@@ -1,0 +1,3641 @@
+/* USER CODE BEGIN Header */
+/**
+  ******************************************************************************
+  * @file           : main.c
+  * @brief          : Main program body
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2025 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  */
+/* USER CODE END Header */
+/* Includes ------------------------------------------------------------------*/
+#include "main.h"
+#include "cmsis_os.h"
+#include "lwip.h"
+
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "lwip/udp.h"
+/* USER CODE END Includes */
+
+/* Private typedef -----------------------------------------------------------*/
+/* USER CODE BEGIN PTD */
+/* Alias vers "struct LDO" (defini dans main.h) pour usage dans
+   la table de configuration generique LDO_Config_t ci-dessous. */
+typedef struct LDO LDO_TypeDef;
+/* USER CODE END PTD */
+
+/* Private define ------------------------------------------------------------*/
+/* USER CODE BEGIN PD */
+
+/* USER CODE END PD */
+
+/* Private macro -------------------------------------------------------------*/
+/* USER CODE BEGIN PM */
+
+/* USER CODE END PM */
+
+/* Private variables ---------------------------------------------------------*/
+ADC_HandleTypeDef hadc1;
+ADC_HandleTypeDef hadc2;
+ADC_HandleTypeDef hadc3;
+
+I2C_HandleTypeDef hi2c1;
+I2C_HandleTypeDef hi2c2;
+
+UART_HandleTypeDef huart1;
+
+osThreadId lwipTaskHandle;
+/* USER CODE BEGIN PV */
+
+/* USER CODE END PV */
+
+/* Private function prototypes -----------------------------------------------*/
+void SystemClock_Config(void);
+void PeriphCommonClock_Config(void);
+static void MPU_Config(void);
+static void MX_GPIO_Init(void);
+static void MX_ADC1_Init(void);
+static void MX_ADC3_Init(void);
+static void MX_I2C1_Init(void);
+static void MX_I2C2_Init(void);
+static void MX_USART1_UART_Init(void);
+static void MX_ADC2_Init(void);
+void StartLwipTask(void const * argument);
+
+/* USER CODE BEGIN PFP */
+void udpServer_init(void);
+void udp_receive_callback(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *addr, u16_t port);
+void tc_request(void);
+int map(uint16_t x, uint16_t in_min, uint16_t in_max, uint16_t out_min, uint16_t out_max);
+void EXTI15_10_IRQHandler(void);
+void EXTI0_IRQHandler(void);
+// Declaree tot : appelee depuis ExecuterCaptureComplete() (ligne ~763),
+// alors que la definition complete de GetMesureReelle() se trouve bien
+// plus loin dans ce fichier (proche de h_WHO).
+static void GetMesureReelle(int idx, const char *nom);
+/* USER CODE END PFP */
+
+/* Private user code ---------------------------------------------------------*/
+/* USER CODE BEGIN 0 */
+
+/*
+    Author      : F.Aizac
+    Date        : 11/08/2026
+    Revision    : 1
+    Commentaire :
+    Git         :
+*/
+
+// Declaration anticipee : UART1_EnvoyerTexte() est definie plus bas
+// dans ce fichier (avec l'init USART1), mais utilisee plus tot par
+// BalayerSortieDAC() pour rapporter chaque palier en direct.
+static void UART1_EnvoyerTexte(const char *texte);
+
+
+// Etat logiciel courant de chacune des 18 LDO de la carte (En/Bl/OC/PG/
+// Voltage/Current/delta_ON/delta_OFF). Mis a jour a chaque iteration
+// de la boucle principale (ancien mecanisme, cf. StartLwipTask()).
+//
+// IMPORTANT - nature reelle du champ OC : ce n'est PAS un defaut
+// absolu, c'est la sortie d'un COMPARATEUR dont le seuil de
+// declenchement depend directement de "Current" (le code ecrit par
+// SET_CURRENT_LDO_<nom>). Chaine materielle :
+//   1) Shunt 100 mOhm en sortie du LDO.
+//   2) AOP #1 (differentiel) : entree + sur le cote LDO du shunt (1k),
+//      entree - sur l'autre cote du shunt (1k), contre-reaction 100k
+//      -> tension = gain x100 x courant reel de sortie.
+//   3) AOP #2 (comparateur, sortie = OC) : entree + reliee a un pont
+//      diviseur (3k vers 5V, DAC "Current" en potentiometre, 10k vers
+//      la masse) qui fixe le SEUIL de declenchement ; entree - reliee
+//      a la sortie de l'AOP #1 (mesure reelle). Sortie protegee par
+//      tirage 5.1k vers 3.3V (compatible entree STM32).
+// Consequence directe : OC=1 signifie "le courant reel mesure depasse
+// le seuil actuellement configure via Current", pas "il y a une
+// surcharge dans l'absolu". Toujours interpreter OC avec la valeur de
+// Current au moment de la lecture (voir buildStatusResponse()).
+struct LDO	LDO_1_PS_p	=	{0,0,0,0,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,0,0};
+struct LDO	LDO_1_PS_n	=	{0,0,0,0,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,0,0};
+struct LDO	LDO_2_PS_p	=	{0,0,0,0,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,0,0};
+struct LDO	LDO_2_PS_n	=	{0,0,0,0,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,0,0};
+struct LDO	LDO_3_PS_p	=	{0,0,0,0,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,0,0};
+struct LDO	LDO_3_PS_n	=	{0,0,0,0,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,0,0};
+struct LDO	LDO_4_PS_p	=	{0,0,0,0,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,0,0};
+struct LDO	LDO_4_PS_n	=	{0,0,0,0,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,0,0};
+struct LDO	LDO_5_PS_p	=	{0,0,0,0,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,0,0};
+struct LDO	LDO_5_PS_n	=	{0,0,0,0,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,0,0};
+struct LDO	LDO_6_PS_p	=	{0,0,0,0,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,0,0};
+struct LDO	LDO_6_PS_n	=	{0,0,0,0,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,0,0};
+
+// LDO de type "PL" : les variantes "_p" n'ont pas de mesure de courant
+// exploitable (champ CURRENT laisse a 0, jamais mis a jour).
+struct LDO	LDO_1_PL_p	=	{0,0,0,0,MCP4725_VAL_DEF_BIN,0,0,0};
+struct LDO	LDO_1_PL_n	=	{0,0,0,0,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,0,0};
+struct LDO	LDO_2_PL_p	=	{0,0,0,0,MCP4725_VAL_DEF_BIN,0,0,0};
+struct LDO	LDO_2_PL_n	=	{0,0,0,0,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,0,0};
+struct LDO	LDO_3_PL_p	=	{0,0,0,0,MCP4725_VAL_DEF_BIN,0,0,0};
+struct LDO	LDO_3_PL_n	=	{0,0,0,0,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,0,0};
+
+// Message UDP brut en cours de traitement (pointeur dans le buffer LwIP
+// recu) et reponse texte a renvoyer a l'expediteur.
+char 		*last_message;
+char 		response[150] 		= "STM32 connect";
+
+// Delais de sequencement (en ms) entre les differentes etapes de mise
+// sous/hors tension des rails (DVDD, AVDD, VREF, NRST). Valeurs
+// modifiables par commande reseau SET_DELTA_*, reinitialisables par
+// RST_DELTA_* (voir tc_request()).
+uint16_t	delta_dvdd_avdd		= DELTA_INIT_DVDD_AVDD;
+uint16_t	delta_avdd_vref		= DELTA_INIT_AVDD_VREF;
+uint16_t	delta_vref_nrst		= DELTA_INIT_VREF_NRST;
+uint16_t	delta_nrst_vref		= DELTA_INIT_NRST_VREF;
+uint16_t	delta_vref_avdd		= DELTA_INIT_VREF_AVDD;
+uint16_t	delta_avdd_dvdd		= DELTA_INIT_AVDD_DVDD;
+
+// Etat logiciel cible des 18 LDO, indexe dans le meme ordre que
+// ldoConfig[] (0=1PSp, 1=1PSn, ... 17=3PLn). EN_LDO/BL_LDO pilotent
+// directement les GPIO Enable/Bleeder ; VAL_LDO/CURRENT_LDO pilotent
+// les DAC via les tableaux DACx_DEF ci-dessous.
+_Bool		EN_LDO[18] 			= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+_Bool		BL_LDO[18] 			= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+uint16_t	VAL_LDO[18]			= {MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,
+		MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,
+		MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,
+		MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,
+		MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN};
+
+uint16_t	CURRENT_LDO[18]		= {MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,
+		MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,
+		MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,
+		MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,
+		MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN};
+
+// Buffers de trame LEGACY, au format MCP4725 d'origine (adresse/MSB/LSB
+// par groupe de 3 octets), utilises par le mecanisme historique de
+// StartLwipTask() / USER CODE BEGIN 2 (HAL_I2C_Master_Transmit direct).
+// NE PAS CONFONDRE avec EcrireDACVolatile()/BalayerSortieDAC(), qui
+// utilisent un format de commande different (registre << 3), verifie
+// experimentalement sur le MCP47FEB28 reel (voir historique de tests).
+// {ADDRESSE, VAL_MSB, VAL_LSB}
+uint8_t		DAC1_DEF[24]			= {0x00, 0x07, 0xFF,	//LDO 6 PS P	CURRENT
+									(0x01<<3),0x07, 0xFF,		//LDO 4 PS P	POWER
+									(0x02<<3),0x07, 0xFF,		//LDO 6 PS P	POWER
+									(0x03<<3),0x07, 0xFF,		//LDO 4 PS P	CURRENT
+									(0x04<<3),0x07, 0xFF,		//LDO 5 PS P	CURRENT
+									(0x05<<3),0x07, 0xFF,		//LDO 5 PS P	POWER
+									(0x06<<3),0x00, 0x00,
+									(0x07<<3),0x00, 0x00};
+
+uint8_t		DAC2_DEF[24]			= {0x00, 0x07, 0xFF,	//LDO 3 PS P	POWER
+									0x01,0x07, 0xFF,		//LDO 1 PS P	CURRENT
+									0x02,0x07, 0xFF,		//LDO 3 PS P	CURRENT
+									0x03,0x0F, 0xFF,		//LDO 1 PS P	POWER
+									0x04,0x07, 0xFF,		//LDO 2 PS P	POWER
+									0x05,0x07, 0xFF,		//LDO 2 PS P	CURRENT
+									0x06,0x00, 0x00,
+									0x07,0x00, 0x00};
+
+uint8_t		DAC3_DEF[24]			= {0x00, 0x07, 0xFF,	//LDO 3 PS N	POWER
+									0x01,0x07, 0xFF,		//LDO 1 PS N	CURRENT
+									0x02,0x07, 0xFF,		//LDO 3 PS N	CURRENT
+									0x03,0x07, 0xFF,		//LDO 1 PS N	POWER
+									0x04,0x07, 0xFF,		//LDO 2 PS N	POWER
+									0x05,0x07, 0xFF,		//LDO 2 PS N	CURRENT
+									0x06,0x00, 0x00,
+									0x07,0x00, 0x00};
+
+uint8_t		DAC4_DEF[24]			= {0x00, 0x07, 0xFF,	//LDO 5 PS N	POWER
+									0x01,0x07, 0xFF,		//LDO 6 PS N	POWER
+									0x02,0x07, 0xFF,		//LDO 5 PS N	CURRENT
+									0x03,0x07, 0xFF,		//LDO 6 PS N	CURRENT
+									0x04,0x07, 0xFF,		//LDO 4 PS N	POWER
+									0x05,0x07, 0xFF,		//LDO 3 PL P	POWER
+									0x06,0x07, 0xFF,		//LDO 4 PS N	CURRENT
+									0x07,0x07, 0xFF};		//LDO 3 PL N	CURRENT
+
+uint8_t		DAC5_DEF[24]			= {0x00, 0x07, 0xFF,	//LDO 1 PL P	POWER
+									0x01,0x00, 0x00,
+									0x02,0x07, 0xFF,		//LDO 2 PL P	POWER
+									0x03,0x07, 0xFF,		//LDO 1 PL N	POWER
+									0x04,0x07, 0xFF,		//LDO 3 PL N	POWER
+									0x05,0x07, 0xFF,		//LDO 1 PL N	CURRENT
+									0x06,0x07, 0xFF,		//LDO 2 PL N	CURRENT
+									0x07,0x07, 0xFF};		//LDO 2 PL N	POWER
+
+// Table de configuration generique : associe a chaque LDO (par son nom
+// texte) ses 4 broches GPIO (Enable, Bleeder, Over-Current, Power-Good)
+// et un pointeur vers sa structure d'etat struct LDO correspondante.
+// Permet de piloter les 18 LDO par une boucle generique plutot que
+// 18 blocs de code dupliques (voir StartLwipTask()).
+typedef struct {
+    const char      *name;
+    GPIO_TypeDef    *en_port;
+    uint16_t         en_pin;
+    GPIO_TypeDef    *bld_port;
+    uint16_t         bld_pin;
+    GPIO_TypeDef    *oc_port;
+    uint16_t         oc_pin;
+    GPIO_TypeDef    *pg_port;
+    uint16_t         pg_pin;
+    LDO_TypeDef     *ldo;
+} LDO_Config_t;
+
+#define NB_LDO 18
+
+static const LDO_Config_t ldoConfig[NB_LDO] = {
+    { "1PSp", EN_LDO1_PSp_GPIO_Port, EN_LDO1_PSp_Pin, BLD_LDO1_PSp_GPIO_Port, BLD_LDO1_PSp_Pin, OC_LDO1_PSp_GPIO_Port, OC_LDO1_PSp_Pin, PG_LDO1_PSp_GPIO_Port, PG_LDO1_PSp_Pin, &LDO_1_PS_p },
+    { "1PSn", EN_LDO1_PSn_GPIO_Port, EN_LDO1_PSn_Pin, BLD_LDO1_PSn_GPIO_Port, BLD_LDO1_PSn_Pin, OC_LDO1_PSn_GPIO_Port, OC_LDO1_PSn_Pin, PG_LDO1_PSn_GPIO_Port, PG_LDO1_PSn_Pin, &LDO_1_PS_n },
+    { "2PSp", EN_LDO2_PSp_GPIO_Port, EN_LDO2_PSp_Pin, BLD_LDO2_PSp_GPIO_Port, BLD_LDO2_PSp_Pin, OC_LDO2_PSp_GPIO_Port, OC_LDO2_PSp_Pin, PG_LDO2_PSp_GPIO_Port, PG_LDO2_PSp_Pin, &LDO_2_PS_p },
+    { "2PSn", EN_LDO2_PSn_GPIO_Port, EN_LDO2_PSn_Pin, BLD_LDO2_PSn_GPIO_Port, BLD_LDO2_PSn_Pin, OC_LDO2_PSn_GPIO_Port, OC_LDO2_PSn_Pin, PG_LDO2_PSn_GPIO_Port, PG_LDO2_PSn_Pin, &LDO_2_PS_n },
+    { "3PSp", EN_LDO3_PSp_GPIO_Port, EN_LDO3_PSp_Pin, BLD_LDO3_PSp_GPIO_Port, BLD_LDO3_PSp_Pin, OC_LDO3_PSp_GPIO_Port, OC_LDO3_PSp_Pin, PG_LDO3_PSp_GPIO_Port, PG_LDO3_PSp_Pin, &LDO_3_PS_p },
+    { "3PSn", EN_LDO3_PSn_GPIO_Port, EN_LDO3_PSn_Pin, BLD_LDO3_PSn_GPIO_Port, BLD_LDO3_PSn_Pin, OC_LDO3_PSn_GPIO_Port, OC_LDO3_PSn_Pin, PG_LDO3_PSn_GPIO_Port, PG_LDO3_PSn_Pin, &LDO_3_PS_n },
+    { "4PSp", EN_LDO4_PSp_GPIO_Port, EN_LDO4_PSp_Pin, BLD_LDO4_PSp_GPIO_Port, BLD_LDO4_PSp_Pin, OC_LDO4_PSp_GPIO_Port, OC_LDO4_PSp_Pin, PG_LDO4_PSp_GPIO_Port, PG_LDO4_PSp_Pin, &LDO_4_PS_p },
+    { "4PSn", EN_LDO4_PSn_GPIO_Port, EN_LDO4_PSn_Pin, BLD_LDO4_PSn_GPIO_Port, BLD_LDO4_PSn_Pin, OC_LDO4_PSn_GPIO_Port, OC_LDO4_PSn_Pin, PG_LDO4_PSn_GPIO_Port, PG_LDO4_PSn_Pin, &LDO_4_PS_n },
+    { "5PSp", EN_LDO5_PSp_GPIO_Port, EN_LDO5_PSp_Pin, BLD_LDO5_PSp_GPIO_Port, BLD_LDO5_PSp_Pin, OC_LDO5_PSp_GPIO_Port, OC_LDO5_PSp_Pin, PG_LDO5_PSp_GPIO_Port, PG_LDO5_PSp_Pin, &LDO_5_PS_p },
+    { "5PSn", EN_LDO5_PSn_GPIO_Port, EN_LDO5_PSn_Pin, BLD_LDO5_PSn_GPIO_Port, BLD_LDO5_PSn_Pin, OC_LDO5_PSn_GPIO_Port, OC_LDO5_PSn_Pin, PG_LDO5_PSn_GPIO_Port, PG_LDO5_PSn_Pin, &LDO_5_PS_n },
+    { "6PSp", EN_LDO6_PSp_GPIO_Port, EN_LDO6_PSp_Pin, BLD_LDO6_PSp_GPIO_Port, BLD_LDO6_PSp_Pin, OC_LDO6_PSp_GPIO_Port, OC_LDO6_PSp_Pin, PG_LDO6_PSp_GPIO_Port, PG_LDO6_PSp_Pin, &LDO_6_PS_p },
+    { "6PSn", EN_LDO6_PSn_GPIO_Port, EN_LDO6_PSn_Pin, BLD_LDO6_PSn_GPIO_Port, BLD_LDO6_PSn_Pin, OC_LDO6_PSn_GPIO_Port, OC_LDO6_PSn_Pin, PG_LDO6_PSn_GPIO_Port, PG_LDO6_PSn_Pin, &LDO_6_PS_n },
+    { "1PLp", EN_LDO1_PLp_GPIO_Port, EN_LDO1_PLp_Pin, BLD_LDO1_PLp_GPIO_Port, BLD_LDO1_PLp_Pin, OC_LDO1_PLp_GPIO_Port, OC_LDO1_PLp_Pin, PG_LDO1_PLp_GPIO_Port, PG_LDO1_PLp_Pin, &LDO_1_PL_p },
+    { "1PLn", EN_LDO1_PLn_GPIO_Port, EN_LDO1_PLn_Pin, BLD_LDO1_PLn_GPIO_Port, BLD_LDO1_PLn_Pin, OC_LDO1_PLn_GPIO_Port, OC_LDO1_PLn_Pin, PG_LDO1_PLn_GPIO_Port, PG_LDO1_PLn_Pin, &LDO_1_PL_n },
+    { "2PLp", EN_LDO2_PLp_GPIO_Port, EN_LDO2_PLp_Pin, BLD_LDO2_PLp_GPIO_Port, BLD_LDO2_PLp_Pin, OC_LDO2_PLp_GPIO_Port, OC_LDO2_PLp_Pin, PG_LDO2_PLp_GPIO_Port, PG_LDO2_PLp_Pin, &LDO_2_PL_p },
+    { "2PLn", EN_LDO2_PLn_GPIO_Port, EN_LDO2_PLn_Pin, BLD_LDO2_PLn_GPIO_Port, BLD_LDO2_PLn_Pin, OC_LDO2_PLn_GPIO_Port, OC_LDO2_PLn_Pin, PG_LDO2_PLn_GPIO_Port, PG_LDO2_PLn_Pin, &LDO_2_PL_n },
+    { "3PLp", EN_LDO3_PLp_GPIO_Port, EN_LDO3_PLp_Pin, BLD_LDO3_PLp_GPIO_Port, BLD_LDO3_PLp_Pin, OC_LDO3_PLp_GPIO_Port, OC_LDO3_PLp_Pin, PG_LDO3_PLp_GPIO_Port, PG_LDO3_PLp_Pin, &LDO_3_PL_p },
+    { "3PLn", EN_LDO3_PLn_GPIO_Port, EN_LDO3_PLn_Pin, BLD_LDO3_PLn_GPIO_Port, BLD_LDO3_PLn_Pin, OC_LDO3_PLn_GPIO_Port, OC_LDO3_PLn_Pin, PG_LDO3_PLn_GPIO_Port, PG_LDO3_PLn_Pin, &LDO_3_PL_n },
+};
+
+/**
+  * @brief  Sequence de recuperation du bus I2C1 (PB8=SCL, PB9=SDA) en cas
+  *         de bus bloque (SDA maintenu bas par un esclave en plein
+  *         transfert interrompu). Reconfigure temporairement les broches
+  *         en GPIO, genere jusqu'a 9 fronts d'horloge pour forcer
+  *         l'esclave a liberer SDA, emet une condition STOP manuelle,
+  *         puis restaure la configuration I2C normale.
+  * @param  Aucun.
+  * @retval Aucun (void).
+  * @par    Exemple d'utilisation
+  *         Appeler UNE FOIS juste avant MX_I2C1_Init() dans main(),
+  *         si HAL_I2C_IsDeviceReady() renvoie systematiquement HAL_BUSY.
+  */
+static void I2C1_BusRecovery(void)
+{
+    GPIO_InitTypeDef GPIO_InitStruct = {0};
+
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+
+    // 1) Reconfigure SCL (PB8) et SDA (PB9) en GPIO open-drain simple
+    GPIO_InitStruct.Pin   = GPIO_PIN_8 | GPIO_PIN_9;
+    GPIO_InitStruct.Mode  = GPIO_MODE_OUTPUT_OD;
+    GPIO_InitStruct.Pull  = GPIO_NOPULL;   // pull-up externe deja present
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+    // Etat de repos : les deux lignes relachees (= niveau haut via pull-up)
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, GPIO_PIN_SET);
+    HAL_Delay(1);
+
+    // Genere jusqu'a 9 fronts d'horloge sur SCL : suffisant pour
+    //    qu'un esclave bloque en plein octet termine sa transmission
+    //    et relache SDA (chaque front peut correspondre a un bit,
+    //    dans le pire cas 8 bits de donnees + 1 bit d'ACK).
+    for (int i = 0; i < 9; i++)
+    {
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_RESET);  // SCL bas
+        HAL_Delay(1);
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET);    // SCL haut
+        HAL_Delay(1);
+
+        // Si SDA est deja relache (haut), inutile de continuer
+        if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_9) == GPIO_PIN_SET)
+        {
+            break;
+        }
+    }
+
+    // Genere une condition STOP manuelle : SDA passe de bas a haut
+    //    pendant que SCL est haut.
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, GPIO_PIN_RESET);
+    HAL_Delay(1);
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET);
+    HAL_Delay(1);
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, GPIO_PIN_SET);
+    HAL_Delay(1);
+
+    // Remet PB8/PB9 en mode Alternate Function I2C1 normal
+    GPIO_InitStruct.Pin       = GPIO_PIN_8 | GPIO_PIN_9;
+    GPIO_InitStruct.Mode      = GPIO_MODE_AF_OD;
+    GPIO_InitStruct.Pull      = GPIO_NOPULL;
+    GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_LOW;
+    GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+}
+
+/**
+  * @brief  Resultat d'un scan I2C complet (voir ScanI2C()) : la liste
+  *         des adresses ayant repondu, et un compteur par type de
+  *         reponse HAL (OK/NACK/bus occupe/timeout). Une instance
+  *         separee par bus (ex : res_i2c1, res_i2c2), pour ne jamais
+  *         melanger les resultats de deux bus differents.
+  */
+typedef struct {
+    uint16_t addr_trouve[16];
+    uint8_t  addr_cpt;
+    uint32_t count_ok;       // HAL_OK    : adresse acquittee
+    uint32_t count_error;    // HAL_ERROR : NACK propre
+    uint32_t count_busy;     // HAL_BUSY  : bus bloque / occupe
+    uint32_t count_timeout;  // HAL_TIMEOUT
+} ScanResult_t;
+
+// Buffer texte partage, rempli par FormaterRapport(). Inspectable au
+// debogueur (Watch/Variables) ; a rediriger vers un UART si tu en
+// ajoutes un plus tard (HAL_UART_Transmit, etc.).
+static char rapport_scan[512];
+
+/**
+  * @brief  Scanne toutes les adresses I2C possibles (hors General Call
+  *         => 0x00) sur le bus passe en parametre, et remplit le
+  *         resultat. Fonction "pure" : aucun effet de bord sur
+  *         rapport_scan ou toute autre variable globale de texte.
+  * @param  hi2c    Pointeur vers le handle I2C a scanner (&hi2c1, &hi2c2, ...).
+  * @param  result  Pointeur vers la structure a remplir avec les resultats.
+  * @retval Aucun (void).
+  * @par    Exemple d'utilisation
+  *         static ScanResult_t res_i2c1;
+  *         ScanI2C(&hi2c1, &res_i2c1);
+  */
+static void ScanI2C(I2C_HandleTypeDef *hi2c, ScanResult_t *result)
+{
+    result->addr_cpt = 0;
+    result->count_ok = 0;
+    result->count_error = 0;
+    result->count_busy = 0;
+    result->count_timeout = 0;
+
+    for (uint16_t scan_addr = 2; scan_addr < 256; scan_addr += 2)
+    {
+        HAL_StatusTypeDef st = HAL_I2C_IsDeviceReady(hi2c, scan_addr, 2, 20);
+
+        switch (st)
+        {
+            case HAL_OK:
+                result->count_ok++;
+                if (result->addr_cpt < 16)
+                {
+                    result->addr_trouve[result->addr_cpt++] = scan_addr;
+                }
+                break;
+            case HAL_ERROR:   result->count_error++;   break;
+            case HAL_BUSY:    result->count_busy++;    break;
+            case HAL_TIMEOUT: result->count_timeout++; break;
+        }
+    }
+}
+
+/**
+  * @brief  Construit, dans le buffer global rapport_scan, une ligne
+  *         "I2Cx:0xNN:message" pour chaque adresse trouvee dans un
+  *         resultat de scan. N'efface PAS rapport_scan avant d'ecrire :
+  *         permet d'enchainer plusieurs bus dans le meme rapport
+  *         (voir exemple).
+  * @param  nom_bus  Nom du bus a afficher dans le rapport (ex : "I2C1").
+  * @param  result   Pointeur vers un resultat deja rempli par ScanI2C().
+  * @retval Aucun (void). Complete rapport_scan.
+  * @par    Exemple d'utilisation
+  *         static ScanResult_t res_i2c1, res_i2c2;
+  *         ScanI2C(&hi2c1, &res_i2c1);
+  *         ScanI2C(&hi2c2, &res_i2c2);
+  *
+  *         rapport_scan[0] = '\0';           // vide le rapport avant de le reconstruire
+  *         FormaterRapport("I2C1", &res_i2c1);
+  *         FormaterRapport("I2C2", &res_i2c2);
+  *         // rapport_scan contient alors par exemple :
+  *         // "I2C1:0x84:OK\nI2C1:0xC4:OK\nI2C2:0x50:OK\n"
+  */
+static void FormaterRapport(const char *nom_bus, const ScanResult_t *result)
+{
+    for (uint8_t i = 0; i < result->addr_cpt; i++)
+    {
+        char ligne[32];
+        int len = sprintf(ligne, "%s:0x%02X:OK\n", nom_bus, result->addr_trouve[i]);
+        size_t used = strlen(rapport_scan);
+        if (used + (size_t)len < sizeof(rapport_scan))
+        {
+            strcat(rapport_scan, ligne);
+        }
+    }
+}
+
+/**
+  * @brief  Convertit une tension desiree (en volts) en code numerique
+  *         12 bits (0-4095) compris par le DAC, selon la formule :
+  *         code = (tension_desiree / tension_reference) * 4095.
+  *         Dans la config actuelle du DAC (registre VREF a sa valeur
+  *         par defaut, VDD utilise comme reference), tension_reference
+  *         doit etre la tension VDD REELLE mesuree sur le DAC (pas
+  *         forcement 3.3V pile - utilise la valeur que tu as mesuree
+  *         au multimetre pour plus de precision).
+  * @param  tension_desiree    Tension de sortie voulue, en volts (ex : 3.3f).
+  *                            Ecretee automatiquement entre 0 et tension_reference.
+  * @param  tension_reference  Tension de reference reelle du DAC (VDD mesure), en volts.
+  * @retval uint16_t  Code 12 bits (0-4095) a passer a EcrireDACVolatile()
+  *                   ou BalayerSortieDAC().
+  * @par    Exemple d'utilisation
+  *         // Ecrire 3.3V sur VOUT0, avec un VDD reellement mesure a 3.3V :
+  *         uint16_t code = VoltageVersCodeDAC(3.3f, 3.3f);   // -> 4095
+  *         EcrireDACVolatile(&hi2c1, (0x62 << 1), 0x00, code);
+  *
+  *         // Ecrire 1.65V (moitie de VDD), avec VDD mesure a 3.28V :
+  *         uint16_t code2 = VoltageVersCodeDAC(1.65f, 3.28f); // -> ~2062
+  */
+static uint16_t VoltageVersCodeDAC(float tension_desiree, float tension_reference)
+{
+    if (tension_desiree < 0.0f)               { tension_desiree = 0.0f; }
+    if (tension_desiree > tension_reference)   { tension_desiree = tension_reference; }
+
+    float ratio = tension_desiree / tension_reference;
+    uint16_t code = (uint16_t)(ratio * 4095.0f + 0.5f);  // +0.5 pour arrondir au plus proche
+
+    if (code > 4095) { code = 4095; }  // securite, ne devrait jamais arriver apres l'ecretage ci-dessus
+
+    return code;
+}
+
+/**
+  * @brief  Ecrit une valeur 12 bits dans un registre VOLATILE du DAC
+  *         MCP47FEB28 (adresses memoire 00h-07h uniquement). Ne touche
+  *         JAMAIS l'EEPROM (adresses 10h-1Ah) : refuse d'emettre quoi
+  *         que ce soit si registre est hors de la plage 0x00-0x07,
+  *         aucun risque de corrompre l'adresse I2C ou toute autre
+  *         configuration du DAC, meme en cas d'appel avec un parametre
+  *         invalide.
+  * @param  hi2c         Pointeur vers le handle I2C a utiliser (&hi2c1, &hi2c2, ...).
+  * @param  adresse_hal  Adresse I2C du DAC, deja au format HAL (decalee,
+  *                      ex : 0xC4 pour un DAC a 0x62 en 7 bits).
+  * @param  registre     Adresse memoire du registre volatile cible
+  *                      (0x00 = DAC0/VOUT0, 0x01 = DAC1/VOUT1, ... 0x07 = DAC7/VOUT7).
+  *                      Toute valeur > 0x07 est refusee (HAL_ERROR immediat,
+  *                      aucune trame emise) pour eviter tout risque d'ecriture
+  *                      accidentelle dans les registres nonvolatiles (EEPROM).
+  * @param  valeur       Valeur 12 bits a ecrire (0-4095).
+  * @retval HAL_StatusTypeDef  Resultat de la transmission I2C
+  *         (HAL_OK si le DAC a acquitte les 3 octets, HAL_ERROR si
+  *         registre est hors plage volatile ou si le DAC a NACK).
+  * @par    Exemple d'utilisation
+  *         // Ecrit la pleine echelle (4095) sur VOUT0 du DAC a l'adresse 0x62 :
+  *         HAL_StatusTypeDef status = EcrireDACVolatile(&hi2c1, (0x62 << 1), 0x00, 4095);
+  *         if (status == HAL_OK) { / * mesurer VOUT0 au voltmetre * / }
+  */
+static HAL_StatusTypeDef EcrireDACVolatile(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal,
+                                            uint8_t registre, uint16_t valeur)
+{
+    // Garde-fou : les registres nonvolatiles (EEPROM) commencent a 0x10.
+    // On refuse toute adresse hors de la plage volatile 0x00-0x07 pour
+    // ne jamais risquer d'y ecrire par erreur (adresse I2C, verrou, etc.).
+    if (registre > 0x07)
+    {
+        return HAL_ERROR;
+    }
+
+    uint8_t trame[3];
+
+    // Octet 1 (commande) : AD4:AD0 = adresse du registre (5 bits),
+    //                       C1:C0 = 00 (Write), bit X = 0
+    // Octets 2-3 (donnee) : valeur 12 bits alignee a droite dans le
+    //                       registre 16 bits du DAC
+    trame[0] = (uint8_t)((registre & 0x1F) << 3);
+    trame[1] = (uint8_t)((valeur >> 8) & 0x0F);
+    trame[2] = (uint8_t)(valeur & 0xFF);
+
+    return HAL_I2C_Master_Transmit(hi2c, adresse_hal, trame, 3, 100);
+}
+
+/**
+  * @brief  Ecrit une valeur sur chacune des 8 sorties volatiles du DAC
+  *         (VOUT0 a VOUT7, registres 00h-07h), et ajoute une ligne de
+  *         compte-rendu dans rapport_scan pour chaque canal, au format
+  *         "DACx:VOUTn:0xNNNN:message". Une valeur DIFFERENTE est
+  *         ecrite sur chaque canal (palier croissant) pour verifier
+  *         facilement au voltmetre que les 8 sorties sont bien
+  *         independantes les unes des autres.
+  * @param  hi2c         Pointeur vers le handle I2C a utiliser (&hi2c1, &hi2c2, ...).
+  * @param  adresse_hal  Adresse I2C du DAC, deja au format HAL (decalee).
+  * @param  nom_dac      Nom du DAC a afficher dans le rapport (ex : "DAC1").
+  * @retval Aucun (void). Complete rapport_scan.
+  * @par    Exemple d'utilisation
+  *         EcrireToutesLesSorties(&hi2c1, (0x62 << 1), "DAC1");
+  *         // rapport_scan contient alors, entre autres :
+  *         // "DAC1:VOUT0:0x01F4:OK\nDAC1:VOUT1:0x03E8:OK\n..."
+  */
+static void EcrireToutesLesSorties(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, const char *nom_dac)
+{
+    for (uint8_t canal = 0; canal < 8; canal++)
+    {
+        // Palier croissant : 500, 1000, 1500, ... 4000 (reste dans la
+        // plage 0-4095) -> facile a distinguer canal par canal au voltmetre.
+        uint16_t valeur = (uint16_t)((canal + 1) * 500);
+
+        HAL_StatusTypeDef st = EcrireDACVolatile(hi2c, adresse_hal, canal, valeur);
+
+        char ligne[40];
+        int len = sprintf(ligne, "%s:VOUT%u:0x%04X:%s\n",
+                           nom_dac, canal, valeur, (st == HAL_OK) ? "OK" : "ERROR");
+        size_t used = strlen(rapport_scan);
+        if (used + (size_t)len < sizeof(rapport_scan))
+        {
+            strcat(rapport_scan, ligne);
+        }
+
+        HAL_Delay(10);  // pause entre chaque canal : laisse le temps au DAC de traiter
+    }
+}
+
+/**
+  * @brief  Balaie une seule sortie du DAC de 0 a valeur_max, par pas
+  *         reguliers, avec une pause entre chaque valeur. Fonction
+  *         BLOQUANTE : elle ne rend la main qu'une fois le balayage
+  *         complet termine. Utile pour observer une montee de tension
+  *         progressive au voltmetre sur une sortie precise. Envoie
+  *         aussi chaque palier sur USART1 en direct, au format
+  *         "nom_dac:VOUTn:code:tension_calculeeV".
+  *         Generique : fonctionne sur n'importe quel DAC/canal/plage/
+  *         vitesse, il suffit de changer les parametres.
+  * @param  hi2c               Pointeur vers le handle I2C a utiliser (&hi2c1, &hi2c2, ...).
+  * @param  adresse_hal        Adresse I2C du DAC, deja au format HAL (decalee).
+  * @param  registre           Adresse memoire du registre volatile cible
+  *                            (0x00 = VOUT0, 0x01 = VOUT1, ... 0x07 = VOUT7).
+  * @param  nom_dac            Nom du DAC a afficher dans le rapport (ex : "DAC1").
+  * @param  valeur_max         Valeur finale du balayage (0-4095 pour un DAC 12 bits).
+  * @param  pas                Increment entre deux valeurs successives (ex : 100).
+  *                            Doit etre >= 1.
+  * @param  delai_ms           Pause en millisecondes entre chaque valeur ecrite
+  *                            (ex : 200 pour bien voir chaque palier au voltmetre).
+  * @param  tension_reference  Tension VDD reelle du DAC (mesuree au multimetre),
+  *                            utilisee uniquement pour calculer la tension
+  *                            affichee dans le rapport (n'affecte pas le code envoye).
+  * @retval Aucun (void). Termine toujours exactement sur valeur_max,
+  *         meme si (valeur_max - 0) n'est pas un multiple exact de pas.
+  * @par    Exemple d'utilisation
+  *         // Balaie VOUT0 du DAC a 0x62, de 0 a 4095, par pas de 100,
+  *         // avec 200 ms entre chaque palier (~8 secondes au total),
+  *         // rapporte sur UART avec VDD mesure a 3.3V :
+  *         BalayerSortieDAC(&hi2c1, (0x62 << 1), 0x00, "DAC1", 4095, 100, 200, 3.3f);
+  */
+static void BalayerSortieDAC(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t registre,
+                              const char *nom_dac, uint16_t valeur_max, uint16_t pas,
+                              uint32_t delai_ms, float tension_reference)
+{
+    if (pas == 0) { pas = 1; }  // evite une boucle infinie si appelee avec pas=0 par erreur
+    // ATTENTION duree totale = (valeur_max / pas) * delai_ms : avec un
+    // pas fin (ex: 1) et un delai long, le balayage complet peut durer
+    // tres longtemps (ex: pas=1, delai_ms=500 -> ~34 minutes). Choisis
+    // pas et delai_ms ensemble selon la duree totale voulue.
+
+    uint16_t valeur;
+    for (valeur = 0; valeur < valeur_max; valeur = (uint16_t)(valeur + pas))
+    {
+        EcrireDACVolatile(hi2c, adresse_hal, registre, valeur);
+
+        // Calcul en millivolts entiers : evite le besoin du support
+        // flottant de printf (%f), non active par defaut sur STM32
+        // (economie de flash). Le calcul flottant lui-meme (pas son
+        // affichage) ne pose aucun probleme.
+        uint32_t milliVolts = (uint32_t)(((float)valeur / 4095.0f) * tension_reference * 1000.0f + 0.5f);
+        char ligne[48];
+        sprintf(ligne, "%s:VOUT%u:%u:%lu.%03luV\n", nom_dac, registre, valeur,
+                (unsigned long)(milliVolts / 1000), (unsigned long)(milliVolts % 1000));
+        UART1_EnvoyerTexte(ligne);
+
+        HAL_Delay(delai_ms);
+    }
+
+    // Assure que le dernier palier ecrit est exactement valeur_max,
+    // meme si le pas ne tombe pas juste dessus.
+    EcrireDACVolatile(hi2c, adresse_hal, registre, valeur_max);
+    {
+        uint32_t milliVolts = (uint32_t)(((float)valeur_max / 4095.0f) * tension_reference * 1000.0f + 0.5f);
+        char ligne[48];
+        sprintf(ligne, "%s:VOUT%u:%u:%lu.%03luV\n", nom_dac, registre, valeur_max,
+                (unsigned long)(milliVolts / 1000), (unsigned long)(milliVolts % 1000));
+        UART1_EnvoyerTexte(ligne);
+    }
+    HAL_Delay(delai_ms);
+}
+
+/**
+  * @brief  Formate le temps ecoule depuis le demarrage (HAL_GetTick(),
+  *         en millisecondes) en une chaine "HH:MM:SS". Le STM32 n'a
+  *         pas de RTC configuree dans ce projet : ce n'est donc PAS
+  *         une heure murale reelle, seulement une duree depuis le
+  *         reset de la carte.
+  * @param  dest    Buffer de sortie, doit faire au moins 9 octets
+  *                 (8 caracteres "HH:MM:SS" + '\0').
+  * @param  taille  Taille du buffer dest, pour eviter tout debordement.
+  * @retval Aucun (void). Ecrit la chaine formatee dans dest.
+  * @par    Exemple d'utilisation
+  *         char temps[9];
+  *         FormaterTempsEcoule(temps, sizeof(temps));
+  *         // temps contient par exemple "00:02:37"
+  */
+static void FormaterTempsEcoule(char *dest, size_t taille)
+{
+    uint32_t total_sec = HAL_GetTick() / 1000;
+    uint32_t heures    = (total_sec / 3600) % 100;  // plafonne a 99h, evite le debordement du format
+    uint32_t minutes   = (total_sec / 60) % 60;
+    uint32_t secondes  = total_sec % 60;
+
+    snprintf(dest, taille, "%02lu:%02lu:%02lu",
+             (unsigned long)heures, (unsigned long)minutes, (unsigned long)secondes);
+}
+
+/**
+  * @brief  Verifie si une adresse (format HAL) fait partie d'une liste
+  *         donnee. Fonction utilitaire generique, reutilisable pour
+  *         n'importe quelle liste d'adresses (exclusion, inclusion, ...).
+  * @param  adresse  Adresse a rechercher (format HAL, deja decalee).
+  * @param  liste    Tableau d'adresses (format HAL) dans lequel chercher.
+  * @param  taille   Nombre d'elements dans liste.
+  * @retval int  1 si l'adresse est trouvee dans la liste, 0 sinon.
+  * @par    Exemple d'utilisation
+  *         static const uint16_t exclues[] = { 0xC4 };
+  *         if (EstDansListe(0xC4, exclues, 1)) { / * ignorer * / }
+  */
+static int EstDansListe(uint16_t adresse, const uint16_t *liste, uint8_t taille)
+{
+    for (uint8_t i = 0; i < taille; i++)
+    {
+        if (liste[i] == adresse)
+        {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+/**
+  * @brief  Envoie un message "Bonjour" a chacune des adresses trouvees
+  *         par un scan I2C prealable (ScanI2C()), SAUF celles listees
+  *         dans adresses_exclues (utile pour eviter d'envoyer du texte
+  *         libre a un appareil qui attend un protocole binaire strict,
+  *         comme un DAC - il repondrait par un NACK/ERROR sans que ce
+  *         soit une vraie panne). Le message inclut : l'identifiant du
+  *         maitre (STM32, texte fixe - un maitre I2C n'a pas d'adresse
+  *         de bus a proprement parler), l'adresse de l'esclave
+  *         destinataire, et le temps ecoule depuis le demarrage du
+  *         STM32 (voir FormaterTempsEcoule()). Ajoute une ligne de
+  *         compte-rendu dans rapport_scan pour chaque envoi (et pour
+  *         chaque adresse ignoree).
+  * @param  hi2c              Pointeur vers le handle I2C a utiliser (&hi2c1, &hi2c2, ...).
+  * @param  nom_bus           Nom du bus a afficher dans le rapport (ex : "I2C1").
+  * @param  result            Pointeur vers un resultat de scan deja rempli par ScanI2C().
+  * @param  adresses_exclues  Tableau d'adresses (format HAL) a ne PAS contacter.
+  *                           Passer NULL et 0 si aucune exclusion.
+  * @param  nb_exclues        Nombre d'elements dans adresses_exclues.
+  * @retval Aucun (void). Complete rapport_scan.
+  * @par    Exemple d'utilisation
+  *         static const uint16_t exclues[] = { (0x62 << 1) };  // le DAC
+  *         EnvoyerBonjourATous(&hi2c1, "I2C1", &res_i2c1, exclues, 1);
+  *         // ou, sans aucune exclusion :
+  *         EnvoyerBonjourATous(&hi2c1, "I2C1", &res_i2c1, NULL, 0);
+  */
+static void EnvoyerBonjourATous(I2C_HandleTypeDef *hi2c, const char *nom_bus, const ScanResult_t *result,
+                                 const uint16_t *adresses_exclues, uint8_t nb_exclues)
+{
+    char temps[9];
+    FormaterTempsEcoule(temps, sizeof(temps));
+
+    for (uint8_t i = 0; i < result->addr_cpt; i++)
+    {
+        uint16_t adresse_hal = result->addr_trouve[i];
+
+        if (EstDansListe(adresse_hal, adresses_exclues, nb_exclues))
+        {
+            char ligne_skip[48];
+            int len_skip = sprintf(ligne_skip, "%s:0x%02X:Bonjour:SKIP\n", nom_bus, adresse_hal);
+            size_t used_skip = strlen(rapport_scan);
+            if (used_skip + (size_t)len_skip < sizeof(rapport_scan))
+            {
+                strcat(rapport_scan, ligne_skip);
+            }
+            continue;
+        }
+
+        char message[64];
+        int len_msg = sprintf(message, "Bonjour Maitre:STM32 Esclave:0x%02X Temps:%s\n",
+                               adresse_hal, temps);
+
+        HAL_StatusTypeDef st = HAL_I2C_Master_Transmit(hi2c, adresse_hal,
+                                                        (uint8_t *)message, (uint16_t)len_msg, 100);
+
+        char ligne[48];
+        int len = sprintf(ligne, "%s:0x%02X:Bonjour:%s\n",
+                           nom_bus, adresse_hal, (st == HAL_OK) ? "OK" : "ERROR");
+        size_t used = strlen(rapport_scan);
+        if (used + (size_t)len < sizeof(rapport_scan))
+        {
+            strcat(rapport_scan, ligne);
+        }
+
+        HAL_Delay(10);
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Bouton USER (B1, PC13) : declenche une capture complete
+// ---------------------------------------------------------------------------
+
+// Etat partage entre l'ISR (HAL_GPIO_EXTI_Callback) et la boucle principale
+// (StartLwipTask) : le flag est mis a 1 par l'interruption, et consomme/remis
+// a 0 par la boucle qui appelle alors ExecuterCaptureComplete(). On ne fait
+// JAMAIS de traitement lourd (I2C, UART) directement dans l'ISR.
+static volatile uint8_t bouton_appuye = 0;
+static uint32_t dernier_appui_ms = 0;   // pour l'anti-rebond (debounce)
+
+// ---------------------------------------------------------------------------
+// Bouton-poussoir de RESET materiel du multiplexeur (broche RESET des 3
+// ADG728, cablee separement sur PD0/EXTI0 pour que le firmware sache que
+// l'appui a eu lieu). Meme principe que le bouton B1 ci-dessus : l'ISR ne
+// fait que positionner un flag, le vrai traitement se fait en tache de fond.
+// ---------------------------------------------------------------------------
+static volatile uint8_t mux_reset_appuye = 0;
+static uint32_t dernier_reset_mux_ms = 0;   // anti-rebond
+
+// Derniers canaux selectionnes sur chaque chaine (0-23 tension, 0-15
+// courant), 0xFF = aucun. Declarees ici (avant TraiterResetMultiplexeur
+// ci-dessous et avant SelectionnerCanalMuxTension()/Courant(), plus loin
+// dans ce fichier) car utilisees par plusieurs fonctions.
+static uint8_t canal_mux_tension_actuel = 0xFF;
+static uint8_t canal_mux_courant_actuel = 0xFF;
+
+/**
+  * @brief  Configure PD0 en entree avec interruption, pour detecter les
+  *         appuis sur le bouton-poussoir cable sur la broche RESET des
+  *         ADG728. A appeler depuis MX_GPIO_Init_2, comme pour B1.
+  *         ATTENTION : polarite (front montant ou descendant) et
+  *         necessite d'un pull-up/pull-down externe ou interne a
+  *         verifier selon le cablage reel du bouton et de la broche
+  *         RESET de l'ADG728 (actif haut ou bas, non confirme cote
+  *         datasheet au moment de l'ecriture de ce code). Si les deux
+  *         chaines (tension/courant) ont chacune leur PROPRE ligne
+  *         RESET physique separee, il faudra dupliquer ce mecanisme
+  *         sur une deuxieme broche/interruption.
+  * @param  Aucun.
+  * @retval Aucun (void).
+  */
+static void MX_MuxResetSync_GPIO_Init(void)
+{
+    GPIO_InitTypeDef GPIO_InitStruct = {0};
+
+    __HAL_RCC_GPIOD_CLK_ENABLE();
+
+    GPIO_InitStruct.Pin  = GPIO_PIN_0;
+    GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;  // A ADAPTER selon la polarite reelle du bouton/RESET
+    GPIO_InitStruct.Pull = GPIO_NOPULL;           // A ADAPTER si pas de pull-up/down externe deja present
+    HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
+    HAL_NVIC_SetPriority(EXTI0_IRQn, 5, 0);
+    HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+}
+
+/**
+  * @brief  Resynchronise l'etat logiciel des DEUX chaines de
+  *         multiplexage (tension et courant) avec la realite materielle,
+  *         apres un appui sur le bouton de RESET des ADG728 : le reset
+  *         materiel coupe tous les canaux, quel que soit ce que le
+  *         firmware pensait actif avant l'appui - sans cette
+  *         resynchronisation, GET_MUX_CANAL/GET_MUX_CANAL_COURANT
+  *         renverraient un canal qui n'est plus reellement selectionne.
+  * @param  Aucun.
+  * @retval Aucun (void). Remet les deux canaux actuels a 0xFF, et
+  *         journalise l'evenement sur UART.
+  * @par    Exemple d'utilisation
+  *         Appelee depuis la boucle de StartLwipTask(), quand
+  *         mux_reset_appuye est a 1 (mis par l'interruption PD0) :
+  *             if (mux_reset_appuye) { mux_reset_appuye = 0; TraiterResetMultiplexeur(); }
+  */
+static void TraiterResetMultiplexeur(void)
+{
+    canal_mux_tension_actuel = 0xFF;
+    canal_mux_courant_actuel = 0xFF;
+    UART1_EnvoyerTexte("MUX:RESET_MATERIEL_DETECTE\n");
+}
+
+// Resultats de scan et compteur de cycle : globaux (et non plus locaux a la
+// boucle de main(), qui ne s'execute plus une fois le RTOS demarre), pour
+// etre accessibles depuis ExecuterCaptureComplete().
+static ScanResult_t res_i2c1;
+static ScanResult_t res_i2c2;
+static uint32_t numero_cycle = 0;
+
+/**
+  * @brief  Capture complete de diagnostic : scan I2C1+I2C2, message
+  *         "Bonjour" a chaque adresse trouvee, ecriture d'un palier
+  *         different sur chacune des 8 sorties du DAC, balayage complet
+  *         de VOUT0 (0 a 4095), ecriture de 2.5V sur VOUT1. Le tout
+  *         encadre par des marqueurs SAVE_BEGIN/SAVE_END (avec numero
+  *         de cycle et heure ecoulee), envoye en une fois sur USART1.
+  *         Les marqueurs SAVE_BEGIN/SAVE_END permettent a un outil PC
+  *         (ex : le script Python de controle) de detecter le debut et
+  *         la fin d'une capture dans le flux UART, et de la sauvegarder
+  *         automatiquement en fichier des qu'elle est complete.
+  * @param  Aucun.
+  * @retval Aucun (void). Effet de bord : ecrit sur le bus I2C1, incremente
+  *         numero_cycle, envoie plusieurs kilo-octets sur USART1
+  *         (duree totale ~8-10 secondes, dominee par BalayerSortieDAC()).
+  * @par    Exemple d'utilisation
+  *         Appelee depuis la boucle de StartLwipTask() quand bouton_appuye
+  *         est a 1 (mis par l'interruption du bouton B1/PC13) :
+  *             if (bouton_appuye) { bouton_appuye = 0; ExecuterCaptureComplete(); }
+  */
+static void ExecuterCaptureComplete(void)
+{
+    numero_cycle++;
+
+    // 0. Marqueur de debut, avec numero de cycle et heure ecoulee.
+    char temps_debut[9];
+    FormaterTempsEcoule(temps_debut, sizeof(temps_debut));
+    rapport_scan[0] = '\0';
+    {
+        char ligne[48];
+        sprintf(ligne, "=== SAVE_BEGIN cycle=%lu heure=%s ===\n",
+                (unsigned long)numero_cycle, temps_debut);
+        strcat(rapport_scan, ligne);
+    }
+    UART1_EnvoyerTexte(rapport_scan);   // envoye tout de suite : le PC sait qu'une capture demarre
+
+    // 1. Scan complet des bus I2C1 et I2C2.
+    ScanI2C(&hi2c1, &res_i2c1);
+    ScanI2C(&hi2c2, &res_i2c2);
+
+    rapport_scan[0] = '\0';
+    FormaterRapport("I2C1", &res_i2c1);
+    FormaterRapport("I2C2", &res_i2c2);
+
+    // 2. Message "Bonjour" a chaque adresse trouvee (DAC exclu : format
+    //    binaire strict, pas de texte libre - voir EnvoyerBonjourATous()).
+    static const uint16_t adresses_exclues_i2c1[] = { (0x62 << 1) };
+    EnvoyerBonjourATous(&hi2c1, "I2C1", &res_i2c1, adresses_exclues_i2c1, 1);
+    EnvoyerBonjourATous(&hi2c2, "I2C2", &res_i2c2, NULL, 0);
+
+    // 3. Palier different sur chacune des 8 sorties du DAC (0x62).
+    EcrireToutesLesSorties(&hi2c1, (0x62 << 1), "DAC1");
+
+    UART1_EnvoyerTexte(rapport_scan);   // envoie le scan+Bonjour+paliers avant le balayage (qui prend du temps)
+
+    // 4. Balayage complet de VOUT0 (0 a 4095, pas 50, 100ms -> ~8s),
+    //    rapporte ligne par ligne en direct sur l'UART (voir BalayerSortieDAC()).
+    BalayerSortieDAC(&hi2c1, (0x62 << 1), 0x00, "DAC1", 4095, 50, 100, 3.3f);
+
+    // 5. Ecrit 2.5V sur VOUT1 via VoltageVersCodeDAC().
+    rapport_scan[0] = '\0';
+    {
+        uint16_t code_2v5 = VoltageVersCodeDAC(2.5f, 3.3f);
+        HAL_StatusTypeDef st = EcrireDACVolatile(&hi2c1, (0x62 << 1), 0x01, code_2v5);
+        char ligne[48];
+        sprintf(ligne, "DAC1:VOUT1:2.5V->code=%u:%s\n",
+                code_2v5, (st == HAL_OK) ? "OK" : "ERROR");
+        strcat(rapport_scan, ligne);
+    }
+
+    // 6. Mesure physique reelle (ADC) de chaque LDO cablee. Chaque appel
+    //    envoie deja son resultat sur UART (voir GetMesureReelle()) -
+    //    les LDO pas encore cablees repondent simplement NON_CABLE.
+    for (int i = 0; i < NB_LDO; i++)
+    {
+        GetMesureReelle(i, ldoConfig[i].name);
+    }
+
+    // 7. Marqueur de fin.
+    {
+        char temps_fin[9];
+        FormaterTempsEcoule(temps_fin, sizeof(temps_fin));
+        char ligne[48];
+        sprintf(ligne, "=== SAVE_END cycle=%lu heure=%s ===\n",
+                (unsigned long)numero_cycle, temps_fin);
+        strcat(rapport_scan, ligne);
+    }
+
+    UART1_EnvoyerTexte(rapport_scan);
+}
+
+// Handle USART1 (PB6/PB7), utilise pour tout le rapport texte envoye
+// vers Hercules via un adaptateur USB-UART externe (voir UART1_EnvoyerTexte()).
+UART_HandleTypeDef huart1;
+
+/**
+  * @brief  Configure les broches PB6 (USART1_TX) et PB7 (USART1_RX)
+  *         en Alternate Function. ATTENTION : ces broches ne sont PAS
+  *         reliees au port COM virtuel du ST-LINK - il faut un
+  *         adaptateur USB-UART externe branche sur PB6/PB7 pour voir
+  *         quoi que ce soit dans un terminal (Hercules, etc.).
+  * @param  Aucun.
+  * @retval Aucun (void).
+  * @par    Exemple d'utilisation
+  *         MX_USART1_GPIO_Init();
+  *         MX_USART1_Init();
+  */
+static void MX_USART1_GPIO_Init(void)
+{
+    GPIO_InitTypeDef GPIO_InitStruct = {0};
+
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+
+    GPIO_InitStruct.Pin       = GPIO_PIN_6 | GPIO_PIN_7;
+    GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Pull      = GPIO_NOPULL;
+    GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_LOW;
+    GPIO_InitStruct.Alternate = GPIO_AF7_USART1;
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+}
+
+/**
+  * @brief  Initialise USART1 : 115200 bauds, 8 bits, sans parite,
+  *         1 bit de stop, sans controle de flux (correspond a la
+  *         config Hercules : "8 b, pas de parity, handshake off").
+  * @param  Aucun.
+  * @retval Aucun (void). Initialise le handle global huart1.
+  * @par    Exemple d'utilisation
+  *         MX_USART1_GPIO_Init();
+  *         MX_USART1_Init();
+  *         UART1_EnvoyerTexte("Test\r\n");
+  */
+static void MX_USART1_Init(void)
+{
+    huart1.Instance = USART1;
+    huart1.Init.BaudRate = 115200;
+    huart1.Init.WordLength = UART_WORDLENGTH_8B;
+    huart1.Init.StopBits = UART_STOPBITS_1;
+    huart1.Init.Parity = UART_PARITY_NONE;
+    huart1.Init.Mode = UART_MODE_TX_RX;
+    huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+    huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+    huart1.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+    huart1.Init.ClockPrescaler = UART_PRESCALER_DIV1;
+    huart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+
+    if (HAL_UART_Init(&huart1) != HAL_OK)
+    {
+        Error_Handler();
+    }
+}
+
+/**
+  * @brief  Envoie une chaine de caracteres sur USART1 (PB6/PB7, via
+  *         un adaptateur USB-UART externe), en mode bloquant.
+  * @param  texte  Chaine C terminee par '\0' a transmettre.
+  * @retval Aucun (void).
+  * @par    Exemple d'utilisation
+  *         UART1_EnvoyerTexte(rapport_scan);
+  */
+static void UART1_EnvoyerTexte(const char *texte)
+{
+    HAL_UART_Transmit(&huart1, (uint8_t *)texte, (uint16_t)strlen(texte), 1000);
+}
+
+/* USER CODE END 0 */
+
+/**
+  * @brief  The application entry point.
+  * @retval int
+  */
+int main(void)
+{
+
+  /* USER CODE BEGIN 1 */
+	int wait	=	1000000;
+	while(wait-- > 0);		//Wait for sometime before initializing the system
+  /* USER CODE END 1 */
+
+  /* MPU Configuration--------------------------------------------------------*/
+  MPU_Config();
+
+  /* Enable the CPU Cache */
+
+  /* Enable I-Cache---------------------------------------------------------*/
+  SCB_EnableICache();
+
+  /* Enable D-Cache---------------------------------------------------------*/
+  SCB_EnableDCache();
+
+  /* MCU Configuration--------------------------------------------------------*/
+
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
+
+  /* USER CODE BEGIN Init */
+  HAL_Delay(1000);
+  /* USER CODE END Init */
+
+  /* Configure the system clock */
+  SystemClock_Config();
+
+  /* Configure the peripherals common clocks */
+  PeriphCommonClock_Config();
+
+  /* USER CODE BEGIN SysInit */
+  I2C1_BusRecovery();
+  /* USER CODE END SysInit */
+
+  /* Initialize all configured peripherals */
+
+
+  MX_GPIO_Init();
+  MX_ADC1_Init();
+  MX_ADC3_Init();
+  MX_I2C1_Init();
+  MX_I2C2_Init();
+  MX_USART1_GPIO_Init();
+  MX_USART1_Init();
+  MX_ADC2_Init();
+  /* USER CODE BEGIN 2 */
+  //DAC1
+  //HAL_I2C_Master_Transmit(&hi2c1,MCP4725_I2CADDR_DEFAULT,DAC1_DEF,SPI_SIZE, SPI_TIMEOUT);
+  //DAC2
+  //HAL_I2C_Master_Transmit(&hi2c2,MCP4725_I2CADDR_DEFAULT,DAC2_DEF,SPI_SIZE, SPI_TIMEOUT);
+  //DAC3
+  //HAL_I2C_Master_Transmit(&hi2c1,MPC4725_I2CADDR_A0,DAC3_DEF,SPI_SIZE, SPI_TIMEOUT);
+  //DAC4
+  //HAL_I2C_Master_Transmit(&hi2c2,MPC4725_I2CADDR_A1,DAC4_DEF,SPI_SIZE, SPI_TIMEOUT);
+  //DAC5
+  //HAL_I2C_Master_Transmit(&hi2c2,MPC4725_I2CADDR_A0,DAC5_DEF,SPI_SIZE, SPI_TIMEOUT);
+  /* USER CODE END 2 */
+
+  /* USER CODE BEGIN RTOS_MUTEX */
+  /* add mutexes, ... */
+  /* USER CODE END RTOS_MUTEX */
+
+  /* USER CODE BEGIN RTOS_SEMAPHORES */
+  /* add semaphores, ... */
+  /* USER CODE END RTOS_SEMAPHORES */
+
+  /* USER CODE BEGIN RTOS_TIMERS */
+  /* start timers, add new ones, ... */
+  /* USER CODE END RTOS_TIMERS */
+
+  /* USER CODE BEGIN RTOS_QUEUES */
+  /* add queues, ... */
+  /* USER CODE END RTOS_QUEUES */
+
+  /* Create the thread(s) */
+  /* definition and creation of lwipTask */
+  osThreadDef(lwipTask, StartLwipTask, osPriorityNormal, 0, 256);
+  lwipTaskHandle = osThreadCreate(osThread(lwipTask), NULL);
+
+  /* USER CODE BEGIN RTOS_THREADS */
+  /* add threads, ... */
+  /* USER CODE END RTOS_THREADS */
+
+  /* Start scheduler */
+  osKernelStart();
+
+  /* We should never get here as control is now taken by the scheduler */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
+    // Ne s'execute jamais : le RTOS (osKernelStart(), plus haut) a pris la
+    // main. Le diagnostic complet (scan/DAC/Bonjour) se declenche desormais
+    // via le bouton USER (B1/PC13) depuis la boucle de StartLwipTask() -
+    // voir ExecuterCaptureComplete() et la gestion de bouton_appuye.
+  }
+  /* USER CODE END 3 */
+
+  }
+/**
+  * @brief System Clock Configuration
+  * @retval None
+  */
+void SystemClock_Config(void)
+{
+  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+
+  /** Supply configuration update enable
+  */
+  HAL_PWREx_ConfigSupply(PWR_LDO_SUPPLY);
+
+  /** Configure the main internal regulator output voltage
+  */
+  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE0);
+
+  while(!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
+
+  /** Initializes the RCC Oscillators according to the specified parameters
+  * in the RCC_OscInitTypeDef structure.
+  */
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.HSIState = RCC_HSI_DIV1;
+  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+  RCC_OscInitStruct.PLL.PLLM = 4;
+  RCC_OscInitStruct.PLL.PLLN = 60;
+  RCC_OscInitStruct.PLL.PLLP = 2;
+  RCC_OscInitStruct.PLL.PLLQ = 4;
+  RCC_OscInitStruct.PLL.PLLR = 2;
+  RCC_OscInitStruct.PLL.PLLRGE = RCC_PLL1VCIRANGE_3;
+  RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;
+  RCC_OscInitStruct.PLL.PLLFRACN = 0;
+  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Initializes the CPU, AHB and APB buses clocks
+  */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2
+                              |RCC_CLOCKTYPE_D3PCLK1|RCC_CLOCKTYPE_D1PCLK1;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+  RCC_ClkInitStruct.SYSCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB3CLKDivider = RCC_APB3_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_APB1_DIV2;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_APB2_DIV2;
+  RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV2;
+
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)
+  {
+    Error_Handler();
+  }
+}
+
+/**
+  * @brief Peripherals Common Clock Configuration
+  * @retval None
+  */
+void PeriphCommonClock_Config(void)
+{
+  RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
+
+  /** Initializes the peripherals clock
+  */
+  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_CKPER;
+  PeriphClkInitStruct.CkperClockSelection = RCC_CLKPSOURCE_HSI;
+  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
+  {
+    Error_Handler();
+  }
+}
+
+/**
+  * @brief ADC1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ADC1_Init(void)
+{
+
+  /* USER CODE BEGIN ADC1_Init 0 */
+
+  /* USER CODE END ADC1_Init 0 */
+
+  ADC_MultiModeTypeDef multimode = {0};
+  ADC_ChannelConfTypeDef sConfig = {0};
+
+  /* USER CODE BEGIN ADC1_Init 1 */
+
+  /* USER CODE END ADC1_Init 1 */
+
+  /** Common config
+  */
+  hadc1.Instance = ADC1;
+  hadc1.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1;
+  hadc1.Init.Resolution = ADC_RESOLUTION_16B;
+  hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
+  hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
+  hadc1.Init.LowPowerAutoWait = DISABLE;
+  hadc1.Init.ContinuousConvMode = DISABLE;
+  hadc1.Init.NbrOfConversion = 1;
+  hadc1.Init.DiscontinuousConvMode = DISABLE;
+  hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
+  hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+  hadc1.Init.ConversionDataManagement = ADC_CONVERSIONDATA_DR;
+  hadc1.Init.Overrun = ADC_OVR_DATA_PRESERVED;
+  hadc1.Init.LeftBitShift = ADC_LEFTBITSHIFT_NONE;
+  hadc1.Init.OversamplingMode = DISABLE;
+  hadc1.Init.Oversampling.Ratio = 1;
+  if (HAL_ADC_Init(&hadc1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure the ADC multi-mode
+  */
+  multimode.Mode = ADC_MODE_INDEPENDENT;
+  if (HAL_ADCEx_MultiModeConfigChannel(&hadc1, &multimode) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Channel = ADC_CHANNEL_10;
+  sConfig.Rank = ADC_REGULAR_RANK_1;
+  sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
+  sConfig.SingleDiff = ADC_SINGLE_ENDED;
+  sConfig.OffsetNumber = ADC_OFFSET_NONE;
+  sConfig.Offset = 0;
+  sConfig.OffsetSignedSaturation = DISABLE;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN ADC1_Init 2 */
+
+  /* USER CODE END ADC1_Init 2 */
+
+}
+
+/**
+  * @brief ADC2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ADC2_Init(void)
+{
+
+  /* USER CODE BEGIN ADC2_Init 0 */
+
+  /* USER CODE END ADC2_Init 0 */
+
+  ADC_ChannelConfTypeDef sConfig = {0};
+
+  /* USER CODE BEGIN ADC2_Init 1 */
+
+  /* USER CODE END ADC2_Init 1 */
+
+  /** Common config
+  */
+  hadc2.Instance = ADC2;
+  hadc2.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1;
+  hadc2.Init.Resolution = ADC_RESOLUTION_16B;
+  hadc2.Init.ScanConvMode = ADC_SCAN_DISABLE;
+  hadc2.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
+  hadc2.Init.LowPowerAutoWait = DISABLE;
+  hadc2.Init.ContinuousConvMode = DISABLE;
+  hadc2.Init.NbrOfConversion = 1;
+  hadc2.Init.DiscontinuousConvMode = DISABLE;
+  hadc2.Init.ExternalTrigConv = ADC_SOFTWARE_START;
+  hadc2.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+  hadc2.Init.ConversionDataManagement = ADC_CONVERSIONDATA_DR;
+  hadc2.Init.Overrun = ADC_OVR_DATA_PRESERVED;
+  hadc2.Init.LeftBitShift = ADC_LEFTBITSHIFT_NONE;
+  hadc2.Init.OversamplingMode = DISABLE;
+  hadc2.Init.Oversampling.Ratio = 1;
+  if (HAL_ADC_Init(&hadc2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Channel = ADC_CHANNEL_VBAT;
+  sConfig.Rank = ADC_REGULAR_RANK_1;
+  sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
+  sConfig.SingleDiff = ADC_SINGLE_ENDED;
+  sConfig.OffsetNumber = ADC_OFFSET_NONE;
+  sConfig.Offset = 0;
+  sConfig.OffsetSignedSaturation = DISABLE;
+  if (HAL_ADC_ConfigChannel(&hadc2, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN ADC2_Init 2 */
+
+  /* USER CODE END ADC2_Init 2 */
+
+}
+
+/**
+  * @brief ADC3 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ADC3_Init(void)
+{
+
+  /* USER CODE BEGIN ADC3_Init 0 */
+
+  /* USER CODE END ADC3_Init 0 */
+
+  ADC_ChannelConfTypeDef sConfig = {0};
+
+  /* USER CODE BEGIN ADC3_Init 1 */
+
+  /* USER CODE END ADC3_Init 1 */
+
+  /** Common config
+  */
+  hadc3.Instance = ADC3;
+  hadc3.Init.Resolution = ADC_RESOLUTION_16B;
+  hadc3.Init.ScanConvMode = ADC_SCAN_DISABLE;
+  hadc3.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
+  hadc3.Init.LowPowerAutoWait = DISABLE;
+  hadc3.Init.ContinuousConvMode = DISABLE;
+  hadc3.Init.NbrOfConversion = 1;
+  hadc3.Init.DiscontinuousConvMode = DISABLE;
+  hadc3.Init.ExternalTrigConv = ADC_SOFTWARE_START;
+  hadc3.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+  hadc3.Init.ConversionDataManagement = ADC_CONVERSIONDATA_DR;
+  hadc3.Init.Overrun = ADC_OVR_DATA_PRESERVED;
+  hadc3.Init.LeftBitShift = ADC_LEFTBITSHIFT_NONE;
+  hadc3.Init.OversamplingMode = DISABLE;
+  hadc3.Init.Oversampling.Ratio = 1;
+  if (HAL_ADC_Init(&hadc3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Channel = ADC_CHANNEL_1;
+  sConfig.Rank = ADC_REGULAR_RANK_1;
+  sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
+  sConfig.SingleDiff = ADC_SINGLE_ENDED;
+  sConfig.OffsetNumber = ADC_OFFSET_NONE;
+  sConfig.Offset = 0;
+  sConfig.OffsetSignedSaturation = DISABLE;
+  if (HAL_ADC_ConfigChannel(&hadc3, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN ADC3_Init 2 */
+
+  /* USER CODE END ADC3_Init 2 */
+
+}
+
+/**
+  * @brief I2C1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_I2C1_Init(void)
+{
+
+  /* USER CODE BEGIN I2C1_Init 0 */
+
+  /* USER CODE END I2C1_Init 0 */
+
+  /* USER CODE BEGIN I2C1_Init 1 */
+
+  /* USER CODE END I2C1_Init 1 */
+  hi2c1.Instance = I2C1;
+  hi2c1.Init.Timing = 0x307075B1;
+  hi2c1.Init.OwnAddress1 = 0;
+  hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c1.Init.OwnAddress2 = 0;
+  hi2c1.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+  hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Analogue filter
+  */
+  if (HAL_I2CEx_ConfigAnalogFilter(&hi2c1, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Digital filter
+  */
+  if (HAL_I2CEx_ConfigDigitalFilter(&hi2c1, 0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN I2C1_Init 2 */
+
+  /* USER CODE END I2C1_Init 2 */
+
+}
+
+/**
+  * @brief I2C2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_I2C2_Init(void)
+{
+
+  /* USER CODE BEGIN I2C2_Init 0 */
+
+  /* USER CODE END I2C2_Init 0 */
+
+  /* USER CODE BEGIN I2C2_Init 1 */
+
+  /* USER CODE END I2C2_Init 1 */
+  hi2c2.Instance = I2C2;
+  hi2c2.Init.Timing = 0x307075B1;
+  hi2c2.Init.OwnAddress1 = 0;
+  hi2c2.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c2.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c2.Init.OwnAddress2 = 0;
+  hi2c2.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+  hi2c2.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c2.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Analogue filter
+  */
+  if (HAL_I2CEx_ConfigAnalogFilter(&hi2c2, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Digital filter
+  */
+  if (HAL_I2CEx_ConfigDigitalFilter(&hi2c2, 0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN I2C2_Init 2 */
+
+  /* USER CODE END I2C2_Init 2 */
+
+}
+
+/**
+  * @brief USART1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART1_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART1_Init 0 */
+
+  /* USER CODE END USART1_Init 0 */
+
+  /* USER CODE BEGIN USART1_Init 1 */
+
+  /* USER CODE END USART1_Init 1 */
+  huart1.Instance = USART1;
+  huart1.Init.BaudRate = 115200;
+  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+  huart1.Init.StopBits = UART_STOPBITS_1;
+  huart1.Init.Parity = UART_PARITY_NONE;
+  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+  huart1.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  huart1.Init.ClockPrescaler = UART_PRESCALER_DIV1;
+  huart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  if (HAL_UART_Init(&huart1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_UARTEx_SetTxFifoThreshold(&huart1, UART_TXFIFO_THRESHOLD_1_8) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_UARTEx_SetRxFifoThreshold(&huart1, UART_RXFIFO_THRESHOLD_1_8) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_UARTEx_DisableFifoMode(&huart1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART1_Init 2 */
+
+  /* USER CODE END USART1_Init 2 */
+
+}
+
+/**
+  * @brief GPIO Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_GPIO_Init(void)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+  /* USER CODE BEGIN MX_GPIO_Init_1 */
+
+  /* USER CODE END MX_GPIO_Init_1 */
+
+  /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOE_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOF_CLK_ENABLE();
+  __HAL_RCC_GPIOH_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOG_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOE, EN_LDO3_PSp_Pin|EN_LDO2_PSp_Pin|BLD_LDO1_PLn_Pin|BLD_LDO5_PSn_Pin
+                          |BLD_LDO2_PLn_Pin|EN_LDO3_PLn_Pin|BLD_LDO6_PSn_Pin|EN_LDO1_PLp_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOC, BLD_LDO5_PSp_Pin|BLD_LDO4_PSp_Pin|EN_LDO1_PSn_Pin|BLD_LDO1_PSn_Pin
+                          |EN_LDO6_PSp_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOF, EN_LDO1_PSp_Pin|BLD_LDO2_PSp_Pin|EN_LDO5_PSn_Pin|EN_LDO5_PSp_Pin
+                          |BLD_LDO1_PSp_Pin|BLD_LDO3_PLp_Pin|EN_LDO3_PLp_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, EN_LDO4_PSp_Pin|EN_LDO2_PLp_Pin|BLD_LDO2_PSn_Pin|EN_LDO2_PSn_Pin
+                          |EN_LDO2_PLn_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, BLD_LDO3_PSn_Pin|EN_LDO3_PSn_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOG, EN_LDO1_PLn_Pin|EN_LDO6_PSn_Pin|BLD_LDO1_PLp_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOD, BLD_LDO3_PLn_Pin|BLD_LDO2_PLp_Pin|BLD_LDO4_PSn_Pin|EN_LDO4_PSn_Pin
+                          |BLD_LDO6_PSp_Pin|BLD_LDO3_PSp_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : EN_LDO3_PSp_Pin EN_LDO2_PSp_Pin BLD_LDO1_PLn_Pin BLD_LDO5_PSn_Pin
+                           BLD_LDO2_PLn_Pin EN_LDO3_PLn_Pin BLD_LDO6_PSn_Pin EN_LDO1_PLp_Pin */
+  GPIO_InitStruct.Pin = EN_LDO3_PSp_Pin|EN_LDO2_PSp_Pin|BLD_LDO1_PLn_Pin|BLD_LDO5_PSn_Pin
+                          |BLD_LDO2_PLn_Pin|EN_LDO3_PLn_Pin|BLD_LDO6_PSn_Pin|EN_LDO1_PLp_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PG_LDO3_PSp_Pin OC_LDO2_PSp_Pin PG_LDO4_PSn_Pin OC_LDO2_PLp_Pin
+                           PG_LDO3_PLn_Pin PG_LDO3_PLp_Pin */
+  GPIO_InitStruct.Pin = PG_LDO3_PSp_Pin|OC_LDO2_PSp_Pin|PG_LDO4_PSn_Pin|OC_LDO2_PLp_Pin
+                          |PG_LDO3_PLn_Pin|PG_LDO3_PLp_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : BLD_LDO5_PSp_Pin BLD_LDO4_PSp_Pin EN_LDO1_PSn_Pin BLD_LDO1_PSn_Pin
+                           EN_LDO6_PSp_Pin */
+  GPIO_InitStruct.Pin = BLD_LDO5_PSp_Pin|BLD_LDO4_PSp_Pin|EN_LDO1_PSn_Pin|BLD_LDO1_PSn_Pin
+                          |EN_LDO6_PSp_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PG_LDO5_PSp_Pin OC_LDO1_PSn_Pin OC_LDO6_PSp_Pin PG_LDO6_PSp_Pin */
+  GPIO_InitStruct.Pin = PG_LDO5_PSp_Pin|OC_LDO1_PSn_Pin|OC_LDO6_PSp_Pin|PG_LDO6_PSp_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : EN_LDO1_PSp_Pin BLD_LDO2_PSp_Pin EN_LDO5_PSn_Pin EN_LDO5_PSp_Pin
+                           BLD_LDO1_PSp_Pin BLD_LDO3_PLp_Pin EN_LDO3_PLp_Pin */
+  GPIO_InitStruct.Pin = EN_LDO1_PSp_Pin|BLD_LDO2_PSp_Pin|EN_LDO5_PSn_Pin|EN_LDO5_PSp_Pin
+                          |BLD_LDO1_PSp_Pin|BLD_LDO3_PLp_Pin|EN_LDO3_PLp_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PG_LDO2_PSp_Pin PG_LDO3_PSn_Pin OC_LDO5_PSp_Pin OC_LDO1_PSp_Pin
+                           PG_LDO5_PSn_Pin OC_LDO4_PSn_Pin OC_LDO5_PSn_Pin */
+  GPIO_InitStruct.Pin = PG_LDO2_PSp_Pin|PG_LDO3_PSn_Pin|OC_LDO5_PSp_Pin|OC_LDO1_PSp_Pin
+                          |PG_LDO5_PSn_Pin|OC_LDO4_PSn_Pin|OC_LDO5_PSn_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : EN_LDO4_PSp_Pin EN_LDO2_PLp_Pin BLD_LDO2_PSn_Pin EN_LDO2_PSn_Pin
+                           EN_LDO2_PLn_Pin */
+  GPIO_InitStruct.Pin = EN_LDO4_PSp_Pin|EN_LDO2_PLp_Pin|BLD_LDO2_PSn_Pin|EN_LDO2_PSn_Pin
+                          |EN_LDO2_PLn_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PG_LDO4_PSp_Pin OC_LDO2_PSn_Pin */
+  GPIO_InitStruct.Pin = PG_LDO4_PSp_Pin|OC_LDO2_PSn_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : OC_LDO4_PSp_Pin PG_LDO2_PSn_Pin OC_LDO3_PSn_Pin */
+  GPIO_InitStruct.Pin = OC_LDO4_PSp_Pin|PG_LDO2_PSn_Pin|OC_LDO3_PSn_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : BLD_LDO3_PSn_Pin EN_LDO3_PSn_Pin */
+  GPIO_InitStruct.Pin = BLD_LDO3_PSn_Pin|EN_LDO3_PSn_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : EN_LDO1_PLn_Pin EN_LDO6_PSn_Pin BLD_LDO1_PLp_Pin */
+  GPIO_InitStruct.Pin = EN_LDO1_PLn_Pin|EN_LDO6_PSn_Pin|BLD_LDO1_PLp_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PG_LDO2_PLp_Pin OC_LDO3_PLp_Pin OC_LDO6_PSn_Pin PG_LDO6_PSn_Pin
+                           OC_LDO3_PLn_Pin PG_LDO1_PLn_Pin OC_LDO1_PLp_Pin */
+  GPIO_InitStruct.Pin = PG_LDO2_PLp_Pin|OC_LDO3_PLp_Pin|OC_LDO6_PSn_Pin|PG_LDO6_PSn_Pin
+                          |OC_LDO3_PLn_Pin|PG_LDO1_PLn_Pin|OC_LDO1_PLp_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PG_LDO1_PSn_Pin OC_LDO1_PLn_Pin OC_LDO2_PLn_Pin PG_LDO2_PLn_Pin
+                           PG_LDO1_PLp_Pin PG_LDO1_PSp_Pin OC_LDO3_PSp_Pin */
+  GPIO_InitStruct.Pin = PG_LDO1_PSn_Pin|OC_LDO1_PLn_Pin|OC_LDO2_PLn_Pin|PG_LDO2_PLn_Pin
+                          |PG_LDO1_PLp_Pin|PG_LDO1_PSp_Pin|OC_LDO3_PSp_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : BLD_LDO3_PLn_Pin BLD_LDO2_PLp_Pin BLD_LDO4_PSn_Pin EN_LDO4_PSn_Pin
+                           BLD_LDO6_PSp_Pin BLD_LDO3_PSp_Pin */
+  GPIO_InitStruct.Pin = BLD_LDO3_PLn_Pin|BLD_LDO2_PLp_Pin|BLD_LDO4_PSn_Pin|EN_LDO4_PSn_Pin
+                          |BLD_LDO6_PSp_Pin|BLD_LDO3_PSp_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
+  /*AnalogSwitch Config */
+  HAL_SYSCFG_AnalogSwitchConfig(SYSCFG_SWITCH_PA0, SYSCFG_SWITCH_PA0_CLOSE);
+
+  /* USER CODE BEGIN MX_GPIO_Init_2 */
+  GPIO_InitStruct.Pin = GPIO_PIN_8 | GPIO_PIN_9;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;      // Alternate Function Open-Drain
+  GPIO_InitStruct.Pull = GPIO_NOPULL;          // pull-up externe déjà présent
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;   // à vérifier dans l'onglet Pinout de CubeMX
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  // I2C2 : SCL = PB10, SDA = PB11 (a verifier dans CubeMX, AF4 standard
+  // pour I2C2 sur cette combinaison de broches en H7, mais a confirmer)
+  GPIO_InitStruct.Pin = GPIO_PIN_10 | GPIO_PIN_11;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.Alternate = GPIO_AF4_I2C2;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  // Bouton USER B1 (PC13) : tire a la masse quand presse, pull-up deja
+  // present sur la carte Nucleo -> GPIO_NOPULL, interruption front
+  // descendant. Voir bouton_appuye / ExecuterCaptureComplete().
+  __HAL_RCC_GPIOC_CLK_ENABLE();
+  GPIO_InitStruct.Pin   = GPIO_PIN_13;
+  GPIO_InitStruct.Mode  = GPIO_MODE_IT_FALLING;
+  GPIO_InitStruct.Pull  = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+
+  // Bouton-poussoir de RESET materiel des 3 ADG728 (PD0/EXTI0) - voir
+  // MX_MuxResetSync_GPIO_Init() pour le detail et les points a verifier
+  // (polarite, pull-up/down).
+  MX_MuxResetSync_GPIO_Init();
+  /* USER CODE END MX_GPIO_Init_2 */
+}
+
+/* USER CODE BEGIN 4 */
+/**
+  * @brief  Initialise le serveur UDP applicatif.
+  *         Cree un PCB UDP (udp_new), le lie a l'adresse IP et au port
+  *         definis par les macros IP4_1..IP4_4 et UDP_SERVER_PORT (main.h),
+  *         puis enregistre udp_receive_callback() comme fonction de reception.
+  *         En cas d'echec de udp_bind(), le PCB est libere (udp_remove).
+  * @param  Aucun.
+  * @retval Aucun (void).
+  * @par    Exemple d'utilisation
+  *         Appelee une seule fois au demarrage de la tache reseau :
+  *             osDelay(1000);
+  *             udpServer_init();
+  */
+void udpServer_init(void)
+{
+  struct	udp_pcb	*upcb;
+  err_t		err;
+  ip_addr_t	myIPADDR;
+  IP_ADDR4(&myIPADDR,IP4_1,IP4_2,IP4_3,IP4_4);
+
+  upcb	=	udp_new();
+
+  UART1_EnvoyerTexte("[UDP] Initialisation...\r\n");
+
+  if (upcb == NULL)
+  {
+    UART1_EnvoyerTexte("[UDP] ERREUR: udp_new() == NULL\r\n");
+    return;
+  }
+
+  err	=	udp_bind(upcb, &myIPADDR,UDP_SERVER_PORT);
+
+  if(err == ERR_OK)
+  {
+	  char msg[96];
+	  snprintf(msg, sizeof(msg), "[UDP] BIND OK %d.%d.%d.%d:%d\r\n",
+	           IP4_1, IP4_2, IP4_3, IP4_4, UDP_SERVER_PORT);
+	  UART1_EnvoyerTexte(msg);
+	  udp_recv(upcb, udp_receive_callback, NULL);
+  }
+  else
+  {
+	  char msg[64];
+	  snprintf(msg, sizeof(msg), "[UDP] BIND ERROR = %d\r\n", (int)err);
+	  UART1_EnvoyerTexte(msg);
+	  udp_remove(upcb);
+  }
+}
+
+
+
+/* =====================================================================
+   udp_receive_callback
+   ===================================================================== */
+/**
+  * @brief  Callback LwIP invoque automatiquement a chaque paquet UDP recu
+  *         sur le port du serveur (enregistre par udpServer_init via udp_recv).
+  *         Recupere le message recu, appelle tc_request() pour l'interpreter
+  *         et construire la reponse, puis renvoie cette reponse a l'expediteur.
+  * @param  arg   Parametre optionnel LwIP (non utilise ici).
+  * @param  upcb  Pointeur vers le PCB UDP ayant recu le paquet.
+  * @param  p     Buffer LwIP (pbuf) contenant les donnees recues (p->payload).
+  * @param  addr  Adresse IP de l'expediteur.
+  * @param  port  Port UDP de l'expediteur.
+  * @retval Aucun (void).
+  * @par    Exemple d'utilisation
+  *         Jamais appelee directement dans le code applicatif : c'est LwIP
+  *         qui l'invoque des qu'un datagramme arrive sur le port ecoute
+  *         (voir udp_recv(upcb, udp_receive_callback, NULL) dans udpServer_init).
+  */
+void udp_receive_callback(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)
+{
+	struct pbuf *txBuf = NULL;
+	char buf[150];
+	char rxbuf[150];
+	u16_t rxlen;
+	int len;
+	err_t err;
+
+	(void)arg;
+
+	if (p == NULL)
+	{
+		return;
+	}
+
+	/*
+	 * p->payload n'est PAS garanti termine par '\0' et un datagramme peut
+	 * etre compose de plusieurs segments pbuf. Les handlers de tc_request()
+	 * utilisent strsep()/strcmp(), donc ils ont besoin d'une vraie chaine C.
+	 */
+	rxlen = (p->tot_len < (sizeof(rxbuf) - 1U)) ? p->tot_len : (sizeof(rxbuf) - 1U);
+	pbuf_copy_partial(p, rxbuf, rxlen, 0);
+	rxbuf[rxlen] = '\0';
+	last_message = rxbuf;
+
+	UART1_EnvoyerTexte("[UDP] RX commande: ");
+	UART1_EnvoyerTexte(rxbuf);
+	UART1_EnvoyerTexte("\r\n");
+
+	tc_request();
+
+	UART1_EnvoyerTexte("[UDP] REPONSE: ");
+	UART1_EnvoyerTexte(response);
+	UART1_EnvoyerTexte("\r\n");
+
+	/* Reponse construite par tc_request(). */
+	len = snprintf(buf, sizeof(buf), "%s", response);
+	if (len < 0)
+	{
+		len = 0;
+	}
+	if ((size_t)len >= sizeof(buf))
+	{
+		len = (int)sizeof(buf) - 1;
+	}
+
+	txBuf = pbuf_alloc(PBUF_TRANSPORT, (u16_t)len, PBUF_RAM);
+	if (txBuf != NULL)
+	{
+		pbuf_take(txBuf, buf, (u16_t)len);
+		/*
+		 * Ne pas udp_connect() le PCB serveur : udp_connect() modifie son
+		 * etat et peut filtrer les paquets entrants sur le peer connecte.
+		 * udp_sendto() repond directement au client qui vient d'envoyer le
+		 * datagramme, tout en conservant le serveur UDP generique.
+		 */
+		err = udp_sendto(upcb, txBuf, addr, port);
+
+		if (err == ERR_OK)
+		{
+			UART1_EnvoyerTexte("[UDP] TX OK\r\n");
+		}
+		else
+		{
+			char msg[64];
+			snprintf(msg, sizeof(msg), "[UDP] TX ERROR = %d\r\n", (int)err);
+			UART1_EnvoyerTexte(msg);
+		}
+		pbuf_free(txBuf);
+	}
+
+	pbuf_free(p);
+	snprintf(response, sizeof(response), "%s", "no message");
+}
+
+/* =====================================================================
+   Fonction Utilitaires LDO génériques (EN/BL/STATUS )
+   ===================================================================== */
+/**
+  * @brief  Recherche l'indice (0 a NB_LDO-1) d'une LDO dans le tableau
+  *         ldoConfig[] a partir de son suffixe de nom.
+  * @param  suffix  Chaine de caracteres identifiant la LDO, sans le prefixe
+  *                 de commande (ex : "1PSp", "3PLn").
+  * @retval int  Indice trouve dans ldoConfig[] (0..17), ou -1 si le suffixe
+  *              ne correspond a aucune LDO connue.
+  * @par    Exemple d'utilisation
+  *         int idx = findLdoIndex("2PSn");   // idx == 3
+  *         int bad = findLdoIndex("ALL");    // bad == -1
+  */
+static int findLdoIndex(const char *suffix)
+{
+	for (int i = 0; i < NB_LDO; i++)
+		if (strcmp(ldoConfig[i].name, suffix) == 0)
+			return i;
+	return -1;
+}
+
+/**
+  * @brief  Construit la chaine de statut complete d'une LDO et la place
+  *         dans la variable globale response, pour repondre a une commande
+  *         "GET_STATUS_LDO_<nom>".
+  *         Cas particulier : pour les LDO de type "PL_p" (ex: 1PLp, 2PLp,
+  *         3PLp), qui n'ont pas de mesure de courant, le champ Current
+  *         affiche "NONE" au lieu d'une valeur numerique.
+  *
+  *         ATTENTION a l'interpretation du champ OC : ce n'est PAS un
+  *         defaut absolu, mais la sortie d'un comparateur analogique
+  *         dont le SEUIL de declenchement est fixe par la valeur
+  *         "Current" elle-meme (via un pont diviseur pilote par le DAC
+  *         courant, voir le commentaire au-dessus de la declaration des
+  *         struct LDO_x_PS_p/n plus haut dans ce fichier). Un meme
+  *         courant reel peut donc donner OC=0 ou OC=1 selon la valeur
+  *         de Current configuree au moment de la lecture - toujours
+  *         lire les deux champs ensemble, jamais OC isolement.
+  * @param  idx  Indice de la LDO dans ldoConfig[] (0..17), typiquement
+  *              obtenu via findLdoIndex().
+  * @retval Aucun (void). Ecrit la chaine formatee dans response, ex :
+  *         "LDO_1PSp:: En:1, Bl:0, PG:1, OC:0, Voltage:2047, Current:2047,
+  *         delta_ON:0, delta_OFF:0".
+  * @par    Exemple d'utilisation
+  *         int idx = findLdoIndex("1PSp");
+  *         if (idx != -1) buildStatusResponse(idx);
+  */
+static void buildStatusResponse(int idx)
+{
+	LDO_TypeDef *l = ldoConfig[idx].ldo;
+	int isPL_p = (strstr(ldoConfig[idx].name, "PL") != NULL) && (ldoConfig[idx].name[3] == 'p');
+	if (isPL_p)
+	{
+		sprintf(response, "LDO_%s:: En:%d, Bl:%d, PG:%d, OC:%d, Voltage:%d, Current:NONE, delta_ON:%d, delta_OFF:%d\n",
+			ldoConfig[idx].name, l->EN, l->BLD, l->PG, l->OC, l->VAL, l->RET, l->RET_OFF);
+	}
+	else
+	{
+		sprintf(response, "LDO_%s:: En:%d, Bl:%d, PG:%d, OC:%d, Voltage:%d, Current:%d, delta_ON:%d, delta_OFF:%d\n",
+			ldoConfig[idx].name, l->EN, l->BLD, l->PG, l->OC, l->VAL, l->CURRENT, l->RET, l->RET_OFF);
+	}
+}
+
+/* =====================================================================
+   HANDLERS pour la table de dispatch
+   Chaque handler lit la suite du message via last_message si besoin
+   (exactement comme le faisait chaque bloc if/else avant).
+   ===================================================================== */
+
+/**
+  * @brief  Handler de la commande reseau "SET_EN_LDO_ALL".
+  *         Parcourt les 18 LDO et active (Enable=1) pour chacune d'entre elles
+  *         (tableau global EN_LDO[18]).
+  * @param  Aucun.
+  * @retval Aucun (void). Effet de bord : EN_LDO[0..17] = 1.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "SET_EN_LDO_ALL" -> h_SET_EN_LDO_ALL();
+  */
+static void h_SET_EN_LDO_ALL(void)  { for (int i = 0; i < NB_LDO; i++) EN_LDO[i] = 1; }
+/**
+  * @brief  Handler de la commande reseau "RST_EN_LDO_ALL".
+  *         Parcourt les 18 LDO et desactive (Enable=0) pour chacune d'entre elles
+  *         (tableau global EN_LDO[18]).
+  * @param  Aucun.
+  * @retval Aucun (void). Effet de bord : EN_LDO[0..17] = 0.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "RST_EN_LDO_ALL" -> h_RST_EN_LDO_ALL();
+  */
+static void h_RST_EN_LDO_ALL(void)  { for (int i = 0; i < NB_LDO; i++) EN_LDO[i] = 0; }
+/**
+  * @brief  Handler de la commande reseau "SET_BL_LDO_ALL".
+  *         Parcourt les 18 LDO et active le bleeder (Bl=1) pour chacune d'entre elles
+  *         (tableau global BL_LDO[18]).
+  * @param  Aucun.
+  * @retval Aucun (void). Effet de bord : BL_LDO[0..17] = 1.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "SET_BL_LDO_ALL" -> h_SET_BL_LDO_ALL();
+  */
+static void h_SET_BL_LDO_ALL(void)  { for (int i = 0; i < NB_LDO; i++) BL_LDO[i] = 1; }
+/**
+  * @brief  Handler de la commande reseau "RST_BL_LDO_ALL".
+  *         Parcourt les 18 LDO et desactive le bleeder (Bl=0) pour chacune d'entre elles
+  *         (tableau global BL_LDO[18]).
+  * @param  Aucun.
+  * @retval Aucun (void). Effet de bord : BL_LDO[0..17] = 0.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "RST_BL_LDO_ALL" -> h_RST_BL_LDO_ALL();
+  */
+static void h_RST_BL_LDO_ALL(void)  { for (int i = 0; i < NB_LDO; i++) BL_LDO[i] = 0; }
+
+/**
+  * @brief  Handler de la commande reseau "SET_EN_TAB".
+  *         Renseigne en une seule fois l'etat Enable des 18 LDO a partir
+  *         d'un tableau texte recu dans la trame.
+  * @param  Aucun parametre C. Lit la variable globale last_message, au format
+  *         attendu "SET_EN_TAB[v0,v1,v2,...,v17]" ou chaque vN vaut 0 ou 1.
+  * @retval Aucun (void). Effet de bord : EN_LDO[0..17] mis a jour.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "SET_EN_TAB[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]"
+  *         -> tc_request() appelle automatiquement h_SET_EN_TAB();
+  */
+static void h_SET_EN_TAB(void)
+{
+	char *token = strsep(&last_message, "[");
+	for (int i = 0; i <= 16; i++)
+	{
+		token = strsep(&last_message, ",");
+		EN_LDO[i] = (_Bool)atoi(token);
+	}
+	token = strsep(&last_message, "]");
+	EN_LDO[17] = (_Bool)atoi(token);
+}
+
+/**
+  * @brief  Handler de la commande reseau "SET_BL_TAB".
+  *         Renseigne en une seule fois l'etat Bleeder des 18 LDO a partir
+  *         d'un tableau texte recu dans la trame.
+  * @param  Aucun parametre C. Lit la variable globale last_message, au format
+  *         attendu "SET_BL_TAB[v0,v1,v2,...,v17]" ou chaque vN vaut 0 ou 1.
+  * @retval Aucun (void). Effet de bord : BL_LDO[0..17] mis a jour.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "SET_BL_TAB[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]"
+  *         -> tc_request() appelle automatiquement h_SET_BL_TAB();
+  */
+static void h_SET_BL_TAB(void)
+{
+	char *token = strsep(&last_message, "[");
+	for (int i = 0; i <= 16; i++)
+	{
+		token = strsep(&last_message, ",");
+		BL_LDO[i] = (_Bool)atoi(token);
+	}
+	token = strsep(&last_message, "]");
+	BL_LDO[17] = (_Bool)atoi(token);
+}
+
+// ---- DELTA ----
+/**
+  * @brief  Handler de la commande reseau "SET_DELTA_DVDD_AVDD".
+  *         Met a jour le delai de sequencement delta_dvdd_avdd (en ms) a partir
+  *         de la valeur recue apres le "'" dans la trame.
+  * @param  Aucun parametre C. La valeur est lue dans la variable globale
+  *         last_message, au format attendu "SET_DELTA_DVDD_AVDD:<valeur_ms>".
+  * @retval Aucun (void). Effet de bord : delta_dvdd_avdd mis a jour.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "SET_DELTA_DVDD_AVDD:750" -> delta_dvdd_avdd = 750;
+  */
+static void h_SET_DELTA_DVDD_AVDD(void) { char *t = strsep(&last_message, ":"); delta_dvdd_avdd = atoi(t); }
+/**
+  * @brief  Handler de la commande reseau "SET_DELTA_AVDD_VREF".
+  *         Met a jour le delai de sequencement delta_avdd_vref (en ms) a partir
+  *         de la valeur recue apres le "'" dans la trame.
+  * @param  Aucun parametre C. La valeur est lue dans la variable globale
+  *         last_message, au format attendu "SET_DELTA_AVDD_VREF:<valeur_ms>".
+  * @retval Aucun (void). Effet de bord : delta_avdd_vref mis a jour.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "SET_DELTA_AVDD_VREF:750" -> delta_avdd_vref = 750;
+  */
+static void h_SET_DELTA_AVDD_VREF(void) { char *t = strsep(&last_message, ":"); delta_avdd_vref = atoi(t); }
+/**
+  * @brief  Handler de la commande reseau "SET_DELTA_VREF_NRST".
+  *         Met a jour le delai de sequencement delta_vref_nrst (en ms) a partir
+  *         de la valeur recue apres le "'" dans la trame.
+  * @param  Aucun parametre C. La valeur est lue dans la variable globale
+  *         last_message, au format attendu "SET_DELTA_VREF_NRST:<valeur_ms>".
+  * @retval Aucun (void). Effet de bord : delta_vref_nrst mis a jour.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "SET_DELTA_VREF_NRST:750" -> delta_vref_nrst = 750;
+  */
+static void h_SET_DELTA_VREF_NRST(void) { char *t = strsep(&last_message, ":"); delta_vref_nrst = atoi(t); }
+/**
+  * @brief  Handler de la commande reseau "SET_DELTA_NRST_VREF".
+  *         Met a jour le delai de sequencement delta_nrst_vref (en ms) a partir
+  *         de la valeur recue apres le "'" dans la trame.
+  * @param  Aucun parametre C. La valeur est lue dans la variable globale
+  *         last_message, au format attendu "SET_DELTA_NRST_VREF:<valeur_ms>".
+  * @retval Aucun (void). Effet de bord : delta_nrst_vref mis a jour.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "SET_DELTA_NRST_VREF:750" -> delta_nrst_vref = 750;
+  */
+static void h_SET_DELTA_NRST_VREF(void) { char *t = strsep(&last_message, ":"); delta_nrst_vref = atoi(t); }
+/**
+  * @brief  Handler de la commande reseau "SET_DELTA_VREF_AVDD".
+  *         Met a jour le delai de sequencement delta_vref_avdd (en ms) a partir
+  *         de la valeur recue apres le "'" dans la trame.
+  * @param  Aucun parametre C. La valeur est lue dans la variable globale
+  *         last_message, au format attendu "SET_DELTA_VREF_AVDD:<valeur_ms>".
+  * @retval Aucun (void). Effet de bord : delta_vref_avdd mis a jour.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "SET_DELTA_VREF_AVDD:750" -> delta_vref_avdd = 750;
+  */
+static void h_SET_DELTA_VREF_AVDD(void) { char *t = strsep(&last_message, ":"); delta_vref_avdd = atoi(t); }
+/**
+  * @brief  Handler de la commande reseau "SET_DELTA_AVDD_DVDD".
+  *         Met a jour le delai de sequencement delta_avdd_dvdd (en ms) a partir
+  *         de la valeur recue apres le "'" dans la trame.
+  * @param  Aucun parametre C. La valeur est lue dans la variable globale
+  *         last_message, au format attendu "SET_DELTA_AVDD_DVDD:<valeur_ms>".
+  * @retval Aucun (void). Effet de bord : delta_avdd_dvdd mis a jour.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "SET_DELTA_AVDD_DVDD:750" -> delta_avdd_dvdd = 750;
+  */
+static void h_SET_DELTA_AVDD_DVDD(void) { char *t = strsep(&last_message, ":"); delta_avdd_dvdd = atoi(t); }
+/**
+  * @brief  Handler de la commande reseau "RST_DELTA_DVDD_AVDD".
+  *         Reinitialise le delai delta_dvdd_avdd a sa valeur par defaut (DELTA_INIT_DVDD_AVDD).
+  * @param  Aucun.
+  * @retval Aucun (void). Effet de bord : delta_dvdd_avdd = DELTA_INIT_DVDD_AVDD.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "RST_DELTA_DVDD_AVDD" -> delta_dvdd_avdd = DELTA_INIT_DVDD_AVDD;
+  */
+static void h_RST_DELTA_DVDD_AVDD(void) { delta_dvdd_avdd = DELTA_INIT_DVDD_AVDD; }
+/**
+  * @brief  Handler de la commande reseau "RST_DELTA_AVDD_VREF".
+  *         Reinitialise le delai delta_avdd_vref a sa valeur par defaut (DELTA_INIT_AVDD_VREF).
+  * @param  Aucun.
+  * @retval Aucun (void). Effet de bord : delta_avdd_vref = DELTA_INIT_AVDD_VREF.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "RST_DELTA_AVDD_VREF" -> delta_avdd_vref = DELTA_INIT_AVDD_VREF;
+  */
+static void h_RST_DELTA_AVDD_VREF(void) { delta_avdd_vref = DELTA_INIT_AVDD_VREF; }
+/**
+  * @brief  Handler de la commande reseau "RST_DELTA_VREF_NRST".
+  *         Reinitialise le delai delta_vref_nrst a sa valeur par defaut (DELTA_INIT_VREF_NRST).
+  * @param  Aucun.
+  * @retval Aucun (void). Effet de bord : delta_vref_nrst = DELTA_INIT_VREF_NRST.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "RST_DELTA_VREF_NRST" -> delta_vref_nrst = DELTA_INIT_VREF_NRST;
+  */
+static void h_RST_DELTA_VREF_NRST(void) { delta_vref_nrst = DELTA_INIT_VREF_NRST; }
+/**
+  * @brief  Handler de la commande reseau "RST_DELTA_NRST_VREF".
+  *         Reinitialise le delai delta_nrst_vref a sa valeur par defaut (DELTA_INIT_NRST_VREF).
+  * @param  Aucun.
+  * @retval Aucun (void). Effet de bord : delta_nrst_vref = DELTA_INIT_NRST_VREF.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "RST_DELTA_NRST_VREF" -> delta_nrst_vref = DELTA_INIT_NRST_VREF;
+  */
+static void h_RST_DELTA_NRST_VREF(void) { delta_nrst_vref = DELTA_INIT_NRST_VREF; }
+/**
+  * @brief  Handler de la commande reseau "RST_DELTA_VREF_AVDD".
+  *         Reinitialise le delai delta_vref_avdd a sa valeur par defaut (DELTA_INIT_VREF_AVDD).
+  * @param  Aucun.
+  * @retval Aucun (void). Effet de bord : delta_vref_avdd = DELTA_INIT_VREF_AVDD.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "RST_DELTA_VREF_AVDD" -> delta_vref_avdd = DELTA_INIT_VREF_AVDD;
+  */
+static void h_RST_DELTA_VREF_AVDD(void) { delta_vref_avdd = DELTA_INIT_VREF_AVDD; }
+/**
+  * @brief  Handler de la commande reseau "RST_DELTA_AVDD_DVDD".
+  *         Reinitialise le delai delta_avdd_dvdd a sa valeur par defaut (DELTA_INIT_AVDD_DVDD).
+  * @param  Aucun.
+  * @retval Aucun (void). Effet de bord : delta_avdd_dvdd = DELTA_INIT_AVDD_DVDD.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "RST_DELTA_AVDD_DVDD" -> delta_avdd_dvdd = DELTA_INIT_AVDD_DVDD;
+  */
+static void h_RST_DELTA_AVDD_DVDD(void) { delta_avdd_dvdd = DELTA_INIT_AVDD_DVDD; }
+
+// ---------------------------------------------------------------------------
+// Mapping DAC <-> LDO, desormais PILOTE PAR LOGICIEL (table modifiable a
+// chaud) plutot que fige dans 36 fonctions individuelles. Remplace
+// l'ancien systeme "un handler par LDO x par type (VAL/CURRENT)".
+// ---------------------------------------------------------------------------
+
+/**
+  * @brief  Identifie quel tableau DACx_DEF est vise par une ecriture
+  *         generique. CIBLE_AUCUNE signifie "pas de DAC associe" (ex :
+  *         courant des LDO *PLp, qui n'ont pas ce circuit).
+  */
+typedef enum {
+    CIBLE_AUCUNE = 0,
+    CIBLE_DAC1,
+    CIBLE_DAC2,
+    CIBLE_DAC3,
+    CIBLE_DAC4,
+    CIBLE_DAC5,
+} CibleDac_t;
+
+/**
+  * @brief  Correspondance DAC <-> LDO pour une LDO donnee : quel tableau
+  *         DACx_DEF et quel canal (0-7) pour la tension, idem pour le
+  *         courant (CIBLE_AUCUNE si non applicable).
+  */
+typedef struct {
+    CibleDac_t dac_tension;
+    uint8_t    canal_tension;
+    CibleDac_t dac_courant;
+    uint8_t    canal_courant;
+} MappingDacLdo_t;
+
+// Table PILOTABLE A CHAUD via SET_DAC_MAPPING_LDO_<nom>:<V|I>:<0-5>:<0-7>
+// (0 = CIBLE_AUCUNE). Valeurs INITIALES verifiees le 13/08/2026 a partir
+// du cablage physique reel (U88/U89/U91/U92 x2), croisees avec le
+// mapping logique PSp/PSn/PLp/PLn fourni par l'utilisateur - PLUS DE
+// VALEURS SUPPOSEES, chaque entree correspond a une correspondance
+// verifiee automatiquement (script de verification, 33/33 correctes).
+// Meme indexation que VAL_LDO[]/CURRENT_LDO[]/ldoConfig[] (0-17).
+static MappingDacLdo_t mappingDacLdo[18] = {
+    { CIBLE_DAC2, 3, CIBLE_DAC2, 1 },  // 0  : 1PSp
+    { CIBLE_DAC3, 3, CIBLE_DAC3, 1 },  // 1  : 1PSn
+    { CIBLE_DAC2, 4, CIBLE_DAC2, 5 },  // 2  : 2PSp
+    { CIBLE_DAC3, 4, CIBLE_DAC3, 5 },  // 3  : 2PSn
+    { CIBLE_DAC2, 0, CIBLE_DAC2, 2 },  // 4  : 3PSp
+    { CIBLE_DAC3, 0, CIBLE_DAC3, 2 },  // 5  : 3PSn
+    { CIBLE_DAC1, 1, CIBLE_DAC1, 3 },  // 6  : 4PSp
+    { CIBLE_DAC5, 4, CIBLE_DAC5, 6 },  // 7  : 4PSn
+    { CIBLE_DAC1, 5, CIBLE_DAC1, 4 },  // 8  : 5PSp
+    { CIBLE_DAC5, 0, CIBLE_DAC5, 2 },  // 9  : 5PSn
+    { CIBLE_DAC1, 2, CIBLE_DAC1, 0 },  // 10 : 6PSp
+    { CIBLE_DAC5, 1, CIBLE_DAC5, 3 },  // 11 : 6PSn
+    { CIBLE_DAC4, 0, CIBLE_AUCUNE, 0 },  // 12 : 1PLp (pas de courant reglable)
+    { CIBLE_DAC4, 3, CIBLE_DAC4, 5 },  // 13 : 1PLn
+    { CIBLE_DAC4, 2, CIBLE_AUCUNE, 0 },  // 14 : 2PLp (pas de courant reglable)
+    { CIBLE_DAC4, 7, CIBLE_DAC4, 6 },  // 15 : 2PLn
+    { CIBLE_DAC5, 5, CIBLE_AUCUNE, 0 },  // 16 : 3PLp (pas de courant reglable)
+    { CIBLE_DAC4, 4, CIBLE_DAC5, 7 },  // 17 : 3PLn
+};
+
+/**
+  * @brief  Retourne le pointeur vers le tableau DACx_DEF correspondant a
+  *         une cible logique.
+  * @param  cible  Cible a resoudre (CIBLE_DAC1..CIBLE_DAC5).
+  * @retval uint8_t*  Pointeur vers DAC1_DEF..DAC5_DEF, ou NULL si
+  *                   CIBLE_AUCUNE ou valeur invalide.
+  */
+static uint8_t *ResoudreTableauDac(CibleDac_t cible)
+{
+    switch (cible)
+    {
+        case CIBLE_DAC1: return DAC1_DEF;
+        case CIBLE_DAC2: return DAC2_DEF;
+        case CIBLE_DAC3: return DAC3_DEF;
+        case CIBLE_DAC4: return DAC4_DEF;
+        case CIBLE_DAC5: return DAC5_DEF;
+        default: return NULL;
+    }
+}
+
+/**
+  * @brief  Ecrit une valeur 12 bits dans le tableau DACx_DEF/canal
+  *         designe par une cible logique - remplace les 36 blocs
+  *         d'ecriture individuels (un par LDO x par type) par UNE
+  *         seule fonction generique, pilotee par mappingDacLdo[].
+  * @param  cible    Tableau DACx_DEF a modifier (CIBLE_AUCUNE = ignore).
+  * @param  canal    Canal 0-7 dans ce tableau (structure par groupes de
+  *                  3 octets : adresse, MSB, LSB).
+  * @param  valeur   Valeur 12 bits a ecrire (0-4095).
+  * @retval Aucun (void). Ne fait rien si cible == CIBLE_AUCUNE ou canal
+  *         hors plage (protege les LDO sans DAC courant, ex : *PLp).
+  * @par    Exemple d'utilisation
+  *         EcrireValeurDac(CIBLE_DAC2, 3, 2048);  // DAC2_DEF, canal 3
+  */
+static void EcrireValeurDac(CibleDac_t cible, uint8_t canal, uint16_t valeur)
+{
+    uint8_t *tableau = ResoudreTableauDac(cible);
+    if (tableau == NULL || canal > 7)
+    {
+        return;
+    }
+    uint8_t offset_msb = (uint8_t)(canal * 3 + 1);
+    uint8_t offset_lsb = (uint8_t)(canal * 3 + 2);
+    tableau[offset_msb] = (uint8_t)((valeur & 0x0F00) >> 8);
+    tableau[offset_lsb] = (uint8_t)(valeur & 0x00FF);
+}
+
+/**
+  * @brief  Handler GENERIQUE de "SET_VAL_LDO_<nom>:<valeur>" - remplace
+  *         les 18 anciennes fonctions h_SET_VAL_LDO_<nom> individuelles.
+  *         Met a jour VAL_LDO[idx]/l'etat logiciel de la LDO, PUIS
+  *         repercute la valeur sur le DAC reellement associe via
+  *         mappingDacLdo[idx] (modifiable a chaud, voir SetMappingDacLdo()).
+  * @param  idx  Index de la LDO (0-17), deja resolu par findLdoIndex()
+  *              dans tc_request() (branche a prefixe "SET_VAL_LDO_").
+  * @retval Aucun (void). Lit last_message (deja positionne apres le
+  *         ':' par tc_request()) pour la valeur (0-4095).
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "SET_VAL_LDO_1PSp:2048"
+  *         -> idx=findLdoIndex("1PSp")=0, h_SET_VAL_LDO_GENERIQUE(0);
+  */
+static void h_SET_VAL_LDO_GENERIQUE(int idx)
+{
+    uint16_t valeur = (uint16_t)atoi(last_message);
+    VAL_LDO[idx] = valeur;
+    ldoConfig[idx].ldo->VAL = valeur;
+
+    MappingDacLdo_t *m = &mappingDacLdo[idx];
+    EcrireValeurDac(m->dac_tension, m->canal_tension, valeur);
+}
+
+/**
+  * @brief  Handler GENERIQUE de "SET_CURRENT_LDO_<nom>:<valeur>" -
+  *         remplace les 18 anciennes fonctions h_SET_CURRENT_LDO_<nom>.
+  *         Repond "NOT FOR YOU" (comme avant) si la LDO n'a pas de DAC
+  *         courant associe (mappingDacLdo[idx].dac_courant == CIBLE_AUCUNE,
+  *         cas des 3 LDO *PLp).
+  * @param  idx  Index de la LDO (0-17), deja resolu par findLdoIndex().
+  * @retval Aucun (void). Lit last_message pour la valeur (0-4095).
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "SET_CURRENT_LDO_1PSp:1500"
+  */
+static void h_SET_CURRENT_LDO_GENERIQUE(int idx)
+{
+    MappingDacLdo_t *m = &mappingDacLdo[idx];
+
+    if (m->dac_courant == CIBLE_AUCUNE)
+    {
+        sprintf(response, "NOT FOR YOU\n");
+        return;
+    }
+
+    uint16_t valeur = (uint16_t)atoi(last_message);
+    CURRENT_LDO[idx] = valeur;
+    ldoConfig[idx].ldo->CURRENT = valeur;
+    EcrireValeurDac(m->dac_courant, m->canal_courant, valeur);
+}
+
+/**
+  * @brief  Handler de "SET_DAC_MAPPING_LDO_<nom>:<V|I>:<0-5>:<0-7>" -
+  *         modifie A CHAUD, sans recompilation ni reflash, quel DAC/canal
+  *         alimente la tension (V) ou le courant (I) d'une LDO.
+  * @param  idx  Index de la LDO (0-17), deja resolu par findLdoIndex().
+  * @param  nom  Nom texte de la LDO, pour la reponse.
+  * @retval Aucun (void). Lit last_message au format "<V|I>:<0-5>:<0-7>"
+  *         (0 pour le numero de DAC = CIBLE_AUCUNE, "debranche" ce canal).
+  *         Remplit response avec "DAC_MAP:<nom>:OK\n" si valide, ou
+  *         "DAC_MAP:<nom>:ERREUR_PARAMETRES\n" sinon.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "SET_DAC_MAPPING_LDO_1PSp:V:2:3"
+  *         -> tension de 1PSp desormais lue/ecrite sur DAC2_DEF, canal 3.
+  */
+static void SetMappingDacLdo(int idx, const char *nom)
+{
+    char *type_str  = strsep(&last_message, ":");
+    char *dac_str   = strsep(&last_message, ":");
+    char *canal_str = strsep(&last_message, ":");
+
+    if (type_str == NULL || dac_str == NULL || canal_str == NULL)
+    {
+        sprintf(response, "DAC_MAP:%s:ERREUR_PARAMETRES\n", nom);
+        return;
+    }
+
+    int numero_dac = atoi(dac_str);
+    int canal = atoi(canal_str);
+
+    if (numero_dac < 0 || numero_dac > 5 || canal < 0 || canal > 7)
+    {
+        sprintf(response, "DAC_MAP:%s:ERREUR_PARAMETRES\n", nom);
+        return;
+    }
+
+    if (type_str[0] == 'V' || type_str[0] == 'v')
+    {
+        mappingDacLdo[idx].dac_tension = (CibleDac_t)numero_dac;
+        mappingDacLdo[idx].canal_tension = (uint8_t)canal;
+    }
+    else if (type_str[0] == 'I' || type_str[0] == 'i')
+    {
+        mappingDacLdo[idx].dac_courant = (CibleDac_t)numero_dac;
+        mappingDacLdo[idx].canal_courant = (uint8_t)canal;
+    }
+    else
+    {
+        sprintf(response, "DAC_MAP:%s:ERREUR_PARAMETRES\n", nom);
+        return;
+    }
+
+    sprintf(response, "DAC_MAP:%s:OK\n", nom);
+}
+
+/**
+  * @brief  Handler de "GET_DAC_MAPPING_LDO_<nom>" - lit la correspondance
+  *         DAC/canal actuellement active pour une LDO (tension et
+  *         courant), sans la modifier.
+  * @param  idx  Index de la LDO (0-17), deja resolu par findLdoIndex().
+  * @param  nom  Nom texte de la LDO, pour la reponse.
+  * @retval Aucun (void). Remplit response au format
+  *         "DAC_MAP:<nom>:V=<dac>.<canal>:I=<dac>.<canal>\n" (dac=0
+  *         signifie CIBLE_AUCUNE, aucun DAC associe a ce canal).
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "GET_DAC_MAPPING_LDO_1PSp"
+  *         Reponse type    : "DAC_MAP:1PSp:V=2.3:I=2.1\n"
+  */
+static void GetMappingDacLdo(int idx, const char *nom)
+{
+    MappingDacLdo_t *m = &mappingDacLdo[idx];
+    sprintf(response, "DAC_MAP:%s:V=%d.%d:I=%d.%d\n",
+            nom, (int)m->dac_tension, m->canal_tension,
+            (int)m->dac_courant, m->canal_courant);
+}
+
+
+// ---- ADC / WHO ----
+/**
+  * @brief  Handler de la commande reseau "GET_CURRENT_1".
+  *         Declenche une conversion sur ADC1, la convertit en pourcentage
+  *         (0-100) via map(), et prepare la reponse texte.
+  * @param  Aucun.
+  * @retval Aucun (void). Ecrit le resultat dans la variable globale response,
+  *         format "Current ADC 1 = <valeur>\n".
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "GET_CURRENT_1" -> reponse "Current ADC 1 = 42".
+  */
+static void h_GET_CURRENT_1(void)
+{
+	uint16_t ADC_VAL = 0; int value = 0;
+	HAL_ADC_Start(&hadc1);
+	HAL_ADC_PollForConversion(&hadc1, 100);
+	ADC_VAL = HAL_ADC_GetValue(&hadc1);
+	HAL_ADC_Stop(&hadc1);
+	value = map(ADC_VAL, 0, 65535, 0, 100);
+	sprintf(response, "Current ADC 1 = %d\n", value);
+}
+/**
+  * @brief  Handler de la commande reseau "GET_CURRENT_2".
+  *         Declenche une conversion sur ADC3, la convertit en pourcentage
+  *         (0-100) via map(), et prepare la reponse texte.
+  * @param  Aucun.
+  * @retval Aucun (void). Ecrit le resultat dans la variable globale response,
+  *         format "Current ADC 2 = <valeur>\n".
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "GET_CURRENT_2" -> reponse "Current ADC 2 = 17".
+  */
+static void h_GET_CURRENT_2(void)
+{
+	uint16_t ADC_VAL = 0; int value = 0;
+	HAL_ADC_Start(&hadc3);
+	HAL_ADC_PollForConversion(&hadc3, 100);
+	ADC_VAL = HAL_ADC_GetValue(&hadc3);
+	HAL_ADC_Stop(&hadc3);
+	value = map(ADC_VAL, 0, 65535, 0, 100);
+	sprintf(response, "Current ADC 2 = %d\n", value);
+}
+/**
+  * @brief  Handler de la commande reseau "WHO".
+  *         Renvoie la chaine d'identification de la carte (macro WHO_AM_I
+  *         definie dans main.h).
+  * @param  Aucun.
+  * @retval Aucun (void). Ecrit WHO_AM_I dans la variable globale response.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "WHO" -> reponse "STM32 NULCEO H753ZI IRIS V1.0".
+  */
+/**
+  * @brief  Handler de la commande reseau "SCAN_I2C1".
+  *         Relance un scan complet du bus I2C1 (ScanI2C()) et renvoie le
+  *         contenu integral de la structure ScanResult_t (compteurs +
+  *         liste des adresses trouvees) dans la reponse UDP.
+  * @param  Aucun.
+  * @retval Aucun (void). Remplit response avec le format :
+  *         "SCAN:I2C1:ok=<n>:err=<n>:busy=<n>:to=<n>:trouve=0xNN,0xNN,...\n"
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "SCAN_I2C1" -> h_SCAN_I2C1();
+  *         Reponse type : "SCAN:I2C1:ok=1:err=126:busy=0:to=0:trouve=0xC4\n"
+  */
+static void h_SCAN_I2C1(void)
+{
+    ScanI2C(&hi2c1, &res_i2c1);
+
+    int len = sprintf(response, "SCAN:I2C1:ok=%lu:err=%lu:busy=%lu:to=%lu:trouve=",
+                       (unsigned long)res_i2c1.count_ok, (unsigned long)res_i2c1.count_error,
+                       (unsigned long)res_i2c1.count_busy, (unsigned long)res_i2c1.count_timeout);
+
+    for (uint8_t i = 0; i < res_i2c1.addr_cpt && len < (int)sizeof(response) - 8; i++)
+    {
+        len += sprintf(response + len, "0x%02X%s", res_i2c1.addr_trouve[i],
+                        (i < res_i2c1.addr_cpt - 1) ? "," : "");
+    }
+    sprintf(response + len, "\n");
+}
+
+/**
+  * @brief  Handler de la commande reseau "SCAN_I2C2". Identique a
+  *         h_SCAN_I2C1() mais sur le bus I2C2.
+  * @param  Aucun.
+  * @retval Aucun (void). Remplit response, meme format que h_SCAN_I2C1()
+  *         avec "I2C2" a la place de "I2C1".
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "SCAN_I2C2" -> h_SCAN_I2C2();
+  */
+static void h_SCAN_I2C2(void)
+{
+    ScanI2C(&hi2c2, &res_i2c2);
+
+    int len = sprintf(response, "SCAN:I2C2:ok=%lu:err=%lu:busy=%lu:to=%lu:trouve=",
+                       (unsigned long)res_i2c2.count_ok, (unsigned long)res_i2c2.count_error,
+                       (unsigned long)res_i2c2.count_busy, (unsigned long)res_i2c2.count_timeout);
+
+    for (uint8_t i = 0; i < res_i2c2.addr_cpt && len < (int)sizeof(response) - 8; i++)
+    {
+        len += sprintf(response + len, "0x%02X%s", res_i2c2.addr_trouve[i],
+                        (i < res_i2c2.addr_cpt - 1) ? "," : "");
+    }
+    sprintf(response + len, "\n");
+}
+
+/**
+  * @brief  Handler de la commande reseau "BALAYER_DAC". Declenche
+  *         BalayerSortieDAC() a distance, avec tous ses parametres
+  *         fournis dans la trame UDP.
+  *         ATTENTION : cette fonction est BLOQUANTE (comme
+  *         BalayerSortieDAC() elle-meme) - pendant toute la duree du
+  *         balayage, ce thread ne traite plus aucune autre commande UDP
+  *         (meme comportement que la capture complete du bouton USER).
+  * @param  Aucun parametre C. Lit la variable globale last_message, au
+  *         format attendu (apres le premier ':' deja consomme par
+  *         tc_request()) :
+  *         "<bus>:<adresse_hal_hex>:<registre>:<valeur_max>:<pas>:<delai_ms>:<tension_ref>"
+  *         - bus : 1 pour hi2c1, 2 pour hi2c2
+  *         - adresse_hal_hex : adresse I2C au format HAL, en hexa avec 0x (ex : 0xC4)
+  *         - registre : 0x00-0x07 (VOUT0-VOUT7)
+  *         - valeur_max : 0-4095
+  *         - pas : increment entre paliers
+  *         - delai_ms : pause entre paliers, en millisecondes
+  *         - tension_ref : VDD reel du DAC, en volts (ex : 3.3)
+  * @retval Aucun (void). Remplit response avec "BALAYER_DAC:TERMINE\n"
+  *         une fois le balayage complet termine, ou
+  *         "BALAYER_DAC:ERREUR_PARAMETRES\n" si la trame est mal formee.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue :
+  *         "BALAYER_DAC:1:0xC4:0:4095:50:100:3.3"
+  *         -> balaie VOUT0 du DAC a 0xC4 sur hi2c1, de 0 a 4095 par pas
+  *            de 50, 100ms entre chaque palier, VDD=3.3V.
+  */
+static void h_BALAYER_DAC(void)
+{
+    int bus = 0, registre = 0, valeur_max = 0, pas = 0, delai_ms = 0;
+    unsigned int adresse_hal = 0;
+    char tension_str[16] = "3.3";
+
+    // %f est volontairement evite dans sscanf() : sur newlib-nano (STM32),
+    // le parsing de flottants par scanf() necessite le flag linker
+    // "-u _scanf_float", separe de "-u _printf_float". Plutot que d'en
+    // dependre, on lit la tension comme une chaine puis on la convertit
+    // avec atof() (stdlib.h), qui ne necessite aucun flag supplementaire.
+    int n = sscanf(last_message, "%d:0x%x:%d:%d:%d:%d:%15s",
+                    &bus, &adresse_hal, &registre, &valeur_max, &pas, &delai_ms, tension_str);
+
+    if (n != 7)
+    {
+        sprintf(response, "BALAYER_DAC:ERREUR_PARAMETRES\n");
+        return;
+    }
+
+    float tension_ref = atof(tension_str);
+    I2C_HandleTypeDef *hi2c = (bus == 2) ? &hi2c2 : &hi2c1;
+
+    BalayerSortieDAC(hi2c, (uint8_t)adresse_hal, (uint8_t)registre, "DAC",
+                      (uint16_t)valeur_max, (uint16_t)pas, (uint32_t)delai_ms, tension_ref);
+
+    sprintf(response, "BALAYER_DAC:TERMINE\n");
+}
+
+// ---------------------------------------------------------------------------
+// Mesure ADC multiplexee des sorties LDO reelles (0-6V), via 3x ADG728
+// (multiplexeurs analogiques NATIVEMENT I2C, 8 canaux chacun -> 24 canaux
+// disponibles pour les 18 sorties), sur le MEME bus I2C1 que le DAC.
+// Une SEULE entree ADC en sortie du mux. Voir schema_mesure_adc_mux.html.
+//
+// IMPORTANT : l'ADG728 supporte au maximum 5.5V d'alimentation - le pont
+// diviseur (0-6V -> 0-3V, R1=R2=10k) doit donc etre place AVANT chaque
+// entree du mux (un pont par LDO, 18 au total), pas en sortie commune.
+// Le signal arrivant au mux est deja a l'echelle ADC : aucun pont
+// supplementaire n'est necessaire en sortie (broche D commune -> ADC direct).
+//
+// SEPARATION TENSION / COURANT (deux chaines totalement independantes,
+// chacune avec son propre bus I2C, ses propres puces ADG728, et sa
+// propre broche ADC - plus de pool de canaux partage) :
+//   - TENSION  : 3x ADG728 sur I2C1 (0x4C/0x4D/0x4E, 24 canaux, 18
+//                utilises), broche commune D -> PC2.
+//   - COURANT  : 2x ADG728 sur I2C2 (0x4C/0x4D, memes valeurs d'adresse
+//                que la chaine tension car bus PHYSIQUEMENT different,
+//                16 canaux, 12 utilises pour les LDO *PSp/*PSn), broche
+//                commune D -> PC3.
+//
+// ATTENTION - A VERIFIER AVANT DE FLASHER :
+//   1) PC2/PC3 ont un double bonding possible sur STM32H7 (ADC1/ADC2
+//      canal 12/13 OU ADC3 canal 0/1 selon le pont de soudure de la
+//      carte). Ce code suppose ADC1 canal 12 (PC2) et canal 13 (PC3) -
+//      a confirmer dans CubeMX / le schema de la Nucleo utilisee.
+//   2) I2C2 (PB10=SCL, PB11=SDA) montrait un bus verrouille (busy=127
+//      au dernier scan) : a resoudre avant de cabler les puces courant
+//      dessus, sinon GET_MESURE_COURANT_REELLE_<nom> echouera toujours.
+// ---------------------------------------------------------------------------
+
+// Adresses I2C des 3 ADG728 (7 bits, deja decalees au format HAL), fixees
+// par le cablage des broches A0/A1 de chaque puce : adresse = 0x4C + 2*A1 + A0.
+// A0=0,A1=0 -> 0x4C ; A0=1,A1=0 -> 0x4D ; A0=0,A1=1 -> 0x4E (celle-ci non
+// utilisee, reste disponible en reserve si besoin d'une 4e puce plus tard).
+#define ADG728_ADDR_0  (0x4C << 1)
+#define ADG728_ADDR_1  (0x4D << 1)
+#define ADG728_ADDR_2  (0x4E << 1)
+
+static const uint8_t adg728_adresses_tension[3] = { ADG728_ADDR_0, ADG728_ADDR_1, ADG728_ADDR_2 };
+static const uint8_t adg728_adresses_courant[2] = { ADG728_ADDR_0, ADG728_ADDR_1 };
+
+// Canaux ADC dedies, confirmes via le fichier .ioc du projet reel :
+//   - TENSION : PC0 -> hadc1, ADC_CHANNEL_10. ATTENTION : ce canal est
+//     DEJA UTILISE par GET_CURRENT_1 (voir h_GET_CURRENT_1()) - collision
+//     assumee et geree par ailleurs (cote utilisateur), pas par ce code.
+//   - COURANT : PF4 -> hadc3, ADC_CHANNEL_9. Broche confirmee libre.
+#define ADC_CANAL_TENSION  ADC_CHANNEL_10  // PC0 - PARTAGE avec GET_CURRENT_1, a arbitrer
+#define ADC_CANAL_COURANT  ADC_CHANNEL_9   // PF4 - confirmee libre dans le .ioc
+
+// Chaque pont diviseur (0-6V -> 0-3V) est deja dimensionne pour amener
+// le signal a l'echelle ADC : aucune division supplementaire ici.
+#define MUX_RATIO_PONT  1.0f
+
+// canal_mux_tension_actuel / canal_mux_courant_actuel sont deja
+// declarees plus haut dans ce fichier (voir section "Bouton-poussoir
+// de RESET materiel du multiplexeur"), car utilisees aussi par
+// TraiterResetMultiplexeur().
+
+/**
+  * @brief  Ecrit le masque de canaux actifs sur un ADG728 (un octet, un
+  *         bit par canal - voir datasheet ADG728, "chaque canal pilote
+  *         par un bit d'un mot de 8 bits").
+  * @param  hi2c            Bus I2C a utiliser (&hi2c1 pour la chaine
+  *                         tension, &hi2c2 pour la chaine courant).
+  * @param  adresse_hal     Adresse I2C de la puce ciblee, format HAL
+  *                         (ex : ADG728_ADDR_0).
+  * @param  masque_canaux   Masque 8 bits, un bit a 1 = canal correspondant
+  *                         actif. 0x00 desactive tous les canaux de cette
+  *                         puce (etat par defaut a la mise sous tension).
+  * @retval HAL_StatusTypeDef  Resultat de la transmission I2C.
+  * @par    Exemple d'utilisation
+  *         EcrireADG728(&hi2c1, ADG728_ADDR_0, 0x04);  // canal 2 actif
+  *         EcrireADG728(&hi2c2, ADG728_ADDR_0, 0x00);  // tous desactives
+  */
+static HAL_StatusTypeDef EcrireADG728(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t masque_canaux)
+{
+    return HAL_I2C_Master_Transmit(hi2c, adresse_hal, &masque_canaux, 1, 100);
+}
+
+/**
+  * @brief  Selectionne un canal (0-23) parmi les 3 ADG728 de la chaine
+  *         TENSION (bus I2C1). Desactive systematiquement les 2 autres
+  *         puces (masque 0x00) avant d'activer le canal voulu, pour que
+  *         la broche D commune (vers PC2) ne porte jamais deux sorties
+  *         a la fois.
+  * @param  canal  Canal a selectionner, 0-23 (0-7 = puce 0, 8-15 = puce 1,
+  *                16-23 = puce 2). Ignore silencieusement si hors plage.
+  * @retval Aucun (void). Met a jour canal_mux_tension_actuel et attend
+  *         un court delai d'etablissement.
+  * @par    Exemple d'utilisation
+  *         SelectionnerCanalMuxTension(2);    // canal 2 de la puce 0 (0x4C)
+  *         SelectionnerCanalMuxTension(10);   // canal 2 de la puce 1 (0x4D)
+  */
+static void SelectionnerCanalMuxTension(uint8_t canal)
+{
+    if (canal > 23)
+    {
+        return;
+    }
+
+    uint8_t puce = canal / 8;
+    uint8_t sous_canal = canal % 8;
+    uint8_t masque_actif = (uint8_t)(1 << sous_canal);
+
+    for (uint8_t i = 0; i < 3; i++)
+    {
+        uint8_t masque = (i == puce) ? masque_actif : 0x00;
+        EcrireADG728(&hi2c1, adg728_adresses_tension[i], masque);
+    }
+
+    canal_mux_tension_actuel = canal;
+
+    HAL_Delay(1);
+}
+
+/**
+  * @brief  Selectionne un canal (0-15) parmi les 2 ADG728 de la chaine
+  *         COURANT (bus I2C2). Meme principe que
+  *         SelectionnerCanalMuxTension(), sur l'autre bus/puces/broche
+  *         ADC (PC3).
+  * @param  canal  Canal a selectionner, 0-15 (0-7 = puce 0, 8-15 = puce 1).
+  *                Ignore silencieusement si hors plage.
+  * @retval Aucun (void). Met a jour canal_mux_courant_actuel et attend
+  *         un court delai d'etablissement.
+  * @par    Exemple d'utilisation
+  *         SelectionnerCanalMuxCourant(9);  // canal 1 de la puce 1
+  */
+static void SelectionnerCanalMuxCourant(uint8_t canal)
+{
+    if (canal > 15)
+    {
+        return;
+    }
+
+    uint8_t puce = canal / 8;
+    uint8_t sous_canal = canal % 8;
+    uint8_t masque_actif = (uint8_t)(1 << sous_canal);
+
+    for (uint8_t i = 0; i < 2; i++)
+    {
+        uint8_t masque = (i == puce) ? masque_actif : 0x00;
+        EcrireADG728(&hi2c2, adg728_adresses_courant[i], masque);
+    }
+
+    canal_mux_courant_actuel = canal;
+
+    HAL_Delay(1);
+}
+
+/**
+  * @brief  Configuration du multiplexage pour la mesure reelle de
+  *         TENSION d'une sortie LDO. Un element par LDO, indexe dans le
+  *         MEME ORDRE que VAL_LDO[]/CURRENT_LDO[] (voir findLdoIndex()) :
+  *         0=1PSp,1=1PSn,2=2PSp,3=2PSn,4=3PSp,5=3PSn,6=4PSp,7=4PSn,
+  *         8=5PSp,9=5PSn,10=6PSp,11=6PSn,12=1PLp,13=1PLn,14=2PLp,
+  *         15=2PLn,16=3PLp,17=3PLn.
+  */
+typedef struct {
+    uint8_t canal_mux;  // 0-23 (3 x ADG728 sur I2C1, chaine tension), ou 0xFF si pas encore cable
+} MuxLdoConfig_t;
+
+// Configuration LOGICIELLE, modifiable a chaud sans recompilation, via
+// les commandes reseau SET_MUX_LDO_<nom>:<canal> / GET_MUX_LDO_<nom>
+// (voir SetMuxLdo()/GetMuxLdo() ci-dessous). Reinitialisee a 0xFF (non
+// cablee) pour toutes les LDO a chaque reset/reflash du STM32 : cote PC,
+// app.py est responsable de re-appliquer la configuration sauvegardee
+// (assets/mux_ldo_config.json) apres chaque redemarrage du STM32.
+static MuxLdoConfig_t muxLdoConfig[18] = {
+    { 0xFF }, { 0xFF }, { 0xFF }, { 0xFF }, { 0xFF }, { 0xFF }, { 0xFF }, { 0xFF }, { 0xFF },
+    { 0xFF }, { 0xFF }, { 0xFF }, { 0xFF }, { 0xFF }, { 0xFF }, { 0xFF }, { 0xFF }, { 0xFF },
+};
+
+/**
+  * @brief  Handler de la commande reseau "SET_MUX_LDO_<nom>:<canal>" -
+  *         associe une LDO a un canal du multiplexeur (0-31), a chaud,
+  *         sans recompilation ni reflash. Voir le branchement dans
+  *         tc_request(), meme motif que SET_VAL_LDO_<nom> : prefixe +
+  *         findLdoIndex() pour resoudre idx directement.
+  * @param  idx  Index de la LDO (0-17), deja resolu par findLdoIndex()
+  *              dans tc_request().
+  * @param  nom  Nom texte de la LDO (ex : "1PSp"), pour la reponse.
+  * @retval Aucun (void). Lit last_message (deja positionne apres le
+  *         premier ':' par tc_request()) au format "<canal>" (entier
+  *         0-23). Remplit response avec "MUX_LDO:<nom>:CANAL=<n>\n" si
+  *         valide, ou "MUX_LDO:<nom>:ERREUR_CANAL\n" sinon.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "SET_MUX_LDO_1PSp:3"
+  *         Reponse type    : "MUX_LDO:1PSp:CANAL=3\n"
+  */
+static void SetMuxLdo(int idx, const char *nom)
+{
+    int canal = atoi(last_message);
+
+    if (canal < 0 || canal > 23)
+    {
+        sprintf(response, "MUX_LDO:%s:ERREUR_CANAL\n", nom);
+        return;
+    }
+
+    muxLdoConfig[idx].canal_mux = (uint8_t)canal;
+    sprintf(response, "MUX_LDO:%s:CANAL=%d\n", nom, canal);
+}
+
+/**
+  * @brief  Handler de la commande reseau "GET_MUX_LDO_<nom>" - lit le
+  *         canal du multiplexeur actuellement associe a une LDO, sans
+  *         le modifier.
+  * @param  idx  Index de la LDO (0-17), deja resolu par findLdoIndex().
+  * @param  nom  Nom texte de la LDO, pour la reponse.
+  * @retval Aucun (void). Remplit response avec
+  *         "MUX_LDO:<nom>:CANAL=<n>\n" si un canal est associe, ou
+  *         "MUX_LDO:<nom>:NON_CABLE\n" sinon.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "GET_MUX_LDO_1PSp"
+  *         Reponse type    : "MUX_LDO:1PSp:CANAL=3\n"
+  */
+static void GetMuxLdo(int idx, const char *nom)
+{
+    uint8_t canal = muxLdoConfig[idx].canal_mux;
+
+    if (canal == 0xFF)
+    {
+        sprintf(response, "MUX_LDO:%s:NON_CABLE\n", nom);
+    }
+    else
+    {
+        sprintf(response, "MUX_LDO:%s:CANAL=%d\n", nom, canal);
+    }
+}
+
+/**
+  * @brief  Lit une conversion ADC sur le canal donne et la convertit en
+  *         tension REELLE cote LDO (avant le pont diviseur), a partir du
+  *         ratio R2/(R1+R2) du pont utilise.
+  *         Resolution 16 bits (ADC_RESOLUTION_16B, deja configuree sur
+  *         hadc1/hadc3) : plage brute 0-65535 pour 0-VDDA (3.3V typique).
+  * @param  hadc          Handle ADC a utiliser (&hadc1 pour PC0/canal 10,
+  *                       &hadc3 pour PF4/canal 9).
+  * @param  canal         Canal ADC a lire (ex : ADC_CANAL_TENSION ou
+  *                       ADC_CANAL_COURANT). RECONFIGURE le canal actif
+  *                       de hadc a chaque appel (HAL_ADC_ConfigChannel) :
+  *                       necessaire des qu'un meme ADC (ex : hadc3) doit
+  *                       lire plusieurs canaux differents selon le
+  *                       contexte (ex : canal 1 pour GET_CURRENT_2, canal
+  *                       9 pour la mesure de courant LDO).
+  * @param  ratio_pont    R2 / (R1 + R2) du pont diviseur utilise (0.5f
+  *                       pour le pont partage R1=R2=10k de ce montage).
+  * @retval float  Tension reelle en volts, cote sortie du LDO (deja
+  *                divisee par ratio_pont pour "annuler" l'effet du pont).
+  *                Retourne -1.0f en cas d'echec de conversion (timeout)
+  *                ou de configuration du canal.
+  * @par    Exemple d'utilisation
+  *         float v = LireTensionADC(&hadc1, ADC_CANAL_TENSION, MUX_RATIO_PONT);
+  */
+static float LireTensionADC(ADC_HandleTypeDef *hadc, uint32_t canal, float ratio_pont)
+{
+    ADC_ChannelConfTypeDef sConfig = {0};
+    sConfig.Channel = canal;
+    sConfig.Rank = ADC_REGULAR_RANK_1;
+    sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
+    sConfig.SingleDiff = ADC_SINGLE_ENDED;
+    sConfig.OffsetNumber = ADC_OFFSET_NONE;
+    sConfig.Offset = 0;
+    sConfig.OffsetSignedSaturation = DISABLE;
+    if (HAL_ADC_ConfigChannel(hadc, &sConfig) != HAL_OK)
+    {
+        return -1.0f;
+    }
+
+    if (HAL_ADC_Start(hadc) != HAL_OK)
+    {
+        return -1.0f;
+    }
+    if (HAL_ADC_PollForConversion(hadc, 10) != HAL_OK)
+    {
+        HAL_ADC_Stop(hadc);
+        return -1.0f;
+    }
+
+    uint32_t code_brut = HAL_ADC_GetValue(hadc);
+    HAL_ADC_Stop(hadc);
+
+    float vadc = ((float)code_brut / 65535.0f) * 3.3f;  // VDDA suppose a 3.3V
+    return vadc / ratio_pont;
+}
+
+/**
+  * @brief  Handler de la commande reseau "GET_MESURE_REELLE_<nom>" (voir
+  *         le branchement dans tc_request(), meme motif que
+  *         GET_STATUS_LDO_<nom> : prefixe + findLdoIndex() pour resoudre
+  *         idx directement, sans parser last_message).
+  *         Selectionne d'abord le canal du multiplexeur associe a la
+  *         LDO, PUIS lit l'unique ADC partage.
+  * @param  idx  Index de la LDO (0-17, voir muxLdoConfig ci-dessus),
+  *              deja resolu par findLdoIndex() dans tc_request().
+  * @param  nom  Nom texte de la LDO (ex : "1PSp"), pour la reponse.
+  * @retval Aucun (void). Remplit response avec :
+  *         "MESURE:<nom>:<tension>V\n"   si la lecture reussit,
+  *         "MESURE:<nom>:NON_CABLE\n"    si muxLdoConfig[idx].canal_mux
+  *                                       vaut encore 0xFF,
+  *         "MESURE:<nom>:ERREUR\n"       si la conversion ADC echoue.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "GET_MESURE_REELLE_1PSp"
+  *         Reponse type    : "MESURE:1PSp:3.075V\n"
+  */
+static void GetMesureReelle(int idx, const char *nom)
+{
+    MuxLdoConfig_t *cfg = &muxLdoConfig[idx];
+
+    if (cfg->canal_mux == 0xFF)
+    {
+        sprintf(response, "MESURE:%s:NON_CABLE\n", nom);
+    }
+    else
+    {
+        SelectionnerCanalMuxTension(cfg->canal_mux);
+        float v = LireTensionADC(&hadc1, ADC_CANAL_TENSION, MUX_RATIO_PONT);
+        if (v < 0.0f)
+        {
+            sprintf(response, "MESURE:%s:ERREUR\n", nom);
+        }
+        else
+        {
+            sprintf(response, "MESURE:%s:%.3fV\n", nom, v);
+        }
+    }
+
+    // Envoye aussi sur UART, en plus de la reponse UDP (response) : le
+    // meme resultat est donc visible sur les deux canaux, quel que soit
+    // le declencheur (commande UDP directe, ou appel depuis
+    // ExecuterCaptureComplete()/executer_rampe() cote Python).
+    UART1_EnvoyerTexte(response);
+}
+
+// ---------------------------------------------------------------------------
+// Mesure REELLE du courant de sortie (PS uniquement : PSp/PSn, 12 LDO -
+// PLp/PLn n'ont pas ce circuit). Chaine materielle :
+//   1) Shunt 100 mOhm en sortie du LDO.
+//   2) AOP #1 (differentiel, gain x100 via 100k/1k) -> tension
+//      proportionnelle au courant reel : Vampli = I_reel x 0.1 x 100
+//      = I_reel x 10 (I en A, Vampli en V).
+//   3) Cette meme tension Vampli est aussi ce qui, comparee au seuil
+//      programme par SET_CURRENT_LDO, produit le signal OC (voir le
+//      commentaire au-dessus des struct LDO_x_PS_p/n, plus haut).
+// Reutilise le MEME multiplexeur/ADC que la mesure de tension (une
+// seule sortie ADC au total, cf. muxLdoConfig) : seule la table de
+// correspondance canal et la formule de conversion changent.
+//
+// TODO A CONFIRMER : la tension d'alimentation reelle de l'AOP #1
+// n'est pas connue au moment de l'ecriture de ce code. MUX_RATIO_PONT
+// (partage avec la mesure de tension) est repris tel quel ici par
+// defaut (1.0f, aucune division supplementaire) - si l'AOP #1 peut
+// sortir plus haut que ~3.3V, il faudra un pont diviseur DEDIE avant
+// ce canal precis, avec un ratio propre a corriger dans
+// LireCourantADC() ci-dessous.
+// ---------------------------------------------------------------------------
+
+/**
+  * @brief  Configuration du multiplexage pour la mesure REELLE de
+  *         courant. Un element par LDO, MEME INDEXATION que
+  *         muxLdoConfig (voir findLdoIndex()) - mais seuls les index
+  *         correspondant a une LDO *PSp/*PSn seront jamais renseignes
+  *         (les *PLp/*PLn n'ont pas ce circuit de mesure).
+  */
+typedef struct {
+    uint8_t canal_mux;  // 0-31, partage avec muxLdoConfig (jamais le meme numero utilise dans les deux tables), ou 0xFF si pas encore cable
+} MuxLdoConfigCourant_t;
+
+// TODO : completer canal_mux au fur et a mesure du cablage physique
+// reel, UNIQUEMENT pour les index *PSp/*PSn (0-11). Les index *PLp/PLn
+// (12-17) doivent rester a 0xFF en permanence (pas de circuit courant).
+static MuxLdoConfigCourant_t muxLdoConfigCourant[18] = {
+    { 0xFF }, { 0xFF }, { 0xFF }, { 0xFF }, { 0xFF }, { 0xFF }, { 0xFF }, { 0xFF }, { 0xFF },
+    { 0xFF }, { 0xFF }, { 0xFF }, { 0xFF }, { 0xFF }, { 0xFF }, { 0xFF }, { 0xFF }, { 0xFF },
+};
+
+/**
+  * @brief  Lit le canal ADC courant et convertit en courant REEL (mA),
+  *         a partir du gain de l'AOP differentiel (x100) et du shunt
+  *         (100 mOhm) : I_reel(A) = Vmesuree(V) / (shunt x gain) =
+  *         Vmesuree / 10, soit I_reel(mA) = Vmesuree(V) x 100.
+  * @param  hadc          Handle ADC a utiliser (&hadc1).
+  * @param  canal         Canal ADC deja configure (ADC_CANAL_COURANT, dedie
+  *                       avec la mesure de tension).
+  * @param  ratio_pont    Ratio de pont diviseur eventuel avant ce canal
+  *                       precis (1.0f = aucun, voir le TODO ci-dessus).
+  * @retval float  Courant reel en mA, ou -1.0f si la conversion ADC echoue.
+  * @par    Exemple d'utilisation
+  *         float i_mA = LireCourantADC(&hadc3, ADC_CANAL_COURANT, 1.0f);
+  */
+static float LireCourantADC(ADC_HandleTypeDef *hadc, uint32_t canal, float ratio_pont)
+{
+    float vmesuree = LireTensionADC(hadc, canal, ratio_pont);
+    if (vmesuree < 0.0f)
+    {
+        return -1.0f;
+    }
+    return vmesuree * 100.0f;  // mA : shunt 100mOhm x gain x100 -> facteur x100 direct V->mA
+}
+
+/**
+  * @brief  Handler de la commande reseau "GET_MESURE_COURANT_REELLE_<nom>"
+  *         (voir le branchement dans tc_request(), meme motif que
+  *         GET_MESURE_REELLE_<nom> : prefixe + findLdoIndex()).
+  *         Selectionne le canal du multiplexeur associe a la mesure de
+  *         COURANT de cette LDO (muxLdoConfigCourant, pas muxLdoConfig),
+  *         puis lit l'ADC partage.
+  * @param  idx  Index de la LDO (0-17), deja resolu par findLdoIndex().
+  * @param  nom  Nom texte de la LDO, pour la reponse.
+  * @retval Aucun (void). Remplit response avec :
+  *         "MESURE_I:<nom>:<courant_mA>mA\n"  si la lecture reussit,
+  *         "MESURE_I:<nom>:NON_CABLE\n"       si muxLdoConfigCourant[idx]
+  *                                            vaut encore 0xFF (LDO PL,
+  *                                            ou LDO PS pas encore cablee),
+  *         "MESURE_I:<nom>:ERREUR\n"          si la conversion ADC echoue.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "GET_MESURE_COURANT_REELLE_1PSp"
+  *         Reponse type    : "MESURE_I:1PSp:145.230mA\n"
+  */
+static void GetMesureCourantReelle(int idx, const char *nom)
+{
+    MuxLdoConfigCourant_t *cfg = &muxLdoConfigCourant[idx];
+
+    if (cfg->canal_mux == 0xFF)
+    {
+        sprintf(response, "MESURE_I:%s:NON_CABLE\n", nom);
+    }
+    else
+    {
+        SelectionnerCanalMuxCourant(cfg->canal_mux);
+        float i_mA = LireCourantADC(&hadc3, ADC_CANAL_COURANT, MUX_RATIO_PONT);
+        if (i_mA < 0.0f)
+        {
+            sprintf(response, "MESURE_I:%s:ERREUR\n", nom);
+        }
+        else
+        {
+            sprintf(response, "MESURE_I:%s:%.3fmA\n", nom, i_mA);
+        }
+    }
+
+    UART1_EnvoyerTexte(response);
+}
+
+/**
+  * @brief  Handler de la commande reseau "SET_MUX_COURANT_LDO_<nom>:<canal>"
+  *         - ECRIT le canal du multiplexeur associe a la mesure de
+  *         COURANT d'une LDO (table separee de SET_MUX_LDO_, qui gere
+  *         la tension). A chaud, sans recompilation.
+  * @param  idx  Index de la LDO (0-17), deja resolu par findLdoIndex().
+  * @param  nom  Nom texte de la LDO, pour la reponse.
+  * @retval Aucun (void). Lit last_message (format "<canal>", 0-15).
+  *         Remplit response avec "MUX_I_LDO:<nom>:CANAL=<n>\n" si
+  *         valide, ou "MUX_I_LDO:<nom>:ERREUR_CANAL\n" sinon.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "SET_MUX_COURANT_LDO_1PSp:9"
+  *         Reponse type    : "MUX_I_LDO:1PSp:CANAL=26\n"
+  */
+static void SetMuxCourantLdo(int idx, const char *nom)
+{
+    int canal = atoi(last_message);
+
+    if (canal < 0 || canal > 15)
+    {
+        sprintf(response, "MUX_I_LDO:%s:ERREUR_CANAL\n", nom);
+        return;
+    }
+
+    muxLdoConfigCourant[idx].canal_mux = (uint8_t)canal;
+    sprintf(response, "MUX_I_LDO:%s:CANAL=%d\n", nom, canal);
+}
+
+/**
+  * @brief  Handler de la commande reseau "GET_MUX_COURANT_LDO_<nom>" -
+  *         LIT le canal du multiplexeur associe a la mesure de courant
+  *         d'une LDO, sans le modifier.
+  * @param  idx  Index de la LDO (0-17), deja resolu par findLdoIndex().
+  * @param  nom  Nom texte de la LDO, pour la reponse.
+  * @retval Aucun (void). Remplit response avec
+  *         "MUX_I_LDO:<nom>:CANAL=<n>\n" si un canal est associe, ou
+  *         "MUX_I_LDO:<nom>:NON_CABLE\n" sinon.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "GET_MUX_COURANT_LDO_1PSp"
+  *         Reponse type    : "MUX_I_LDO:1PSp:CANAL=26\n"
+  */
+static void GetMuxCourantLdo(int idx, const char *nom)
+{
+    uint8_t canal = muxLdoConfigCourant[idx].canal_mux;
+
+    if (canal == 0xFF)
+    {
+        sprintf(response, "MUX_I_LDO:%s:NON_CABLE\n", nom);
+    }
+    else
+    {
+        sprintf(response, "MUX_I_LDO:%s:CANAL=%d\n", nom, canal);
+    }
+}
+
+/**
+  * @brief  Handler de la commande reseau "SET_MUX_CANAL_TENSION:<canal>"
+  *         - ECRIT l'etat de la chaine de multiplexage TENSION (change
+  *         le canal actif, bus I2C1, 0-23).
+  * @param  Aucun parametre C. Lit last_message (deja positionne apres
+  *         le premier ':' par tc_request()), attendu au format "<canal>"
+  *         (entier 0-23).
+  * @retval Aucun (void). Remplit response avec "MUX:CANAL=<n>\n" si le
+  *         canal est valide, ou "MUX:ERREUR_CANAL\n" sinon (hors plage
+  *         0-23, ou parametre non numerique).
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "SET_MUX_CANAL_TENSION:3"
+  *         Reponse type    : "MUX:CANAL=3\n"
+  */
+static void h_SET_MUX_CANAL_TENSION(void)
+{
+    int canal = atoi(last_message);
+
+    if (canal < 0 || canal > 23)
+    {
+        sprintf(response, "MUX:ERREUR_CANAL\n");
+        return;
+    }
+
+    SelectionnerCanalMuxTension((uint8_t)canal);
+    sprintf(response, "MUX:CANAL=%d\n", canal);
+}
+
+/**
+  * @brief  Handler de la commande reseau "GET_MUX_CANAL_TENSION" - LIT
+  *         l'etat actuel de la chaine TENSION (dernier canal selectionne),
+  *         sans le modifier.
+  * @param  Aucun.
+  * @retval Aucun (void). Remplit response avec "MUX:CANAL=<n>\n" si un
+  *         canal a deja ete selectionne depuis le demarrage, ou
+  *         "MUX:AUCUN\n" sinon.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "GET_MUX_CANAL_TENSION"
+  *         Reponse type    : "MUX:CANAL=3\n"
+  */
+static void h_GET_MUX_CANAL_TENSION(void)
+{
+    if (canal_mux_tension_actuel == 0xFF)
+    {
+        sprintf(response, "MUX:AUCUN\n");
+    }
+    else
+    {
+        sprintf(response, "MUX:CANAL=%d\n", canal_mux_tension_actuel);
+    }
+}
+
+/**
+  * @brief  Handler de la commande reseau "SET_MUX_CANAL_COURANT:<canal>"
+  *         - ECRIT l'etat de la chaine de multiplexage COURANT (change
+  *         le canal actif, bus I2C2, 0-15).
+  * @param  Aucun parametre C. Lit last_message, format "<canal>"
+  *         (entier 0-15).
+  * @retval Aucun (void). Remplit response avec "MUX:CANAL=<n>\n" si le
+  *         canal est valide, ou "MUX:ERREUR_CANAL\n" sinon (hors plage
+  *         0-15, ou parametre non numerique).
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "SET_MUX_CANAL_COURANT:5"
+  *         Reponse type    : "MUX:CANAL=5\n"
+  */
+static void h_SET_MUX_CANAL_COURANT(void)
+{
+    int canal = atoi(last_message);
+
+    if (canal < 0 || canal > 15)
+    {
+        sprintf(response, "MUX:ERREUR_CANAL\n");
+        return;
+    }
+
+    SelectionnerCanalMuxCourant((uint8_t)canal);
+    sprintf(response, "MUX:CANAL=%d\n", canal);
+}
+
+/**
+  * @brief  Handler de la commande reseau "GET_MUX_CANAL_COURANT" - LIT
+  *         l'etat actuel de la chaine COURANT (dernier canal selectionne),
+  *         sans le modifier.
+  * @param  Aucun.
+  * @retval Aucun (void). Remplit response avec "MUX:CANAL=<n>\n" si un
+  *         canal a deja ete selectionne depuis le demarrage, ou
+  *         "MUX:AUCUN\n" sinon.
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "GET_MUX_CANAL_COURANT"
+  *         Reponse type    : "MUX:CANAL=5\n"
+  */
+static void h_GET_MUX_CANAL_COURANT(void)
+{
+    if (canal_mux_courant_actuel == 0xFF)
+    {
+        sprintf(response, "MUX:AUCUN\n");
+    }
+    else
+    {
+        sprintf(response, "MUX:CANAL=%d\n", canal_mux_courant_actuel);
+    }
+}
+
+static void h_WHO(void) { sprintf(response, WHO_AM_I); }
+
+/* =====================================================================
+   TABLE DE DISPATCH :
+
+   BUT :
+
+   	Pouvoir ajouter une commande n'importe où dans ce tableau, dans
+   	n'importe quel ordre : sortCommandTable() la remettra à sa place
+   	automatiquement au démarrage (voir plus bas + appel dans StartLwipTask).
+	Attention la variable ne doit pas etre de type const" car qsort() doit pouvoir
+   	réordonner le tableau en RAM.
+   ===================================================================== */
+
+typedef struct {
+	const char *name;
+	void (*handler)(void);
+} Command_t;
+
+static Command_t commandTable[] = {
+	{ "BALAYER_DAC", h_BALAYER_DAC },
+	{ "GET_CURRENT_1", h_GET_CURRENT_1 },
+	{ "GET_CURRENT_2", h_GET_CURRENT_2 },
+	{ "GET_MUX_CANAL_COURANT", h_GET_MUX_CANAL_COURANT },
+	{ "GET_MUX_CANAL_TENSION", h_GET_MUX_CANAL_TENSION },
+	{ "RST_BL_LDO_ALL", h_RST_BL_LDO_ALL },
+	{ "RST_DELTA_AVDD_DVDD", h_RST_DELTA_AVDD_DVDD },
+	{ "RST_DELTA_AVDD_VREF", h_RST_DELTA_AVDD_VREF },
+	{ "RST_DELTA_DVDD_AVDD", h_RST_DELTA_DVDD_AVDD },
+	{ "RST_DELTA_NRST_VREF", h_RST_DELTA_NRST_VREF },
+	{ "RST_DELTA_VREF_AVDD", h_RST_DELTA_VREF_AVDD },
+	{ "RST_DELTA_VREF_NRST", h_RST_DELTA_VREF_NRST },
+	{ "RST_EN_LDO_ALL", h_RST_EN_LDO_ALL },
+	{ "SCAN_I2C1", h_SCAN_I2C1 },
+	{ "SCAN_I2C2", h_SCAN_I2C2 },
+	{ "SET_BL_LDO_ALL", h_SET_BL_LDO_ALL },
+	{ "SET_BL_TAB", h_SET_BL_TAB },
+	{ "SET_DELTA_AVDD_DVDD", h_SET_DELTA_AVDD_DVDD },
+	{ "SET_DELTA_AVDD_VREF", h_SET_DELTA_AVDD_VREF },
+	{ "SET_DELTA_DVDD_AVDD", h_SET_DELTA_DVDD_AVDD },
+	{ "SET_DELTA_NRST_VREF", h_SET_DELTA_NRST_VREF },
+	{ "SET_DELTA_VREF_AVDD", h_SET_DELTA_VREF_AVDD },
+	{ "SET_DELTA_VREF_NRST", h_SET_DELTA_VREF_NRST },
+	{ "SET_EN_LDO_ALL", h_SET_EN_LDO_ALL },
+	{ "SET_EN_TAB", h_SET_EN_TAB },
+	{ "SET_MUX_CANAL_COURANT", h_SET_MUX_CANAL_COURANT },
+	{ "SET_MUX_CANAL_TENSION", h_SET_MUX_CANAL_TENSION },
+	{ "WHO", h_WHO },
+};
+#define NB_COMMANDS (sizeof(commandTable) / sizeof(commandTable[0]))
+
+// Comparateur requis par bsearch() : compare le nom cherché (key)
+// avec le champ "name" de chaque entrée Command_t.
+/**
+  * @brief  Fonction de comparaison utilisee par bsearch() pour retrouver
+  *         une commande dans commandTable[] (qui doit etre triee, voir
+  *         sortCommandTable()).
+  * @param  key   Pointeur vers la chaine de caracteres recherchee (le token
+  *               de commande extrait de la trame, ex: "WHO").
+  * @param  elem  Pointeur vers l'entree Command_t courante du tableau,
+  *               fourni automatiquement par bsearch().
+  * @retval int  Resultat de strcmp() entre key et elem->name : negatif si
+  *              key < elem->name, 0 si egal, positif si key > elem->name.
+  * @par    Exemple d'utilisation
+  *         Jamais appelee directement : passee en argument a bsearch()
+  *         dans findCommandHandler().
+  */
+static int compareCommand(const void *key, const void *elem)
+{
+	const char *cmdName = (const char *)key;
+	const Command_t *entry = (const Command_t *)elem;
+	return strcmp(cmdName, entry->name);
+}
+
+/**
+  * @brief  Recherche par dichotomie (bsearch) le handler associe a une
+  *         commande exacte dans commandTable[].
+  * @param  cmd  Chaine de commande complete telle qu'extraite de la trame
+  *              (ex : "WHO", "SET_EN_TAB", "SET_VAL_LDO_1PSp").
+  * @retval void(*)(void)  Pointeur vers la fonction handler correspondante,
+  *                        ou NULL si la commande est inconnue.
+  * @par    Exemple d'utilisation
+  *         void (*h)(void) = findCommandHandler("WHO");
+  *         if (h != NULL) h();
+  */
+static void (*findCommandHandler(const char *cmd))(void)
+{
+	Command_t *found = (Command_t *)bsearch(
+		cmd, commandTable, NB_COMMANDS, sizeof(Command_t), compareCommand);
+	return found ? found->handler : NULL;
+}
+
+// Comparateur pour qsort() : même logique que compareCommand(), mais
+// qsort() passe deux "const void*" (deux éléments du tableau), alors
+// que bsearch() passe une clé + un élément. D'où les deux casts.
+/**
+  * @brief  Fonction de comparaison utilisee par qsort() pour trier
+  *         commandTable[] par ordre alphabetique de commande, prealable
+  *         indispensable a l'utilisation de bsearch() dans findCommandHandler().
+  * @param  a  Pointeur vers une premiere entree Command_t du tableau.
+  * @param  b  Pointeur vers une seconde entree Command_t du tableau.
+  * @retval int  Resultat de strcmp() entre les deux noms de commande.
+  * @par    Exemple d'utilisation
+  *         Jamais appelee directement : passee en argument a qsort()
+  *         dans sortCommandTable().
+  */
+static int compareCommandForSort(const void *a, const void *b)
+{
+	const Command_t *ea = (const Command_t *)a;
+	const Command_t *eb = (const Command_t *)b;
+	return strcmp(ea->name, eb->name);
+}
+
+// À appeler UNE SEULE FOIS au démarrage, avant toute utilisation de
+// findCommandHandler(). Trie commandTable[] par ordre alphabétique
+// pour que bsearch() fonctionne, quel que soit l'ordre dans lequel
+// les entrées ont été écrites dans le tableau ci-dessus.
+/**
+  * @brief  Trie une bonne fois pour toutes (au demarrage) le tableau
+  *         commandTable[] par ordre alphabetique de commande.
+  *         Doit imperativement etre appelee avant le premier appel a
+  *         tc_request()/findCommandHandler(), sous peine de resultats
+  *         de bsearch() incorrects.
+  * @param  Aucun.
+  * @retval Aucun (void). Trie commandTable[] en place.
+  * @par    Exemple d'utilisation
+  *         Appelee une seule fois dans StartLwipTask(), avant la boucle
+  *         infinie :
+  *             udpServer_init();
+  *             sortCommandTable();
+  */
+static void sortCommandTable(void)
+{
+	qsort(commandTable, NB_COMMANDS, sizeof(Command_t), compareCommandForSort);
+}
+
+/* =====================================================================
+   tc_request : dispatch générique
+   ===================================================================== */
+/**
+  * @brief  Analyseur (parser) principal des trames recues par UDP.
+  *         Extrait le premier token de la trame (avant le premier ":"),
+  *         puis tente de le faire correspondre, dans l'ordre :
+  *         1) aux prefixes indexes par LDO (SET_EN_LDO_, RST_EN_LDO_,
+  *            SET_BL_LDO_, RST_BL_LDO_, GET_STATUS_LDO_) via findLdoIndex() ;
+  *         2) sinon, a une commande exacte de commandTable[] via
+  *            findCommandHandler(), dont le handler associe est alors execute.
+  *         Si aucune correspondance n'est trouvee, la reponse "UNKNOWN" est
+  *         renvoyee.
+  * @param  Aucun parametre C. Lit et modifie la variable globale
+  *         last_message (message brut recu), et ecrit le resultat dans
+  *         la variable globale response.
+  * @retval Aucun (void).
+  * @par    Exemple d'utilisation
+  *         last_message = "SET_VAL_LDO_1PSp:2048";
+  *         tc_request();   // -> execute h_SET_VAL_LDO_1PSp(), response="DONE"
+  */
+void tc_request(void)
+{
+	char *token = strsep(&last_message, ":");
+	int idx;
+	void (*handler)(void);
+
+	sprintf(response, "DONE\n");
+
+	// 1) Commandes à suffixe variable sur les 18 LDO (EN/BL/STATUS)
+	if (strncmp(token, "SET_EN_LDO_", 11) == 0 && (idx = findLdoIndex(token + 11)) != -1)
+	{
+		EN_LDO[idx] = 1;
+	}
+	else if (strncmp(token, "RST_EN_LDO_", 11) == 0 && (idx = findLdoIndex(token + 11)) != -1)
+	{
+		EN_LDO[idx] = 0;
+	}
+	else if (strncmp(token, "SET_BL_LDO_", 11) == 0 && (idx = findLdoIndex(token + 11)) != -1)
+	{
+		BL_LDO[idx] = 1;
+	}
+	else if (strncmp(token, "RST_BL_LDO_", 11) == 0 && (idx = findLdoIndex(token + 11)) != -1)
+	{
+		BL_LDO[idx] = 0;
+	}
+	else if (strncmp(token, "GET_STATUS_LDO_", 15) == 0 && (idx = findLdoIndex(token + 15)) != -1)
+	{
+		buildStatusResponse(idx);
+	}
+	else if (strncmp(token, "GET_MESURE_REELLE_", 19) == 0 && (idx = findLdoIndex(token + 19)) != -1)
+	{
+		GetMesureReelle(idx, token + 19);
+	}
+	else if (strncmp(token, "GET_MESURE_COURANT_REELLE_", 26) == 0 && (idx = findLdoIndex(token + 26)) != -1)
+	{
+		GetMesureCourantReelle(idx, token + 26);
+	}
+	else if (strncmp(token, "SET_VAL_LDO_", 12) == 0 && (idx = findLdoIndex(token + 12)) != -1)
+	{
+		h_SET_VAL_LDO_GENERIQUE(idx);
+	}
+	else if (strncmp(token, "SET_CURRENT_LDO_", 16) == 0 && (idx = findLdoIndex(token + 16)) != -1)
+	{
+		h_SET_CURRENT_LDO_GENERIQUE(idx);
+	}
+	else if (strncmp(token, "SET_DAC_MAPPING_LDO_", 20) == 0 && (idx = findLdoIndex(token + 20)) != -1)
+	{
+		SetMappingDacLdo(idx, token + 20);
+	}
+	else if (strncmp(token, "GET_DAC_MAPPING_LDO_", 20) == 0 && (idx = findLdoIndex(token + 20)) != -1)
+	{
+		GetMappingDacLdo(idx, token + 20);
+	}
+	else if (strncmp(token, "SET_MUX_LDO_", 12) == 0 && (idx = findLdoIndex(token + 12)) != -1)
+	{
+		SetMuxLdo(idx, token + 12);
+	}
+	else if (strncmp(token, "GET_MUX_LDO_", 12) == 0 && (idx = findLdoIndex(token + 12)) != -1)
+	{
+		GetMuxLdo(idx, token + 12);
+	}
+	else if (strncmp(token, "SET_MUX_COURANT_LDO_", 20) == 0 && (idx = findLdoIndex(token + 20)) != -1)
+	{
+		SetMuxCourantLdo(idx, token + 20);
+	}
+	else if (strncmp(token, "GET_MUX_COURANT_LDO_", 20) == 0 && (idx = findLdoIndex(token + 20)) != -1)
+	{
+		GetMuxCourantLdo(idx, token + 20);
+	}
+	// 2) Toutes les autres commandes -> table de dispatch
+	else if ((handler = findCommandHandler(token)) != NULL)
+	{
+		handler();
+	}
+	// 3) Commande inconnue
+	else
+	{
+		sprintf(response, "UNKNOWN\n");
+	}
+}
+
+/**
+  * @brief  Met a l'echelle lineaire une valeur d'une plage d'entree vers
+  *         une plage de sortie (equivalent de la fonction map() d'Arduino).
+  *         Utilisee pour convertir une lecture ADC brute (0-65535) en
+  *         pourcentage (0-100).
+  * @param  x        Valeur a convertir.
+  * @param  in_min   Borne basse de la plage d'entree.
+  * @param  in_max   Borne haute de la plage d'entree.
+  * @param  out_min  Borne basse de la plage de sortie.
+  * @param  out_max  Borne haute de la plage de sortie.
+  * @retval int  Valeur convertie, ramenee dans la plage [out_min, out_max].
+  * @par    Exemple d'utilisation
+  *         int pourcentage = map(32768, 0, 65535, 0, 100);   // ~= 50
+  */
+int map(uint16_t x, uint16_t in_min, uint16_t in_max, uint16_t out_min, uint16_t out_max)
+{
+	return (x - in_min) * (out_max - out_min + 1) / (in_max - in_min + 1) + out_min;
+}
+
+/**
+  * @brief  Gestionnaire d'interruption EXTI ligne 15:10 (couvre PC13,
+  *         bouton USER B1). Delegue immediatement a HAL_GPIO_EXTI_IRQHandler(),
+  *         qui identifie la broche et appelle HAL_GPIO_EXTI_Callback().
+  * @param  Aucun.
+  * @retval Aucun (void).
+  */
+void EXTI15_10_IRQHandler(void)
+{
+    HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_13);
+}
+
+/**
+  * @brief  Gestionnaire d'interruption EXTI ligne 0 (couvre PD0, bouton
+  *         de RESET materiel des ADG728). Meme principe que
+  *         EXTI15_10_IRQHandler() ci-dessus.
+  * @param  Aucun.
+  * @retval Aucun (void).
+  */
+void EXTI0_IRQHandler(void)
+{
+    HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
+}
+
+/**
+  * @brief  Callback appele par le HAL a chaque interruption EXTI, quelle
+  *         que soit la broche. Ne fait QUE positionner un flag (aucun
+  *         traitement I2C/UART dans un contexte d'interruption) : le
+  *         vrai travail (ExecuterCaptureComplete() pour B1,
+  *         TraiterResetMultiplexeur() pour PD0) est fait par la boucle
+  *         de StartLwipTask(), qui consomme les flags. Anti-rebond
+  *         simple par mesure du temps ecoule depuis le dernier appui
+  *         (HAL_GetTick(), 250 ms), independant pour chaque bouton.
+  * @param  GPIO_Pin  Broche ayant declenche l'interruption.
+  * @retval Aucun (void). Positionne bouton_appuye (PC13) ou
+  *         mux_reset_appuye (PD0) a 1 si l'anti-rebond laisse passer
+  *         l'evenement.
+  */
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+    uint32_t maintenant = HAL_GetTick();
+
+    if (GPIO_Pin == GPIO_PIN_13)
+    {
+        uint32_t maintenant = HAL_GetTick();
+        if ((maintenant - dernier_appui_ms) > 250)
+        {
+            dernier_appui_ms = maintenant;
+            bouton_appuye = 1;
+        }
+    }
+    else if (GPIO_Pin == GPIO_PIN_0)
+    {
+        if ((maintenant - dernier_reset_mux_ms) > 250)
+        {
+            dernier_reset_mux_ms = maintenant;
+            mux_reset_appuye = 1;
+        }
+    }
+}
+/* USER CODE END 4 */
+
+/* USER CODE BEGIN Header_StartLwipTask */
+/**
+  * @brief  Function implementing the lwipTask thread.
+  * @param  argument: Not used
+  * @retval None
+  */
+/* USER CODE END Header_StartLwipTask */
+void StartLwipTask(void const * argument)
+{
+  /* init code for LWIP */
+  MX_LWIP_Init();
+  /* USER CODE BEGIN 5 */
+  osDelay(1000);
+  udpServer_init();
+  sortCommandTable();   // tri unique de commandTable[] avant le premier message reçu
+
+  for (;;)
+  {
+    for (int i = 0; i < NB_LDO; i++)
+    {
+        const LDO_Config_t *cfg = &ldoConfig[i];
+        LDO_TypeDef *l = cfg->ldo;
+
+        int enableCondition = (i == 0) ? (EN_LDO[i] == 1 && LDO_1_PS_p.OC == 0)
+                                        : (EN_LDO[i] == 1);
+        HAL_GPIO_WritePin(cfg->en_port, cfg->en_pin,
+                           enableCondition ? GPIO_PIN_SET : GPIO_PIN_RESET);
+        l->EN = EN_LDO[i];
+
+        HAL_GPIO_WritePin(cfg->bld_port, cfg->bld_pin,
+                           (BL_LDO[i] == 1) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+        l->BLD = BL_LDO[i];
+
+        l->OC = HAL_GPIO_ReadPin(cfg->oc_port, cfg->oc_pin);
+        l->PG = HAL_GPIO_ReadPin(cfg->pg_port, cfg->pg_pin);
+    }
+
+    HAL_I2C_Master_Transmit(&hi2c1, MCP4725_I2CADDR_DEFAULT, DAC1_DEF, SPI_SIZE, SPI_TIMEOUT);
+    HAL_I2C_Master_Transmit(&hi2c2, MCP4725_I2CADDR_DEFAULT, DAC2_DEF, SPI_SIZE, SPI_TIMEOUT);
+    HAL_I2C_Master_Transmit(&hi2c1, MPC4725_I2CADDR_A0, DAC3_DEF, SPI_SIZE, SPI_TIMEOUT);
+    HAL_I2C_Master_Transmit(&hi2c2, MPC4725_I2CADDR_A1, DAC4_DEF, SPI_SIZE, SPI_TIMEOUT);
+    HAL_I2C_Master_Transmit(&hi2c2, MPC4725_I2CADDR_A0, DAC5_DEF, SPI_SIZE, SPI_TIMEOUT);
+
+    // Bouton USER (B1/PC13) appuye : declenche une capture complete de
+    // diagnostic (scan I2C1+I2C2, DAC, balayage...), rapportee sur USART1.
+    // Le flag est mis par HAL_GPIO_EXTI_Callback() (voir USER CODE 4).
+    if (bouton_appuye)
+    {
+        bouton_appuye = 0;
+        ExecuterCaptureComplete();
+    }
+
+    // Bouton de RESET materiel des ADG728 (PD0) appuye : resynchronise
+    // canal_mux_tension_actuel et canal_mux_courant_actuel avec la
+    // realite (tous canaux coupes par le reset, sur les deux chaines).
+    // Le flag est mis par HAL_GPIO_EXTI_Callback() (voir USER CODE 4).
+    if (mux_reset_appuye)
+    {
+        mux_reset_appuye = 0;
+        TraiterResetMultiplexeur();
+    }
+  }
+  /* USER CODE END 5 */
+}
+
+/**
+  * @brief  Configure la MPU (Memory Protection Unit) du Cortex-M7.
+  *         Desactive l'acces (lecture/ecriture/execution) sur la region
+  *         memoire par defaut, avant de reactiver la protection - evite
+  *         que des acces memoire invalides (pointeurs errants, etc.)
+  *         passent silencieusement inapercus.
+  * @param  Aucun.
+  * @retval Aucun (void). Genere par CubeMX, non modifie depuis.
+  */
+void MPU_Config(void)
+{
+  MPU_Region_InitTypeDef MPU_InitStruct = {0};
+
+  /* Disables the MPU */
+  HAL_MPU_Disable();
+
+  /** Initializes and configures the Region and the memory to be protected
+  */
+  MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER0;
+  MPU_InitStruct.BaseAddress = 0x0;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_4GB;
+  MPU_InitStruct.SubRegionDisable = 0x87;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+  MPU_InitStruct.AccessPermission = MPU_REGION_NO_ACCESS;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /** Initializes and configures the Region and the memory to be protected
+  */
+  MPU_InitStruct.Number = MPU_REGION_NUMBER1;
+  MPU_InitStruct.BaseAddress = 0x30020000;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_128KB;
+  MPU_InitStruct.SubRegionDisable = 0x0;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL1;
+  MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /** Initializes and configures the Region and the memory to be protected
+  */
+  MPU_InitStruct.Number = MPU_REGION_NUMBER2;
+  MPU_InitStruct.BaseAddress = 0x30040000;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_512B;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_BUFFERABLE;
+
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+  /* Enables the MPU */
+  HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
+
+}
+
+/**
+  * @brief  Period elapsed callback in non blocking mode
+  * @note   This function is called  when TIM6 interrupt took place, inside
+  * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
+  * a global variable "uwTick" used as application time base.
+  * @param  htim : TIM handle
+  * @retval None
+  */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  /* USER CODE BEGIN Callback 0 */
+
+  /* USER CODE END Callback 0 */
+  if (htim->Instance == TIM6)
+  {
+    HAL_IncTick();
+  }
+  /* USER CODE BEGIN Callback 1 */
+
+  /* USER CODE END Callback 1 */
+}
+
+/**
+  * @brief  This function is executed in case of error occurrence.
+  * @retval None
+  */
+void Error_Handler(void)
+{
+  /* USER CODE BEGIN Error_Handler_Debug */
+  /* User can add his own implementation to report the HAL error return state */
+  __disable_irq();
+  while (1)
+  {
+  }
+  /* USER CODE END Error_Handler_Debug */
+}
+#ifdef USE_FULL_ASSERT
+/**
+  * @brief  Reports the name of the source file and the source line number
+  *         where the assert_param error has occurred.
+  * @param  file: pointer to the source file name
+  * @param  line: assert_param error line source number
+  * @retval None
+  */
+void assert_failed(uint8_t *file, uint32_t line)
+{
+  /* USER CODE BEGIN 6 */
+  /* User can add his own implementation to report the file name and line number,
+     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+  /* USER CODE END 6 */
+}
+#endif /* USE_FULL_ASSERT */
