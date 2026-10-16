@@ -101,7 +101,7 @@ static void GetMesureReelle(int idx, const char *nom);
 // Declaration anticipee : UART1_EnvoyerTexte() est definie plus bas
 // dans ce fichier (avec l'init USART1), mais utilisee plus tot par
 // BalayerSortieDAC() pour rapporter chaque palier en direct.
-static void UART1_EnvoyerTexte(const char *texte);
+void UART1_EnvoyerTexte(const char *texte);   /* non statique : appelee aussi par ethernetif.c */
 
 
 // Etat logiciel courant de chacune des 18 LDO de la carte (En/Bl/OC/PG/
@@ -112,19 +112,21 @@ static void UART1_EnvoyerTexte(const char *texte);
 // absolu, c'est la sortie d'un COMPARATEUR dont le seuil de
 // declenchement depend directement de "Current" (le code ecrit par
 // SET_CURRENT_LDO_<nom>). Chaine materielle :
-//   1) Shunt 100 mOhm en sortie du LDO.
-//   2) AOP #1 (differentiel) : entree + sur le cote LDO du shunt (1k),
-//      entree - sur l'autre cote du shunt (1k), contre-reaction 100k
-//      -> tension = gain x100 x courant reel de sortie.
-//   3) AOP #2 (comparateur, sortie = OC) : entree + reliee a un pont
-//      diviseur (3k vers 5V, DAC "Current" en potentiometre, 10k vers
-//      la masse) qui fixe le SEUIL de declenchement ; entree - reliee
-//      a la sortie de l'AOP #1 (mesure reelle). Sortie protegee par
-//      tirage 5.1k vers 3.3V (compatible entree STM32).
-// Consequence directe : OC=1 signifie "le courant reel mesure depasse
-// le seuil actuellement configure via Current", pas "il y a une
-// surcharge dans l'absolu". Toujours interpreter OC avec la valeur de
-// Current au moment de la lecture (voir buildStatusResponse()).
+//   1) Shunt R97 = 100 mOhm en sortie du LDO.
+//   2) U17 OP184 (soustracteur) : IN+ cote LDO du shunt (R94 1k / R96),
+//      IN- cote charge (R95 1k / R98) -> VMES = OC_K_V_PAR_A x I
+//      (10 V/A carte actuelle, 2,61 V/A carte corrigee), point TP24.
+//      R100 (10k) = charge de sortie de l'AOP, pas un pont de seuil.
+//   3) U2 LM211 (comparateur, sortie = OC) : IN+ (broche 2) = VMES via
+//      R103 ; IN- (broche 3) = DAC_OUT (MCP47FEB28 0xC0, voie du courant)
+//      qui fixe le SEUIL. Pont R104 (3k vers 5V) / RV2 (100k) : reglage
+//      manuel, a ne pas monter quand le DAC est utilise. Sortie a
+//      collecteur ouvert tiree par R109 (5,1k) vers 3,3 V.
+// Consequence : OC=1 signifie "le courant reel depasse le seuil programme
+// par Current" (polarite a confirmer par l'essai T5, voir OC_NIVEAU_DEFAUT).
+// Seuil (A) = Current x 5 V / 4096 / OC_K_V_PAR_A (hors hysteresis).
+// Depuis la revision du 13/10/2026, un depassement coupe l'EN de la LDO
+// et reste verrouille jusqu'a RST_OC_LDO_<nom> (voir OC_Verrouiller()).
 struct LDO	LDO_1_PS_p	=	{0,0,0,0,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,0,0};
 struct LDO	LDO_1_PS_n	=	{0,0,0,0,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,0,0};
 struct LDO	LDO_2_PS_p	=	{0,0,0,0,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,0,0};
@@ -167,7 +169,7 @@ uint16_t	delta_avdd_dvdd		= DELTA_INIT_AVDD_DVDD;
 // ldoConfig[] (0=1PSp, 1=1PSn, ... 17=3PLn). EN_LDO/BL_LDO pilotent
 // directement les GPIO Enable/Bleeder ; VAL_LDO/CURRENT_LDO pilotent
 // les DAC via les tableaux DACx_DEF ci-dessous.
-_Bool		EN_LDO[18] 			= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+volatile _Bool	EN_LDO[18] 			= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 _Bool		BL_LDO[18] 			= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 uint16_t	VAL_LDO[18]			= {MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,
 		MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,
@@ -181,57 +183,73 @@ uint16_t	CURRENT_LDO[18]		= {MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,
 		MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,
 		MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN,MCP4725_VAL_DEF_BIN};
 
-// Buffers de trame LEGACY, au format MCP4725 d'origine (adresse/MSB/LSB
-// par groupe de 3 octets), utilises par le mecanisme historique de
-// StartLwipTask() / USER CODE BEGIN 2 (HAL_I2C_Master_Transmit direct).
-// NE PAS CONFONDRE avec EcrireDACVolatile()/BalayerSortieDAC(), qui
-// utilisent un format de commande different (registre << 3), verifie
-// experimentalement sur le MCP47FEB28 reel (voir historique de tests).
-// {ADDRESSE, VAL_MSB, VAL_LSB}
-uint8_t		DAC1_DEF[24]			= {0x00, 0x07, 0xFF,	//LDO 6 PS P	CURRENT
-									(0x01<<3),0x07, 0xFF,		//LDO 4 PS P	POWER
-									(0x02<<3),0x07, 0xFF,		//LDO 6 PS P	POWER
-									(0x03<<3),0x07, 0xFF,		//LDO 4 PS P	CURRENT
-									(0x04<<3),0x07, 0xFF,		//LDO 5 PS P	CURRENT
-									(0x05<<3),0x07, 0xFF,		//LDO 5 PS P	POWER
+// Buffers de trame envoyes en continu par la boucle de StartLwipTask()
+// (HAL_I2C_Master_Transmit direct, 24 octets = 8 ecritures chainees).
+// Chaque groupe de 3 octets : {COMMANDE = registre << 3, VAL_MSB, VAL_LSB},
+// meme format que EcrireDACVolatile()/BalayerSortieDAC() (MCP47FEB28).
+// DAC1_DEF : I2C1, adresse 0xC0 (0x60 en 7 bits). Montage du 22/09/2026
+// (tout sur I2C1 suite a un probleme sur I2C2) : 1PSp et 2PSp. Registres
+// 0, 2, 6, 7 : libres, non cables. La 2e puce cablee sur I2C1 (0xC2, 1PLp)
+// utilise DAC3_DEF, voir plus bas.
+uint8_t		DAC1_DEF[24]			= {(0x00<<3),0x00, 0x00,		//libre
+									(0x01<<3),0x00, 0x00,		//1PSp	COURANT
+									(0x02<<3),0x00, 0x00,		//libre
+									(0x03<<3),0x00, 0x00,		//1PSp	TENSION
+									(0x04<<3),0x00, 0x00,		//2PSp	TENSION
+									(0x05<<3),0x00, 0x00,		//2PSp	COURANT
+									(0x06<<3),0x00, 0x00,		//libre
+									(0x07<<3),0x00, 0x00};		//libre
+
+// ATTENTION FORMAT (corrige le 24/09/2026) : TOUTES les puces sont des
+// MCP47FEB28. L'octet de commande de chaque groupe doit etre (registre << 3)
+// (AD4:AD0 = registre, C1:C0 = 00 = Write, X = 0), exactement comme DAC1_DEF.
+// Les anciens octets 0x01..0x07 (format MCP4725) etaient interpretes par le
+// MCP47FEB28 comme des commandes invalides / des ecritures sur le registre 0 :
+// c'est pour cela que SET_VAL_LDO_1PLp ne faisait jamais varier la sortie.
+//
+// DAC2_DEF : I2C2, 0xC0 (bus I2C2 desactive, voir i2c2_actif). Tout a 0V par
+// securite (l'ancien 0x0FFF sur le registre 3 sortait la pleine echelle des
+// que I2C2 serait reactive).
+uint8_t		DAC2_DEF[24]			= {(0x00<<3),0x00, 0x00,
+									(0x01<<3),0x00, 0x00,
+									(0x02<<3),0x00, 0x00,
+									(0x03<<3),0x00, 0x00,
+									(0x04<<3),0x00, 0x00,
+									(0x05<<3),0x00, 0x00,
 									(0x06<<3),0x00, 0x00,
 									(0x07<<3),0x00, 0x00};
 
-uint8_t		DAC2_DEF[24]			= {0x00, 0x07, 0xFF,	//LDO 3 PS P	POWER
-									0x01,0x07, 0xFF,		//LDO 1 PS P	CURRENT
-									0x02,0x07, 0xFF,		//LDO 3 PS P	CURRENT
-									0x03,0x0F, 0xFF,		//LDO 1 PS P	POWER
-									0x04,0x07, 0xFF,		//LDO 2 PS P	POWER
-									0x05,0x07, 0xFF,		//LDO 2 PS P	CURRENT
-									0x06,0x00, 0x00,
-									0x07,0x00, 0x00};
+// DAC3_DEF : I2C1, adresse 0xC2 (0x61 en 7 bits, MPC4725_I2CADDR_A0).
+// Montage du 22/09/2026 : sortie 0 = 1PLp TENSION (pas de DAC courant sur les
+// PLp). Registres 1 a 7 : libres, non cables.
+uint8_t		DAC3_DEF[24]			= {(0x00<<3),0x00, 0x00,		//1PLp	TENSION
+									(0x01<<3),0x00, 0x00,		//libre
+									(0x02<<3),0x00, 0x00,		//libre
+									(0x03<<3),0x00, 0x00,		//libre
+									(0x04<<3),0x00, 0x00,		//libre
+									(0x05<<3),0x00, 0x00,		//libre
+									(0x06<<3),0x00, 0x00,		//libre
+									(0x07<<3),0x00, 0x00};		//libre
 
-uint8_t		DAC3_DEF[24]			= {0x00, 0x07, 0xFF,	//LDO 3 PS N	POWER
-									0x01,0x07, 0xFF,		//LDO 1 PS N	CURRENT
-									0x02,0x07, 0xFF,		//LDO 3 PS N	CURRENT
-									0x03,0x07, 0xFF,		//LDO 1 PS N	POWER
-									0x04,0x07, 0xFF,		//LDO 2 PS N	POWER
-									0x05,0x07, 0xFF,		//LDO 2 PS N	CURRENT
-									0x06,0x00, 0x00,
-									0x07,0x00, 0x00};
+// DAC4_DEF : I2C2, 0xC4 (bus I2C2 desactive).
+uint8_t		DAC4_DEF[24]			= {(0x00<<3),0x00, 0x00,
+									(0x01<<3),0x00, 0x00,
+									(0x02<<3),0x00, 0x00,
+									(0x03<<3),0x00, 0x00,
+									(0x04<<3),0x00, 0x00,
+									(0x05<<3),0x00, 0x00,
+									(0x06<<3),0x00, 0x00,
+									(0x07<<3),0x00, 0x00};
 
-uint8_t		DAC4_DEF[24]			= {0x00, 0x07, 0xFF,	//LDO 5 PS N	POWER
-									0x01,0x07, 0xFF,		//LDO 6 PS N	POWER
-									0x02,0x07, 0xFF,		//LDO 5 PS N	CURRENT
-									0x03,0x07, 0xFF,		//LDO 6 PS N	CURRENT
-									0x04,0x07, 0xFF,		//LDO 4 PS N	POWER
-									0x05,0x07, 0xFF,		//LDO 3 PL P	POWER
-									0x06,0x07, 0xFF,		//LDO 4 PS N	CURRENT
-									0x07,0x07, 0xFF};		//LDO 3 PL N	CURRENT
-
-uint8_t		DAC5_DEF[24]			= {0x00, 0x07, 0xFF,	//LDO 1 PL P	POWER
-									0x01,0x00, 0x00,
-									0x02,0x07, 0xFF,		//LDO 2 PL P	POWER
-									0x03,0x07, 0xFF,		//LDO 1 PL N	POWER
-									0x04,0x07, 0xFF,		//LDO 3 PL N	POWER
-									0x05,0x07, 0xFF,		//LDO 1 PL N	CURRENT
-									0x06,0x07, 0xFF,		//LDO 2 PL N	CURRENT
-									0x07,0x07, 0xFF};		//LDO 2 PL N	POWER
+// DAC5_DEF : I2C2, 0xC2 (bus I2C2 desactive).
+uint8_t		DAC5_DEF[24]			= {(0x00<<3),0x00, 0x00,
+									(0x01<<3),0x00, 0x00,
+									(0x02<<3),0x00, 0x00,
+									(0x03<<3),0x00, 0x00,
+									(0x04<<3),0x00, 0x00,
+									(0x05<<3),0x00, 0x00,
+									(0x06<<3),0x00, 0x00,
+									(0x07<<3),0x00, 0x00};
 
 // Table de configuration generique : associe a chaque LDO (par son nom
 // texte) ses 4 broches GPIO (Enable, Bleeder, Over-Current, Power-Good)
@@ -252,6 +270,18 @@ typedef struct {
 } LDO_Config_t;
 
 #define NB_LDO 18
+
+// Etat de la protection surintensite, une entree par LDO (meme index que
+// ldoConfig[]). Ecrit depuis l'interruption EXTI et depuis la boucle.
+static volatile uint8_t  oc_verrou[NB_LDO];
+static volatile uint8_t  oc_a_signaler[NB_LDO];
+static volatile uint32_t oc_nb_declenchements[NB_LDO];
+static volatile uint32_t oc_tick_declenchement[NB_LDO];
+static volatile uint32_t en_tick_activation[NB_LDO];
+static volatile uint8_t  en_actif[NB_LDO];
+
+/** Index de 2PSp dans ldoConfig[] (meme ordre que findLdoIndex()). */
+#define IDX_LDO_2PSp          2
 
 static const LDO_Config_t ldoConfig[NB_LDO] = {
     { "1PSp", EN_LDO1_PSp_GPIO_Port, EN_LDO1_PSp_Pin, BLD_LDO1_PSp_GPIO_Port, BLD_LDO1_PSp_Pin, OC_LDO1_PSp_GPIO_Port, OC_LDO1_PSp_Pin, PG_LDO1_PSp_GPIO_Port, PG_LDO1_PSp_Pin, &LDO_1_PS_p },
@@ -341,6 +371,44 @@ static void I2C1_BusRecovery(void)
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 }
 
+static void I2C_BusRecovery(GPIO_TypeDef *port, uint16_t scl_pin, uint16_t sda_pin,
+                             uint8_t af_i2c)
+{
+    GPIO_InitTypeDef GPIO_InitStruct = {0};
+
+    GPIO_InitStruct.Pin   = scl_pin | sda_pin;
+    GPIO_InitStruct.Mode  = GPIO_MODE_OUTPUT_OD;
+    GPIO_InitStruct.Pull  = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(port, &GPIO_InitStruct);
+
+    HAL_GPIO_WritePin(port, scl_pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(port, sda_pin, GPIO_PIN_SET);
+    HAL_Delay(1);
+
+    for (int i = 0; i < 9; i++)
+    {
+        HAL_GPIO_WritePin(port, scl_pin, GPIO_PIN_RESET);
+        HAL_Delay(1);
+        HAL_GPIO_WritePin(port, scl_pin, GPIO_PIN_SET);
+        HAL_Delay(1);
+        if (HAL_GPIO_ReadPin(port, sda_pin) == GPIO_PIN_SET) break;
+    }
+
+    HAL_GPIO_WritePin(port, sda_pin, GPIO_PIN_RESET);
+    HAL_Delay(1);
+    HAL_GPIO_WritePin(port, scl_pin, GPIO_PIN_SET);
+    HAL_Delay(1);
+    HAL_GPIO_WritePin(port, sda_pin, GPIO_PIN_SET);
+    HAL_Delay(1);
+
+    GPIO_InitStruct.Mode      = GPIO_MODE_AF_OD;
+    GPIO_InitStruct.Alternate = af_i2c;
+    HAL_GPIO_Init(port, &GPIO_InitStruct);
+}
+
+
+
 /**
   * @brief  Resultat d'un scan I2C complet (voir ScanI2C()) : la liste
   *         des adresses ayant repondu, et un compteur par type de
@@ -361,6 +429,128 @@ typedef struct {
 // debogueur (Watch/Variables) ; a rediriger vers un UART si tu en
 // ajoutes un plus tard (HAL_UART_Transmit, etc.).
 static char rapport_scan[512];
+
+// ---------------------------------------------------------------------------
+// Verrous I2C (un par bus) : StartLwipTask() (boucle for(;;), envoi
+// periodique DAC1_DEF..DAC5_DEF) et le traitement des commandes reseau
+// (tc_request(), invoque depuis le contexte reseau lwIP a chaque paquet
+// UDP recu) accedent TOUS LES DEUX a hi2c1/hi2c2, depuis deux contextes
+// d'execution differents, sans aucune protection jusqu'ici. HAL_I2C
+// n'est pas reentrant : un HAL_I2C_Master_Transmit() qui demarre pendant
+// qu'une autre transaction est en cours sur le MEME bus produit au mieux
+// un HAL_BUSY silencieusement ignore (EcrireDACVolatile() ne verifiait
+// pas son retour), au pire une trame corrompue/tronquee sur le bus.
+// C'est une cause plausible des "trucs bizarres" observes sur le DAC
+// pendant un balayage (BALAYER_DAC, sur hi2c1) alors que la boucle
+// principale continue en parallele d'emettre sur ce meme bus.
+// Un mutex PAR BUS (plutot qu'un seul mutex global) : une transaction
+// lente sur hi2c2 ne bloque pas hi2c1, et vice-versa.
+static osMutexId i2c1_mutex_id;
+static osMutexId i2c2_mutex_id;
+osMutexDef(i2c1_mutex);
+osMutexDef(i2c2_mutex);
+
+// Verrou UART1 : UART1_EnvoyerTexte() est appelee depuis plusieurs contextes
+// (boucle de StartLwipTask() : capture du bouton USER et battement de coeur ;
+// contexte reseau lwIP : BALAYER_DAC, SCAN...). HAL_UART_Transmit() n'est pas
+// reentrant : un appel concurrent sur le meme handle retourne HAL_BUSY et la
+// ligne est PERDUE silencieusement. Ce mutex serialise les emissions. Il vaut
+// NULL tant que CreerMutexUART() n'a pas ete appele (debut du demarrage) : dans
+// ce cas UART1_EnvoyerTexte() emet sans verrou, comme avant.
+static osMutexId uart1_mutex_id = NULL;
+osMutexDef(uart1_mutex);
+
+// Battement de coeur UART : une ligne "HB" est emise sur USART1 (PB6/PB7) toutes
+// les UART_HEARTBEAT_MS millisecondes. Elle permet a l'interface PC de savoir si
+// le cable UART est branche et si le firmware tourne, independamment de
+// l'Ethernet (l'interface PC filtre ces lignes : elles n'apparaissent pas dans
+// son journal). Mettre 0 pour desactiver.
+#define UART_HEARTBEAT_MS   1000U
+#if UART_HEARTBEAT_MS > 0U
+static uint32_t tick_dernier_hb_uart = 0U;
+#endif
+
+// Drapeau runtime : desactive l'emission periodique sur I2C2 (boucle
+// principale) tant que ce bus a un probleme materiel non resolu. Par
+// defaut a 0 (desactive) : la boucle attendait jusqu'a SPI_TIMEOUT
+// (100 ms) par tentative ratee sur I2C2, x3 par tour, ce qui retardait
+// aussi les mises a jour I2C1 (meme thread, tout est sequentiel).
+// Pilotable a chaud via SET_I2C2_ACTIF:0/1 (pas besoin de reflash pour
+// re-basculer une fois le bus repare).
+static volatile uint8_t i2c2_actif = 0;
+
+// Coupure automatique de l'Enable sur OC : ACTIVEE depuis le 13/10/2026,
+// avec verrouillage du defaut, masquage au demarrage (OC_BLANKING_MS) et
+// interruption EXTI4 sur PE4 pour 2PSp (voir OC_Verrouiller()). Historique :
+// elle etait DESACTIVEE pour la raison ci-dessous.
+// L'ancien code ne l'appliquait qu'a 1PSp (index 0), ce qui empechait EN de
+// 1PSp de rester a l'etat haut : des que le comparateur OC basculait (appel
+// de courant a la mise sous tension, polarite du comparateur non encore
+// validee), la boucle forcait EN bas, OC retombait, EN remontait... EN
+// oscillait au rythme de la boucle au lieu de rester haut. Tant que la
+// polarite et le seuil OC ne sont pas valides par les tests, EN suit
+// UNIQUEMENT la commande operateur. Mettre a 1 pour reactiver la coupure,
+// de facon identique sur les 18 LDO.
+#define OC_COUPURE_AUTO     1
+
+// Puce DAC actuellement balayee par BalayerSortieDAC() (BALAYER_DAC depuis
+// l'interface web, ou capture du bouton USER) : bus + adresse I2C. NULL = aucun
+// balayage en cours. La boucle de StartLwipTask() re-ecrit EN CONTINU les blocs
+// DAC1_DEF..DAC5_DEF sur chaque puce (une iteration ne dure que quelques ms
+// depuis que i2c2_actif = 0) : sans suspension, elle ecrase chaque palier du
+// balayage quelques ms apres son ecriture et la sortie du DAC ne suit plus la
+// rampe. Tant que ce couple (bus, adresse) est renseigne, la boucle NE reecrit
+// PAS la puce concernee ; les autres puces continuent d'etre rafraichies.
+static I2C_HandleTypeDef * volatile balayage_hi2c = NULL;
+static volatile uint8_t              balayage_adresse = 0U;
+#define BALAYAGE_SUR(h, a)   ((balayage_hi2c == (h)) && (balayage_adresse == (uint8_t)(a)))
+
+/**
+  * @brief  Cree les deux mutex I2C (un par bus). A appeler UNE SEULE
+  *         FOIS, avant que quoi que ce soit puisse emettre sur hi2c1/
+  *         hi2c2 (donc avant udpServer_init() dans StartLwipTask() et
+  *         avant la premiere iteration de la boucle for(;;)).
+  * @param  Aucun.
+  * @retval Aucun (void). Remplit i2c1_mutex_id/i2c2_mutex_id.
+  */
+static void CreerMutexI2C(void)
+{
+    i2c1_mutex_id = osMutexCreate(osMutex(i2c1_mutex));
+    i2c2_mutex_id = osMutexCreate(osMutex(i2c2_mutex));
+}
+
+/**
+  * @brief  Cree le mutex qui serialise les emissions de texte sur USART1
+  *         (voir UART1_EnvoyerTexte()). A appeler UNE SEULE FOIS, depuis
+  *         StartLwipTask(), juste apres CreerMutexI2C(), avant que la boucle
+  *         ou une commande reseau puisse emettre sur l'UART.
+  * @param  Aucun.
+  * @retval Aucun (void). Remplit uart1_mutex_id.
+  * @par    Exemple d'utilisation
+  *         CreerMutexI2C();
+  *         CreerMutexUART();   // dans StartLwipTask(), avant udpServer_init()
+  */
+static void CreerMutexUART(void)
+{
+    uart1_mutex_id = osMutexCreate(osMutex(uart1_mutex));
+}
+
+/**
+  * @brief  Retourne le mutex correspondant au bus d'un handle I2C donne.
+  * @param  hi2c  Handle I2C (&hi2c1 ou &hi2c2).
+  * @retval osMutexId  i2c2_mutex_id si hi2c == &hi2c2, i2c1_mutex_id sinon
+  *                    (comportement par defaut : hi2c1, comme ailleurs
+  *                    dans ce fichier ou "bus == 2" bascule sur hi2c2).
+  * @par    Exemple d'utilisation
+  *         osMutexId m = ResoudreMutexI2C(hi2c);
+  *         osMutexWait(m, osWaitForever);
+  *         HAL_I2C_Master_Transmit(hi2c, ...);
+  *         osMutexRelease(m);
+  */
+static osMutexId ResoudreMutexI2C(I2C_HandleTypeDef *hi2c)
+{
+    return (hi2c == &hi2c2) ? i2c2_mutex_id : i2c1_mutex_id;
+}
 
 /**
   * @brief  Scanne toutes les adresses I2C possibles (hors General Call
@@ -384,7 +574,10 @@ static void ScanI2C(I2C_HandleTypeDef *hi2c, ScanResult_t *result)
 
     for (uint16_t scan_addr = 2; scan_addr < 256; scan_addr += 2)
     {
+        osMutexId m = ResoudreMutexI2C(hi2c);
+        osMutexWait(m, osWaitForever);
         HAL_StatusTypeDef st = HAL_I2C_IsDeviceReady(hi2c, scan_addr, 2, 20);
+        osMutexRelease(m);
 
         switch (st)
         {
@@ -436,6 +629,12 @@ static void FormaterRapport(const char *nom_bus, const ScanResult_t *result)
     }
 }
 
+// Tension d'alimentation REELLE des DAC (= reference pleine echelle, VREF=VDD) : 5 V.
+// Aucun DAC de la carte n'est alimente en 3.3 V. Valeur unique utilisee par la
+// capture du bouton USER (ExecuterCaptureComplete) ; le balayage a distance
+// (BALAYER_DAC) recoit sa propre tension_ref depuis l'interface web.
+#define DAC_VDD_REFERENCE_V   5.0f
+
 /**
   * @brief  Convertit une tension desiree (en volts) en code numerique
   *         12 bits (0-4095) compris par le DAC, selon la formule :
@@ -443,20 +642,20 @@ static void FormaterRapport(const char *nom_bus, const ScanResult_t *result)
   *         Dans la config actuelle du DAC (registre VREF a sa valeur
   *         par defaut, VDD utilise comme reference), tension_reference
   *         doit etre la tension VDD REELLE mesuree sur le DAC (pas
-  *         forcement 3.3V pile - utilise la valeur que tu as mesuree
+  *         forcement 5V pile - utilise la valeur que tu as mesuree
   *         au multimetre pour plus de precision).
-  * @param  tension_desiree    Tension de sortie voulue, en volts (ex : 3.3f).
+  * @param  tension_desiree    Tension de sortie voulue, en volts (ex : 5.0f).
   *                            Ecretee automatiquement entre 0 et tension_reference.
   * @param  tension_reference  Tension de reference reelle du DAC (VDD mesure), en volts.
   * @retval uint16_t  Code 12 bits (0-4095) a passer a EcrireDACVolatile()
   *                   ou BalayerSortieDAC().
   * @par    Exemple d'utilisation
-  *         // Ecrire 3.3V sur VOUT0, avec un VDD reellement mesure a 3.3V :
-  *         uint16_t code = VoltageVersCodeDAC(3.3f, 3.3f);   // -> 4095
+  *         // Ecrire 5V sur VOUT0, avec un VDD reellement mesure a 5V :
+  *         uint16_t code = VoltageVersCodeDAC(5.0f, 5.0f);   // -> 4095
   *         EcrireDACVolatile(&hi2c1, (0x62 << 1), 0x00, code);
   *
-  *         // Ecrire 1.65V (moitie de VDD), avec VDD mesure a 3.28V :
-  *         uint16_t code2 = VoltageVersCodeDAC(1.65f, 3.28f); // -> ~2062
+  *         // Ecrire 2.5V (moitie de VDD), avec VDD mesure a 4.98V :
+  *         uint16_t code2 = VoltageVersCodeDAC(2.5f, 4.98f); // -> ~2056
   */
 static uint16_t VoltageVersCodeDAC(float tension_desiree, float tension_reference)
 {
@@ -496,6 +695,66 @@ static uint16_t VoltageVersCodeDAC(float tension_desiree, float tension_referenc
   *         HAL_StatusTypeDef status = EcrireDACVolatile(&hi2c1, (0x62 << 1), 0x00, 4095);
   *         if (status == HAL_OK) { / * mesurer VOUT0 au voltmetre * / }
   */
+/**
+  * @brief  Retrouve le tableau DACx_DEF (celui rafraichi en continu par la
+  *         boucle de StartLwipTask(), voir "USER CODE BEGIN 2") qui
+  *         correspond au bus/adresse donnes, ou NULL si aucun ne correspond
+  *         (adresse non geree par la boucle periodique).
+  * @param  hi2c         Handle I2C (&hi2c1 ou &hi2c2).
+  * @param  adresse_hal  Adresse I2C 7 bits deja decalee (ex: MCP4725_I2CADDR_DEFAULT).
+  * @retval uint8_t*  Pointeur vers DAC1_DEF, DAC2_DEF... DAC5_DEF, ou NULL.
+  * @par    Exemple d'utilisation
+  *         uint8_t *tab = ResoudreTableauDacParAdresse(&hi2c1, (0x60 << 1));
+  *         // -> &DAC1_DEF[0]
+  */
+static uint8_t *ResoudreTableauDacParAdresse(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal)
+{
+    if (hi2c == &hi2c1 && adresse_hal == MCP4725_I2CADDR_DEFAULT) { return DAC1_DEF; }
+    if (hi2c == &hi2c2 && adresse_hal == MCP4725_I2CADDR_DEFAULT) { return DAC2_DEF; }
+    if (hi2c == &hi2c1 && adresse_hal == MPC4725_I2CADDR_A0)      { return DAC3_DEF; }
+    if (hi2c == &hi2c2 && adresse_hal == MPC4725_I2CADDR_A1)      { return DAC4_DEF; }
+    if (hi2c == &hi2c2 && adresse_hal == MPC4725_I2CADDR_A0)      { return DAC5_DEF; }
+    return NULL;
+}
+
+/**
+  * @brief  Repercute une ecriture DAC directe (EcrireDACVolatile(), typiquement
+  *         depuis BalayerSortieDAC()) dans le tableau DACx_DEF correspondant,
+  *         pour que la boucle periodique de StartLwipTask() retransmette CETTE
+  *         valeur au lieu d'ecraser la sortie avec l'ancien contenu du tableau
+  *         (typiquement 0V, voir MCP4725_VAL_DEF_BIN) des la fin de l'ecriture
+  *         directe. Sans cet appel, une valeur ecrite par un balayage ou un
+  *         cycle de test "retombait" au palier suivant de la boucle. Ne fait
+  *         rien si (hi2c, adresse_hal) ne correspond a aucun DACx_DEF connu
+  *         (ResoudreTableauDacParAdresse() renvoie alors NULL).
+  * @param  hi2c         Handle I2C utilise pour l'ecriture (&hi2c1 ou &hi2c2).
+  * @param  adresse_hal  Adresse I2C 7 bits deja decalee de la puce ecrite.
+  * @param  registre     Registre ecrit (0-7).
+  * @param  valeur       Valeur 12 bits ecrite sur ce registre.
+  * @retval Aucun (void).
+  * @par    Exemple d'utilisation
+  *         EcrireDACVolatile(hi2c, adresse_hal, registre, valeur);
+  *         SynchroniserTableauDac(hi2c, adresse_hal, registre, valeur);
+  */
+// Declaration anticipee : definie apres mappingDacLdo[] (plus bas).
+static void MajEtatLdoDepuisDac(const uint8_t *tableau, uint8_t canal, uint16_t valeur);
+
+static void SynchroniserTableauDac(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal,
+                                    uint8_t registre, uint16_t valeur)
+{
+    uint8_t *tableau = ResoudreTableauDacParAdresse(hi2c, adresse_hal);
+    if (tableau == NULL || registre > 0x07)
+    {
+        return;
+    }
+    tableau[registre * 3 + 1] = (uint8_t)((valeur & 0x0F00) >> 8);
+    tableau[registre * 3 + 2] = (uint8_t)(valeur & 0x00FF);
+
+    // Garde la page LDO coherente apres un balayage a distance : la LDO
+    // cablee sur ce canal affiche la valeur reellement en place.
+    MajEtatLdoDepuisDac(tableau, registre, valeur);
+}
+
 static HAL_StatusTypeDef EcrireDACVolatile(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal,
                                             uint8_t registre, uint16_t valeur)
 {
@@ -517,7 +776,162 @@ static HAL_StatusTypeDef EcrireDACVolatile(I2C_HandleTypeDef *hi2c, uint8_t adre
     trame[1] = (uint8_t)((valeur >> 8) & 0x0F);
     trame[2] = (uint8_t)(valeur & 0xFF);
 
-    return HAL_I2C_Master_Transmit(hi2c, adresse_hal, trame, 3, 100);
+    osMutexId m = ResoudreMutexI2C(hi2c);
+    osMutexWait(m, osWaitForever);
+    HAL_StatusTypeDef st = HAL_I2C_Master_Transmit(hi2c, adresse_hal, trame, 3, 100);
+    osMutexRelease(m);
+    return st;
+}
+
+/**
+  * @brief  Lit un registre VOLATILE de CONFIGURATION du DAC MCP47FEB28
+  *         (adresses memoire 08h/09h/0Ah UNIQUEMENT - VREF/Power-Down/
+  *         Gain, voir Table 4-1 du datasheet DS20006368A). Toute autre
+  *         adresse est refusee (HAL_ERROR immediat, aucune trame emise) :
+  *         meme garde-fou que EcrireDACVolatile(), pour ne jamais risquer
+  *         de lire (et donc plus tard, par erreur de copier-coller,
+  *         d'ecrire) 0Bh (WiperLock STATUS) ou l'EEPROM (10h-1Ah).
+  *         Protocole : ecrit l'octet de commande (adresse memoire,
+  *         bits C1:C0=11 pour READ), puis relit 2 octets de donnee via
+  *         un Repeated Start (HAL_I2C_Mem_Read gere cette sequence).
+  * @param  hi2c         Pointeur vers le handle I2C a utiliser (&hi2c1, &hi2c2, ...).
+  * @param  adresse_hal  Adresse I2C du DAC, deja au format HAL (decalee).
+  * @param  registre     0x08 (VREF), 0x09 (Power-Down) ou 0x0A (Gain/STATUS).
+  *                      Toute autre valeur est refusee.
+  * @param  valeur       Pointeur vers le uint16_t a remplir avec le mot lu.
+  * @retval HAL_StatusTypeDef  Resultat de la lecture I2C (HAL_OK si le
+  *         DAC a repondu, HAL_ERROR si registre est hors plage autorisee
+  *         ou si le DAC a NACK/timeout).
+  * @par    Exemple d'utilisation
+  *         uint16_t vref;
+  *         if (LireRegistreConfigDAC(&hi2c1, (0x62 << 1), 0x08, &vref) == HAL_OK)
+  *         {
+  *             // vref == 0x0000 si tous les canaux sont sur VDD (defaut usine)
+  *         }
+  */
+static HAL_StatusTypeDef LireRegistreConfigDAC(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal,
+                                                uint8_t registre, uint16_t *valeur)
+{
+    if (registre < 0x08 || registre > 0x0A || valeur == NULL)
+    {
+        return HAL_ERROR;
+    }
+
+    // Octet de commande : AD4:AD0 = adresse du registre (5 bits),
+    // C1:C0 = 11 (Read), bit X = 0.
+    uint8_t commande = (uint8_t)(((registre & 0x1F) << 3) | 0x06);
+    uint8_t donnees[2] = {0, 0};
+
+    osMutexId m = ResoudreMutexI2C(hi2c);
+    osMutexWait(m, osWaitForever);
+    HAL_StatusTypeDef st = HAL_I2C_Mem_Read(hi2c, adresse_hal, commande,
+                                             I2C_MEMADD_SIZE_8BIT, donnees, 2, 100);
+    osMutexRelease(m);
+
+    if (st == HAL_OK)
+    {
+        *valeur = (uint16_t)((donnees[0] << 8) | donnees[1]);
+    }
+    return st;
+}
+
+/**
+  * @brief  Ecrit un registre VOLATILE de CONFIGURATION du DAC MCP47FEB28
+  *         (adresses memoire 08h/09h/0Ah UNIQUEMENT). Meme garde-fou que
+  *         EcrireDACVolatile()/LireRegistreConfigDAC() : toute adresse
+  *         hors de {0x08, 0x09, 0x0A} est refusee, aucune trame emise.
+  *         ATTENTION : contrairement a EcrireDACVolatile() (une sortie a
+  *         la fois), ces 3 registres s'appliquent AUX 8 CANAUX DE LA
+  *         PUCE A LA FOIS (2 bits/canal pour VREF et Power-Down, 1 bit/
+  *         canal pour Gain) - voir Registres 4-2/4-3/4-4 du datasheet.
+  *         Une seule ecriture ici change donc potentiellement les 8
+  *         sorties de cette puce.
+  * @param  hi2c         Pointeur vers le handle I2C a utiliser (&hi2c1, &hi2c2, ...).
+  * @param  adresse_hal  Adresse I2C du DAC, deja au format HAL (decalee).
+  * @param  registre     0x08 (VREF), 0x09 (Power-Down) ou 0x0A (Gain).
+  *                      Toute autre valeur est refusee.
+  * @param  valeur       Mot 16 bits a ecrire tel quel (voir Registres
+  *                      4-2/4-3/4-4 pour le format exact bit a bit -
+  *                      c'est a l'appelant de le construire correctement,
+  *                      cette fonction ne fait aucune interpretation).
+  * @retval HAL_StatusTypeDef  Resultat de l'ecriture I2C.
+  * @par    Exemple d'utilisation
+  *         // VREF = VDD sur les 8 canaux (VRnB:VRnA = 00 partout) :
+  *         EcrireRegistreConfigDAC(&hi2c1, (0x62 << 1), 0x08, 0x0000);
+  *         // Gain = 1x sur les 8 canaux (G7..G0 = 0, octet bas ignore) :
+  *         EcrireRegistreConfigDAC(&hi2c1, (0x62 << 1), 0x0A, 0x0000);
+  */
+static HAL_StatusTypeDef EcrireRegistreConfigDAC(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal,
+                                                  uint8_t registre, uint16_t valeur)
+{
+    if (registre < 0x08 || registre > 0x0A)
+    {
+        return HAL_ERROR;
+    }
+
+    uint8_t trame[3];
+    trame[0] = (uint8_t)((registre & 0x1F) << 3);   // C1:C0 = 00 (Write)
+    trame[1] = (uint8_t)((valeur >> 8) & 0xFF);
+    trame[2] = (uint8_t)(valeur & 0xFF);
+
+    osMutexId m = ResoudreMutexI2C(hi2c);
+    osMutexWait(m, osWaitForever);
+    HAL_StatusTypeDef st = HAL_I2C_Master_Transmit(hi2c, adresse_hal, trame, 3, 100);
+    osMutexRelease(m);
+    return st;
+}
+
+// Puces MCP47FEB28 presentes sur I2C1 (scan du 24/09/2026 : 0xC0, 0xC2, 0xC4).
+static const uint8_t dacs_i2c1_adresses[] = { (0x60 << 1), (0x61 << 1), (0x62 << 1) };
+#define NB_DACS_I2C1   (sizeof(dacs_i2c1_adresses) / sizeof(dacs_i2c1_adresses[0]))
+
+/**
+  * @brief  Force la configuration VOLATILE des MCP47FEB28 de I2C1 a l'etat
+  *         attendu par tout le reste du firmware : VREF = VDD (5V) sur les 8
+  *         canaux, sortie en fonctionnement normal (pas de Power-Down),
+  *         gain 1x. Relit ensuite les 3 registres et envoie le resultat sur
+  *         USART1.
+  *         Pourquoi : le firmware ne configurait JAMAIS ces registres. Chaque
+  *         puce demarre donc sur les valeurs de son EEPROM, qui peuvent
+  *         differer d'une puce a l'autre (programmation anterieure, trame
+  *         parasite, ex : le texte "Bonjour" de la capture bouton USER,
+  *         envoye a 0xC0/0xC2 avant le correctif). Si l'EEPROM de la puce
+  *         0xC2 contient VREF = bande interdite (~1.2V) ou un mode
+  *         Power-Down, SET_VAL_LDO_1PLp ne peut pas couvrir 0-5V alors que
+  *         la puce 0xC0 (1PSp/2PSp) fonctionne. Registres 08h/09h/0Ah
+  *         volatils uniquement : l'EEPROM n'est jamais touchee.
+  * @param  Aucun.
+  * @retval Aucun (void). Une ligne UART par puce :
+  *         "DAC_INIT:0xC2:VREF=0x0000:PD=0x0000:GAIN=0x0080:OK".
+  * @par    Exemple d'utilisation
+  *         CreerMutexI2C();
+  *         CreerMutexUART();
+  *         InitialiserConfigDacsI2C1();   // avant udpServer_init()
+  */
+static void InitialiserConfigDacsI2C1(void)
+{
+    for (uint32_t i = 0; i < NB_DACS_I2C1; i++)
+    {
+        uint8_t adr = dacs_i2c1_adresses[i];
+        HAL_StatusTypeDef st = HAL_OK;
+
+        if (EcrireRegistreConfigDAC(&hi2c1, adr, 0x08, 0x0000) != HAL_OK) { st = HAL_ERROR; }  // VREF = VDD
+        if (EcrireRegistreConfigDAC(&hi2c1, adr, 0x09, 0x0000) != HAL_OK) { st = HAL_ERROR; }  // PD = normal
+        if (EcrireRegistreConfigDAC(&hi2c1, adr, 0x0A, 0x0000) != HAL_OK) { st = HAL_ERROR; }  // Gain = 1x
+
+        uint16_t vref = 0xFFFF, pd = 0xFFFF, gain = 0xFFFF;
+        LireRegistreConfigDAC(&hi2c1, adr, 0x08, &vref);
+        LireRegistreConfigDAC(&hi2c1, adr, 0x09, &pd);
+        LireRegistreConfigDAC(&hi2c1, adr, 0x0A, &gain);
+
+        // Octet bas du registre 0Ah = bits d'etat (POR, EEWA), non significatifs ici.
+        int conforme = (st == HAL_OK) && (vref == 0x0000) && (pd == 0x0000) && ((gain & 0xFF00) == 0x0000);
+
+        char ligne[80];
+        snprintf(ligne, sizeof(ligne), "DAC_INIT:0x%02X:VREF=0x%04X:PD=0x%04X:GAIN=0x%04X:%s\r\n",
+                 adr, vref, pd, gain, conforme ? "OK" : "ERREUR");
+        UART1_EnvoyerTexte(ligne);
+    }
 }
 
 /**
@@ -588,14 +1002,19 @@ static void EcrireToutesLesSorties(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal,
   * @par    Exemple d'utilisation
   *         // Balaie VOUT0 du DAC a 0x62, de 0 a 4095, par pas de 100,
   *         // avec 200 ms entre chaque palier (~8 secondes au total),
-  *         // rapporte sur UART avec VDD mesure a 3.3V :
-  *         BalayerSortieDAC(&hi2c1, (0x62 << 1), 0x00, "DAC1", 4095, 100, 200, 3.3f);
+  *         // rapporte sur UART avec VDD mesure a 5V :
+  *         BalayerSortieDAC(&hi2c1, (0x62 << 1), 0x00, "DAC1", 4095, 100, 200, 5.0f);
   */
 static void BalayerSortieDAC(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t registre,
                               const char *nom_dac, uint16_t valeur_max, uint16_t pas,
                               uint32_t delai_ms, float tension_reference)
 {
     if (pas == 0) { pas = 1; }  // evite une boucle infinie si appelee avec pas=0 par erreur
+
+    // Suspend le rafraichissement periodique de CETTE puce par la boucle de
+    // StartLwipTask() pendant tout le balayage (voir balayage_hi2c).
+    balayage_adresse = adresse_hal;
+    balayage_hi2c    = hi2c;
     // ATTENTION duree totale = (valeur_max / pas) * delai_ms : avec un
     // pas fin (ex: 1) et un delai long, le balayage complet peut durer
     // tres longtemps (ex: pas=1, delai_ms=500 -> ~34 minutes). Choisis
@@ -604,16 +1023,18 @@ static void BalayerSortieDAC(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8
     uint16_t valeur;
     for (valeur = 0; valeur < valeur_max; valeur = (uint16_t)(valeur + pas))
     {
-        EcrireDACVolatile(hi2c, adresse_hal, registre, valeur);
+        HAL_StatusTypeDef st_ecr = EcrireDACVolatile(hi2c, adresse_hal, registre, valeur);
+        SynchroniserTableauDac(hi2c, adresse_hal, registre, valeur);  // garde la valeur : la boucle periodique ne doit pas revenir en arriere
 
         // Calcul en millivolts entiers : evite le besoin du support
         // flottant de printf (%f), non active par defaut sur STM32
         // (economie de flash). Le calcul flottant lui-meme (pas son
         // affichage) ne pose aucun probleme.
         uint32_t milliVolts = (uint32_t)(((float)valeur / 4095.0f) * tension_reference * 1000.0f + 0.5f);
-        char ligne[48];
-        sprintf(ligne, "%s:VOUT%u:%u:%lu.%03luV\n", nom_dac, registre, valeur,
-                (unsigned long)(milliVolts / 1000), (unsigned long)(milliVolts % 1000));
+        char ligne[56];
+        sprintf(ligne, "%s:VOUT%u:%u:%lu.%03luV:%s\n", nom_dac, registre, valeur,
+                (unsigned long)(milliVolts / 1000), (unsigned long)(milliVolts % 1000),
+                (st_ecr == HAL_OK) ? "OK" : "ERREUR_I2C");
         UART1_EnvoyerTexte(ligne);
 
         HAL_Delay(delai_ms);
@@ -622,6 +1043,7 @@ static void BalayerSortieDAC(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8
     // Assure que le dernier palier ecrit est exactement valeur_max,
     // meme si le pas ne tombe pas juste dessus.
     EcrireDACVolatile(hi2c, adresse_hal, registre, valeur_max);
+    SynchroniserTableauDac(hi2c, adresse_hal, registre, valeur_max);  // idem pour le palier final
     {
         uint32_t milliVolts = (uint32_t)(((float)valeur_max / 4095.0f) * tension_reference * 1000.0f + 0.5f);
         char ligne[48];
@@ -630,6 +1052,10 @@ static void BalayerSortieDAC(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8
         UART1_EnvoyerTexte(ligne);
     }
     HAL_Delay(delai_ms);
+
+    // Fin du balayage : la boucle de StartLwipTask() reprend le rafraichissement
+    // de la puce avec DAC1_DEF..DAC5_DEF (valeurs configurees).
+    balayage_hi2c = NULL;
 }
 
 /**
@@ -734,8 +1160,11 @@ static void EnvoyerBonjourATous(I2C_HandleTypeDef *hi2c, const char *nom_bus, co
         int len_msg = sprintf(message, "Bonjour Maitre:STM32 Esclave:0x%02X Temps:%s\n",
                                adresse_hal, temps);
 
+        osMutexId m = ResoudreMutexI2C(hi2c);
+        osMutexWait(m, osWaitForever);
         HAL_StatusTypeDef st = HAL_I2C_Master_Transmit(hi2c, adresse_hal,
                                                         (uint8_t *)message, (uint16_t)len_msg, 100);
+        osMutexRelease(m);
 
         char ligne[48];
         int len = sprintf(ligne, "%s:0x%02X:Bonjour:%s\n",
@@ -883,8 +1312,11 @@ static void ExecuterCaptureComplete(void)
 
     // 2. Message "Bonjour" a chaque adresse trouvee (DAC exclu : format
     //    binaire strict, pas de texte libre - voir EnvoyerBonjourATous()).
-    static const uint16_t adresses_exclues_i2c1[] = { (0x62 << 1) };
-    EnvoyerBonjourATous(&hi2c1, "I2C1", &res_i2c1, adresses_exclues_i2c1, 1);
+    // Les deux MCP47FEB28 cables sur I2C1 (0xC0 et 0xC2) sont exclus : le texte
+    // "Bonjour..." serait interprete comme des commandes (ex : 'B' = 0x42 vise le
+    // registre 0x08 VREF) et pourrait modifier la configuration du DAC.
+    static const uint16_t adresses_exclues_i2c1[] = { (0x60 << 1), (0x61 << 1), (0x62 << 1) };
+    EnvoyerBonjourATous(&hi2c1, "I2C1", &res_i2c1, adresses_exclues_i2c1, 3);
     EnvoyerBonjourATous(&hi2c2, "I2C2", &res_i2c2, NULL, 0);
 
     // 3. Palier different sur chacune des 8 sorties du DAC (0x62).
@@ -894,12 +1326,12 @@ static void ExecuterCaptureComplete(void)
 
     // 4. Balayage complet de VOUT0 (0 a 4095, pas 50, 100ms -> ~8s),
     //    rapporte ligne par ligne en direct sur l'UART (voir BalayerSortieDAC()).
-    BalayerSortieDAC(&hi2c1, (0x62 << 1), 0x00, "DAC1", 4095, 50, 100, 3.3f);
+    BalayerSortieDAC(&hi2c1, (0x62 << 1), 0x00, "DAC1", 4095, 50, 100, DAC_VDD_REFERENCE_V);
 
     // 5. Ecrit 2.5V sur VOUT1 via VoltageVersCodeDAC().
     rapport_scan[0] = '\0';
     {
-        uint16_t code_2v5 = VoltageVersCodeDAC(2.5f, 3.3f);
+        uint16_t code_2v5 = VoltageVersCodeDAC(2.5f, DAC_VDD_REFERENCE_V);
         HAL_StatusTypeDef st = EcrireDACVolatile(&hi2c1, (0x62 << 1), 0x01, code_2v5);
         char ligne[48];
         sprintf(ligne, "DAC1:VOUT1:2.5V->code=%u:%s\n",
@@ -991,15 +1423,28 @@ static void MX_USART1_Init(void)
 
 /**
   * @brief  Envoie une chaine de caracteres sur USART1 (PB6/PB7, via
-  *         un adaptateur USB-UART externe), en mode bloquant.
+  *         un adaptateur USB-UART externe), en mode bloquant. L'emission est
+  *         protegee par uart1_mutex_id (une seule emission a la fois, depuis
+  *         n'importe quelle tache) pour ne jamais perdre une ligne sur un
+  *         HAL_BUSY ; sans verrou tant que le mutex n'est pas cree.
   * @param  texte  Chaine C terminee par '\0' a transmettre.
   * @retval Aucun (void).
   * @par    Exemple d'utilisation
   *         UART1_EnvoyerTexte(rapport_scan);
   */
-static void UART1_EnvoyerTexte(const char *texte)
+void UART1_EnvoyerTexte(const char *texte)
 {
+    if (uart1_mutex_id != NULL)
+    {
+        osMutexWait(uart1_mutex_id, osWaitForever);
+    }
+
     HAL_UART_Transmit(&huart1, (uint8_t *)texte, (uint16_t)strlen(texte), 1000);
+
+    if (uart1_mutex_id != NULL)
+    {
+        osMutexRelease(uart1_mutex_id);
+    }
 }
 
 /* USER CODE END 0 */
@@ -1043,19 +1488,19 @@ int main(void)
   PeriphCommonClock_Config();
 
   /* USER CODE BEGIN SysInit */
-  I2C1_BusRecovery();
+  //I2C1_BusRecovery();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+  I2C_BusRecovery(GPIOB, GPIO_PIN_8,  GPIO_PIN_9,  GPIO_AF4_I2C1);
+  I2C_BusRecovery(GPIOB, GPIO_PIN_10, GPIO_PIN_11, GPIO_AF4_I2C2);
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
-
-
   MX_GPIO_Init();
   MX_ADC1_Init();
   MX_ADC3_Init();
   MX_I2C1_Init();
   MX_I2C2_Init();
-  MX_USART1_GPIO_Init();
-  MX_USART1_Init();
+  MX_USART1_UART_Init();
   MX_ADC2_Init();
   /* USER CODE BEGIN 2 */
   //DAC1
@@ -1113,8 +1558,8 @@ int main(void)
     // voir ExecuterCaptureComplete() et la gestion de bouton_appuye.
   }
   /* USER CODE END 3 */
+}
 
-  }
 /**
   * @brief System Clock Configuration
   * @retval None
@@ -1780,6 +2225,9 @@ void udpServer_init(void)
   *         sur le port du serveur (enregistre par udpServer_init via udp_recv).
   *         Recupere le message recu, appelle tc_request() pour l'interpreter
   *         et construire la reponse, puis renvoie cette reponse a l'expediteur.
+  *         Chaque commande est tracee sur l'UART ("[UDP] RX commande", "[UDP]
+  *         REPONSE", "[UDP] TX OK"), SAUF "WHO" : c'est la sonde de liaison que
+  *         l'interface PC envoie en continu, sa trace noierait le journal UART.
   * @param  arg   Parametre optionnel LwIP (non utilise ici).
   * @param  upcb  Pointeur vers le PCB UDP ayant recu le paquet.
   * @param  p     Buffer LwIP (pbuf) contenant les donnees recues (p->payload).
@@ -1799,6 +2247,7 @@ void udp_receive_callback(void *arg, struct udp_pcb *upcb, struct pbuf *p, const
 	u16_t rxlen;
 	int len;
 	err_t err;
+	uint8_t trace_uart;
 
 	(void)arg;
 
@@ -1817,15 +2266,24 @@ void udp_receive_callback(void *arg, struct udp_pcb *upcb, struct pbuf *p, const
 	rxbuf[rxlen] = '\0';
 	last_message = rxbuf;
 
-	UART1_EnvoyerTexte("[UDP] RX commande: ");
-	UART1_EnvoyerTexte(rxbuf);
-	UART1_EnvoyerTexte("\r\n");
+	/* "WHO" = sonde de liaison de l'interface PC (toutes les ~1.5 s) : pas de trace UART. */
+	trace_uart = (strcmp(rxbuf, "WHO") != 0) ? 1U : 0U;
+
+	if (trace_uart != 0U)
+	{
+		UART1_EnvoyerTexte("[UDP] RX commande: ");
+		UART1_EnvoyerTexte(rxbuf);
+		UART1_EnvoyerTexte("\r\n");
+	}
 
 	tc_request();
 
-	UART1_EnvoyerTexte("[UDP] REPONSE: ");
-	UART1_EnvoyerTexte(response);
-	UART1_EnvoyerTexte("\r\n");
+	if (trace_uart != 0U)
+	{
+		UART1_EnvoyerTexte("[UDP] REPONSE: ");
+		UART1_EnvoyerTexte(response);
+		UART1_EnvoyerTexte("\r\n");
+	}
 
 	/* Reponse construite par tc_request(). */
 	len = snprintf(buf, sizeof(buf), "%s", response);
@@ -1852,7 +2310,10 @@ void udp_receive_callback(void *arg, struct udp_pcb *upcb, struct pbuf *p, const
 
 		if (err == ERR_OK)
 		{
-			UART1_EnvoyerTexte("[UDP] TX OK\r\n");
+			if (trace_uart != 0U)
+			{
+				UART1_EnvoyerTexte("[UDP] TX OK\r\n");
+			}
 		}
 		else
 		{
@@ -1921,13 +2382,13 @@ static void buildStatusResponse(int idx)
 	int isPL_p = (strstr(ldoConfig[idx].name, "PL") != NULL) && (ldoConfig[idx].name[3] == 'p');
 	if (isPL_p)
 	{
-		sprintf(response, "LDO_%s:: En:%d, Bl:%d, PG:%d, OC:%d, Voltage:%d, Current:NONE, delta_ON:%d, delta_OFF:%d\n",
-			ldoConfig[idx].name, l->EN, l->BLD, l->PG, l->OC, l->VAL, l->RET, l->RET_OFF);
+		sprintf(response, "LDO_%s:: En:%d, Bl:%d, PG:%d, OC:%d, Voltage:%d, Current:NONE, delta_ON:%d, delta_OFF:%d, OCV:%u\n",
+			ldoConfig[idx].name, l->EN, l->BLD, l->PG, l->OC, l->VAL, l->RET, l->RET_OFF, (unsigned)oc_verrou[idx]);
 	}
 	else
 	{
-		sprintf(response, "LDO_%s:: En:%d, Bl:%d, PG:%d, OC:%d, Voltage:%d, Current:%d, delta_ON:%d, delta_OFF:%d\n",
-			ldoConfig[idx].name, l->EN, l->BLD, l->PG, l->OC, l->VAL, l->CURRENT, l->RET, l->RET_OFF);
+		sprintf(response, "LDO_%s:: En:%d, Bl:%d, PG:%d, OC:%d, Voltage:%d, Current:%d, delta_ON:%d, delta_OFF:%d, OCV:%u\n",
+			ldoConfig[idx].name, l->EN, l->BLD, l->PG, l->OC, l->VAL, l->CURRENT, l->RET, l->RET_OFF, (unsigned)oc_verrou[idx]);
 	}
 }
 
@@ -1946,7 +2407,7 @@ static void buildStatusResponse(int idx)
   * @par    Exemple d'utilisation
   *         Trame UDP recue : "SET_EN_LDO_ALL" -> h_SET_EN_LDO_ALL();
   */
-static void h_SET_EN_LDO_ALL(void)  { for (int i = 0; i < NB_LDO; i++) EN_LDO[i] = 1; }
+static void h_SET_EN_LDO_ALL(void)  { for (int i = 0; i < NB_LDO; i++) { if (oc_verrou[i] == 0U) { EN_LDO[i] = 1; } } }
 /**
   * @brief  Handler de la commande reseau "RST_EN_LDO_ALL".
   *         Parcourt les 18 LDO et desactive (Enable=0) pour chacune d'entre elles
@@ -2186,25 +2647,267 @@ typedef struct {
 // verifiee automatiquement (script de verification, 33/33 correctes).
 // Meme indexation que VAL_LDO[]/CURRENT_LDO[]/ldoConfig[] (0-17).
 static MappingDacLdo_t mappingDacLdo[18] = {
-    { CIBLE_DAC2, 3, CIBLE_DAC2, 1 },  // 0  : 1PSp
-    { CIBLE_DAC3, 3, CIBLE_DAC3, 1 },  // 1  : 1PSn
-    { CIBLE_DAC2, 4, CIBLE_DAC2, 5 },  // 2  : 2PSp
-    { CIBLE_DAC3, 4, CIBLE_DAC3, 5 },  // 3  : 2PSn
-    { CIBLE_DAC2, 0, CIBLE_DAC2, 2 },  // 4  : 3PSp
-    { CIBLE_DAC3, 0, CIBLE_DAC3, 2 },  // 5  : 3PSn
-    { CIBLE_DAC1, 1, CIBLE_DAC1, 3 },  // 6  : 4PSp
-    { CIBLE_DAC5, 4, CIBLE_DAC5, 6 },  // 7  : 4PSn
-    { CIBLE_DAC1, 5, CIBLE_DAC1, 4 },  // 8  : 5PSp
-    { CIBLE_DAC5, 0, CIBLE_DAC5, 2 },  // 9  : 5PSn
-    { CIBLE_DAC1, 2, CIBLE_DAC1, 0 },  // 10 : 6PSp
-    { CIBLE_DAC5, 1, CIBLE_DAC5, 3 },  // 11 : 6PSn
-    { CIBLE_DAC4, 0, CIBLE_AUCUNE, 0 },  // 12 : 1PLp (pas de courant reglable)
+    // Montage du 22/09/2026 (tout sur I2C1) :
+    //   DAC1 = I2C1 0xC0 : sortie 3 = 1PSp V, 1 = 1PSp I, 4 = 2PSp V, 5 = 2PSp I
+    //   DAC3 = I2C1 0xC2 : sortie 0 = 1PLp V
+    // Les LDO dont l'ancien mapping tombait sur un canal de DAC1/DAC3 desormais
+    // occupe par 1PSp/2PSp/1PLp sont DEBRANCHEES (CIBLE_AUCUNE) : sinon un
+    // SET_VAL_LDO_4PSp (par ex.) ecrasait le seuil de courant de 1PSp, et un
+    // SET_VAL_LDO_3PSn la tension de 1PLp. A rebrancher a chaud via
+    // SET_DAC_MAPPING_LDO_<nom> une fois cablees.
+    { CIBLE_DAC1, 3, CIBLE_DAC1, 1 },    // 0  : 1PSp (I2C1 0xC0, V=3, I=1)
+    { CIBLE_AUCUNE, 0, CIBLE_AUCUNE, 0 },// 1  : 1PSn (ex DAC3 3/1 - non cable)
+    { CIBLE_DAC1, 4, CIBLE_DAC1, 5 },    // 2  : 2PSp (I2C1 0xC0, V=4, I=5)
+    { CIBLE_AUCUNE, 0, CIBLE_AUCUNE, 0 },// 3  : 2PSn (ex DAC3 4/5 - non cable)
+    { CIBLE_DAC2, 0, CIBLE_DAC2, 2 },    // 4  : 3PSp (I2C2, inactif)
+    { CIBLE_AUCUNE, 0, CIBLE_AUCUNE, 0 },// 5  : 3PSn (ex DAC3 0/2 - conflit 1PLp)
+    { CIBLE_AUCUNE, 0, CIBLE_AUCUNE, 0 },// 6  : 4PSp (ex DAC1 1/3 - conflit 1PSp)
+    { CIBLE_DAC5, 4, CIBLE_DAC5, 6 },    // 7  : 4PSn (I2C2, inactif)
+    { CIBLE_AUCUNE, 0, CIBLE_AUCUNE, 0 },// 8  : 5PSp (ex DAC1 5/4 - conflit 2PSp)
+    { CIBLE_DAC5, 0, CIBLE_DAC5, 2 },    // 9  : 5PSn (I2C2, inactif)
+    { CIBLE_AUCUNE, 0, CIBLE_AUCUNE, 0 },// 10 : 6PSp (ex DAC1 2/0 - non cable)
+    { CIBLE_DAC5, 1, CIBLE_DAC5, 3 },    // 11 : 6PSn (I2C2, inactif)
+    { CIBLE_DAC3, 0, CIBLE_AUCUNE, 0 },  // 12 : 1PLp (I2C1 0xC2, V=0, pas de courant reglable)
     { CIBLE_DAC4, 3, CIBLE_DAC4, 5 },  // 13 : 1PLn
     { CIBLE_DAC4, 2, CIBLE_AUCUNE, 0 },  // 14 : 2PLp (pas de courant reglable)
     { CIBLE_DAC4, 7, CIBLE_DAC4, 6 },  // 15 : 2PLn
     { CIBLE_DAC5, 5, CIBLE_AUCUNE, 0 },  // 16 : 3PLp (pas de courant reglable)
     { CIBLE_DAC4, 4, CIBLE_DAC5, 7 },  // 17 : 3PLn
 };
+
+/* ---------------------------------------------------------------------------
+ * Protection surintensite (OC) - revision du 13/10/2026.
+ * Constantes dans main.h (CARTE_LIM_CORRIGEE, OC_*), variables pres de
+ * ldoConfig[].
+ * ------------------------------------------------------------------------- */
+/**
+ * @brief  Indique si la LDO possede un circuit de limitation cable, c'est-a-dire
+ *         un DAC de seuil associe dans mappingDacLdo[].
+ * @param  idx  Index de la LDO (0-17).
+ * @retval 1 si la LDO est surveillee, 0 sinon.
+ * @par Exemple d'utilisation
+ * @code
+ * if (OC_EstSurveillee(IDX_LDO_2PSp) != 0U) { ... }
+ * @endcode
+ */
+static uint8_t OC_EstSurveillee(int idx)
+{
+    return (mappingDacLdo[idx].dac_courant != CIBLE_AUCUNE) ? 1U : 0U;
+}
+
+/**
+ * @brief  Verifie que le seuil programme est dans la plage specifiee du LM211
+ *         (VDAC >= 0,5 V). Une LDO non surveillee est toujours valide.
+ * @param  idx  Index de la LDO (0-17).
+ * @retval 1 si le seuil est valide, 0 sinon.
+ * @par Exemple d'utilisation
+ * @code
+ * if (OC_SeuilValide(IDX_LDO_2PSp) == 0U) { refuser_activation(); }
+ * @endcode
+ */
+static uint8_t OC_SeuilValide(int idx)
+{
+    if (OC_EstSurveillee(idx) == 0U)
+    {
+        return 1U;
+    }
+    return (CURRENT_LDO[idx] >= OC_CODE_SEUIL_MIN) ? 1U : 0U;
+}
+
+/**
+ * @brief  Lit la broche OC de la LDO et indique si elle signale une surintensite.
+ * @param  idx  Index de la LDO (0-17).
+ * @retval 1 si surintensite, 0 sinon.
+ * @par Exemple d'utilisation
+ * @code
+ * uint8_t defaut = OC_LireDefaut(IDX_LDO_2PSp);
+ * @endcode
+ */
+static uint8_t OC_LireDefaut(int idx)
+{
+    return (HAL_GPIO_ReadPin(ldoConfig[idx].oc_port, ldoConfig[idx].oc_pin) == OC_NIVEAU_DEFAUT) ? 1U : 0U;
+}
+
+/**
+ * @brief  Coupe l'EN de la LDO et verrouille le defaut. N'utilise aucune API
+ *         FreeRTOS : appelable depuis l'interruption EXTI ou depuis la boucle.
+ * @param  idx  Index de la LDO (0-17).
+ * @retval Aucun.
+ * @par Exemple d'utilisation
+ * @code
+ * OC_Verrouiller(IDX_LDO_2PSp);
+ * @endcode
+ */
+static void OC_Verrouiller(int idx)
+{
+    HAL_GPIO_WritePin(ldoConfig[idx].en_port, ldoConfig[idx].en_pin, GPIO_PIN_RESET);
+    if (oc_verrou[idx] == 0U)
+    {
+        oc_verrou[idx] = 1U;
+        oc_nb_declenchements[idx]++;
+        oc_tick_declenchement[idx] = HAL_GetTick();
+        oc_a_signaler[idx] = 1U;
+    }
+    EN_LDO[idx] = 0;
+    en_actif[idx] = 0U;
+}
+
+/**
+ * @brief  Indique si la surveillance est armee : EN actif depuis au moins
+ *         OC_BLANKING_MS (fin du soft-start et de l'appel de courant).
+ * @param  idx  Index de la LDO (0-17).
+ * @retval 1 si armee, 0 sinon.
+ * @par Exemple d'utilisation
+ * @code
+ * if (OC_EstArme(IDX_LDO_2PSp) != 0U) { ... }
+ * @endcode
+ */
+static uint8_t OC_EstArme(int idx)
+{
+    return ((en_actif[idx] != 0U) &&
+            ((HAL_GetTick() - en_tick_activation[idx]) >= OC_BLANKING_MS)) ? 1U : 0U;
+}
+
+/**
+ * @brief  Traitement d'un front de la broche OC en interruption.
+ * @param  idx  Index de la LDO dont la broche OC a change.
+ * @retval Aucun.
+ * @par Exemple d'utilisation
+ * @code
+ * OC_SurFrontIT(IDX_LDO_2PSp);   // depuis HAL_GPIO_EXTI_Callback()
+ * @endcode
+ */
+static void OC_SurFrontIT(int idx)
+{
+#if OC_COUPURE_AUTO
+    if ((OC_EstSurveillee(idx) != 0U) && (OC_EstArme(idx) != 0U) && (OC_LireDefaut(idx) != 0U))
+    {
+        OC_Verrouiller(idx);
+    }
+#else
+    (void)idx;
+#endif
+}
+
+/**
+ * @brief  Met a jour EN, BLD, OC et PG d'une LDO. Remplace le corps de la
+ *         boucle for de StartLwipTask(). OC est lu AVANT l'ecriture de EN.
+ * @param  i  Index de la LDO (0-17).
+ * @retval Aucun.
+ * @par Exemple d'utilisation
+ * @code
+ * for (int i = 0; i < NB_LDO; i++) { LDO_MettreAJour(i); }
+ * @endcode
+ */
+static void LDO_MettreAJour(int i)
+{
+    const LDO_Config_t *cfg = &ldoConfig[i];
+    LDO_TypeDef *l = cfg->ldo;
+    uint8_t defaut = OC_LireDefaut(i);
+    uint8_t activer;
+    uint32_t primask;
+
+#if OC_COUPURE_AUTO
+    /* Couvre un front manque et un defaut deja present a la fin du masquage. */
+    if ((OC_EstSurveillee(i) != 0U) && (defaut != 0U) && (OC_EstArme(i) != 0U))
+    {
+        OC_Verrouiller(i);
+    }
+#endif
+
+    /* Section critique courte : l'IT EXTI ne doit pas verrouiller entre la
+     * decision et l'ecriture de EN, sinon EN serait remis a 1 pendant un tour. */
+    primask = __get_PRIMASK();
+    __disable_irq();
+    activer = ((EN_LDO[i] == 1) && (oc_verrou[i] == 0U) && (OC_SeuilValide(i) != 0U)) ? 1U : 0U;
+    if ((activer != 0U) && (en_actif[i] == 0U))
+    {
+        en_tick_activation[i] = HAL_GetTick();
+    }
+    en_actif[i] = activer;
+    HAL_GPIO_WritePin(cfg->en_port, cfg->en_pin, (activer != 0U) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+    __set_PRIMASK(primask);
+
+    l->EN  = (_Bool)(HAL_GPIO_ReadPin(cfg->en_port, cfg->en_pin) == GPIO_PIN_SET);
+    HAL_GPIO_WritePin(cfg->bld_port, cfg->bld_pin, (BL_LDO[i] == 1) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+    l->BLD = BL_LDO[i];
+    l->OC  = (_Bool)defaut;            /* 1 = surintensite, quelle que soit la polarite */
+    l->PG  = HAL_GPIO_ReadPin(cfg->pg_port, cfg->pg_pin);
+}
+
+/**
+ * @brief  Emet sur USART1 une ligne par defaut nouvellement verrouille.
+ *         Appelee depuis la boucle de StartLwipTask(), jamais en interruption.
+ * @retval Aucun. Ligne emise : "OC_TRIP:2PSp:NB=1:T_MS=123456:SEUIL=4006".
+ * @par Exemple d'utilisation
+ * @code
+ * OC_SignalerEvenements();
+ * @endcode
+ */
+static void OC_SignalerEvenements(void)
+{
+    for (int i = 0; i < NB_LDO; i++)
+    {
+        if (oc_a_signaler[i] != 0U)
+        {
+            char ligne[96];
+            oc_a_signaler[i] = 0U;
+            snprintf(ligne, sizeof(ligne), "OC_TRIP:%s:NB=%lu:T_MS=%lu:SEUIL=%u\r\n",
+                     ldoConfig[i].name,
+                     (unsigned long)oc_nb_declenchements[i],
+                     (unsigned long)oc_tick_declenchement[i],
+                     (unsigned)CURRENT_LDO[i]);
+            UART1_EnvoyerTexte(ligne);
+        }
+    }
+}
+
+/**
+ * @brief  Commande "RST_OC_LDO_<nom>" : deverrouille le defaut si la broche OC
+ *         est revenue au repos. L'EN reste a 0 : l'operateur doit renvoyer
+ *         SET_EN_LDO_<nom>.
+ * @param  idx  Index de la LDO (0-17).
+ * @param  nom  Nom de la LDO, pour la reponse.
+ * @retval Aucun. Reponse "OC_RST:<nom>:OK" ou "OC_RST:<nom>:REFUS_OC_ACTIF".
+ * @par Exemple d'utilisation
+ * @code
+ * Trame UDP recue : "RST_OC_LDO_2PSp"
+ * @endcode
+ */
+static void OC_Rearmer(int idx, const char *nom)
+{
+    if (OC_LireDefaut(idx) != 0U)
+    {
+        sprintf(response, "OC_RST:%s:REFUS_OC_ACTIF\n", nom);
+        return;
+    }
+    oc_verrou[idx] = 0U;
+    sprintf(response, "OC_RST:%s:OK\n", nom);
+}
+
+/**
+ * @brief  Commande "GET_OC_LDO_<nom>" : etat complet de la protection.
+ * @param  idx  Index de la LDO (0-17).
+ * @param  nom  Nom de la LDO, pour la reponse.
+ * @retval Aucun. Reponse
+ *         "OC_LDO:2PSp:NIV=0:VERROU=1:NB=1:T_MS=123456:SEUIL=4006:SEUIL_VALIDE=1".
+ * @par Exemple d'utilisation
+ * @code
+ * Trame UDP recue : "GET_OC_LDO_2PSp"
+ * @endcode
+ */
+static void OC_Etat(int idx, const char *nom)
+{
+    sprintf(response, "OC_LDO:%s:NIV=%u:VERROU=%u:NB=%lu:T_MS=%lu:SEUIL=%u:SEUIL_VALIDE=%u\n",
+            nom,
+            (unsigned)OC_LireDefaut(idx),
+            (unsigned)oc_verrou[idx],
+            (unsigned long)oc_nb_declenchements[idx],
+            (unsigned long)oc_tick_declenchement[idx],
+            (unsigned)CURRENT_LDO[idx],
+            (unsigned)OC_SeuilValide(idx));
+}
+
 
 /**
   * @brief  Retourne le pointeur vers le tableau DACx_DEF correspondant a
@@ -2243,14 +2946,60 @@ static uint8_t *ResoudreTableauDac(CibleDac_t cible)
 static void EcrireValeurDac(CibleDac_t cible, uint8_t canal, uint16_t valeur)
 {
     uint8_t *tableau = ResoudreTableauDac(cible);
+    osMutexId m;
+
+    if ((tableau == NULL) || (canal > 7U) || (valeur > 0x0FFFU))
+    {
+        return;
+    }
+    // Mise a jour sous le mutex du bus : la boucle de StartLwipTask() emet ce
+    // tableau sous le meme mutex, elle ne peut donc jamais envoyer une valeur
+    // a moitie ecrite (ex : 0x100 -> 0x0FF qui donnait 0x000 transitoire).
+    m = ((cible == CIBLE_DAC1) || (cible == CIBLE_DAC3)) ? i2c1_mutex_id : i2c2_mutex_id;
+    osMutexWait(m, osWaitForever);
+    tableau[canal * 3U + 1U] = (uint8_t)((valeur >> 8) & 0x0FU);
+    tableau[canal * 3U + 2U] = (uint8_t)(valeur & 0xFFU);
+    osMutexRelease(m);
+}
+
+/**
+  * @brief  Repercute une ecriture directe sur un canal DAC (balayage a
+  *         distance BALAYER_DAC, capture bouton USER) dans l'etat logiciel
+  *         de la ou des LDO associees a ce canal par mappingDacLdo[]
+  *         (VAL_LDO/CURRENT_LDO et struct LDO). Sans cela, apres un
+  *         balayage sur I2C1 0xC0 ou 0xC2, la sortie restait a la valeur
+  *         finale du balayage alors que GET_STATUS_LDO_<nom> (page valeur
+  *         LDO, page dac/<nom>) affichait encore l'ancienne valeur.
+  * @param  tableau  Tableau DACx_DEF ecrit (DAC1_DEF ... DAC5_DEF).
+  * @param  canal    Canal ecrit (0-7).
+  * @param  valeur   Code 12 bits ecrit (0-4095).
+  * @retval Aucun (void). Ne fait rien si aucune LDO n'est associee.
+  * @par    Exemple d'utilisation
+  *         // Apres un balayage de VOUT3 du DAC I2C1 0xC0 jusqu'a 4095 :
+  *         MajEtatLdoDepuisDac(DAC1_DEF, 3, 4095);  // -> VAL_LDO[0] (1PSp) = 4095
+  */
+static void MajEtatLdoDepuisDac(const uint8_t *tableau, uint8_t canal, uint16_t valeur)
+{
     if (tableau == NULL || canal > 7)
     {
         return;
     }
-    uint8_t offset_msb = (uint8_t)(canal * 3 + 1);
-    uint8_t offset_lsb = (uint8_t)(canal * 3 + 2);
-    tableau[offset_msb] = (uint8_t)((valeur & 0x0F00) >> 8);
-    tableau[offset_lsb] = (uint8_t)(valeur & 0x00FF);
+    for (int i = 0; i < NB_LDO; i++)
+    {
+        const MappingDacLdo_t *m = &mappingDacLdo[i];
+        if (m->dac_tension != CIBLE_AUCUNE && ResoudreTableauDac(m->dac_tension) == tableau
+            && m->canal_tension == canal)
+        {
+            VAL_LDO[i] = valeur;
+            ldoConfig[i].ldo->VAL = valeur;
+        }
+        if (m->dac_courant != CIBLE_AUCUNE && ResoudreTableauDac(m->dac_courant) == tableau
+            && m->canal_courant == canal)
+        {
+            CURRENT_LDO[i] = valeur;
+            ldoConfig[i].ldo->CURRENT = valeur;
+        }
+    }
 }
 
 /**
@@ -2269,7 +3018,21 @@ static void EcrireValeurDac(CibleDac_t cible, uint8_t canal, uint16_t valeur)
   */
 static void h_SET_VAL_LDO_GENERIQUE(int idx)
 {
-    uint16_t valeur = (uint16_t)atoi(last_message);
+    char *fin = NULL;
+    long v;
+
+    if (last_message == NULL)
+    {
+        sprintf(response, "VAL:%s:PARAMETRE_ABSENT\n", ldoConfig[idx].name);
+        return;
+    }
+    v = strtol(last_message, &fin, 10);
+    if ((fin == last_message) || (v < 0L) || (v > 4095L))
+    {
+        sprintf(response, "VAL:%s:HORS_PLAGE_0_4095\n", ldoConfig[idx].name);
+        return;
+    }
+    uint16_t valeur = (uint16_t)v;
     VAL_LDO[idx] = valeur;
     ldoConfig[idx].ldo->VAL = valeur;
 
@@ -2298,10 +3061,53 @@ static void h_SET_CURRENT_LDO_GENERIQUE(int idx)
         return;
     }
 
-    uint16_t valeur = (uint16_t)atoi(last_message);
+    char *fin = NULL;
+    long v;
+
+    if (last_message == NULL)
+    {
+        sprintf(response, "CURRENT:%s:PARAMETRE_ABSENT\n", ldoConfig[idx].name);
+        return;
+    }
+    v = strtol(last_message, &fin, 10);
+    if ((fin == last_message) || (v < (long)OC_CODE_SEUIL_MIN) || (v > (long)OC_CODE_SEUIL_MAX))
+    {
+        sprintf(response, "CURRENT:%s:HORS_PLAGE_%u_%u\n", ldoConfig[idx].name,
+                (unsigned)OC_CODE_SEUIL_MIN, (unsigned)OC_CODE_SEUIL_MAX);
+        return;
+    }
+    uint16_t valeur = (uint16_t)v;
     CURRENT_LDO[idx] = valeur;
     ldoConfig[idx].ldo->CURRENT = valeur;
     EcrireValeurDac(m->dac_courant, m->canal_courant, valeur);
+}
+
+/**
+  * @brief  Programme le seuil de courant par defaut (OC_CODE_SEUIL_DEFAUT,
+  *         0,50 A) sur toutes les LDO equipees du circuit de limitation, au
+  *         demarrage. Sans cela, le seuil vaudrait 0 V (MCP4725_VAL_DEF),
+  *         hors de la plage d'entree du LM211, et l'activation serait refusee.
+  * @param  Aucun.
+  * @retval Aucun. Met a jour CURRENT_LDO[], ldo->CURRENT et DACx_DEF ; la
+  *         boucle de StartLwipTask() l'envoie au DAC au tour suivant.
+  * @par Exemple d'utilisation
+  * @code
+  * CreerMutexI2C();
+  * OC_InitialiserSeuilsDefaut();   // apres les mutex (EcrireValeurDac les utilise)
+  * @endcode
+  */
+static void OC_InitialiserSeuilsDefaut(void)
+{
+    for (int i = 0; i < NB_LDO; i++)
+    {
+        const MappingDacLdo_t *m = &mappingDacLdo[i];
+        if (m->dac_courant != CIBLE_AUCUNE)
+        {
+            CURRENT_LDO[i] = OC_CODE_SEUIL_DEFAUT;
+            ldoConfig[i].ldo->CURRENT = OC_CODE_SEUIL_DEFAUT;
+            EcrireValeurDac(m->dac_courant, m->canal_courant, OC_CODE_SEUIL_DEFAUT);
+        }
+    }
 }
 
 /**
@@ -2501,21 +3307,21 @@ static void h_SCAN_I2C2(void)
   *         - valeur_max : 0-4095
   *         - pas : increment entre paliers
   *         - delai_ms : pause entre paliers, en millisecondes
-  *         - tension_ref : VDD reel du DAC, en volts (ex : 3.3)
+  *         - tension_ref : VDD reel du DAC, en volts (ex : 5.0)
   * @retval Aucun (void). Remplit response avec "BALAYER_DAC:TERMINE\n"
   *         une fois le balayage complet termine, ou
   *         "BALAYER_DAC:ERREUR_PARAMETRES\n" si la trame est mal formee.
   * @par    Exemple d'utilisation
   *         Trame UDP recue :
-  *         "BALAYER_DAC:1:0xC4:0:4095:50:100:3.3"
+  *         "BALAYER_DAC:1:0xC4:0:4095:50:100:5.0"
   *         -> balaie VOUT0 du DAC a 0xC4 sur hi2c1, de 0 a 4095 par pas
-  *            de 50, 100ms entre chaque palier, VDD=3.3V.
+  *            de 50, 100ms entre chaque palier, VDD=5V.
   */
 static void h_BALAYER_DAC(void)
 {
     int bus = 0, registre = 0, valeur_max = 0, pas = 0, delai_ms = 0;
     unsigned int adresse_hal = 0;
-    char tension_str[16] = "3.3";
+    char tension_str[16] = "5.0";
 
     // %f est volontairement evite dans sscanf() : sur newlib-nano (STM32),
     // le parsing de flottants par scanf() necessite le flag linker
@@ -2538,6 +3344,189 @@ static void h_BALAYER_DAC(void)
                       (uint16_t)valeur_max, (uint16_t)pas, (uint32_t)delai_ms, tension_ref);
 
     sprintf(response, "BALAYER_DAC:TERMINE\n");
+}
+
+/**
+  * @brief  Handler de la commande reseau "GET_DAC_CONFIG" - lit et
+  *         renvoie les 3 registres de configuration (VREF/Power-Down/
+  *         Gain) d'une puce DAC MCP47FEB28, adressable par bus et
+  *         adresse I2C (paametrable, pas fige sur une puce donnee).
+  * @param  Aucun parametre C. Lit last_message, au format attendu
+  *         "<bus>:<adresse_hal_hex>" - bus : 1 pour hi2c1, 2 pour hi2c2.
+  * @retval Aucun (void). Remplit response avec
+  *         "DAC_CONFIG:<bus>:<adresse>:VREF=0x????:PD=0x????:GAIN=0x????\n"
+  *         ou "DAC_CONFIG:ERREUR_PARAMETRES\n" / "...:ERREUR_I2C\n".
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "GET_DAC_CONFIG:1:0xC4"
+  *         -> lit VREF/PD/GAIN du DAC a 0xC4 (0x62<<1) sur hi2c1.
+  */
+static void h_GET_DAC_CONFIG(void)
+{
+    int bus = 0;
+    unsigned int adresse_hal = 0;
+
+    int n = sscanf(last_message, "%d:0x%x", &bus, &adresse_hal);
+    if (n != 2)
+    {
+        sprintf(response, "DAC_CONFIG:ERREUR_PARAMETRES\n");
+        return;
+    }
+
+    I2C_HandleTypeDef *hi2c = (bus == 2) ? &hi2c2 : &hi2c1;
+    uint16_t vref = 0, pd = 0, gain = 0;
+
+    HAL_StatusTypeDef st_v = LireRegistreConfigDAC(hi2c, (uint8_t)adresse_hal, 0x08, &vref);
+    HAL_StatusTypeDef st_p = LireRegistreConfigDAC(hi2c, (uint8_t)adresse_hal, 0x09, &pd);
+    HAL_StatusTypeDef st_g = LireRegistreConfigDAC(hi2c, (uint8_t)adresse_hal, 0x0A, &gain);
+
+    if (st_v != HAL_OK || st_p != HAL_OK || st_g != HAL_OK)
+    {
+        sprintf(response, "DAC_CONFIG:%d:0x%02X:ERREUR_I2C\n", bus, adresse_hal);
+        return;
+    }
+
+    sprintf(response, "DAC_CONFIG:%d:0x%02X:VREF=0x%04X:PD=0x%04X:GAIN=0x%04X\n",
+            bus, adresse_hal, vref, pd, gain);
+}
+
+/**
+  * @brief  Handler de la commande reseau "SET_DAC_VREF" - ecrit le
+  *         registre VREF (0x08) d'une puce DAC : source de reference
+  *         des 8 canaux EN UNE SEULE FOIS (2 bits/canal, voir Registre
+  *         4-2 du datasheet - 00=VDD, 01=bande interne 1.22V, 10=VREF
+  *         pin non bufferisee, 11=VREF pin bufferisee).
+  * @param  Aucun parametre C. Lit last_message, au format attendu
+  *         "<bus>:<adresse_hal_hex>:<valeur_hex16>". Ex : 0x0000 pour
+  *         forcer VDD sur les 8 canaux.
+  * @retval Aucun (void). Remplit response avec
+  *         "SET_DAC_VREF:<bus>:<adresse>:0x????:OK\n" ou
+  *         "...:ERREUR_I2C\n" / "SET_DAC_VREF:ERREUR_PARAMETRES\n".
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "SET_DAC_VREF:1:0xC4:0x0000"
+  *         -> force VREF=VDD sur les 8 canaux du DAC a 0xC4 sur hi2c1.
+  */
+static void h_SET_DAC_VREF(void)
+{
+    int bus = 0;
+    unsigned int adresse_hal = 0, valeur = 0;
+
+    int n = sscanf(last_message, "%d:0x%x:0x%x", &bus, &adresse_hal, &valeur);
+    if (n != 3)
+    {
+        sprintf(response, "SET_DAC_VREF:ERREUR_PARAMETRES\n");
+        return;
+    }
+
+    I2C_HandleTypeDef *hi2c = (bus == 2) ? &hi2c2 : &hi2c1;
+    HAL_StatusTypeDef st = EcrireRegistreConfigDAC(hi2c, (uint8_t)adresse_hal, 0x08, (uint16_t)valeur);
+
+    sprintf(response, "SET_DAC_VREF:%d:0x%02X:0x%04X:%s\n",
+            bus, adresse_hal, valeur, (st == HAL_OK) ? "OK" : "ERREUR_I2C");
+}
+
+/**
+  * @brief  Handler de la commande reseau "SET_DAC_PD" - ecrit le
+  *         registre Power-Down (0x09) d'une puce DAC : etat des 8
+  *         canaux EN UNE SEULE FOIS (2 bits/canal, voir Registre 4-3 -
+  *         00=normal, 01/10/11=power-down avec differentes resistances
+  *         de tirage). 0x0000 = fonctionnement normal sur les 8 canaux.
+  * @param  Aucun parametre C. Lit last_message, au format attendu
+  *         "<bus>:<adresse_hal_hex>:<valeur_hex16>".
+  * @retval Aucun (void). Remplit response avec
+  *         "SET_DAC_PD:<bus>:<adresse>:0x????:OK\n" ou
+  *         "...:ERREUR_I2C\n" / "SET_DAC_PD:ERREUR_PARAMETRES\n".
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "SET_DAC_PD:1:0xC4:0x0000"
+  *         -> force fonctionnement normal sur les 8 canaux (pas de power-down).
+  */
+static void h_SET_DAC_PD(void)
+{
+    int bus = 0;
+    unsigned int adresse_hal = 0, valeur = 0;
+
+    int n = sscanf(last_message, "%d:0x%x:0x%x", &bus, &adresse_hal, &valeur);
+    if (n != 3)
+    {
+        sprintf(response, "SET_DAC_PD:ERREUR_PARAMETRES\n");
+        return;
+    }
+
+    I2C_HandleTypeDef *hi2c = (bus == 2) ? &hi2c2 : &hi2c1;
+    HAL_StatusTypeDef st = EcrireRegistreConfigDAC(hi2c, (uint8_t)adresse_hal, 0x09, (uint16_t)valeur);
+
+    sprintf(response, "SET_DAC_PD:%d:0x%02X:0x%04X:%s\n",
+            bus, adresse_hal, valeur, (st == HAL_OK) ? "OK" : "ERREUR_I2C");
+}
+
+/**
+  * @brief  Handler de la commande reseau "SET_DAC_GAIN" - ecrit le
+  *         registre Gain (0x0A) d'une puce DAC : gain des 8 canaux EN
+  *         UNE SEULE FOIS (1 bit/canal, G7..G0 dans l'octet haut - voir
+  *         Registre 4-4 - 0=1x, 1=2x). L'octet bas (bits status POR/
+  *         EEWA) est toujours envoye a 0x00, sans effet indesirable :
+  *         POR est "clearable" (0 le laisse tel quel a la prochaine
+  *         lecture), EEWA est en lecture seule.
+  * @param  Aucun parametre C. Lit last_message, au format attendu
+  *         "<bus>:<adresse_hal_hex>:<valeur_hex8>" - valeur_hex8 = G7..G0
+  *         sur 8 bits (ex : 0x00 = gain 1x sur les 8 canaux).
+  * @retval Aucun (void). Remplit response avec
+  *         "SET_DAC_GAIN:<bus>:<adresse>:0x??:OK\n" ou
+  *         "...:ERREUR_I2C\n" / "SET_DAC_GAIN:ERREUR_PARAMETRES\n".
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "SET_DAC_GAIN:1:0xC4:0x00"
+  *         -> force gain 1x sur les 8 canaux du DAC a 0xC4 sur hi2c1.
+  */
+static void h_SET_DAC_GAIN(void)
+{
+    int bus = 0;
+    unsigned int adresse_hal = 0, valeur = 0;
+
+    int n = sscanf(last_message, "%d:0x%x:0x%x", &bus, &adresse_hal, &valeur);
+    if (n != 3)
+    {
+        sprintf(response, "SET_DAC_GAIN:ERREUR_PARAMETRES\n");
+        return;
+    }
+
+    I2C_HandleTypeDef *hi2c = (bus == 2) ? &hi2c2 : &hi2c1;
+    uint16_t mot = (uint16_t)((valeur & 0xFF) << 8);
+    HAL_StatusTypeDef st = EcrireRegistreConfigDAC(hi2c, (uint8_t)adresse_hal, 0x0A, mot);
+
+    sprintf(response, "SET_DAC_GAIN:%d:0x%02X:0x%02X:%s\n",
+            bus, adresse_hal, (unsigned int)(valeur & 0xFF), (st == HAL_OK) ? "OK" : "ERREUR_I2C");
+}
+
+/**
+  * @brief  Handler de la commande reseau "SET_I2C2_ACTIF" - active ou
+  *         desactive a chaud l'emission periodique sur I2C2 (boucle
+  *         principale, DAC2/DAC4/DAC5). A desactiver tant que le
+  *         probleme materiel sur ce bus n'est pas resolu : sinon,
+  *         chaque tentative ratee bloque le thread jusqu'a
+  *         SPI_TIMEOUT (100 ms), x3 par tour de boucle, ce qui retarde
+  *         aussi les mises a jour I2C1 (meme thread, sequentiel).
+  * @param  Aucun parametre C. Lit last_message : "0" ou "1".
+  * @retval Aucun (void). Remplit response avec
+  *         "SET_I2C2_ACTIF:0\n" / "SET_I2C2_ACTIF:1\n" ou
+  *         "SET_I2C2_ACTIF:ERREUR_PARAMETRES\n".
+  * @par    Exemple d'utilisation
+  *         Trame UDP recue : "SET_I2C2_ACTIF:0" -> coupe I2C2.
+  */
+static void h_SET_I2C2_ACTIF(void)
+{
+    if (strcmp(last_message, "0") == 0)
+    {
+        i2c2_actif = 0;
+    }
+    else if (strcmp(last_message, "1") == 0)
+    {
+        i2c2_actif = 1;
+    }
+    else
+    {
+        sprintf(response, "SET_I2C2_ACTIF:ERREUR_PARAMETRES\n");
+        return;
+    }
+    sprintf(response, "SET_I2C2_ACTIF:%d\n", i2c2_actif);
 }
 
 // ---------------------------------------------------------------------------
@@ -2618,7 +3607,11 @@ static const uint8_t adg728_adresses_courant[2] = { ADG728_ADDR_0, ADG728_ADDR_1
   */
 static HAL_StatusTypeDef EcrireADG728(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t masque_canaux)
 {
-    return HAL_I2C_Master_Transmit(hi2c, adresse_hal, &masque_canaux, 1, 100);
+    osMutexId m = ResoudreMutexI2C(hi2c);
+    osMutexWait(m, osWaitForever);
+    HAL_StatusTypeDef st = HAL_I2C_Master_Transmit(hi2c, adresse_hal, &masque_canaux, 1, 100);
+    osMutexRelease(m);
+    return st;
 }
 
 /**
@@ -2939,7 +3932,9 @@ static float LireCourantADC(ADC_HandleTypeDef *hadc, uint32_t canal, float ratio
     {
         return -1.0f;
     }
-    return vmesuree * 100.0f;  // mA : shunt 100mOhm x gain x100 -> facteur x100 direct V->mA
+    // mA : I = VMES / k, k = OC_K_V_PAR_A (main.h). A corriger si un pont
+    // diviseur est place avant l'ADC sur cette voie (voir section 13 du rapport).
+    return vmesuree * 1000.0f / OC_K_V_PAR_A;
 }
 
 /**
@@ -3211,6 +4206,7 @@ static Command_t commandTable[] = {
 	{ "GET_ADC_BRUT", h_GET_ADC_BRUT },
 	{ "GET_CURRENT_1", h_GET_CURRENT_1 },
 	{ "GET_CURRENT_2", h_GET_CURRENT_2 },
+	{ "GET_DAC_CONFIG", h_GET_DAC_CONFIG },
 	{ "GET_MUX_CANAL_COURANT", h_GET_MUX_CANAL_COURANT },
 	{ "GET_MUX_CANAL_TENSION", h_GET_MUX_CANAL_TENSION },
 	{ "RST_BL_LDO_ALL", h_RST_BL_LDO_ALL },
@@ -3225,6 +4221,9 @@ static Command_t commandTable[] = {
 	{ "SCAN_I2C2", h_SCAN_I2C2 },
 	{ "SET_BL_LDO_ALL", h_SET_BL_LDO_ALL },
 	{ "SET_BL_TAB", h_SET_BL_TAB },
+	{ "SET_DAC_GAIN", h_SET_DAC_GAIN },
+	{ "SET_DAC_PD", h_SET_DAC_PD },
+	{ "SET_DAC_VREF", h_SET_DAC_VREF },
 	{ "SET_DELTA_AVDD_DVDD", h_SET_DELTA_AVDD_DVDD },
 	{ "SET_DELTA_AVDD_VREF", h_SET_DELTA_AVDD_VREF },
 	{ "SET_DELTA_DVDD_AVDD", h_SET_DELTA_DVDD_AVDD },
@@ -3233,6 +4232,7 @@ static Command_t commandTable[] = {
 	{ "SET_DELTA_VREF_NRST", h_SET_DELTA_VREF_NRST },
 	{ "SET_EN_LDO_ALL", h_SET_EN_LDO_ALL },
 	{ "SET_EN_TAB", h_SET_EN_TAB },
+	{ "SET_I2C2_ACTIF", h_SET_I2C2_ACTIF },
 	{ "SET_MUX_CANAL_COURANT", h_SET_MUX_CANAL_COURANT },
 	{ "SET_MUX_CANAL_TENSION", h_SET_MUX_CANAL_TENSION },
 	{ "WHO", h_WHO },
@@ -3356,7 +4356,26 @@ void tc_request(void)
 	// 1) Commandes à suffixe variable sur les 18 LDO (EN/BL/STATUS)
 	if (strncmp(token, "SET_EN_LDO_", 11) == 0 && (idx = findLdoIndex(token + 11)) != -1)
 	{
-		EN_LDO[idx] = 1;
+		if (oc_verrou[idx] != 0U)
+		{
+			sprintf(response, "EN:%s:REFUS_OC_VERROUILLE\n", token + 11);
+		}
+		else
+		{
+			EN_LDO[idx] = 1;
+			if (OC_SeuilValide(idx) == 0U)
+			{
+				sprintf(response, "EN:%s:ATTENTE_SEUIL_OC\n", token + 11);
+			}
+		}
+	}
+	else if (strncmp(token, "RST_OC_LDO_", 11) == 0 && (idx = findLdoIndex(token + 11)) != -1)
+	{
+		OC_Rearmer(idx, token + 11);
+	}
+	else if (strncmp(token, "GET_OC_LDO_", 11) == 0 && (idx = findLdoIndex(token + 11)) != -1)
+	{
+		OC_Etat(idx, token + 11);
 	}
 	else if (strncmp(token, "RST_EN_LDO_", 11) == 0 && (idx = findLdoIndex(token + 11)) != -1)
 	{
@@ -3446,6 +4465,45 @@ int map(uint16_t x, uint16_t in_min, uint16_t in_max, uint16_t out_min, uint16_t
 }
 
 /**
+ * @brief  Reconfigure PE4 (OC_LDO2_PSp) en entree sous interruption, sur le
+ *         front qui correspond a l'apparition d'une surintensite. A appeler
+ *         une fois, apres MX_GPIO_Init(), avant la boucle de StartLwipTask().
+ *         Aucune API FreeRTOS n'est appelee dans l'IT : la priorite peut
+ *         etre plus haute que configMAX_SYSCALL_INTERRUPT_PRIORITY.
+ * @retval Aucun.
+ * @par Exemple d'utilisation
+ * @code
+ * InitialiserConfigDacsI2C1();
+ * MX_OC_EXTI_Init();
+ * @endcode
+ */
+static void MX_OC_EXTI_Init(void)
+{
+    GPIO_InitTypeDef g = {0};
+
+    g.Pin  = OC_LDO2_PSp_Pin;
+    g.Mode = (OC_NIVEAU_DEFAUT == GPIO_PIN_SET) ? GPIO_MODE_IT_RISING : GPIO_MODE_IT_FALLING;
+    g.Pull = GPIO_NOPULL;                  /* pull-up externe R109 (5,1 kOhm vers 3,3 V) */
+    HAL_GPIO_Init(OC_LDO2_PSp_GPIO_Port, &g);
+
+    HAL_NVIC_SetPriority(EXTI4_IRQn, 2, 0);
+    HAL_NVIC_EnableIRQ(EXTI4_IRQn);
+}
+
+/**
+ * @brief  Gestionnaire d'interruption EXTI ligne 4 (PE4, OC_LDO2_PSp).
+ * @retval Aucun.
+ * @par Exemple d'utilisation
+ * @code
+ * // appele par le materiel, ne pas appeler directement
+ * @endcode
+ */
+void EXTI4_IRQHandler(void)
+{
+    HAL_GPIO_EXTI_IRQHandler(OC_LDO2_PSp_Pin);
+}
+
+/**
   * @brief  Gestionnaire d'interruption EXTI ligne 15:10 (couvre PC13,
   *         bouton USER B1). Delegue immediatement a HAL_GPIO_EXTI_IRQHandler(),
   *         qui identifie la broche et appelle HAL_GPIO_EXTI_Callback().
@@ -3504,6 +4562,11 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
             mux_reset_appuye = 1;
         }
     }
+    else if (GPIO_Pin == OC_LDO2_PSp_Pin)
+    {
+        // Surintensite 2PSp : coupure de l'EN dans l'interruption (quelques us)
+        OC_SurFrontIT(IDX_LDO_2PSp);
+    }
 }
 /* USER CODE END 4 */
 
@@ -3520,35 +4583,71 @@ void StartLwipTask(void const * argument)
   MX_LWIP_Init();
   /* USER CODE BEGIN 5 */
   osDelay(1000);
+  CreerMutexI2C();      // AVANT udpServer_init() : plus rien n'emet sur hi2c1/hi2c2 sans passer par un mutex a partir d'ici
+  CreerMutexUART();     // idem pour USART1 : emissions de texte serialisees (rapports + battement de coeur)
+  OC_InitialiserSeuilsDefaut(); // seuil de courant 0,50 A sur 1PSp/2PSp avant toute activation (EN reste a 0)
+  InitialiserConfigDacsI2C1();  // VREF=VDD, PD=normal, Gain=1x sur 0xC0/0xC2/0xC4 (sinon config EEPROM de chaque puce)
+  MX_OC_EXTI_Init();            // PE4 (OC_LDO2_PSp) en interruption : coupure immediate de l'EN sur surintensite
   udpServer_init();
   sortCommandTable();   // tri unique de commandTable[] avant le premier message reçu
 
   for (;;)
   {
+    // EN / BLD / OC / PG des 18 LDO. OC est lu AVANT l'ecriture de EN, le
+    // defaut est verrouille (voir LDO_MettreAJour() et OC_Verrouiller()).
     for (int i = 0; i < NB_LDO; i++)
     {
-        const LDO_Config_t *cfg = &ldoConfig[i];
-        LDO_TypeDef *l = cfg->ldo;
-
-        int enableCondition = (i == 0) ? (EN_LDO[i] == 1 && LDO_1_PS_p.OC == 0)
-                                        : (EN_LDO[i] == 1);
-        HAL_GPIO_WritePin(cfg->en_port, cfg->en_pin,
-                           enableCondition ? GPIO_PIN_SET : GPIO_PIN_RESET);
-        l->EN = EN_LDO[i];
-
-        HAL_GPIO_WritePin(cfg->bld_port, cfg->bld_pin,
-                           (BL_LDO[i] == 1) ? GPIO_PIN_SET : GPIO_PIN_RESET);
-        l->BLD = BL_LDO[i];
-
-        l->OC = HAL_GPIO_ReadPin(cfg->oc_port, cfg->oc_pin);
-        l->PG = HAL_GPIO_ReadPin(cfg->pg_port, cfg->pg_pin);
+        LDO_MettreAJour(i);
     }
+    // Une ligne "OC_TRIP:<nom>:..." sur USART1 par defaut nouvellement verrouille.
+    OC_SignalerEvenements();
 
-    HAL_I2C_Master_Transmit(&hi2c1, MCP4725_I2CADDR_DEFAULT, DAC1_DEF, SPI_SIZE, SPI_TIMEOUT);
-    HAL_I2C_Master_Transmit(&hi2c2, MCP4725_I2CADDR_DEFAULT, DAC2_DEF, SPI_SIZE, SPI_TIMEOUT);
-    HAL_I2C_Master_Transmit(&hi2c1, MPC4725_I2CADDR_A0, DAC3_DEF, SPI_SIZE, SPI_TIMEOUT);
-    HAL_I2C_Master_Transmit(&hi2c2, MPC4725_I2CADDR_A1, DAC4_DEF, SPI_SIZE, SPI_TIMEOUT);
-    HAL_I2C_Master_Transmit(&hi2c2, MPC4725_I2CADDR_A0, DAC5_DEF, SPI_SIZE, SPI_TIMEOUT);
+    // Chaque envoi est protege individuellement (verrou pris/relache par
+    // appel) : une transaction lente sur un bus ne retarde jamais l'autre
+    // bus, et une commande reseau (BALAYER_DAC, GET_DAC_CONFIG, ...) qui
+    // attend le meme mutex n'est jamais bloquee plus que la duree d'UNE
+    // transmission (quelques centaines de microsecondes a 100 kHz).
+    osMutexWait(i2c1_mutex_id, osWaitForever);
+    if (!BALAYAGE_SUR(&hi2c1, MCP4725_I2CADDR_DEFAULT))
+    {
+        HAL_I2C_Master_Transmit(&hi2c1, MCP4725_I2CADDR_DEFAULT, DAC1_DEF, SPI_SIZE, SPI_TIMEOUT);
+    }
+    osMutexRelease(i2c1_mutex_id);
+
+    osMutexWait(i2c2_mutex_id, osWaitForever);
+    HAL_StatusTypeDef st2 = HAL_OK;
+    if (i2c2_actif)
+    {
+        if (!BALAYAGE_SUR(&hi2c2, MCP4725_I2CADDR_DEFAULT))
+        {
+            st2 = HAL_I2C_Master_Transmit(&hi2c2, MCP4725_I2CADDR_DEFAULT, DAC2_DEF, SPI_SIZE, SPI_TIMEOUT);
+        }
+    }
+    osMutexRelease(i2c2_mutex_id);
+
+    osMutexWait(i2c1_mutex_id, osWaitForever);
+    if (!BALAYAGE_SUR(&hi2c1, MPC4725_I2CADDR_A0))
+    {
+        HAL_I2C_Master_Transmit(&hi2c1, MPC4725_I2CADDR_A0, DAC3_DEF, SPI_SIZE, SPI_TIMEOUT);
+    }
+    osMutexRelease(i2c1_mutex_id);
+
+    if (i2c2_actif)
+    {
+        osMutexWait(i2c2_mutex_id, osWaitForever);
+        if (!BALAYAGE_SUR(&hi2c2, MPC4725_I2CADDR_A1))
+        {
+            HAL_I2C_Master_Transmit(&hi2c2, MPC4725_I2CADDR_A1, DAC4_DEF, SPI_SIZE, SPI_TIMEOUT);
+        }
+        osMutexRelease(i2c2_mutex_id);
+
+        osMutexWait(i2c2_mutex_id, osWaitForever);
+        if (!BALAYAGE_SUR(&hi2c2, MPC4725_I2CADDR_A0))
+        {
+            HAL_I2C_Master_Transmit(&hi2c2, MPC4725_I2CADDR_A0, DAC5_DEF, SPI_SIZE, SPI_TIMEOUT);
+        }
+        osMutexRelease(i2c2_mutex_id);
+    }
 
     // Bouton USER (B1/PC13) appuye : declenche une capture complete de
     // diagnostic (scan I2C1+I2C2, DAC, balayage...), rapportee sur USART1.
@@ -3568,19 +4667,24 @@ void StartLwipTask(void const * argument)
         mux_reset_appuye = 0;
         TraiterResetMultiplexeur();
     }
+
+#if UART_HEARTBEAT_MS > 0U
+    // Battement de coeur UART : ligne "HB" toutes les UART_HEARTBEAT_MS ms, pour que
+    // l'interface PC detecte un cable UART (PB6/PB7) debranche ou une carte arretee.
+    // Pendant une capture (bouton B1) la boucle est occupee, mais la capture emet
+    // elle-meme sur l'UART : le PC voit du trafic.
+    if ((HAL_GetTick() - tick_dernier_hb_uart) >= UART_HEARTBEAT_MS)
+    {
+        tick_dernier_hb_uart = HAL_GetTick();
+        UART1_EnvoyerTexte("HB\r\n");
+    }
+#endif
   }
   /* USER CODE END 5 */
 }
 
-/**
-  * @brief  Configure la MPU (Memory Protection Unit) du Cortex-M7.
-  *         Desactive l'acces (lecture/ecriture/execution) sur la region
-  *         memoire par defaut, avant de reactiver la protection - evite
-  *         que des acces memoire invalides (pointeurs errants, etc.)
-  *         passent silencieusement inapercus.
-  * @param  Aucun.
-  * @retval Aucun (void). Genere par CubeMX, non modifie depuis.
-  */
+ /* MPU Configuration */
+
 void MPU_Config(void)
 {
   MPU_Region_InitTypeDef MPU_InitStruct = {0};
