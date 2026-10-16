@@ -274,6 +274,13 @@ typedef struct {
 // Etat de la protection surintensite, une entree par LDO (meme index que
 // ldoConfig[]). Ecrit depuis l'interruption EXTI et depuis la boucle.
 static volatile uint8_t  oc_verrou[NB_LDO];
+// Canal de seuil de chaque LDO equipee du circuit de limitation, fige au
+// demarrage par OC_InitialiserSeuilsDefaut() a partir de mappingDacLdo[]
+// (valeurs codees en dur). La surveillance OC ne depend plus du mapping
+// modifiable a chaud : SET_DAC_MAPPING_LDO_ ne peut plus la desactiver.
+static uint8_t     oc_cable[NB_LDO];
+static uint8_t     oc_cible_seuil[NB_LDO];   // CibleDac_t (type declare plus bas)
+static uint8_t     oc_canal_seuil[NB_LDO];
 static volatile uint8_t  oc_a_signaler[NB_LDO];
 static volatile uint32_t oc_nb_declenchements[NB_LDO];
 static volatile uint32_t oc_tick_declenchement[NB_LDO];
@@ -2452,13 +2459,18 @@ static void h_RST_BL_LDO_ALL(void)  { for (int i = 0; i < NB_LDO; i++) BL_LDO[i]
   */
 static void h_SET_EN_TAB(void)
 {
+	// Trame incomplete : on s'arrete au premier element manquant (plus de
+	// atoi(NULL), qui provoquait une HardFault et figeait les EN en place).
+	// L'activation reste soumise au verrou OC et au seuil (LDO_MettreAJour()).
 	char *token = strsep(&last_message, "[");
 	for (int i = 0; i <= 16; i++)
 	{
 		token = strsep(&last_message, ",");
+		if (token == NULL) { return; }
 		EN_LDO[i] = (_Bool)atoi(token);
 	}
 	token = strsep(&last_message, "]");
+	if (token == NULL) { return; }
 	EN_LDO[17] = (_Bool)atoi(token);
 }
 
@@ -2692,7 +2704,7 @@ static MappingDacLdo_t mappingDacLdo[18] = {
  */
 static uint8_t OC_EstSurveillee(int idx)
 {
-    return (mappingDacLdo[idx].dac_courant != CIBLE_AUCUNE) ? 1U : 0U;
+    return oc_cable[idx];
 }
 
 /**
@@ -2711,7 +2723,7 @@ static uint8_t OC_SeuilValide(int idx)
     {
         return 1U;
     }
-    return (CURRENT_LDO[idx] >= OC_CODE_SEUIL_MIN) ? 1U : 0U;
+    return ((CURRENT_LDO[idx] >= OC_CODE_SEUIL_MIN) && (CURRENT_LDO[idx] <= OC_CODE_SEUIL_MAX)) ? 1U : 0U;
 }
 
 /**
@@ -3079,7 +3091,14 @@ static void h_SET_CURRENT_LDO_GENERIQUE(int idx)
     uint16_t valeur = (uint16_t)v;
     CURRENT_LDO[idx] = valeur;
     ldoConfig[idx].ldo->CURRENT = valeur;
-    EcrireValeurDac(m->dac_courant, m->canal_courant, valeur);
+    if (oc_cable[idx] != 0U)
+    {
+        EcrireValeurDac((CibleDac_t)oc_cible_seuil[idx], oc_canal_seuil[idx], valeur);
+    }
+    else
+    {
+        EcrireValeurDac(m->dac_courant, m->canal_courant, valeur);
+    }
 }
 
 /**
@@ -3087,6 +3106,9 @@ static void h_SET_CURRENT_LDO_GENERIQUE(int idx)
   *         0,50 A) sur toutes les LDO equipees du circuit de limitation, au
   *         demarrage. Sans cela, le seuil vaudrait 0 V (MCP4725_VAL_DEF),
   *         hors de la plage d'entree du LM211, et l'activation serait refusee.
+  *         Fige aussi oc_cable[], oc_cible_seuil[] et oc_canal_seuil[] a partir
+  *         du mapping code en dur : doit etre appelee avant tout traitement
+  *         de commande UDP.
   * @param  Aucun.
   * @retval Aucun. Met a jour CURRENT_LDO[], ldo->CURRENT et DACx_DEF ; la
   *         boucle de StartLwipTask() l'envoie au DAC au tour suivant.
@@ -3101,6 +3123,9 @@ static void OC_InitialiserSeuilsDefaut(void)
     for (int i = 0; i < NB_LDO; i++)
     {
         const MappingDacLdo_t *m = &mappingDacLdo[i];
+        oc_cable[i] = (m->dac_courant != CIBLE_AUCUNE) ? 1U : 0U;
+        oc_cible_seuil[i] = (uint8_t)m->dac_courant;
+        oc_canal_seuil[i] = m->canal_courant;
         if (m->dac_courant != CIBLE_AUCUNE)
         {
             CURRENT_LDO[i] = OC_CODE_SEUIL_DEFAUT;
@@ -3118,12 +3143,42 @@ static void OC_InitialiserSeuilsDefaut(void)
   * @param  nom  Nom texte de la LDO, pour la reponse.
   * @retval Aucun (void). Lit last_message au format "<V|I>:<0-5>:<0-7>"
   *         (0 pour le numero de DAC = CIBLE_AUCUNE, "debranche" ce canal).
-  *         Remplit response avec "DAC_MAP:<nom>:OK\n" si valide, ou
-  *         "DAC_MAP:<nom>:ERREUR_PARAMETRES\n" sinon.
+  *         Remplit response avec "DAC_MAP:<nom>:OK\n" si valide,
+  *         "DAC_MAP:<nom>:ERREUR_PARAMETRES\n" si la trame est mal formee, ou
+  *         "DAC_MAP:<nom>:REFUS_PROTECTION_OC\n" si la demande deplace le
+  *         seuil OC d'une LDO surveillee ou vise un canal de seuil OC.
   * @par    Exemple d'utilisation
   *         Trame UDP recue : "SET_DAC_MAPPING_LDO_1PSp:V:2:3"
   *         -> tension de 1PSp desormais lue/ecrite sur DAC2_DEF, canal 3.
   */
+/**
+ * @brief  Cherche la LDO surveillee dont le seuil de courant est sur le canal
+ *         donne d'un tableau DACx_DEF.
+ * @param  tableau  Tableau DACx_DEF (DAC1_DEF ... DAC5_DEF), peut etre NULL.
+ * @param  canal    Canal (0-7).
+ * @retval Index de la LDO (0-17), ou -1 si ce canal n'est pas un seuil OC.
+ * @par Exemple d'utilisation
+ * @code
+ * int idx = OC_LdoDuCanalSeuil(DAC1_DEF, 5);   // -> 2 (2PSp)
+ * @endcode
+ */
+static int OC_LdoDuCanalSeuil(const uint8_t *tableau, uint8_t canal)
+{
+    if (tableau == NULL)
+    {
+        return -1;
+    }
+    for (int i = 0; i < NB_LDO; i++)
+    {
+        if ((oc_cable[i] != 0U) && (oc_canal_seuil[i] == canal)
+            && (ResoudreTableauDac((CibleDac_t)oc_cible_seuil[i]) == tableau))
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
 static void SetMappingDacLdo(int idx, const char *nom)
 {
     char *type_str  = strsep(&last_message, ":");
@@ -3143,6 +3198,24 @@ static void SetMappingDacLdo(int idx, const char *nom)
     {
         sprintf(response, "DAC_MAP:%s:ERREUR_PARAMETRES\n", nom);
         return;
+    }
+
+    // Protection OC : le canal de seuil d'une LDO surveillee ne peut ni etre
+    // deplace, ni etre attribue a une autre grandeur (sinon SET_VAL_LDO_ ou un
+    // autre SET_CURRENT_LDO_ ecrirait le seuil sans bornage). Une entree
+    // identique au mapping en place est acceptee (rejeu de la configuration).
+    {
+        const int est_courant = (type_str[0] == 'I' || type_str[0] == 'i') ? 1 : 0;
+        const int meme_seuil = (est_courant != 0) && (oc_cable[idx] != 0U)
+                               && (numero_dac == (int)oc_cible_seuil[idx])
+                               && (canal == (int)oc_canal_seuil[idx]);
+        const int ldo_seuil = (numero_dac == 0) ? -1
+                              : OC_LdoDuCanalSeuil(ResoudreTableauDac((CibleDac_t)numero_dac), (uint8_t)canal);
+        if ((meme_seuil == 0) && (((est_courant != 0) && (oc_cable[idx] != 0U)) || (ldo_seuil >= 0)))
+        {
+            sprintf(response, "DAC_MAP:%s:REFUS_PROTECTION_OC\n", nom);
+            return;
+        }
     }
 
     if (type_str[0] == 'V' || type_str[0] == 'v')
@@ -3309,8 +3382,11 @@ static void h_SCAN_I2C2(void)
   *         - delai_ms : pause entre paliers, en millisecondes
   *         - tension_ref : VDD reel du DAC, en volts (ex : 5.0)
   * @retval Aucun (void). Remplit response avec "BALAYER_DAC:TERMINE\n"
-  *         une fois le balayage complet termine, ou
-  *         "BALAYER_DAC:ERREUR_PARAMETRES\n" si la trame est mal formee.
+  *         une fois le balayage complet termine,
+  *         "BALAYER_DAC:ERREUR_PARAMETRES\n" si la trame est mal formee, ou
+  *         "BALAYER_DAC:REFUS_SEUIL_OC_LDO_ACTIVE:<nom>\n" si le registre vise
+  *         est le seuil OC d'une LDO active. Sur un registre de seuil OC (LDO
+  *         coupee), le seuil d'avant le balayage est restaure a la fin.
   * @par    Exemple d'utilisation
   *         Trame UDP recue :
   *         "BALAYER_DAC:1:0xC4:0:4095:50:100:5.0"
@@ -3340,8 +3416,31 @@ static void h_BALAYER_DAC(void)
     float tension_ref = atof(tension_str);
     I2C_HandleTypeDef *hi2c = (bus == 2) ? &hi2c2 : &hi2c1;
 
+    // Protection OC : un registre de seuil ne se balaie que LDO coupee
+    // (le balayage bloque la boucle et passe par des codes hors 410..max),
+    // et le seuil d'avant le balayage est restaure a la fin.
+    const int ldo_seuil = ((registre >= 0) && (registre <= 7))
+        ? OC_LdoDuCanalSeuil(ResoudreTableauDacParAdresse(hi2c, (uint8_t)adresse_hal), (uint8_t)registre) : -1;
+    uint16_t seuil_avant = 0U;
+    if (ldo_seuil >= 0)
+    {
+        if ((EN_LDO[ldo_seuil] != 0) || (en_actif[ldo_seuil] != 0U))
+        {
+            sprintf(response, "BALAYER_DAC:REFUS_SEUIL_OC_LDO_ACTIVE:%s\n", ldoConfig[ldo_seuil].name);
+            return;
+        }
+        seuil_avant = CURRENT_LDO[ldo_seuil];
+    }
+
     BalayerSortieDAC(hi2c, (uint8_t)adresse_hal, (uint8_t)registre, "DAC",
                       (uint16_t)valeur_max, (uint16_t)pas, (uint32_t)delai_ms, tension_ref);
+
+    if (ldo_seuil >= 0)
+    {
+        CURRENT_LDO[ldo_seuil] = seuil_avant;
+        ldoConfig[ldo_seuil].ldo->CURRENT = seuil_avant;
+        EcrireValeurDac((CibleDac_t)oc_cible_seuil[ldo_seuil], oc_canal_seuil[ldo_seuil], seuil_avant);
+    }
 
     sprintf(response, "BALAYER_DAC:TERMINE\n");
 }
