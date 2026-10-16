@@ -251,11 +251,51 @@ struct LDO {
 
 //#define MCP4725_CMD_WRITEDAC	(0x40)
 //#define MCP4725_CMD_WRITEDACEEPROM	(0x60)
-#define MCP4725_VAL_DEF			(0x7FF)			//2047 ou 2.5 Volts
-#define MCP4725_VAL_DEF_BIN		2047
+// Valeur d'initialisation de chaque sortie DAC au demarrage ET valeur restauree
+// par la boucle periodique de StartLwipTask() apres tout code operateur qui ne
+// passe pas par VAL_LDO[]/ldoConfig[].ldo->VAL (ex: juste apres un balayage a
+// distance BALAYER_DAC, dont la cible n'est pas forcement une LDO configuree) :
+// 0V, jamais une tension intermediaire, par securite (aucune sortie ne doit
+// "sortir" une tension non voulue par l'operateur simplement parce qu'elle n'a
+// jamais ete explicitement configuree).
+#define MCP4725_VAL_DEF			(0x000)			//0 code = 0V, quelle que soit VDD
+#define MCP4725_VAL_DEF_BIN		0
 
 #define	SPI_SIZE				24
 #define	SPI_TIMEOUT				100
+
+// ---------------------------------------------------------------------------
+// Protection surintensite (OC) des LDO equipees du circuit shunt R97 +
+// OP184 + LM211 (aujourd'hui 1PSp et 2PSp). Revision du 13/10/2026.
+//
+// CARTE_LIM_CORRIGEE : 1 = carte corrigee (R96 = R98 = 26,1 kOhm 0,1 %,
+// C178 = C356 = 10 nF C0G, R103 = 10 kOhm, RH = 680 kOhm),
+//                      0 = carte actuelle (R96 = R98 = 100 kOhm, 100 nF).
+// C'est le SEUL define a changer pour passer d'une carte a l'autre.
+// ---------------------------------------------------------------------------
+#define CARTE_LIM_CORRIGEE		1
+
+#if CARTE_LIM_CORRIGEE
+#define OC_K_V_PAR_A			2.61f	// G x R97 = 26,1 x 0,1 Ohm (V/A)
+#define OC_BLANKING_MS			10U		// soft-start + 5 tau (tau = 261 us)
+#define OC_CODE_SEUIL_MAX		4006U	// 1,90 A : pire cas 1,951 A < 2,0 A
+#define OC_CODE_SEUIL_DEFAUT	1056U	// 0,50 A au demarrage (hysteresis incluse)
+#else
+#define OC_K_V_PAR_A			10.0f	// G x R97 = 100 x 0,1 Ohm (V/A)
+#define OC_BLANKING_MS			60U		// soft-start + 5 tau (tau = 10 ms)
+#define OC_CODE_SEUIL_MAX		4095U	// 0,50 A, pleine echelle du DAC
+#define OC_CODE_SEUIL_DEFAUT	4095U	// 0,50 A au demarrage (500 mA = 4096, ramene a 4095)
+#endif
+
+// Code minimal du seuil : 0,5 V = limite basse d'entree du LM211
+// (0,5 x 4096 / 5 = 409,6 -> 410), identique pour les deux cartes.
+#define OC_CODE_SEUIL_MIN		410U
+
+// Niveau de la broche OC qui signifie "surintensite". Schema PS2+ : IN+ du
+// LM211 = VMES (sortie OP184 via R103), IN- = DAC_OUT, donc OC = 1 en
+// surintensite. A passer a GPIO_PIN_RESET uniquement si l'essai T5 montre
+// la polarite inverse.
+#define OC_NIVEAU_DEFAUT		GPIO_PIN_SET
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
