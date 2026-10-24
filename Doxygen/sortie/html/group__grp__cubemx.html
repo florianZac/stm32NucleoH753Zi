@@ -1,0 +1,961 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lwip_demo_H753 - Controleur de LDO: Initialisation matérielle (CubeMX)</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Lwip_demo_H753 - Controleur de LDO<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">Firmware STM32H753ZI : pilotage de 18 LDO (configuration CSV, DAC MCP47FEB28, protection OC)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Recherche" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('group__grp__cubemx.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Initialisation matérielle (CubeMX) </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Fonctions générées par STM32CubeMX (documentées dans complements_cubemx.dox).  
+<a href="#details">Plus de détails...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:ga840291bc02cba5474a4cb46a9b9566fe" id="r_ga840291bc02cba5474a4cb46a9b9566fe"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ga840291bc02cba5474a4cb46a9b9566fe">main</a> (void)</td></tr>
+<tr class="memdesc:ga840291bc02cba5474a4cb46a9b9566fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">The application entry point.  <br /></td></tr>
+<tr class="memitem:ga70af21c671abfcc773614a9a4f63d920" id="r_ga70af21c671abfcc773614a9a4f63d920"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga70af21c671abfcc773614a9a4f63d920">SystemClock_Config</a> (void)</td></tr>
+<tr class="memdesc:ga70af21c671abfcc773614a9a4f63d920"><td class="mdescLeft">&#160;</td><td class="mdescRight">System Clock Configuration.  <br /></td></tr>
+<tr class="memitem:ga336c5acb34a801b2984e602b97ed7b73" id="r_ga336c5acb34a801b2984e602b97ed7b73"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga336c5acb34a801b2984e602b97ed7b73">PeriphCommonClock_Config</a> (void)</td></tr>
+<tr class="memdesc:ga336c5acb34a801b2984e602b97ed7b73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peripherals Common Clock Configuration.  <br /></td></tr>
+<tr class="memitem:gaaa163e37853e6fc971474824d9f655ca" id="r_gaaa163e37853e6fc971474824d9f655ca"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#gaaa163e37853e6fc971474824d9f655ca">MX_ADC1_Init</a> (void)</td></tr>
+<tr class="memdesc:gaaa163e37853e6fc971474824d9f655ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADC1 Initialization Function.  <br /></td></tr>
+<tr class="memitem:ga4e987f0fdef6459c1a03ca830bac23f5" id="r_ga4e987f0fdef6459c1a03ca830bac23f5"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga4e987f0fdef6459c1a03ca830bac23f5">MX_ADC2_Init</a> (void)</td></tr>
+<tr class="memdesc:ga4e987f0fdef6459c1a03ca830bac23f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADC2 Initialization Function.  <br /></td></tr>
+<tr class="memitem:gae1e1b355e2d7714a267fee7e71891e59" id="r_gae1e1b355e2d7714a267fee7e71891e59"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#gae1e1b355e2d7714a267fee7e71891e59">MX_ADC3_Init</a> (void)</td></tr>
+<tr class="memdesc:gae1e1b355e2d7714a267fee7e71891e59"><td class="mdescLeft">&#160;</td><td class="mdescRight">ADC3 Initialization Function.  <br /></td></tr>
+<tr class="memitem:ga4230d11f81d0b16e112f1cc3f40cb42f" id="r_ga4230d11f81d0b16e112f1cc3f40cb42f"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga4230d11f81d0b16e112f1cc3f40cb42f">MX_I2C1_Init</a> (void)</td></tr>
+<tr class="memdesc:ga4230d11f81d0b16e112f1cc3f40cb42f"><td class="mdescLeft">&#160;</td><td class="mdescRight">I2C1 Initialization Function.  <br /></td></tr>
+<tr class="memitem:gaf71812af4fbb9ebbe0f681165b657433" id="r_gaf71812af4fbb9ebbe0f681165b657433"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#gaf71812af4fbb9ebbe0f681165b657433">MX_I2C2_Init</a> (void)</td></tr>
+<tr class="memdesc:gaf71812af4fbb9ebbe0f681165b657433"><td class="mdescLeft">&#160;</td><td class="mdescRight">I2C2 Initialization Function.  <br /></td></tr>
+<tr class="memitem:ga62f4b77e20bccafe98a183771749c20c" id="r_ga62f4b77e20bccafe98a183771749c20c"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga62f4b77e20bccafe98a183771749c20c">MX_USART1_UART_Init</a> (void)</td></tr>
+<tr class="memdesc:ga62f4b77e20bccafe98a183771749c20c"><td class="mdescLeft">&#160;</td><td class="mdescRight">USART1 Initialization Function.  <br /></td></tr>
+<tr class="memitem:gae89fdd15729ad41a66911190fcbab23a" id="r_gae89fdd15729ad41a66911190fcbab23a"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#gae89fdd15729ad41a66911190fcbab23a">MX_GPIO_Init</a> (void)</td></tr>
+<tr class="memdesc:gae89fdd15729ad41a66911190fcbab23a"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPIO Initialization Function.  <br /></td></tr>
+<tr class="memitem:ga93ce41942d08d309203e0188cad7e54e" id="r_ga93ce41942d08d309203e0188cad7e54e"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga93ce41942d08d309203e0188cad7e54e">MPU_Config</a> (void)</td></tr>
+<tr class="memdesc:ga93ce41942d08d309203e0188cad7e54e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration de la MPU (zones SRAM D2 utilisees par LwIP et l'Ethernet).  <br /></td></tr>
+<tr class="memitem:ga8a3b0ad512a6e6c6157440b68d395eac" id="r_ga8a3b0ad512a6e6c6157440b68d395eac"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga8a3b0ad512a6e6c6157440b68d395eac">HAL_TIM_PeriodElapsedCallback</a> (TIM_HandleTypeDef *htim)</td></tr>
+<tr class="memdesc:ga8a3b0ad512a6e6c6157440b68d395eac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Period elapsed callback in non blocking mode.  <br /></td></tr>
+<tr class="memitem:ga1730ffe1e560465665eb47d9264826f9" id="r_ga1730ffe1e560465665eb47d9264826f9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga1730ffe1e560465665eb47d9264826f9">Error_Handler</a> (void)</td></tr>
+<tr class="memdesc:ga1730ffe1e560465665eb47d9264826f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is executed in case of error occurrence.  <br /></td></tr>
+<tr class="memitem:ga2532ff72b1a2ff82f65e8c2a5a4dde00" id="r_ga2532ff72b1a2ff82f65e8c2a5a4dde00"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga2532ff72b1a2ff82f65e8c2a5a4dde00">assert_failed</a> (uint8_t *file, uint32_t line)</td></tr>
+<tr class="memdesc:ga2532ff72b1a2ff82f65e8c2a5a4dde00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reports the name of the source file and the source line number where the assert_param error has occurred.  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Fonctions générées par STM32CubeMX (documentées dans complements_cubemx.dox). </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentation des fonctions</h2>
+<a id="ga840291bc02cba5474a4cb46a9b9566fe" name="ga840291bc02cba5474a4cb46a9b9566fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga840291bc02cba5474a4cb46a9b9566fe">&#9670;&#160;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The application entry point. </p>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">int</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Role dans le projet</dt><dd>Point d'entree. Configure la MPU, active les caches, initialise le HAL, attend 1 s, configure les horloges, debloque les deux bus I2C (I2C_BusRecovery() sur PB8/PB9 et PB10/PB11), initialise les GPIO et peripheriques CubeMX, puis LDO_GPIO_Init() (broches des LDO depuis ldoConfig[]). Cree ensuite la tache lwipTask (StartLwipTask()) et demarre FreeRTOS : la boucle while(1) n'est jamais atteinte. </dd></dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="comment">// appele par le code de demarrage (startup_stm32h753zitx.s), ne pas appeler directement</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l01824">1824</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l00539">I2C_BusRecovery()</a>, <a class="el" href="main_8c_source.html#l06117">LDO_GPIO_Init()</a>, <a class="el" href="main_8c_source.html#l01824">main()</a>, <a class="el" href="main_8c_source.html#l06837">MPU_Config()</a>, <a class="el" href="main_8c_source.html#l02016">MX_ADC1_Init()</a>, <a class="el" href="main_8c_source.html#l02085">MX_ADC2_Init()</a>, <a class="el" href="main_8c_source.html#l02145">MX_ADC3_Init()</a>, <a class="el" href="main_8c_source.html#l02348">MX_GPIO_Init()</a>, <a class="el" href="main_8c_source.html#l02204">MX_I2C1_Init()</a>, <a class="el" href="main_8c_source.html#l02252">MX_I2C2_Init()</a>, <a class="el" href="main_8c_source.html#l02300">MX_USART1_UART_Init()</a>, <a class="el" href="main_8c_source.html#l01997">PeriphCommonClock_Config()</a>, <a class="el" href="main_8c_source.html#l06730">StartLwipTask()</a>, et <a class="el" href="main_8c_source.html#l01938">SystemClock_Config()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01824">main()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_ga840291bc02cba5474a4cb46a9b9566fe_cgraph.svg" width="1311" height="2468"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_ga840291bc02cba5474a4cb46a9b9566fe_icgraph.svg" width="60" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga70af21c671abfcc773614a9a4f63d920" name="ga70af21c671abfcc773614a9a4f63d920"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga70af21c671abfcc773614a9a4f63d920">&#9670;&#160;</a></span>SystemClock_Config()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SystemClock_Config </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>System Clock Configuration. </p>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Role dans le projet</dt><dd>Horloge systeme : HSI 64 MHz, PLL1 (M = 4, N = 60, P = 2) -&gt; SYSCLK 480 MHz, HCLK 240 MHz (AHB / 2), regulateur en VOS0, latence flash 4 cycles. </dd></dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">HAL_Init();</div>
+<div class="line"><a class="code hl_function" href="#ga70af21c671abfcc773614a9a4f63d920">SystemClock_Config</a>();</div>
+<div class="line"><a class="code hl_function" href="#ga336c5acb34a801b2984e602b97ed7b73">PeriphCommonClock_Config</a>();</div>
+<div class="ttc" id="agroup__grp__cubemx_html_ga336c5acb34a801b2984e602b97ed7b73"><div class="ttname"><a href="#ga336c5acb34a801b2984e602b97ed7b73">PeriphCommonClock_Config</a></div><div class="ttdeci">void PeriphCommonClock_Config(void)</div><div class="ttdoc">Peripherals Common Clock Configuration.</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l01997">main.c:1997</a></div></div>
+<div class="ttc" id="agroup__grp__cubemx_html_ga70af21c671abfcc773614a9a4f63d920"><div class="ttname"><a href="#ga70af21c671abfcc773614a9a4f63d920">SystemClock_Config</a></div><div class="ttdeci">void SystemClock_Config(void)</div><div class="ttdoc">System Clock Configuration.</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l01938">main.c:1938</a></div></div>
+</div><!-- fragment --> </dd></dl>
+<p>Supply configuration update enable</p>
+<p>Configure the main internal regulator output voltage</p>
+<p>Initializes the RCC Oscillators according to the specified parameters in the RCC_OscInitTypeDef structure.</p>
+<p>Initializes the CPU, AHB and APB buses clocks</p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l01938">1938</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06913">Error_Handler()</a>, et <a class="el" href="main_8c_source.html#l01938">SystemClock_Config()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01824">main()</a>, et <a class="el" href="main_8c_source.html#l01938">SystemClock_Config()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_ga70af21c671abfcc773614a9a4f63d920_cgraph.svg" width="306" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_ga70af21c671abfcc773614a9a4f63d920_icgraph.svg" width="256" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga336c5acb34a801b2984e602b97ed7b73" name="ga336c5acb34a801b2984e602b97ed7b73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga336c5acb34a801b2984e602b97ed7b73">&#9670;&#160;</a></span>PeriphCommonClock_Config()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PeriphCommonClock_Config </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Peripherals Common Clock Configuration. </p>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Role dans le projet</dt><dd>Horloge commune des peripheriques (CKPER = HSI), utilisee par les ADC. </dd></dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#ga70af21c671abfcc773614a9a4f63d920">SystemClock_Config</a>();</div>
+<div class="line"><a class="code hl_function" href="#ga336c5acb34a801b2984e602b97ed7b73">PeriphCommonClock_Config</a>();</div>
+</div><!-- fragment --> </dd></dl>
+<p>Initializes the peripherals clock</p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l01997">1997</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06913">Error_Handler()</a>, et <a class="el" href="main_8c_source.html#l01997">PeriphCommonClock_Config()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01824">main()</a>, et <a class="el" href="main_8c_source.html#l01997">PeriphCommonClock_Config()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_ga336c5acb34a801b2984e602b97ed7b73_cgraph.svg" width="351" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_ga336c5acb34a801b2984e602b97ed7b73_icgraph.svg" width="306" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gaaa163e37853e6fc971474824d9f655ca" name="gaaa163e37853e6fc971474824d9f655ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaaa163e37853e6fc971474824d9f655ca">&#9670;&#160;</a></span>MX_ADC1_Init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MX_ADC1_Init </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>ADC1 Initialization Function. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Role dans le projet</dt><dd>ADC1, resolution 16 bits, conversion unique, canal 10 (PC0) : mesure de tension par le multiplexeur ADG728 (LireTensionADC()). </dd></dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#gaaa163e37853e6fc971474824d9f655ca">MX_ADC1_Init</a>();</div>
+<div class="line"><span class="keywordtype">float</span> v = <a class="code hl_function" href="group__grp__adc.html#ga6bcd15aecac42670e775f0796aa0b8ec">LireTensionADC</a>(&amp;hadc1, ADC_CANAL_TENSION, MUX_RATIO_PONT);</div>
+<div class="ttc" id="agroup__grp__adc_html_ga6bcd15aecac42670e775f0796aa0b8ec"><div class="ttname"><a href="group__grp__adc.html#ga6bcd15aecac42670e775f0796aa0b8ec">LireTensionADC</a></div><div class="ttdeci">static float LireTensionADC(ADC_HandleTypeDef *hadc, uint32_t canal, float ratio_pont)</div><div class="ttdoc">Lit une conversion ADC sur le canal donne et la convertit en tension REELLE cote LDO (avant le pont d...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l05420">main.c:5420</a></div></div>
+<div class="ttc" id="agroup__grp__cubemx_html_gaaa163e37853e6fc971474824d9f655ca"><div class="ttname"><a href="#gaaa163e37853e6fc971474824d9f655ca">MX_ADC1_Init</a></div><div class="ttdeci">static void MX_ADC1_Init(void)</div><div class="ttdoc">ADC1 Initialization Function.</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l02016">main.c:2016</a></div></div>
+</div><!-- fragment --> </dd></dl>
+<p>Common config</p>
+<p>Configure the ADC multi-mode</p>
+<p>Configure Regular Channel</p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l02016">2016</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06913">Error_Handler()</a>, et <a class="el" href="main_8c_source.html#l02016">MX_ADC1_Init()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01824">main()</a>, et <a class="el" href="main_8c_source.html#l02016">MX_ADC1_Init()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_gaaa163e37853e6fc971474824d9f655ca_cgraph.svg" width="270" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_gaaa163e37853e6fc971474824d9f655ca_icgraph.svg" width="218" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga4e987f0fdef6459c1a03ca830bac23f5" name="ga4e987f0fdef6459c1a03ca830bac23f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4e987f0fdef6459c1a03ca830bac23f5">&#9670;&#160;</a></span>MX_ADC2_Init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MX_ADC2_Init </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>ADC2 Initialization Function. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Role dans le projet</dt><dd>ADC2, resolution 16 bits, canal VBAT (configuration CubeMX, non utilise par l'application). </dd></dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#ga4e987f0fdef6459c1a03ca830bac23f5">MX_ADC2_Init</a>();</div>
+<div class="ttc" id="agroup__grp__cubemx_html_ga4e987f0fdef6459c1a03ca830bac23f5"><div class="ttname"><a href="#ga4e987f0fdef6459c1a03ca830bac23f5">MX_ADC2_Init</a></div><div class="ttdeci">static void MX_ADC2_Init(void)</div><div class="ttdoc">ADC2 Initialization Function.</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l02085">main.c:2085</a></div></div>
+</div><!-- fragment --> </dd></dl>
+<p>Common config</p>
+<p>Configure Regular Channel</p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l02085">2085</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06913">Error_Handler()</a>, et <a class="el" href="main_8c_source.html#l02085">MX_ADC2_Init()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01824">main()</a>, et <a class="el" href="main_8c_source.html#l02085">MX_ADC2_Init()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_ga4e987f0fdef6459c1a03ca830bac23f5_cgraph.svg" width="270" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_ga4e987f0fdef6459c1a03ca830bac23f5_icgraph.svg" width="218" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gae1e1b355e2d7714a267fee7e71891e59" name="gae1e1b355e2d7714a267fee7e71891e59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae1e1b355e2d7714a267fee7e71891e59">&#9670;&#160;</a></span>MX_ADC3_Init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MX_ADC3_Init </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>ADC3 Initialization Function. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Role dans le projet</dt><dd>ADC3, resolution 16 bits, conversion unique : mesure de courant par le multiplexeur (PF4, canal 9 selectionne au moment de la lecture) et commandes GET_CURRENT_x. </dd></dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#gae1e1b355e2d7714a267fee7e71891e59">MX_ADC3_Init</a>();</div>
+<div class="line"><span class="keywordtype">float</span> i_mA = <a class="code hl_function" href="group__grp__adc.html#ga4feb141ddc6376d2ada1a4e0f58416e1">LireCourantADC</a>(&amp;hadc3, ADC_CANAL_COURANT, MUX_RATIO_PONT);</div>
+<div class="ttc" id="agroup__grp__adc_html_ga4feb141ddc6376d2ada1a4e0f58416e1"><div class="ttname"><a href="group__grp__adc.html#ga4feb141ddc6376d2ada1a4e0f58416e1">LireCourantADC</a></div><div class="ttdeci">static float LireCourantADC(ADC_HandleTypeDef *hadc, uint32_t canal, float ratio_pont)</div><div class="ttdoc">Lit le canal ADC courant et convertit en courant REEL (mA), a partir du gain de l&#39;AOP differentiel (x...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l05561">main.c:5561</a></div></div>
+<div class="ttc" id="agroup__grp__cubemx_html_gae1e1b355e2d7714a267fee7e71891e59"><div class="ttname"><a href="#gae1e1b355e2d7714a267fee7e71891e59">MX_ADC3_Init</a></div><div class="ttdeci">static void MX_ADC3_Init(void)</div><div class="ttdoc">ADC3 Initialization Function.</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l02145">main.c:2145</a></div></div>
+</div><!-- fragment --> </dd></dl>
+<p>Common config</p>
+<p>Configure Regular Channel</p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l02145">2145</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06913">Error_Handler()</a>, et <a class="el" href="main_8c_source.html#l02145">MX_ADC3_Init()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01824">main()</a>, et <a class="el" href="main_8c_source.html#l02145">MX_ADC3_Init()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_gae1e1b355e2d7714a267fee7e71891e59_cgraph.svg" width="270" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_gae1e1b355e2d7714a267fee7e71891e59_icgraph.svg" width="218" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga4230d11f81d0b16e112f1cc3f40cb42f" name="ga4230d11f81d0b16e112f1cc3f40cb42f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4230d11f81d0b16e112f1cc3f40cb42f">&#9670;&#160;</a></span>MX_I2C1_Init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MX_I2C1_Init </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>I2C1 Initialization Function. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Role dans le projet</dt><dd>I2C1 (PB8 = SCL, PB9 = SDA), Timing 0x307075B1 : bus actif des DAC MCP47FEB28 0xC0 / 0xC2 et des ADG728 de mesure de tension. Precede de I2C_BusRecovery() dans main(). </dd></dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="group__grp__i2c.html#ga2f7d3957d1b8de76916916f379898287">I2C_BusRecovery</a>(GPIOB, GPIO_PIN_8, GPIO_PIN_9, GPIO_AF4_I2C1);</div>
+<div class="line">MX_I2C1_Init();</div>
+<div class="ttc" id="agroup__grp__i2c_html_ga2f7d3957d1b8de76916916f379898287"><div class="ttname"><a href="group__grp__i2c.html#ga2f7d3957d1b8de76916916f379898287">I2C_BusRecovery</a></div><div class="ttdeci">static void I2C_BusRecovery(GPIO_TypeDef *port, uint16_t scl_pin, uint16_t sda_pin, uint8_t af_i2c)</div><div class="ttdoc">Version generique de I2C1_BusRecovery() pour n&#39;importe quel bus : passe SCL/SDA en sorties open-drain...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l00539">main.c:539</a></div></div>
+</div><!-- fragment --> </dd></dl>
+<p>Configure Analogue filter</p>
+<p>Configure Digital filter</p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l02204">2204</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06913">Error_Handler()</a>, et <a class="el" href="main_8c_source.html#l02204">MX_I2C1_Init()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01824">main()</a>, et <a class="el" href="main_8c_source.html#l02204">MX_I2C1_Init()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_ga4230d11f81d0b16e112f1cc3f40cb42f_cgraph.svg" width="262" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_ga4230d11f81d0b16e112f1cc3f40cb42f_icgraph.svg" width="210" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gaf71812af4fbb9ebbe0f681165b657433" name="gaf71812af4fbb9ebbe0f681165b657433"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf71812af4fbb9ebbe0f681165b657433">&#9670;&#160;</a></span>MX_I2C2_Init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MX_I2C2_Init </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>I2C2 Initialization Function. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Role dans le projet</dt><dd>I2C2 (PB10 = SCL, PB11 = SDA), Timing 0x307075B1. Initialise mais non utilise tant que i2c2_actif = 0 (commande SET_I2C2_ACTIF:1 pour l'activer). </dd></dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="group__grp__i2c.html#ga2f7d3957d1b8de76916916f379898287">I2C_BusRecovery</a>(GPIOB, GPIO_PIN_10, GPIO_PIN_11, GPIO_AF4_I2C2);</div>
+<div class="line">MX_I2C2_Init();</div>
+</div><!-- fragment --> </dd></dl>
+<p>Configure Analogue filter</p>
+<p>Configure Digital filter</p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l02252">2252</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06913">Error_Handler()</a>, et <a class="el" href="main_8c_source.html#l02252">MX_I2C2_Init()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01824">main()</a>, et <a class="el" href="main_8c_source.html#l02252">MX_I2C2_Init()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_gaf71812af4fbb9ebbe0f681165b657433_cgraph.svg" width="262" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_gaf71812af4fbb9ebbe0f681165b657433_icgraph.svg" width="210" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga62f4b77e20bccafe98a183771749c20c" name="ga62f4b77e20bccafe98a183771749c20c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga62f4b77e20bccafe98a183771749c20c">&#9670;&#160;</a></span>MX_USART1_UART_Init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MX_USART1_UART_Init </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>USART1 Initialization Function. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Role dans le projet</dt><dd>USART1 (PB6 = TX, PB7 = RX), 115200 bauds 8N1 sans controle de flux : rapports de diagnostic et commandes (reception demarree par UART1_DemarrerReceptionCommandes()). </dd></dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#ga62f4b77e20bccafe98a183771749c20c">MX_USART1_UART_Init</a>();</div>
+<div class="line"><a class="code hl_function" href="group__grp__comm.html#gab9b5dfc109e472981cbbb7867d1b7f92">UART1_EnvoyerTexte</a>(<span class="stringliteral">&quot;HB\r\n&quot;</span>);</div>
+<div class="ttc" id="agroup__grp__comm_html_gab9b5dfc109e472981cbbb7867d1b7f92"><div class="ttname"><a href="group__grp__comm.html#gab9b5dfc109e472981cbbb7867d1b7f92">UART1_EnvoyerTexte</a></div><div class="ttdeci">void UART1_EnvoyerTexte(const char *texte)</div><div class="ttdoc">Envoie une chaine de caracteres sur USART1 (PB6/PB7, via un adaptateur USB-UART externe),...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l01803">main.c:1803</a></div></div>
+<div class="ttc" id="agroup__grp__cubemx_html_ga62f4b77e20bccafe98a183771749c20c"><div class="ttname"><a href="#ga62f4b77e20bccafe98a183771749c20c">MX_USART1_UART_Init</a></div><div class="ttdeci">static void MX_USART1_UART_Init(void)</div><div class="ttdoc">USART1 Initialization Function.</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l02300">main.c:2300</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l02300">2300</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06913">Error_Handler()</a>, et <a class="el" href="main_8c_source.html#l02300">MX_USART1_UART_Init()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01824">main()</a>, et <a class="el" href="main_8c_source.html#l02300">MX_USART1_UART_Init()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_ga62f4b77e20bccafe98a183771749c20c_cgraph.svg" width="328" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_ga62f4b77e20bccafe98a183771749c20c_icgraph.svg" width="282" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gae89fdd15729ad41a66911190fcbab23a" name="gae89fdd15729ad41a66911190fcbab23a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae89fdd15729ad41a66911190fcbab23a">&#9670;&#160;</a></span>MX_GPIO_Init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MX_GPIO_Init </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>GPIO Initialization Function. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Role dans le projet</dt><dd>Horloges des ports A a H et GPIO declarees dans le .ioc (bouton USER PC13 en EXTI, etc.). La zone USER CODE MX_GPIO_Init_2 appelle MX_MuxResetSync_GPIO_Init(). Les broches des LDO sont (re)configurees ensuite par LDO_GPIO_Init() a partir du CSV : c'est cette derniere qui fait foi. </dd></dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">MX_GPIO_Init();</div>
+<div class="line"><a class="code hl_function" href="group__grp__config.html#ga3bce4a57356f1afcbef6d05a989f33f5">LDO_GPIO_Init</a>();</div>
+<div class="ttc" id="agroup__grp__config_html_ga3bce4a57356f1afcbef6d05a989f33f5"><div class="ttname"><a href="group__grp__config.html#ga3bce4a57356f1afcbef6d05a989f33f5">LDO_GPIO_Init</a></div><div class="ttdeci">static void LDO_GPIO_Init(void)</div><div class="ttdoc">Configure les broches de TOUTES les LDO a partir de ldoConfig[] (donc du CSV), independamment du ....</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l06117">main.c:6117</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l02348">2348</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l02348">MX_GPIO_Init()</a>, et <a class="el" href="main_8c_source.html#l01577">MX_MuxResetSync_GPIO_Init()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01824">main()</a>, et <a class="el" href="main_8c_source.html#l02348">MX_GPIO_Init()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_gae89fdd15729ad41a66911190fcbab23a_cgraph.svg" width="368" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_gae89fdd15729ad41a66911190fcbab23a_icgraph.svg" width="215" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga93ce41942d08d309203e0188cad7e54e" name="ga93ce41942d08d309203e0188cad7e54e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga93ce41942d08d309203e0188cad7e54e">&#9670;&#160;</a></span>MPU_Config()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MPU_Config </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Configuration de la MPU (zones SRAM D2 utilisees par LwIP et l'Ethernet). </p>
+<dl class="section user"><dt>Role dans le projet</dt><dd>Region 0 : fond 4 Go sans acces ; regions 1 et 2 : SRAM D2 a 0x30020000 (128 Ko) et 0x30040000 (512 o), utilisee par LwIP et le DMA Ethernet, avec des attributs de cache compatibles avec le DMA. Appelee au debut de main(). </dd></dl>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#ga93ce41942d08d309203e0188cad7e54e">MPU_Config</a>();   <span class="comment">// debut de main(), avant SCB_EnableICache() / SCB_EnableDCache()</span></div>
+<div class="ttc" id="agroup__grp__cubemx_html_ga93ce41942d08d309203e0188cad7e54e"><div class="ttname"><a href="#ga93ce41942d08d309203e0188cad7e54e">MPU_Config</a></div><div class="ttdeci">static void MPU_Config(void)</div><div class="ttdoc">Configuration de la MPU (zones SRAM D2 utilisees par LwIP et l&#39;Ethernet).</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l06837">main.c:6837</a></div></div>
+</div><!-- fragment --> </dd></dl>
+<p>Initializes and configures the Region and the memory to be protected</p>
+<p>Initializes and configures the Region and the memory to be protected</p>
+<p>Initializes and configures the Region and the memory to be protected</p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l06837">6837</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06837">MPU_Config()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01824">main()</a>, et <a class="el" href="main_8c_source.html#l06837">MPU_Config()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_ga93ce41942d08d309203e0188cad7e54e_cgraph.svg" width="107" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_ga93ce41942d08d309203e0188cad7e54e_icgraph.svg" width="204" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga8a3b0ad512a6e6c6157440b68d395eac" name="ga8a3b0ad512a6e6c6157440b68d395eac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8a3b0ad512a6e6c6157440b68d395eac">&#9670;&#160;</a></span>HAL_TIM_PeriodElapsedCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HAL_TIM_PeriodElapsedCallback </td>
+          <td>(</td>
+          <td class="paramtype">TIM_HandleTypeDef *</td>          <td class="paramname"><span class="paramname"><em>htim</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Period elapsed callback in non blocking mode. </p>
+<dl class="section note"><dt>Note</dt><dd>This function is called when TIM6 interrupt took place, inside HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment a global variable "uwTick" used as application time base. </dd></dl>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">htim</td><td>: TIM handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Role dans le projet</dt><dd>Base de temps du HAL sur TIM6 (SysTick reserve a FreeRTOS) : incremente uwTick, donc HAL_GetTick() et HAL_Delay(). </dd></dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="comment">// appele par HAL_TIM_IRQHandler() (TIM6), ne pas appeler directement</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l06895">6895</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06895">HAL_TIM_PeriodElapsedCallback()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06895">HAL_TIM_PeriodElapsedCallback()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_ga8a3b0ad512a6e6c6157440b68d395eac_cgraph.svg" width="231" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_ga8a3b0ad512a6e6c6157440b68d395eac_icgraph.svg" width="231" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga1730ffe1e560465665eb47d9264826f9" name="ga1730ffe1e560465665eb47d9264826f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1730ffe1e560465665eb47d9264826f9">&#9670;&#160;</a></span>Error_Handler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Error_Handler </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function is executed in case of error occurrence. </p>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Role dans le projet</dt><dd>Appele quand une initialisation HAL echoue : masque les interruptions et boucle indefiniment (point d'arret conseille en debogage). </dd></dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="keywordflow">if</span> (HAL_I2C_Init(&amp;hi2c1) != HAL_OK)</div>
+<div class="line">{</div>
+<div class="line">    <a class="code hl_function" href="#ga1730ffe1e560465665eb47d9264826f9">Error_Handler</a>();</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__grp__cubemx_html_ga1730ffe1e560465665eb47d9264826f9"><div class="ttname"><a href="#ga1730ffe1e560465665eb47d9264826f9">Error_Handler</a></div><div class="ttdeci">void Error_Handler(void)</div><div class="ttdoc">This function is executed in case of error occurrence.</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l06913">main.c:6913</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l06913">6913</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06913">Error_Handler()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06913">Error_Handler()</a>, <a class="el" href="main_8c_source.html#l02016">MX_ADC1_Init()</a>, <a class="el" href="main_8c_source.html#l02085">MX_ADC2_Init()</a>, <a class="el" href="main_8c_source.html#l02145">MX_ADC3_Init()</a>, <a class="el" href="main_8c_source.html#l02204">MX_I2C1_Init()</a>, <a class="el" href="main_8c_source.html#l02252">MX_I2C2_Init()</a>, <a class="el" href="main_8c_source.html#l01769">MX_USART1_Init()</a>, <a class="el" href="main_8c_source.html#l02300">MX_USART1_UART_Init()</a>, <a class="el" href="main_8c_source.html#l01997">PeriphCommonClock_Config()</a>, et <a class="el" href="main_8c_source.html#l01938">SystemClock_Config()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_ga1730ffe1e560465665eb47d9264826f9_cgraph.svg" width="112" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_ga1730ffe1e560465665eb47d9264826f9_icgraph.svg" width="455" height="659"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga2532ff72b1a2ff82f65e8c2a5a4dde00" name="ga2532ff72b1a2ff82f65e8c2a5a4dde00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2532ff72b1a2ff82f65e8c2a5a4dde00">&#9670;&#160;</a></span>assert_failed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void assert_failed </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>file</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reports the name of the source file and the source line number where the assert_param error has occurred. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file</td><td>pointer to the source file name </td></tr>
+    <tr><td class="paramname">line</td><td>assert_param error line source number </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Role dans le projet</dt><dd>Compile seulement si USE_FULL_ASSERT est defini : appele par assert_param() quand un parametre HAL est invalide. Vide dans ce projet. </dd></dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">assert_param(IS_GPIO_PIN(pin));   <span class="comment">// appelle assert_failed(__FILE__, __LINE__) si faux</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l06931">6931</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06931">assert_failed()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06931">assert_failed()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_ga2532ff72b1a2ff82f65e8c2a5a4dde00_cgraph.svg" width="107" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__cubemx_ga2532ff72b1a2ff82f65e8c2a5a4dde00_icgraph.svg" width="107" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

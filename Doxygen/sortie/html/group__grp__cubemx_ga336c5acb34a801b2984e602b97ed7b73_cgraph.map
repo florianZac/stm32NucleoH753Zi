@@ -1,0 +1,7 @@
+<map id="PeriphCommonClock_Config" name="PeriphCommonClock_Config">
+<area shape="rect" id="Node000001" title="Peripherals Common Clock Configuration." alt="" coords="5,29,196,56"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="67,28,62,21,66,11,79,5,101,3,124,5,137,14,132,14,122,10,100,8,80,10,69,15,67,20,72,29"/>
+<area shape="rect" id="Node000002" href="$group__grp__cubemx.html#ga1730ffe1e560465665eb47d9264826f9" title="This function is executed in case of error occurrence." alt="" coords="244,29,345,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="196,40,231,43,225,43,196,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="261,28,255,21,259,11,273,5,294,3,318,5,331,14,326,14,316,10,294,8,274,10,263,15,261,20,266,30"/>
+</map>

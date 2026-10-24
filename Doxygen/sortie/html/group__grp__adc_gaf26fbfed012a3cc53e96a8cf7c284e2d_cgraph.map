@@ -1,0 +1,10 @@
+<map id="SelectionnerCanalMuxTension" name="SelectionnerCanalMuxTension">
+<area shape="rect" id="Node000001" title="Selectionne un canal (0&#45;23) parmi les 3 ADG728 de la chaine TENSION (bus I2C1). Desactive systematiqu..." alt="" coords="5,29,203,56"/>
+<area shape="poly" id="edge5_Node000001_Node000001" title=" " alt="" coords="70,28,64,21,68,11,82,5,104,3,128,5,142,14,137,14,126,10,104,8,83,10,72,15,69,20,75,29"/>
+<area shape="rect" id="Node000002" href="$group__grp__adc.html#ga74a9c056e466dd59ca9ea5b9110125f0" title="Ecrit le masque de canaux actifs sur un ADG728 (un octet, un bit par canal &#45; voir datasheet ADG728,..." alt="" coords="251,29,356,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="203,40,238,43,233,43,203,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="274,28,269,21,273,11,284,5,303,3,324,5,336,15,330,14,322,10,303,8,286,10,277,15,275,20,279,30"/>
+<area shape="rect" id="Node000003" href="$group__grp__i2c.html#ga5cb1cd70b1dd76a8aadb2bccb2837d2f" title="Retourne le mutex correspondant au bus d&#39;un handle I2C donne." alt="" coords="404,29,538,56"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="356,40,391,43,386,43,357,45"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="442,28,437,21,441,11,452,5,471,3,491,5,503,15,498,14,490,10,471,8,454,10,445,15,442,20,447,30"/>
+</map>

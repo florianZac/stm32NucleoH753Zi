@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="ldo__config__genere_8h" kind="file" language="C++">
+    <compoundname>ldo_config_genere.h</compoundname>
+    <includedby refid="main_8c" local="yes">C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c</includedby>
+    <invincdepgraph>
+      <node id="1">
+        <label>C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc/ldo_config_genere.h</label>
+        <link refid="ldo__config__genere_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c</label>
+        <link refid="main_8c"/>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="ldo__config__genere_8h_1a07b3ba5510da9d33dd86423d15b9fb65" prot="public" static="no">
+        <name>LDO_NB</name>
+        <initializer>18U</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc/ldo_config_genere.h" line="6" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc/ldo_config_genere.h" bodystart="6" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="ldo__config__genere_8h_1a470762ddcaa539bf66d27ef3f0abd707" prot="public" static="no">
+        <name>LDO_CONFIG_CRC32</name>
+        <initializer>0x30A4CC7DUL</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc/ldo_config_genere.h" line="7" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc/ldo_config_genere.h" bodystart="7" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc/ldo_config_genere.h"/>
+  </compounddef>
+</doxygen>

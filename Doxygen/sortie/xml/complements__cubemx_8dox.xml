@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="complements__cubemx_8dox" kind="file" language="C++">
+    <compoundname>complements_cubemx.dox</compoundname>
+    <briefdescription>
+<para>Documentation des fonctions generees par STM32CubeMX. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Les commentaires de ces fonctions dans main.c sont reecrits par CubeMX a chaque generation de code : leur documentation (role dans le projet, exemple d&apos;utilisation, module) est donc ecrite ici. Doxygen la fusionne avec le commentaire d&apos;origine de main.c. </para>
+    </detaileddescription>
+    <location file="complements_cubemx.dox"/>
+  </compounddef>
+</doxygen>

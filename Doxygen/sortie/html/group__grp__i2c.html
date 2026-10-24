@@ -1,0 +1,825 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lwip_demo_H753 - Controleur de LDO: Scan et diagnostic I2C</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Lwip_demo_H753 - Controleur de LDO<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">Firmware STM32H753ZI : pilotage de 18 LDO (configuration CSV, DAC MCP47FEB28, protection OC)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Recherche" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('group__grp__i2c.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Scan et diagnostic I2C </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Déblocage des bus, verrous I2C, scan et rapports.  
+<a href="#details">Plus de détails...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:ga64c71e2587dfe3b42d37bd356dd021a0" id="r_ga64c71e2587dfe3b42d37bd356dd021a0"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga64c71e2587dfe3b42d37bd356dd021a0">I2C1_BusRecovery</a> (void)</td></tr>
+<tr class="memdesc:ga64c71e2587dfe3b42d37bd356dd021a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sequence de recuperation du bus I2C1 (PB8=SCL, PB9=SDA) en cas de bus bloque (SDA maintenu bas par un esclave en plein transfert interrompu). Reconfigure temporairement les broches en GPIO, genere jusqu'a 9 fronts d'horloge pour forcer l'esclave a liberer SDA, emet une condition STOP manuelle, puis restaure la configuration I2C normale.  <br /></td></tr>
+<tr class="memitem:ga2f7d3957d1b8de76916916f379898287" id="r_ga2f7d3957d1b8de76916916f379898287"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga2f7d3957d1b8de76916916f379898287">I2C_BusRecovery</a> (GPIO_TypeDef *port, uint16_t scl_pin, uint16_t sda_pin, uint8_t af_i2c)</td></tr>
+<tr class="memdesc:ga2f7d3957d1b8de76916916f379898287"><td class="mdescLeft">&#160;</td><td class="mdescRight">Version generique de I2C1_BusRecovery() pour n'importe quel bus : passe SCL/SDA en sorties open-drain, envoie jusqu'a 9 fronts d'horloge pour qu'un esclave bloque relache SDA, genere un STOP manuel, puis remet les broches en fonction alternative I2C.  <br /></td></tr>
+<tr class="memitem:ga9c1e98ecaf3c304b9045320209882bf7" id="r_ga9c1e98ecaf3c304b9045320209882bf7"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga9c1e98ecaf3c304b9045320209882bf7">CreerMutexI2C</a> (void)</td></tr>
+<tr class="memdesc:ga9c1e98ecaf3c304b9045320209882bf7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cree les deux mutex I2C (un par bus). A appeler UNE SEULE FOIS, avant que quoi que ce soit puisse emettre sur hi2c1/ hi2c2 (donc avant udpServer_init() dans StartLwipTask() et avant la premiere iteration de la boucle for(;;)).  <br /></td></tr>
+<tr class="memitem:ga5cb1cd70b1dd76a8aadb2bccb2837d2f" id="r_ga5cb1cd70b1dd76a8aadb2bccb2837d2f"><td class="memItemLeft">static osMutexId&#160;</td><td class="memItemRight"><a class="el" href="#ga5cb1cd70b1dd76a8aadb2bccb2837d2f">ResoudreMutexI2C</a> (I2C_HandleTypeDef *hi2c)</td></tr>
+<tr class="memdesc:ga5cb1cd70b1dd76a8aadb2bccb2837d2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retourne le mutex correspondant au bus d'un handle I2C donne.  <br /></td></tr>
+<tr class="memitem:ga779f08189cf1996577c596f37e17f128" id="r_ga779f08189cf1996577c596f37e17f128"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga779f08189cf1996577c596f37e17f128">ScanI2C</a> (I2C_HandleTypeDef *hi2c, <a class="el" href="struct_scan_result__t.html">ScanResult_t</a> *result)</td></tr>
+<tr class="memdesc:ga779f08189cf1996577c596f37e17f128"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scanne toutes les adresses I2C possibles (hors General Call =&gt; 0x00) sur le bus passe en parametre, et remplit le resultat. Fonction "pure" : aucun effet de bord sur rapport_scan ou toute autre variable globale de texte.  <br /></td></tr>
+<tr class="memitem:ga66520b068519c774eaeaa10c91bc87e4" id="r_ga66520b068519c774eaeaa10c91bc87e4"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga66520b068519c774eaeaa10c91bc87e4">FormaterRapport</a> (const char *nom_bus, const <a class="el" href="struct_scan_result__t.html">ScanResult_t</a> *result)</td></tr>
+<tr class="memdesc:ga66520b068519c774eaeaa10c91bc87e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construit, dans le buffer global rapport_scan, une ligne "I2Cx:0xNN:message" pour chaque adresse trouvee dans un resultat de scan. N'efface PAS rapport_scan avant d'ecrire : permet d'enchainer plusieurs bus dans le meme rapport (voir exemple).  <br /></td></tr>
+<tr class="memitem:gad3e3e81fe86eb2d85a4b3a6e84e0b550" id="r_gad3e3e81fe86eb2d85a4b3a6e84e0b550"><td class="memItemLeft">static int&#160;</td><td class="memItemRight"><a class="el" href="#gad3e3e81fe86eb2d85a4b3a6e84e0b550">EstDansListe</a> (uint16_t adresse, const uint16_t *liste, uint8_t taille)</td></tr>
+<tr class="memdesc:gad3e3e81fe86eb2d85a4b3a6e84e0b550"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifie si une adresse (format HAL) fait partie d'une liste donnee. Fonction utilitaire generique, reutilisable pour n'importe quelle liste d'adresses (exclusion, inclusion, ...).  <br /></td></tr>
+<tr class="memitem:ga78897222189585f100bc3855e98e25cc" id="r_ga78897222189585f100bc3855e98e25cc"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga78897222189585f100bc3855e98e25cc">EnvoyerBonjourATous</a> (I2C_HandleTypeDef *hi2c, const char *nom_bus, const <a class="el" href="struct_scan_result__t.html">ScanResult_t</a> *result, const uint16_t *adresses_exclues, uint8_t nb_exclues)</td></tr>
+<tr class="memdesc:ga78897222189585f100bc3855e98e25cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Envoie un message "Bonjour" a chacune des adresses trouvees par un scan I2C prealable (ScanI2C()), SAUF celles listees dans adresses_exclues (utile pour eviter d'envoyer du texte libre a un appareil qui attend un protocole binaire strict, comme un DAC - il repondrait par un NACK/ERROR sans que ce soit une vraie panne). Le message inclut : l'identifiant du maitre (STM32, texte fixe - un maitre I2C n'a pas d'adresse de bus a proprement parler), l'adresse de l'esclave destinataire, et le temps ecoule depuis le demarrage du STM32 (voir FormaterTempsEcoule()). Ajoute une ligne de compte-rendu dans rapport_scan pour chaque envoi (et pour chaque adresse ignoree).  <br /></td></tr>
+<tr class="memitem:ga45ca114e0fa3b65a4923db15bbc51a0e" id="r_ga45ca114e0fa3b65a4923db15bbc51a0e"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga45ca114e0fa3b65a4923db15bbc51a0e">h_SCAN_I2C1</a> (void)</td></tr>
+<tr class="memdesc:ga45ca114e0fa3b65a4923db15bbc51a0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler de la commande reseau "SCAN_I2C1". Relance un scan complet du bus I2C1 (ScanI2C()) et renvoie le contenu integral de la structure ScanResult_t (compteurs + liste des adresses trouvees) dans la reponse UDP.  <br /></td></tr>
+<tr class="memitem:gaf5fe51ec000f68a1b5a11cea7a1ffd32" id="r_gaf5fe51ec000f68a1b5a11cea7a1ffd32"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#gaf5fe51ec000f68a1b5a11cea7a1ffd32">h_SCAN_I2C2</a> (void)</td></tr>
+<tr class="memdesc:gaf5fe51ec000f68a1b5a11cea7a1ffd32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler de la commande reseau "SCAN_I2C2". Identique a h_SCAN_I2C1() mais sur le bus I2C2.  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Déblocage des bus, verrous I2C, scan et rapports. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentation des fonctions</h2>
+<a id="ga64c71e2587dfe3b42d37bd356dd021a0" name="ga64c71e2587dfe3b42d37bd356dd021a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga64c71e2587dfe3b42d37bd356dd021a0">&#9670;&#160;</a></span>I2C1_BusRecovery()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void I2C1_BusRecovery </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sequence de recuperation du bus I2C1 (PB8=SCL, PB9=SDA) en cas de bus bloque (SDA maintenu bas par un esclave en plein transfert interrompu). Reconfigure temporairement les broches en GPIO, genere jusqu'a 9 fronts d'horloge pour forcer l'esclave a liberer SDA, emet une condition STOP manuelle, puis restaure la configuration I2C normale. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Appeler UNE FOIS juste avant MX_I2C1_Init() dans <a class="code hl_function" href="group__grp__cubemx.html#ga840291bc02cba5474a4cb46a9b9566fe">main</a>(),</div>
+<div class="line">si HAL_I2C_IsDeviceReady() renvoie systematiquement HAL_BUSY.</div>
+<div class="ttc" id="agroup__grp__cubemx_html_ga840291bc02cba5474a4cb46a9b9566fe"><div class="ttname"><a href="group__grp__cubemx.html#ga840291bc02cba5474a4cb46a9b9566fe">main</a></div><div class="ttdeci">int main(void)</div><div class="ttdoc">The application entry point.</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l01824">main.c:1824</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00467">467</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l00467">I2C1_BusRecovery()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l00467">I2C1_BusRecovery()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__i2c_ga64c71e2587dfe3b42d37bd356dd021a0_cgraph.svg" width="147" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__i2c_ga64c71e2587dfe3b42d37bd356dd021a0_icgraph.svg" width="147" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga2f7d3957d1b8de76916916f379898287" name="ga2f7d3957d1b8de76916916f379898287"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2f7d3957d1b8de76916916f379898287">&#9670;&#160;</a></span>I2C_BusRecovery()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void I2C_BusRecovery </td>
+          <td>(</td>
+          <td class="paramtype">GPIO_TypeDef *</td>          <td class="paramname"><span class="paramname"><em>port</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>scl_pin</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>sda_pin</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>af_i2c</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Version generique de I2C1_BusRecovery() pour n'importe quel bus : passe SCL/SDA en sorties open-drain, envoie jusqu'a 9 fronts d'horloge pour qu'un esclave bloque relache SDA, genere un STOP manuel, puis remet les broches en fonction alternative I2C. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">port</td><td>Port GPIO des deux broches (ex : GPIOB). </td></tr>
+    <tr><td class="paramname">scl_pin</td><td>Broche SCL (ex : GPIO_PIN_10 pour I2C2). </td></tr>
+    <tr><td class="paramname">sda_pin</td><td>Broche SDA (ex : GPIO_PIN_11 pour I2C2). </td></tr>
+    <tr><td class="paramname">af_i2c</td><td>Fonction alternative I2C a restaurer (ex : GPIO_AF4_I2C2). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="comment">// Bus I2C2 bloque (SDA tenue a 0 par un esclave) :</span></div>
+<div class="line"><a class="code hl_function" href="#ga2f7d3957d1b8de76916916f379898287">I2C_BusRecovery</a>(GPIOB, GPIO_PIN_10, GPIO_PIN_11, GPIO_AF4_I2C2);</div>
+<div class="line">MX_I2C2_Init();</div>
+<div class="ttc" id="agroup__grp__i2c_html_ga2f7d3957d1b8de76916916f379898287"><div class="ttname"><a href="#ga2f7d3957d1b8de76916916f379898287">I2C_BusRecovery</a></div><div class="ttdeci">static void I2C_BusRecovery(GPIO_TypeDef *port, uint16_t scl_pin, uint16_t sda_pin, uint8_t af_i2c)</div><div class="ttdoc">Version generique de I2C1_BusRecovery() pour n&#39;importe quel bus : passe SCL/SDA en sorties open-drain...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l00539">main.c:539</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00539">539</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l00539">I2C_BusRecovery()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l00539">I2C_BusRecovery()</a>, et <a class="el" href="main_8c_source.html#l01824">main()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__i2c_ga2f7d3957d1b8de76916916f379898287_cgraph.svg" width="139" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__i2c_ga2f7d3957d1b8de76916916f379898287_icgraph.svg" width="238" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga9c1e98ecaf3c304b9045320209882bf7" name="ga9c1e98ecaf3c304b9045320209882bf7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9c1e98ecaf3c304b9045320209882bf7">&#9670;&#160;</a></span>CreerMutexI2C()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CreerMutexI2C </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Cree les deux mutex I2C (un par bus). A appeler UNE SEULE FOIS, avant que quoi que ce soit puisse emettre sur hi2c1/ hi2c2 (donc avant udpServer_init() dans StartLwipTask() et avant la premiere iteration de la boucle for(;;)). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Remplit i2c1_mutex_id/i2c2_mutex_id. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="comment">// Debut de StartLwipTask(), avant udpServer_init() :</span></div>
+<div class="line">CreerMutexI2C();</div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00688">688</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l00688">CreerMutexI2C()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l00688">CreerMutexI2C()</a>, et <a class="el" href="main_8c_source.html#l06730">StartLwipTask()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__i2c_ga9c1e98ecaf3c304b9045320209882bf7_cgraph.svg" width="122" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__i2c_ga9c1e98ecaf3c304b9045320209882bf7_icgraph.svg" width="371" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga5cb1cd70b1dd76a8aadb2bccb2837d2f" name="ga5cb1cd70b1dd76a8aadb2bccb2837d2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5cb1cd70b1dd76a8aadb2bccb2837d2f">&#9670;&#160;</a></span>ResoudreMutexI2C()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">osMutexId ResoudreMutexI2C </td>
+          <td>(</td>
+          <td class="paramtype">I2C_HandleTypeDef *</td>          <td class="paramname"><span class="paramname"><em>hi2c</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retourne le mutex correspondant au bus d'un handle I2C donne. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hi2c</td><td>Handle I2C (&amp;hi2c1 ou &amp;hi2c2). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">osMutexId</td><td>i2c2_mutex_id si hi2c == &amp;hi2c2, i2c1_mutex_id sinon (comportement par defaut : hi2c1, comme ailleurs dans ce fichier ou "bus == 2" bascule sur hi2c2). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">osMutexId m = <a class="code hl_function" href="#ga5cb1cd70b1dd76a8aadb2bccb2837d2f">ResoudreMutexI2C</a>(hi2c);</div>
+<div class="line">osMutexWait(m, osWaitForever);</div>
+<div class="line">HAL_I2C_Master_Transmit(hi2c, ...);</div>
+<div class="line">osMutexRelease(m);</div>
+<div class="ttc" id="agroup__grp__i2c_html_ga5cb1cd70b1dd76a8aadb2bccb2837d2f"><div class="ttname"><a href="#ga5cb1cd70b1dd76a8aadb2bccb2837d2f">ResoudreMutexI2C</a></div><div class="ttdeci">static osMutexId ResoudreMutexI2C(I2C_HandleTypeDef *hi2c)</div><div class="ttdoc">Retourne le mutex correspondant au bus d&#39;un handle I2C donne.</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l00728">main.c:728</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00728">728</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l00728">ResoudreMutexI2C()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l05222">EcrireADG728()</a>, <a class="el" href="main_8c_source.html#l04676">EcrireDACEeprom()</a>, <a class="el" href="main_8c_source.html#l00956">EcrireDACVolatile()</a>, <a class="el" href="main_8c_source.html#l01068">EcrireRegistreConfigDAC()</a>, <a class="el" href="main_8c_source.html#l01484">EnvoyerBonjourATous()</a>, <a class="el" href="main_8c_source.html#l01013">LireRegistreConfigDAC()</a>, <a class="el" href="main_8c_source.html#l04579">LireRegistreValeurDAC()</a>, <a class="el" href="main_8c_source.html#l00728">ResoudreMutexI2C()</a>, <a class="el" href="main_8c_source.html#l00748">ScanI2C()</a>, et <a class="el" href="main_8c_source.html#l06730">StartLwipTask()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__i2c_ga5cb1cd70b1dd76a8aadb2bccb2837d2f_cgraph.svg" width="146" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__i2c_ga5cb1cd70b1dd76a8aadb2bccb2837d2f_icgraph.svg" width="1838" height="1135"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga779f08189cf1996577c596f37e17f128" name="ga779f08189cf1996577c596f37e17f128"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga779f08189cf1996577c596f37e17f128">&#9670;&#160;</a></span>ScanI2C()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ScanI2C </td>
+          <td>(</td>
+          <td class="paramtype">I2C_HandleTypeDef *</td>          <td class="paramname"><span class="paramname"><em>hi2c</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_scan_result__t.html">ScanResult_t</a> *</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Scanne toutes les adresses I2C possibles (hors General Call =&gt; 0x00) sur le bus passe en parametre, et remplit le resultat. Fonction "pure" : aucun effet de bord sur rapport_scan ou toute autre variable globale de texte. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hi2c</td><td>Pointeur vers le handle I2C a scanner (&amp;hi2c1, &amp;hi2c2, ...). </td></tr>
+    <tr><td class="paramname">result</td><td>Pointeur vers la structure a remplir avec les resultats. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="keyword">static</span> <a class="code hl_struct" href="struct_scan_result__t.html">ScanResult_t</a> res_i2c1;</div>
+<div class="line"><a class="code hl_function" href="#ga779f08189cf1996577c596f37e17f128">ScanI2C</a>(&amp;hi2c1, &amp;res_i2c1);</div>
+<div class="ttc" id="agroup__grp__i2c_html_ga779f08189cf1996577c596f37e17f128"><div class="ttname"><a href="#ga779f08189cf1996577c596f37e17f128">ScanI2C</a></div><div class="ttdeci">static void ScanI2C(I2C_HandleTypeDef *hi2c, ScanResult_t *result)</div><div class="ttdoc">Scanne toutes les adresses I2C possibles (hors General Call =&gt; 0x00) sur le bus passe en parametre,...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l00748">main.c:748</a></div></div>
+<div class="ttc" id="astruct_scan_result__t_html"><div class="ttname"><a href="struct_scan_result__t.html">ScanResult_t</a></div><div class="ttdoc">Resultat d&#39;un scan I2C complet (voir ScanI2C()) : la liste des adresses ayant repondu,...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l00584">main.c:584</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00748">748</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l00728">ResoudreMutexI2C()</a>, et <a class="el" href="main_8c_source.html#l00748">ScanI2C()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01648">ExecuterCaptureComplete()</a>, <a class="el" href="main_8c_source.html#l04380">h_SCAN_I2C1()</a>, <a class="el" href="main_8c_source.html#l04408">h_SCAN_I2C2()</a>, et <a class="el" href="main_8c_source.html#l00748">ScanI2C()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__i2c_ga779f08189cf1996577c596f37e17f128_cgraph.svg" width="266" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__i2c_ga779f08189cf1996577c596f37e17f128_icgraph.svg" width="556" height="211"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga66520b068519c774eaeaa10c91bc87e4" name="ga66520b068519c774eaeaa10c91bc87e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga66520b068519c774eaeaa10c91bc87e4">&#9670;&#160;</a></span>FormaterRapport()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FormaterRapport </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>nom_bus</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_scan_result__t.html">ScanResult_t</a> *</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construit, dans le buffer global rapport_scan, une ligne "I2Cx:0xNN:message" pour chaque adresse trouvee dans un resultat de scan. N'efface PAS rapport_scan avant d'ecrire : permet d'enchainer plusieurs bus dans le meme rapport (voir exemple). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nom_bus</td><td>Nom du bus a afficher dans le rapport (ex : "I2C1"). </td></tr>
+    <tr><td class="paramname">result</td><td>Pointeur vers un resultat deja rempli par ScanI2C(). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Complete rapport_scan. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="keyword">static</span> <a class="code hl_struct" href="struct_scan_result__t.html">ScanResult_t</a> res_i2c1, res_i2c2;</div>
+<div class="line"><a class="code hl_function" href="#ga779f08189cf1996577c596f37e17f128">ScanI2C</a>(&amp;hi2c1, &amp;res_i2c1);</div>
+<div class="line"><a class="code hl_function" href="#ga779f08189cf1996577c596f37e17f128">ScanI2C</a>(&amp;hi2c2, &amp;res_i2c2);</div>
+<div class="line"> </div>
+<div class="line">rapport_scan[0] = <span class="charliteral">&#39;\0&#39;</span>;           <span class="comment">// vide le rapport avant de le reconstruire</span></div>
+<div class="line"><a class="code hl_function" href="#ga66520b068519c774eaeaa10c91bc87e4">FormaterRapport</a>(<span class="stringliteral">&quot;I2C1&quot;</span>, &amp;res_i2c1);</div>
+<div class="line"><a class="code hl_function" href="#ga66520b068519c774eaeaa10c91bc87e4">FormaterRapport</a>(<span class="stringliteral">&quot;I2C2&quot;</span>, &amp;res_i2c2);</div>
+<div class="line"><span class="comment">// rapport_scan contient alors par exemple :</span></div>
+<div class="line"><span class="comment">// &quot;I2C1:0x84:OK\nI2C1:0xC4:OK\nI2C2:0x50:OK\n&quot;</span></div>
+<div class="ttc" id="agroup__grp__i2c_html_ga66520b068519c774eaeaa10c91bc87e4"><div class="ttname"><a href="#ga66520b068519c774eaeaa10c91bc87e4">FormaterRapport</a></div><div class="ttdeci">static void FormaterRapport(const char *nom_bus, const ScanResult_t *result)</div><div class="ttdoc">Construit, dans le buffer global rapport_scan, une ligne &quot;I2Cx:0xNN:message&quot; pour chaque adresse trou...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l00802">main.c:802</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00802">802</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l00802">FormaterRapport()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01648">ExecuterCaptureComplete()</a>, et <a class="el" href="main_8c_source.html#l00802">FormaterRapport()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__i2c_ga66520b068519c774eaeaa10c91bc87e4_cgraph.svg" width="131" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__i2c_ga66520b068519c774eaeaa10c91bc87e4_icgraph.svg" width="603" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gad3e3e81fe86eb2d85a4b3a6e84e0b550" name="gad3e3e81fe86eb2d85a4b3a6e84e0b550"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad3e3e81fe86eb2d85a4b3a6e84e0b550">&#9670;&#160;</a></span>EstDansListe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int EstDansListe </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>adresse</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint16_t *</td>          <td class="paramname"><span class="paramname"><em>liste</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>taille</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Verifie si une adresse (format HAL) fait partie d'une liste donnee. Fonction utilitaire generique, reutilisable pour n'importe quelle liste d'adresses (exclusion, inclusion, ...). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">adresse</td><td>Adresse a rechercher (format HAL, deja decalee). </td></tr>
+    <tr><td class="paramname">liste</td><td>Tableau d'adresses (format HAL) dans lequel chercher. </td></tr>
+    <tr><td class="paramname">taille</td><td>Nombre d'elements dans liste. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">int</td><td>1 si l'adresse est trouvee dans la liste, 0 sinon. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keyword">const</span> uint16_t exclues[] = { 0xC4 };</div>
+<div class="line"><span class="keywordflow">if</span> (<a class="code hl_function" href="#gad3e3e81fe86eb2d85a4b3a6e84e0b550">EstDansListe</a>(0xC4, exclues, 1)) { / * ignorer * / }</div>
+<div class="ttc" id="agroup__grp__i2c_html_gad3e3e81fe86eb2d85a4b3a6e84e0b550"><div class="ttname"><a href="#gad3e3e81fe86eb2d85a4b3a6e84e0b550">EstDansListe</a></div><div class="ttdeci">static int EstDansListe(uint16_t adresse, const uint16_t *liste, uint8_t taille)</div><div class="ttdoc">Verifie si une adresse (format HAL) fait partie d&#39;une liste donnee. Fonction utilitaire generique,...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l01443">main.c:1443</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l01443">1443</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l01443">EstDansListe()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01484">EnvoyerBonjourATous()</a>, et <a class="el" href="main_8c_source.html#l01443">EstDansListe()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__i2c_gad3e3e81fe86eb2d85a4b3a6e84e0b550_cgraph.svg" width="111" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__i2c_gad3e3e81fe86eb2d85a4b3a6e84e0b550_icgraph.svg" width="782" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga78897222189585f100bc3855e98e25cc" name="ga78897222189585f100bc3855e98e25cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga78897222189585f100bc3855e98e25cc">&#9670;&#160;</a></span>EnvoyerBonjourATous()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EnvoyerBonjourATous </td>
+          <td>(</td>
+          <td class="paramtype">I2C_HandleTypeDef *</td>          <td class="paramname"><span class="paramname"><em>hi2c</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>nom_bus</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_scan_result__t.html">ScanResult_t</a> *</td>          <td class="paramname"><span class="paramname"><em>result</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint16_t *</td>          <td class="paramname"><span class="paramname"><em>adresses_exclues</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>nb_exclues</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Envoie un message "Bonjour" a chacune des adresses trouvees par un scan I2C prealable (ScanI2C()), SAUF celles listees dans adresses_exclues (utile pour eviter d'envoyer du texte libre a un appareil qui attend un protocole binaire strict, comme un DAC - il repondrait par un NACK/ERROR sans que ce soit une vraie panne). Le message inclut : l'identifiant du maitre (STM32, texte fixe - un maitre I2C n'a pas d'adresse de bus a proprement parler), l'adresse de l'esclave destinataire, et le temps ecoule depuis le demarrage du STM32 (voir FormaterTempsEcoule()). Ajoute une ligne de compte-rendu dans rapport_scan pour chaque envoi (et pour chaque adresse ignoree). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hi2c</td><td>Pointeur vers le handle I2C a utiliser (&amp;hi2c1, &amp;hi2c2, ...). </td></tr>
+    <tr><td class="paramname">nom_bus</td><td>Nom du bus a afficher dans le rapport (ex : "I2C1"). </td></tr>
+    <tr><td class="paramname">result</td><td>Pointeur vers un resultat de scan deja rempli par ScanI2C(). </td></tr>
+    <tr><td class="paramname">adresses_exclues</td><td>Tableau d'adresses (format HAL) a ne PAS contacter. Passer NULL et 0 si aucune exclusion. </td></tr>
+    <tr><td class="paramname">nb_exclues</td><td>Nombre d'elements dans adresses_exclues. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Complete rapport_scan. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keyword">const</span> uint16_t exclues[] = { (0x62 &lt;&lt; 1) };  <span class="comment">// le DAC</span></div>
+<div class="line"><a class="code hl_function" href="#ga78897222189585f100bc3855e98e25cc">EnvoyerBonjourATous</a>(&amp;hi2c1, <span class="stringliteral">&quot;I2C1&quot;</span>, &amp;res_i2c1, exclues, 1);</div>
+<div class="line"><span class="comment">// ou, sans aucune exclusion :</span></div>
+<div class="line"><a class="code hl_function" href="#ga78897222189585f100bc3855e98e25cc">EnvoyerBonjourATous</a>(&amp;hi2c1, <span class="stringliteral">&quot;I2C1&quot;</span>, &amp;res_i2c1, NULL, 0);</div>
+<div class="ttc" id="agroup__grp__i2c_html_ga78897222189585f100bc3855e98e25cc"><div class="ttname"><a href="#ga78897222189585f100bc3855e98e25cc">EnvoyerBonjourATous</a></div><div class="ttdeci">static void EnvoyerBonjourATous(I2C_HandleTypeDef *hi2c, const char *nom_bus, const ScanResult_t *result, const uint16_t *adresses_exclues, uint8_t nb_exclues)</div><div class="ttdoc">Envoie un message &quot;Bonjour&quot; a chacune des adresses trouvees par un scan I2C prealable (ScanI2C()),...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l01484">main.c:1484</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l01484">1484</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l01484">EnvoyerBonjourATous()</a>, <a class="el" href="main_8c_source.html#l01443">EstDansListe()</a>, <a class="el" href="main_8c_source.html#l01417">FormaterTempsEcoule()</a>, et <a class="el" href="main_8c_source.html#l00728">ResoudreMutexI2C()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01484">EnvoyerBonjourATous()</a>, et <a class="el" href="main_8c_source.html#l01648">ExecuterCaptureComplete()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__i2c_ga78897222189585f100bc3855e98e25cc_cgraph.svg" width="360" height="211"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__i2c_ga78897222189585f100bc3855e98e25cc_icgraph.svg" width="634" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga45ca114e0fa3b65a4923db15bbc51a0e" name="ga45ca114e0fa3b65a4923db15bbc51a0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga45ca114e0fa3b65a4923db15bbc51a0e">&#9670;&#160;</a></span>h_SCAN_I2C1()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void h_SCAN_I2C1 </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handler de la commande reseau "SCAN_I2C1". Relance un scan complet du bus I2C1 (ScanI2C()) et renvoie le contenu integral de la structure ScanResult_t (compteurs + liste des adresses trouvees) dans la reponse UDP. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Remplit response avec le format : "SCAN:I2C1:ok=&lt;n&gt;:err=&lt;n&gt;:busy=&lt;n&gt;:to=&lt;n&gt;:trouve=0xNN,0xNN,...\n" </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Trame UDP recue : <span class="stringliteral">&quot;SCAN_I2C1&quot;</span> -&gt; <a class="code hl_function" href="#ga45ca114e0fa3b65a4923db15bbc51a0e">h_SCAN_I2C1</a>();</div>
+<div class="line">Reponse type : <span class="stringliteral">&quot;SCAN:I2C1:ok=1:err=126:busy=0:to=0:trouve=0xC4\n&quot;</span></div>
+<div class="ttc" id="agroup__grp__i2c_html_ga45ca114e0fa3b65a4923db15bbc51a0e"><div class="ttname"><a href="#ga45ca114e0fa3b65a4923db15bbc51a0e">h_SCAN_I2C1</a></div><div class="ttdeci">static void h_SCAN_I2C1(void)</div><div class="ttdoc">Handler de la commande reseau &quot;SCAN_I2C1&quot;. Relance un scan complet du bus I2C1 (ScanI2C()) et renvoie...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l04380">main.c:4380</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l04380">4380</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l04380">h_SCAN_I2C1()</a>, et <a class="el" href="main_8c_source.html#l00748">ScanI2C()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04380">h_SCAN_I2C1()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__i2c_ga45ca114e0fa3b65a4923db15bbc51a0e_cgraph.svg" width="422" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__i2c_ga45ca114e0fa3b65a4923db15bbc51a0e_icgraph.svg" width="119" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gaf5fe51ec000f68a1b5a11cea7a1ffd32" name="gaf5fe51ec000f68a1b5a11cea7a1ffd32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf5fe51ec000f68a1b5a11cea7a1ffd32">&#9670;&#160;</a></span>h_SCAN_I2C2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void h_SCAN_I2C2 </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handler de la commande reseau "SCAN_I2C2". Identique a h_SCAN_I2C1() mais sur le bus I2C2. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Remplit response, meme format que h_SCAN_I2C1() avec "I2C2" a la place de "I2C1". </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Trame UDP recue : <span class="stringliteral">&quot;SCAN_I2C2&quot;</span> -&gt; <a class="code hl_function" href="#gaf5fe51ec000f68a1b5a11cea7a1ffd32">h_SCAN_I2C2</a>();</div>
+<div class="ttc" id="agroup__grp__i2c_html_gaf5fe51ec000f68a1b5a11cea7a1ffd32"><div class="ttname"><a href="#gaf5fe51ec000f68a1b5a11cea7a1ffd32">h_SCAN_I2C2</a></div><div class="ttdeci">static void h_SCAN_I2C2(void)</div><div class="ttdoc">Handler de la commande reseau &quot;SCAN_I2C2&quot;. Identique a h_SCAN_I2C1() mais sur le bus I2C2.</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l04408">main.c:4408</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l04408">4408</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l04408">h_SCAN_I2C2()</a>, et <a class="el" href="main_8c_source.html#l00748">ScanI2C()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04408">h_SCAN_I2C2()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__i2c_gaf5fe51ec000f68a1b5a11cea7a1ffd32_cgraph.svg" width="422" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__i2c_gaf5fe51ec000f68a1b5a11cea7a1ffd32_icgraph.svg" width="119" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

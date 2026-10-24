@@ -1,0 +1,16 @@
+<map id="h_SET_DAC_GAIN" name="h_SET_DAC_GAIN">
+<area shape="rect" id="Node000001" title="Handler de la commande reseau &quot;SET_DAC_GAIN&quot; &#45; ecrit le registre Gain (0x0A) d&#39;une puce DAC : gain de..." alt="" coords="5,67,143,93"/>
+<area shape="poly" id="edge5_Node000001_Node000001" title=" " alt="" coords="39,67,33,58,38,48,52,42,74,40,98,43,112,51,107,52,97,48,74,45,53,47,41,52,39,57,44,66"/>
+<area shape="rect" id="Node000002" href="$group__grp__dac.html#ga64f4ecd7d147a039d045da6b64975451" title="Ecrit un registre VOLATILE de CONFIGURATION du DAC MCP47FEB28 (adresses memoire 08h/09h/0Ah UNIQUEMEN..." alt="" coords="191,29,362,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="142,65,188,58,183,60,144,70"/>
+<area shape="rect" id="Node000004" href="$group__grp__dac.html#ga657c4f07f159cff86dc8a577e46d0ddb" title="Memorise la nouvelle configuration attendue apres un SET_DAC_VREF/ PD/GAIN reussi,..." alt="" coords="204,104,348,131"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="143,90,192,101,186,102,143,95"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="242,28,236,21,240,11,254,5,276,3,300,5,314,14,309,14,299,10,276,8,255,10,244,15,241,20,247,30"/>
+<area shape="rect" id="Node000003" href="$group__grp__i2c.html#ga5cb1cd70b1dd76a8aadb2bccb2837d2f" title="Retourne le mutex correspondant au bus d&#39;un handle I2C donne." alt="" coords="410,29,544,56"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="362,40,397,42,392,43,363,45"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="443,28,437,21,441,11,455,5,477,3,501,5,515,14,510,14,500,10,477,8,456,10,445,15,442,20,448,30"/>
+<area shape="poly" id="edge9_Node000004_Node000004" title=" " alt="" coords="242,103,236,95,240,86,254,79,276,77,300,80,314,89,309,88,299,85,276,83,255,85,244,89,241,95,247,105"/>
+<area shape="rect" id="Node000005" href="$group__grp__dac.html#gab992619e0a04a6fbb9a6a97c2e284c65" title="Index d&#39;une puce de I2C1 dans dacs_i2c1_adresses[]." alt="" coords="424,104,530,131"/>
+<area shape="poly" id="edge7_Node000004_Node000005" title=" " alt="" coords="349,115,412,117,406,117,349,120"/>
+<area shape="poly" id="edge8_Node000005_Node000005" title=" " alt="" coords="443,102,437,95,441,86,455,79,477,77,501,80,515,89,510,88,500,85,477,83,456,85,445,89,442,95,448,105"/>
+</map>

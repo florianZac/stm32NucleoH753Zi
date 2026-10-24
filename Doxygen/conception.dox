@@ -1,0 +1,260 @@
+/**
+@mainpage Document de conception — firmware Lwip_demo_H753
+
+@section sec_objet 1. Objet et périmètre
+
+Ce document s'adresse aux développeurs qui reprennent ou font évoluer le firmware
+de la carte STM32H753ZI (Nucleo-144) qui pilote les régulateurs LDO. Il est
+<b>généré par Doxygen</b> à partir des commentaires du code : toute fonction
+documentée dans `Core/Src/main.c` y apparaît automatiquement avec son rôle, ses
+paramètres, sa valeur de retour et un exemple d'utilisation. Les chapitres 1 à 9
+(ce fichier, `Doxygen/conception.dox`) décrivent la conception d'ensemble ; la
+suite décrit chaque fonction, module par module.
+
+Périmètre : `Core/Src/main.c`, `Core/Inc/main.h`, l'en-tête généré
+`Core/Inc/ldo_config_genere.h` et les scripts Python de `configurationLDO/`.
+Les pilotes HAL, LwIP et FreeRTOS fournis par ST ne sont pas décrits.
+
+@section sec_archi 2. Architecture
+
+@subsection sec_archi_mat 2.1 Matériel piloté
+
+| Élément | Liaison | Rôle |
+|---------|---------|------|
+| 18 LDO (1PSp à 16PSp, 2PLn, 3PLn) | GPIO EN / BLD (sorties), OC / PG (entrées) | Rails d'alimentation pilotés |
+| MCP47FEB28 0xC0, 0xC2 | I2C1 (PB8/PB9), actif | Tension et seuil de courant des LDO (voies décrites dans le CSV) |
+| MCP47FEB28 0xC0, 0xC2, 0xC4 | I2C2 (PB10/PB11), désactivé par défaut | DAC des autres LDO (héritage) |
+| 3× ADG728 (0x4C-0x4E) | I2C1 | Multiplexeur de mesure de tension vers PC0 (ADC1, canal 10) |
+| 2× ADG728 (0x4C-0x4D) | I2C2 | Multiplexeur de mesure de courant vers PF4 (ADC3, canal 9) |
+| Shunt R97 + OP184 + LM211 | broche OC | Protection de surintensité (2,61 V/A) |
+| Ethernet (LwIP) | UDP 192.168.0.123:7 | Commandes depuis le contrôleur PC |
+| USART1 (PB6/PB7) 115200 8N1 | UART | Rapports de diagnostic et commandes |
+
+@subsection sec_archi_demarrage 2.2 Séquence de démarrage
+
+-# `main()` (code CubeMX) : caches, `HAL_Init()`, horloges, déblocage des bus
+   I2C (I2C_BusRecovery()), `MX_GPIO_Init()` et périphériques, puis
+   LDO_GPIO_Init() qui configure les broches des LDO à partir de `ldoConfig[]`.
+-# Création de la tâche `lwipTask` (StartLwipTask()) et démarrage de FreeRTOS.
+-# StartLwipTask() : LwIP, verrous (CreerMutexI2C(), CreerMutexUART(),
+   CreerMutexCommandes()), réception UART, LDO_InitialiserTables(),
+   OC_InitialiserSeuilsDefaut(), InitialiserConfigDacsI2C1(),
+   DAC_RestaurerMemoire(), DAC_ConfigurerSeuilsPotentiometre(),
+   CmdOnOff_Initialiser(), MX_OC_EXTI_Init(), udpServer_init(),
+   sortCommandTable().
+
+@subsection sec_archi_boucle 2.3 Boucle principale
+
+Une seule tâche applicative. À chaque tour de la boucle de StartLwipTask() :
+
+-# LDO_MettreAJour() pour chaque LDO : lecture OC (avant l'écriture de EN),
+   verrouillage éventuel, écriture EN / BLD, lecture PG ;
+-# OC_SignalerEvenements() : une ligne `OC_TRIP:<nom>:...` par nouveau défaut ;
+-# rafraîchissement des puces DAC (`tableDac[]`), sauf puces I2C2 si
+   `i2c2_actif = 0` et sauf puce en cours de balayage ;
+-# boutons : capture complète (ExecuterCaptureComplete()), reset des multiplexeurs ;
+-# SurveillerConfigDacsI2C1(), DAC_TraiterSauvegardes() (EEPROM),
+   CmdOnOff_TraiterSauvegarde() (flash) ;
+-# UART1_TraiterCommande() : commande UART en attente ;
+-# battement de cœur `HB` sur l'UART.
+
+Les commandes UDP sont traitées dans le contexte LwIP (udp_receive_callback()) ;
+les deux chemins appellent tc_request() sous le verrou des commandes.
+
+@subsection sec_archi_commande 2.4 Chemin d'une commande
+
+@code
+UDP  : udp_receive_callback() --+
+                                +--> Commande_Verrouiller()
+UART : HAL_UART_RxCpltCallback()|      last_message = trame
+       -> UART1_TraiterCommande()+      tc_request()  -> handler -> response
+                                       Commande_Deverrouiller()
+                                     reponse renvoyee sur le canal d'origine
+@endcode
+
+tc_request() traite d'abord les commandes à suffixe LDO (`SET_EN_LDO_<nom>`,
+`SET_VAL_LDO_<nom>:<code>`…, nom résolu par findLdoIndex()), puis les commandes
+fixes de `commandTable[]`, triée au démarrage par sortCommandTable() et
+recherchée par dichotomie (findCommandHandler()).
+
+@section sec_csv 3. Configuration des LDO (CSV)
+
+Le câblage des LDO n'est écrit ni dans main.c ni dans le .ioc : il est décrit par
+`configurationLDO/ldo_config.csv`, une ligne par LDO, l'ordre des lignes donnant
+l'index (0 à `LDO_NB`-1).
+
+@code
+ldo_config.csv --(pre-build CubeIDE : python ../configurationLDO/generer_config.py)-->
+    Core/Inc/ldo_config_genere.h   : LDO_NB, LDO_CONFIG_CRC32
+    Core/Inc/ldo_config_lignes.inc : lignes de ldoConfig[] (LDO_Config_t)
+@endcode
+
+- LDO_GPIO_Init() configure les broches à partir de `ldoConfig[]` (le .ioc ne
+  contient plus que la configuration système) ;
+- LDO_InitialiserTables() recopie dans les tables modifiables à chaud
+  (`mappingDacLdo[]`, `muxLdoConfig[]`, `muxLdoConfigCourant[]`) les valeurs du CSV ;
+- h_GET_CONFIG_LDO() renvoie `CONFIG_LDO:NB=<n>:CRC=0x<empreinte>`, que le
+  contrôleur PC compare à son propre CSV ;
+- ne jamais éditer à la main les deux fichiers générés : ils sont réécrits à
+  chaque compilation.
+
+@section sec_donnees 4. Données principales
+
+| Donnée | Type | Rôle |
+|--------|------|------|
+| `ldoConfig[NB_LDO]` | ::LDO_Config_t (const) | Description de chaque LDO, issue du CSV |
+| `EN_LDO[]`, `BL_LDO[]` | `volatile _Bool` | Consignes Enable / Bleeder écrites sur les GPIO par LDO_MettreAJour() |
+| `VAL_LDO[]`, `CURRENT_LDO[]` | `uint16_t` | Codes DAC de tension / de seuil de courant |
+| `DAC1_DEF` … `DAC5_DEF` | trames de 24 octets | Image des 8 voies de chaque puce, réémise à chaque tour |
+| `tableDac[]` | ::DacPuce_t | Puce, bus, adresse, trame de chaque MCP47FEB28 |
+| `mappingDacLdo[]` | ::MappingDacLdo_t | DAC et voie de chaque LDO, modifiable par `SET_DAC_MAPPING_LDO_` |
+| `muxLdoConfig[]`, `muxLdoConfigCourant[]` | ::MuxLdoConfig_t | Voie de multiplexeur de chaque LDO (`MUX_NC` = 0xFF) |
+| `oc_verrou[]`, `oc_nb_declenchements[]` … | tableaux par LDO | État de la protection OC |
+| `cmd_on_off_bld[]`, `cmd_on_off_oc[]` | `uint8_t` | Commandes ON/OFF, sauvegardées en flash |
+| `commandTable[]` | ::Command_t | Commandes fixes et leur gestionnaire |
+
+@section sec_oc 5. Protection de surintensité (OC)
+
+Pour une LDO `protection = LM211`, la sortie du LM211 arrive sur la broche OC.
+
+-# Masquage : pendant `OC_BLANKING_MS` (10 ms) après la mise à 1 de EN, l'OC est ignoré (soft-start).
+-# Déclenchement : OC actif et protection armée → OC_Verrouiller() : EN coupé, défaut
+   verrouillé, bleeder forcé, compteur incrémenté. Si `oc_interruption = 1`, la coupure
+   est faite dans l'interruption EXTI (OC_SurFrontIT()), en quelques microsecondes.
+-# Signalement : OC_SignalerEvenements() émet `OC_TRIP:<nom>:...` sur l'UART.
+-# Réarmement : `RST_BL_LDO_<nom>` (LDO_RelacherBleeder()) ou `RST_OC_LDO_<nom>`
+   (OC_Rearmer()), refusé tant que la broche OC signale encore la surintensité.
+-# Verrous : `SET_EN_LDO_<nom>` est refusé tant que le défaut est verrouillé
+   (`REFUS_OC_VERROUILLE`) ou que le bleeder est actif (`REFUS_BLEEDER_ACTIF`).
+
+Seuil : code DAC de 410 à 4006 (0,19 à 1,90 A), 1056 (0,50 A) au démarrage.
+Seuil (A) = code × 5 V / 4096 / 2,61 V/A, hors hystérésis. `CMD_ON_OFF_OC = 0`
+neutralise la surveillance (LED grise côté IHM).
+
+@section sec_persist 6. Persistance
+
+@subsection sec_persist_eeprom 6.1 Codes DAC en EEPROM du MCP47FEB28
+
+Pour une LDO `memoire = EEPROM` : après chaque modification, DAC_DemanderSauvegarde()
+programme une écriture différée ; DAC_TraiterSauvegardes() écrit le registre non volatil
+(10h-17h, tWC = 16 ms max) ; au démarrage DAC_RestaurerMemoire() relit ces valeurs.
+
+@subsection sec_persist_flash 6.2 Commandes ON/OFF en flash interne
+
+- Zone : banque 2, secteur 7, `0x081E0000`, 128 Ko, réservée dans
+  `STM32H753ZITX_FLASH.ld` (FLASH LENGTH = 1920K) ;
+- enregistrements de 64 octets écrits à la suite : magic `"CMD1"`,
+  `LDO_CONFIG_CRC32`, numéro de séquence, `LDO_NB`, masques BLD et OC, CRC32 ;
+- CmdOnOff_Initialiser() retient le dernier enregistrement valide de même
+  empreinte ; sinon valeurs du CSV (`CMD_ON_OFF_BLD`, `CMD_ON_OFF_OC`) ;
+- CmdOnOff_TraiterSauvegarde() regroupe les bascules (500 ms) ; le secteur n'est
+  effacé que lorsqu'il est plein (environ toutes les 2048 sauvegardes).
+
+@section sec_concurrence 7. Concurrence et interruptions
+
+| Ressource | Protection | Règle |
+|-----------|------------|-------|
+| `hi2c1`, `hi2c2` | un mutex par bus (CreerMutexI2C(), ResoudreMutexI2C()) | Toute transaction I2C hors interruption prend le mutex du bus |
+| USART1 en émission | mutex UART (UART1_EnvoyerTexte()) | Jamais d'émission depuis une interruption |
+| `last_message`, `response` | verrou des commandes (Commande_Verrouiller()) | tc_request() n'est jamais exécuté deux fois en parallèle |
+| Interruptions EXTI | — | Positionnent un drapeau ; seule exception : coupure OC (OC_SurFrontIT()) |
+| Réception UART | — | HAL_UART_RxCpltCallback() n'appelle aucune API FreeRTOS |
+
+@section sec_evolutions 8. Faire évoluer le firmware
+
+@subsection sec_evol_ldo 8.1 Ajouter ou recâbler une LDO
+
+-# Modifier `configurationLDO/ldo_config.csv` (ou la page /dac/config du contrôleur) ;
+-# compiler dans CubeIDE (le pre-build régénère les fichiers) et flasher ;
+-# vérifier `GET_CONFIG_LDO` : l'empreinte doit être celle du CSV du contrôleur.
+
+Aucune ligne de main.c n'est à modifier.
+
+@subsection sec_evol_cmd 8.2 Ajouter une commande fixe
+
+-# Écrire le gestionnaire `static void h_MA_COMMANDE(void)`, qui lit ses paramètres
+   dans `last_message` (`strsep(&last_message, ":")`) et écrit sa réponse dans `response` ;
+-# le documenter (modèle du chapitre 9, avec `@ingroup`) ;
+-# ajouter `{ "MA_COMMANDE", h_MA_COMMANDE }` dans `commandTable[]` (ordre
+   indifférent : la table est triée au démarrage) ;
+-# déclarer le prototype dans la zone `USER CODE BEGIN PFP`.
+
+@subsection sec_evol_cmd_ldo 8.3 Ajouter une commande par LDO
+
+Ajouter une branche `else if (strncmp(token, "PREFIXE_", n) == 0 && (idx = findLdoIndex(token + n)) != -1)`
+dans tc_request(), avant les branches de préfixes plus courts qui pourraient la masquer.
+
+@subsection sec_evol_cubemx 8.4 Régénération CubeMX
+
+Tout le code applicatif est dans des zones `USER CODE BEGIN / END`. Les commentaires
+des fonctions générées par CubeMX (main(), MX_*_Init()…) sont réécrits à chaque
+génération : leur documentation est donc dans `Doxygen/complements_cubemx.dox`.
+
+@section sec_convention 9. Convention de commentaire
+
+Chaque fonction est précédée d'un bloc Doxygen en français :
+
+@verbatim
+/**
+  * @brief  Ce que fait la fonction, en une ou deux phrases.
+  * @param  idx  Index de la LDO (0 a NB_LDO-1).
+  * @retval uint8_t  1 si ..., 0 sinon.
+  * @par    Exemple d'utilisation
+  * @code
+  * if (OC_EstSurveillee(idx) != 0U) { ... }
+  * @endcode
+  * @ingroup grp_oc
+  */
+@endverbatim
+
+Une fonction sans paramètre porte `@param Aucun.`, une fonction `void` porte
+`@retval Aucun (void).`. L'exemple est toujours encadré par `@code` / `@endcode`
+et `@ingroup` range la fonction dans son module (liste des modules à la fin de
+`Doxygen/conception.dox`).
+
+Le document Word de conception est produit par `Doxygen/generer_doc_conception.bat`
+(Doxygen puis `doxygen_vers_docx.py`) : voir la notice Doxygen du projet.
+*/
+
+/** @defgroup grp_config Configuration des LDO (CSV) et broches
+ *  @brief Lecture de ldoConfig[] (généré depuis le CSV), configuration des broches, recherche d'une LDO par son nom.
+ */
+/** @defgroup grp_etat État des LDO, Enable et bleeder
+ *  @brief Mise à jour cyclique des GPIO EN / BLD / OC / PG et commandes d'activation.
+ */
+/** @defgroup grp_oc Protection de surintensité (OC)
+ *  @brief Surveillance, verrouillage, signalement et réarmement de la protection LM211.
+ */
+/** @defgroup grp_cmd Commandes ON/OFF et flash interne
+ *  @brief CMD_ON_OFF_BLD / CMD_ON_OFF_OC par LDO et leur sauvegarde en flash (banque 2, secteur 7).
+ */
+/** @defgroup grp_dac Pilotage des DAC MCP47FEB28
+ *  @brief Écriture des tensions et seuils, mapping DAC ↔ LDO, registres de configuration, balayage.
+ */
+/** @defgroup grp_eeprom Mémoire EEPROM des DAC et potentiomètre
+ *  @brief Sauvegarde différée et restauration des codes DAC dans l'EEPROM du MCP47FEB28.
+ */
+/** @defgroup grp_i2c Scan et diagnostic I2C
+ *  @brief Déblocage des bus, verrous I2C, scan et rapports.
+ */
+/** @defgroup grp_adc Mesure ADC et multiplexeurs ADG728
+ *  @brief Sélection des voies de multiplexeur et mesures réelles de tension et de courant.
+ */
+/** @defgroup grp_exti Capture complète, boutons et interruptions EXTI
+ *  @brief Bouton USER, bouton de reset des multiplexeurs, gestionnaires EXTI.
+ */
+/** @defgroup grp_comm Communication UART / UDP et commandes
+ *  @brief Réception et émission UART, serveur UDP, analyse et dispatch des commandes.
+ */
+/** @defgroup grp_seq Séquencement (delta timings)
+ *  @brief Commandes SET_DELTA_* / RST_DELTA_* des délais de séquencement.
+ */
+/** @defgroup grp_tache Tâche principale FreeRTOS
+ *  @brief Initialisation applicative et boucle principale.
+ */
+/** @defgroup grp_cubemx Initialisation matérielle (CubeMX)
+ *  @brief Fonctions générées par STM32CubeMX (documentées dans complements_cubemx.dox).
+ */
+/** @defgroup grp_outils Outils généraux
+ *  @brief Fonctions utilitaires.
+ */

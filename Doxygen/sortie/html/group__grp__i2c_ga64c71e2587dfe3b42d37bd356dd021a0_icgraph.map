@@ -1,0 +1,4 @@
+<map id="I2C1_BusRecovery" name="I2C1_BusRecovery">
+<area shape="rect" id="Node000001" title="Sequence de recuperation du bus I2C1 (PB8=SCL, PB9=SDA) en cas de bus bloque (SDA maintenu bas par un..." alt="" coords="5,29,141,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="94,14,88,10,73,8,59,10,52,14,50,20,54,29,49,28,45,21,48,11,57,5,73,3,90,5,100,14"/>
+</map>

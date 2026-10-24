@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="struct_oc_config__t" kind="struct" language="C++" prot="public">
+    <compoundname>OcConfig_t</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_oc_config__t_1a56247b577392782299054a6ef58879dd" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t OcConfig_t::surveille</definition>
+        <argsstring></argsstring>
+        <name>surveille</name>
+        <qualifiedname>OcConfig_t::surveille</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>1 = OC lu et coupure de l&apos;EN sur defaut </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="320" column="20" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="320" bodyend="-1"/>
+        <referencedby refid="group__grp__config_1ga8ad9d7191f49b52c41d5a583f774465d" compoundref="main_8c" startline="6025" endline="6058">LDO_InitialiserTables</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_oc_config__t_1ab4aae6449b7133c24f0a31a11881bf23" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t OcConfig_t::interruption</definition>
+        <argsstring></argsstring>
+        <name>interruption</name>
+        <qualifiedname>OcConfig_t::interruption</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>1 = broche OC en EXTI (coupure en quelques us) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="321" column="20" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="321" bodyend="-1"/>
+        <referencedby refid="group__grp__oc_1ga12ef8bab086612c9ecf3cb2ffed9c776" compoundref="main_8c" startline="6510" endline="6543">MX_OC_EXTI_Init</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_oc_config__t_1a02fdfd44379abeade99ae11bc092a844" prot="public" static="no" mutable="no">
+        <type>GPIO_PinState</type>
+        <definition>GPIO_PinState OcConfig_t::niveau_defaut</definition>
+        <argsstring></argsstring>
+        <name>niveau_defaut</name>
+        <qualifiedname>OcConfig_t::niveau_defaut</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>niveau de la broche OC = surintensite </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="322" column="20" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="322" bodyend="-1"/>
+        <referencedby refid="group__grp__oc_1ga12ef8bab086612c9ecf3cb2ffed9c776" compoundref="main_8c" startline="6510" endline="6543">MX_OC_EXTI_Init</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_oc_config__t_1ab54cb3ef340e386f02f0d25ddb7a5bdc" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t OcConfig_t::seuil_defaut</definition>
+        <argsstring></argsstring>
+        <name>seuil_defaut</name>
+        <qualifiedname>OcConfig_t::seuil_defaut</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>code DAC programme au demarrage </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="323" column="20" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="323" bodyend="-1"/>
+        <referencedby refid="group__grp__config_1ga8ad9d7191f49b52c41d5a583f774465d" compoundref="main_8c" startline="6025" endline="6058">LDO_InitialiserTables</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_oc_config__t_1a98afa44ff3ce1b9dea487d408539ec0e" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t OcConfig_t::seuil_min</definition>
+        <argsstring></argsstring>
+        <name>seuil_min</name>
+        <qualifiedname>OcConfig_t::seuil_min</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>code minimal accepte par SET_CURRENT_LDO_ </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="324" column="20" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="324" bodyend="-1"/>
+        <referencedby refid="group__grp__eeprom_1gaea23265d4fdedf9ac60d1c4afb886e40" compoundref="main_8c" startline="4822" endline="4885">DAC_RestaurerMemoire</referencedby>
+        <referencedby refid="group__grp__config_1ga8ad9d7191f49b52c41d5a583f774465d" compoundref="main_8c" startline="6025" endline="6058">LDO_InitialiserTables</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_oc_config__t_1a02d54a5b70b7606da5863162de32fd80" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t OcConfig_t::seuil_max</definition>
+        <argsstring></argsstring>
+        <name>seuil_max</name>
+        <qualifiedname>OcConfig_t::seuil_max</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>code maximal accepte par SET_CURRENT_LDO_ </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="325" column="20" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="325" bodyend="-1"/>
+        <referencedby refid="group__grp__config_1ga8ad9d7191f49b52c41d5a583f774465d" compoundref="main_8c" startline="6025" endline="6058">LDO_InitialiserTables</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_oc_config__t_1acdbc71359b8ceb2a1a097d14f246819a" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t OcConfig_t::blanking_ms</definition>
+        <argsstring></argsstring>
+        <name>blanking_ms</name>
+        <qualifiedname>OcConfig_t::blanking_ms</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>masquage apres activation de l&apos;EN (soft-start) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="326" column="20" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="326" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_oc_config__t_1a797257c705383220e7d91decf2270a7e" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t OcConfig_t::k_mv_par_a</definition>
+        <argsstring></argsstring>
+        <name>k_mv_par_a</name>
+        <qualifiedname>OcConfig_t::k_mv_par_a</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>gain VMES/I de la chaine (mV/A), diagnostic </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="327" column="20" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="327" bodyend="-1"/>
+        <referencedby refid="group__grp__config_1ga2ba862323ea386969585492246cd74d6" compoundref="main_8c" startline="6223" endline="6264">LDO_Diagnostic</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Parametres de la protection surintensite d&apos;une LDO (circuit shunt R97 + OP184 + LM211, sortie OC sur une entree GPIO). </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="319" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="319" bodyend="328"/>
+    <listofallmembers>
+      <member refid="struct_oc_config__t_1acdbc71359b8ceb2a1a097d14f246819a" prot="public" virt="non-virtual"><scope>OcConfig_t</scope><name>blanking_ms</name></member>
+      <member refid="struct_oc_config__t_1ab4aae6449b7133c24f0a31a11881bf23" prot="public" virt="non-virtual"><scope>OcConfig_t</scope><name>interruption</name></member>
+      <member refid="struct_oc_config__t_1a797257c705383220e7d91decf2270a7e" prot="public" virt="non-virtual"><scope>OcConfig_t</scope><name>k_mv_par_a</name></member>
+      <member refid="struct_oc_config__t_1a02fdfd44379abeade99ae11bc092a844" prot="public" virt="non-virtual"><scope>OcConfig_t</scope><name>niveau_defaut</name></member>
+      <member refid="struct_oc_config__t_1ab54cb3ef340e386f02f0d25ddb7a5bdc" prot="public" virt="non-virtual"><scope>OcConfig_t</scope><name>seuil_defaut</name></member>
+      <member refid="struct_oc_config__t_1a02d54a5b70b7606da5863162de32fd80" prot="public" virt="non-virtual"><scope>OcConfig_t</scope><name>seuil_max</name></member>
+      <member refid="struct_oc_config__t_1a98afa44ff3ce1b9dea487d408539ec0e" prot="public" virt="non-virtual"><scope>OcConfig_t</scope><name>seuil_min</name></member>
+      <member refid="struct_oc_config__t_1a56247b577392782299054a6ef58879dd" prot="public" virt="non-virtual"><scope>OcConfig_t</scope><name>surveille</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,4 @@
+<map id="h_SET_BL_LDO_ALL" name="h_SET_BL_LDO_ALL">
+<area shape="rect" id="Node000001" title="Handler de la commande reseau &quot;SET_BL_LDO_ALL&quot;. Parcourt les 18 LDO et active le bleeder (Bl=1) pour ..." alt="" coords="5,29,154,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="53,28,49,21,52,11,63,5,80,3,98,5,108,14,103,14,96,10,79,8,64,10,56,14,54,20,59,29"/>
+</map>

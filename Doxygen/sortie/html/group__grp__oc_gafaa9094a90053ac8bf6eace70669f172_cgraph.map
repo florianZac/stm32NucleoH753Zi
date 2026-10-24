@@ -1,0 +1,22 @@
+<map id="OC_SurFrontIT" name="OC_SurFrontIT">
+<area shape="rect" id="Node000001" title="Traitement d&#39;un front de la broche OC en interruption." alt="" coords="5,141,116,168"/>
+<area shape="poly" id="edge9_Node000001_Node000001" title=" " alt="" coords="33,141,28,133,32,123,43,117,61,115,80,117,91,125,86,127,78,122,60,120,44,122,36,127,34,132,38,140"/>
+<area shape="rect" id="Node000002" href="$group__grp__oc.html#ga5a3191b846544a7dced3ea094018f361" title="Indique si la protection OC est AGISSANTE : LDO surveillee (circuit cable, voir OC_EstSurveillee()) E..." alt="" coords="165,29,270,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,139,112,104,162,66,172,62,168,66,165,70,115,108,77,143"/>
+<area shape="rect" id="Node000004" href="$group__grp__oc.html#gab7b892d9b93ae98c0860c1569fb10702" title="Indique si la surveillance est armee : EN actif depuis au moins ldoConfig[idx].oc...." alt="" coords="168,104,268,131"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="115,139,155,131,151,134,117,144"/>
+<area shape="rect" id="Node000005" href="$group__grp__oc.html#ga4c720f3df5385977a33b0d91f63df5f9" title="Lit la broche OC de la LDO et indique si elle signale une surintensite." alt="" coords="164,179,272,205"/>
+<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="116,165,151,175,146,177,116,170"/>
+<area shape="rect" id="Node000006" href="$group__grp__oc.html#gad5ee0d7de4089f81d1b5309a4919b764" title="Coupe l&#39;EN de la LDO et verrouille le defaut. N&#39;utilise aucune API FreeRTOS : appelable depuis l&#39;inte..." alt="" coords="165,253,270,280"/>
+<area shape="poly" id="edge10_Node000001_Node000006" title=" " alt="" coords="82,166,187,242,183,245,80,171"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="190,29,186,21,189,11,200,5,218,3,237,5,248,14,243,15,235,10,218,8,202,10,193,15,191,20,195,29"/>
+<area shape="rect" id="Node000003" href="$group__grp__oc.html#ga7851b235d1d1f7564644d659587b3ba2" title="Indique si la LDO est surveillee : ldoConfig[idx].oc.surveille = 1 ET un DAC de seuil (dac_courant) d..." alt="" coords="350,29,476,56"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="270,40,337,42,332,44,272,45"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="380,28,374,21,378,11,391,5,413,3,437,5,450,14,445,14,435,10,413,8,393,10,382,15,379,20,385,29"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="190,103,186,95,189,86,200,80,218,77,237,80,248,89,243,89,235,85,218,83,202,85,193,89,191,95,195,104"/>
+<area shape="poly" id="edge8_Node000005_Node000005" title=" " alt="" coords="190,178,186,170,189,160,200,154,218,152,237,155,248,163,243,163,235,160,218,157,202,159,193,164,191,169,195,179"/>
+<area shape="poly" id="edge13_Node000006_Node000006" title=" " alt="" coords="190,252,186,245,189,235,200,229,218,227,237,229,248,239,243,238,235,234,218,232,202,234,193,239,191,244,195,254"/>
+<area shape="rect" id="Node000007" href="$group__grp__eeprom.html#ga0fdcf8780e2127569c1e1a76e9518c5a" title="Demande l&#39;ecriture en EEPROM du MCP47FEB28 des codes DAC (tension et seuil de courant) d&#39;une LDO decl..." alt="" coords="320,253,506,280"/>
+<area shape="poly" id="edge11_Node000006_Node000007" title=" " alt="" coords="271,264,307,267,302,267,271,269"/>
+<area shape="poly" id="edge12_Node000007_Node000007" title=" " alt="" coords="380,252,374,245,378,235,391,229,413,227,437,229,450,239,445,238,435,234,413,232,393,234,382,239,379,244,385,254"/>
+</map>

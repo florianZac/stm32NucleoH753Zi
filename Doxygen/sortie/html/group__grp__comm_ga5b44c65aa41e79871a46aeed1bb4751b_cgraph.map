@@ -1,0 +1,143 @@
+<map id="udp_receive_callback" name="udp_receive_callback">
+<area shape="rect" id="Node000001" title="Callback LwIP invoque automatiquement a chaque paquet UDP recu sur le port du serveur (enregistre par..." alt="" coords="5,129,152,156"/>
+<area shape="poly" id="edge99_Node000001_Node000001" title=" " alt="" coords="43,130,37,121,42,111,56,105,79,103,103,105,117,113,112,115,101,110,78,108,57,110,45,115,43,120,48,128"/>
+<area shape="rect" id="Node000002" href="$group__grp__comm.html#ga8f851878b9fa126696fa20796cb7c274" title="Rend le verrou des commandes pris par Commande_Verrouiller()." alt="" coords="200,29,368,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,128,142,96,199,66,217,59,214,64,201,70,145,101,101,130"/>
+<area shape="rect" id="Node000003" href="$group__grp__comm.html#ga700668cb98e6ac2d4c9e2a1f80bd365a" title="Prend le verrou des commandes (tc_mutex). Sans effet tant qu&#39;il n&#39;est pas cree. Garantit que tc_reque..." alt="" coords="208,104,360,131"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="150,132,194,127,190,131,154,136"/>
+<area shape="rect" id="Node000004" href="$group__grp__comm.html#gad6e271fe1796ab0b2a698260f0b78533" title="Analyseur (parser) principal des trames recues par UDP. Extrait le premier token de la trame (avant l..." alt="" coords="243,901,325,928"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="85,154,278,886,272,887,82,159"/>
+<area shape="rect" id="Node000018" href="$group__grp__comm.html#gab9b5dfc109e472981cbbb7867d1b7f92" title="Envoie une chaine de caracteres sur USART1 (PB6/PB7, via un adaptateur USB&#45;UART externe),..." alt="" coords="745,453,896,480"/>
+<area shape="poly" id="edge98_Node000001_Node000018" title=" " alt="" coords="150,142,291,146,454,155,597,170,647,179,675,191,694,211,704,231,708,252,708,273,708,317,713,341,724,365,756,408,792,443,787,444,752,411,719,368,708,342,703,318,703,273,702,253,699,233,689,214,672,196,645,185,596,175,454,161,291,152,153,146"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="249,29,243,21,247,11,261,5,284,3,308,5,323,13,318,15,307,10,284,8,262,10,251,15,248,20,254,28"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="249,104,243,95,247,86,261,79,284,77,308,80,323,88,318,90,307,85,284,83,262,85,251,89,248,95,254,103"/>
+<area shape="poly" id="edge97_Node000004_Node000004" title=" " alt="" coords="249,901,243,893,247,883,261,877,284,875,308,877,323,885,318,887,307,882,284,880,262,882,251,887,248,892,254,900"/>
+<area shape="rect" id="Node000005" href="$group__grp__etat.html#ga70c1db5780542cb5246d6ed350666c5c" title="Construit la chaine de statut complete d&#39;une LDO et la place dans la variable globale response,..." alt="" coords="472,603,617,629"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="285,900,296,851,319,780,336,741,357,703,383,669,414,639,434,627,459,620,455,624,437,632,418,643,387,672,362,706,340,743,324,781,301,852,290,902"/>
+<area shape="rect" id="Node000006" href="$group__grp__cmd.html#ga5d44c3c48f8606b7286fe670f62997b4" title="Bascule CMD_ON_OFF_BLD d&#39;une LDO. Passage a OFF : bleeder relache tout de suite et plus commandable...." alt="" coords="464,229,625,256"/>
+<area shape="poly" id="edge8_Node000004_Node000006" title=" " alt="" coords="283,901,292,780,315,588,332,487,354,394,381,318,397,288,414,266,430,254,452,246,448,250,433,258,418,270,401,291,386,320,359,395,337,488,320,588,298,780,289,902"/>
+<area shape="rect" id="Node000008" href="$group__grp__cmd.html#ga7d468d2e11f2a18d745896a5865ed077" title="Bascule CMD_ON_OFF_OC d&#39;une LDO. Passage a OFF : la broche OC est ignoree et un defaut memorise est e..." alt="" coords="466,752,624,779"/>
+<area shape="poly" id="edge12_Node000004_Node000008" title=" " alt="" coords="293,899,341,845,376,814,415,788,452,776,448,779,417,793,379,818,345,848,298,902"/>
+<area shape="rect" id="Node000009" href="$group__grp__cmd.html#gafb6457db3c48283dd0fb280775957f7a" title="Reponse des commandes GET/SWITCH_CMD_ON_OFF_*." alt="" coords="472,827,618,853"/>
+<area shape="poly" id="edge14_Node000004_Node000009" title=" " alt="" coords="316,899,415,863,459,854,454,857,417,868,319,903"/>
+<area shape="rect" id="Node000010" href="$group__grp__config.html#gadc686ab4f6036d732a6f2b1ecb6dbd01" title="Recherche l&#39;indice (0 a NB_LDO&#45;1) d&#39;une LDO dans le tableau ldoConfig[] a partir de son suffixe de no..." alt="" coords="497,901,592,928"/>
+<area shape="poly" id="edge16_Node000004_Node000010" title=" " alt="" coords="324,912,484,913,480,916,327,917"/>
+<area shape="rect" id="Node000011" href="$group__grp__dac.html#gac1d35f9367efff87f176072901b295ac" title="Handler de &quot;GET_DAC_MAPPING_LDO_&lt;nom&gt;&quot; &#45; lit la correspondance DAC/canal actuellement active pour une..." alt="" coords="476,976,613,1003"/>
+<area shape="poly" id="edge18_Node000004_Node000011" title=" " alt="" coords="325,924,483,970,479,973,326,929"/>
+<area shape="rect" id="Node000012" href="$group__grp__adc.html#ga291e2e1e27a0a67a3c63820c746abc60" title="Handler de la commande reseau &quot;GET_MESURE_COURANT_REELLE_&lt;nom&gt;&quot; (voir le branchement dans tc_request(..." alt="" coords="460,528,629,555"/>
+<area shape="poly" id="edge20_Node000004_Node000012" title=" " alt="" coords="283,900,290,839,309,747,326,698,348,649,378,603,414,565,448,548,444,552,418,569,382,607,353,651,331,700,314,749,295,839,288,901"/>
+<area shape="rect" id="Node000019" href="$group__grp__adc.html#ga5620dbaf6425610dff776e64b7f6c3ca" title="Handler de la commande reseau &quot;GET_MESURE_REELLE_&lt;nom&gt;&quot; (voir le branchement dans tc_request(),..." alt="" coords="484,379,606,405"/>
+<area shape="poly" id="edge34_Node000004_Node000019" title=" " alt="" coords="284,901,298,804,324,658,342,581,363,511,387,454,414,415,439,399,470,391,466,395,441,404,418,419,392,456,368,513,347,583,330,659,303,805,289,902"/>
+<area shape="rect" id="Node000021" href="$group__grp__adc.html#gac835b21b6948669a86732fd2683d8fd6" title="Handler de la commande reseau &quot;GET_MUX_COURANT_LDO_&lt;nom&gt;&quot; &#45; LIT le canal du multiplexeur associe a la..." alt="" coords="478,1649,612,1676"/>
+<area shape="poly" id="edge41_Node000004_Node000021" title=" " alt="" coords="287,926,298,1057,321,1262,339,1371,360,1472,387,1555,402,1587,418,1612,439,1630,466,1646,460,1645,436,1634,414,1615,397,1590,382,1557,355,1473,333,1372,316,1263,293,1057,285,931"/>
+<area shape="rect" id="Node000022" href="$group__grp__adc.html#ga9ab7d7bc3c2e86fe9886ff9a25b5d2d4" title="Handler de la commande reseau &quot;GET_MUX_LDO_&lt;nom&gt;&quot; &#45; lit le canal du multiplexeur actuellement associe..." alt="" coords="500,304,589,331"/>
+<area shape="poly" id="edge43_Node000004_Node000022" title=" " alt="" coords="284,900,295,791,320,622,337,533,359,452,384,386,399,360,414,341,430,329,447,321,487,314,483,317,449,326,432,334,418,345,403,363,389,388,364,454,342,535,325,623,300,792,289,901"/>
+<area shape="rect" id="Node000023" href="$group__grp__dac.html#ga1b7ca6a4fce7e0d525508dd4951a48f0" title="Handler GENERIQUE de &quot;SET_CURRENT_LDO_&lt;nom&gt;:&lt;valeur&gt;&quot; &#45; remplace les 18 anciennes fonctions h_SET_CUR..." alt="" coords="416,1575,673,1601"/>
+<area shape="poly" id="edge45_Node000004_Node000023" title=" " alt="" coords="287,926,301,1045,325,1228,343,1324,364,1413,389,1487,403,1515,418,1537,437,1554,461,1569,455,1568,434,1558,414,1540,399,1518,384,1489,359,1415,338,1325,320,1229,295,1046,286,931"/>
+<area shape="rect" id="Node000028" href="$group__grp__dac.html#gadcbefabbab52750a575b5dac7150534e" title="Handler GENERIQUE de &quot;SET_VAL_LDO_&lt;nom&gt;:&lt;valeur&gt;&quot; &#45; remplace les 18 anciennes fonctions h_SET_VAL_LDO..." alt="" coords="438,1500,652,1527"/>
+<area shape="poly" id="edge55_Node000004_Node000028" title=" " alt="" coords="285,926,290,1011,295,1073,305,1144,321,1219,345,1296,376,1370,418,1437,451,1469,492,1493,487,1493,448,1473,414,1440,372,1372,340,1298,316,1221,300,1145,290,1074,285,1012,284,931"/>
+<area shape="rect" id="Node000029" href="$group__grp__config.html#ga2ba862323ea386969585492246cd74d6" title="Commande &quot;GET_DIAG_LDO_&lt;nom&gt;&quot; : etat REEL des broches d&#39;une LDO (niveau lu sur la broche,..." alt="" coords="486,1051,603,1077"/>
+<area shape="poly" id="edge59_Node000004_Node000029" title=" " alt="" coords="300,926,351,968,417,1012,487,1044,482,1046,415,1017,348,972,301,931"/>
+<area shape="rect" id="Node000034" href="$group__grp__etat.html#ga4d73884db55d5370dfdce4dca8d1eddf" title="Desactive le bleeder d&#39;une LDO (RST_BL_LDO_&lt;nom&gt;, RST_BL_LDO_ALL, SET_BL_TAB avec 0)...." alt="" coords="469,1200,620,1227"/>
+<area shape="poly" id="edge70_Node000004_Node000034" title=" " alt="" coords="289,925,305,972,330,1034,367,1102,391,1134,418,1162,442,1179,471,1194,465,1195,439,1184,414,1166,387,1137,363,1105,325,1037,300,974,288,931"/>
+<area shape="rect" id="Node000035" href="$group__grp__oc.html#ga53ac0c1da803505e54c72dbd31e4de73" title="Commande &quot;GET_OC_LDO_&lt;nom&gt;&quot; : etat complet de la protection." alt="" coords="508,1275,581,1301"/>
+<area shape="poly" id="edge73_Node000004_Node000035" title=" " alt="" coords="287,926,299,984,321,1067,338,1112,360,1157,386,1199,418,1237,454,1261,496,1278,491,1279,452,1266,414,1241,382,1202,355,1159,333,1114,316,1068,294,985,286,931"/>
+<area shape="rect" id="Node000036" href="$group__grp__oc.html#gafc2057d31d2abd2b3389f0e6ce4cc3a2" title="Verifie que le seuil programme est dans la plage specifiee du LM211 (VDAC &gt;= 0,5 V)...." alt="" coords="764,1275,877,1301"/>
+<area shape="poly" id="edge84_Node000004_Node000036" title=" " alt="" coords="285,926,289,1000,293,1051,303,1107,319,1164,342,1220,375,1270,395,1292,417,1311,442,1322,476,1328,564,1327,661,1315,751,1302,746,1304,662,1321,564,1332,475,1333,440,1327,415,1316,391,1296,370,1274,337,1223,314,1166,298,1108,288,1051,283,1000,284,931"/>
+<area shape="rect" id="Node000038" href="$group__grp__oc.html#ga61bd3c43a673ea375cabfe6a2de48eb0" title="Commande &quot;RST_OC_LDO_&lt;nom&gt;&quot; : deverrouille le defaut si la broche OC est revenue au repos...." alt="" coords="496,1125,594,1152"/>
+<area shape="poly" id="edge81_Node000004_Node000038" title=" " alt="" coords="292,926,340,1002,375,1047,418,1087,449,1106,484,1122,479,1123,446,1111,414,1091,371,1051,335,1005,292,931"/>
+<area shape="rect" id="Node000039" href="$group__grp__dac.html#gaeda25d5b60439cf57afc75b5c8096a3d" title="Handler de &quot;SET_DAC_MAPPING_LDO_&lt;nom&gt;:&lt;V|I&gt;:&lt;0&#45;5&gt;:&lt;0&#45;7&gt;&quot; &#45; modifie A CHAUD, sans recompilation ni ref..." alt="" coords="477,1400,612,1427"/>
+<area shape="poly" id="edge85_Node000004_Node000039" title=" " alt="" coords="286,926,292,1001,309,1114,326,1178,348,1241,379,1302,418,1356,443,1377,474,1394,468,1394,440,1381,414,1359,374,1304,344,1243,321,1179,304,1116,287,1002,285,931"/>
+<area shape="rect" id="Node000041" href="$group__grp__adc.html#ga17dfb24c9ed80c2dca43e9d81d13e130" title="Handler de la commande reseau &quot;SET_MUX_COURANT_LDO_&lt;nom&gt;:&lt;canal&gt;&quot;." alt="" coords="478,453,611,480"/>
+<area shape="poly" id="edge93_Node000004_Node000041" title=" " alt="" coords="282,900,284,828,290,775,300,716,316,655,339,595,372,538,414,490,437,475,465,468,461,471,439,480,418,494,376,542,344,597,321,657,305,718,295,776,290,828,287,901"/>
+<area shape="rect" id="Node000042" href="$group__grp__adc.html#gabea253a3031b6371c35f5c1b206728c6" title="Handler de la commande reseau &quot;SET_MUX_LDO_&lt;nom&gt;:&lt;canal&gt;&quot; &#45; associe une LDO a un canal du multiplexeu..." alt="" coords="501,677,588,704"/>
+<area shape="poly" id="edge95_Node000004_Node000042" title=" " alt="" coords="287,900,303,862,329,811,366,758,389,734,415,714,449,698,488,691,484,694,451,703,417,718,393,738,370,762,334,814,308,864,292,902"/>
+<area shape="poly" id="edge7_Node000005_Node000005" title=" " alt="" coords="501,603,493,594,499,584,516,578,545,576,576,579,594,587,589,589,575,584,545,581,517,583,502,588,499,593,506,602"/>
+<area shape="poly" id="edge9_Node000006_Node000006" title=" " alt="" coords="501,229,493,221,499,211,516,205,545,203,576,205,594,213,589,216,575,210,545,208,517,210,502,215,499,220,506,228"/>
+<area shape="rect" id="Node000007" href="$group__grp__config.html#gae28fc29161c8b412bf38609488b281ef" title="Indique si une broche appartient a un bouton du firmware (PC13 USER, PD0 reset ADG728)...." alt="" coords="752,229,889,256"/>
+<area shape="poly" id="edge10_Node000006_Node000007" title=" " alt="" coords="624,240,739,241,734,244,627,245"/>
+<area shape="poly" id="edge11_Node000007_Node000007" title=" " alt="" coords="783,229,777,221,781,211,796,205,821,203,847,205,862,213,857,215,845,210,820,208,797,210,785,215,782,220,788,229"/>
+<area shape="poly" id="edge13_Node000008_Node000008" title=" " alt="" coords="501,752,493,743,499,733,516,727,545,725,576,728,594,736,589,738,575,733,545,731,517,733,502,738,499,743,506,751"/>
+<area shape="poly" id="edge15_Node000009_Node000009" title=" " alt="" coords="501,826,493,818,499,808,516,802,545,800,576,803,594,811,589,813,575,808,545,805,517,807,502,812,499,817,506,826"/>
+<area shape="poly" id="edge17_Node000010_Node000010" title=" " alt="" coords="501,901,493,893,499,883,516,877,545,875,576,877,594,886,589,887,575,882,545,880,517,882,502,887,499,892,506,901"/>
+<area shape="poly" id="edge19_Node000011_Node000011" title=" " alt="" coords="501,976,493,967,499,957,516,951,545,949,576,952,594,960,589,962,575,957,545,955,517,957,502,962,499,967,506,975"/>
+<area shape="poly" id="edge21_Node000012_Node000012" title=" " alt="" coords="501,528,493,519,499,509,516,503,545,501,576,504,594,512,589,514,575,509,545,507,517,509,502,514,499,519,506,527"/>
+<area shape="rect" id="Node000013" href="$group__grp__adc.html#ga4feb141ddc6376d2ada1a4e0f58416e1" title="Lit le canal ADC courant et convertit en courant REEL (mA), a partir du gain de l&#39;AOP differentiel (x..." alt="" coords="762,603,879,629"/>
+<area shape="poly" id="edge22_Node000012_Node000013" title=" " alt="" coords="623,553,674,564,771,596,766,598,673,569,625,558"/>
+<area shape="rect" id="Node000015" href="$group__grp__adc.html#ga58dc9f0471184fd3cc5f8030ba048bcd" title="Selectionne un canal (0&#45;15) parmi les 2 ADG728 de la chaine COURANT (bus I2C2). Meme principe que Sel..." alt="" coords="721,528,920,555"/>
+<area shape="poly" id="edge26_Node000012_Node000015" title=" " alt="" coords="628,539,708,540,703,543,631,544"/>
+<area shape="poly" id="edge32_Node000012_Node000018" title=" " alt="" coords="593,525,721,489,752,483,748,486,722,495,596,530"/>
+<area shape="poly" id="edge23_Node000013_Node000013" title=" " alt="" coords="783,602,777,594,781,584,796,578,821,576,847,579,862,587,857,588,845,584,820,581,797,583,785,588,782,593,788,602"/>
+<area shape="rect" id="Node000014" href="$group__grp__adc.html#ga6bcd15aecac42670e775f0796aa0b8ec" title="Lit une conversion ADC sur le canal donne et la convertit en tension REELLE cote LDO (avant le pont d..." alt="" coords="983,553,1099,580"/>
+<area shape="poly" id="edge24_Node000013_Node000014" title=" " alt="" coords="878,601,970,582,965,584,881,605"/>
+<area shape="poly" id="edge25_Node000014_Node000014" title=" " alt="" coords="1008,553,1003,545,1007,535,1020,529,1041,527,1063,529,1077,538,1071,539,1062,534,1041,532,1021,534,1011,539,1008,544,1014,553"/>
+<area shape="poly" id="edge31_Node000015_Node000015" title=" " alt="" coords="783,528,777,519,781,509,796,503,821,501,847,504,862,512,857,513,845,509,820,507,797,509,785,513,782,519,788,527"/>
+<area shape="rect" id="Node000016" href="$group__grp__adc.html#ga74a9c056e466dd59ca9ea5b9110125f0" title="Ecrit le masque de canaux actifs sur un ADG728 (un octet, un bit par canal &#45; voir datasheet ADG728,..." alt="" coords="988,428,1094,455"/>
+<area shape="poly" id="edge27_Node000015_Node000016" title=" " alt="" coords="851,525,998,460,994,463,854,530"/>
+<area shape="poly" id="edge28_Node000016_Node000016" title=" " alt="" coords="1008,427,1003,419,1007,410,1020,403,1041,401,1063,404,1077,412,1072,413,1062,409,1041,407,1021,409,1011,413,1008,419,1014,428"/>
+<area shape="rect" id="Node000017" href="$group__grp__i2c.html#ga5cb1cd70b1dd76a8aadb2bccb2837d2f" title="Retourne le mutex correspondant au bus d&#39;un handle I2C donne." alt="" coords="1162,428,1296,455"/>
+<area shape="poly" id="edge29_Node000016_Node000017" title=" " alt="" coords="1093,439,1149,440,1144,442,1095,444"/>
+<area shape="poly" id="edge30_Node000017_Node000017" title=" " alt="" coords="1197,427,1191,419,1195,410,1208,403,1229,401,1252,404,1265,412,1260,413,1250,409,1229,407,1210,409,1199,413,1197,419,1202,428"/>
+<area shape="poly" id="edge33_Node000018_Node000018" title=" " alt="" coords="783,453,777,445,781,435,796,429,821,427,847,429,862,437,857,439,845,434,820,432,797,434,785,439,782,444,788,453"/>
+<area shape="poly" id="edge36_Node000019_Node000014" title=" " alt="" coords="605,380,674,373,755,374,840,386,882,398,921,415,939,432,966,465,1023,541,1018,541,962,468,935,436,918,420,880,403,839,391,754,379,674,379,608,384"/>
+<area shape="poly" id="edge40_Node000019_Node000018" title=" " alt="" coords="605,400,674,415,771,447,766,449,673,420,607,405"/>
+<area shape="poly" id="edge35_Node000019_Node000019" title=" " alt="" coords="501,379,493,370,499,360,516,354,545,352,576,355,594,363,589,365,575,360,545,357,517,359,502,364,499,369,506,378"/>
+<area shape="rect" id="Node000020" href="$group__grp__adc.html#gaf26fbfed012a3cc53e96a8cf7c284e2d" title="Selectionne un canal (0&#45;23) parmi les 3 ADG728 de la chaine TENSION (bus I2C1). Desactive systematiqu..." alt="" coords="722,328,919,355"/>
+<area shape="poly" id="edge37_Node000019_Node000020" title=" " alt="" coords="605,379,731,356,727,360,608,383"/>
+<area shape="poly" id="edge38_Node000020_Node000016" title=" " alt="" coords="870,353,921,371,1008,419,1003,420,919,376,872,358"/>
+<area shape="poly" id="edge39_Node000020_Node000020" title=" " alt="" coords="783,328,777,319,781,309,796,303,821,301,847,304,862,312,857,314,845,309,820,307,797,309,785,313,782,319,788,327"/>
+<area shape="poly" id="edge42_Node000021_Node000021" title=" " alt="" coords="501,1648,493,1641,499,1631,516,1625,545,1623,576,1625,594,1635,589,1634,575,1630,545,1628,517,1630,502,1635,499,1640,506,1650"/>
+<area shape="poly" id="edge44_Node000022_Node000022" title=" " alt="" coords="501,304,493,295,499,285,516,279,545,277,576,280,594,288,589,290,575,285,545,283,517,285,502,290,499,295,506,303"/>
+<area shape="poly" id="edge52_Node000023_Node000023" title=" " alt="" coords="501,1573,493,1566,499,1556,516,1550,545,1548,576,1551,594,1560,589,1560,575,1556,545,1553,517,1555,502,1560,499,1565,506,1575"/>
+<area shape="rect" id="Node000024" href="$group__grp__eeprom.html#ga0fdcf8780e2127569c1e1a76e9518c5a" title="Demande l&#39;ecriture en EEPROM du MCP47FEB28 des codes DAC (tension et seuil de courant) d&#39;une LDO decl..." alt="" coords="727,1600,914,1627"/>
+<area shape="poly" id="edge46_Node000023_Node000024" title=" " alt="" coords="674,1597,715,1603,709,1603,674,1603"/>
+<area shape="rect" id="Node000025" href="$group__grp__dac.html#ga4469a4eb236eb4a995abab435c43c644" title="Ecrit une valeur 12 bits dans le tableau DACx_DEF/canal designe par une cible logique &#45; remplace les ..." alt="" coords="763,1525,878,1552"/>
+<area shape="poly" id="edge48_Node000023_Node000025" title=" " alt="" coords="623,1571,745,1552,750,1551,624,1577"/>
+<area shape="rect" id="Node000027" href="$group__grp__oc.html#ga7851b235d1d1f7564644d659587b3ba2" title="Indique si la LDO est surveillee : ldoConfig[idx].oc.surveille = 1 ET un DAC de seuil (dac_courant) d..." alt="" coords="1166,1351,1292,1377"/>
+<area shape="poly" id="edge53_Node000023_Node000027" title=" " alt="" coords="634,1599,674,1611,698,1624,722,1636,777,1649,821,1655,865,1651,919,1636,968,1615,1015,1586,1059,1553,1098,1517,1164,1446,1208,1392,1212,1389,1168,1449,1102,1521,1062,1557,1018,1591,971,1619,921,1641,866,1656,821,1660,776,1654,720,1641,696,1629,672,1616,633,1605"/>
+<area shape="poly" id="edge47_Node000024_Node000024" title=" " alt="" coords="783,1598,777,1591,781,1581,796,1575,821,1573,847,1576,862,1585,857,1584,845,1581,820,1579,797,1581,785,1585,782,1591,788,1601"/>
+<area shape="poly" id="edge49_Node000025_Node000025" title=" " alt="" coords="783,1524,777,1517,781,1507,796,1501,821,1499,847,1501,862,1510,857,1510,845,1506,820,1504,797,1506,785,1511,782,1516,788,1526"/>
+<area shape="rect" id="Node000026" href="$group__grp__dac.html#gad09bc7e6abf4db69f2fea3ab311c637f" title="Retourne le pointeur vers le tableau DACx_DEF correspondant a une cible logique." alt="" coords="968,1451,1114,1477"/>
+<area shape="poly" id="edge50_Node000025_Node000026" title=" " alt="" coords="862,1522,982,1484,987,1482,863,1527"/>
+<area shape="poly" id="edge51_Node000026_Node000026" title=" " alt="" coords="1008,1449,1003,1442,1007,1432,1020,1426,1041,1424,1063,1427,1077,1436,1071,1435,1062,1432,1041,1429,1021,1431,1011,1436,1008,1441,1013,1451"/>
+<area shape="poly" id="edge54_Node000027_Node000027" title=" " alt="" coords="1197,1349,1191,1342,1195,1332,1208,1326,1229,1324,1252,1327,1265,1336,1260,1335,1250,1332,1229,1329,1210,1331,1199,1336,1197,1341,1202,1351"/>
+<area shape="poly" id="edge56_Node000028_Node000024" title=" " alt="" coords="634,1525,674,1536,699,1548,723,1562,781,1593,775,1592,720,1566,697,1553,672,1541,633,1530"/>
+<area shape="poly" id="edge57_Node000028_Node000025" title=" " alt="" coords="652,1521,750,1532,745,1532,652,1526"/>
+<area shape="poly" id="edge58_Node000028_Node000028" title=" " alt="" coords="501,1499,493,1491,499,1481,516,1475,545,1473,576,1476,594,1485,589,1485,575,1481,545,1479,517,1481,502,1486,499,1491,506,1500"/>
+<area shape="poly" id="edge69_Node000029_Node000018" title=" " alt="" coords="602,1053,641,1038,657,1027,671,1013,682,993,690,969,697,906,697,832,693,752,689,672,689,598,698,536,707,510,719,490,733,481,730,485,723,494,712,513,703,537,695,598,694,672,698,752,702,832,703,906,695,970,687,995,675,1016,661,1031,643,1043,605,1058"/>
+<area shape="poly" id="edge62_Node000029_Node000029" title=" " alt="" coords="501,1050,493,1042,499,1032,516,1026,545,1024,576,1027,594,1035,589,1036,575,1032,545,1029,517,1031,502,1036,499,1041,506,1050"/>
+<area shape="rect" id="Node000030" href="$group__grp__dac.html#gab992619e0a04a6fbb9a6a97c2e284c65" title="Index d&#39;une puce de I2C1 dans dacs_i2c1_adresses[]." alt="" coords="768,1051,873,1077"/>
+<area shape="poly" id="edge60_Node000029_Node000030" title=" " alt="" coords="603,1061,755,1063,750,1065,605,1067"/>
+<area shape="rect" id="Node000031" href="$group__grp__config.html#ga12b4c9909bec1ea781ab3e736da3b356" title="Mode d&#39;une broche GPIO lu dans le registre MODER." alt="" coords="773,1125,868,1152"/>
+<area shape="poly" id="edge63_Node000029_Node000031" title=" " alt="" coords="603,1071,674,1087,771,1119,766,1120,673,1092,604,1076"/>
+<area shape="rect" id="Node000032" href="$group__grp__oc.html#gab7b892d9b93ae98c0860c1569fb10702" title="Indique si la surveillance est armee : EN actif depuis au moins ldoConfig[idx].oc...." alt="" coords="771,976,870,1003"/>
+<area shape="poly" id="edge65_Node000029_Node000032" title=" " alt="" coords="593,1048,721,1012,758,1004,753,1007,722,1017,596,1052"/>
+<area shape="rect" id="Node000033" href="$group__grp__oc.html#ga4c720f3df5385977a33b0d91f63df5f9" title="Lit la broche OC de la LDO et indique si elle signale une surintensite." alt="" coords="766,1200,875,1227"/>
+<area shape="poly" id="edge67_Node000029_Node000033" title=" " alt="" coords="603,1063,640,1071,675,1087,693,1105,701,1124,708,1143,723,1162,745,1178,770,1193,764,1194,742,1183,719,1166,704,1146,696,1126,688,1108,672,1092,639,1076,604,1068"/>
+<area shape="poly" id="edge61_Node000030_Node000030" title=" " alt="" coords="783,1050,777,1042,781,1032,796,1026,821,1024,847,1027,862,1035,857,1036,845,1032,820,1029,797,1031,785,1036,782,1041,788,1051"/>
+<area shape="poly" id="edge64_Node000031_Node000031" title=" " alt="" coords="783,1124,777,1117,781,1107,796,1101,821,1099,847,1101,862,1110,857,1110,845,1106,820,1104,797,1106,785,1111,782,1116,788,1125"/>
+<area shape="poly" id="edge66_Node000032_Node000032" title=" " alt="" coords="783,975,777,967,781,957,796,951,821,949,847,952,862,960,857,961,845,957,820,955,797,957,785,961,782,967,788,976"/>
+<area shape="poly" id="edge68_Node000033_Node000033" title=" " alt="" coords="783,1199,777,1191,781,1181,796,1175,821,1173,847,1176,862,1185,857,1185,845,1181,820,1179,797,1181,785,1185,782,1191,788,1200"/>
+<area shape="poly" id="edge72_Node000034_Node000033" title=" " alt="" coords="620,1211,753,1212,748,1214,621,1216"/>
+<area shape="poly" id="edge71_Node000034_Node000034" title=" " alt="" coords="501,1199,493,1191,499,1181,516,1175,545,1173,576,1176,594,1185,589,1186,575,1181,545,1179,517,1181,502,1186,499,1191,506,1200"/>
+<area shape="poly" id="edge75_Node000035_Node000033" title=" " alt="" coords="580,1275,721,1236,754,1230,749,1232,722,1241,582,1280"/>
+<area shape="poly" id="edge74_Node000035_Node000035" title=" " alt="" coords="505,1277,494,1268,497,1257,514,1250,545,1248,585,1253,594,1259,596,1268,591,1266,590,1262,583,1258,545,1253,515,1256,501,1261,499,1267,511,1277"/>
+<area shape="poly" id="edge76_Node000035_Node000036" title=" " alt="" coords="581,1285,751,1287,746,1289,582,1291"/>
+<area shape="poly" id="edge80_Node000036_Node000036" title=" " alt="" coords="783,1274,777,1266,781,1256,796,1250,821,1248,847,1251,862,1259,857,1259,845,1256,820,1253,797,1255,785,1260,782,1265,788,1275"/>
+<area shape="rect" id="Node000037" href="$group__grp__oc.html#ga5a3191b846544a7dced3ea094018f361" title="Indique si la protection OC est AGISSANTE : LDO surveillee (circuit cable, voir OC_EstSurveillee()) E..." alt="" coords="988,1275,1094,1301"/>
+<area shape="poly" id="edge77_Node000036_Node000037" title=" " alt="" coords="877,1285,975,1287,970,1289,878,1291"/>
+<area shape="poly" id="edge79_Node000037_Node000027" title=" " alt="" coords="1076,1299,1183,1344,1177,1344,1076,1305"/>
+<area shape="poly" id="edge78_Node000037_Node000037" title=" " alt="" coords="1008,1273,1003,1266,1007,1256,1020,1250,1041,1248,1063,1251,1077,1260,1071,1259,1062,1256,1041,1253,1021,1255,1011,1260,1008,1265,1013,1275"/>
+<area shape="poly" id="edge82_Node000038_Node000033" title=" " alt="" coords="594,1144,674,1161,771,1194,766,1195,673,1167,595,1149"/>
+<area shape="poly" id="edge83_Node000038_Node000038" title=" " alt="" coords="501,1125,493,1117,499,1107,516,1101,545,1099,576,1101,594,1110,589,1111,575,1106,545,1104,517,1106,502,1111,499,1116,506,1125"/>
+<area shape="poly" id="edge91_Node000039_Node000026" title=" " alt="" coords="613,1421,722,1436,955,1458,949,1459,721,1441,613,1427"/>
+<area shape="poly" id="edge86_Node000039_Node000027" title=" " alt="" coords="583,1397,647,1377,721,1361,838,1351,955,1348,1063,1350,1153,1357,1148,1358,1063,1355,955,1353,838,1356,722,1367,648,1382,585,1402"/>
+<area shape="poly" id="edge92_Node000039_Node000039" title=" " alt="" coords="501,1399,493,1391,499,1381,516,1375,545,1373,576,1376,594,1385,589,1385,575,1381,545,1379,517,1381,502,1386,499,1391,506,1400"/>
+<area shape="rect" id="Node000040" href="$group__grp__oc.html#gaa95aeec744d338f67994e9ecbaf895b9" title="Cherche la LDO surveillee dont le seuil de courant est sur le canal donne d&#39;un tableau DACx_DEF." alt="" coords="746,1400,895,1427"/>
+<area shape="poly" id="edge87_Node000039_Node000040" title=" " alt="" coords="612,1411,733,1413,728,1414,613,1416"/>
+<area shape="poly" id="edge90_Node000040_Node000026" title=" " alt="" coords="882,1425,968,1447,962,1447,882,1430"/>
+<area shape="poly" id="edge88_Node000040_Node000027" title=" " alt="" coords="895,1402,1154,1373,1149,1374,896,1407"/>
+<area shape="poly" id="edge89_Node000040_Node000040" title=" " alt="" coords="783,1399,777,1391,781,1381,796,1375,821,1373,847,1376,862,1385,857,1385,845,1381,820,1379,797,1381,785,1385,782,1391,788,1400"/>
+<area shape="poly" id="edge94_Node000041_Node000041" title=" " alt="" coords="501,453,493,445,499,435,516,429,545,427,576,429,594,438,589,440,575,434,545,432,517,434,502,439,499,444,506,452"/>
+<area shape="poly" id="edge96_Node000042_Node000042" title=" " alt="" coords="501,677,493,669,499,659,516,653,545,651,576,653,594,662,589,663,575,658,545,656,517,658,502,663,499,668,506,677"/>
+</map>

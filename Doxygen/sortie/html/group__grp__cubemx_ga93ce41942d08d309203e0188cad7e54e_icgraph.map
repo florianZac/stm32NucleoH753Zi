@@ -1,0 +1,7 @@
+<map id="MPU_Config" name="MPU_Config">
+<area shape="rect" id="Node000001" title="Configuration de la MPU (zones SRAM D2 utilisees par LwIP et l&#39;Ethernet)." alt="" coords="103,29,199,56"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="170,14,164,10,151,8,139,10,132,14,131,20,134,30,129,28,126,20,128,11,137,5,151,3,166,5,175,15"/>
+<area shape="rect" id="Node000002" href="$group__grp__cubemx.html#ga840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,29,55,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="85,44,55,45,55,40,90,42"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="49,15,43,10,30,8,18,10,12,14,10,20,13,28,8,29,5,20,7,11,16,5,30,3,45,5,54,14"/>
+</map>

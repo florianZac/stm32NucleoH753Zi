@@ -1,0 +1,506 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="group__grp__seq" kind="group">
+    <compoundname>grp_seq</compoundname>
+    <title>Séquencement (delta timings)</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__grp__seq_1ga8024c7bf9dc251e781f90eb02093c068" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_SET_DELTA_DVDD_AVDD</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_SET_DELTA_DVDD_AVDD</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;SET_DELTA_DVDD_AVDD&quot;. Met a jour le delai de sequencement delta_dvdd_avdd (en ms) a partir de la valeur recue apres le &quot;&apos;&quot; dans la trame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>parametre C. La valeur est lue dans la variable globale last_message, au format attendu &quot;SET_DELTA_DVDD_AVDD:&lt;valeur_ms&gt;&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Effet de bord : delta_dvdd_avdd mis a jour. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;SET_DELTA_DVDD_AVDD:750&quot;<sp/>-&gt;<sp/>delta_dvdd_avdd<sp/>=<sp/>750;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="2913" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="2913" bodyend="2913"/>
+        <references refid="group__grp__seq_1ga8024c7bf9dc251e781f90eb02093c068" compoundref="main_8c" startline="2913" endline="2913">h_SET_DELTA_DVDD_AVDD</references>
+        <referencedby refid="group__grp__seq_1ga8024c7bf9dc251e781f90eb02093c068" compoundref="main_8c" startline="2913" endline="2913">h_SET_DELTA_DVDD_AVDD</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__seq_1ga447238e5b551e58c8b0e7ae98584b5e8" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_SET_DELTA_AVDD_VREF</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_SET_DELTA_AVDD_VREF</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;SET_DELTA_AVDD_VREF&quot;. Met a jour le delai de sequencement delta_avdd_vref (en ms) a partir de la valeur recue apres le &quot;&apos;&quot; dans la trame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>parametre C. La valeur est lue dans la variable globale last_message, au format attendu &quot;SET_DELTA_AVDD_VREF:&lt;valeur_ms&gt;&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Effet de bord : delta_avdd_vref mis a jour. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;SET_DELTA_AVDD_VREF:750&quot;<sp/>-&gt;<sp/>delta_avdd_vref<sp/>=<sp/>750;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="2927" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="2927" bodyend="2927"/>
+        <references refid="group__grp__seq_1ga447238e5b551e58c8b0e7ae98584b5e8" compoundref="main_8c" startline="2927" endline="2927">h_SET_DELTA_AVDD_VREF</references>
+        <referencedby refid="group__grp__seq_1ga447238e5b551e58c8b0e7ae98584b5e8" compoundref="main_8c" startline="2927" endline="2927">h_SET_DELTA_AVDD_VREF</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__seq_1gad6a88754ddfa232341e56f1002eec8c0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_SET_DELTA_VREF_NRST</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_SET_DELTA_VREF_NRST</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;SET_DELTA_VREF_NRST&quot;. Met a jour le delai de sequencement delta_vref_nrst (en ms) a partir de la valeur recue apres le &quot;&apos;&quot; dans la trame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>parametre C. La valeur est lue dans la variable globale last_message, au format attendu &quot;SET_DELTA_VREF_NRST:&lt;valeur_ms&gt;&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Effet de bord : delta_vref_nrst mis a jour. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;SET_DELTA_VREF_NRST:750&quot;<sp/>-&gt;<sp/>delta_vref_nrst<sp/>=<sp/>750;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="2941" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="2941" bodyend="2941"/>
+        <references refid="group__grp__seq_1gad6a88754ddfa232341e56f1002eec8c0" compoundref="main_8c" startline="2941" endline="2941">h_SET_DELTA_VREF_NRST</references>
+        <referencedby refid="group__grp__seq_1gad6a88754ddfa232341e56f1002eec8c0" compoundref="main_8c" startline="2941" endline="2941">h_SET_DELTA_VREF_NRST</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__seq_1gad624d55c33c1c9d1fa936ec32c703b45" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_SET_DELTA_NRST_VREF</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_SET_DELTA_NRST_VREF</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;SET_DELTA_NRST_VREF&quot;. Met a jour le delai de sequencement delta_nrst_vref (en ms) a partir de la valeur recue apres le &quot;&apos;&quot; dans la trame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>parametre C. La valeur est lue dans la variable globale last_message, au format attendu &quot;SET_DELTA_NRST_VREF:&lt;valeur_ms&gt;&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Effet de bord : delta_nrst_vref mis a jour. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;SET_DELTA_NRST_VREF:750&quot;<sp/>-&gt;<sp/>delta_nrst_vref<sp/>=<sp/>750;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="2955" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="2955" bodyend="2955"/>
+        <references refid="group__grp__seq_1gad624d55c33c1c9d1fa936ec32c703b45" compoundref="main_8c" startline="2955" endline="2955">h_SET_DELTA_NRST_VREF</references>
+        <referencedby refid="group__grp__seq_1gad624d55c33c1c9d1fa936ec32c703b45" compoundref="main_8c" startline="2955" endline="2955">h_SET_DELTA_NRST_VREF</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__seq_1gac6a1155f69e7a25d7bb385ae35b93aae" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_SET_DELTA_VREF_AVDD</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_SET_DELTA_VREF_AVDD</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;SET_DELTA_VREF_AVDD&quot;. Met a jour le delai de sequencement delta_vref_avdd (en ms) a partir de la valeur recue apres le &quot;&apos;&quot; dans la trame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>parametre C. La valeur est lue dans la variable globale last_message, au format attendu &quot;SET_DELTA_VREF_AVDD:&lt;valeur_ms&gt;&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Effet de bord : delta_vref_avdd mis a jour. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;SET_DELTA_VREF_AVDD:750&quot;<sp/>-&gt;<sp/>delta_vref_avdd<sp/>=<sp/>750;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="2969" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="2969" bodyend="2969"/>
+        <references refid="group__grp__seq_1gac6a1155f69e7a25d7bb385ae35b93aae" compoundref="main_8c" startline="2969" endline="2969">h_SET_DELTA_VREF_AVDD</references>
+        <referencedby refid="group__grp__seq_1gac6a1155f69e7a25d7bb385ae35b93aae" compoundref="main_8c" startline="2969" endline="2969">h_SET_DELTA_VREF_AVDD</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__seq_1gad370c2ace608cdb8daf1afd3ca3b202f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_SET_DELTA_AVDD_DVDD</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_SET_DELTA_AVDD_DVDD</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;SET_DELTA_AVDD_DVDD&quot;. Met a jour le delai de sequencement delta_avdd_dvdd (en ms) a partir de la valeur recue apres le &quot;&apos;&quot; dans la trame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>parametre C. La valeur est lue dans la variable globale last_message, au format attendu &quot;SET_DELTA_AVDD_DVDD:&lt;valeur_ms&gt;&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Effet de bord : delta_avdd_dvdd mis a jour. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;SET_DELTA_AVDD_DVDD:750&quot;<sp/>-&gt;<sp/>delta_avdd_dvdd<sp/>=<sp/>750;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="2983" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="2983" bodyend="2983"/>
+        <references refid="group__grp__seq_1gad370c2ace608cdb8daf1afd3ca3b202f" compoundref="main_8c" startline="2983" endline="2983">h_SET_DELTA_AVDD_DVDD</references>
+        <referencedby refid="group__grp__seq_1gad370c2ace608cdb8daf1afd3ca3b202f" compoundref="main_8c" startline="2983" endline="2983">h_SET_DELTA_AVDD_DVDD</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__seq_1gab8a97c1e4d7e30955e1e037a892379bf" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_RST_DELTA_DVDD_AVDD</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_RST_DELTA_DVDD_AVDD</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;RST_DELTA_DVDD_AVDD&quot;. Reinitialise le delai delta_dvdd_avdd a sa valeur par defaut (DELTA_INIT_DVDD_AVDD). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Effet de bord : delta_dvdd_avdd = DELTA_INIT_DVDD_AVDD. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;RST_DELTA_DVDD_AVDD&quot;<sp/>-&gt;<sp/>delta_dvdd_avdd<sp/>=<sp/>DELTA_INIT_DVDD_AVDD;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="2995" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="2995" bodyend="2995"/>
+        <references refid="group__grp__seq_1gab8a97c1e4d7e30955e1e037a892379bf" compoundref="main_8c" startline="2995" endline="2995">h_RST_DELTA_DVDD_AVDD</references>
+        <referencedby refid="group__grp__seq_1gab8a97c1e4d7e30955e1e037a892379bf" compoundref="main_8c" startline="2995" endline="2995">h_RST_DELTA_DVDD_AVDD</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__seq_1gaa3fe1ad448a429d3760b5fbef9c41f07" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_RST_DELTA_AVDD_VREF</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_RST_DELTA_AVDD_VREF</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;RST_DELTA_AVDD_VREF&quot;. Reinitialise le delai delta_avdd_vref a sa valeur par defaut (DELTA_INIT_AVDD_VREF). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Effet de bord : delta_avdd_vref = DELTA_INIT_AVDD_VREF. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;RST_DELTA_AVDD_VREF&quot;<sp/>-&gt;<sp/>delta_avdd_vref<sp/>=<sp/>DELTA_INIT_AVDD_VREF;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3007" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3007" bodyend="3007"/>
+        <references refid="group__grp__seq_1gaa3fe1ad448a429d3760b5fbef9c41f07" compoundref="main_8c" startline="3007" endline="3007">h_RST_DELTA_AVDD_VREF</references>
+        <referencedby refid="group__grp__seq_1gaa3fe1ad448a429d3760b5fbef9c41f07" compoundref="main_8c" startline="3007" endline="3007">h_RST_DELTA_AVDD_VREF</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__seq_1gafa476ad70dfb2f285f7dff1b041e04dd" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_RST_DELTA_VREF_NRST</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_RST_DELTA_VREF_NRST</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;RST_DELTA_VREF_NRST&quot;. Reinitialise le delai delta_vref_nrst a sa valeur par defaut (DELTA_INIT_VREF_NRST). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Effet de bord : delta_vref_nrst = DELTA_INIT_VREF_NRST. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;RST_DELTA_VREF_NRST&quot;<sp/>-&gt;<sp/>delta_vref_nrst<sp/>=<sp/>DELTA_INIT_VREF_NRST;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3019" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3019" bodyend="3019"/>
+        <references refid="group__grp__seq_1gafa476ad70dfb2f285f7dff1b041e04dd" compoundref="main_8c" startline="3019" endline="3019">h_RST_DELTA_VREF_NRST</references>
+        <referencedby refid="group__grp__seq_1gafa476ad70dfb2f285f7dff1b041e04dd" compoundref="main_8c" startline="3019" endline="3019">h_RST_DELTA_VREF_NRST</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__seq_1gaaf5aa614e94e4b5e58f55b372a3dc575" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_RST_DELTA_NRST_VREF</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_RST_DELTA_NRST_VREF</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;RST_DELTA_NRST_VREF&quot;. Reinitialise le delai delta_nrst_vref a sa valeur par defaut (DELTA_INIT_NRST_VREF). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Effet de bord : delta_nrst_vref = DELTA_INIT_NRST_VREF. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;RST_DELTA_NRST_VREF&quot;<sp/>-&gt;<sp/>delta_nrst_vref<sp/>=<sp/>DELTA_INIT_NRST_VREF;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3031" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3031" bodyend="3031"/>
+        <references refid="group__grp__seq_1gaaf5aa614e94e4b5e58f55b372a3dc575" compoundref="main_8c" startline="3031" endline="3031">h_RST_DELTA_NRST_VREF</references>
+        <referencedby refid="group__grp__seq_1gaaf5aa614e94e4b5e58f55b372a3dc575" compoundref="main_8c" startline="3031" endline="3031">h_RST_DELTA_NRST_VREF</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__seq_1gaa9d31428d43e4e992c4c104147df4fc4" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_RST_DELTA_VREF_AVDD</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_RST_DELTA_VREF_AVDD</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;RST_DELTA_VREF_AVDD&quot;. Reinitialise le delai delta_vref_avdd a sa valeur par defaut (DELTA_INIT_VREF_AVDD). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Effet de bord : delta_vref_avdd = DELTA_INIT_VREF_AVDD. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;RST_DELTA_VREF_AVDD&quot;<sp/>-&gt;<sp/>delta_vref_avdd<sp/>=<sp/>DELTA_INIT_VREF_AVDD;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3043" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3043" bodyend="3043"/>
+        <references refid="group__grp__seq_1gaa9d31428d43e4e992c4c104147df4fc4" compoundref="main_8c" startline="3043" endline="3043">h_RST_DELTA_VREF_AVDD</references>
+        <referencedby refid="group__grp__seq_1gaa9d31428d43e4e992c4c104147df4fc4" compoundref="main_8c" startline="3043" endline="3043">h_RST_DELTA_VREF_AVDD</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__seq_1gab0984c31ea124d09363e7ed26ea7191c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_RST_DELTA_AVDD_DVDD</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_RST_DELTA_AVDD_DVDD</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;RST_DELTA_AVDD_DVDD&quot;. Reinitialise le delai delta_avdd_dvdd a sa valeur par defaut (DELTA_INIT_AVDD_DVDD). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Effet de bord : delta_avdd_dvdd = DELTA_INIT_AVDD_DVDD. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;RST_DELTA_AVDD_DVDD&quot;<sp/>-&gt;<sp/>delta_avdd_dvdd<sp/>=<sp/>DELTA_INIT_AVDD_DVDD;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3055" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3055" bodyend="3055"/>
+        <references refid="group__grp__seq_1gab0984c31ea124d09363e7ed26ea7191c" compoundref="main_8c" startline="3055" endline="3055">h_RST_DELTA_AVDD_DVDD</references>
+        <referencedby refid="group__grp__seq_1gab0984c31ea124d09363e7ed26ea7191c" compoundref="main_8c" startline="3055" endline="3055">h_RST_DELTA_AVDD_DVDD</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Commandes SET_DELTA_* / RST_DELTA_* des délais de séquencement. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

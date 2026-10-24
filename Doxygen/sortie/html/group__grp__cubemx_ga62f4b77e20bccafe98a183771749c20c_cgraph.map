@@ -1,0 +1,7 @@
+<map id="MX_USART1_UART_Init" name="MX_USART1_UART_Init">
+<area shape="rect" id="Node000001" title="USART1 Initialization Function." alt="" coords="5,29,174,56"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="58,29,53,21,56,11,69,5,90,3,111,5,124,14,119,14,110,10,89,8,71,10,60,15,58,20,63,29"/>
+<area shape="rect" id="Node000002" href="$group__grp__cubemx.html#ga1730ffe1e560465665eb47d9264826f9" title="This function is executed in case of error occurrence." alt="" coords="222,29,323,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="174,40,208,43,203,43,174,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="241,28,235,21,239,11,252,5,272,3,294,5,307,14,302,14,293,10,272,8,253,10,243,15,241,20,246,30"/>
+</map>

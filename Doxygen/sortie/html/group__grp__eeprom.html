@@ -1,0 +1,649 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lwip_demo_H753 - Controleur de LDO: Mémoire EEPROM des DAC et potentiomètre</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Lwip_demo_H753 - Controleur de LDO<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">Firmware STM32H753ZI : pilotage de 18 LDO (configuration CSV, DAC MCP47FEB28, protection OC)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Recherche" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('group__grp__eeprom.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Mémoire EEPROM des DAC et potentiomètre </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Sauvegarde différée et restauration des codes DAC dans l'EEPROM du MCP47FEB28.  
+<a href="#details">Plus de détails...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:ga0fdcf8780e2127569c1e1a76e9518c5a" id="r_ga0fdcf8780e2127569c1e1a76e9518c5a"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga0fdcf8780e2127569c1e1a76e9518c5a">DAC_DemanderSauvegarde</a> (int idx, uint8_t immediat)</td></tr>
+<tr class="memdesc:ga0fdcf8780e2127569c1e1a76e9518c5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Demande l'ecriture en EEPROM du MCP47FEB28 des codes DAC (tension et seuil de courant) d'une LDO declaree MEM_EEPROM dans ldoConfig[]. Sans effet pour une LDO MEM_RAM. N'ecrit rien sur le bus : la boucle de StartLwipTask() fait l'ecriture (DAC_TraiterSauvegardes()). Appelable depuis l'interruption OC et depuis le contexte lwIP.  <br /></td></tr>
+<tr class="memitem:ga411fdeb5f1d7a54dc6d8ecf893d7d0a9" id="r_ga411fdeb5f1d7a54dc6d8ecf893d7d0a9"><td class="memItemLeft">static const <a class="el" href="struct_dac_puce__t.html">DacPuce_t</a> *&#160;</td><td class="memItemRight"><a class="el" href="#ga411fdeb5f1d7a54dc6d8ecf893d7d0a9">DAC_PuceDeCible</a> (<a class="el" href="main_8c.html#a75e57bba50363a40a374df0b941bfd58">CibleDac_t</a> cible)</td></tr>
+<tr class="memdesc:ga411fdeb5f1d7a54dc6d8ecf893d7d0a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Puce DAC (ligne de tableDac[]) correspondant a une cible logique.  <br /></td></tr>
+<tr class="memitem:ga9038fec6d17da09fb1543c560d3e7965" id="r_ga9038fec6d17da09fb1543c560d3e7965"><td class="memItemLeft">static uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#ga9038fec6d17da09fb1543c560d3e7965">DAC_PuceJoignable</a> (const <a class="el" href="struct_dac_puce__t.html">DacPuce_t</a> *puce)</td></tr>
+<tr class="memdesc:ga9038fec6d17da09fb1543c560d3e7965"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indique si une puce DAC est joignable maintenant : bus I2C1, ou I2C2 active (i2c2_actif), et pas en cours de balayage (BALAYER_DAC).  <br /></td></tr>
+<tr class="memitem:ga1de03c1c4ce3c3d63b079d5bce9c8e74" id="r_ga1de03c1c4ce3c3d63b079d5bce9c8e74"><td class="memItemLeft">static HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#ga1de03c1c4ce3c3d63b079d5bce9c8e74">EcrireDACEeprom</a> (I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t voie, uint16_t valeur)</td></tr>
+<tr class="memdesc:ga1de03c1c4ce3c3d63b079d5bce9c8e74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ecrit le code de demarrage (EEPROM, registre non volatil 10h + voie) d'une voie du MCP47FEB28. Commande "Write" simple (3 octets), seul mode autorise vers la memoire non volatile. La sortie analogique ne change pas (seul le registre volatil 00h-07h la pilote).  <br /></td></tr>
+<tr class="memitem:ga461f9e8b58bc45203018e3132c71b989" id="r_ga461f9e8b58bc45203018e3132c71b989"><td class="memItemLeft">static uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#ga461f9e8b58bc45203018e3132c71b989">DAC_GarderEnEeprom</a> (<a class="el" href="main_8c.html#a75e57bba50363a40a374df0b941bfd58">CibleDac_t</a> cible, uint8_t voie, uint16_t valeur, uint16_t *lu)</td></tr>
+<tr class="memdesc:ga461f9e8b58bc45203018e3132c71b989"><td class="mdescLeft">&#160;</td><td class="mdescRight">Garde un code dans l'EEPROM d'une voie : relit la valeur en EEPROM, n'ecrit que si elle differe, attend DAC_EEPROM_TWC_MS et relit pour controler. A n'appeler que depuis la boucle de StartLwipTask().  <br /></td></tr>
+<tr class="memitem:ga5f9ce30ec25412cc3efbe118447a5a11" id="r_ga5f9ce30ec25412cc3efbe118447a5a11"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga5f9ce30ec25412cc3efbe118447a5a11">DAC_TraiterSauvegardes</a> (void)</td></tr>
+<tr class="memdesc:ga5f9ce30ec25412cc3efbe118447a5a11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traite AU PLUS UNE demande de sauvegarde EEPROM par appel (une LDO : voie tension puis voie seuil). Une demande "differee" (SET_VAL, SET_CURRENT) n'est traitee qu'apres DAC_EEPROM_DELAI_MS sans nouvelle valeur ; une demande "immediate" (declenchement OC) au tour suivant. En cas d'echec, nouvel essai, jusqu'a DAC_EEPROM_ESSAIS_MAX.  <br /></td></tr>
+<tr class="memitem:gaea23265d4fdedf9ac60d1c4afb886e40" id="r_gaea23265d4fdedf9ac60d1c4afb886e40"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#gaea23265d4fdedf9ac60d1c4afb886e40">DAC_RestaurerMemoire</a> (void)</td></tr>
+<tr class="memdesc:gaea23265d4fdedf9ac60d1c4afb886e40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Au demarrage, recharge depuis l'EEPROM du MCP47FEB28 les codes de tension et de seuil des LDO declarees MEM_EEPROM, dans VAL_LDO[], CURRENT_LDO[] et les trames DACx_DEF (la boucle les reemet ensuite). Un seuil lu hors de [seuil_min, seuil_max] est remplace par le seuil par defaut, qui est alors ecrit en EEPROM. L'EN reste a 0. A appeler apres CreerMutexI2C(), OC_InitialiserSeuilsDefaut() et InitialiserConfigDacsI2C1(), avant udpServer_init().  <br /></td></tr>
+<tr class="memitem:ga538f60d46cf0ac04119fa65a989274be" id="r_ga538f60d46cf0ac04119fa65a989274be"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga538f60d46cf0ac04119fa65a989274be">DAC_ConfigurerSeuilsPotentiometre</a> (void)</td></tr>
+<tr class="memdesc:ga538f60d46cf0ac04119fa65a989274be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mode potentiometre (LDO dont la colonne "seuil" vaut SEUIL_POT) : met la voie du DAC de courant en Power-Down 11 (sortie ouverte) pour qu'elle ne pilote plus IN- du LM211, et memorise cette configuration pour que SurveillerConfigDacsI2C1() la conserve. Sans effet si aucune LDO n'est en SEUIL_POT (cas actuel). Puces de I2C1 uniquement. Codage PDnB:PDnA = 11 a confirmer (DS20006368A, registre 4-3).  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Sauvegarde différée et restauration des codes DAC dans l'EEPROM du MCP47FEB28. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentation des fonctions</h2>
+<a id="ga0fdcf8780e2127569c1e1a76e9518c5a" name="ga0fdcf8780e2127569c1e1a76e9518c5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0fdcf8780e2127569c1e1a76e9518c5a">&#9670;&#160;</a></span>DAC_DemanderSauvegarde()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DAC_DemanderSauvegarde </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>immediat</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Demande l'ecriture en EEPROM du MCP47FEB28 des codes DAC (tension et seuil de courant) d'une LDO declaree MEM_EEPROM dans ldoConfig[]. Sans effet pour une LDO MEM_RAM. N'ecrit rien sur le bus : la boucle de StartLwipTask() fait l'ecriture (DAC_TraiterSauvegardes()). Appelable depuis l'interruption OC et depuis le contexte lwIP. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idx</td><td>Index de la LDO (0-17). </td></tr>
+    <tr><td class="paramname">immediat</td><td>1 = au prochain tour de boucle (declenchement OC), 0 = apres DAC_EEPROM_DELAI_MS sans nouvelle valeur (SET_VAL). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#ga0fdcf8780e2127569c1e1a76e9518c5a">DAC_DemanderSauvegarde</a>(<a class="code hl_function" href="group__grp__config.html#gadc686ab4f6036d732a6f2b1ecb6dbd01">findLdoIndex</a>(<span class="stringliteral">&quot;2PSp&quot;</span>), 0U);   <span class="comment">// apres SET_VAL_LDO_2PSp</span></div>
+<div class="ttc" id="agroup__grp__config_html_gadc686ab4f6036d732a6f2b1ecb6dbd01"><div class="ttname"><a href="group__grp__config.html#gadc686ab4f6036d732a6f2b1ecb6dbd01">findLdoIndex</a></div><div class="ttdeci">static int findLdoIndex(const char *suffix)</div><div class="ttdoc">Recherche l&#39;indice (0 a NB_LDO-1) d&#39;une LDO dans le tableau ldoConfig[] a partir de son suffixe de no...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l02727">main.c:2727</a></div></div>
+<div class="ttc" id="agroup__grp__eeprom_html_ga0fdcf8780e2127569c1e1a76e9518c5a"><div class="ttname"><a href="#ga0fdcf8780e2127569c1e1a76e9518c5a">DAC_DemanderSauvegarde</a></div><div class="ttdeci">static void DAC_DemanderSauvegarde(int idx, uint8_t immediat)</div><div class="ttdoc">Demande l&#39;ecriture en EEPROM du MCP47FEB28 des codes DAC (tension et seuil de courant) d&#39;une LDO decl...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l03147">main.c:3147</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l03147">3147</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03147">DAC_DemanderSauvegarde()</a>, <a class="el" href="main_8c_source.html#l00440">nv_a_sauver</a>, <a class="el" href="main_8c_source.html#l00441">nv_immediat</a>, et <a class="el" href="main_8c_source.html#l00442">nv_tick_demande</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l03147">DAC_DemanderSauvegarde()</a>, <a class="el" href="main_8c_source.html#l04822">DAC_RestaurerMemoire()</a>, <a class="el" href="main_8c_source.html#l04755">DAC_TraiterSauvegardes()</a>, <a class="el" href="main_8c_source.html#l04109">h_SET_CURRENT_LDO_GENERIQUE()</a>, <a class="el" href="main_8c_source.html#l04084">h_SET_VAL_LDO_GENERIQUE()</a>, et <a class="el" href="main_8c_source.html#l03187">OC_Verrouiller()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__eeprom_ga0fdcf8780e2127569c1e1a76e9518c5a_cgraph.svg" width="198" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__eeprom_ga0fdcf8780e2127569c1e1a76e9518c5a_icgraph.svg" width="1375" height="387"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga411fdeb5f1d7a54dc6d8ecf893d7d0a9" name="ga411fdeb5f1d7a54dc6d8ecf893d7d0a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga411fdeb5f1d7a54dc6d8ecf893d7d0a9">&#9670;&#160;</a></span>DAC_PuceDeCible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="struct_dac_puce__t.html">DacPuce_t</a> * DAC_PuceDeCible </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="main_8c.html#a75e57bba50363a40a374df0b941bfd58">CibleDac_t</a></td>          <td class="paramname"><span class="paramname"><em>cible</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Puce DAC (ligne de tableDac[]) correspondant a une cible logique. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cible</td><td>CIBLE_DAC1 ... CIBLE_DAC5. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Pointeur</td><td>vers la ligne de tableDac[], ou NULL (CIBLE_AUCUNE/inconnue). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="keyword">const</span> <a class="code hl_struct" href="struct_dac_puce__t.html">DacPuce_t</a> *p = <a class="code hl_function" href="#ga411fdeb5f1d7a54dc6d8ecf893d7d0a9">DAC_PuceDeCible</a>(CIBLE_DAC1);   <span class="comment">// I2C1, 0xC0</span></div>
+<div class="ttc" id="agroup__grp__eeprom_html_ga411fdeb5f1d7a54dc6d8ecf893d7d0a9"><div class="ttname"><a href="#ga411fdeb5f1d7a54dc6d8ecf893d7d0a9">DAC_PuceDeCible</a></div><div class="ttdeci">static const DacPuce_t * DAC_PuceDeCible(CibleDac_t cible)</div><div class="ttdoc">Puce DAC (ligne de tableDac[]) correspondant a une cible logique.</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l04624">main.c:4624</a></div></div>
+<div class="ttc" id="astruct_dac_puce__t_html"><div class="ttname"><a href="struct_dac_puce__t.html">DacPuce_t</a></div><div class="ttdoc">Une puce MCP47FEB28 rafraichie en continu par StartLwipTask().</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l00293">main.c:293</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l04624">4624</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l04624">DAC_PuceDeCible()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04902">DAC_ConfigurerSeuilsPotentiometre()</a>, <a class="el" href="main_8c_source.html#l04712">DAC_GarderEnEeprom()</a>, <a class="el" href="main_8c_source.html#l04624">DAC_PuceDeCible()</a>, et <a class="el" href="main_8c_source.html#l04822">DAC_RestaurerMemoire()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__eeprom_ga411fdeb5f1d7a54dc6d8ecf893d7d0a9_cgraph.svg" width="146" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__eeprom_ga411fdeb5f1d7a54dc6d8ecf893d7d0a9_icgraph.svg" width="896" height="211"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga9038fec6d17da09fb1543c560d3e7965" name="ga9038fec6d17da09fb1543c560d3e7965"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9038fec6d17da09fb1543c560d3e7965">&#9670;&#160;</a></span>DAC_PuceJoignable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t DAC_PuceJoignable </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_dac_puce__t.html">DacPuce_t</a> *</td>          <td class="paramname"><span class="paramname"><em>puce</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Indique si une puce DAC est joignable maintenant : bus I2C1, ou I2C2 active (i2c2_actif), et pas en cours de balayage (BALAYER_DAC). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">puce</td><td>Ligne de tableDac[] (peut etre NULL). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">1</td><td>si la puce peut etre lue/ecrite, 0 sinon. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="keywordflow">if</span> (<a class="code hl_function" href="#ga9038fec6d17da09fb1543c560d3e7965">DAC_PuceJoignable</a>(<a class="code hl_function" href="#ga411fdeb5f1d7a54dc6d8ecf893d7d0a9">DAC_PuceDeCible</a>(CIBLE_DAC1)) != 0U) { ... }</div>
+<div class="ttc" id="agroup__grp__eeprom_html_ga9038fec6d17da09fb1543c560d3e7965"><div class="ttname"><a href="#ga9038fec6d17da09fb1543c560d3e7965">DAC_PuceJoignable</a></div><div class="ttdeci">static uint8_t DAC_PuceJoignable(const DacPuce_t *puce)</div><div class="ttdoc">Indique si une puce DAC est joignable maintenant : bus I2C1, ou I2C2 active (i2c2_actif),...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l04647">main.c:4647</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l04647">4647</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l00296">DacPuce_t::adresse_hal</a>, <a class="el" href="main_8c_source.html#l04647">DAC_PuceJoignable()</a>, et <a class="el" href="main_8c_source.html#l00295">DacPuce_t::hi2c</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04712">DAC_GarderEnEeprom()</a>, <a class="el" href="main_8c_source.html#l04647">DAC_PuceJoignable()</a>, et <a class="el" href="main_8c_source.html#l04822">DAC_RestaurerMemoire()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__eeprom_ga9038fec6d17da09fb1543c560d3e7965_cgraph.svg" width="154" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__eeprom_ga9038fec6d17da09fb1543c560d3e7965_icgraph.svg" width="827" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga1de03c1c4ce3c3d63b079d5bce9c8e74" name="ga1de03c1c4ce3c3d63b079d5bce9c8e74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1de03c1c4ce3c3d63b079d5bce9c8e74">&#9670;&#160;</a></span>EcrireDACEeprom()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">HAL_StatusTypeDef EcrireDACEeprom </td>
+          <td>(</td>
+          <td class="paramtype">I2C_HandleTypeDef *</td>          <td class="paramname"><span class="paramname"><em>hi2c</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>adresse_hal</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>voie</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>valeur</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Ecrit le code de demarrage (EEPROM, registre non volatil 10h + voie) d'une voie du MCP47FEB28. Commande "Write" simple (3 octets), seul mode autorise vers la memoire non volatile. La sortie analogique ne change pas (seul le registre volatil 00h-07h la pilote). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hi2c</td><td>&amp;hi2c1 ou &amp;hi2c2. </td></tr>
+    <tr><td class="paramname">adresse_hal</td><td>Adresse 7 bits decalee (0xC0, 0xC2, 0xC4). </td></tr>
+    <tr><td class="paramname">voie</td><td>Voie 0-7 ; toute autre valeur est refusee. </td></tr>
+    <tr><td class="paramname">valeur</td><td>Code 12 bits (0-4095). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">HAL_StatusTypeDef</td><td>de la transmission (HAL_ERROR si voie &gt; 7). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#ga1de03c1c4ce3c3d63b079d5bce9c8e74">EcrireDACEeprom</a>(&amp;hi2c1, 0xC0, 5, 1056);   <span class="comment">// seuil 2PSp garde a la coupure</span></div>
+<div class="ttc" id="agroup__grp__eeprom_html_ga1de03c1c4ce3c3d63b079d5bce9c8e74"><div class="ttname"><a href="#ga1de03c1c4ce3c3d63b079d5bce9c8e74">EcrireDACEeprom</a></div><div class="ttdeci">static HAL_StatusTypeDef EcrireDACEeprom(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t voie, uint16_t valeur)</div><div class="ttdoc">Ecrit le code de demarrage (EEPROM, registre non volatil 10h + voie) d&#39;une voie du MCP47FEB28....</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l04676">main.c:4676</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l04676">4676</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l04676">EcrireDACEeprom()</a>, et <a class="el" href="main_8c_source.html#l00728">ResoudreMutexI2C()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04712">DAC_GarderEnEeprom()</a>, et <a class="el" href="main_8c_source.html#l04676">EcrireDACEeprom()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__eeprom_ga1de03c1c4ce3c3d63b079d5bce9c8e74_cgraph.svg" width="323" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__eeprom_ga1de03c1c4ce3c3d63b079d5bce9c8e74_icgraph.svg" width="814" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga461f9e8b58bc45203018e3132c71b989" name="ga461f9e8b58bc45203018e3132c71b989"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga461f9e8b58bc45203018e3132c71b989">&#9670;&#160;</a></span>DAC_GarderEnEeprom()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t DAC_GarderEnEeprom </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="main_8c.html#a75e57bba50363a40a374df0b941bfd58">CibleDac_t</a></td>          <td class="paramname"><span class="paramname"><em>cible</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>voie</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>valeur</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t *</td>          <td class="paramname"><span class="paramname"><em>lu</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Garde un code dans l'EEPROM d'une voie : relit la valeur en EEPROM, n'ecrit que si elle differe, attend DAC_EEPROM_TWC_MS et relit pour controler. A n'appeler que depuis la boucle de StartLwipTask(). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cible</td><td>Puce (CIBLE_DAC1 ... CIBLE_DAC5). </td></tr>
+    <tr><td class="paramname">voie</td><td>Voie 0-7. </td></tr>
+    <tr><td class="paramname">valeur</td><td>Code 12 bits a garder. </td></tr>
+    <tr><td class="paramname">lu</td><td>Recoit le code relu en EEPROM apres l'operation (peut etre NULL). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>= code en EEPROM conforme, 1 = puce non joignable (ignore), 2 = erreur I2C ou relecture differente. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">uint16_t lu;</div>
+<div class="line"><span class="keywordflow">if</span> (<a class="code hl_function" href="#ga461f9e8b58bc45203018e3132c71b989">DAC_GarderEnEeprom</a>(CIBLE_DAC1, 4, VAL_LDO[2], &amp;lu) == 2U) { ... }</div>
+<div class="ttc" id="agroup__grp__eeprom_html_ga461f9e8b58bc45203018e3132c71b989"><div class="ttname"><a href="#ga461f9e8b58bc45203018e3132c71b989">DAC_GarderEnEeprom</a></div><div class="ttdeci">static uint8_t DAC_GarderEnEeprom(CibleDac_t cible, uint8_t voie, uint16_t valeur, uint16_t *lu)</div><div class="ttdoc">Garde un code dans l&#39;EEPROM d&#39;une voie : relit la valeur en EEPROM, n&#39;ecrit que si elle differe,...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l04712">main.c:4712</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l04712">4712</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l00296">DacPuce_t::adresse_hal</a>, <a class="el" href="main_8c_source.html#l04712">DAC_GarderEnEeprom()</a>, <a class="el" href="main_8c_source.html#l04624">DAC_PuceDeCible()</a>, <a class="el" href="main_8c_source.html#l04647">DAC_PuceJoignable()</a>, <a class="el" href="main_8c_source.html#l04676">EcrireDACEeprom()</a>, <a class="el" href="main_8c_source.html#l00295">DacPuce_t::hi2c</a>, et <a class="el" href="main_8c_source.html#l04579">LireRegistreValeurDAC()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04712">DAC_GarderEnEeprom()</a>, et <a class="el" href="main_8c_source.html#l04755">DAC_TraiterSauvegardes()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__eeprom_ga461f9e8b58bc45203018e3132c71b989_cgraph.svg" width="555" height="286"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__eeprom_ga461f9e8b58bc45203018e3132c71b989_icgraph.svg" width="636" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga5f9ce30ec25412cc3efbe118447a5a11" name="ga5f9ce30ec25412cc3efbe118447a5a11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5f9ce30ec25412cc3efbe118447a5a11">&#9670;&#160;</a></span>DAC_TraiterSauvegardes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DAC_TraiterSauvegardes </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Traite AU PLUS UNE demande de sauvegarde EEPROM par appel (une LDO : voie tension puis voie seuil). Une demande "differee" (SET_VAL, SET_CURRENT) n'est traitee qu'apres DAC_EEPROM_DELAI_MS sans nouvelle valeur ; une demande "immediate" (declenchement OC) au tour suivant. En cas d'echec, nouvel essai, jusqu'a DAC_EEPROM_ESSAIS_MAX. </p>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun.</td><td>Ligne USART1 a chaque ecriture : "DAC_NV:2PSp:V=860:I=1056:OK" (ou ":ERREUR_n"). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#ga5f9ce30ec25412cc3efbe118447a5a11">DAC_TraiterSauvegardes</a>();   <span class="comment">// dans la boucle for(;;) de StartLwipTask()</span></div>
+<div class="ttc" id="agroup__grp__eeprom_html_ga5f9ce30ec25412cc3efbe118447a5a11"><div class="ttname"><a href="#ga5f9ce30ec25412cc3efbe118447a5a11">DAC_TraiterSauvegardes</a></div><div class="ttdeci">static void DAC_TraiterSauvegardes(void)</div><div class="ttdoc">Traite AU PLUS UNE demande de sauvegarde EEPROM par appel (une LDO : voie tension puis voie seuil)....</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l04755">main.c:4755</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l04755">4755</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l00347">LDO_Config_t::canal_courant</a>, <a class="el" href="main_8c_source.html#l00346">LDO_Config_t::dac_courant</a>, <a class="el" href="main_8c_source.html#l03147">DAC_DemanderSauvegarde()</a>, <a class="el" href="main_8c_source.html#l04712">DAC_GarderEnEeprom()</a>, <a class="el" href="main_8c_source.html#l04755">DAC_TraiterSauvegardes()</a>, <a class="el" href="main_8c_source.html#l00334">LDO_Config_t::name</a>, <a class="el" href="main_8c_source.html#l00440">nv_a_sauver</a>, <a class="el" href="main_8c_source.html#l00443">nv_essais</a>, <a class="el" href="main_8c_source.html#l00441">nv_immediat</a>, <a class="el" href="main_8c_source.html#l00442">nv_tick_demande</a>, <a class="el" href="main_8c_source.html#l03086">OC_EstSurveillee()</a>, <a class="el" href="main_8c_source.html#l00354">LDO_Config_t::seuil_par_pot</a>, et <a class="el" href="main_8c_source.html#l01803">UART1_EnvoyerTexte()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04755">DAC_TraiterSauvegardes()</a>, et <a class="el" href="main_8c_source.html#l06730">StartLwipTask()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__eeprom_ga5f9ce30ec25412cc3efbe118447a5a11_cgraph.svg" width="803" height="323"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__eeprom_ga5f9ce30ec25412cc3efbe118447a5a11_icgraph.svg" width="431" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gaea23265d4fdedf9ac60d1c4afb886e40" name="gaea23265d4fdedf9ac60d1c4afb886e40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaea23265d4fdedf9ac60d1c4afb886e40">&#9670;&#160;</a></span>DAC_RestaurerMemoire()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DAC_RestaurerMemoire </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Au demarrage, recharge depuis l'EEPROM du MCP47FEB28 les codes de tension et de seuil des LDO declarees MEM_EEPROM, dans VAL_LDO[], CURRENT_LDO[] et les trames DACx_DEF (la boucle les reemet ensuite). Un seuil lu hors de [seuil_min, seuil_max] est remplace par le seuil par defaut, qui est alors ecrit en EEPROM. L'EN reste a 0. A appeler apres CreerMutexI2C(), OC_InitialiserSeuilsDefaut() et InitialiserConfigDacsI2C1(), avant udpServer_init(). </p>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun.</td><td>Une ligne USART1 par LDO : "DAC_NV_INIT:2PSp:V=860:I=1056:OK". </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">InitialiserConfigDacsI2C1();</div>
+<div class="line"><a class="code hl_function" href="#gaea23265d4fdedf9ac60d1c4afb886e40">DAC_RestaurerMemoire</a>();</div>
+<div class="ttc" id="agroup__grp__eeprom_html_gaea23265d4fdedf9ac60d1c4afb886e40"><div class="ttname"><a href="#gaea23265d4fdedf9ac60d1c4afb886e40">DAC_RestaurerMemoire</a></div><div class="ttdeci">static void DAC_RestaurerMemoire(void)</div><div class="ttdoc">Au demarrage, recharge depuis l&#39;EEPROM du MCP47FEB28 les codes de tension et de seuil des LDO declare...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l04822">main.c:4822</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l04822">4822</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l00296">DacPuce_t::adresse_hal</a>, <a class="el" href="main_8c_source.html#l00347">LDO_Config_t::canal_courant</a>, <a class="el" href="main_8c_source.html#l00346">LDO_Config_t::dac_courant</a>, <a class="el" href="main_8c_source.html#l03147">DAC_DemanderSauvegarde()</a>, <a class="el" href="main_8c_source.html#l04624">DAC_PuceDeCible()</a>, <a class="el" href="main_8c_source.html#l04647">DAC_PuceJoignable()</a>, <a class="el" href="main_8c_source.html#l04822">DAC_RestaurerMemoire()</a>, <a class="el" href="main_8c_source.html#l04011">EcrireValeurDac()</a>, <a class="el" href="main_8c_source.html#l00295">DacPuce_t::hi2c</a>, <a class="el" href="main_8c_source.html#l00343">LDO_Config_t::ldo</a>, <a class="el" href="main_8c_source.html#l04579">LireRegistreValeurDAC()</a>, <a class="el" href="main_8c_source.html#l00355">LDO_Config_t::memoire_dac</a>, <a class="el" href="main_8c_source.html#l00334">LDO_Config_t::name</a>, <a class="el" href="main_8c_source.html#l00348">LDO_Config_t::oc</a>, <a class="el" href="main_8c_source.html#l03086">OC_EstSurveillee()</a>, <a class="el" href="main_8c_source.html#l00324">OcConfig_t::seuil_min</a>, <a class="el" href="main_8c_source.html#l00354">LDO_Config_t::seuil_par_pot</a>, et <a class="el" href="main_8c_source.html#l01803">UART1_EnvoyerTexte()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04822">DAC_RestaurerMemoire()</a>, et <a class="el" href="main_8c_source.html#l06730">StartLwipTask()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__eeprom_gaea23265d4fdedf9ac60d1c4afb886e40_cgraph.svg" width="604" height="510"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__eeprom_gaea23265d4fdedf9ac60d1c4afb886e40_icgraph.svg" width="426" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga538f60d46cf0ac04119fa65a989274be" name="ga538f60d46cf0ac04119fa65a989274be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga538f60d46cf0ac04119fa65a989274be">&#9670;&#160;</a></span>DAC_ConfigurerSeuilsPotentiometre()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DAC_ConfigurerSeuilsPotentiometre </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Mode potentiometre (LDO dont la colonne "seuil" vaut SEUIL_POT) : met la voie du DAC de courant en Power-Down 11 (sortie ouverte) pour qu'elle ne pilote plus IN- du LM211, et memorise cette configuration pour que SurveillerConfigDacsI2C1() la conserve. Sans effet si aucune LDO n'est en SEUIL_POT (cas actuel). Puces de I2C1 uniquement. Codage PDnB:PDnA = 11 a confirmer (DS20006368A, registre 4-3). </p>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun.</td><td>Ligne USART1 : "DAC_PD_POT:2PSp:0xC0:PD=0x0C00:OK". </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">InitialiserConfigDacsI2C1();</div>
+<div class="line"><a class="code hl_function" href="#ga538f60d46cf0ac04119fa65a989274be">DAC_ConfigurerSeuilsPotentiometre</a>();</div>
+<div class="ttc" id="agroup__grp__eeprom_html_ga538f60d46cf0ac04119fa65a989274be"><div class="ttname"><a href="#ga538f60d46cf0ac04119fa65a989274be">DAC_ConfigurerSeuilsPotentiometre</a></div><div class="ttdeci">static void DAC_ConfigurerSeuilsPotentiometre(void)</div><div class="ttdoc">Mode potentiometre (LDO dont la colonne &quot;seuil&quot; vaut SEUIL_POT) : met la voie du DAC de courant en Po...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l04902">main.c:4902</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l04902">4902</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l00296">DacPuce_t::adresse_hal</a>, <a class="el" href="main_8c_source.html#l00347">LDO_Config_t::canal_courant</a>, <a class="el" href="main_8c_source.html#l04902">DAC_ConfigurerSeuilsPotentiometre()</a>, <a class="el" href="main_8c_source.html#l00346">LDO_Config_t::dac_courant</a>, <a class="el" href="main_8c_source.html#l04624">DAC_PuceDeCible()</a>, <a class="el" href="main_8c_source.html#l01068">EcrireRegistreConfigDAC()</a>, <a class="el" href="main_8c_source.html#l00295">DacPuce_t::hi2c</a>, <a class="el" href="main_8c_source.html#l01175">IndexDacI2C1()</a>, <a class="el" href="main_8c_source.html#l01205">MemoriserConfigDac()</a>, <a class="el" href="main_8c_source.html#l00334">LDO_Config_t::name</a>, <a class="el" href="main_8c_source.html#l03086">OC_EstSurveillee()</a>, <a class="el" href="main_8c_source.html#l00354">LDO_Config_t::seuil_par_pot</a>, et <a class="el" href="main_8c_source.html#l01803">UART1_EnvoyerTexte()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04902">DAC_ConfigurerSeuilsPotentiometre()</a>, et <a class="el" href="main_8c_source.html#l06730">StartLwipTask()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__eeprom_ga538f60d46cf0ac04119fa65a989274be_cgraph.svg" width="647" height="411"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__eeprom_ga538f60d46cf0ac04119fa65a989274be_icgraph.svg" width="495" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

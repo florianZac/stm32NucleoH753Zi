@@ -1,0 +1,274 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="indexpage" kind="page">
+    <compoundname>index</compoundname>
+    <title>Document de conception — firmware Lwip_demo_H753</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="index_1sec_objet">
+<title>1. Objet et périmètre</title><para>Ce document s&apos;adresse aux développeurs qui reprennent ou font évoluer le firmware de la carte STM32H753ZI (Nucleo-144) qui pilote les régulateurs LDO. Il est <bold>généré par Doxygen</bold> à partir des commentaires du code : toute fonction documentée dans <computeroutput>Core/Src/main.c</computeroutput> y apparaît automatiquement avec son rôle, ses paramètres, sa valeur de retour et un exemple d&apos;utilisation. Les chapitres 1 à 9 (ce fichier, <computeroutput>Doxygen/conception.dox</computeroutput>) décrivent la conception d&apos;ensemble ; la suite décrit chaque fonction, module par module.</para>
+<para>Périmètre : <computeroutput>Core/Src/main.c</computeroutput>, <computeroutput>Core/Inc/main.h</computeroutput>, l&apos;en-tête généré <computeroutput>Core/Inc/ldo_config_genere.h</computeroutput> et les scripts Python de <computeroutput>configurationLDO/</computeroutput>. Les pilotes HAL, LwIP et FreeRTOS fournis par ST ne sont pas décrits.</para>
+</sect1>
+<sect1 id="index_1sec_archi">
+<title>2. Architecture</title><sect2 id="index_1sec_archi_mat">
+<title>2.1 Matériel piloté</title><para><table rows="9" cols="3"><row>
+<entry thead="yes"><para>Élément  </para>
+</entry><entry thead="yes"><para>Liaison  </para>
+</entry><entry thead="yes"><para>Rôle  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>18 LDO (1PSp à 16PSp, 2PLn, 3PLn)  </para>
+</entry><entry thead="no"><para>GPIO EN / BLD (sorties), OC / PG (entrées)  </para>
+</entry><entry thead="no"><para>Rails d&apos;alimentation pilotés  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>MCP47FEB28 0xC0, 0xC2  </para>
+</entry><entry thead="no"><para>I2C1 (PB8/PB9), actif  </para>
+</entry><entry thead="no"><para>Tension et seuil de courant des LDO (voies décrites dans le CSV)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>MCP47FEB28 0xC0, 0xC2, 0xC4  </para>
+</entry><entry thead="no"><para>I2C2 (PB10/PB11), désactivé par défaut  </para>
+</entry><entry thead="no"><para>DAC des autres LDO (héritage)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>3× ADG728 (0x4C-0x4E)  </para>
+</entry><entry thead="no"><para>I2C1  </para>
+</entry><entry thead="no"><para>Multiplexeur de mesure de tension vers PC0 (ADC1, canal 10)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>2× ADG728 (0x4C-0x4D)  </para>
+</entry><entry thead="no"><para>I2C2  </para>
+</entry><entry thead="no"><para>Multiplexeur de mesure de courant vers PF4 (ADC3, canal 9)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Shunt R97 + OP184 + LM211  </para>
+</entry><entry thead="no"><para>broche OC  </para>
+</entry><entry thead="no"><para>Protection de surintensité (2,61 V/A)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Ethernet (LwIP)  </para>
+</entry><entry thead="no"><para>UDP 192.168.0.123:7  </para>
+</entry><entry thead="no"><para>Commandes depuis le contrôleur PC  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>USART1 (PB6/PB7) 115200 8N1  </para>
+</entry><entry thead="no"><para>UART  </para>
+</entry><entry thead="no"><para>Rapports de diagnostic et commandes  </para>
+</entry></row>
+</table>
+</para>
+</sect2>
+<sect2 id="index_1sec_archi_demarrage">
+<title>2.2 Séquence de démarrage</title><para><orderedlist>
+<listitem><para><computeroutput>main()</computeroutput> (code CubeMX) : caches, <computeroutput>HAL_Init()</computeroutput>, horloges, déblocage des bus I2C (I2C_BusRecovery()), <computeroutput>MX_GPIO_Init()</computeroutput> et périphériques, puis LDO_GPIO_Init() qui configure les broches des LDO à partir de <computeroutput>ldoConfig[]</computeroutput>.</para>
+</listitem><listitem><para>Création de la tâche <computeroutput>lwipTask</computeroutput> (StartLwipTask()) et démarrage de FreeRTOS.</para>
+</listitem><listitem><para>StartLwipTask() : LwIP, verrous (CreerMutexI2C(), CreerMutexUART(), CreerMutexCommandes()), réception UART, LDO_InitialiserTables(), OC_InitialiserSeuilsDefaut(), InitialiserConfigDacsI2C1(), DAC_RestaurerMemoire(), DAC_ConfigurerSeuilsPotentiometre(), CmdOnOff_Initialiser(), MX_OC_EXTI_Init(), udpServer_init(), sortCommandTable().</para>
+</listitem></orderedlist>
+</para>
+</sect2>
+<sect2 id="index_1sec_archi_boucle">
+<title>2.3 Boucle principale</title><para>Une seule tâche applicative. À chaque tour de la boucle de StartLwipTask() :</para>
+<para><orderedlist>
+<listitem><para>LDO_MettreAJour() pour chaque LDO : lecture OC (avant l&apos;écriture de EN), verrouillage éventuel, écriture EN / BLD, lecture PG ;</para>
+</listitem><listitem><para>OC_SignalerEvenements() : une ligne <computeroutput>OC_TRIP:&lt;nom&gt;:...</computeroutput> par nouveau défaut ;</para>
+</listitem><listitem><para>rafraîchissement des puces DAC (<computeroutput>tableDac[]</computeroutput>), sauf puces I2C2 si <computeroutput>i2c2_actif = 0</computeroutput> et sauf puce en cours de balayage ;</para>
+</listitem><listitem><para>boutons : capture complète (ExecuterCaptureComplete()), reset des multiplexeurs ;</para>
+</listitem><listitem><para>SurveillerConfigDacsI2C1(), DAC_TraiterSauvegardes() (EEPROM), CmdOnOff_TraiterSauvegarde() (flash) ;</para>
+</listitem><listitem><para>UART1_TraiterCommande() : commande UART en attente ;</para>
+</listitem><listitem><para>battement de cœur <computeroutput>HB</computeroutput> sur l&apos;UART.</para>
+</listitem></orderedlist>
+</para>
+<para>Les commandes UDP sont traitées dans le contexte LwIP (udp_receive_callback()) ; les deux chemins appellent tc_request() sous le verrou des commandes.</para>
+</sect2>
+<sect2 id="index_1sec_archi_commande">
+<title>2.4 Chemin d&apos;une commande</title><para><programlisting><codeline><highlight class="normal">UDP<sp/><sp/>:<sp/><ref refid="group__grp__comm_1ga5b44c65aa41e79871a46aeed1bb4751b" kindref="member">udp_receive_callback</ref>()<sp/>--+</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>+--&gt;<sp/><ref refid="group__grp__comm_1ga700668cb98e6ac2d4c9e2a1f80bd365a" kindref="member">Commande_Verrouiller</ref>()</highlight></codeline>
+<codeline><highlight class="normal">UART<sp/>:<sp/><ref refid="group__grp__comm_1gae494a9643f29b87d6d81e5264e60e57b" kindref="member">HAL_UART_RxCpltCallback</ref>()|<sp/><sp/><sp/><sp/><sp/><sp/>last_message<sp/>=<sp/>trame</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;<sp/><ref refid="group__grp__comm_1gabcc2bb9c188ed5dd0c34bf573bdb04e6" kindref="member">UART1_TraiterCommande</ref>()+<sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" kindref="member">tc_request</ref>()<sp/><sp/>-&gt;<sp/>handler<sp/>-&gt;<sp/>response</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__grp__comm_1ga8f851878b9fa126696fa20796cb7c274" kindref="member">Commande_Deverrouiller</ref>()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>reponse<sp/>renvoyee<sp/>sur<sp/>le<sp/>canal<sp/>d&apos;origine</highlight></codeline>
+</programlisting></para>
+<para>tc_request() traite d&apos;abord les commandes à suffixe LDO (<computeroutput>SET_EN_LDO_&lt;nom&gt;</computeroutput>, <computeroutput>SET_VAL_LDO_&lt;nom&gt;:&lt;code&gt;</computeroutput>…, nom résolu par findLdoIndex()), puis les commandes fixes de <computeroutput>commandTable[]</computeroutput>, triée au démarrage par sortCommandTable() et recherchée par dichotomie (findCommandHandler()).</para>
+</sect2>
+</sect1>
+<sect1 id="index_1sec_csv">
+<title>3. Configuration des LDO (CSV)</title><para>Le câblage des LDO n&apos;est écrit ni dans main.c ni dans le .ioc : il est décrit par <computeroutput>configurationLDO/ldo_config.csv</computeroutput>, une ligne par LDO, l&apos;ordre des lignes donnant l&apos;index (0 à <computeroutput>LDO_NB</computeroutput>-1).</para>
+<para><programlisting><codeline><highlight class="normal">ldo_config.csv<sp/>--(pre-build<sp/>CubeIDE<sp/>:<sp/>python<sp/>../configurationLDO/<ref refid="namespacegenerer__config" kindref="compound">generer_config</ref>.py)--&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Core/Inc/ldo_config_genere.h<sp/><sp/><sp/>:<sp/>LDO_NB,<sp/>LDO_CONFIG_CRC32</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Core/Inc/ldo_config_lignes.inc<sp/>:<sp/>lignes<sp/>de<sp/>ldoConfig[]<sp/>(<ref refid="struct_l_d_o___config__t" kindref="compound">LDO_Config_t</ref>)</highlight></codeline>
+</programlisting></para>
+<para><itemizedlist>
+<listitem><para>LDO_GPIO_Init() configure les broches à partir de <computeroutput>ldoConfig[]</computeroutput> (le .ioc ne contient plus que la configuration système) ;</para>
+</listitem><listitem><para>LDO_InitialiserTables() recopie dans les tables modifiables à chaud (<computeroutput>mappingDacLdo[]</computeroutput>, <computeroutput>muxLdoConfig[]</computeroutput>, <computeroutput>muxLdoConfigCourant[]</computeroutput>) les valeurs du CSV ;</para>
+</listitem><listitem><para>h_GET_CONFIG_LDO() renvoie <computeroutput>CONFIG_LDO:NB=&lt;n&gt;:CRC=0x&lt;empreinte&gt;</computeroutput>, que le contrôleur PC compare à son propre CSV ;</para>
+</listitem><listitem><para>ne jamais éditer à la main les deux fichiers générés : ils sont réécrits à chaque compilation.</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="index_1sec_donnees">
+<title>4. Données principales</title><para><table rows="11" cols="3"><row>
+<entry thead="yes"><para>Donnée  </para>
+</entry><entry thead="yes"><para>Type  </para>
+</entry><entry thead="yes"><para>Rôle  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ldoConfig[NB_LDO]</computeroutput>  </para>
+</entry><entry thead="no"><para>LDO_Config_t (const)  </para>
+</entry><entry thead="no"><para>Description de chaque LDO, issue du CSV  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>EN_LDO[]</computeroutput>, <computeroutput>BL_LDO[]</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>volatile _Bool</computeroutput>  </para>
+</entry><entry thead="no"><para>Consignes Enable / Bleeder écrites sur les GPIO par LDO_MettreAJour()  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>VAL_LDO[]</computeroutput>, <computeroutput>CURRENT_LDO[]</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>uint16_t</computeroutput>  </para>
+</entry><entry thead="no"><para>Codes DAC de tension / de seuil de courant  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>DAC1_DEF</computeroutput> … <computeroutput>DAC5_DEF</computeroutput>  </para>
+</entry><entry thead="no"><para>trames de 24 octets  </para>
+</entry><entry thead="no"><para>Image des 8 voies de chaque puce, réémise à chaque tour  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>tableDac[]</computeroutput>  </para>
+</entry><entry thead="no"><para>DacPuce_t  </para>
+</entry><entry thead="no"><para>Puce, bus, adresse, trame de chaque MCP47FEB28  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>mappingDacLdo[]</computeroutput>  </para>
+</entry><entry thead="no"><para>MappingDacLdo_t  </para>
+</entry><entry thead="no"><para>DAC et voie de chaque LDO, modifiable par <computeroutput>SET_DAC_MAPPING_LDO_</computeroutput>  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>muxLdoConfig[]</computeroutput>, <computeroutput>muxLdoConfigCourant[]</computeroutput>  </para>
+</entry><entry thead="no"><para>MuxLdoConfig_t  </para>
+</entry><entry thead="no"><para>Voie de multiplexeur de chaque LDO (<computeroutput>MUX_NC</computeroutput> = 0xFF)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>oc_verrou[]</computeroutput>, <computeroutput>oc_nb_declenchements[]</computeroutput> …  </para>
+</entry><entry thead="no"><para>tableaux par LDO  </para>
+</entry><entry thead="no"><para>État de la protection OC  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>cmd_on_off_bld[]</computeroutput>, <computeroutput>cmd_on_off_oc[]</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>uint8_t</computeroutput>  </para>
+</entry><entry thead="no"><para>Commandes ON/OFF, sauvegardées en flash  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>commandTable[]</computeroutput>  </para>
+</entry><entry thead="no"><para>Command_t  </para>
+</entry><entry thead="no"><para>Commandes fixes et leur gestionnaire  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="index_1sec_oc">
+<title>5. Protection de surintensité (OC)</title><para>Pour une LDO <computeroutput>protection = LM211</computeroutput>, la sortie du LM211 arrive sur la broche OC.</para>
+<para><orderedlist>
+<listitem><para>Masquage : pendant <computeroutput>OC_BLANKING_MS</computeroutput> (10 ms) après la mise à 1 de EN, l&apos;OC est ignoré (soft-start).</para>
+</listitem><listitem><para>Déclenchement : OC actif et protection armée → OC_Verrouiller() : EN coupé, défaut verrouillé, bleeder forcé, compteur incrémenté. Si <computeroutput>oc_interruption = 1</computeroutput>, la coupure est faite dans l&apos;interruption EXTI (OC_SurFrontIT()), en quelques microsecondes.</para>
+</listitem><listitem><para>Signalement : OC_SignalerEvenements() émet <computeroutput>OC_TRIP:&lt;nom&gt;:...</computeroutput> sur l&apos;UART.</para>
+</listitem><listitem><para>Réarmement : <computeroutput>RST_BL_LDO_&lt;nom&gt;</computeroutput> (LDO_RelacherBleeder()) ou <computeroutput>RST_OC_LDO_&lt;nom&gt;</computeroutput> (OC_Rearmer()), refusé tant que la broche OC signale encore la surintensité.</para>
+</listitem><listitem><para>Verrous : <computeroutput>SET_EN_LDO_&lt;nom&gt;</computeroutput> est refusé tant que le défaut est verrouillé (<computeroutput>REFUS_OC_VERROUILLE</computeroutput>) ou que le bleeder est actif (<computeroutput>REFUS_BLEEDER_ACTIF</computeroutput>).</para>
+</listitem></orderedlist>
+</para>
+<para>Seuil : code DAC de 410 à 4006 (0,19 à 1,90 A), 1056 (0,50 A) au démarrage. Seuil (A) = code × 5 V / 4096 / 2,61 V/A, hors hystérésis. <computeroutput>CMD_ON_OFF_OC = 0</computeroutput> neutralise la surveillance (LED grise côté IHM).</para>
+</sect1>
+<sect1 id="index_1sec_persist">
+<title>6. Persistance</title><sect2 id="index_1sec_persist_eeprom">
+<title>6.1 Codes DAC en EEPROM du MCP47FEB28</title><para>Pour une LDO <computeroutput>memoire = EEPROM</computeroutput> : après chaque modification, DAC_DemanderSauvegarde() programme une écriture différée ; DAC_TraiterSauvegardes() écrit le registre non volatil (10h-17h, tWC = 16 ms max) ; au démarrage DAC_RestaurerMemoire() relit ces valeurs.</para>
+</sect2>
+<sect2 id="index_1sec_persist_flash">
+<title>6.2 Commandes ON/OFF en flash interne</title><para><itemizedlist>
+<listitem><para>Zone : banque 2, secteur 7, <computeroutput>0x081E0000</computeroutput>, 128 Ko, réservée dans <computeroutput>STM32H753ZITX_FLASH.ld</computeroutput> (FLASH LENGTH = 1920K) ;</para>
+</listitem><listitem><para>enregistrements de 64 octets écrits à la suite : magic <computeroutput>"CMD1"</computeroutput>, <computeroutput>LDO_CONFIG_CRC32</computeroutput>, numéro de séquence, <computeroutput>LDO_NB</computeroutput>, masques BLD et OC, CRC32 ;</para>
+</listitem><listitem><para>CmdOnOff_Initialiser() retient le dernier enregistrement valide de même empreinte ; sinon valeurs du CSV (<computeroutput>CMD_ON_OFF_BLD</computeroutput>, <computeroutput>CMD_ON_OFF_OC</computeroutput>) ;</para>
+</listitem><listitem><para>CmdOnOff_TraiterSauvegarde() regroupe les bascules (500 ms) ; le secteur n&apos;est effacé que lorsqu&apos;il est plein (environ toutes les 2048 sauvegardes).</para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+</sect1>
+<sect1 id="index_1sec_concurrence">
+<title>7. Concurrence et interruptions</title><para><table rows="6" cols="3"><row>
+<entry thead="yes"><para>Ressource  </para>
+</entry><entry thead="yes"><para>Protection  </para>
+</entry><entry thead="yes"><para>Règle  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>hi2c1</computeroutput>, <computeroutput>hi2c2</computeroutput>  </para>
+</entry><entry thead="no"><para>un mutex par bus (CreerMutexI2C(), ResoudreMutexI2C())  </para>
+</entry><entry thead="no"><para>Toute transaction I2C hors interruption prend le mutex du bus  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>USART1 en émission  </para>
+</entry><entry thead="no"><para>mutex UART (UART1_EnvoyerTexte())  </para>
+</entry><entry thead="no"><para>Jamais d&apos;émission depuis une interruption  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>last_message</computeroutput>, <computeroutput>response</computeroutput>  </para>
+</entry><entry thead="no"><para>verrou des commandes (Commande_Verrouiller())  </para>
+</entry><entry thead="no"><para>tc_request() n&apos;est jamais exécuté deux fois en parallèle  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Interruptions EXTI  </para>
+</entry><entry thead="no"><para>—  </para>
+</entry><entry thead="no"><para>Positionnent un drapeau ; seule exception : coupure OC (OC_SurFrontIT())  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Réception UART  </para>
+</entry><entry thead="no"><para>—  </para>
+</entry><entry thead="no"><para>HAL_UART_RxCpltCallback() n&apos;appelle aucune API FreeRTOS  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="index_1sec_evolutions">
+<title>8. Faire évoluer le firmware</title><sect2 id="index_1sec_evol_ldo">
+<title>8.1 Ajouter ou recâbler une LDO</title><para><orderedlist>
+<listitem><para>Modifier <computeroutput>configurationLDO/ldo_config.csv</computeroutput> (ou la page /dac/config du contrôleur) ;</para>
+</listitem><listitem><para>compiler dans CubeIDE (le pre-build régénère les fichiers) et flasher ;</para>
+</listitem><listitem><para>vérifier <computeroutput>GET_CONFIG_LDO</computeroutput> : l&apos;empreinte doit être celle du CSV du contrôleur.</para>
+</listitem></orderedlist>
+</para>
+<para>Aucune ligne de main.c n&apos;est à modifier.</para>
+</sect2>
+<sect2 id="index_1sec_evol_cmd">
+<title>8.2 Ajouter une commande fixe</title><para><orderedlist>
+<listitem><para>Écrire le gestionnaire <computeroutput>static void h_MA_COMMANDE(void)</computeroutput>, qui lit ses paramètres dans <computeroutput>last_message</computeroutput> (<computeroutput>strsep(&amp;last_message, ":")</computeroutput>) et écrit sa réponse dans <computeroutput>response</computeroutput> ;</para>
+</listitem><listitem><para>le documenter (modèle du chapitre 9, avec <computeroutput>@ingroup</computeroutput>) ;</para>
+</listitem><listitem><para>ajouter <computeroutput>{ "MA_COMMANDE", h_MA_COMMANDE }</computeroutput> dans <computeroutput>commandTable[]</computeroutput> (ordre indifférent : la table est triée au démarrage) ;</para>
+</listitem><listitem><para>déclarer le prototype dans la zone <computeroutput>USER CODE BEGIN PFP</computeroutput>.</para>
+</listitem></orderedlist>
+</para>
+</sect2>
+<sect2 id="index_1sec_evol_cmd_ldo">
+<title>8.3 Ajouter une commande par LDO</title><para>Ajouter une branche <computeroutput>else if (strncmp(token, "PREFIXE_", n) == 0 &amp;&amp; (idx = findLdoIndex(token + n)) != -1)</computeroutput> dans tc_request(), avant les branches de préfixes plus courts qui pourraient la masquer.</para>
+</sect2>
+<sect2 id="index_1sec_evol_cubemx">
+<title>8.4 Régénération CubeMX</title><para>Tout le code applicatif est dans des zones <computeroutput>USER CODE BEGIN / END</computeroutput>. Les commentaires des fonctions générées par CubeMX (main(), MX_*_Init()…) sont réécrits à chaque génération : leur documentation est donc dans <computeroutput>Doxygen/complements_cubemx.dox</computeroutput>.</para>
+</sect2>
+</sect1>
+<sect1 id="index_1sec_convention">
+<title>9. Convention de commentaire</title><para>Chaque fonction est précédée d&apos;un bloc Doxygen en français :</para>
+<para><verbatim>/**
+  * @brief  Ce que fait la fonction, en une ou deux phrases.
+  * @param  idx  Index de la LDO (0 a NB_LDO-1).
+  * @retval uint8_t  1 si ..., 0 sinon.
+  * @par    Exemple d&apos;utilisation
+  * @code
+  * if (OC_EstSurveillee(idx) != 0U) { ... }
+  * @endcode
+  * @ingroup grp_oc
+  */
+</verbatim></para>
+<para>Une fonction sans paramètre porte <computeroutput>@param Aucun.</computeroutput>, une fonction <computeroutput>void</computeroutput> porte <computeroutput>@retval Aucun (void).</computeroutput>. L&apos;exemple est toujours encadré par <computeroutput>@code</computeroutput> / <computeroutput>@endcode</computeroutput> et <computeroutput>@ingroup</computeroutput> range la fonction dans son module (liste des modules à la fin de <computeroutput>Doxygen/conception.dox</computeroutput>).</para>
+<para>Le document Word de conception est produit par <computeroutput>Doxygen/generer_doc_conception.bat</computeroutput> (Doxygen puis <computeroutput>doxygen_vers_docx.py</computeroutput>) : voir la notice Doxygen du projet. </para>
+</sect1>
+    </detaileddescription>
+    <location file="conception.dox"/>
+  </compounddef>
+</doxygen>

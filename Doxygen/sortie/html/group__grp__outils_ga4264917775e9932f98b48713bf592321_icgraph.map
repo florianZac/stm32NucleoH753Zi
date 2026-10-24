@@ -1,0 +1,10 @@
+<map id="map" name="map">
+<area shape="rect" id="Node000001" title="Met a l&#39;echelle lineaire une valeur d&#39;une plage d&#39;entree vers une plage de sortie (equivalent de la f..." alt="" coords="204,67,250,93"/>
+<area shape="poly" id="edge5_Node000001_Node000001" title=" " alt="" coords="250,51,243,48,227,45,212,47,204,52,202,58,206,67,201,65,197,58,200,48,210,42,227,40,245,43,255,52"/>
+<area shape="rect" id="Node000002" href="$group__grp__adc.html#ga096a71e898411e3976c99187adaddc11" title="Handler de la commande reseau &quot;GET_CURRENT_1&quot;. Declenche une conversion sur ADC1, la convertit en pou..." alt="" coords="5,29,156,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="186,71,135,59,135,54,191,70"/>
+<area shape="rect" id="Node000003" href="$group__grp__adc.html#ga861c7e50b324d97f26759930fa7390a2" title="Handler de la commande reseau &quot;GET_CURRENT_2&quot;. Declenche une conversion sur ADC3, la convertit en pou..." alt="" coords="5,104,156,131"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="191,89,136,106,134,101,186,90"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="104,15,96,10,80,8,66,10,58,14,56,20,60,29,55,29,50,21,54,11,64,5,81,3,98,5,109,14"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="104,89,96,85,80,83,66,85,58,89,56,95,60,104,55,103,50,95,54,86,64,80,81,77,98,80,109,89"/>
+</map>

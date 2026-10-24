@@ -1,0 +1,7 @@
+<map id="CmdOnOff_BasculerBld" name="CmdOnOff_BasculerBld">
+<area shape="rect" id="Node000001" title="Bascule CMD_ON_OFF_BLD d&#39;une LDO. Passage a OFF : bleeder relache tout de suite et plus commandable...." alt="" coords="5,29,166,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="52,29,46,21,50,11,64,5,86,3,109,5,123,14,118,14,107,10,85,8,65,10,54,15,51,20,57,29"/>
+<area shape="rect" id="Node000002" href="$group__grp__config.html#gae28fc29161c8b412bf38609488b281ef" title="Indique si une broche appartient a un bouton du firmware (PC13 USER, PD0 reset ADG728)...." alt="" coords="214,29,351,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="166,40,201,43,196,43,166,45"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="249,28,243,21,247,11,260,5,282,3,306,5,320,14,314,14,304,10,282,8,262,10,251,15,248,20,254,30"/>
+</map>

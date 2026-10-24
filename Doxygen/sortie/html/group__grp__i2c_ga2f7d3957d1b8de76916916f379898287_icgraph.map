@@ -1,0 +1,7 @@
+<map id="I2C_BusRecovery" name="I2C_BusRecovery">
+<area shape="rect" id="Node000001" title="Version generique de I2C1_BusRecovery() pour n&#39;importe quel bus : passe SCL/SDA en sorties open&#45;drain..." alt="" coords="104,29,232,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="190,14,183,10,168,8,154,10,147,14,145,20,149,30,144,28,140,21,143,11,152,5,168,3,185,5,195,15"/>
+<area shape="rect" id="Node000002" href="$group__grp__cubemx.html#ga840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="7,29,56,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="86,43,56,45,56,40,91,42"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="53,15,46,10,31,8,17,10,10,14,8,20,12,28,7,30,3,21,6,11,16,5,31,3,48,5,58,14"/>
+</map>

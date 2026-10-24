@@ -1,0 +1,4 @@
+<map id="h_SET_MUX_CANAL_TENSION" name="h_SET_MUX_CANAL_TENSION">
+<area shape="rect" id="Node000001" title="Handler de la commande reseau &quot;SET_MUX_CANAL_TENSION:&lt;canal&gt;&quot;." alt="" coords="5,29,223,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="150,14,138,10,114,8,91,10,79,15,76,20,82,29,77,28,71,21,75,11,90,5,114,3,140,5,155,14"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="OC_InitialiserSeuilsDefaut" name="OC_InitialiserSeuilsDefaut">
+<area shape="rect" id="Node000001" title="Programme le seuil de courant par defaut (ldoConfig[i].oc.seuil_defaut, 0,50 A par defaut) sur toutes..." alt="" coords="5,67,181,93"/>
+<area shape="poly" id="edge7_Node000001_Node000001" title=" " alt="" coords="59,66,53,58,57,48,71,42,93,40,117,43,131,51,125,52,115,48,93,45,72,47,61,52,59,57,64,66"/>
+<area shape="rect" id="Node000002" href="$group__grp__dac.html#ga4469a4eb236eb4a995abab435c43c644" title="Ecrit une valeur 12 bits dans le tableau DACx_DEF/canal designe par une cible logique &#45; remplace les ..." alt="" coords="234,29,349,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="167,64,221,55,216,57,168,69"/>
+<area shape="rect" id="Node000004" href="$group__grp__oc.html#ga7851b235d1d1f7564644d659587b3ba2" title="Indique si la LDO est surveillee : ldoConfig[idx].oc.surveille = 1 ET un DAC de seuil (dac_courant) d..." alt="" coords="229,104,354,131"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="167,91,216,103,211,103,167,97"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="260,28,254,21,258,11,271,5,291,3,313,5,326,14,321,14,312,10,291,8,272,10,262,15,260,20,265,30"/>
+<area shape="rect" id="Node000003" href="$group__grp__dac.html#gad09bc7e6abf4db69f2fea3ab311c637f" title="Retourne le pointeur vers le tableau DACx_DEF correspondant a une cible logique." alt="" coords="402,29,548,56"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="349,40,389,42,384,43,350,45"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="443,28,438,21,442,11,455,5,475,3,497,5,510,14,505,14,496,10,475,8,456,10,446,15,443,20,448,30"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="260,102,254,95,258,86,271,79,291,77,313,80,326,89,321,88,312,85,291,83,272,85,262,89,260,95,265,105"/>
+</map>

@@ -1,0 +1,964 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="group__grp__comm" kind="group">
+    <compoundname>grp_comm</compoundname>
+    <title>Communication UART / UDP et commandes</title>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="group__grp__comm_1ga768693a9fdf4a85d1ba355e3c321e075" prot="public" static="yes" mutable="no">
+        <type>void(*)(void)</type>
+        <definition>void(*)(void) findCommandHandler(const char *cmd)</definition>
+        <argsstring>(const char *cmd)</argsstring>
+        <name>findCommandHandler</name>
+        <briefdescription>
+<para>Recherche par dichotomie (bsearch) le handler associe a une commande exacte dans commandTable[]. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cmd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Chaine de commande complete telle qu&apos;extraite de la trame (ex : &quot;WHO&quot;, &quot;SET_EN_TAB&quot;, &quot;SET_VAL_LDO_1PSp&quot;). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>void(*)(void)</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointeur vers la fonction handler correspondante, ou NULL si la commande est inconnue. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">void<sp/>(*h)(void)<sp/>=<sp/>findCommandHandler(&quot;WHO&quot;);</highlight></codeline>
+<codeline><highlight class="normal">if<sp/>(h<sp/>!=<sp/>NULL)<sp/>h();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5952" column="8" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5952" bodyend="5957"/>
+        <referencedby refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" compoundref="main_8c" startline="6290" endline="6439">tc_request</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__grp__comm_1ga59372978b4f9f6b427161864e8bc4dd6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void CreerMutexUART</definition>
+        <argsstring>(void)</argsstring>
+        <name>CreerMutexUART</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Cree le mutex qui serialise les emissions de texte sur USART1 (voir UART1_EnvoyerTexte()). A appeler UNE SEULE FOIS, depuis StartLwipTask(), juste apres CreerMutexI2C(), avant que la boucle ou une commande reseau puisse emettre sur l&apos;UART. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Remplit uart1_mutex_id. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">CreerMutexI2C();</highlight></codeline>
+<codeline><highlight class="normal">CreerMutexUART();<sp/><sp/><sp/>//<sp/>dans<sp/>StartLwipTask(),<sp/>avant<sp/>udpServer_init()</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="708" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="708" bodyend="711"/>
+        <references refid="group__grp__comm_1ga59372978b4f9f6b427161864e8bc4dd6" compoundref="main_8c" startline="708" endline="711">CreerMutexUART</references>
+        <referencedby refid="group__grp__comm_1ga59372978b4f9f6b427161864e8bc4dd6" compoundref="main_8c" startline="708" endline="711">CreerMutexUART</referencedby>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__comm_1ga5294dbf6a367b9a48010296000e1430a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void MX_USART1_GPIO_Init</definition>
+        <argsstring>(void)</argsstring>
+        <name>MX_USART1_GPIO_Init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Configure les broches PB6 (USART1_TX) et PB7 (USART1_RX) en Alternate Function. ATTENTION : ces broches ne sont PAS reliees au port COM virtuel du ST-LINK - il faut un adaptateur USB-UART externe branche sur PB6/PB7 pour voir quoi que ce soit dans un terminal (Hercules, etc.). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">MX_USART1_GPIO_Init();</highlight></codeline>
+<codeline><highlight class="normal">MX_USART1_Init();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1741" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1741" bodyend="1753"/>
+        <references refid="group__grp__comm_1ga5294dbf6a367b9a48010296000e1430a" compoundref="main_8c" startline="1741" endline="1753">MX_USART1_GPIO_Init</references>
+        <referencedby refid="group__grp__comm_1ga5294dbf6a367b9a48010296000e1430a" compoundref="main_8c" startline="1741" endline="1753">MX_USART1_GPIO_Init</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__comm_1ga59e35c131ee43adc1fad6c4bfdf9fa0a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void MX_USART1_Init</definition>
+        <argsstring>(void)</argsstring>
+        <name>MX_USART1_Init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Initialise USART1 : 115200 bauds, 8 bits, sans parite, 1 bit de stop, sans controle de flux (correspond a la config Hercules : &quot;8 b, pas de parity, handshake off&quot;). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Initialise le handle global huart1. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">MX_USART1_GPIO_Init();</highlight></codeline>
+<codeline><highlight class="normal">MX_USART1_Init();</highlight></codeline>
+<codeline><highlight class="normal">UART1_EnvoyerTexte(&quot;Test\r\n&quot;);</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1769" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1769" bodyend="1787"/>
+        <references refid="group__grp__cubemx_1ga1730ffe1e560465665eb47d9264826f9" compoundref="main_8c" startline="6913" endline="6922">Error_Handler</references>
+        <references refid="group__grp__comm_1ga59e35c131ee43adc1fad6c4bfdf9fa0a" compoundref="main_8c" startline="1769" endline="1787">MX_USART1_Init</references>
+        <referencedby refid="group__grp__comm_1ga59e35c131ee43adc1fad6c4bfdf9fa0a" compoundref="main_8c" startline="1769" endline="1787">MX_USART1_Init</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__comm_1gab9b5dfc109e472981cbbb7867d1b7f92" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void UART1_EnvoyerTexte</definition>
+        <argsstring>(const char *texte)</argsstring>
+        <name>UART1_EnvoyerTexte</name>
+        <param>
+          <type>const char *</type>
+          <declname>texte</declname>
+        </param>
+        <briefdescription>
+<para>Envoie une chaine de caracteres sur USART1 (PB6/PB7, via un adaptateur USB-UART externe), en mode bloquant. L&apos;emission est protegee par uart1_mutex_id (une seule emission a la fois, depuis n&apos;importe quelle tache) pour ne jamais perdre une ligne sur un HAL_BUSY ; sans verrou tant que le mutex n&apos;est pas cree. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>texte</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Chaine C terminee par &apos;\0&apos; a transmettre. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">UART1_EnvoyerTexte(rapport_scan);</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1803" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1803" bodyend="1816" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="108" declcolumn="6"/>
+        <references refid="group__grp__comm_1gab9b5dfc109e472981cbbb7867d1b7f92" compoundref="main_8c" startline="1803" endline="1816">UART1_EnvoyerTexte</references>
+        <referencedby refid="group__grp__dac_1ga3b69ec3e3af5d495bc0a095f6e4343eb" compoundref="main_8c" startline="1346" endline="1397">BalayerSortieDAC</referencedby>
+        <referencedby refid="group__grp__cmd_1ga3f4f9ffd19d9dfb5f1fccd414e6bd2f3" compoundref="main_8c" startline="3434" endline="3482">CmdOnOff_Initialiser</referencedby>
+        <referencedby refid="group__grp__cmd_1ga8a6ad7d0ecff45c40c421cbab46b2526" compoundref="main_8c" startline="3564" endline="3581">CmdOnOff_TraiterSauvegarde</referencedby>
+        <referencedby refid="group__grp__eeprom_1ga538f60d46cf0ac04119fa65a989274be" compoundref="main_8c" startline="4902" endline="4928">DAC_ConfigurerSeuilsPotentiometre</referencedby>
+        <referencedby refid="group__grp__eeprom_1gaea23265d4fdedf9ac60d1c4afb886e40" compoundref="main_8c" startline="4822" endline="4885">DAC_RestaurerMemoire</referencedby>
+        <referencedby refid="group__grp__eeprom_1ga5f9ce30ec25412cc3efbe118447a5a11" compoundref="main_8c" startline="4755" endline="4804">DAC_TraiterSauvegardes</referencedby>
+        <referencedby refid="group__grp__exti_1ga3a919fef613806da58b99557a009f22a" compoundref="main_8c" startline="1648" endline="1720">ExecuterCaptureComplete</referencedby>
+        <referencedby refid="group__grp__adc_1ga291e2e1e27a0a67a3c63820c746abc60" compoundref="main_8c" startline="5595" endline="5618">GetMesureCourantReelle</referencedby>
+        <referencedby refid="group__grp__adc_1ga5620dbaf6425610dff776e64b7f6c3ca" compoundref="main_8c" startline="5474" endline="5501">GetMesureReelle</referencedby>
+        <referencedby refid="group__grp__dac_1gaef2582c078db38424ec959fc1f9f1c5f" compoundref="main_8c" startline="1118" endline="1142">InitialiserConfigDacsI2C1</referencedby>
+        <referencedby refid="group__grp__config_1ga2ba862323ea386969585492246cd74d6" compoundref="main_8c" startline="6223" endline="6264">LDO_Diagnostic</referencedby>
+        <referencedby refid="group__grp__config_1ga8ad9d7191f49b52c41d5a583f774465d" compoundref="main_8c" startline="6025" endline="6058">LDO_InitialiserTables</referencedby>
+        <referencedby refid="group__grp__oc_1ga12ef8bab086612c9ecf3cb2ffed9c776" compoundref="main_8c" startline="6510" endline="6543">MX_OC_EXTI_Init</referencedby>
+        <referencedby refid="group__grp__oc_1ga66c4ac6f7a9837733484590dbe3081d2" compoundref="main_8c" startline="3898" endline="3914">OC_SignalerEvenements</referencedby>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+        <referencedby refid="group__grp__dac_1gacdf4ad1b5d4a18ab3a5b309318099344" compoundref="main_8c" startline="1228" endline="1267">SurveillerConfigDacsI2C1</referencedby>
+        <referencedby refid="group__grp__adc_1ga22145e0da7150e80ea9faf528fa8e7c3" compoundref="main_8c" startline="1611" endline="1616">TraiterResetMultiplexeur</referencedby>
+        <referencedby refid="group__grp__comm_1gab9b5dfc109e472981cbbb7867d1b7f92" compoundref="main_8c" startline="1803" endline="1816">UART1_EnvoyerTexte</referencedby>
+        <referencedby refid="group__grp__comm_1gabcc2bb9c188ed5dd0c34bf573bdb04e6" compoundref="main_8c" startline="3849" endline="3886">UART1_TraiterCommande</referencedby>
+        <referencedby refid="group__grp__comm_1ga5b44c65aa41e79871a46aeed1bb4751b" compoundref="main_8c" startline="2619" endline="2708">udp_receive_callback</referencedby>
+        <referencedby refid="group__grp__comm_1ga78047c519037c4c6091c71e1801519c7" compoundref="main_8c" startline="2556" endline="2590">udpServer_init</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__comm_1ga78047c519037c4c6091c71e1801519c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void udpServer_init</definition>
+        <argsstring>(void)</argsstring>
+        <name>udpServer_init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Initialise le serveur UDP applicatif. Cree un PCB UDP (udp_new), le lie a l&apos;adresse IP et au port definis par les macros IP4_1..IP4_4 et UDP_SERVER_PORT (main.h), puis enregistre udp_receive_callback() comme fonction de reception. En cas d&apos;echec de udp_bind(), le PCB est libere (udp_remove). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Appelee<sp/>une<sp/>seule<sp/>fois<sp/>au<sp/>demarrage<sp/>de<sp/>la<sp/>tache<sp/>reseau<sp/>:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>osDelay(1000);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>udpServer_init();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="2556" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="2556" bodyend="2590" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="82" declcolumn="6"/>
+        <references refid="group__grp__comm_1gab9b5dfc109e472981cbbb7867d1b7f92" compoundref="main_8c" startline="1803" endline="1816">UART1_EnvoyerTexte</references>
+        <references refid="group__grp__comm_1ga5b44c65aa41e79871a46aeed1bb4751b" compoundref="main_8c" startline="2619" endline="2708">udp_receive_callback</references>
+        <references refid="group__grp__comm_1ga78047c519037c4c6091c71e1801519c7" compoundref="main_8c" startline="2556" endline="2590">udpServer_init</references>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+        <referencedby refid="group__grp__comm_1ga78047c519037c4c6091c71e1801519c7" compoundref="main_8c" startline="2556" endline="2590">udpServer_init</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__comm_1ga5b44c65aa41e79871a46aeed1bb4751b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void udp_receive_callback</definition>
+        <argsstring>(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)</argsstring>
+        <name>udp_receive_callback</name>
+        <param>
+          <type>void *</type>
+          <declname>arg</declname>
+        </param>
+        <param>
+          <type>struct udp_pcb *</type>
+          <declname>upcb</declname>
+        </param>
+        <param>
+          <type>struct pbuf *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>const ip_addr_t *</type>
+          <declname>addr</declname>
+        </param>
+        <param>
+          <type>u16_t</type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+<para>Callback LwIP invoque automatiquement a chaque paquet UDP recu sur le port du serveur (enregistre par udpServer_init via udp_recv). Recupere le message recu, appelle tc_request() pour l&apos;interpreter et construire la reponse, puis renvoie cette reponse a l&apos;expediteur. Chaque commande est tracee sur l&apos;UART (&quot;[UDP] RX commande&quot;, &quot;[UDP]
+        REPONSE&quot;, &quot;[UDP] TX OK&quot;), SAUF &quot;WHO&quot; : c&apos;est la sonde de liaison que l&apos;interface PC envoie en continu, sa trace noierait le journal UART. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>arg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Parametre optionnel LwIP (non utilise ici). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>upcb</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointeur vers le PCB UDP ayant recu le paquet. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Buffer LwIP (pbuf) contenant les donnees recues (p-&gt;payload). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>addr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Adresse IP de l&apos;expediteur. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Port UDP de l&apos;expediteur. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Jamais<sp/>appelee<sp/>directement<sp/>dans<sp/>le<sp/>code<sp/>applicatif<sp/>:<sp/>c&apos;est<sp/>LwIP</highlight></codeline>
+<codeline><highlight class="normal">qui<sp/>l&apos;invoque<sp/>des<sp/>qu&apos;un<sp/>datagramme<sp/>arrive<sp/>sur<sp/>le<sp/>port<sp/>ecoute</highlight></codeline>
+<codeline><highlight class="normal">(voir<sp/>udp_recv(upcb,<sp/>udp_receive_callback,<sp/>NULL)<sp/>dans<sp/>udpServer_init).</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="2619" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="2619" bodyend="2708" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="83" declcolumn="6"/>
+        <references refid="group__grp__comm_1ga8f851878b9fa126696fa20796cb7c274" compoundref="main_8c" startline="3730" endline="3736">Commande_Deverrouiller</references>
+        <references refid="group__grp__comm_1ga700668cb98e6ac2d4c9e2a1f80bd365a" compoundref="main_8c" startline="3710" endline="3716">Commande_Verrouiller</references>
+        <references refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" compoundref="main_8c" startline="6290" endline="6439">tc_request</references>
+        <references refid="group__grp__comm_1gab9b5dfc109e472981cbbb7867d1b7f92" compoundref="main_8c" startline="1803" endline="1816">UART1_EnvoyerTexte</references>
+        <references refid="group__grp__comm_1ga5b44c65aa41e79871a46aeed1bb4751b" compoundref="main_8c" startline="2619" endline="2708">udp_receive_callback</references>
+        <referencedby refid="group__grp__comm_1ga5b44c65aa41e79871a46aeed1bb4751b" compoundref="main_8c" startline="2619" endline="2708">udp_receive_callback</referencedby>
+        <referencedby refid="group__grp__comm_1ga78047c519037c4c6091c71e1801519c7" compoundref="main_8c" startline="2556" endline="2590">udpServer_init</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__comm_1ga7e95f093ea99a8f73f132b261bdebc2f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void CreerMutexCommandes</definition>
+        <argsstring>(void)</argsstring>
+        <name>CreerMutexCommandes</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Cree le verrou des commandes (UDP + UART). A appeler avant udpServer_init(). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">CreerMutexCommandes();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3689" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3689" bodyend="3692"/>
+        <references refid="group__grp__comm_1ga7e95f093ea99a8f73f132b261bdebc2f" compoundref="main_8c" startline="3689" endline="3692">CreerMutexCommandes</references>
+        <referencedby refid="group__grp__comm_1ga7e95f093ea99a8f73f132b261bdebc2f" compoundref="main_8c" startline="3689" endline="3692">CreerMutexCommandes</referencedby>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__comm_1ga700668cb98e6ac2d4c9e2a1f80bd365a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Commande_Verrouiller</definition>
+        <argsstring>(void)</argsstring>
+        <name>Commande_Verrouiller</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Prend le verrou des commandes (tc_mutex). Sans effet tant qu&apos;il n&apos;est pas cree. Garantit que tc_request() (qui utilise les globales last_message et response) n&apos;est jamais execute par l&apos;UDP et l&apos;UART en meme temps. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Commande_Verrouiller();</highlight></codeline>
+<codeline><highlight class="normal">last_message<sp/>=<sp/>ligne;</highlight></codeline>
+<codeline><highlight class="normal">tc_request();</highlight></codeline>
+<codeline><highlight class="normal">Commande_Deverrouiller();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3710" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3710" bodyend="3716" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="113" declcolumn="13"/>
+        <references refid="group__grp__comm_1ga700668cb98e6ac2d4c9e2a1f80bd365a" compoundref="main_8c" startline="3710" endline="3716">Commande_Verrouiller</references>
+        <referencedby refid="group__grp__comm_1ga700668cb98e6ac2d4c9e2a1f80bd365a" compoundref="main_8c" startline="3710" endline="3716">Commande_Verrouiller</referencedby>
+        <referencedby refid="group__grp__comm_1gabcc2bb9c188ed5dd0c34bf573bdb04e6" compoundref="main_8c" startline="3849" endline="3886">UART1_TraiterCommande</referencedby>
+        <referencedby refid="group__grp__comm_1ga5b44c65aa41e79871a46aeed1bb4751b" compoundref="main_8c" startline="2619" endline="2708">udp_receive_callback</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__comm_1ga8f851878b9fa126696fa20796cb7c274" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Commande_Deverrouiller</definition>
+        <argsstring>(void)</argsstring>
+        <name>Commande_Deverrouiller</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Rend le verrou des commandes pris par Commande_Verrouiller(). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Commande_Verrouiller();</highlight></codeline>
+<codeline><highlight class="normal">tc_request();</highlight></codeline>
+<codeline><highlight class="normal">Commande_Deverrouiller();<sp/><sp/><sp/>//<sp/>toujours<sp/>apres<sp/>la<sp/>copie<sp/>de<sp/>response</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3730" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3730" bodyend="3736" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="114" declcolumn="13"/>
+        <references refid="group__grp__comm_1ga8f851878b9fa126696fa20796cb7c274" compoundref="main_8c" startline="3730" endline="3736">Commande_Deverrouiller</references>
+        <referencedby refid="group__grp__comm_1ga8f851878b9fa126696fa20796cb7c274" compoundref="main_8c" startline="3730" endline="3736">Commande_Deverrouiller</referencedby>
+        <referencedby refid="group__grp__comm_1gabcc2bb9c188ed5dd0c34bf573bdb04e6" compoundref="main_8c" startline="3849" endline="3886">UART1_TraiterCommande</referencedby>
+        <referencedby refid="group__grp__comm_1ga5b44c65aa41e79871a46aeed1bb4751b" compoundref="main_8c" startline="2619" endline="2708">udp_receive_callback</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__comm_1ga6b6a3cef741ac3270119f7e1890f58eb" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void UART1_DemarrerReceptionCommandes</definition>
+        <argsstring>(void)</argsstring>
+        <name>UART1_DemarrerReceptionCommandes</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Demarre la reception des commandes sur USART1 (interruption, 1 octet). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">UART1_DemarrerReceptionCommandes();<sp/><sp/><sp/>//<sp/>apres<sp/>MX_USART1_UART_Init()</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3747" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3747" bodyend="3752"/>
+        <references refid="group__grp__comm_1ga6b6a3cef741ac3270119f7e1890f58eb" compoundref="main_8c" startline="3747" endline="3752">UART1_DemarrerReceptionCommandes</references>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+        <referencedby refid="group__grp__comm_1ga6b6a3cef741ac3270119f7e1890f58eb" compoundref="main_8c" startline="3747" endline="3752">UART1_DemarrerReceptionCommandes</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__comm_1ga7139cd4baabbbcbab0c1fe6d7d4ae1cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void USART1_IRQHandler</definition>
+        <argsstring>(void)</argsstring>
+        <name>USART1_IRQHandler</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Interruption USART1 : delegue au HAL, qui appelle HAL_UART_RxCpltCallback() a chaque octet recu (commandes UART). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">//<sp/>appele<sp/>par<sp/>le<sp/>materiel<sp/>(vecteur<sp/>USART1_IRQn,<sp/>priorite<sp/>6),<sp/>ne<sp/>pas<sp/>appeler<sp/>directement</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3765" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3765" bodyend="3768"/>
+        <references refid="group__grp__comm_1ga7139cd4baabbbcbab0c1fe6d7d4ae1cc" compoundref="main_8c" startline="3765" endline="3768">USART1_IRQHandler</references>
+        <referencedby refid="group__grp__comm_1ga7139cd4baabbbcbab0c1fe6d7d4ae1cc" compoundref="main_8c" startline="3765" endline="3768">USART1_IRQHandler</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__comm_1gae494a9643f29b87d6d81e5264e60e57b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void HAL_UART_RxCpltCallback</definition>
+        <argsstring>(UART_HandleTypeDef *huart)</argsstring>
+        <name>HAL_UART_RxCpltCallback</name>
+        <param>
+          <type>UART_HandleTypeDef *</type>
+          <declname>huart</declname>
+        </param>
+        <briefdescription>
+<para>Octet recu sur USART1 : assemble la ligne ; CR ou LF la termine et la confie a la boucle (une ligne en attente au plus, les suivantes sont comptees comme perdues). Aucune API FreeRTOS ici. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>huart</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Handle UART de l&apos;interruption. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">//<sp/>appele<sp/>par<sp/>HAL_UART_IRQHandler()<sp/>;<sp/>la<sp/>ligne<sp/>&quot;WHO\r&quot;<sp/>donne<sp/>uart_cmd<sp/>=<sp/>&quot;WHO&quot;,</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>uart_cmd_prete<sp/>=<sp/>1,<sp/>puis<sp/>UART1_TraiterCommande()<sp/>l&apos;execute<sp/>dans<sp/>la<sp/>boucle</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3783" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3783" bodyend="3817"/>
+        <references refid="group__grp__comm_1gae494a9643f29b87d6d81e5264e60e57b" compoundref="main_8c" startline="3783" endline="3817">HAL_UART_RxCpltCallback</references>
+        <referencedby refid="group__grp__comm_1gae494a9643f29b87d6d81e5264e60e57b" compoundref="main_8c" startline="3783" endline="3817">HAL_UART_RxCpltCallback</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__comm_1ga0e0456ea96d55db31de947fb3e954f18" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void HAL_UART_ErrorCallback</definition>
+        <argsstring>(UART_HandleTypeDef *huart)</argsstring>
+        <name>HAL_UART_ErrorCallback</name>
+        <param>
+          <type>UART_HandleTypeDef *</type>
+          <declname>huart</declname>
+        </param>
+        <briefdescription>
+<para>Erreur de reception USART1 (debordement, bruit...) : relance la reception. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>huart</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Handle UART. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">//<sp/>appele<sp/>par<sp/>le<sp/>HAL<sp/>sur<sp/>erreur<sp/>;<sp/>la<sp/>ligne<sp/>en<sp/>cours<sp/>est<sp/>abandonnee</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3829" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3829" bodyend="3836"/>
+        <references refid="group__grp__comm_1ga0e0456ea96d55db31de947fb3e954f18" compoundref="main_8c" startline="3829" endline="3836">HAL_UART_ErrorCallback</references>
+        <referencedby refid="group__grp__comm_1ga0e0456ea96d55db31de947fb3e954f18" compoundref="main_8c" startline="3829" endline="3836">HAL_UART_ErrorCallback</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__comm_1gabcc2bb9c188ed5dd0c34bf573bdb04e6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void UART1_TraiterCommande</definition>
+        <argsstring>(void)</argsstring>
+        <name>UART1_TraiterCommande</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Execute la commande recue sur l&apos;UART (s&apos;il y en a une) et renvoie la reponse sur l&apos;UART. Meme traitement que l&apos;UDP (tc_request()). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">UART1_TraiterCommande();<sp/><sp/><sp/>//<sp/>dans<sp/>la<sp/>boucle<sp/>for(;;)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>//<sp/>terminal<sp/>:<sp/>&quot;GET_CMD_ON_OFF_OC_LDO_2PSp&quot;<sp/>-&gt;<sp/>&quot;CMD_ON_OFF_OC:2PSp:0&quot;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3849" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3849" bodyend="3886"/>
+        <references refid="group__grp__comm_1ga8f851878b9fa126696fa20796cb7c274" compoundref="main_8c" startline="3730" endline="3736">Commande_Deverrouiller</references>
+        <references refid="group__grp__comm_1ga700668cb98e6ac2d4c9e2a1f80bd365a" compoundref="main_8c" startline="3710" endline="3716">Commande_Verrouiller</references>
+        <references refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" compoundref="main_8c" startline="6290" endline="6439">tc_request</references>
+        <references refid="group__grp__comm_1gab9b5dfc109e472981cbbb7867d1b7f92" compoundref="main_8c" startline="1803" endline="1816">UART1_EnvoyerTexte</references>
+        <references refid="group__grp__comm_1gabcc2bb9c188ed5dd0c34bf573bdb04e6" compoundref="main_8c" startline="3849" endline="3886">UART1_TraiterCommande</references>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+        <referencedby refid="group__grp__comm_1gabcc2bb9c188ed5dd0c34bf573bdb04e6" compoundref="main_8c" startline="3849" endline="3886">UART1_TraiterCommande</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__comm_1ga69203767b05a3021fd164dfbc0b4d6c5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_WHO</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_WHO</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;WHO&quot;. Renvoie la chaine d&apos;identification de la carte (macro WHO_AM_I definie dans main.h). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Ecrit WHO_AM_I dans la variable globale response. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;WHO&quot;<sp/>-&gt;<sp/>reponse<sp/>&quot;STM32<sp/>NULCEO<sp/>H753ZI<sp/>IRIS<sp/>V1.0&quot;.</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5853" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5853" bodyend="5853"/>
+        <references refid="group__grp__comm_1ga69203767b05a3021fd164dfbc0b4d6c5" compoundref="main_8c" startline="5853" endline="5853">h_WHO</references>
+        <referencedby refid="group__grp__comm_1ga69203767b05a3021fd164dfbc0b4d6c5" compoundref="main_8c" startline="5853" endline="5853">h_WHO</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__comm_1ga5e4e310aeaafd17d31d0c9fd0874ad0c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int compareCommand</definition>
+        <argsstring>(const void *key, const void *elem)</argsstring>
+        <name>compareCommand</name>
+        <param>
+          <type>const void *</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>elem</declname>
+        </param>
+        <briefdescription>
+<para>Fonction de comparaison utilisee par bsearch() pour retrouver une commande dans commandTable[] (qui doit etre triee, voir sortCommandTable()). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointeur vers la chaine de caracteres recherchee (le token de commande extrait de la trame, ex: &quot;WHO&quot;). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>elem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointeur vers l&apos;entree Command_t courante du tableau, fourni automatiquement par bsearch(). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>int</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Resultat de strcmp() entre key et elem-&gt;name : negatif si key &lt; elem-&gt;name, 0 si egal, positif si key &gt; elem-&gt;name. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Jamais<sp/>appelee<sp/>directement<sp/>:<sp/>passee<sp/>en<sp/>argument<sp/>a<sp/>bsearch()</highlight></codeline>
+<codeline><highlight class="normal">dans<sp/>findCommandHandler().</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5931" column="12" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5931" bodyend="5936"/>
+        <references refid="group__grp__comm_1ga5e4e310aeaafd17d31d0c9fd0874ad0c" compoundref="main_8c" startline="5931" endline="5936">compareCommand</references>
+        <referencedby refid="group__grp__comm_1ga5e4e310aeaafd17d31d0c9fd0874ad0c" compoundref="main_8c" startline="5931" endline="5936">compareCommand</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__comm_1ga2f7f33500ff00c489e30866948d48e3c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int compareCommandForSort</definition>
+        <argsstring>(const void *a, const void *b)</argsstring>
+        <name>compareCommandForSort</name>
+        <param>
+          <type>const void *</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Fonction de comparaison utilisee par qsort() pour trier commandTable[] par ordre alphabetique de commande, prealable indispensable a l&apos;utilisation de bsearch() dans findCommandHandler(). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointeur vers une premiere entree Command_t du tableau. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointeur vers une seconde entree Command_t du tableau. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>int</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Resultat de strcmp() entre les deux noms de commande. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Jamais<sp/>appelee<sp/>directement<sp/>:<sp/>passee<sp/>en<sp/>argument<sp/>a<sp/>qsort()</highlight></codeline>
+<codeline><highlight class="normal">dans<sp/>sortCommandTable().</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5976" column="12" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5976" bodyend="5981"/>
+        <references refid="group__grp__comm_1ga2f7f33500ff00c489e30866948d48e3c" compoundref="main_8c" startline="5976" endline="5981">compareCommandForSort</references>
+        <referencedby refid="group__grp__comm_1ga2f7f33500ff00c489e30866948d48e3c" compoundref="main_8c" startline="5976" endline="5981">compareCommandForSort</referencedby>
+        <referencedby refid="group__grp__comm_1gaa8eed1e7f490101de8fcefc4af23882c" compoundref="main_8c" startline="6004" endline="6007">sortCommandTable</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__comm_1gaa8eed1e7f490101de8fcefc4af23882c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void sortCommandTable</definition>
+        <argsstring>(void)</argsstring>
+        <name>sortCommandTable</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Trie une bonne fois pour toutes (au demarrage) le tableau commandTable[] par ordre alphabetique de commande. Doit imperativement etre appelee avant le premier appel a tc_request()/findCommandHandler(), sous peine de resultats de bsearch() incorrects. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Trie commandTable[] en place. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Appelee<sp/>une<sp/>seule<sp/>fois<sp/>dans<sp/>StartLwipTask(),<sp/>avant<sp/>la<sp/>boucle</highlight></codeline>
+<codeline><highlight class="normal">infinie<sp/>:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>udpServer_init();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>sortCommandTable();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6004" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6004" bodyend="6007"/>
+        <references refid="group__grp__comm_1ga2f7f33500ff00c489e30866948d48e3c" compoundref="main_8c" startline="5976" endline="5981">compareCommandForSort</references>
+        <references refid="group__grp__comm_1gaa8eed1e7f490101de8fcefc4af23882c" compoundref="main_8c" startline="6004" endline="6007">sortCommandTable</references>
+        <referencedby refid="group__grp__comm_1gaa8eed1e7f490101de8fcefc4af23882c" compoundref="main_8c" startline="6004" endline="6007">sortCommandTable</referencedby>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void tc_request</definition>
+        <argsstring>(void)</argsstring>
+        <name>tc_request</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Analyseur (parser) principal des trames recues par UDP. Extrait le premier token de la trame (avant le premier &quot;:&quot;), puis tente de le faire correspondre, dans l&apos;ordre : 1) aux prefixes indexes par LDO (SET_EN_LDO_, RST_EN_LDO_, SET_BL_LDO_, RST_BL_LDO_, GET_STATUS_LDO_) via findLdoIndex() ; 2) sinon, a une commande exacte de commandTable[] via findCommandHandler(), dont le handler associe est alors execute. Si aucune correspondance n&apos;est trouvee, la reponse &quot;UNKNOWN&quot; est renvoyee. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>parametre C. Lit et modifie la variable globale last_message (message brut recu), et ecrit le resultat dans la variable globale response. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">last_message<sp/>=<sp/>&quot;SET_VAL_LDO_1PSp:2048&quot;;</highlight></codeline>
+<codeline><highlight class="normal">tc_request();<sp/><sp/><sp/>//<sp/>-&gt;<sp/>execute<sp/>h_SET_VAL_LDO_1PSp(),<sp/>response=&quot;DONE&quot;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6290" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6290" bodyend="6439" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="84" declcolumn="6"/>
+        <references refid="group__grp__etat_1ga70c1db5780542cb5246d6ed350666c5c" compoundref="main_8c" startline="2764" endline="2782">buildStatusResponse</references>
+        <references refid="group__grp__cmd_1ga5d44c3c48f8606b7286fe670f62997b4" compoundref="main_8c" startline="3625" endline="3640">CmdOnOff_BasculerBld</references>
+        <references refid="group__grp__cmd_1ga7d468d2e11f2a18d745896a5865ed077" compoundref="main_8c" startline="3595" endline="3611">CmdOnOff_BasculerOc</references>
+        <references refid="group__grp__cmd_1gafb6457db3c48283dd0fb280775957f7a" compoundref="main_8c" startline="3654" endline="3657">CmdOnOff_Repondre</references>
+        <references refid="group__grp__comm_1ga768693a9fdf4a85d1ba355e3c321e075" compoundref="main_8c" startline="5952" endline="5957">findCommandHandler</references>
+        <references refid="group__grp__config_1gadc686ab4f6036d732a6f2b1ecb6dbd01" compoundref="main_8c" startline="2727" endline="2733">findLdoIndex</references>
+        <references refid="group__grp__dac_1gac1d35f9367efff87f176072901b295ac" compoundref="main_8c" startline="4309" endline="4315">GetMappingDacLdo</references>
+        <references refid="group__grp__adc_1ga291e2e1e27a0a67a3c63820c746abc60" compoundref="main_8c" startline="5595" endline="5618">GetMesureCourantReelle</references>
+        <references refid="group__grp__adc_1ga5620dbaf6425610dff776e64b7f6c3ca" compoundref="main_8c" startline="5474" endline="5501">GetMesureReelle</references>
+        <references refid="group__grp__adc_1gac835b21b6948669a86732fd2683d8fd6" compoundref="main_8c" startline="5667" endline="5679">GetMuxCourantLdo</references>
+        <references refid="group__grp__adc_1ga9ab7d7bc3c2e86fe9886ff9a25b5d2d4" compoundref="main_8c" startline="5379" endline="5391">GetMuxLdo</references>
+        <references refid="group__grp__dac_1ga1b7ca6a4fce7e0d525508dd4951a48f0" compoundref="main_8c" startline="4109" endline="4154">h_SET_CURRENT_LDO_GENERIQUE</references>
+        <references refid="group__grp__dac_1gadcbefabbab52750a575b5dac7150534e" compoundref="main_8c" startline="4084" endline="4093">h_SET_VAL_LDO_GENERIQUE</references>
+        <references refid="group__grp__config_1ga2ba862323ea386969585492246cd74d6" compoundref="main_8c" startline="6223" endline="6264">LDO_Diagnostic</references>
+        <references refid="group__grp__etat_1ga4d73884db55d5370dfdce4dca8d1eddf" compoundref="main_8c" startline="3228" endline="3254">LDO_RelacherBleeder</references>
+        <references refid="group__grp__oc_1ga53ac0c1da803505e54c72dbd31e4de73" compoundref="main_8c" startline="3952" endline="3963">OC_Etat</references>
+        <references refid="group__grp__oc_1ga61bd3c43a673ea375cabfe6a2de48eb0" compoundref="main_8c" startline="3929" endline="3938">OC_Rearmer</references>
+        <references refid="group__grp__oc_1gafc2057d31d2abd2b3389f0e6ce4cc3a2" compoundref="main_8c" startline="3120" endline="3128">OC_SeuilValide</references>
+        <references refid="group__grp__dac_1gaeda25d5b60439cf57afc75b5c8096a3d" compoundref="main_8c" startline="4235" endline="4291">SetMappingDacLdo</references>
+        <references refid="group__grp__adc_1ga17dfb24c9ed80c2dca43e9d81d13e130" compoundref="main_8c" startline="5637" endline="5649">SetMuxCourantLdo</references>
+        <references refid="group__grp__adc_1gabea253a3031b6371c35f5c1b206728c6" compoundref="main_8c" startline="5349" endline="5361">SetMuxLdo</references>
+        <references refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" compoundref="main_8c" startline="6290" endline="6439">tc_request</references>
+        <referencedby refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" compoundref="main_8c" startline="6290" endline="6439">tc_request</referencedby>
+        <referencedby refid="group__grp__comm_1gabcc2bb9c188ed5dd0c34bf573bdb04e6" compoundref="main_8c" startline="3849" endline="3886">UART1_TraiterCommande</referencedby>
+        <referencedby refid="group__grp__comm_1ga5b44c65aa41e79871a46aeed1bb4751b" compoundref="main_8c" startline="2619" endline="2708">udp_receive_callback</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Réception et émission UART, serveur UDP, analyse et dispatch des commandes. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

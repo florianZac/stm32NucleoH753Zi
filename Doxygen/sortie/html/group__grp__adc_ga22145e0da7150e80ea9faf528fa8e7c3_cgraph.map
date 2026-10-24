@@ -1,0 +1,7 @@
+<map id="TraiterResetMultiplexeur" name="TraiterResetMultiplexeur">
+<area shape="rect" id="Node000001" title="Resynchronise l&#39;etat logiciel des DEUX chaines de multiplexage (tension et courant) avec la realite m..." alt="" coords="5,29,169,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="52,29,46,21,50,11,64,5,87,3,111,5,126,14,121,14,110,10,87,8,66,10,54,15,51,20,57,29"/>
+<area shape="rect" id="Node000002" href="$group__grp__comm.html#gab9b5dfc109e472981cbbb7867d1b7f92" title="Envoie une chaine de caracteres sur USART1 (PB6/PB7, via un adaptateur USB&#45;UART externe),..." alt="" coords="217,29,368,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="169,40,204,43,199,43,169,45"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="257,28,251,21,256,11,270,5,292,3,317,5,331,14,326,14,315,10,292,8,271,10,259,15,257,20,262,30"/>
+</map>

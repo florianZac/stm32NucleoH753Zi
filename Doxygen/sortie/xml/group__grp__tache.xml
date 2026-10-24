@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="group__grp__tache" kind="group">
+    <compoundname>grp_tache</compoundname>
+    <title>Tâche principale FreeRTOS</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void StartLwipTask</definition>
+        <argsstring>(void const *argument)</argsstring>
+        <name>StartLwipTask</name>
+        <param>
+          <type>void const *</type>
+          <declname>argument</declname>
+        </param>
+        <briefdescription>
+<para>Tache FreeRTOS principale (lwipTask). Initialise LwIP, les verrous (I2C, UART, commandes), la reception UART, les tables issues du CSV (LDO_InitialiserTables()), les seuils OC, les DAC (configuration, restauration EEPROM), les commandes ON/OFF (flash), l&apos;EXTI des OC et le serveur UDP, puis boucle sans fin : etat des LDO, surveillance OC, sauvegardes EEPROM/flash differees, commande UART en attente, boutons (capture complete, reset des multiplexeurs). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Non utilise (signature imposee par osThreadDef). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Ne retourne jamais. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">//<sp/>Cree<sp/>par<sp/>main()<sp/>(code<sp/>CubeMX)<sp/>:</highlight></codeline>
+<codeline><highlight class="normal">osThreadDef(lwipTask,<sp/>StartLwipTask,<sp/>osPriorityNormal,<sp/>0,<sp/>256);</highlight></codeline>
+<codeline><highlight class="normal">lwipTaskHandle<sp/>=<sp/>osThreadCreate(osThread(lwipTask),<sp/>NULL);</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6730" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6730" bodyend="6833" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="79" declcolumn="6"/>
+        <references refid="struct_dac_puce__t_1a5282fbac84522f70703e90c87793c301" compoundref="main_8c" startline="296">DacPuce_t::adresse_hal</references>
+        <references refid="group__grp__cmd_1ga3f4f9ffd19d9dfb5f1fccd414e6bd2f3" compoundref="main_8c" startline="3434" endline="3482">CmdOnOff_Initialiser</references>
+        <references refid="group__grp__cmd_1ga8a6ad7d0ecff45c40c421cbab46b2526" compoundref="main_8c" startline="3564" endline="3581">CmdOnOff_TraiterSauvegarde</references>
+        <references refid="group__grp__comm_1ga7e95f093ea99a8f73f132b261bdebc2f" compoundref="main_8c" startline="3689" endline="3692">CreerMutexCommandes</references>
+        <references refid="group__grp__i2c_1ga9c1e98ecaf3c304b9045320209882bf7" compoundref="main_8c" startline="688" endline="692">CreerMutexI2C</references>
+        <references refid="group__grp__comm_1ga59372978b4f9f6b427161864e8bc4dd6" compoundref="main_8c" startline="708" endline="711">CreerMutexUART</references>
+        <references refid="group__grp__eeprom_1ga538f60d46cf0ac04119fa65a989274be" compoundref="main_8c" startline="4902" endline="4928">DAC_ConfigurerSeuilsPotentiometre</references>
+        <references refid="group__grp__eeprom_1gaea23265d4fdedf9ac60d1c4afb886e40" compoundref="main_8c" startline="4822" endline="4885">DAC_RestaurerMemoire</references>
+        <references refid="group__grp__eeprom_1ga5f9ce30ec25412cc3efbe118447a5a11" compoundref="main_8c" startline="4755" endline="4804">DAC_TraiterSauvegardes</references>
+        <references refid="group__grp__exti_1ga3a919fef613806da58b99557a009f22a" compoundref="main_8c" startline="1648" endline="1720">ExecuterCaptureComplete</references>
+        <references refid="struct_dac_puce__t_1ac5991a30280e6d3eccfa12cb476e69a1" compoundref="main_8c" startline="295">DacPuce_t::hi2c</references>
+        <references refid="group__grp__dac_1gaef2582c078db38424ec959fc1f9f1c5f" compoundref="main_8c" startline="1118" endline="1142">InitialiserConfigDacsI2C1</references>
+        <references refid="group__grp__config_1ga8ad9d7191f49b52c41d5a583f774465d" compoundref="main_8c" startline="6025" endline="6058">LDO_InitialiserTables</references>
+        <references refid="group__grp__etat_1gad7a2801e95c498fa0a2f1982238ae732" compoundref="main_8c" startline="3307" endline="3361">LDO_MettreAJour</references>
+        <references refid="group__grp__oc_1ga12ef8bab086612c9ecf3cb2ffed9c776" compoundref="main_8c" startline="6510" endline="6543">MX_OC_EXTI_Init</references>
+        <references refid="group__grp__oc_1ga9358ff0a14ed464e81374dab1f13777d" compoundref="main_8c" startline="4173" endline="4185">OC_InitialiserSeuilsDefaut</references>
+        <references refid="group__grp__oc_1ga66c4ac6f7a9837733484590dbe3081d2" compoundref="main_8c" startline="3898" endline="3914">OC_SignalerEvenements</references>
+        <references refid="group__grp__i2c_1ga5cb1cd70b1dd76a8aadb2bccb2837d2f" compoundref="main_8c" startline="728" endline="731">ResoudreMutexI2C</references>
+        <references refid="group__grp__comm_1gaa8eed1e7f490101de8fcefc4af23882c" compoundref="main_8c" startline="6004" endline="6007">sortCommandTable</references>
+        <references refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</references>
+        <references refid="group__grp__dac_1gacdf4ad1b5d4a18ab3a5b309318099344" compoundref="main_8c" startline="1228" endline="1267">SurveillerConfigDacsI2C1</references>
+        <references refid="group__grp__adc_1ga22145e0da7150e80ea9faf528fa8e7c3" compoundref="main_8c" startline="1611" endline="1616">TraiterResetMultiplexeur</references>
+        <references refid="struct_dac_puce__t_1ad3f1b1cd8364b991f7266cc77b0c057a" compoundref="main_8c" startline="297">DacPuce_t::trame</references>
+        <references refid="group__grp__comm_1ga6b6a3cef741ac3270119f7e1890f58eb" compoundref="main_8c" startline="3747" endline="3752">UART1_DemarrerReceptionCommandes</references>
+        <references refid="group__grp__comm_1gab9b5dfc109e472981cbbb7867d1b7f92" compoundref="main_8c" startline="1803" endline="1816">UART1_EnvoyerTexte</references>
+        <references refid="group__grp__comm_1gabcc2bb9c188ed5dd0c34bf573bdb04e6" compoundref="main_8c" startline="3849" endline="3886">UART1_TraiterCommande</references>
+        <references refid="group__grp__comm_1ga78047c519037c4c6091c71e1801519c7" compoundref="main_8c" startline="2556" endline="2590">udpServer_init</references>
+        <referencedby refid="group__grp__cubemx_1ga840291bc02cba5474a4cb46a9b9566fe" compoundref="main_8c" startline="1824" endline="1932">main</referencedby>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Initialisation applicative et boucle principale. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

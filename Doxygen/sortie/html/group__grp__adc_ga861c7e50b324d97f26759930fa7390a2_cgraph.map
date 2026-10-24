@@ -1,0 +1,7 @@
+<map id="h_GET_CURRENT_2" name="h_GET_CURRENT_2">
+<area shape="rect" id="Node000001" title="Handler de la commande reseau &quot;GET_CURRENT_2&quot;. Declenche une conversion sur ADC3, la convertit en pou..." alt="" coords="5,29,156,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="55,28,50,21,54,11,64,5,81,3,98,5,109,14,104,14,96,10,80,8,66,10,58,14,56,20,60,29"/>
+<area shape="rect" id="Node000002" href="$group__grp__outils.html#ga4264917775e9932f98b48713bf592321" title="Met a l&#39;echelle lineaire une valeur d&#39;une plage d&#39;entree vers une plage de sortie (equivalent de la f..." alt="" coords="204,29,250,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="156,40,191,43,185,43,156,45"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="201,28,197,21,200,11,210,5,227,3,245,5,255,15,250,14,243,10,227,8,212,10,204,14,202,20,206,30"/>
+</map>

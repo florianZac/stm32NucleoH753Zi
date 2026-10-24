@@ -1,0 +1,4 @@
+<map id="h_SCAN_I2C2" name="h_SCAN_I2C2">
+<area shape="rect" id="Node000001" title="Handler de la commande reseau &quot;SCAN_I2C2&quot;. Identique a h_SCAN_I2C1() mais sur le bus I2C2." alt="" coords="5,29,114,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="76,14,71,10,59,8,49,10,43,14,42,20,45,29,40,29,37,20,39,11,47,5,60,3,73,5,81,14"/>
+</map>

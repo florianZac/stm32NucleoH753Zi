@@ -1,0 +1,54 @@
+<map id="OC_LireDefaut" name="OC_LireDefaut">
+<area shape="rect" id="Node000001" title="Lit la broche OC de la LDO et indique si elle signale une surintensite." alt="" coords="1082,216,1191,243"/>
+<area shape="poly" id="edge29_Node000001_Node000001" title=" " alt="" coords="1165,200,1156,197,1136,195,1118,197,1108,201,1106,207,1111,217,1106,214,1101,207,1104,198,1117,191,1137,189,1158,192,1171,201"/>
+<area shape="rect" id="Node000002" href="$group__grp__config.html#ga2ba862323ea386969585492246cd74d6" title="Commande &quot;GET_DIAG_LDO_&lt;nom&gt;&quot; : etat REEL des broches d&#39;une LDO (niveau lu sur la broche,..." alt="" coords="900,29,1017,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1122,200,1089,136,1063,101,1033,70,1015,59,1015,54,1036,66,1067,97,1093,133,1127,202"/>
+<area shape="rect" id="Node000009" href="$group__grp__etat.html#gad7a2801e95c498fa0a2f1982238ae732" title="Met a jour EN, BLD, OC et PG d&#39;une LDO. Remplace le corps de la boucle for de StartLwipTask()...." alt="" coords="255,279,381,305"/>
+<area shape="poly" id="edge16_Node000001_Node000009" title=" " alt="" coords="1110,252,1075,277,1035,295,945,315,852,327,759,333,668,333,504,322,382,306,382,301,504,317,668,328,759,327,852,322,944,310,1034,289,1073,272,1105,253"/>
+<area shape="rect" id="Node000010" href="$group__grp__etat.html#ga4d73884db55d5370dfdce4dca8d1eddf" title="Desactive le bleeder d&#39;une LDO (RST_BL_LDO_&lt;nom&gt;, RST_BL_LDO_ALL, SET_BL_TAB avec 0)...." alt="" coords="883,253,1034,280"/>
+<area shape="poly" id="edge19_Node000001_Node000010" title=" " alt="" coords="1070,243,1026,255,1025,250,1065,244"/>
+<area shape="rect" id="Node000013" href="$group__grp__oc.html#ga53ac0c1da803505e54c72dbd31e4de73" title="Commande &quot;GET_OC_LDO_&lt;nom&gt;&quot; : etat complet de la protection." alt="" coords="922,104,995,131"/>
+<area shape="poly" id="edge26_Node000001_Node000013" title=" " alt="" coords="1109,204,1075,175,1033,145,995,129,995,124,1036,140,1079,171,1115,206"/>
+<area shape="rect" id="Node000014" href="$group__grp__oc.html#ga61bd3c43a673ea375cabfe6a2de48eb0" title="Commande &quot;RST_OC_LDO_&lt;nom&gt;&quot; : deverrouille le defaut si la broche OC est revenue au repos...." alt="" coords="910,179,1008,205"/>
+<area shape="poly" id="edge30_Node000001_Node000014" title=" " alt="" coords="1065,215,1008,205,1008,200,1070,215"/>
+<area shape="rect" id="Node000015" href="$group__grp__oc.html#gafaa9094a90053ac8bf6eace70669f172" title="Traitement d&#39;un front de la broche OC en interruption." alt="" coords="904,379,1014,405"/>
+<area shape="poly" id="edge33_Node000001_Node000015" title=" " alt="" coords="1116,253,1079,296,1036,338,981,381,979,376,1033,334,1076,292,1111,256"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="987,14,978,10,959,8,940,10,930,15,928,20,933,30,928,28,923,21,926,11,939,5,959,3,980,5,993,14"/>
+<area shape="rect" id="Node000003" href="$group__grp__comm.html#gad6e271fe1796ab0b2a698260f0b78533" title="Analyseur (parser) principal des trames recues par UDP. Extrait le premier token de la trame (avant l..." alt="" coords="703,104,785,131"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="899,62,884,71,785,106,783,101,882,65,904,61"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="779,89,768,85,744,83,721,85,709,89,706,95,712,104,707,103,701,95,705,86,720,79,744,77,769,80,784,89"/>
+<area shape="rect" id="Node000004" href="$group__grp__comm.html#gabcc2bb9c188ed5dd0c34bf573bdb04e6" title="Execute la commande recue sur l&#39;UART (s&#39;il y en a une) et renvoie la reponse sur l&#39;UART...." alt="" coords="429,104,605,131"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="685,118,605,120,604,115,690,117"/>
+<area shape="rect" id="Node000007" href="$group__grp__comm.html#ga5b44c65aa41e79871a46aeed1bb4751b" title="Callback LwIP invoque automatiquement a chaque paquet UDP recu sur le port du serveur (enregistre par..." alt="" coords="444,179,590,205"/>
+<area shape="poly" id="edge11_Node000003_Node000007" title=" " alt="" coords="685,133,654,145,555,181,553,176,652,140,690,131"/>
+<area shape="poly" id="edge10_Node000004_Node000004" title=" " alt="" coords="549,89,539,85,517,83,496,85,485,89,482,95,488,104,483,103,477,95,481,86,495,79,517,77,541,80,555,89"/>
+<area shape="rect" id="Node000005" href="$group__grp__tache.html#gae9bf934dd2f4a12a5c5975d81afa3063" title="Tache FreeRTOS principale (lwipTask). Initialise LwIP, les verrous (I2C, UART, commandes),..." alt="" coords="103,179,207,205"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="412,120,336,129,256,145,214,162,180,180,176,176,212,157,254,140,335,124,417,117"/>
+<area shape="poly" id="edge9_Node000005_Node000005" title=" " alt="" coords="174,164,168,160,155,157,142,159,136,164,134,170,138,178,132,178,129,170,131,161,140,154,155,152,170,155,180,163"/>
+<area shape="rect" id="Node000006" href="$group__grp__cubemx.html#ga840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,179,55,205"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="85,194,56,194,53,190,89,190"/>
+<area shape="poly" id="edge8_Node000006_Node000006" title=" " alt="" coords="50,164,43,160,30,157,18,159,11,164,9,170,13,178,8,179,4,170,7,161,16,154,30,152,46,155,55,162"/>
+<area shape="poly" id="edge12_Node000007_Node000007" title=" " alt="" coords="549,163,539,160,517,157,496,159,485,164,482,169,488,179,483,178,477,170,481,160,495,154,517,152,541,155,555,163"/>
+<area shape="rect" id="Node000008" href="$group__grp__comm.html#ga78047c519037c4c6091c71e1801519c7" title="Initialise le serveur UDP applicatif. Cree un PCB UDP (udp_new), le lie a l&#39;adresse IP et au port def..." alt="" coords="266,179,370,205"/>
+<area shape="poly" id="edge13_Node000007_Node000008" title=" " alt="" coords="426,193,371,195,370,189,431,191"/>
+<area shape="poly" id="edge14_Node000008_Node000005" title=" " alt="" coords="248,193,208,195,207,189,253,191"/>
+<area shape="poly" id="edge15_Node000008_Node000008" title=" " alt="" coords="344,164,336,160,318,157,301,159,292,164,290,169,295,179,290,178,285,170,288,160,300,154,318,152,338,155,350,163"/>
+<area shape="poly" id="edge18_Node000009_Node000005" title=" " alt="" coords="279,271,178,208,179,203,284,269"/>
+<area shape="poly" id="edge17_Node000009_Node000009" title=" " alt="" coords="344,263,336,260,318,257,301,259,292,264,290,269,295,279,290,277,285,270,288,260,300,254,318,252,338,255,350,264"/>
+<area shape="poly" id="edge25_Node000010_Node000003" title=" " alt="" coords="915,244,881,219,866,198,858,179,850,162,833,145,810,132,786,125,785,120,812,127,837,141,854,159,863,177,871,196,885,215,920,245"/>
+<area shape="poly" id="edge24_Node000010_Node000010" title=" " alt="" coords="987,238,978,234,959,232,940,234,930,239,928,244,933,254,928,252,923,245,926,235,939,229,959,227,980,229,993,239"/>
+<area shape="rect" id="Node000011" href="$group__grp__etat.html#ga9b73881c339d3de0d81a83298d3c74c6" title="Handler de la commande reseau &quot;RST_BL_LDO_ALL&quot;. Parcourt les 18 LDO et desactive le bleeder (Bl=0) po..." alt="" coords="669,179,818,205"/>
+<area shape="poly" id="edge20_Node000010_Node000011" title=" " alt="" coords="909,247,834,220,798,209,798,203,836,215,914,247"/>
+<area shape="rect" id="Node000012" href="$group__grp__etat.html#ga31a850bfb276c79400e40e6272d933ae" title="Handler de la commande reseau &quot;SET_BL_TAB&quot;. Renseigne en une seule fois l&#39;etat Bleeder des 18 LDO a p..." alt="" coords="686,253,802,280"/>
+<area shape="poly" id="edge22_Node000010_Node000012" title=" " alt="" coords="865,267,803,269,802,264,870,266"/>
+<area shape="poly" id="edge21_Node000011_Node000011" title=" " alt="" coords="779,163,768,160,744,157,721,159,709,164,706,169,712,179,707,177,701,170,705,160,720,154,744,152,769,155,784,164"/>
+<area shape="poly" id="edge23_Node000012_Node000012" title=" " alt="" coords="779,238,768,234,744,232,721,234,709,239,706,244,712,254,707,252,701,245,705,235,720,229,744,227,769,229,784,238"/>
+<area shape="poly" id="edge28_Node000013_Node000003" title=" " alt="" coords="905,118,786,120,785,115,910,117"/>
+<area shape="poly" id="edge27_Node000013_Node000013" title=" " alt="" coords="987,88,978,85,959,83,940,85,930,89,928,95,933,104,928,103,923,95,926,86,939,79,959,77,980,80,993,89"/>
+<area shape="poly" id="edge32_Node000014_Node000003" title=" " alt="" coords="909,172,834,145,785,130,785,125,836,140,914,172"/>
+<area shape="poly" id="edge31_Node000014_Node000014" title=" " alt="" coords="987,163,978,160,959,157,940,159,930,164,928,169,933,179,928,177,923,170,926,160,939,154,959,152,980,155,993,164"/>
+<area shape="poly" id="edge36_Node000015_Node000015" title=" " alt="" coords="988,363,978,360,959,357,940,359,930,364,928,369,933,379,928,377,923,370,926,360,939,354,959,352,980,355,993,364"/>
+<area shape="rect" id="Node000016" href="$group__grp__exti.html#ga0cd91fd3a9608559c2a87a8ba6cba55f" title="Callback appele par le HAL a chaque interruption EXTI, quelle que soit la broche. Boutons (PC13,..." alt="" coords="653,379,835,405"/>
+<area shape="poly" id="edge34_Node000015_Node000016" title=" " alt="" coords="886,392,835,395,835,389,891,392"/>
+<area shape="poly" id="edge35_Node000016_Node000016" title=" " alt="" coords="779,363,768,360,744,357,721,359,709,364,706,369,712,379,707,377,701,370,705,360,720,354,744,352,769,355,784,364"/>
+</map>

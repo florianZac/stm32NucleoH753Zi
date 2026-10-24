@@ -1,0 +1,7 @@
+<map id="OC_EstActive" name="OC_EstActive">
+<area shape="rect" id="Node000001" title="Indique si la protection OC est AGISSANTE : LDO surveillee (circuit cable, voir OC_EstSurveillee()) E..." alt="" coords="5,29,111,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="29,29,25,21,28,11,40,5,58,3,78,5,90,14,84,14,76,10,58,8,41,10,32,15,30,20,35,29"/>
+<area shape="rect" id="Node000002" href="$group__grp__oc.html#ga7851b235d1d1f7564644d659587b3ba2" title="Indique si la LDO est surveillee : ldoConfig[idx].oc.surveille = 1 ET un DAC de seuil (dac_courant) d..." alt="" coords="159,29,284,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="111,40,146,42,140,43,111,45"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="193,28,188,21,192,11,203,5,221,3,241,5,253,15,248,14,239,10,221,8,205,10,196,15,193,20,198,30"/>
+</map>

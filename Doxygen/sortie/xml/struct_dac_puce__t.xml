@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="struct_dac_puce__t" kind="struct" language="C++" prot="public">
+    <compoundname>DacPuce_t</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_dac_puce__t_1a769853bb6a6a620d2a26495442fedeb4" prot="public" static="no" mutable="no">
+        <type><ref refid="main_8c_1a75e57bba50363a40a374df0b941bfd58" kindref="member">CibleDac_t</ref></type>
+        <definition>CibleDac_t DacPuce_t::cible</definition>
+        <argsstring></argsstring>
+        <name>cible</name>
+        <qualifiedname>DacPuce_t::cible</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>CIBLE_DAC1..CIBLE_DAC5 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="294" column="25" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="294" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_dac_puce__t_1ac5991a30280e6d3eccfa12cb476e69a1" prot="public" static="no" mutable="no">
+        <type>I2C_HandleTypeDef *</type>
+        <definition>I2C_HandleTypeDef* DacPuce_t::hi2c</definition>
+        <argsstring></argsstring>
+        <name>hi2c</name>
+        <qualifiedname>DacPuce_t::hi2c</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>&amp;hi2c1 ou &amp;hi2c2 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="295" column="24" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="295" bodyend="-1"/>
+        <referencedby refid="group__grp__eeprom_1ga538f60d46cf0ac04119fa65a989274be" compoundref="main_8c" startline="4902" endline="4928">DAC_ConfigurerSeuilsPotentiometre</referencedby>
+        <referencedby refid="group__grp__eeprom_1ga461f9e8b58bc45203018e3132c71b989" compoundref="main_8c" startline="4712" endline="4739">DAC_GarderEnEeprom</referencedby>
+        <referencedby refid="group__grp__eeprom_1ga9038fec6d17da09fb1543c560d3e7965" compoundref="main_8c" startline="4647" endline="4658">DAC_PuceJoignable</referencedby>
+        <referencedby refid="group__grp__eeprom_1gaea23265d4fdedf9ac60d1c4afb886e40" compoundref="main_8c" startline="4822" endline="4885">DAC_RestaurerMemoire</referencedby>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_dac_puce__t_1a5282fbac84522f70703e90c87793c301" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t DacPuce_t::adresse_hal</definition>
+        <argsstring></argsstring>
+        <name>adresse_hal</name>
+        <qualifiedname>DacPuce_t::adresse_hal</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>adresse 7 bits decalee (0xC0, 0xC2, 0xC4) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="296" column="25" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="296" bodyend="-1"/>
+        <referencedby refid="group__grp__eeprom_1ga538f60d46cf0ac04119fa65a989274be" compoundref="main_8c" startline="4902" endline="4928">DAC_ConfigurerSeuilsPotentiometre</referencedby>
+        <referencedby refid="group__grp__eeprom_1ga461f9e8b58bc45203018e3132c71b989" compoundref="main_8c" startline="4712" endline="4739">DAC_GarderEnEeprom</referencedby>
+        <referencedby refid="group__grp__eeprom_1ga9038fec6d17da09fb1543c560d3e7965" compoundref="main_8c" startline="4647" endline="4658">DAC_PuceJoignable</referencedby>
+        <referencedby refid="group__grp__eeprom_1gaea23265d4fdedf9ac60d1c4afb886e40" compoundref="main_8c" startline="4822" endline="4885">DAC_RestaurerMemoire</referencedby>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_dac_puce__t_1ad3f1b1cd8364b991f7266cc77b0c057a" prot="public" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>uint8_t* DacPuce_t::trame</definition>
+        <argsstring></argsstring>
+        <name>trame</name>
+        <qualifiedname>DacPuce_t::trame</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>DACx_DEF (8 x {registre&lt;&lt;3, MSB, LSB}) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="297" column="24" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="297" bodyend="-1"/>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Une puce MCP47FEB28 rafraichie en continu par StartLwipTask(). </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="293" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="293" bodyend="298"/>
+    <listofallmembers>
+      <member refid="struct_dac_puce__t_1a5282fbac84522f70703e90c87793c301" prot="public" virt="non-virtual"><scope>DacPuce_t</scope><name>adresse_hal</name></member>
+      <member refid="struct_dac_puce__t_1a769853bb6a6a620d2a26495442fedeb4" prot="public" virt="non-virtual"><scope>DacPuce_t</scope><name>cible</name></member>
+      <member refid="struct_dac_puce__t_1ac5991a30280e6d3eccfa12cb476e69a1" prot="public" virt="non-virtual"><scope>DacPuce_t</scope><name>hi2c</name></member>
+      <member refid="struct_dac_puce__t_1ad3f1b1cd8364b991f7266cc77b0c057a" prot="public" virt="non-virtual"><scope>DacPuce_t</scope><name>trame</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

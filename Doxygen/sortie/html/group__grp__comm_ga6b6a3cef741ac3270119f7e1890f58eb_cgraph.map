@@ -1,0 +1,4 @@
+<map id="UART1_DemarrerReceptionCommandes" name="UART1_DemarrerReceptionCommandes">
+<area shape="rect" id="Node000001" title="Demarre la reception des commandes sur USART1 (interruption, 1 octet)." alt="" coords="5,29,264,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="91,28,83,21,89,11,106,5,135,3,166,5,183,15,178,14,164,10,134,8,107,10,92,15,89,20,96,29"/>
+</map>

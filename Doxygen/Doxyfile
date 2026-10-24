@@ -1,0 +1,3259 @@
+# Doxyfile 1.18.0
+
+# Ce fichier décrit les paramètres à utiliser par le système de documentation
+# Doxygen (www.doxygen.org) pour un projet.
+#
+# Tout le texte suivant un double dièse (##) est considéré comme un commentaire
+# et est placé devant la balise qu'il précède.
+#
+# Tout le texte suivant un simple dièse (#) est considéré comme un commentaire
+# et sera ignoré. Le format est :
+# TAG = value [value, ...]
+# Pour les listes, des éléments peuvent également être ajoutés en utilisant :
+# TAG += value [value, ...]
+# Les valeurs contenant des espaces doivent être placées entre guillemets ("
+# ").
+#
+# Remarque :
+#
+# Utilisez Doxygen pour comparer le fichier de configuration utilisé avec le
+# fichier de configuration modèle :
+# doxygen -x [configFile]
+# Utilisez Doxygen pour comparer le fichier de configuration utilisé avec le
+# fichier de configuration modèle sans remplacer les variables d'environnement
+# ou les variables de substitution de type CMake :
+# doxygen -x_noenv [configFile]
+
+#---------------------------------------------------------------------------
+# Options de configuration relatives au projet
+#---------------------------------------------------------------------------
+
+# Cette balise spécifie l'encodage utilisé pour tous les caractères du fichier
+# de configuration qui suivent. La valeur par défaut est UTF-8, qui est
+# également l'encodage utilisé pour tout le texte avant la première occurrence
+# de cette balise. Doxygen utilise libiconv (ou l'iconv intégré dans libc) pour
+# le transcodage. Voir https://www.gnu.org/software/libiconv/ pour la liste des
+# encodages possibles.
+# La valeur par défaut est : UTF-8.
+
+DOXYFILE_ENCODING      = UTF-8
+
+# La balise PROJECT_NAME est un mot unique (ou une séquence de mots entourés de
+# guillemets doubles, sauf si vous utilisez Doxywizard) qui doit identifier le
+# projet pour lequel la documentation est générée. Ce nom est utilisé dans le
+# titre de la plupart des pages générées et dans quelques autres endroits.
+# La valeur par défaut est : My Project.
+
+PROJECT_NAME           = "Lwip_demo_H753 - Controleur de LDO"
+
+# La balise PROJECT_NUMBER peut être utilisée pour entrer un numéro de projet ou
+# de révision. Cela peut être utile pour archiver la documentation générée ou si
+# un système de contrôle de version est utilisé.
+
+PROJECT_NUMBER         = 1.0.0
+
+# En utilisant la balise PROJECT_BRIEF, on peut fournir une description
+# optionnelle d'une ligne pour un projet qui apparaît en haut de chaque page et
+# devrait donner aux lecteurs une idée rapide du but du projet. Gardez la
+# description courte.
+
+PROJECT_BRIEF          = "Firmware STM32H753ZI : pilotage de 18 LDO (configuration CSV, DAC MCP47FEB28, protection OC)"
+
+# Avec la balise PROJECT_LOGO, on peut spécifier un logo ou une icône qui est
+# inclus dans la documentation. La hauteur maximale du logo ne doit pas dépasser
+# 55 pixels et la largeur maximale ne doit pas dépasser 200 pixels. Doxygen
+# copiera le logo dans le répertoire de sortie.
+
+PROJECT_LOGO           =
+
+# Avec la balise PROJECT_ICON, on peut spécifier une icône qui est incluse dans
+# les onglets lorsque le document HTML est affiché. Doxygen copiera le logo dans
+# le répertoire de sortie.
+
+PROJECT_ICON           =
+
+# La balise OUTPUT_DIRECTORY est utilisée pour spécifier le chemin (relatif ou
+# absolu) dans lequel la documentation générée sera écrite. Si un chemin relatif
+# est entre, il sera relatif à l'emplacement ou Doxygen a été lance. Si laissé
+# vide, le répertoire courant sera utilisé.
+
+OUTPUT_DIRECTORY       = sortie
+
+# Si la balise CREATE_SUBDIRS est définie à YES, Doxygen créera jusqu'à 4096
+# sous-répertoires (sur 2 niveaux) sous le répertoire de sortie de chaque format
+# de sortie et distribuera les fichiers générés sur ces répertoires. Activer
+# cette option peut être utile lors de l'alimentation de Doxygen avec une grande
+# quantité de fichiers sources, ou mettre tous les fichiers générés dans le même
+# répertoire causerait autrement des problèmes de performance pour le système de
+# fichiers. Ajustez CREATE_SUBDIRS_LEVEL pour contrôler le nombre de sous-
+# répertoires.
+# La valeur par défaut est : NO.
+
+CREATE_SUBDIRS         = NO
+
+# Contrôle le nombre de sous-répertoires qui seront créés lorsque la balise
+# CREATE_SUBDIRS est définie à YES. Le niveau 0 représente 16 répertoires, et
+# chaque incrément de niveau double le nombre de répertoires, résultant en 4096
+# répertoires au niveau 8 qui est la valeur par défaut et également la valeur
+# maximale. Les sous-répertoires sont organisés sur 2 niveaux, le premier niveau
+# a toujours un nombre fixe de 16 répertoires.
+# Valeur minimum : 0, valeur maximum : 8, valeur par défaut : 8.
+# Cette balise nécessite que la balise CREATE_SUBDIRS soit définie sur YES.
+
+CREATE_SUBDIRS_LEVEL   = 8
+
+# Si la balise ALLOW_UNICODE_NAMES est définie à YES, Doxygen permettra aux
+# caractères non-ASCII d'apparaître dans les noms des fichiers générés. Si
+# défini à NO, les caractères non-ASCII seront échappés, par exemple
+# _xE3_x81_x84 sera utilisé pour Unicode U+3044.
+# La valeur par défaut est : NO.
+
+ALLOW_UNICODE_NAMES    = NO
+
+# La balise OUTPUT_LANGUAGE est utilisée pour spécifier la langue dans laquelle
+# toute la documentation générée par Doxygen est écrite. Doxygen utilisera cette
+# information pour générer toute la sortie constante dans la langue appropriée.
+# Les valeurs possibles sont :Afrikaans, Arabic, Armenian, Brazilian, Bulgarian,
+# Catalan, Chinese, Chinese-Traditional, Croatian, Czech, Danish, Dutch, English
+# (États-Unis), Esperanto, Farsi (Persan), Finnish, French, German, Greek,
+# Hindi, Hungarian, Indonesian, Italian, Japanese, Japanese-en (Japonais avec
+# messages en anglais), Korean, Korean-en (Coréen avec messages en anglais),
+# Latvian, Lithuanian, Macedonian, Norwegian, Persian (Farsi), Polish,
+# Portuguese, Romanian, Russian, Serbian, Serbian-Cyrillic, Slovak, Slovene,
+# Spanish, Swedish, Turkish, UkrainianetVietnamese.
+# La valeur par défaut est : English.
+
+OUTPUT_LANGUAGE        = French
+
+# Si la balise BRIEF_MEMBER_DESC est définie à YES, Doxygen inclura les
+# descriptions brèves des membres après les membres qui sont listés dans la
+# documentation du fichier et de la classe (similaire à Javadoc). Définir à NO
+# pour désactiver cela.
+# La valeur par défaut est : YES.
+
+BRIEF_MEMBER_DESC      = YES
+
+# Si la balise REPEAT_BRIEF est définie à YES, Doxygen ajoutera la description
+# brève d'un membre ou d'une fonction avant la description détaillée.
+#
+# Remarque: Si HIDE_UNDOC_MEMBERS et BRIEF_MEMBER_DESC sont tous deux définis à
+# NO, les descriptions brèves seront complètement supprimées.
+# La valeur par défaut est : YES.
+
+REPEAT_BRIEF           = YES
+
+# Cette balise implémente un abréviateur de description brève quasi-intelligent
+# qui est utilisé pour former le texte dans diverses listes. Chaque chaîne de
+# cette liste, si elle est trouvée comme texte de début de la description brève,
+# sera retirée du texte et le résultat, après traitement de toute la liste, est
+# utilisé comme texte annoté. Sinon, la description brève est utilisée telle
+# quelle. Si laissé vide, les valeurs suivantes sont utilisées ($name est
+# automatiquement remplace par le nom de l'entité):The $name class, The $name
+# widget, The $name file, is, provides, specifies, contains, represents, a,
+# anetthe.
+
+ABBREVIATE_BRIEF       = "The $name class" \
+                         "The $name widget" \
+                         "The $name file" \
+                         is \
+                         provides \
+                         specifies \
+                         contains \
+                         represents \
+                         a \
+                         an \
+                         the
+
+# Si les balises ALWAYS_DETAILED_SEC et REPEAT_BRIEF sont toutes deux définies à
+# YES, alors Doxygen générera une section détaillée même s'il n'y a qu'une
+# description brève.
+# La valeur par défaut est : NO.
+
+ALWAYS_DETAILED_SEC    = NO
+
+# Si la balise INLINE_INHERITED_MEMB est définie à YES, Doxygen affichera tous
+# les membres hérités d'une classe dans la documentation de cette classe comme
+# si ces membres étaient des membres ordinaires de la classe. Les constructeurs,
+# destructeurs et opérateurs d'affectation des classes de base ne seront pas
+# affichés.
+# La valeur par défaut est : NO.
+
+INLINE_INHERITED_MEMB  = NO
+
+# Si la balise FULL_PATH_NAMES est définie à YES, Doxygen ajoutera le chemin
+# complet avant les noms de fichiers dans la liste des fichiers et dans les
+# fichiers d'en-tête. Si défini à NO, le chemin le plus court qui rend le nom de
+# fichier unique sera utilisé.
+# La valeur par défaut est : YES.
+
+FULL_PATH_NAMES        = YES
+
+# La balise STRIP_FROM_PATH peut être utilisée pour retirer une partie définie
+# par l'utilisateur du chemin. Le retrait n'est effectue que si l'une des
+# chaînes spécifiées correspond à la partie gauche du chemin. La balise peut
+# être utilisée pour afficher des chemins relatifs dans la liste des fichiers.
+# Si laissé vide, le répertoire à partir duquel Doxygen est lance est utilisé
+# comme chemin a retirer.
+#
+# Remarquez que vous pouvez spécifier des chemins absolus ici, mais aussi des
+# chemins relatifs, qui seront relatifs au répertoire ou Doxygen est lance.
+# Cette balise nécessite que la balise FULL_PATH_NAMES soit définie sur YES.
+
+STRIP_FROM_PATH        =
+
+# La balise STRIP_FROM_INC_PATH peut être utilisée pour retirer une partie
+# définie par l'utilisateur du chemin mentionne dans la documentation d'une
+# classe, qui indique au lecteur quel fichier d'en-tête inclure pour utiliser
+# une classe. Si laissé vide, seul le nom du fichier d'en-tête contenant la
+# définition de la classe est utilisé. Sinon, on devrait spécifier la liste des
+# chemins d'inclusion qui sont normalement passés au compilateur en utilisant
+# l'option -I.
+
+STRIP_FROM_INC_PATH    =
+
+# Si la balise SHORT_NAMES est définie à YES, Doxygen générera des noms de
+# fichiers beaucoup plus courts (mais moins lisibles). Cela peut être utile si
+# votre système de fichiers ne supporte pas les longs noms comme sur DOS, Mac ou
+# CD-ROM.
+# La valeur par défaut est : NO.
+
+SHORT_NAMES            = NO
+
+# Si la balise JAVADOC_AUTOBRIEF est définie à YES alors Doxygen interprétera la
+# première ligne (jusqu'au premier point, point d'interrogation ou point
+# d'exclamation) d'un commentaire de style Javadoc comme la description brève.
+# Si défini à NO, le style Javadoc se comportera comme des commentaires de style
+# Qt normaux (requérant donc une commande @brief explicite pour une description
+# brève).
+# La valeur par défaut est : NO.
+
+JAVADOC_AUTOBRIEF      = NO
+
+# Si la balise JAVADOC_BANNER est définie à YES alors Doxygen interprétera une
+# ligne telle que
+# /***************
+# comme étant le début d'une "bannière" de commentaire de style Javadoc. Si
+# défini à NO, le style Javadoc se comportera comme des commentaires normaux et
+# Doxygen ne l'interprétera pas.
+# La valeur par défaut est : NO.
+
+JAVADOC_BANNER         = NO
+
+# Si la balise QT_AUTOBRIEF est définie à YES alors Doxygen interprétera la
+# première ligne (jusqu'au premier point, point d'interrogation ou point
+# d'exclamation) d'un commentaire de style Qt comme la description brève. Si
+# défini à NO, le style Qt se comportera comme des commentaires de style Qt
+# normaux (requérant donc une commande \brief explicite pour une description
+# brève).
+# La valeur par défaut est : NO.
+
+QT_AUTOBRIEF           = NO
+
+# La balise MULTILINE_CPP_IS_BRIEF peut être définie à YES pour faire que
+# Doxygen traite un bloc de commentaire spécial C++ multiligne (c'est-à-dire un
+# bloc de commentaires //! ou ///) comme une description brève. C'était le
+# comportement par défaut. Le nouveau défaut est de traiter un bloc de
+# commentaire C++ multiligne comme une description détaillée. Définissez cette
+# balise à YES si vous préférez l'ancien comportement.
+#
+# Remarquez que définir cette balise à YES signifie également que les
+# commentaires Rational Rose ne sont plus reconnus.
+# La valeur par défaut est : NO.
+
+MULTILINE_CPP_IS_BRIEF = NO
+
+# Par défaut, les docstrings Python sont affichées comme du texte préformaté et
+# les commandes spéciales de Doxygen ne peuvent pas être utilisées. En
+# définissant PYTHON_DOCSTRING à NO, les commandes spéciales de Doxygen peuvent
+# être utilisées et le contenu des blocs de documentation docstring est affiché
+# comme documentation Doxygen.
+# La valeur par défaut est : YES.
+
+PYTHON_DOCSTRING       = YES
+
+# Si la balise INHERIT_DOCS est définie à YES alors un membre non documente
+# hérité de la documentation de tout membre documente qu'il re-implémente.
+# La valeur par défaut est : YES.
+
+INHERIT_DOCS           = YES
+
+# Si la balise SEPARATE_MEMBER_PAGES est définie à YES alors Doxygen produira
+# une nouvelle page pour chaque membre. Si défini à NO, la documentation d'un
+# membre fera partie du fichier/classe/namespace qui le contient.
+# La valeur par défaut est : NO.
+
+SEPARATE_MEMBER_PAGES  = NO
+
+# La balise TAB_SIZE peut être utilisée pour définir le nombre d'espaces dans
+# une tabulation. Doxygen utilise cette valeur pour remplacer les tabulations
+# par des espaces dans les fragments de code.
+# Valeur minimum : 1, valeur maximum : 16, valeur par défaut : 4.
+
+TAB_SIZE               = 4
+
+# Cette balise peut être utilisée pour spécifier un certain nombre d'alias qui
+# agissent comme des commandes dans la documentation. Un alias à la forme:
+# name=value
+# Par exemple, ajouter
+# "sideeffect=@par Side Effects:^^"
+# vous permettra de placer la commande \sideeffect (ou @sideeffect) dans la
+# documentation, ce qui résultera en un paragraphe défini par l'utilisateur avec
+# le titre "Side Effects:". Notez que vous ne pouvez pas mettre de \n dans la
+# partie valeur d'un alias pour insérer des sauts de ligne (dans la sortie
+# résultante). Vous pouvez mettre ^^ dans la partie valeur d'un alias pour
+# insérer un saut de ligne comme si un saut de ligne physique était dans le
+# fichier original.Lorsque vous avez besoin d'un caractère littéral { ou } ou ,
+# dans la valeur d'un alias, vous devez les échapper à l'aide d'une barre
+# oblique inverse (\). Cela peut entraîner des conflits avec les commandes \{ et
+# \}. Pour celles-ci, il est conseillé d'utiliser la version @{ et @} ou
+# d'utiliser une double échappement (\\{ et \\}).
+
+ALIASES                =
+
+# Définissez la balise OPTIMIZE_OUTPUT_FOR_C à YES si votre projet consiste
+# uniquement en sources C. Doxygen générera alors une sortie plus adaptée au C.
+# Par exemple, certains des noms utilisés seront différents. La liste de tous
+# les membres sera omise, etc.
+# La valeur par défaut est : NO.
+
+OPTIMIZE_OUTPUT_FOR_C  = YES
+
+# Définissez la balise OPTIMIZE_OUTPUT_JAVA à YES si votre projet consiste
+# uniquement en sources Java ou Python. Doxygen générera alors une sortie plus
+# adaptée à ce langage. Par exemple, les namespaces seront présentés comme des
+# packages, les portées qualifiées auront un aspect différent, etc.
+# La valeur par défaut est : NO.
+
+OPTIMIZE_OUTPUT_JAVA   = NO
+
+# Définissez la balise OPTIMIZE_FOR_FORTRAN à YES si votre projet consiste en
+# sources Fortran. Doxygen générera alors une sortie adaptée au Fortran.
+# La valeur par défaut est : NO.
+
+OPTIMIZE_FOR_FORTRAN   = NO
+
+# Définissez la balise OPTIMIZE_OUTPUT_VHDL à YES si votre projet consiste en
+# sources VHDL. Doxygen générera alors une sortie adaptée au VHDL.
+# La valeur par défaut est : NO.
+
+OPTIMIZE_OUTPUT_VHDL   = NO
+
+# Définissez la balise OPTIMIZE_OUTPUT_SLICE à YES si votre projet consiste
+# uniquement en sources Slice. Doxygen générera alors une sortie plus adaptée à
+# ce langage. Par exemple, les namespaces seront présentés comme des modules,
+# les types seront séparés en plus de groupes, etc.
+# La valeur par défaut est : NO.
+
+OPTIMIZE_OUTPUT_SLICE  = NO
+
+# Doxygen sélectionne l'analyseur à utiliser en fonction de l'extension des
+# fichiers qu'il analyse. Avec cette balise, vous pouvez assigner quel analyseur
+# utiliser pour une extension donnée. Doxygen a une correspondance intégrée,
+# mais vous pouvez la remplacer ou l'étendre en utilisant cette balise. Le
+# format est ext=language, ou ext est une extension de fichier, et language est
+# l'un des analyseurs supportés par Doxygen: IDL, Java, JavaScript, Csharp (C#),
+# C, C++, Lex, D, PHP, md (Markdown), Objective-C, Python, Slice, VHDL, Fortran
+# (Fortran format fixe: FortranFixed, Fortran format libre: FortranFree, Fortran
+# format inconnu: Fortran. Dans ce dernier cas, l'analyseur essaie de deviner si
+# le code est en format fixe ou libre, c'est le défaut pour les fichiers de type
+# Fortran). Par exemple, pour faire que Doxygen traite les fichiers .inc comme
+# des fichiers Fortran (le défaut est PHP), et les fichiers .f comme C (le
+# défaut est Fortran), utilisez: inc=Fortran f=C.
+#
+# Note: Pour les fichiers sans extension, vous pouvez utiliser no_extension
+# comme espace réservé.
+#
+# Notez que pour les extensions personnalisées vous devez également définir
+# FILE_PATTERNS sinon les fichiers ne sont pas lus par Doxygen. Lorsque vous
+# spécifiez no_extension vous devriez ajouter * au FILE_PATTERNS.
+#
+# Notez voir aussi la liste des correspondances d'extension de fichier par
+# défaut.
+
+EXTENSION_MAPPING      =
+
+# Si la balise MARKDOWN_SUPPORT est activée alors Doxygen pré-traite tous les
+# commentaires selon le format Markdown, ce qui permet une documentation plus
+# lisible. Voir https://daringfireball.net/projects/markdown/ pour plus de
+# détails. La sortie du traitement Markdown est ensuite traitée par Doxygen,
+# vous pouvez donc mélanger les commandes Doxygen, HTML et XML avec le formatage
+# Markdown. Désactivez uniquement en cas de problèmes de compatibilité
+# ascendante.
+# La valeur par défaut est : YES.
+
+MARKDOWN_SUPPORT       = YES
+
+# Si la balise MARKDOWN_STRICT est activée alors Doxygen traite le texte dans
+# les commentaires comme formaté en Markdown aussi dans les cas ou le format de
+# balisage natif de Doxygen entre en conflit avec celui de Markdown. Cela n'est
+# pertinent que dans les cas ou des backticks sont utilisés. Le style de
+# balisage natif de Doxygen permet à un guillemet simple de terminer un fragment
+# de texte commencé par un backtick et de le traiter comme un morceau de texte
+# cité, alors qu'en Markdown un tel fragment est traité comme verbatim et ne se
+# termine que lorsqu'un deuxième backtick correspondant est trouvé. De plus, le
+# format de balisage natif de Doxygen nécessite que les guillemets doubles
+# soient échappés lorsqu'ils apparaissent dans une section backtick, alors que
+# cela n'est pas nécessaire pour Markdown.
+# La valeur par défaut est : YES.
+# Cette balise nécessite que la balise MARKDOWN_SUPPORT soit définie sur YES.
+
+MARKDOWN_STRICT        = YES
+
+# Lorsque la balise TOC_INCLUDE_HEADINGS est définie à une valeur non nulle,
+# tous les titres jusqu'à ce niveau sont automatiquement inclus dans la table
+# des matières, même s'ils n'ont pas d'attribut id.
+# Note : Cette fonctionnalité s'applique actuellement uniquement aux titres
+# Markdown.
+# Valeur minimum : 0, valeur maximum : 99, valeur par défaut : 6.
+# Cette balise nécessite que la balise MARKDOWN_SUPPORT soit définie sur YES.
+
+TOC_INCLUDE_HEADINGS   = 6
+
+# La balise MARKDOWN_ID_STYLE peut être utilisée pour spécifier l'algorithme
+# utilisé pour générer les identifiants pour les titres Markdown. Note: Chaque
+# identifiant est unique.
+# Les valeurs possibles sont :DOXYGEN utiliser une chaîne 'autotoc_md' fixe
+# suivie d'un numéro de séquence commençant à 0etGITHUB utiliser la version en
+# minuscules du titre avec tous les espaces remplacés par '-' et les caractères
+# de ponctuation supprimés.
+# La valeur par défaut est : DOXYGEN.
+# Cette balise nécessite que la balise MARKDOWN_SUPPORT soit définie sur YES.
+
+MARKDOWN_ID_STYLE      = DOXYGEN
+
+# Lorsqu'activé, Doxygen essaie de lier les mots qui correspondent à des classes
+# documentées, ou des namespaces à leur documentation correspondante. Un tel
+# lien peut être empesche dans des cas individuels en mettant un signe % devant
+# le mot ou globalement en définissant AUTOLINK_SUPPORT à NO. Les mots listes
+# dans la balise AUTOLINK_IGNORE_WORDS sont exclus de la liaison automatique.
+# La valeur par défaut est : YES.
+
+AUTOLINK_SUPPORT       = NO
+
+# Cette balise spécifie une liste de mots qui, lorsqu'ils correspondent au début
+# d'un mot dans la documentation, supprimeront la génération de liens
+# automatiques, si elle est activée via AUTOLINK_SUPPORT. Cette liste n'affecte
+# pas les liens créés explicitement en utilisant # ou les commandes \link ou
+# \ref.
+# Cette balise nécessite que la balise AUTOLINK_SUPPORT soit définie sur YES.
+
+AUTOLINK_IGNORE_WORDS  =
+
+# Si vous utilisez des classes STL (c'est-à-dire std::string, std::vector, etc.)
+# mais ne voulez pas inclure (un fichier de balises pour) les sources STL comme
+# entrée, alors vous devriez définir cette balise à YES afin de laisser Doxygen
+# faire correspondre les déclarations et définitions de fonctions dont les
+# arguments contiennent des classes STL (par ex. func(std::string); versus
+# func(std::string) {}). Cela rend également les diagrammes d'héritage et de
+# collaboration qui impliquent des classes STL plus complets et précis.
+# La valeur par défaut est : NO.
+
+BUILTIN_STL_SUPPORT    = NO
+
+# Si vous utilisez le langage C++/CLI de Microsoft, vous devriez définir cette
+# option à YES pour activer le support de l'analyse.
+# La valeur par défaut est : NO.
+
+CPP_CLI_SUPPORT        = NO
+
+# Définissez la balise SIP_SUPPORT à YES si votre projet consiste uniquement en
+# sources sip (see:
+# https://www.riverbankcomputing.com/software). Doxygen les analysera comme du
+# C++ normal mais supposera que toutes les classes utilisent l'héritage public
+# au lieu de l'héritage prive lorsqu'aucun mot-cle de protection explicite n'est
+# présent.
+# La valeur par défaut est : NO.
+
+SIP_SUPPORT            = NO
+
+# Pour l'IDL de Microsoft, il y a des attributs propget et propput pour indiquer
+# les méthodes getter et setter pour une propriété. Définir cette option à YES
+# fera que Doxygen remplacera les méthodes get et set par une propriété dans la
+# documentation. Cela ne fonctionnera que si les méthodes obtiennent ou
+# definissent effectivement un type simple. Si ce n'est pas le cas, ou si vous
+# voulez montrer les méthodes quand même, vous devriez définir cette option à
+# NO.
+# La valeur par défaut est : YES.
+
+IDL_PROPERTY_SUPPORT   = YES
+
+# Si le regroupement de membres est utilisé dans la documentation et que la
+# balise DISTRIBUTE_GROUP_DOC est définie à YES alors Doxygen reutilisera la
+# documentation du premier membre du groupe (s'il y en a) pour les autres
+# membres du groupe. Par défaut, tous les membres d'un groupe doivent être
+# documentés explicitement.
+# La valeur par défaut est : NO.
+
+DISTRIBUTE_GROUP_DOC   = NO
+
+# Si on ajoute une struct ou une classe à un groupe et que cette option est
+# activée, alors toute classe ou struct imbriquée est également ajoutée au même
+# groupe. Par défaut cette option est désactivée et on doit ajouter les composes
+# imbriques explicitement via \ingroup.
+# La valeur par défaut est : NO.
+
+GROUP_NESTED_COMPOUNDS = NO
+
+# Définissez la balise SUBGROUPING à YES pour permettre aux groupes de membres
+# de classe du même type (par exemple un groupe de fonctions publiques) d'être
+# mis comme sous-groupe de ce type (par exemple sous la section Fonctions
+# Publiques). Définissez-la à NO pour empêcher le sous-groupement.
+# Alternativement, cela peut être fait par classe en utilisant la commande
+# \nosubgrouping.
+# La valeur par défaut est : YES.
+
+SUBGROUPING            = YES
+
+# Lorsque la balise INLINE_GROUPED_CLASSES est définie à YES, les classes,
+# structs et unions sont affichés à l'intérieur du groupe dans lequel ils sont
+# inclus (par exemple en utilisant \ingroup) au lieu d'une page séparée (pour
+# HTML et pages de manuel) ou section (pour LaTeX et RTF).
+#
+# Notez que cette fonctionnalité ne fonctionne pas en combinaison avec
+# SEPARATE_MEMBER_PAGES.
+# La valeur par défaut est : NO.
+
+INLINE_GROUPED_CLASSES = NO
+
+# Lorsque la balise INLINE_SIMPLE_STRUCTS est définie à YES, les structs,
+# classes et unions avec uniquement des champs de données publics ou des champs
+# typedef simples seront affichés en ligne dans la documentation de la portée
+# dans laquelle ils sont définis (c'est-à-dire documentation de fichier,
+# namespace ou groupe), à condition que cette portée soit documentée. Si défini
+# à NO, les structs, classes et unions sont affichés sur une page séparée (pour
+# HTML et pages de manuel) ou section (pour LaTeX et RTF).
+# La valeur par défaut est : NO.
+
+INLINE_SIMPLE_STRUCTS  = NO
+
+# Lorsque la balise TYPEDEF_HIDES_STRUCT est activée, un typedef d'une struct,
+# union ou enum est documente comme struct, union ou enum avec le nom du
+# typedef. Donc typedef struct TypeS {} TypeT apparaîtra dans la documentation
+# comme une struct avec le nom TypeT. Lorsque désactivé, le typedef apparaîtra
+# comme un membre d'un fichier, namespace ou classe. Et la struct sera nommée
+# TypeS. Cela peut typiquement être utile pour le code C au cas ou la convention
+# de codage dicte que tous les types composes sont typedefes et seul le typedef
+# est référence, jamais le nom de tag.
+# La valeur par défaut est : NO.
+
+TYPEDEF_HIDES_STRUCT   = NO
+
+# La taille du cache de recherche de symboles peut être définie en utilisant
+# LOOKUP_CACHE_SIZE. Ce cache est utilisé pour résoudre les symboles donnes leur
+# nom et portée. Puisque cela peut être un processus couteux et souvent le même
+# symbole apparaît plusieurs fois dans le code, Doxygen garde un cache de
+# symboles pre-resolus. Si le cache est trop petit Doxygen deviendra plus lent.
+# Si le cache est trop grand, la mémoire est gaspillée. La taille du cache est
+# donnée par cette formule: 2^(16+LOOKUP_CACHE_SIZE). La plage valide est 0..9,
+# le défaut est 0, correspondant à une taille de cache de 2^16=65536 symboles. à
+# la fin d'une exécution Doxygen rapportera l'utilisation du cache et suggerera
+# la taille de cache optimale d'un point de vue vitesse.
+# Valeur minimum : 0, valeur maximum : 9, valeur par défaut : 0.
+
+LOOKUP_CACHE_SIZE      = 0
+
+# Le NUM_PROC_THREADS spécifie le nombre de threads que Doxygen est autorisé à
+# utiliser pendant le traitement. Lorsque défini à 0 Doxygen se basera sur le
+# nombre de coeurs disponibles dans le système. Vous pouvez le définir
+# explicitement à une valeur supérieure à 0 pour avoir plus de contrôle sur
+# l'équilibre entre la charge CPU et la vitesse de traitement. Pour le moment
+# seul le traitement d'entrée peut être fait en utilisant plusieurs threads.
+# Puisque c'est encore une fonctionnalité expérimentale, le défaut est défini à
+# 1, ce qui désactive effectivement le traitement parallele. Veuillez signaler
+# tout problème que vous rencontrez. La génération de graphes dot en parallele
+# est contrôlée par le paramètre DOT_NUM_THREADS.
+# Valeur minimum : 0, valeur maximum : 512, valeur par défaut : 1.
+
+NUM_PROC_THREADS       = 1
+
+# Si la balise TIMESTAMP est définie différemment de NO alors chaque page
+# générée contiendra la date ou la date et l'heure ou la page a été générée.
+# Définir cela à NO peut aider lors de la comparaison de la sortie de plusieurs
+# exécutions.
+# Les valeurs possibles sont :YES, NO, DATETIMEetDATE.
+# La valeur par défaut est : NO.
+
+TIMESTAMP              = NO
+
+#---------------------------------------------------------------------------
+# Options de configuration relatives à la compilation
+#---------------------------------------------------------------------------
+
+# Si la balise EXTRACT_ALL est définie à YES, Doxygen supposera que toutes les
+# entités dans la documentation sont documentées, même si aucune documentation
+# n'était disponible. Les membres prives de classe et les membres statiques de
+# fichier seront cachés sauf si les balises EXTRACT_PRIVATE respectivement
+# EXTRACT_STATIC sont définies à YES.
+# Note : Cela desactivera également les avertissements sur les membres non
+# documentés qui sont normalement produits lorsque WARNINGS est défini à YES.
+# La valeur par défaut est : NO.
+
+EXTRACT_ALL            = NO
+
+# Si la balise EXTRACT_PRIVATE est définie à YES, tous les membres prives d'une
+# classe seront inclus dans la documentation.
+# La valeur par défaut est : NO.
+
+EXTRACT_PRIVATE        = YES
+
+# Si la balise EXTRACT_PRIV_VIRTUAL est définie à YES, les méthodes virtuelles
+# prives documentées d'une classe seront incluses dans la documentation.
+# La valeur par défaut est : NO.
+
+EXTRACT_PRIV_VIRTUAL   = NO
+
+# Si la balise EXTRACT_PACKAGE est définie à YES, tous les membres avec une
+# portée package ou interne seront inclus dans la documentation.
+# La valeur par défaut est : NO.
+
+EXTRACT_PACKAGE        = NO
+
+# Si la balise EXTRACT_STATIC est définie à YES, tous les membres statiques d'un
+# fichier seront inclus dans la documentation.
+# La valeur par défaut est : NO.
+
+EXTRACT_STATIC         = YES
+
+# Si la balise EXTRACT_LOCAL_CLASSES est définie à YES, les classes (et structs)
+# définies localement dans les fichiers sources seront incluses dans la
+# documentation. Si défini à NO, seules les classes définies dans les fichiers
+# d'en-tête sont incluses. N'a aucun effet pour les sources Java.
+# La valeur par défaut est : YES.
+
+EXTRACT_LOCAL_CLASSES  = YES
+
+# Ce drapeau n'est utile que pour le code Objective-C. Si défini à YES, les
+# méthodes locales, qui sont définies dans la section d'implémentation mais pas
+# dans l'interface sont incluses dans la documentation. Si défini à NO, seules
+# les méthodes dans l'interface sont incluses.
+# La valeur par défaut est : NO.
+
+EXTRACT_LOCAL_METHODS  = NO
+
+# Si ce drapeau est défini à YES, les membres des namespaces anonymes seront
+# extraits et apparaîtront dans la documentation comme un namespace appelé
+# 'anonymous_namespace{file}', ou file sera remplace par le nom de base du
+# fichier qui contient le namespace anonyme. Par défaut les namespaces anonymes
+# sont cachés.
+# La valeur par défaut est : NO.
+
+EXTRACT_ANON_NSPACES   = NO
+
+# Si ce drapeau est défini à YES, le nom d'un paramètre sans nom dans une
+# déclaration sera détermine par la définition correspondante. Par défaut les
+# paramètres sans nom restent sans nom dans la sortie.
+# La valeur par défaut est : YES.
+
+RESOLVE_UNNAMED_PARAMS = YES
+
+# Si la balise HIDE_UNDOC_MEMBERS est définie à YES, Doxygen cachera tous les
+# membres non documentés à l'intérieur des classes ou fichiers documentés. Si
+# défini à NO ces membres seront inclus dans les différents aperçus, mais aucune
+# section de documentation n'est générée. Cette option n'a aucun effet si
+# EXTRACT_ALL est activé.
+# La valeur par défaut est : NO.
+
+HIDE_UNDOC_MEMBERS     = NO
+
+# Si la balise HIDE_UNDOC_CLASSES est définie à YES, Doxygen cachera toutes les
+# classes non documentées qui sont normalement visibles dans la hiérarchie de
+# classes. Si défini à NO, ces classes seront incluses dans les différents
+# aperçus. Cette option cachera également les concepts C++ non documentés si
+# active. Cette option n'a aucun effet si EXTRACT_ALL est activé.
+# La valeur par défaut est : NO.
+
+HIDE_UNDOC_CLASSES     = NO
+
+# Si la balise HIDE_UNDOC_NAMESPACES est définie à YES, Doxygen cachera tous les
+# namespaces non documentés qui sont normalement visibles dans la hiérarchie des
+# namespaces. Si défini à NO, ces namespaces seront inclus dans les différents
+# aperçus. Cette option n'a aucun effet si EXTRACT_ALL est activé.
+# La valeur par défaut est : YES.
+
+HIDE_UNDOC_NAMESPACES  = YES
+
+# Si la balise HIDE_FRIEND_COMPOUNDS est définie à YES, Doxygen cachera toutes
+# les déclarations friend. Si défini à NO, ces déclarations seront incluses dans
+# la documentation.
+# La valeur par défaut est : NO.
+
+HIDE_FRIEND_COMPOUNDS  = NO
+
+# Si la balise HIDE_IN_BODY_DOCS est définie à YES, Doxygen cachera tous les
+# blocs de documentation trouvés à l'intérieur du corps d'une fonction. Si
+# défini à NO, ces blocs seront ajoutés au bloc de documentation détaillé de la
+# fonction.
+# La valeur par défaut est : NO.
+
+HIDE_IN_BODY_DOCS      = NO
+
+# La balise INTERNAL_DOCS détermine si la documentation qui est tapée après une
+# commande \internal est incluse. Si la balise est définie à NO alors la
+# documentation sera exclue. Définissez-la à YES pour inclure la documentation
+# interne.
+# La valeur par défaut est : NO.
+
+INTERNAL_DOCS          = NO
+
+# Avec le reglage correct de l'option CASE_SENSE_NAMES, Doxygen sera mieux à
+# même de correspondre aux capacites du système de fichiers sous-jacent. Si le
+# système de fichiers est sensible à la casse (c'est-à-dire qu'il supporte des
+# fichiers dans le même répertoire dont les noms ne différent que par la casse),
+# l'option doit être définie à YES pour traiter correctement ces fichiers s'ils
+# apparaissent dans l'entrée. Pour les systèmes de fichiers qui ne sont pas
+# sensibles à la casse, l'option devrait être définie à NO pour traiter
+# correctement les fichiers de sortie écrits pour des symboles qui ne différent
+# que par la casse, comme pour deux classes, une nommée CLASS et l'autre nommée
+# Class, et pour supporter également les références aux fichiers sans avoir a
+# spécifier la casse exacte correspondante. Sur Windows (y compris Cygwin) et
+# macOS, les utilisateurs devraient généralement définir cette option à NO,
+# alors que sur Linux ou d'autres variantes Unix, elle devrait généralement être
+# définie à YES.
+# Les valeurs possibles sont :SYSTEM, NOetYES.
+# La valeur par défaut est : SYSTEM.
+
+CASE_SENSE_NAMES       = SYSTEM
+
+# Si la balise HIDE_SCOPE_NAMES est définie à NO alors Doxygen affichera les
+# membres avec leurs portées de classe et de namespace complètes dans la
+# documentation. Si défini à YES, la portée sera cachée.
+# La valeur par défaut est : NO.
+
+HIDE_SCOPE_NAMES       = NO
+
+# Si la balise HIDE_COMPOUND_REFERENCE est définie à NO (défaut) alors Doxygen
+# ajoutera du texte supplémentaire au titre d'une page, tel que Class Référence.
+# Si défini à YES la référence du compose sera cachée.
+# La valeur par défaut est : NO.
+
+HIDE_COMPOUND_REFERENCE= NO
+
+# Si la balise SHOW_HEADERFILE est définie à YES alors la documentation d'une
+# classe montrera quel fichier doit être inclus pour utiliser la classe.
+# La valeur par défaut est : YES.
+
+SHOW_HEADERFILE        = YES
+
+# Si la balise SHOW_INCLUDE_FILES est définie à YES alors Doxygen mettra une
+# liste des fichiers qui sont inclus par un fichier dans la documentation de ce
+# fichier.
+# La valeur par défaut est : YES.
+
+SHOW_INCLUDE_FILES     = YES
+
+# Si la balise SHOW_GROUPED_MEMB_INC est définie à YES alors Doxygen ajoutera
+# pour chaque membre groupe une instruction d'inclusion à la documentation,
+# indiquant au lecteur quel fichier inclure pour utiliser le membre.
+# La valeur par défaut est : NO.
+
+SHOW_GROUPED_MEMB_INC  = NO
+
+# Si la balise FORCE_LOCAL_INCLUDES est définie à YES alors Doxygen listera les
+# fichiers d'inclusion avec des guillemets doubles dans la documentation plutôt
+# qu'avec des chevrons.
+# La valeur par défaut est : NO.
+
+FORCE_LOCAL_INCLUDES   = NO
+
+# Si la balise INLINE_INFO est définie à YES alors une étiquette [inline] est
+# insérée dans la documentation pour les membres inline.
+# La valeur par défaut est : YES.
+
+INLINE_INFO            = YES
+
+# Si la balise SORT_MEMBER_DOCS est définie à YES alors Doxygen triera la
+# documentation (détaillée) des membres de fichier et de classe alphabétiquement
+# par nom de membre. Si défini à NO, les membres apparaîtront dans l'ordre de
+# déclaration.
+# La valeur par défaut est : YES.
+
+SORT_MEMBER_DOCS       = NO
+
+# Si la balise SORT_BRIEF_DOCS est définie à YES alors Doxygen triera les
+# descriptions brèves des membres de fichier, namespace et classe
+# alphabétiquement par nom de membre. Si défini à NO, les membres apparaîtront
+# dans l'ordre de déclaration. Notez que cela influencera également l'ordre des
+# classes dans la liste des classes.
+# La valeur par défaut est : NO.
+
+SORT_BRIEF_DOCS        = NO
+
+# Si la balise SORT_MEMBERS_CTORS_1ST est définie à YES alors Doxygen triera la
+# documentation (brève et détaillée) des membres de classe de sorte que les
+# constructeurs et destructeurs soient listes en premier. Si défini à NO les
+# constructeurs apparaîtront dans les ordres respectifs définis par
+# SORT_BRIEF_DOCS et SORT_MEMBER_DOCS.
+# Note : Si SORT_BRIEF_DOCS est défini à NO cette option est ignorée pour le tri
+# de la documentation brève des membres.
+# Note : Si SORT_MEMBER_DOCS est défini à NO cette option est ignorée pour le
+# tri de la documentation détaillée des membres.
+# La valeur par défaut est : NO.
+
+SORT_MEMBERS_CTORS_1ST = NO
+
+# Si la balise SORT_GROUP_NAMES est définie à YES alors Doxygen triera la
+# hiérarchie des noms de groupes en ordre alphabetique. Si défini à NO les noms
+# de groupes apparaîtront dans leur ordre défini.
+# La valeur par défaut est : NO.
+
+SORT_GROUP_NAMES       = NO
+
+# Si la balise SORT_BY_SCOPE_NAME est définie à YES, la liste des classes sera
+# triée par noms complètement qualifies, y compris les namespaces. Si défini à
+# NO, la liste des classes sera triée uniquement par nom de classe, sans inclure
+# la partie namespace.
+# Note : Cette option n'est pas tres utile si HIDE_SCOPE_NAMES est défini à YES.
+# Note : Cette option s'applique uniquement à la liste des classes, pas à la
+# liste alphabetique.
+# La valeur par défaut est : NO.
+
+SORT_BY_SCOPE_NAME     = NO
+
+# Si l'option STRICT_PROTO_MATCHING est activée et que Doxygen échoue à faire
+# une résolution de type correcte de tous les paramètres d'une fonction, il
+# rejettera une correspondance entre le prototype et l'implémentation d'une
+# fonction membre même s'il n'y a qu'un seul candidat ou s'il est evident quel
+# candidat choisir en faisant une simple correspondance de chaîne. En
+# desactivant STRICT_PROTO_MATCHING, Doxygen acceptera toujours une
+# correspondance entre prototype et implémentation dans de tels cas.
+# La valeur par défaut est : NO.
+
+STRICT_PROTO_MATCHING  = NO
+
+# La balise GENERATE_TODOLIST peut être utilisée pour activer (YES) ou
+# désactiver (NO) la liste des taches. Cette liste est créée en mettant des
+# commandes \todo dans la documentation.
+# La valeur par défaut est : YES.
+
+GENERATE_TODOLIST      = YES
+
+# La balise GENERATE_TESTLIST peut être utilisée pour activer (YES) ou
+# désactiver (NO) la liste des tests. Cette liste est créée en mettant des
+# commandes \test dans la documentation.
+# La valeur par défaut est : YES.
+
+GENERATE_TESTLIST      = YES
+
+# La balise GENERATE_BUGLIST peut être utilisée pour activer (YES) ou désactiver
+# (NO) la liste des bugs. Cette liste est créée en mettant des commandes \bug
+# dans la documentation.
+# La valeur par défaut est : YES.
+
+GENERATE_BUGLIST       = YES
+
+# La balise GENERATE_DEPRECATEDLIST peut être utilisée pour activer (YES) ou
+# désactiver (NO) la liste des éléments deprecies. Cette liste est créée en
+# mettant des commandes \deprecated dans la documentation.
+# La valeur par défaut est : YES.
+
+GENERATE_DEPRECATEDLIST= YES
+
+# La balise GENERATE_REQUIREMENTS peut être utilisée pour activer (YES) ou
+# désactiver (NO) la page des exigences. Lorsqu'activée, cette page est
+# automatiquement créée lorsqu'au moins un bloc de commentaire avec une commande
+# \requirement apparaît dans l'entrée.
+# La valeur par défaut est : YES.
+
+GENERATE_REQUIREMENTS  = YES
+
+# La balise REQ_TRACEABILITY_INFO contrôle si les informations de traçabilité
+# sont affichées sur la page des exigences (pertinent uniquement lors de
+# l'utilisation de blocs de commentaire \requirement). Le paramètre NO
+# desactivera complètement les informations de traçabilité. Le paramètre
+# UNSATISFIED_ONLY affichera une liste des exigences qui manquent d'une relation
+# satisfies (via la commande: \satisfies). De même le paramètre UNVERIFIED_ONLY
+# affichera une liste des exigences qui manquent d'une relation verifies (via la
+# commande: \verifies). Définir la balise à YES (le défaut) affichera les deux
+# listes si applicable.
+# Les valeurs possibles sont :YES, NO, UNSATISFIED_ONLYetUNVERIFIED_ONLY.
+# La valeur par défaut est : YES.
+# Cette balise nécessite que la balise GENERATE_REQUIREMENTS soit définie sur
+# YES.
+
+REQ_TRACEABILITY_INFO  = YES
+
+# La balise ENABLED_SECTIONS peut être utilisée pour activer des sections de
+# documentation conditionnelles, marquées par \if <section_label> ... \endif et
+# \cond <section_label> ... \endcond.
+
+ENABLED_SECTIONS       =
+
+# La balise MAX_INITIALIZER_LINES détermine le nombre maximal de lignes que la
+# valeur initiale d'une variable ou macro / define peut avoir pour apparaître
+# dans la documentation. Si l'initialiseur consiste en plus de lignes que
+# spécifie ici, il sera cache. Utilisez une valeur de 0 pour cacher complètement
+# les initialiseurs. L'apparence de la valeur des variables individuelles et
+# macros / defines peut être contrôlée en utilisant la commande \showinitializer
+# ou \hideinitializer dans la documentation indépendamment de ce paramètre.
+# Valeur minimum : 0, valeur maximum : 10000, valeur par défaut : 30.
+
+MAX_INITIALIZER_LINES  = 30
+
+# Définissez la balise SHOW_USED_FILES à NO pour désactiver la liste des
+# fichiers générés au bas de la documentation des classes et structs. Si défini
+# à YES, la liste mentionnera les fichiers qui ont été utilisés pour générer la
+# documentation.
+# La valeur par défaut est : YES.
+
+SHOW_USED_FILES        = YES
+
+# Définissez la balise SHOW_FILES à NO pour désactiver la génération de la page
+# Fichiers. Cela supprimera l'entrée Fichiers de l'Index Rapide et de la Vue
+# Arborescente des Dossiers (si spécifie).
+# La valeur par défaut est : YES.
+
+SHOW_FILES             = YES
+
+# Définissez la balise SHOW_NAMESPACES à NO pour désactiver la génération de la
+# page Namespaces. Cela supprimera l'entrée Namespaces de l'Index Rapide et de
+# la Vue Arborescente des Dossiers (si spécifie).
+# La valeur par défaut est : YES.
+
+SHOW_NAMESPACES        = YES
+
+# La balise FILE_VERSION_FILTER peut être utilisée pour spécifier un programme
+# ou script que Doxygen devrait invoquer pour obtenir la version actuelle de
+# chaque fichier (généralement à partir du système de contrôle de version).
+# Doxygen invoquera le programme en executant (via popen()) la commande command
+# input_file, ou command est la valeur de la balise FILE_VERSION_FILTER, et
+# input_file est le nom d'un fichier d'entrée fourni par Doxygen. Ce que le
+# programme écrit sur la sortie standard est utilisé comme version de
+# fichier.Pour un exemple, consultez la documentation.
+
+FILE_VERSION_FILTER    =
+
+# La balise LAYOUT_FILE peut être utilisée pour spécifier un fichier de mise en
+# page qui sera analysé par Doxygen. Le fichier de mise en page contrôle la
+# structure globale des fichiers de sortie générés d'une manière indépendante du
+# format de sortie. Pour créer le fichier de mise en page qui représente les
+# valeurs par défaut de Doxygen, exécutez Doxygen avec l'option -l. Vous pouvez
+# optionnellement spécifier un nom de fichier après l'option, si omis
+# DoxygenLayout.xml sera utilisé comme nom du fichier de mise en page. Voir
+# aussi la section "Changing the layout of pages" pour plus d'informations.
+#
+# Notez que si vous exécutez Doxygen à partir d'un répertoire contenant un
+# fichier appelé DoxygenLayout.xml, Doxygen l'analysera automatiquement même si
+# la balise LAYOUT_FILE est laissée vide.
+
+LAYOUT_FILE            =
+
+# La balise CITE_BIB_FILES peut être utilisée pour spécifier un ou plusieurs
+# fichiers bib contenant les définitions de référence. Cela doit être une liste
+# de fichiers .bib. L'extension .bib est automatiquement ajoutée si omise. Cela
+# nécessite que l'outil bibtex soit installe. Voir aussi
+# https://en.wikipedia.org/wiki/BibTeX pour plus d'infos. Pour LaTeX le style de
+# la bibliographie peut être contrôle en utilisant LATEX_BIB_STYLE. Pour
+# utiliser cette fonctionnalité vous avez besoin de bibtex et perl disponibles
+# dans le chemin de recherche. Voir aussi \cite pour plus d'infos sur la
+# création de références.
+
+CITE_BIB_FILES         =
+
+# La balise EXTERNAL_TOOL_PATH peut être utilisée pour étendre le chemin de
+# recherche (variable d'environnement PATH) afin que des outils externes tels
+# que latex et gs puissent être trouvés.
+# Note : Les répertoires spécifiés avec EXTERNAL_TOOL_PATH sont ajoutés devant
+# le chemin déjà spécifie par la variable PATH, et sont ajoutés dans l'ordre
+# spécifie.
+# Note : Cette option est particulièrement utile pour macOS version 14 (Sonoma)
+# et supérieures, lors de l'exécution de Doxygen depuis Doxywizard, car dans ce
+# cas toutes les modifications définies par l'utilisateur du PATH sont ignorées.
+# Un exemple typique sur macOS est de définir
+# EXTERNAL_TOOL_PATH = /Library/TeX/texbin /usr/local/bin
+# avec le chemin standard, le chemin de recherche complet utilisé par doxygen
+# lors du lancement d'outils externes deviendra alors
+# PATH=/Library/TeX/texbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+EXTERNAL_TOOL_PATH     =
+
+#---------------------------------------------------------------------------
+# Options de configuration relatives aux messages d'avertissement et de progression
+#---------------------------------------------------------------------------
+
+# La balise QUIET peut être utilisée pour activer/désactiver les messages qui
+# sont générés vers la sortie standard par Doxygen. Si QUIET est défini à YES
+# cela implique que les messages sont désactivés.
+# La valeur par défaut est : NO.
+
+QUIET                  = YES
+
+# La balise WARNINGS peut être utilisée pour activer/désactiver les messages
+# d'avertissement qui sont générés vers la sortie d'erreur standard (stderr) par
+# Doxygen. Si WARNINGS est défini à YES cela implique que les avertissements
+# sont activés.
+#
+# Conseil: Activez les avertissements pendant l'écriture de la documentation.
+# La valeur par défaut est : YES.
+
+WARNINGS               = YES
+
+# Si la balise WARN_IF_UNDOCUMENTED est définie à YES alors Doxygen générera des
+# avertissements pour les membres non documentés. Si EXTRACT_ALL est défini à
+# YES alors ce drapeau sera automatiquement désactivé.
+# La valeur par défaut est : YES.
+
+WARN_IF_UNDOCUMENTED   = NO
+
+# Si la balise WARN_IF_DOC_ERROR est définie à YES, Doxygen générera des
+# avertissements pour les erreurs potentielles dans la documentation, comme
+# documenter certains paramètres dans une fonction documentée deux fois, ou
+# documenter des paramètres qui n'existent pas ou utiliser incorrectement les
+# commandes de balisage.
+# La valeur par défaut est : YES.
+
+WARN_IF_DOC_ERROR      = YES
+
+# Si WARN_IF_INCOMPLETE_DOC est défini à YES, Doxygen avertira des
+# documentations de paramètres de fonction incomplètes. Si défini à NO, Doxygen
+# acceptera que certains paramètres n'aient pas de documentation sans
+# avertissement.
+# La valeur par défaut est : YES.
+
+WARN_IF_INCOMPLETE_DOC = YES
+
+# Cette option WARN_NO_PARAMDOC peut être activée pour obtenir des
+# avertissements pour les fonctions qui sont documentées, mais qui n'ont pas de
+# documentation pour leurs paramètres ou valeur de retour. Si défini à NO,
+# Doxygen avertira uniquement des erreurs de documentation de paramètres, mais
+# pas de l'absence de documentation. Si EXTRACT_ALL est défini à YES alors ce
+# drapeau sera automatiquement désactivé. Voir aussi WARN_IF_INCOMPLETE_DOC
+# La valeur par défaut est : NO.
+
+WARN_NO_PARAMDOC       = NO
+
+# Si l'option WARN_IF_UNDOC_ENUM_VAL est définie à YES, Doxygen avertira des
+# valeurs d'énumération non documentées. Si défini à NO, Doxygen acceptera les
+# valeurs d'énumération non documentées. Si EXTRACT_ALL est défini à YES alors
+# ce drapeau sera automatiquement désactivé.
+# La valeur par défaut est : NO.
+
+WARN_IF_UNDOC_ENUM_VAL = NO
+
+# Si l'option WARN_LAYOUT_FILE est définie à YES, Doxygen avertira des problèmes
+# trouvés lors de l'analyse du fichier de mise en page défini par l'utilisateur,
+# tels que des éléments manquants ou incorrects. Voir aussi LAYOUT_FILE pour
+# plus de détails. Si défini à NO, les problèmes avec le fichier de mise en page
+# seront supprimés.
+# La valeur par défaut est : YES.
+
+WARN_LAYOUT_FILE       = YES
+
+# Si la balise WARN_AS_ERROR est définie à YES alors Doxygen s'arrêtera
+# immediatement lorsqu'un avertissement est rencontre. Si la balise
+# WARN_AS_ERROR est définie à FAIL_ON_WARNINGS alors Doxygen continuera à
+# s'exécuter comme si la balise WARN_AS_ERROR était définie à NO, mais à la fin
+# du processus Doxygen retournera un statut non nul. Si la balise WARN_AS_ERROR
+# est définie à FAIL_ON_WARNINGS_PRINT alors Doxygen se comporte comme
+# FAIL_ON_WARNINGS mais au cas ou aucun WARN_LOGFILE n'est défini Doxygen
+# n'ecrira pas les messages d'avertissement entre les autres messages mais les
+# ecrira à la fin d'une exécution, au cas ou un WARN_LOGFILE est défini les
+# messages d'avertissement seront en plus d'être dans le fichier défini
+# également affichés à la fin d'une exécution, sauf si le WARN_LOGFILE est
+# défini comme - c'est-à-dire la sortie standard (stdout) dans ce cas le
+# comportement restera comme avec le paramètre FAIL_ON_WARNINGS.
+# Les valeurs possibles sont :NO, YES, FAIL_ON_WARNINGSetFAIL_ON_WARNINGS_PRINT.
+# La valeur par défaut est : NO.
+
+WARN_AS_ERROR          = NO
+
+# La balise WARN_FORMAT détermine le format des messages d'avertissement que
+# Doxygen peut produire. La chaîne doit contenir les balises $file, $line, et
+# $text, qui seront remplacées par le fichier et le numéro de ligne d'ou
+# l'avertissement a originate et le texte de l'avertissement. Optionnellement le
+# format peut contenir $version, qui sera remplace par la version du fichier (si
+# elle a pu être obtenue via FILE_VERSION_FILTER)
+# Voir aussi : WARN_LINE_FORMAT
+# La valeur par défaut est : $file:$line: $text.
+
+WARN_FORMAT            = "$file:$line: $text"
+
+# Dans la partie $text de la commande WARN_FORMAT il est possible qu'une
+# référence à un endroit plus spécifique soit donnée. Pour faciliter le saut à
+# cet endroit (en dehors de Doxygen) l'utilisateur peut définir une chaîne
+# "couper" / "coller" personnalisée. Exemple:
+# WARN_LINE_FORMAT = "'vi $file +$line'"
+# Voir aussi : WARN_FORMAT
+# La valeur par défaut est : at line $line of file $file.
+
+WARN_LINE_FORMAT       = "at line $line of file $file"
+
+# La balise WARN_LOGFILE peut être utilisée pour spécifier un fichier dans
+# lequel les messages d'avertissement et d'erreur doivent être écrits. Si
+# laissée vide, la sortie est écrite vers la sortie d'erreur standard (stderr).
+# Au cas ou le fichier spécifie ne peut pas être ouvert pour écriture, les
+# messages d'avertissement et d'erreur sont écrits vers la sortie d'erreur
+# standard. Lorsqu'un fichier - est spécifié, les messages d'avertissement et
+# d'erreur sont écrits vers la sortie standard (stdout).
+
+WARN_LOGFILE           = sortie/avertissements.txt
+
+#---------------------------------------------------------------------------
+# Options de configuration relatives aux fichiers d'entrée
+#---------------------------------------------------------------------------
+
+# La balise INPUT est utilisée pour spécifier les fichiers et/ou répertoires qui
+# contiennent les fichiers sources documentés. Vous pouvez entrer des noms de
+# fichiers comme myfile.cpp ou des répertoires comme /usr/src/myproject. Separez
+# les fichiers ou répertoires par des espaces. Voir aussi FILE_PATTERNS et
+# EXTENSION_MAPPING
+# Note : Si cette balise est vide, le répertoire courant est recherche.
+
+INPUT                  = conception.dox \
+                         complements_cubemx.dox \
+                         ../Core/Src/main.c \
+                         ../Core/Inc/main.h \
+                         ../Core/Inc/ldo_config_genere.h \
+                         ../configurationLDO/ldo_config_csv.py \
+                         ../configurationLDO/generer_config.py
+
+# Cette balise peut être utilisée pour spécifier l'encodage de caractères des
+# fichiers sources que Doxygen analyse. Interne Doxygen utilise l'encodage
+# UTF-8. Doxygen utilise libiconv (ou le iconv intégré dans libc) pour le
+# transcodage. Voir la documentation libiconv (see:
+# https://www.gnu.org/software/libiconv/) pour la liste des encodages possibles.
+# Voir aussi : INPUT_FILE_ENCODING
+# La valeur par défaut est : UTF-8.
+
+INPUT_ENCODING         = UTF-8
+
+# Cette balise peut être utilisée pour spécifier l'encodage de caractères des
+# fichiers sources que Doxygen analyse. La balise INPUT_FILE_ENCODING peut être
+# utilisée pour spécifier l'encodage de caractères sur une base par modèle de
+# fichier. Doxygen comparera le nom du fichier avec chaque modèle et appliquera
+# l'encodage au lieu du INPUT_ENCODING par défaut s'il y a une correspondance.
+# Les encodages de caractères sont une liste de la forme: modèle=encodage (comme
+# *.php=ISO-8859-1).
+# Voir aussi : INPUT_ENCODING pour plus d'informations sur les encodages
+# supportés.
+
+INPUT_FILE_ENCODING    =
+
+# Si la valeur de la balise INPUT contient des répertoires, vous pouvez utiliser
+# la balise FILE_PATTERNS pour spécifier un ou plusieurs modèles de caractères
+# generiques (comme *.cpp et *.h) pour filtrer les fichiers sources dans les
+# répertoires.
+#
+# Notez que pour les extensions personnalisées ou non directement supportées
+# vous devez également définir EXTENSION_MAPPING pour l'extension sinon les
+# fichiers ne sont pas lus par Doxygen.
+#
+# Notez que la liste des modèles de fichiers vérifiés par défaut peut différer
+# de la liste des correspondances d'extension de fichier par défaut.
+#
+# Si laissée vide, les modèles suivants sont testes:*.c, *.cc, *.cxx, *.cxxm,
+# *.cpp, *.cppm, *.ccm, *.c++, *.c++m, *.java, *.ii, *.ixx, *.ipp, *.i++, *.inl,
+# *.idl, *.ddl, *.odl, *.h, *.hh, *.hxx, *.hpp, *.h++, *.l, *.cs, *.d, *.php,
+# *.php4, *.php5, *.phtml, *.inc, *.m, *.markdown, *.md, *.mm, *.dox (to be
+# provided as Doxygen C comment), *.py, *.pyw, *.f90, *.f95, *.f03, *.f08,
+# *.f18, *.f, *.for, *.vhd, *.vhdl, *.ucf, *.qsfet*.ice.
+
+FILE_PATTERNS          = *.c \
+                         *.h \
+                         *.py \
+                         *.dox
+
+# La balise RECURSIVE peut être utilisée pour spécifier si les sous-répertoires
+# doivent être recherches pour les fichiers d'entrée également.
+# La valeur par défaut est : NO.
+
+RECURSIVE              = NO
+
+# La balise EXCLUDE peut être utilisée pour spécifier les fichiers et/ou
+# répertoires qui doivent être exclus des fichiers sources INPUT. De cette
+# facon, vous pouvez facilement exclure un sous-répertoire d'une arborescence de
+# répertoires dont la racine est spécifiée avec la balise INPUT.
+#
+# Remarquez que les chemins relatifs sont relatifs au répertoire à partir duquel
+# Doxygen est exécuté.
+
+EXCLUDE                =
+
+# La balise EXCLUDE_SYMLINKS peut être utilisée pour sélectionner si les
+# fichiers ou répertoires qui sont des liens symboliques (une fonctionnalité du
+# système de fichiers Unix) sont exclus de l'entrée.
+# La valeur par défaut est : NO.
+
+EXCLUDE_SYMLINKS       = NO
+
+# Si la valeur de la balise INPUT contient des répertoires, vous pouvez utiliser
+# la balise EXCLUDE_PATTERNS pour spécifier un ou plusieurs modèles de
+# caractères generiques pour exclure certains fichiers de ces répertoires.
+#
+# Notez que les caractères generiques sont comparés au fichier avec le chemin
+# absolu, donc pour exclure tous les répertoires de test par exemple utilisez le
+# modèle */test/*
+
+EXCLUDE_PATTERNS       =
+
+# La balise EXCLUDE_SYMBOLS peut être utilisée pour spécifier un ou plusieurs
+# noms de symboles (namespaces, classes, fonctions, etc.) qui doivent être
+# exclus de la sortie. Le nom de symbole peut être un nom complètement qualifie,
+# un mot, ou si le caractère generique * est utilisé, une sous-chaîne. Exemples:
+# ANamespace, AClass, ANamespace::AClass, ANamespace::*Test
+
+EXCLUDE_SYMBOLS        =
+
+# La balise EXAMPLE_PATH peut être utilisée pour spécifier un ou plusieurs
+# fichiers ou répertoires qui contiennent des fragments de code exemple qui sont
+# inclus (voir la commande \include).
+
+EXAMPLE_PATH           =
+
+# Si la valeur de la balise EXAMPLE_PATH contient des répertoires, vous pouvez
+# utiliser la balise EXAMPLE_PATTERNS pour spécifier un ou plusieurs modèles de
+# caractères generiques (comme *.cpp et *.h) pour filtrer les fichiers sources
+# dans les répertoires. Si laissée vide, tous les fichiers sont inclus.
+
+EXAMPLE_PATTERNS       = *
+
+# Si la balise EXAMPLE_RECURSIVE est définie à YES alors les sous-répertoires
+# seront recherches pour les fichiers d'entrée a utiliser avec les commandes
+# \include ou \dontinclude indépendamment de la valeur de la balise RECURSIVE.
+# La valeur par défaut est : NO.
+
+EXAMPLE_RECURSIVE      = NO
+
+# La balise IMAGE_PATH peut être utilisée pour spécifier un ou plusieurs
+# fichiers ou répertoires qui contiennent des images qui doivent être incluses
+# dans la documentation (voir la commande \image).
+
+IMAGE_PATH             =
+
+# La balise INPUT_FILTER peut être utilisée pour spécifier un programme que
+# Doxygen devrait invoquer pour filtrer chaque fichier d'entrée. Doxygen
+# invoquera le programme de filtre en executant (via popen()) la commande:
+#
+# <filtre> <fichier-entrée>
+#
+# ou <filtre> est la valeur de la balise INPUT_FILTER, et <fichier-entrée> est
+# le nom d'un fichier d'entrée. Doxygen utilisera ensuite la sortie que le
+# programme de filtre écrit sur la sortie standard. Si FILTER_PATTERNS est
+# spécifié, cette balise sera ignorée.
+#
+# Notez que le filtre ne doit pas ajouter ou supprimer de lignes; il est
+# appliqué avant que le code ne soit scanne, mais pas lorsque le code de sortie
+# est généré. Si des lignes sont ajoutées ou supprimées, les ancres ne seront
+# pas placées correctement.
+#
+# Notez que Doxygen utilisera les données traitées et ecrites sur la sortie
+# standard pour un traitement ulterieur, donc rien d'autre, comme des
+# instructions de débogage ou des commandes utilisées (donc dans le cas d'un
+# fichier batch Windows utilisez toujours @echo OFF), ne doit être écrit sur la
+# sortie standard.
+#
+# Notez que pour les extensions personnalisées ou non directement supportées
+# vous devez également définir EXTENSION_MAPPING pour l'extension sinon les
+# fichiers ne sont pas correctement traités par Doxygen.
+
+INPUT_FILTER           =
+
+# La balise FILTER_PATTERNS peut être utilisée pour spécifier des filtres sur
+# une base par modèle de fichier. Doxygen comparera le nom du fichier avec
+# chaque modèle et appliquera le filtre s'il y a une correspondance. Les filtres
+# sont une liste de la forme: modèle=filtre (comme *.cpp=my_cpp_filter). Voir
+# INPUT_FILTER pour plus d'informations sur l'utilisation des filtres. Si la
+# balise FILTER_PATTERNS est vide ou si aucun des modèles ne correspond au nom
+# du fichier, INPUT_FILTER est appliqué.
+#
+# Notez que pour les extensions personnalisées ou non directement supportées
+# vous devez également définir EXTENSION_MAPPING pour l'extension sinon les
+# fichiers ne sont pas correctement traités par Doxygen.
+
+FILTER_PATTERNS        =
+
+# Si la balise FILTER_SOURCE_FILES est définie à YES, le filtre d'entrée (si
+# défini en utilisant INPUT_FILTER) sera également utilisé pour filtrer les
+# fichiers d'entrée qui sont utilisés pour produire les fichiers sources a
+# parcourir (c'est-à-dire lorsque SOURCE_BROWSER est défini à YES).
+# La valeur par défaut est : NO.
+
+FILTER_SOURCE_FILES    = NO
+
+# La balise FILTER_SOURCE_PATTERNS peut être utilisée pour spécifier des filtres
+# sources par modèle de fichier. Un modèle remplacera le paramètre pour
+# FILTER_PATTERN (s'il y en a) et il est également possible de désactiver le
+# filtrage source pour un modèle spécifique en utilisant *.ext= (donc sans
+# nommer de filtre).
+# Cette balise nécessite que la balise FILTER_SOURCE_FILES soit définie sur YES.
+
+FILTER_SOURCE_PATTERNS =
+
+# Si la balise USE_MDFILE_AS_MAINPAGE fait référence au nom d'un fichier
+# markdown qui fait partie de l'entrée, son contenu sera place sur la page
+# principale (index.html). Cela peut être utile si vous avez un projet par
+# exemple sur GitHub et voulez reutiliser la page d'introduction également pour
+# la sortie Doxygen.
+
+USE_MDFILE_AS_MAINPAGE =
+
+# Si la balise IMPLICIT_DIR_DOCS est définie à YES, tout fichier README.md
+# trouve dans les sous-répertoires de la racine du projet est utilisé comme
+# documentation pour ce sous-répertoire, sauf si le README.md commence par une
+# commande \dir, \page ou \mainpage. Si défini à NO, le fichier README.md doit
+# commencer par une commande \dir explicite pour être utilisé comme
+# documentation de répertoire.
+# La valeur par défaut est : YES.
+
+IMPLICIT_DIR_DOCS      = YES
+
+# La norme Fortran spécifie que pour le code Fortran format fixe, tous les
+# caractères à partir de la position 72 sont considérés comme des commentaires.
+# Une extension courante est d'autoriser des lignes plus longues avant que le
+# commentaire automatique ne commence. Le paramètre FORTRAN_COMMENT_AFTER
+# permettra également que des lignes plus longues puissent être traitées avant
+# que le commentaire automatique ne commence.
+# Valeur minimum : 7, valeur maximum : 10000, valeur par défaut : 72.
+
+FORTRAN_COMMENT_AFTER  = 72
+
+#---------------------------------------------------------------------------
+# Options de configuration relatives à la navigation dans le code source
+#---------------------------------------------------------------------------
+
+# Si la balise SOURCE_BROWSER est définie à YES, une liste de fichiers sources
+# sera générée. Les entités documentées seront référencées croisées avec ces
+# sources.
+#
+# Remarque: Pour se débarrasser de tout le code source dans la sortie générée,
+# assurez-vous que également VERBATIM_HEADERS est défini à NO.
+# La valeur par défaut est : NO.
+
+SOURCE_BROWSER         = YES
+
+# Définir la balise INLINE_SOURCES à YES inclura le corps des fonctions, macros
+# multilignes, énumérations ou variables a initialisation de liste directement
+# dans la documentation.
+# La valeur par défaut est : NO.
+
+INLINE_SOURCES         = NO
+
+# Définir la balise STRIP_CODE_COMMENTS à YES indiquera a Doxygen de cacher tous
+# les blocs de commentaires speciaux des fragments de code source générés. Les
+# commentaires normaux C, C++ et Fortran resteront toujours visibles.
+# La valeur par défaut est : YES.
+
+STRIP_CODE_COMMENTS    = NO
+
+# Si la balise REFERENCED_BY_RELATION est définie à YES, alors pour chaque
+# entité documentée, toutes les fonctions documentées la referencant seront
+# listées.
+# La valeur par défaut est : NO.
+
+REFERENCED_BY_RELATION = YES
+
+# Si la balise REFERENCES_RELATION est définie à YES, alors pour chaque fonction
+# documentée, toutes les entités documentées appelées/utilisées par cette
+# fonction seront listées.
+# La valeur par défaut est : NO.
+
+REFERENCES_RELATION    = YES
+
+# Si la balise REFERENCES_LINK_SOURCE est définie à YES et que la balise
+# SOURCE_BROWSER est définie à YES, alors les hyperliens des fonctions dans les
+# listes REFERENCES_RELATION et REFERENCED_BY_RELATION pointeront vers le code
+# source. Sinon, ils pointeront vers la documentation.
+# La valeur par défaut est : YES.
+
+REFERENCES_LINK_SOURCE = YES
+
+# Si SOURCE_TOOLTIPS est activé (le défaut), alors survoler un hyperlien dans le
+# code source affichera une infobulle avec des informations supplémentaires
+# telles que le prototype, la description brève et les liens vers la définition
+# et la documentation. Comme cela rendra le fichier HTML plus grand et le
+# chargement des grands fichiers un peu plus lent, vous pouvez choisir de
+# désactiver cette fonctionnalité.
+# La valeur par défaut est : YES.
+# Cette balise nécessite que la balise SOURCE_BROWSER soit définie sur YES.
+
+SOURCE_TOOLTIPS        = YES
+
+# Si la balise USE_HTAGS est définie à YES, les références au code source
+# pointeront vers le HTML généré par l'outil htags(1) au lieu du navigateur de
+# source intégré de Doxygen. L'outil htags fait partie du système de balisage de
+# source global de GNU (voir https://www.gnu.org/software/global/global.html).
+# Vous aurez besoin de la version 4.8.6 ou supérieure.
+#
+# Pour l'utiliser, faites ce qui suit:
+# - Installez la dernière version de global
+# - Activez SOURCE_BROWSER et USE_HTAGS dans le fichier de configuration
+# - Assurez-vous que INPUT pointe vers la racine de l'arborescence des sources
+# - Exécutez doxygen normalement
+#
+# Doxygen invoquera htags (et qui invoquera à son tour gtags), donc ces outils
+# doivent être disponibles depuis la ligne de commande (c'est-à-dire dans le
+# chemin de recherche).
+#
+# Résultat: au lieu du navigateur de source généré par Doxygen, les liens vers
+# le code source pointeront maintenant vers la sortie de htags.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise SOURCE_BROWSER soit définie sur YES.
+
+USE_HTAGS              = NO
+
+# Si la balise VERBATIM_HEADERS est définie à YES, Doxygen générera une copie
+# verbatim du fichier d'en-tête pour chaque classe pour laquelle une inclusion
+# est spécifiée. Définir à NO pour désactiver cela.
+# Voir aussi : Section \class.
+# La valeur par défaut est : YES.
+
+VERBATIM_HEADERS       = YES
+
+# Si la balise CLANG_ASSISTED_PARSING est définie à YES, Doxygen utilisera
+# l'analyseur clang (see:
+# http://clang.llvm.org/) pour une analyse plus précise au prix de performances
+# reduites. Cela peut être particulièrement utile avec le code C++ riche en
+# templates pour lequel l'analyseur intégré de Doxygen manque des informations
+# de type nécessaires.
+# Note : La disponibilité de cette option dépend de si Doxygen a été généré avec
+# l'option -Duse_libclang=ON pour CMake.
+# La valeur par défaut est : NO.
+
+CLANG_ASSISTED_PARSING = NO
+
+# Si la balise CLANG_ASSISTED_PARSING est définie à YES et que la balise
+# CLANG_ADD_INC_PATHS est définie à YES, Doxygen ajoutera le répertoire de
+# chaque entrée au chemin d'inclusion.
+# La valeur par défaut est : YES.
+# Cette balise nécessite que la balise CLANG_ASSISTED_PARSING soit définie sur
+# YES.
+
+CLANG_ADD_INC_PATHS    = YES
+
+# Si l'analyse assistée par clang est activée, vous pouvez fournir au
+# compilateur des options de ligne de commande que vous utiliseriez normalement
+# lors de l'appel du compilateur. Remarquez que les chemins d'inclusion seront
+# déjà définis par Doxygen pour les fichiers et répertoires spécifiés avec INPUT
+# et INCLUDE_PATH.
+# Cette balise nécessite que la balise CLANG_ASSISTED_PARSING soit définie sur
+# YES.
+
+CLANG_OPTIONS          =
+
+# Si l'analyse assistée par clang est activée, vous pouvez fournir à l'analyseur
+# clang le chemin vers le répertoire contenant un fichier appelé
+# compile_commands.json. Ce fichier est la base de données de compilation (see:
+# http://clang.llvm.org/docs/HowToSetupToolingForLLVM.html) contenant les
+# options utilisées lors de la construction des fichiers sources. Cela équivaut
+# a spécifier l'option -p à un outil clang, tel que clang-check. Ces options
+# seront ensuite passées à l'analyseur. Toutes les options spécifiées avec
+# CLANG_OPTIONS seront également ajoutées.
+# Note : La disponibilité de cette option dépend de si Doxygen a été généré avec
+# l'option -Duse_libclang=ON pour CMake.
+
+CLANG_DATABASE_PATH    =
+
+#---------------------------------------------------------------------------
+# Options de configuration relatives à l'index alphabétique des classes
+#---------------------------------------------------------------------------
+
+# Si la balise ALPHABETICAL_INDEX est définie à YES, un index alphabetique de
+# tous les composes sera généré. Activez cela si le projet contient beaucoup de
+# classes, structures, unions ou interfaces.
+# La valeur par défaut est : YES.
+
+ALPHABETICAL_INDEX     = YES
+
+# La balise IGNORE_PREFIX peut être utilisée pour spécifier un préfixe (ou une
+# liste de préfixes) qui doit être ignore lors de la génération des en-têtes
+# d'index. La balise IGNORE_PREFIX fonctionne pour les noms de classes,
+# fonctions et membres. L'entité sera placée dans la liste alphabetique sous la
+# première lettre du nom de l'entité qui reste après suppression du préfixe.
+# Cette balise nécessite que la balise ALPHABETICAL_INDEX soit définie sur YES.
+
+IGNORE_PREFIX          =
+
+#---------------------------------------------------------------------------
+# Options de configuration relatives à la sortie HTML
+#---------------------------------------------------------------------------
+
+# Si la balise GENERATE_HTML est définie à YES, Doxygen générera une sortie HTML
+# La valeur par défaut est : YES.
+
+GENERATE_HTML          = YES
+
+# La balise HTML_OUTPUT est utilisée pour spécifier ou les docs HTML seront
+# placées. Si un chemin relatif est entre, la valeur de OUTPUT_DIRECTORY sera
+# mise devant.
+# Le répertoire par défaut est : html.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+HTML_OUTPUT            = html
+
+# La balise HTML_FILE_EXTENSION peut être utilisée pour spécifier l'extension de
+# fichier pour chaque page HTML générée (par exemple: .htm, .php, .asp).
+# La valeur par défaut est : .html.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+HTML_FILE_EXTENSION    = .html
+
+# La balise HTML_HEADER peut être utilisée pour spécifier un fichier d'en-tête
+# HTML défini par l'utilisateur pour chaque page HTML générée. Si la balise est
+# laissée vide, Doxygen générera un en-tête standard.
+#
+# Pour obtenir un HTML valide, le fichier d'en-tête doit inclure tous les
+# scripts et feuilles de style dont Doxygen a besoin, ce qui dépend des options
+# de configuration utilisées (par exemple le paramètre GENERATE_TREEVIEW). Il
+# est fortement recommandé de commencer avec un en-tête par défaut en utilisant
+# doxygen -w html new_header.html new_footer.html new_stylesheet.css
+# YourConfigFile
+# puis de modifier le fichier new_header.html. Voir aussi la section "Doxygen
+# usage" pour plus d'informations sur la génération de l'en-tête par défaut que
+# Doxygen utilise normalement.
+# Note : L'en-tête est sujet à changement, donc vous devez généralement
+# régénérer l'en-tête par défaut lors de la mise à jour vers une version plus
+# récente de Doxygen.Pour une description des marqueurs et noms de blocs
+# possibles, consultez la documentation.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+HTML_HEADER            =
+
+# La balise HTML_FOOTER peut être utilisée pour spécifier un pied de page HTML
+# défini par l'utilisateur pour chaque page HTML générée. Si la balise est
+# laissée vide, Doxygen générera un pied de page standard. Voir HTML_HEADER pour
+# plus d'informations sur la génération d'un pied de page par défaut et les
+# commandes spéciales qui peuvent être utilisées dans le pied de page. Voir
+# aussi la section "Doxygen usage" pour plus d'informations sur la génération du
+# pied de page par défaut que Doxygen utilise normalement.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+HTML_FOOTER            =
+
+# La balise HTML_STYLESHEET peut être utilisée pour spécifier une feuille de
+# style en cascade définie par l'utilisateur qui est utilisée par chaque page
+# HTML. Elle peut être utilisée pour affiner l'apparence de la sortie HTML. Si
+# laissée vide, Doxygen générera une feuille de style par défaut. Voir aussi la
+# section "Doxygen usage" pour plus d'informations sur la génération de la
+# feuille de style que Doxygen utilise normalement.
+# Note : Il est recommandé d'utiliser HTML_EXTRA_STYLESHEET au lieu de cette
+# balise, car elle est plus robuste et cette balise (HTML_STYLESHEET) deviendra
+# obsolète à l'avenir.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+HTML_STYLESHEET        =
+
+# La balise HTML_EXTRA_STYLESHEET peut être utilisée pour spécifier des feuilles
+# de style en cascade supplémentaires définies par l'utilisateur qui sont
+# incluses après les feuilles de style standard créées par Doxygen. En utilisant
+# cette option, on peut redéfinir certains aspects de style. Ceci est préférable
+# à l'utilisation de HTML_STYLESHEET car elle ne remplace pas la feuille de
+# style standard et est donc plus robuste face aux mises à jour futures. Doxygen
+# copiera les fichiers de feuille de style dans le répertoire de sortie.
+# Note : L'ordre des fichiers de feuille de style supplémentaires est important
+# (par exemple, la dernière feuille de style de la liste redéfinit les
+# paramètres des précédentes dans la liste).
+# Note : Comme le style des barres de défilement ne peut actuellement pas être
+# remplace dans Webkit/Chromium, le style sera omis du doxygen.css par défaut si
+# une ou plusieurs feuilles de style supplémentaires ont été spécifiées. Donc si
+# la personnalisation des barres de défilement est souhaitée, elle doit être
+# ajoutée explicitement.Pour un exemple, consultez la documentation.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+HTML_EXTRA_STYLESHEET  =
+
+# La balise HTML_EXTRA_FILES peut être utilisée pour spécifier un ou plusieurs
+# fichiers images supplémentaires ou autres fichiers sources qui doivent être
+# copiés dans le répertoire de sortie HTML. Notez que ces fichiers seront copiés
+# dans le répertoire de sortie HTML de base. Utilisez le marqueur $relpath^ dans
+# les fichiers HTML_HEADER et/ou HTML_FOOTER pour charger ces fichiers. Dans le
+# fichier HTML_STYLESHEET, utilisez uniquement le nom du fichier. Notez
+# également que les fichiers seront copiés tels quels; il n'y a pas de commandes
+# ou de marqueurs disponibles.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+HTML_EXTRA_FILES       =
+
+# La balise HTML_COLORSTYLE peut être utilisée pour spécifier si la sortie HTML
+# générée doit être rendue avec un thème sombre ou clair.
+# Les valeurs possibles sont :LIGHT génère toujours une sortie en mode clair,
+# DARK génère toujours une sortie en mode sombre, AUTO_LIGHT définit
+# automatiquement le mode selon la preference de l'utilisateur, utilise le mode
+# clair si aucune preference n'est définie (par défaut), AUTO_DARK définit
+# automatiquement le mode selon la preference de l'utilisateur, utilise le mode
+# sombre si aucune preference n'est définieetTOGGLE permet à l'utilisateur de
+# basculer entre le mode clair et sombre via un bouton.
+# La valeur par défaut est : AUTO_LIGHT.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+HTML_COLORSTYLE        = AUTO_LIGHT
+
+# La balise HTML_COLORSTYLE_HUE contrôle la couleur de la sortie HTML. Doxygen
+# ajustera les couleurs dans la feuille de style et les images d'arrière-plan en
+# fonction de cette couleur. La teinte est spécifiée comme un angle sur une roue
+# chromatique, voir https://en.wikipedia.org/wiki/Hue pour plus d'informations.
+# Par exemple, la valeur 0 représente le rouge, 60 le jaune, 120 le vert, 180 le
+# cyan, 240 le bleu, 300 le violet et 360 le rouge à nouveau.
+# Valeur minimum : 0, valeur maximum : 359, valeur par défaut : 220.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+HTML_COLORSTYLE_HUE    = 220
+
+# La balise HTML_COLORSTYLE_SAT contrôle la pureté (ou saturation) des couleurs
+# dans la sortie HTML. Pour une valeur de 0, la sortie utilisera uniquement des
+# niveaux de gris. Une valeur de 255 produira les couleurs les plus vives.
+# Valeur minimum : 0, valeur maximum : 255, valeur par défaut : 100.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+HTML_COLORSTYLE_SAT    = 100
+
+# La balise HTML_COLORSTYLE_GAMMA contrôle la correction gamma appliquée à la
+# composante de luminance des couleurs dans la sortie HTML. Les valeurs
+# inférieures à 100 rendent progressivement la sortie plus claire, tandis que
+# les valeurs supérieures à 100 rendent la sortie plus foncée. La valeur divisée
+# par 100 est le gamma réel appliqué, donc 80 représente un gamma de 0.8, la
+# valeur 220 représente un gamma de 2.2, et 100 ne change pas le gamma.
+# Valeur minimum : 40, valeur maximum : 240, valeur par défaut : 80.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+HTML_COLORSTYLE_GAMMA  = 80
+
+# Si la balise HTML_DYNAMIC_MENUS est définie à YES, la documentation HTML
+# générée contiendra un index principal avec des menus de navigation verticaux
+# qui sont créés dynamiquement via JavaScript. Si désactivé, l'index de
+# navigation consistera en plusieurs niveaux d'onglets qui sont intégrés
+# statiquement dans chaque page HTML. Désactivez cette option pour prendre en
+# charge les navigateurs qui n'ont pas JavaScript, comme le navigateur d'aide
+# Qt.
+# La valeur par défaut est : YES.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+HTML_DYNAMIC_MENUS     = YES
+
+# Si la balise HTML_DYNAMIC_SECTIONS est définie à YES, la documentation HTML
+# générée contiendra des sections qui peuvent être cachées et affichées après le
+# chargement de la page.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+HTML_DYNAMIC_SECTIONS  = NO
+
+# Si la balise HTML_CODE_FOLDING est définie à YES, les classes et fonctions
+# peuvent être repliées et développées dynamiquement dans le code source HTML
+# généré.
+# La valeur par défaut est : YES.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+HTML_CODE_FOLDING      = YES
+
+# Si la balise HTML_COPY_CLIPBOARD est définie à YES, Doxygen affichera une
+# icône dans le coin supérieur droit des fragments de code et de texte qui
+# permet à l'utilisateur de copier son contenu dans le presse-papiers. Notez que
+# cela ne fonctionne que si le navigateur le prend en charge et que la page Web
+# est servie via un contexte sécurisé (see:
+# https://www.w3.org/TR/secure-contexts/), c'est-à-dire en utilisant le
+# protocole https: ou file:.
+# La valeur par défaut est : YES.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+HTML_COPY_CLIPBOARD    = YES
+
+# Doxygen stocke quelques paramètres de manière persistante dans le navigateur
+# (via par exemple les cookies). Par défaut, ces paramètres s'appliquent a
+# toutes les pages HTML générées par Doxygen pour tous les projets. La balise
+# HTML_PROJECT_COOKIE peut être utilisée pour stocker les paramètres sous une
+# cle spécifique au projet, de sorte que les preferences de l'utilisateur seront
+# stockées séparément.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+HTML_PROJECT_COOKIE    =
+
+# Avec HTML_INDEX_NUM_ENTRIES, on peut contrôler le nombre préféré d'entrées
+# affichées initialement dans les différents indices structures en arborescence;
+# l'utilisateur peut développer et réduire les entrées dynamiquement plus tard.
+# Doxygen développera l'arbre à un tel niveau qu'au maximum le nombre spécifie
+# d'entrées sont visibles (sauf si un arbre complètement réduit dépasse déjà ce
+# montant). Donc définir le nombre d'entrées à 1 produira un arbre complètement
+# réduit par défaut. 0 est une valeur spéciale représentant un nombre infini
+# d'entrées et résultera en un arbre complètement développé par défaut.
+# Valeur minimum : 0, valeur maximum : 9999, valeur par défaut : 100.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+HTML_INDEX_NUM_ENTRIES = 100
+
+# Si la balise GENERATE_DOCSET est définie à YES, des fichiers d'index
+# supplémentaires seront générés qui peuvent être utilisés comme entrée pour
+# l'environnement de développement intégré Xcode 3 d'Apple (see:
+# https://developer.apple.com/xcode/), introduit avec OSX 10.5 (Leopard). Pour
+# créer un ensemble de documentation, Doxygen générera un Makefile dans le
+# répertoire de sortie HTML. L'exécution de make produira le docset dans ce
+# répertoire et l'exécution de make install installera le docset dans
+# ~/Library/Developer/Shared/Documentation/DocSets afin que Xcode le trouve au
+# démarrage. Voir https://developer.apple.com/library/archive/featuredarticles/D
+# oxygenXcode/_index.html pour plus d'informations.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+GENERATE_DOCSET        = NO
+
+# Cette balise détermine le nom du flux docset. Un flux de documentation fournit
+# un parapluie sous lequel plusieurs ensembles de documentation d'un seul
+# fournisseur (comme une entreprise ou une suite de produits) peuvent être
+# regroupes.
+# La valeur par défaut est : Doxygen generated docs.
+# Cette balise nécessite que la balise GENERATE_DOCSET soit définie sur YES.
+
+DOCSET_FEEDNAME        = "Doxygen generated docs"
+
+# Cette balise détermine l'URL du flux docset. Un flux de documentation fournit
+# un parapluie sous lequel plusieurs ensembles de documentation d'un seul
+# fournisseur (comme une entreprise ou une suite de produits) peuvent être
+# regroupes.
+# Cette balise nécessite que la balise GENERATE_DOCSET soit définie sur YES.
+
+DOCSET_FEEDURL         =
+
+# Cette balise spécifie une chaîne qui doit identifier de manière unique
+# l'ensemble de documentation bundle. Il doit s'agir d'une chaîne de style nom
+# de domaine inverse, par exemple com.mycompany.MyDocSet. Doxygen ajoutera
+# .docset au nom.
+# La valeur par défaut est : org.doxygen.Project.
+# Cette balise nécessite que la balise GENERATE_DOCSET soit définie sur YES.
+
+DOCSET_BUNDLE_ID       = org.doxygen.Project
+
+# La balise DOCSET_PUBLISHER_ID spécifie une chaîne qui doit identifier de
+# manière unique l'editeur de la documentation. Il doit s'agir d'une chaîne de
+# style nom de domaine inverse, par exemple
+# com.mycompany.MyDocSet.documentation.
+# La valeur par défaut est : org.doxygen.Publisher.
+# Cette balise nécessite que la balise GENERATE_DOCSET soit définie sur YES.
+
+DOCSET_PUBLISHER_ID    = org.doxygen.Publisher
+
+# La balise DOCSET_PUBLISHER_NAME identifie l'editeur de la documentation.
+# La valeur par défaut est : Publisher.
+# Cette balise nécessite que la balise GENERATE_DOCSET soit définie sur YES.
+
+DOCSET_PUBLISHER_NAME  = Publisher
+
+# Si la balise GENERATE_HTMLHELP est définie à YES, Doxygen génère trois
+# fichiers d'index HTML supplémentaires: index.hhp, index.hhc, et index.hhk. Le
+# index.hhp est un fichier de projet qui peut être lu par l'atelier d'aide HTML
+# de Microsoft sur Windows. Au début de 2021, Microsoft a mis hors ligne la page
+# originale, avec notamment les liens de téléchargement (l'atelier d'aide HTML
+# était déjà en mode maintenance depuis de nombreuses années). Vous pouvez
+# télécharger l'atelier d'aide HTML depuis les archives Web a exécutable
+# d'installation (see:
+# http://web.archive.org/web/20160201063255/https://download.microsoft.com/downl
+# oad/0/A/9/0A939EF6-E31C-430F-A3DF-DFAE7960D564/htmlhelp.exe).
+#
+# L'atelier d'aide HTML contient un compilateur qui peut convertir toute la
+# sortie HTML générée par Doxygen en un seul fichier HTML compilé (.chm). Les
+# fichiers HTML compilés sont maintenant utilisés comme format d'aide Windows 98
+# et remplaceront l'ancien format d'aide Windows (.hlp) sur toutes les
+# plateformes Windows à l'avenir. Les fichiers HTML compressés contiennent
+# également un index, une table des matières, et vous pouvez rechercher des mots
+# dans la documentation. L'atelier HTML contient également une visionneuse pour
+# les fichiers HTML compressés.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+GENERATE_HTMLHELP      = NO
+
+# La balise CHM_FILE peut être utilisée pour spécifier le nom du fichier .chm
+# résultant. Vous pouvez ajouter un chemin devant le fichier si le résultat ne
+# doit pas être écrit dans le répertoire de sortie html.
+# Cette balise nécessite que la balise GENERATE_HTMLHELP soit définie sur YES.
+
+CHM_FILE               =
+
+# La balise HHC_LOCATION peut être utilisée pour spécifier l'emplacement (chemin
+# absolu incluant le nom de fichier) du compilateur d'aide HTML (hhc.exe). Si
+# non vide, Doxygen essaiera d'exécuter le compilateur d'aide HTML sur le
+# index.hhp généré.
+# Le fichier doit être spécifié avec un chemin complet.
+# Cette balise nécessite que la balise GENERATE_HTMLHELP soit définie sur YES.
+
+HHC_LOCATION           =
+
+# Le drapeau GENERATE_CHI contrôle si un fichier d'index .chi séparé est généré
+# (YES) ou s'il doit être inclus dans le fichier .chm principal (NO).
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise GENERATE_HTMLHELP soit définie sur YES.
+
+GENERATE_CHI           = NO
+
+# Le CHM_INDEX_ENCODING est utilisé pour encoder le contenu du fichier d'index
+# HtmlHelp (hhk), de la table des matières (hhc) et du fichier de projet.
+# Cette balise nécessite que la balise GENERATE_HTMLHELP soit définie sur YES.
+
+CHM_INDEX_ENCODING     =
+
+# Le drapeau BINARY_TOC contrôle si une table des matières binaire est générée
+# (YES) ou une table des matières normale (NO) dans le fichier .chm. De plus, il
+# active les boutons Précédent et Suivant.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise GENERATE_HTMLHELP soit définie sur YES.
+
+BINARY_TOC             = NO
+
+# Le drapeau TOC_EXPAND peut être défini à YES pour ajouter des éléments
+# supplémentaires pour les membres de groupe à la table des matières de la
+# documentation d'aide HTML et à la vue en arborescence.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise GENERATE_HTMLHELP soit définie sur YES.
+
+TOC_EXPAND             = NO
+
+# La balise SITEMAP_URL est utilisée pour spécifier l'URL complète de l'endroit
+# ou la documentation générée sera placée sur le serveur par l'utilisateur lors
+# du déploiement de la documentation. Le plan de site généré s'appelle
+# sitemap.xml et est place dans le répertoire spécifie par HTML_OUTPUT. Si aucun
+# SITEMAP_URL n'est spécifié, aucun plan de site n'est généré. Pour plus
+# d'informations sur le protocole de plan de site, voir https://www.sitemaps.org
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+SITEMAP_URL            =
+
+# Si la balise GENERATE_QHP est définie à YES et que QHP_NAMESPACE et
+# QHP_VIRTUAL_FOLDER sont tous deux définis, un fichier d'index supplémentaire
+# sera généré qui peut être utilisé comme entrée pour le qhelpgenerator de Qt
+# pour générer une aide compressée Qt (.qch) de la documentation HTML générée.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+GENERATE_QHP           = NO
+
+# Si la balise QHG_LOCATION est spécifiée, la balise QCH_FILE peut être utilisée
+# pour spécifier le nom du fichier .qch résultant. Le chemin spécifie est
+# relatif au dossier de sortie HTML.
+# Cette balise nécessite que la balise GENERATE_QHP soit définie sur YES.
+
+QCH_FILE               =
+
+# La balise QHP_NAMESPACE spécifie l'espace de noms a utiliser lors de la
+# génération de la sortie du projet d'aide Qt. Pour plus d'informations, voir
+# Projet d'aide Qt / Namespace (see:
+# https://doc.qt.io/archives/qt-4.8/qthelpproject.html#namespace).
+# La valeur par défaut est : org.doxygen.Project.
+# Cette balise nécessite que la balise GENERATE_QHP soit définie sur YES.
+
+QHP_NAMESPACE          = org.doxygen.Project
+
+# La balise QHP_VIRTUAL_FOLDER spécifie l'espace de noms a utiliser lors de la
+# génération de la sortie du projet d'aide Qt. Pour plus d'informations, voir
+# Projet d'aide Qt / Dossiers virtuels (see:
+# https://doc.qt.io/archives/qt-4.8/qthelpproject.html#virtual-folders).
+# La valeur par défaut est : doc.
+# Cette balise nécessite que la balise GENERATE_QHP soit définie sur YES.
+
+QHP_VIRTUAL_FOLDER     = doc
+
+# Si la balise QHP_CUST_FILTER_NAME est définie, elle spécifie le nom d'un
+# filtre personnalise a ajouter. Pour plus d'informations, voir Projet d'aide Qt
+# / Filtres personnalises (see:
+# https://doc.qt.io/archives/qt-4.8/qthelpproject.html#custom-filters).
+# Cette balise nécessite que la balise GENERATE_QHP soit définie sur YES.
+
+QHP_CUST_FILTER_NAME   =
+
+# La balise QHP_CUST_FILTER_ATTRS spécifie la liste des attributs du filtre
+# personnalise a ajouter. Pour plus d'informations, voir Projet d'aide Qt /
+# Filtres personnalises (see:
+# https://doc.qt.io/archives/qt-4.8/qthelpproject.html#custom-filters).
+# Cette balise nécessite que la balise GENERATE_QHP soit définie sur YES.
+
+QHP_CUST_FILTER_ATTRS  =
+
+# La balise QHP_SECT_FILTER_ATTRS spécifie la liste des attributs avec lesquels
+# la section de filtre de ce projet correspond. Projet d'aide Qt / Attributs de
+# filtre (see:
+# https://doc.qt.io/archives/qt-4.8/qthelpproject.html#filter-attributes).
+# Cette balise nécessite que la balise GENERATE_QHP soit définie sur YES.
+
+QHP_SECT_FILTER_ATTRS  =
+
+# La balise QHG_LOCATION peut être utilisée pour spécifier l'emplacement (chemin
+# absolu incluant le nom de fichier) du qhelpgenerator de Qt. Si non vide,
+# Doxygen essaiera d'exécuter qhelpgenerator sur le fichier .qhp généré.
+# Cette balise nécessite que la balise GENERATE_QHP soit définie sur YES.
+
+QHG_LOCATION           =
+
+# Si la balise GENERATE_ECLIPSEHELP est définie à YES, des fichiers d'index
+# supplémentaires seront générés, et avec les fichiers HTML, ils forment un
+# plugin d'aide Eclipse. Pour installer ce plugin et le rendre disponible sous
+# le menu du contenu d'aide dans Eclipse, le contenu du répertoire contenant les
+# fichiers HTML et XML doit être copie dans le répertoire des plugins d'eclipse.
+# Le nom du répertoire dans le répertoire des plugins doit être le même que la
+# valeur ECLIPSE_DOC_ID. Après la copie, Eclipse doit être redemarre avant que
+# l'aide n'apparaisse.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+GENERATE_ECLIPSEHELP   = NO
+
+# Un identifiant unique pour le plugin d'aide Eclipse. Lors de l'installation du
+# plugin, le nom du répertoire contenant les fichiers HTML et XML doit également
+# avoir ce nom. Chaque ensemble de documentation doit avoir son propre
+# identifiant.
+# La valeur par défaut est : org.doxygen.Project.
+# Cette balise nécessite que la balise GENERATE_ECLIPSEHELP soit définie sur
+# YES.
+
+ECLIPSE_DOC_ID         = org.doxygen.Project
+
+# Si vous voulez un contrôle complet sur la mise en page des pages HTML
+# générées, il peut être nécessaire de désactiver l'index et de le remplacer par
+# le votre. La balise DISABLE_INDEX peut être utilisée pour activer/désactiver
+# l'index condense (onglets) en haut de chaque page HTML. Une valeur de NO
+# active l'index et la valeur YES le désactive. Comme les onglets de l'index
+# contiennent les mêmes informations que l'arbre de navigation, vous pouvez
+# définir cette option à YES si vous définissez également GENERATE_TREEVIEW à
+# YES.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+DISABLE_INDEX          = NO
+
+# La balise GENERATE_TREEVIEW est utilisée pour spécifier si une structure
+# d'index en arborescence doit être générée pour afficher des informations
+# hiérarchiques. Si la valeur de la balise est définie à YES, un panneau latéral
+# sera généré contenant une structure d'index en arborescence (tout comme celle
+# qui est générée pour l'aide HTML). Pour que cela fonctionne, un navigateur qui
+# prend en charge JavaScript, DHTML, CSS et les cadres est requis (c'est-à-dire
+# tout navigateur moderne). Les utilisateurs de Windows sont probablement mieux
+# lotis en utilisant la fonctionnalité d'aide HTML. Via des feuilles de style
+# personnalisées (voir HTML_EXTRA_STYLESHEET), on peut affiner davantage
+# l'apparence de l'index (voir "Fine-tuning the output"). A titre d'exemple, la
+# feuille de style par défaut générée par Doxygen à un exemple qui montre
+# comment placer une image à la racine de l'arbre au lieu du PROJECT_NAME. Comme
+# l'arbre a fondamentalement plus d'informations détaillées que l'index des
+# onglets, vous pouvez envisager de définir DISABLE_INDEX à YES lors de
+# l'activation de cette option.
+# La valeur par défaut est : YES.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+GENERATE_TREEVIEW      = YES
+
+# Lorsque GENERATE_TREEVIEW est défini à YES, l'option PAGE_OUTLINE_PANEL
+# détermine si un panneau de navigation supplémentaire est affiché sur le côté
+# droit de l'écran, affichant un plan du contenu de la page principale,
+# similaire à par exemple https://developer.android.com/reference. Si
+# GENERATE_TREEVIEW est défini à NO, cette option n'a aucun effet.
+# La valeur par défaut est : YES.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+PAGE_OUTLINE_PANEL     = YES
+
+# Lorsque GENERATE_TREEVIEW est défini à YES, l'option FULL_SIDEBAR détermine si
+# la barre latérale est limitée uniquement à la zone de l'arborescence (valeur
+# NO) ou si elle doit s'étendre sur toute la hauteur de la fenêtre (valeur YES).
+# Définir ceci à YES donne une mise en page similaire à par exemple
+# https://docs.readthedocs.io avec plus d'espace pour le contenu, mais moins
+# d'espace pour le logo, le titre et la description du projet. Si
+# GENERATE_TREEVIEW est défini à NO, cette option n'a aucun effet.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+FULL_SIDEBAR           = NO
+
+# La balise ENUM_VALUES_PER_LINE peut être utilisée pour définir le nombre de
+# valeurs d'énumération que Doxygen regroupera sur une ligne dans la
+# documentation HTML générée.
+#
+# Notez qu'une valeur de 0 supprimera complètement les valeurs d'énumération de
+# la section de vue d'ensemble.
+# Valeur minimum : 0, valeur maximum : 20, valeur par défaut : 4.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+ENUM_VALUES_PER_LINE   = 4
+
+# Lorsque la balise SHOW_ENUM_VALUES est définie, Doxygen affichera les valeurs
+# d'énumération spécifiées a côté des mnémoniques d'énumération.
+# La valeur par défaut est : NO.
+
+SHOW_ENUM_VALUES       = NO
+
+# Si l'arborescence est activée (voir GENERATE_TREEVIEW), cette balise peut être
+# utilisée pour définir la largeur initiale (en pixels) du cadre dans lequel
+# l'arbre est affiché.
+# Valeur minimum : 0, valeur maximum : 1500, valeur par défaut : 250.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+TREEVIEW_WIDTH         = 250
+
+# Si l'option EXT_LINKS_IN_WINDOW est définie à YES, Doxygen ouvrira les liens
+# vers des symboles externes importés via des fichiers de balises dans une
+# fenêtre séparée.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+EXT_LINKS_IN_WINDOW    = NO
+
+# Si la balise OBFUSCATE_EMAILS est définie à YES, Doxygen offusquera les
+# adresses email.
+# La valeur par défaut est : YES.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+OBFUSCATE_EMAILS       = YES
+
+# Si l'option HTML_FORMULA_FORMAT est définie à svg, Doxygen utilisera l'outil
+# pdf2svg (voir https://github.com/dawbarton/pdf2svg) ou inkscape (voir
+# https://inkscape.org) pour générer des formules en tant qu'images SVG au lieu
+# de PNG pour la sortie HTML. Ces images auront généralement une meilleure
+# apparence à des resolutions mises à l'echelle.
+# Les valeurs possibles sont :png (par défaut)etsvg (plus joli mais nécessite
+# l'outil pdf2svg ou inkscape).
+# La valeur par défaut est : png.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+HTML_FORMULA_FORMAT    = png
+
+# Utilisez cette balise pour changer la taille de police des formules LaTeX
+# incluses en tant qu'images dans la documentation HTML. Lorsque vous changez la
+# taille de police après une exécution Doxygen reussie, vous devez supprimer
+# manuellement toutes les images form_*.png du répertoire de sortie HTML pour
+# forcer leur regeneration.
+# Valeur minimum : 8, valeur maximum : 50, valeur par défaut : 10.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+FORMULA_FONTSIZE       = 10
+
+# Le FORMULA_MACROFILE peut contenir des commandes LaTeX \newcommand et
+# \renewcommand pour créer de nouvelles commandes LaTeX a utiliser dans les
+# formules comme blocs de construction. Voir la section "Including formulas"
+# pour plus de détails.
+
+FORMULA_MACROFILE      =
+
+# Activez l'option USE_MATHJAX pour rendre les formules LaTeX en utilisant
+# MathJax (voir https://www.mathjax.org) qui utilise JavaScript côté client pour
+# le rendu au lieu d'utiliser des bitmaps pre-rendus. Utilisez ceci si vous
+# n'avez pas LaTeX installe ou si vous voulez que les formules soient plus
+# jolies dans la sortie HTML. lorsqu'activé, vous devrez peut-être également
+# installer MathJax séparément et configurer le chemin d'accès en utilisant
+# l'option MATHJAX_RELPATH.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+USE_MATHJAX            = NO
+
+# Avec MATHJAX_VERSION, il est possible de spécifier la version de MathJax a
+# utiliser. Notez que les différentes versions de MathJax ont des exigences
+# différentes en ce qui concerne les différents paramètres, il est donc possible
+# que d'autres paramètres MathJax doivent également être modifies lors du
+# passage entre les différentes versions de MathJax.
+# Les valeurs possibles sont :MathJax_2, MathJax_3etMathJax_4.
+# La valeur par défaut est : MathJax_2.
+# Cette balise nécessite que la balise USE_MATHJAX soit définie sur YES.
+
+MATHJAX_VERSION        = MathJax_2
+
+# Lorsque MathJax est activé, vous pouvez définir le format de sortie par défaut
+# a utiliser pour la sortie MathJax. Pour plus de détails sur le format de
+# sortie, voir MathJax version 2 (see:
+# https://docs.mathjax.org/en/v2.7/output.html), MathJax version 3 (see:
+# https://docs.mathjax.org/en/v3.2/output/index.html) et MathJax version 4 (see:
+# https://docs.mathjax.org/en/v4.0/output/index.htm).
+# Les valeurs possibles sont :HTML-CSS (plus lent, mais avec la meilleure
+# compatibilité. C'est le nom pour MathJax version 2, pour MathJax version 3
+# cela sera traduit en chtml), NativeMML (c'est-à-dire MathML. Pris en charge
+# uniquement pour MathJax 2. Pour MathJax version 3, chtml sera utilisé à la
+# place.), chtml (C'est le nom pour MathJax version 3, pour MathJax version 2
+# cela sera traduit en HTML-CSS)etSVG.
+# La valeur par défaut est : HTML-CSS.
+# Cette balise nécessite que la balise USE_MATHJAX soit définie sur YES.
+
+MATHJAX_FORMAT         = HTML-CSS
+
+# Lorsque MathJax est activé, vous devez spécifier l'emplacement relatif au
+# répertoire de sortie HTML en utilisant l'option MATHJAX_RELPATH. Pour MathJax
+# version 2, le répertoire de destination doit contenir le script MathJax.js.
+# Par exemple, si le répertoire mathjax se trouve au même niveau que le
+# répertoire de sortie HTML, alors MATHJAX_RELPATH doit être ../mathjax. Pour
+# MathJax versions 3 et 4, le répertoire de destination doit contenir le script
+# tex-<format>.js (ou <format> est chtml ou svg). La valeur par défaut pointe
+# vers le Reseau de Distribution de Contenu MathJax pour que vous puissiez voir
+# rapidement le résultat sans installer MathJax. Cependant, il est fortement
+# recommandé d'installer une copie locale de MathJax depuis
+# https://www.mathjax.org avant le déploiement. La valeur par défaut est :
+# - dans le cas de MathJax version 2 : https://cdn.jsdelivr.net/npm/mathjax@2
+# - dans le cas de MathJax version 3 : https://cdn.jsdelivr.net/npm/mathjax@3
+# - dans le cas de MathJax version 4 : https://cdn.jsdelivr.net/npm/mathjax@4
+# Cette balise nécessite que la balise USE_MATHJAX soit définie sur YES.
+
+MATHJAX_RELPATH        =
+
+# La balise MATHJAX_EXTENSIONS peut être utilisée pour spécifier un ou plusieurs
+# noms d'extension MathJax qui doivent être activés pendant le rendu MathJax.
+# Par exemple pour la version 2 de MathJax (voir
+# https://docs.mathjax.org/en/v2.7/tex.html):
+# MATHJAX_EXTENSIONS = TeX/AMSmath TeX/AMSsymbols
+# Par exemple pour la version 3 de MathJax (voir
+# https://docs.mathjax.org/en/v3.2/input/tex/extensions/):
+# MATHJAX_EXTENSIONS = ams
+# Par exemple pour la version 4 de MathJax (voir
+# https://docs.mathjax.org/en/v4.0/input/tex/extensions/):
+# MATHJAX_EXTENSIONS = units
+# Notez que pour la version 4 de Mathjax, quelques extensions sont déjà
+# automatiquement chargées. Pour désactiver un paquet dans la version 4 de
+# Mathjax, on peut utiliser le nom du paquet précède d'un signe moins (- comme
+# MATHJAX_EXTENSIONS += -textmacros)
+# Cette balise nécessite que la balise USE_MATHJAX soit définie sur YES.
+
+MATHJAX_EXTENSIONS     =
+
+# La balise MATHJAX_CODEFILE peut être utilisée pour spécifier un fichier avec
+# des morceaux de code JavaScript qui seront utilisés au démarrage du code
+# MathJax. Voir le site Mathjax pour plus de détails:
+# - MathJax version 2 (see:
+# https://docs.mathjax.org/en/v2.7/)
+# - MathJax version 3 (see:
+# https://docs.mathjax.org/en/v3.2/)
+# - MathJax version 4 (see:
+# https://docs.mathjax.org/en/v4.0/)Pour un exemple, consultez la documentation.
+# Cette balise nécessite que la balise USE_MATHJAX soit définie sur YES.
+
+MATHJAX_CODEFILE       =
+
+# Lorsque la balise SEARCHENGINE est activée, Doxygen générera une boite de
+# recherche pour la sortie HTML. Le moteur de recherche sous-jacent utilise
+# JavaScript et DHTML et devrait fonctionner sur tout navigateur moderne. Notez
+# que lors de l'utilisation de l'aide HTML (GENERATE_HTMLHELP), de l'aide Qt
+# (GENERATE_QHP) ou des docsets (GENERATE_DOCSET), il existe déjà une fonction
+# de recherche, celle-ci devrait donc généralement être désactivée. Pour les
+# grands projets, le moteur de recherche base sur JavaScript peut être lent,
+# alors l'activation de SERVER_BASED_SEARCH peut fournir une meilleure solution.
+# Il est possible de rechercher en utilisant le clavier; pour accéder à la boite
+# de recherche, utilisez <touche d'accès> + S (ce qu'est la <touche d'accès>
+# dépend de l'OS et du navigateur, mais c'est généralement <CTRL>,
+# <ALT>/<option>, ou les deux). Dans la boite de recherche, utilisez la <touche
+# curseur bas> pour accéder à la fenêtre des résultats de recherche, les
+# résultats peuvent être navigues en utilisant les <touches curseur>. Appuyez
+# sur <Entrée> pour sélectionner un élément ou <echap> pour annuler la
+# recherche. Les options de filtre peuvent être sélectionnées lorsque le curseur
+# est dans la boite de recherche en appuyant sur <Maj>+<curseur bas>. Ici aussi,
+# utilisez les <touches curseur> pour sélectionner un filtre et <Entrée> ou
+# <echap> pour activer ou annuler l'option de filtre.
+# La valeur par défaut est : YES.
+# Cette balise nécessite que la balise GENERATE_HTML soit définie sur YES.
+
+SEARCHENGINE           = YES
+
+# Lorsque la balise SERVER_BASED_SEARCH est activée, le moteur de recherche sera
+# implémenté en utilisant un serveur Web au lieu d'un client Web utilisant
+# JavaScript. Il existe deux types de recherche basée sur un serveur Web selon
+# le paramètre EXTERNAL_SEARCH. Lorsqu'il est désactivé, Doxygen générera un
+# script PHP pour la recherche et un fichier d'index utilisé par le script.
+# Lorsque EXTERNAL_SEARCH est activé, l'indexation et la recherche doivent être
+# fournies par des outils externes. Voir la section "External Indexing and
+# Searching" pour plus de détails.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise SEARCHENGINE soit définie sur YES.
+
+SERVER_BASED_SEARCH    = NO
+
+# Lorsque la balise EXTERNAL_SEARCH est activée, Doxygen ne générera plus le
+# script PHP pour la recherche. Au lieu de cela, les résultats de recherche sont
+# écrits dans un fichier XML qui doit être traite par un indexeur externe.
+# Doxygen invoquera un moteur de recherche externe pointe par l'option
+# SEARCHENGINE_URL pour obtenir les résultats de recherche.
+#
+# Doxygen est fourni avec un exemple d'indexeur (doxyindexer) et de moteur de
+# recherche (doxysearch.cgi) qui sont bases sur la bibliothèque de moteur de
+# recherche open source Xapian (see:
+# https://xapian.org/).
+#
+# Voir la section "External Indexing and Searching" pour plus de détails.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise SEARCHENGINE soit définie sur YES.
+
+EXTERNAL_SEARCH        = NO
+
+# Le SEARCHENGINE_URL doit pointer vers un moteur de recherche heberge par un
+# serveur Web qui retourner les résultats de recherche lorsque EXTERNAL_SEARCH
+# est activé.
+#
+# Doxygen est fourni avec un exemple d'indexeur (doxyindexer) et de moteur de
+# recherche (doxysearch.cgi) qui sont bases sur la bibliothèque de moteur de
+# recherche open source Xapian (see:
+# https://xapian.org/). Voir la section "External Indexing and Searching" pour
+# plus de détails.
+# Cette balise nécessite que la balise SEARCHENGINE soit définie sur YES.
+
+SEARCHENGINE_URL       =
+
+# Lorsque SERVER_BASED_SEARCH et EXTERNAL_SEARCH sont tous deux activés, les
+# données de recherche non indexées sont ecrites dans un fichier pour
+# l'indexation par un outil externe. Avec la balise SEARCHDATA_FILE, le nom de
+# ce fichier peut être spécifie.
+# Le fichier par défaut est : searchdata.xml.
+# Cette balise nécessite que la balise SEARCHENGINE soit définie sur YES.
+
+SEARCHDATA_FILE        = searchdata.xml
+
+# Lorsque SERVER_BASED_SEARCH et EXTERNAL_SEARCH sont tous deux activés, la
+# balise EXTERNAL_SEARCH_ID peut être utilisée comme identifiant pour le projet.
+# Ceci est utile en combinaison avec EXTRA_SEARCH_MAPPINGS pour rechercher dans
+# plusieurs projets et rediriger les résultats vers le bon projet.
+# Cette balise nécessite que la balise SEARCHENGINE soit définie sur YES.
+
+EXTERNAL_SEARCH_ID     =
+
+# La balise EXTRA_SEARCH_MAPPINGS peut être utilisée pour activer la recherche
+# dans des projets Doxygen autres que celui défini par ce fichier de
+# configuration, mais qui sont tous ajoutés au même index de recherche externe.
+# Chaque projet doit avoir un identifiant unique défini via EXTERNAL_SEARCH_ID.
+# Le mappage de recherche mappe ensuite l'identifiant vers un emplacement
+# relatif ou la documentation peut être trouvée. Le format est:
+# EXTRA_SEARCH_MAPPINGS = tagname1=loc1 tagname2=loc2 ...
+# Cette balise nécessite que la balise SEARCHENGINE soit définie sur YES.
+
+EXTRA_SEARCH_MAPPINGS  =
+
+#---------------------------------------------------------------------------
+# Options de configuration relatives à la sortie LaTeX
+#---------------------------------------------------------------------------
+
+# Si la balise GENERATE_LATEX est définie à YES, Doxygen générera une sortie
+# LaTeX.
+# La valeur par défaut est : YES.
+
+GENERATE_LATEX         = NO
+
+# La balise LATEX_OUTPUT est utilisée pour spécifier ou les docs LaTeX seront
+# placées. Si un chemin relatif est entre, la valeur de OUTPUT_DIRECTORY sera
+# mise devant.
+# Le répertoire par défaut est : latex.
+# Cette balise nécessite que la balise GENERATE_LATEX soit définie sur YES.
+
+LATEX_OUTPUT           = latex
+
+# La balise LATEX_CMD_NAME peut être utilisée pour spécifier le nom de la
+# commande LaTeX a invoquer.
+#
+# Notez que lorsque USE_PDFLATEX n'est pas active, le défaut est latex, lorsque
+# USE_PDFLATEX est activé, le défaut est pdflatex et dans ce dernier cas si
+# latex est choisi, il est écrasé par pdflatex. Pour des langages de sortie
+# spécifiques, le défaut peut avoir été défini différemment, cela dépend de
+# l'implémentation du langage de sortie.
+# Cette balise nécessite que la balise GENERATE_LATEX soit définie sur YES.
+
+LATEX_CMD_NAME         =
+
+# La balise MAKEINDEX_CMD_NAME peut être utilisée pour spécifier le nom de la
+# commande pour générer l'index pour LaTeX.
+# Note : Cette balise est utilisée dans le Makefile / make.bat.
+# Voir aussi : LATEX_MAKEINDEX_CMD pour la partie dans le fichier de sortie
+# généré (.tex).
+# Le fichier par défaut est : makeindex.
+# Cette balise nécessite que la balise GENERATE_LATEX soit définie sur YES.
+
+MAKEINDEX_CMD_NAME     = makeindex
+
+# La balise LATEX_MAKEINDEX_CMD peut être utilisée pour spécifier le nom de la
+# commande pour générer l'index pour LaTeX. S'il n'y a pas de barre oblique
+# inverse (\) comme premier caractère, elle sera automatiquement ajoutée dans le
+# code LaTeX.
+# Note : Cette balise est utilisée dans le fichier de sortie généré (.tex).
+# Voir aussi : MAKEINDEX_CMD_NAME pour la partie dans le Makefile / make.bat.
+# La valeur par défaut est : makeindex.
+# Cette balise nécessite que la balise GENERATE_LATEX soit définie sur YES.
+
+LATEX_MAKEINDEX_CMD    = makeindex
+
+# Si la balise COMPACT_LATEX est définie à YES, Doxygen génère des documents
+# LaTeX plus compacts. Cela peut être utile pour les petits projets et peut
+# aider a economiser quelques arbres en général.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise GENERATE_LATEX soit définie sur YES.
+
+COMPACT_LATEX          = NO
+
+# La balise PAPER_TYPE peut être utilisée pour définir le type de papier utilisé
+# par l'imprimante.
+# Les valeurs possibles sont :a4 (210 x 297 mm), letter (8,5 x 11 pouces), legal
+# (8,5 x 14 pouces)etexecutive (7,25 x 10,5 pouces).
+# La valeur par défaut est : a4.
+# Cette balise nécessite que la balise GENERATE_LATEX soit définie sur YES.
+
+PAPER_TYPE             = a4
+
+# La balise EXTRA_PACKAGES peut être utilisée pour spécifier un ou plusieurs
+# noms de paquets LaTeX qui doivent être inclus dans la sortie LaTeX. Le paquet
+# peut être spécifie simplement par son nom ou avec la syntaxe correcte a
+# utiliser avec la commande LaTeX \usepackage. Pour obtenir la police times par
+# exemple, vous pouvez spécifier:
+# EXTRA_PACKAGES=times ou EXTRA_PACKAGES={times}
+# Pour utiliser l'option intlimits avec le paquet amsmath, vous pouvez
+# spécifier:
+# EXTRA_PACKAGES=[intlimits]{amsmath}
+# Si laissé vide, aucun paquet supplémentaire ne sera inclus.
+# Cette balise nécessite que la balise GENERATE_LATEX soit définie sur YES.
+
+EXTRA_PACKAGES         =
+
+# La balise LATEX_HEADER peut être utilisée pour spécifier un en-tête LaTeX
+# défini par l'utilisateur pour le document LaTeX généré. L'en-tête doit
+# contenir tout jusqu'au premier chapitre. S'il est laissé vide, Doxygen
+# générera un en-tête standard. Il est fortement recommandé de commencer avec un
+# en-tête par défaut en utilisant
+# doxygen -w latex new_header.tex new_footer.tex new_stylesheet.sty
+# puis de modifier le fichier new_header.tex. Voir aussi la section "Doxygen
+# usage" pour plus d'informations sur la génération de l'en-tête par défaut que
+# Doxygen utilise normalement.
+#
+# Note: N'utilisez un en-tête défini par l'utilisateur que si vous savez ce que
+# vous faites!
+# Note : L'en-tête est sujet à changement, donc vous devez généralement
+# régénérer l'en-tête par défaut lors de la mise à jour vers une version plus
+# récente de Doxygen.Pour une description des marqueurs et noms de blocs
+# possibles, consultez la documentation.
+# Cette balise nécessite que la balise GENERATE_LATEX soit définie sur YES.
+
+LATEX_HEADER           =
+
+# La balise LATEX_FOOTER peut être utilisée pour spécifier un pied de page LaTeX
+# défini par l'utilisateur pour le document LaTeX généré. Le pied de page doit
+# contenir tout après le dernier chapitre. S'il est laissé vide, Doxygen
+# générera un pied de page standard. Voir LATEX_HEADER pour plus d'informations
+# sur la génération d'un pied de page par défaut et les commandes spéciales qui
+# peuvent être utilisées dans le pied de page. Voir aussi la section "Doxygen
+# usage" pour plus d'informations sur la génération du pied de page par défaut
+# que Doxygen utilise normalement. Note: N'utilisez un pied de page défini par
+# l'utilisateur que si vous savez ce que vous faites!
+# Cette balise nécessite que la balise GENERATE_LATEX soit définie sur YES.
+
+LATEX_FOOTER           =
+
+# La balise LATEX_EXTRA_STYLESHEET peut être utilisée pour spécifier des
+# feuilles de style LaTeX supplémentaires définies par l'utilisateur qui sont
+# incluses après les feuilles de style standard créées par Doxygen. En utilisant
+# cette option, on peut redéfinir certains aspects de style. Doxygen copiera les
+# fichiers de feuille de style dans le répertoire de sortie.
+# Note : L'ordre des fichiers de feuille de style supplémentaires est important
+# (par exemple, la dernière feuille de style de la liste redéfinit les
+# paramètres des précédentes dans la liste).
+# Cette balise nécessite que la balise GENERATE_LATEX soit définie sur YES.
+
+LATEX_EXTRA_STYLESHEET =
+
+# La balise LATEX_EXTRA_FILES peut être utilisée pour spécifier une ou plusieurs
+# images supplémentaires ou autres fichiers sources qui doivent être copiés dans
+# le répertoire de sortie LATEX_OUTPUT. Notez que les fichiers seront copiés
+# tels quels; il n'y a pas de commandes ou de marqueurs disponibles.
+# Cette balise nécessite que la balise GENERATE_LATEX soit définie sur YES.
+
+LATEX_EXTRA_FILES      =
+
+# Si la balise PDF_HYPERLINKS est définie à YES, le LaTeX généré est prepare
+# pour la conversion en PDF (en utilisant ps2pdf ou pdflatex). Le fichier PDF
+# contiendra des liens (tout comme la sortie HTML) au lieu de références de
+# pages. Cela rend la sortie adaptée à la navigation en ligne en utilisant un
+# lecteur PDF.
+# La valeur par défaut est : YES.
+# Cette balise nécessite que la balise GENERATE_LATEX soit définie sur YES.
+
+PDF_HYPERLINKS         = YES
+
+# Si la balise USE_PDFLATEX est définie à YES, Doxygen utilisera le moteur comme
+# spécifie avec LATEX_CMD_NAME pour générer le fichier PDF directement à partir
+# des fichiers LaTeX. Définissez cette option à YES pour obtenir une
+# documentation PDF de meilleure qualité.
+#
+# Voir aussi la section LATEX_CMD_NAME pour sélectionner le moteur.
+# La valeur par défaut est : YES.
+# Cette balise nécessite que la balise GENERATE_LATEX soit définie sur YES.
+
+USE_PDFLATEX           = YES
+
+# La balise LATEX_BATCHMODE signale le comportement de LaTeX en cas d'erreur.
+# Les valeurs possibles sont :NO identique a ERROR_STOP, YES identique a BATCH,
+# BATCH En mode batch, rien n'est imprime sur le terminal, les erreurs defilent
+# comme si <return> était appuye à chaque erreur; les fichiers manquants que TeX
+# essaie de lire ou de demander à partir de l'entrée clavier (\read sur un flux
+# d'entrée non ouvert) provoquent l'arret du travail, NON_STOP En mode nonstop,
+# le message de diagnostic apparaîtra sur le terminal, mais il n'y a aucune
+# possibilite d'interaction utilisateur comme en mode batch, SCROLL En mode
+# scroll, TeX s'arrêtera uniquement pour les fichiers manquants a lire ou si une
+# entrée clavier est nécessaireetERROR_STOP En mode errorstop, TeX s'arrêtera à
+# chaque erreur, demandant l'intervention de l'utilisateur.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise GENERATE_LATEX soit définie sur YES.
+
+LATEX_BATCHMODE        = NO
+
+# Si la balise LATEX_HIDE_INDICES est définie à YES, Doxygen n'inclura pas les
+# chapitres d'index (tels que l'index des fichiers, l'index des composes, etc.)
+# dans la sortie.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise GENERATE_LATEX soit définie sur YES.
+
+LATEX_HIDE_INDICES     = NO
+
+# La balise LATEX_BIB_STYLE peut être utilisée pour spécifier le style a
+# utiliser pour la bibliographie, par exemple plainnat ou ieeetr. Voir
+# https://en.wikipedia.org/wiki/BibTeX et \cite pour plus d'informations.
+# La valeur par défaut est : plainnat.
+# Cette balise nécessite que la balise GENERATE_LATEX soit définie sur YES.
+
+LATEX_BIB_STYLE        = plainnat
+
+# La balise LATEX_EMOJI_DIRECTORY est utilisée pour spécifier le chemin (relatif
+# ou absolu) à partir duquel les images emoji seront lues. Si un chemin relatif
+# est entre, il sera relatif au répertoire LATEX_OUTPUT. Si laissé vide, le
+# répertoire LATEX_OUTPUT sera utilisé.
+# Cette balise nécessite que la balise GENERATE_LATEX soit définie sur YES.
+
+LATEX_EMOJI_DIRECTORY  =
+
+#---------------------------------------------------------------------------
+# Options de configuration relatives à la sortie RTF
+#---------------------------------------------------------------------------
+
+# Si la balise GENERATE_RTF est définie à YES, Doxygen générera une sortie RTF.
+# La sortie RTF est optimisée pour Word 97 et peut ne pas sembler tres jolie
+# avec d'autres lecteurs/editeurs RTF.
+# La valeur par défaut est : NO.
+
+GENERATE_RTF           = NO
+
+# La balise RTF_OUTPUT est utilisée pour spécifier ou les docs RTF seront
+# placées. Si un chemin relatif est entre, la valeur de OUTPUT_DIRECTORY sera
+# mise devant.
+# Le répertoire par défaut est : rtf.
+# Cette balise nécessite que la balise GENERATE_RTF soit définie sur YES.
+
+RTF_OUTPUT             = rtf
+
+# Si la balise COMPACT_RTF est définie à YES, Doxygen génère des documents RTF
+# plus compacts. Cela peut être utile pour les petits projets et peut aider a
+# economiser quelques arbres en général.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise GENERATE_RTF soit définie sur YES.
+
+COMPACT_RTF            = NO
+
+# Si la balise RTF_HYPERLINKS est définie à YES, le RTF généré contiendra des
+# champs de lien hypertexte. Le fichier RTF contiendra des liens (tout comme la
+# sortie HTML) au lieu de références de pages. Cela rend la sortie adaptée à la
+# navigation en ligne en utilisant Word ou d'autres lecteurs compatibles Word
+# qui prennent en charge ces champs.
+#
+# Note: WordPad (write) et d'autres ne prennent pas en charge les liens.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise GENERATE_RTF soit définie sur YES.
+
+RTF_HYPERLINKS         = NO
+
+# Charge les définitions de feuille de style à partir d'un fichier. La syntaxe
+# est similaire au fichier de configuration de Doxygen, c'est-à-dire une serie
+# d'affectations. Vous devez uniquement fournir des remplacements, les
+# définitions manquantes sont définies a leur valeur par défaut.
+#
+# Voir aussi la section "Doxygen usage" pour plus d'informations sur la
+# génération de la feuille de style par défaut que Doxygen utilise normalement.
+# Cette balise nécessite que la balise GENERATE_RTF soit définie sur YES.
+
+RTF_STYLESHEET_FILE    =
+
+# Définit des variables optionnelles utilisées dans la génération d'un document
+# RTF. La syntaxe est similaire au fichier de configuration de Doxygen. Un
+# fichier d'extensions modèle peut être généré en utilisant doxygen -e rtf
+# extensionFile.
+# Cette balise nécessite que la balise GENERATE_RTF soit définie sur YES.
+
+RTF_EXTENSIONS_FILE    =
+
+# La balise RTF_EXTRA_FILES peut être utilisée pour spécifier une ou plusieurs
+# images supplémentaires ou autres fichiers sources qui doivent être copiés dans
+# le répertoire de sortie RTF_OUTPUT. Notez que les fichiers seront copiés tels
+# quels; il n'y a pas de commandes ou de marqueurs disponibles.
+# Cette balise nécessite que la balise GENERATE_RTF soit définie sur YES.
+
+RTF_EXTRA_FILES        =
+
+#---------------------------------------------------------------------------
+# Options de configuration relatives à la sortie des pages de manuel
+#---------------------------------------------------------------------------
+
+# Si la balise GENERATE_MAN est définie à YES, Doxygen générera des pages de
+# manuel pour les classes et les fichiers.
+# La valeur par défaut est : NO.
+
+GENERATE_MAN           = YES
+
+# La balise MAN_OUTPUT est utilisée pour spécifier ou les pages de manuel seront
+# placées. Si un chemin relatif est entre, la valeur de OUTPUT_DIRECTORY sera
+# mise devant. Un répertoire man3 sera créé dans le répertoire spécifie par
+# MAN_OUTPUT.
+# Le répertoire par défaut est : man.
+# Cette balise nécessite que la balise GENERATE_MAN soit définie sur YES.
+
+MAN_OUTPUT             = man
+
+# La balise MAN_EXTENSION détermine l'extension qui est ajoutée aux pages de
+# manuel générées. Si la section du manuel ne commence pas par un chiffre, le
+# chiffre 3 est ajouté au début. Le point (.) au début de la balise
+# MAN_EXTENSION est optionnel.
+# La valeur par défaut est : .3.
+# Cette balise nécessite que la balise GENERATE_MAN soit définie sur YES.
+
+MAN_EXTENSION          = .3
+
+# La balise MAN_SUBDIR détermine le nom du répertoire créé dans MAN_OUTPUT dans
+# lequel les pages de manuel sont placées. Par défaut, c'est man suivi de
+# MAN_EXTENSION avec le . initial supprime.
+# Cette balise nécessite que la balise GENERATE_MAN soit définie sur YES.
+
+MAN_SUBDIR             =
+
+# Si la balise MAN_LINKS est définie à YES et que Doxygen génère une sortie man,
+# alors il générera un fichier man supplémentaire pour chaque entité documentée
+# dans la ou les vraies pages de manuel. Ces fichiers supplémentaires ne font
+# que sourcer la vraie page de manuel, mais sans eux la commande man serait
+# incapable de trouver la bonne page.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise GENERATE_MAN soit définie sur YES.
+
+MAN_LINKS              = NO
+
+#---------------------------------------------------------------------------
+# Options de configuration relatives à la sortie XML
+#---------------------------------------------------------------------------
+
+# Si la balise GENERATE_XML est définie à YES, Doxygen générera un fichier XML
+# qui capture la structure du code, y compris toute la documentation.
+# La valeur par défaut est : NO.
+
+GENERATE_XML           = YES
+
+# La balise XML_OUTPUT est utilisée pour spécifier ou les pages XML seront
+# placées. Si un chemin relatif est entre, la valeur de OUTPUT_DIRECTORY sera
+# mise devant.
+# Le répertoire par défaut est : xml.
+# Cette balise nécessite que la balise GENERATE_XML soit définie sur YES.
+
+XML_OUTPUT             = xml
+
+# Si la balise XML_PROGRAMLISTING est définie à YES, Doxygen copiera les listes
+# de programmes (y compris la coloration syntaxique et les informations de
+# référence croisée) dans la sortie XML. Notez que l'activation de cela
+# augmentera de manière significative la taille de la sortie XML.
+# La valeur par défaut est : YES.
+# Cette balise nécessite que la balise GENERATE_XML soit définie sur YES.
+
+XML_PROGRAMLISTING     = NO
+
+# Si la balise XML_NS_MEMB_FILE_SCOPE est définie à YES, Doxygen inclura les
+# membres de namespace dans la portée du fichier également, correspondant à la
+# sortie HTML.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise GENERATE_XML soit définie sur YES.
+
+XML_NS_MEMB_FILE_SCOPE = NO
+
+#---------------------------------------------------------------------------
+# Options de configuration relatives à la sortie DOCBOOK
+#---------------------------------------------------------------------------
+
+# Si la balise GENERATE_DOCBOOK est définie à YES, Doxygen générera des fichiers
+# Docbook qui peuvent être utilisés pour générer du PDF.
+# La valeur par défaut est : NO.
+
+GENERATE_DOCBOOK       = NO
+
+# La balise DOCBOOK_OUTPUT est utilisée pour spécifier ou les pages Docbook
+# seront placées. Si un chemin relatif est entre, la valeur de OUTPUT_DIRECTORY
+# sera mise devant.
+# Le répertoire par défaut est : docbook.
+# Cette balise nécessite que la balise GENERATE_DOCBOOK soit définie sur YES.
+
+DOCBOOK_OUTPUT         = docbook
+
+#---------------------------------------------------------------------------
+# Options de configuration pour la sortie AutoGen Définitions
+#---------------------------------------------------------------------------
+
+# Si la balise GENERATE_AUTOGEN_DEF est définie à YES, Doxygen générera un
+# fichier de définitions AutoGen (voir https://autogen.sourceforge.net/) qui
+# capture la structure du code, y compris toute la documentation. Notez que
+# cette fonctionnalité est encore expérimentale et incomplète pour le moment.
+# La valeur par défaut est : NO.
+
+GENERATE_AUTOGEN_DEF   = NO
+
+#---------------------------------------------------------------------------
+# Options de configuration relatives à la sortie Sqlite3
+#---------------------------------------------------------------------------
+
+# Si la balise GENERATE_SQLITE3 est définie à YES, Doxygen générera une base de
+# données Sqlite3 avec les symboles trouvés par Doxygen stockés dans des tables.
+# La valeur par défaut est : NO.
+
+GENERATE_SQLITE3       = NO
+
+# La balise SQLITE3_OUTPUT est utilisée pour spécifier ou la base de données
+# Sqlite3 sera placée. Si un chemin relatif est entre, la valeur de
+# OUTPUT_DIRECTORY sera mise devant.
+# Le répertoire par défaut est : sqlite3.
+# Cette balise nécessite que la balise GENERATE_SQLITE3 soit définie sur YES.
+
+SQLITE3_OUTPUT         = sqlite3
+
+# Si la balise SQLITE3_RECREATE_DB est définie à YES, le fichier de base de
+# données doxygen_sqlite3.db existant sera recréé à chaque exécution de Doxygen.
+# Si défini à NO, Doxygen avertira si un fichier de base de données est déjà
+# trouve et ne le modifiera pas.
+# La valeur par défaut est : YES.
+# Cette balise nécessite que la balise GENERATE_SQLITE3 soit définie sur YES.
+
+SQLITE3_RECREATE_DB    = YES
+
+#---------------------------------------------------------------------------
+# Options de configuration relatives à la sortie du module Perl
+#---------------------------------------------------------------------------
+
+# Si la balise GENERATE_PERLMOD est définie à YES, Doxygen générera un fichier
+# de module Perl qui capture la structure du code, y compris toute la
+# documentation.
+#
+# Notez que cette fonctionnalité est encore expérimentale et incomplète pour le
+# moment.
+# La valeur par défaut est : NO.
+
+GENERATE_PERLMOD       = NO
+
+# Si la balise PERLMOD_LATEX est définie à YES, Doxygen générera les règles
+# Makefile nécessaires, les scripts Perl et le code LaTeX pour pouvoir générer
+# une sortie PDF et DVI à partir de la sortie du module Perl.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise GENERATE_PERLMOD soit définie sur YES.
+
+PERLMOD_LATEX          = NO
+
+# Si la balise PERLMOD_PRETTY est définie à YES, la sortie du module Perl sera
+# bien formatée pour qu'elle puisse être analyse par un lecteur humain. Cela est
+# utile si vous voulez comprendre ce qui se passe. D'un autre côté, si cette
+# balise est définie à NO, la taille de la sortie du module Perl sera beaucoup
+# plus petite et Perl l'analyser de la même manière.
+# La valeur par défaut est : YES.
+# Cette balise nécessite que la balise GENERATE_PERLMOD soit définie sur YES.
+
+PERLMOD_PRETTY         = YES
+
+# Les noms des variables make dans le fichier doxyrules.make généré sont
+# préfixes par la chaîne contenue dans PERLMOD_MAKEVAR_PREFIX. Cela est utile
+# pour que différents fichiers doxyrules.make inclus par le même Makefile
+# n'ecrasent pas les variables les uns des autres.
+# Cette balise nécessite que la balise GENERATE_PERLMOD soit définie sur YES.
+
+PERLMOD_MAKEVAR_PREFIX =
+
+#---------------------------------------------------------------------------
+# Options de configuration relatives au préprocesseur
+#---------------------------------------------------------------------------
+
+# Si la balise ENABLE_PREPROCESSING est définie à YES, Doxygen evaluera toutes
+# les directives de préprocesseur C trouvées dans les sources et les fichiers
+# d'inclusion.
+# La valeur par défaut est : YES.
+
+ENABLE_PREPROCESSING   = YES
+
+# Si la balise MACRO_EXPANSION est définie à YES, Doxygen etendra tous les noms
+# de macros dans le code source. Si défini à NO, seule la compilation
+# conditionnelle sera effectuée. L'expansion de macro peut être faite de manière
+# contrôlée en définissant EXPAND_ONLY_PREDEF à YES.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise ENABLE_PREPROCESSING soit définie sur
+# YES.
+
+MACRO_EXPANSION        = YES
+
+# Si les balises EXPAND_ONLY_PREDEF et MACRO_EXPANSION sont toutes deux définies
+# à YES, alors l'expansion de macro est limitée aux macros spécifiées avec les
+# balises PREDEFINED et EXPAND_AS_DEFINED.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise ENABLE_PREPROCESSING soit définie sur
+# YES.
+
+EXPAND_ONLY_PREDEF     = YES
+
+# Si la balise SEARCH_INCLUDES est définie à YES, les fichiers d'inclusion dans
+# le INCLUDE_PATH seront recherches si un #include est trouvé.
+# La valeur par défaut est : YES.
+# Cette balise nécessite que la balise ENABLE_PREPROCESSING soit définie sur
+# YES.
+
+SEARCH_INCLUDES        = NO
+
+# La balise INCLUDE_PATH peut être utilisée pour spécifier un ou plusieurs
+# répertoires qui contiennent des fichiers d'inclusion qui ne sont pas des
+# fichiers d'entrée mais qui doivent être traités par le préprocesseur. Notez
+# que le INCLUDE_PATH n'est pas recursif, donc le paramètre de RECURSIVE n'a
+# aucun effet ici.
+# Cette balise nécessite que la balise SEARCH_INCLUDES soit définie sur YES.
+
+INCLUDE_PATH           =
+
+# Vous pouvez utiliser la balise INCLUDE_FILE_PATTERNS pour spécifier un ou
+# plusieurs modèles de caractères generiques (comme *.h et *.hpp) pour filtrer
+# les fichiers d'en-tête dans les répertoires. Si laissé vide, les modèles
+# spécifiés avec FILE_PATTERNS seront utilisés.
+# Cette balise nécessite que la balise ENABLE_PREPROCESSING soit définie sur
+# YES.
+
+INCLUDE_FILE_PATTERNS  =
+
+# La balise PREDEFINED peut être utilisée pour spécifier un ou plusieurs noms de
+# macros qui sont définis avant que le préprocesseur ne soit lance (similaire à
+# l'option -D de par exemple gcc). L'argument de la balise est une liste de
+# macros de la forme: name ou name=définition (sans espaces). Si la définition
+# et le = sont omis, =1 est suppose. Pour empêcher une définition de macro
+# d'être non définie via #undef ou recursivement développée, utilisez
+# l'opérateur := au lieu de l'opérateur =.
+# Cette balise nécessite que la balise ENABLE_PREPROCESSING soit définie sur
+# YES.
+
+PREDEFINED             = STM32H753xx \
+                         USE_HAL_DRIVER \
+                         USE_FULL_ASSERT \
+                         osMutexDef(x)=
+
+# Si les balises MACRO_EXPANSION et EXPAND_ONLY_PREDEF sont définies à YES,
+# cette balise peut être utilisée pour spécifier une liste de noms de macros qui
+# doivent être développées. La définition de macro trouvée dans les sources sera
+# utilisée. Utilisez la balise PREDEFINED si vous voulez utiliser une définition
+# de macro différente qui prime sur la définition trouvée dans le code source.
+# Cette balise nécessite que la balise ENABLE_PREPROCESSING soit définie sur
+# YES.
+
+EXPAND_AS_DEFINED      =
+
+# Si la balise SKIP_FUNCTION_MACROS est définie à YES, le préprocesseur de
+# Doxygen supprimera toutes les références aux macros de type fonction qui sont
+# seules sur une ligne, ont un nom entièrement en majuscules et ne se terminent
+# pas par un point-virgule. De telles macros de fonction sont généralement
+# utilisées pour le code standard et perturberont l'analyseur si elles ne sont
+# pas supprimées.
+# La valeur par défaut est : YES.
+# Cette balise nécessite que la balise ENABLE_PREPROCESSING soit définie sur
+# YES.
+
+SKIP_FUNCTION_MACROS   = YES
+
+#---------------------------------------------------------------------------
+# Options de configuration relatives aux références externes
+#---------------------------------------------------------------------------
+
+# La balise TAGFILES peut être utilisée pour spécifier un ou plusieurs fichiers
+# de balises. Pour chaque fichier de balises, l'emplacement de la documentation
+# externe doit être ajouté. Le format d'un fichier de balises sans cet
+# emplacement est le suivant:
+# TAGFILES = file1 file2 ...
+# L'ajout d'un emplacement pour les fichiers de balises se fait comme suit:
+# TAGFILES = file1=loc1 "file2 = loc2" ...
+# ou loc1 et loc2 peuvent être des chemins relatifs ou absolus ou des URL. Voir
+# la section "Linking to external documentation" pour plus d'informations sur
+# l'utilisation des fichiers de balises.
+# Note : Chaque fichier de balises doit avoir un nom unique (ou le nom n'inclut
+# PAS le chemin). Si un fichier de balises n'est pas situe dans le répertoire
+# dans lequel Doxygen est exécuté, vous devez également spécifier le chemin
+# d'accès au fichier de balises ici.
+
+TAGFILES               =
+
+# Lorsqu'un nom de fichier est spécifié après GENERATE_TAGFILE, Doxygen créera
+# un fichier de balises base sur les fichiers d'entrée qu'il lit. Voir la
+# section "Linking to external documentation" pour plus d'informations sur
+# l'utilisation des fichiers de balises.
+
+GENERATE_TAGFILE       =
+
+# Si la balise ALLEXTERNALS est définie à YES, toutes les classes et namespaces
+# externes seront listés dans l'index des classes et des namespaces. Si défini à
+# NO, seules les classes externes héritées seront listées.
+# La valeur par défaut est : NO.
+
+ALLEXTERNALS           = NO
+
+# Si la balise EXTERNAL_GROUPS est définie à YES, tous les groupes externes
+# seront listés dans l'index des sujets. Si défini à NO, seuls les groupes du
+# projet actuel seront listés.
+# La valeur par défaut est : YES.
+
+EXTERNAL_GROUPS        = YES
+
+# Si la balise EXTERNAL_PAGES est définie à YES, toutes les pages externes
+# seront listées dans l'index des pages connexes. Si défini à NO, seules les
+# pages du projet actuel seront listées.
+# La valeur par défaut est : YES.
+
+EXTERNAL_PAGES         = YES
+
+#---------------------------------------------------------------------------
+# Options de configuration relatives aux outils de génération de diagrammes
+#---------------------------------------------------------------------------
+
+# Si défini à YES, les graphes d'héritage et de collaboration cacheront les
+# relations d'héritage et d'utilisation si la cible est non documentée ou n'est
+# pas une classe.
+# La valeur par défaut est : YES.
+
+HIDE_UNDOC_RELATIONS   = YES
+
+# Si vous définissez la balise HAVE_DOT à YES, Doxygen supposera que l'outil dot
+# est disponible depuis le path. Cet outil fait partie de Graphviz (see:
+# https://www.graphviz.org/), une boite a outils de visualisation de graphes
+# d'AT&T et Lucent Bell Labs. Les autres options de cette section n'ont aucun
+# effet si cette option est définie à NO.
+# La valeur par défaut est : NO.
+
+HAVE_DOT               = YES
+
+# Le DOT_NUM_THREADS spécifie le nombre d'invocations dot que Doxygen est
+# autorisé à exécuter en parallele. Lorsqu'il est défini à 0, Doxygen le basera
+# sur le nombre de processeurs disponibles dans le système. Vous pouvez le
+# définir explicitement à une valeur supérieure à 0 pour avoir un contrôle sur
+# l'équilibre entre la charge CPU et la vitesse de traitement.
+# Valeur minimum : 0, valeur maximum : 512, valeur par défaut : 0.
+# Cette balise nécessite que la balise HAVE_DOT soit définie sur YES.
+
+DOT_NUM_THREADS        = 0
+
+# Le DOT_BATCH_SIZE spécifie le nombre de graphiques dot que Doxygen est
+# autorisé à compiler en une seule invocation de dot. Lorsqu'il est défini sur
+# 1, Doxygen invoquera dot pour chaque graphique séparément, ce qui peut
+# entrainer une surcharge significative de création de processus, en particulier
+# sur les systèmes avec de nombreux cœurs de CPU. Ensemble avec DOT_NUM_THREADS,
+# ce paramètre peut être utilisé pour optimiser la vitesse de traitement de dot
+# pour un système particulier. Doxygen essaiera d'attribuer à chaque thread une
+# charge de travail équilibrée. Si le nombre total de graphiques a traiter
+# dépasse DOT_NUM_THREADS * DOT_BATCH_SIZE, des lots supplémentaires seront
+# créés pour que dot les traite.
+# Valeur minimum : 1, valeur maximum : 1000, valeur par défaut : 50.
+# Cette balise nécessite que la balise HAVE_DOT soit définie sur YES.
+
+DOT_BATCH_SIZE         = 50
+
+# DOT_COMMON_ATTR est des attributs communs pour les nœuds, les arêtes et les
+# étiquettes de sous-graphes. Lorsque vous voulez une police d'apparence
+# différente dans les fichiers dot que Doxygen génère, vous pouvez spécifier les
+# attributs fontname, fontcolor et fontsize. Pour plus de détails, voir <a
+# href=https://graphviz.org/doc/info/attrs.html>spécification des attributs de
+# Nœud, Arête et Graphe</a>. Vous devez vous assurer que dot est capable de
+# trouver la police, ce qui peut être fait en la placant dans un emplacement
+# standard ou en définissant la variable d'environnement DOTFONTPATH ou en
+# définissant DOT_FONTPATH sur le répertoire contenant la police. La taille de
+# police graphviz par défaut est 14.
+# La valeur par défaut est : fontname=Helvetica,fontsize=10.
+# Cette balise nécessite que la balise HAVE_DOT soit définie sur YES.
+
+DOT_COMMON_ATTR        = "fontname=Helvetica,fontsize=10"
+
+# DOT_EDGE_ATTR est concatene avec DOT_COMMON_ATTR. Pour un style elegant, vous
+# pouvez ajouter 'arrowhead=open, arrowtail=open, arrowsize=0.5'. <a
+# href=https://graphviz.org/doc/info/arrows.html>Documentation complète sur les
+# formes de flèches.</a>
+# La valeur par défaut est : labelfontname=Helvetica,labelfontsize=10.
+# Cette balise nécessite que la balise HAVE_DOT soit définie sur YES.
+
+DOT_EDGE_ATTR          = "labelfontname=Helvetica,labelfontsize=10"
+
+# DOT_NODE_ATTR est concatene avec DOT_COMMON_ATTR. Pour une vue sans boites
+# autour des nœuds, définissez 'shape=plain' ou 'shape=plaintext'. <a
+# href=https://www.graphviz.org/doc/info/shapes.html>Spécification des
+# formes.</a>
+# La valeur par défaut est : shape=box,height=0.2,width=0.4.
+# Cette balise nécessite que la balise HAVE_DOT soit définie sur YES.
+
+DOT_NODE_ATTR          = "shape=box,height=0.2,width=0.4"
+
+# Vous pouvez définir le chemin ou dot peut trouver la police spécifiée avec
+# fontname dans DOT_COMMON_ATTR et d'autres attributs dot.
+# Cette balise nécessite que la balise HAVE_DOT soit définie sur YES.
+
+DOT_FONTPATH           =
+
+# Si la balise CLASS_GRAPH est définie à YES ou GRAPH ou BUILTIN, Doxygen
+# générera un graphe pour chaque classe documentée montrant les relations
+# d'héritage directes et indirectes. Si la balise CLASS_GRAPH est définie à YES
+# ou GRAPH et que HAVE_DOT est activé également, alors dot sera utilisé pour
+# dessiner le graphe. Si la balise CLASS_GRAPH est définie à YES et que HAVE_DOT
+# est désactivé ou si la balise CLASS_GRAPH est définie à BUILTIN, alors le
+# generateur intégré sera utilisé. Si la balise CLASS_GRAPH est définie à TEXT,
+# les relations d'héritage directes et indirectes seront affichées sous forme de
+# textes / liens. L'activation explicite d'un graphe d'héritage ou le choix
+# d'une representation différente pour un graphe d'héritage d'une classe
+# spécifique peut être accompli au moyen de la commande \inheritancegraph. La
+# désactivation d'un graphe d'héritage peut être accomplie au moyen de la
+# commande \hideinheritancegraph.
+# Les valeurs possibles sont :NO, YES, TEXT, GRAPHetBUILTIN.
+# La valeur par défaut est : YES.
+
+CLASS_GRAPH            = YES
+
+# Si la balise COLLABORATION_GRAPH est définie à YES, Doxygen générera un graphe
+# pour chaque classe documentée montrant les dépendances d'implémentation
+# directes et indirectes (héritage, containment et variables de référence de
+# classe) de la classe avec d'autres classes documentées. L'activation explicite
+# d'un graphe de collaboration, lorsque COLLABORATION_GRAPH est défini à NO,
+# peut être accomplie au moyen de la commande \collaborationgraph. La
+# désactivation d'un graphe de collaboration peut être accomplie au moyen de la
+# commande \hidecollaborationgraph.
+# La valeur par défaut est : YES.
+# Cette balise nécessite que la balise HAVE_DOT soit définie sur YES.
+
+COLLABORATION_GRAPH    = YES
+
+# Si la balise GROUP_GRAPHS est définie à YES, Doxygen générera un graphe pour
+# les groupes, montrant les dépendances directes des groupes. L'activation
+# explicite d'un graphe de dépendance de groupe, lorsque GROUP_GRAPHS est défini
+# à NO, peut être accomplie au moyen de la commande \groupgraph. La
+# désactivation d'un graphe de répertoire peut être accomplie au moyen de la
+# commande \hidegroupgraph. Voir aussi le chapitre Grouping dans le manuel.
+# La valeur par défaut est : YES.
+# Cette balise nécessite que la balise HAVE_DOT soit définie sur YES.
+
+GROUP_GRAPHS           = YES
+
+# Si la balise UML_LOOK est définie à YES, Doxygen générera des diagrammes
+# d'héritage et de collaboration dans un style similaire au langage de
+# modelisation unifie de l'OMG.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise HAVE_DOT soit définie sur YES.
+
+UML_LOOK               = NO
+
+# Si la balise UML_LOOK est activée, les champs et méthodes sont affichés à
+# l'intérieur du nœud de classe. S'il y a beaucoup de champs ou méthodes et
+# beaucoup de nœuds, le graphe peut devenir trop grand pour être utile. Le seuil
+# UML_LIMIT_NUM_FIELDS limite le nombre d'éléments pour chaque type pour rendre
+# la taille plus gérable. Définissez ceci à 0 pour aucune limite. Notez que le
+# seuil peut être dépasse de 50% avant que la limite ne soit appliquée. Donc
+# lorsque vous définissez le seuil à 10, jusqu'à 15 champs peuvent apparaître,
+# mais si le nombre dépasse 15, le nombre total de champs affichés est limite à
+# 10.
+# Valeur minimum : 0, valeur maximum : 100, valeur par défaut : 10.
+# Cette balise nécessite que la balise UML_LOOK soit définie sur YES.
+
+UML_LIMIT_NUM_FIELDS   = 10
+
+# Si la balise UML_LOOK est activée, les étiquettes de champ sont affichées le
+# long de l'arête entre deux nœuds de classe. S'il y a beaucoup de champs et
+# beaucoup de nœuds, le graphe peut devenir trop encombre. Le seuil
+# UML_MAX_EDGE_LABELS limite le nombre d'éléments pour rendre la taille plus
+# gérable. Définissez ceci à 0 pour aucune limite.
+# Valeur minimum : 0, valeur maximum : 100, valeur par défaut : 10.
+# Cette balise nécessite que la balise UML_LOOK soit définie sur YES.
+
+UML_MAX_EDGE_LABELS    = 10
+
+# Si la balise DOT_UML_DETAILS est définie à NO, Doxygen affichera les attributs
+# et méthodes sans types et arguments dans les graphes UML. Si la balise
+# DOT_UML_DETAILS est définie à YES, Doxygen ajoutera le type et les arguments
+# pour les attributs et méthodes dans les graphes UML. Si la balise
+# DOT_UML_DETAILS est définie à NONE, Doxygen ne générera pas de champs avec des
+# informations de membre de classe dans les graphes UML. Les diagrammes de
+# classe ressembleront aux diagrammes de classe par défaut mais en utilisant la
+# notation UML pour les relations.
+# Les valeurs possibles sont :NO, YESetNONE.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise UML_LOOK soit définie sur YES.
+
+DOT_UML_DETAILS        = NO
+
+# La balise DOT_WRAP_THRESHOLD peut être utilisée pour définir le nombre maximal
+# de caractères a afficher sur une seule ligne. Si la longueur réelle de la
+# ligne dépasse significativement ce seuil, elle sera divisée sur plusieurs
+# lignes. Quelques heuristiques sont appliquées pour éviter les coupures de
+# ligne inesthetiques.
+# Valeur minimum : 0, valeur maximum : 1000, valeur par défaut : 17.
+# Cette balise nécessite que la balise HAVE_DOT soit définie sur YES.
+
+DOT_WRAP_THRESHOLD     = 17
+
+# Si la balise TEMPLATE_RELATIONS est définie à YES, les graphes d'héritage et
+# de collaboration montreront les relations entre les templates et leurs
+# instances.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise HAVE_DOT soit définie sur YES.
+
+TEMPLATE_RELATIONS     = NO
+
+# Si les balises INCLUDE_GRAPH, ENABLE_PREPROCESSING et SEARCH_INCLUDES sont
+# définies à YES, Doxygen générera un graphe pour chaque fichier documente
+# montrant les dépendances d'inclusion directes et indirectes du fichier avec
+# d'autres fichiers documentés. L'activation explicite d'un graphe d'inclusion,
+# lorsque INCLUDE_GRAPH est défini à NO, peut être accomplie au moyen de la
+# commande \includegraph. La désactivation d'un graphe d'inclusion peut être
+# accomplie au moyen de la commande \hideincludegraph.
+# La valeur par défaut est : YES.
+# Cette balise nécessite que la balise HAVE_DOT soit définie sur YES.
+
+INCLUDE_GRAPH          = YES
+
+# Si les balises INCLUDED_BY_GRAPH, ENABLE_PREPROCESSING et SEARCH_INCLUDES sont
+# définies à YES, Doxygen générera un graphe pour chaque fichier documente
+# montrant les dépendances d'inclusion directes et indirectes du fichier avec
+# d'autres fichiers documentés. L'activation explicite d'un graphe d'inclusion
+# par, lorsque INCLUDED_BY_GRAPH est défini à NO, peut être accomplie au moyen
+# de la commande \includedbygraph. La désactivation d'un graphe d'inclusion par
+# peut être accomplie au moyen de la commande \hideincludedbygraph.
+# La valeur par défaut est : YES.
+# Cette balise nécessite que la balise HAVE_DOT soit définie sur YES.
+
+INCLUDED_BY_GRAPH      = YES
+
+# Si la balise CALL_GRAPH est définie à YES, Doxygen générera un graphe de
+# dépendance d'appel pour chaque fonction globale ou méthode de classe.
+#
+# Notez que l'activation de cette option augmentera de manière significative le
+# temps d'une exécution. Donc dans la plupart des cas, il sera préférable
+# d'activer les graphes d'appel uniquement pour les fonctions sélectionnées en
+# utilisant la commande \callgraph. La désactivation d'un graphe d'appel peut
+# être accomplie au moyen de la commande \hidecallgraph.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise HAVE_DOT soit définie sur YES.
+
+CALL_GRAPH             = YES
+
+# Si la balise CALLER_GRAPH est définie à YES, Doxygen générera un graphe de
+# dépendance d'appelant pour chaque fonction globale ou méthode de classe.
+#
+# Notez que l'activation de cette option augmentera de manière significative le
+# temps d'une exécution. Donc dans la plupart des cas, il sera préférable
+# d'activer les graphes d'appelant uniquement pour les fonctions sélectionnées
+# en utilisant la commande \callergraph. La désactivation d'un graphe d'appelant
+# peut être accomplie au moyen de la commande \hidecallergraph.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise HAVE_DOT soit définie sur YES.
+
+CALLER_GRAPH           = YES
+
+# Si la balise GRAPHICAL_HIERARCHY est définie à YES, Doxygen générera une
+# hiérarchie graphique de toutes les classes au lieu d'une textuelle.
+# La valeur par défaut est : YES.
+# Cette balise nécessite que la balise HAVE_DOT soit définie sur YES.
+
+GRAPHICAL_HIERARCHY    = YES
+
+# Si la balise DIRECTORY_GRAPH est définie à YES, Doxygen montrera les
+# dépendances d'un répertoire sur d'autres répertoires de manière graphique. Les
+# relations de dépendance sont déterminées par les relations #include entre les
+# fichiers dans les répertoires. L'activation explicite d'un graphe de
+# répertoire, lorsque DIRECTORY_GRAPH est défini à NO, peut être accomplie au
+# moyen de la commande \directorygraph. La désactivation d'un graphe de
+# répertoire peut être accomplie au moyen de la commande \hidedirectorygraph.
+# La valeur par défaut est : YES.
+# Cette balise nécessite que la balise HAVE_DOT soit définie sur YES.
+
+DIRECTORY_GRAPH        = YES
+
+# La balise DIR_GRAPH_MAX_DEPTH peut être utilisée pour limiter le nombre
+# maximal de niveaux de sous-répertoires générés dans les graphes de dépendance
+# de répertoire par dot.
+# Valeur minimum : 1, valeur maximum : 25, valeur par défaut : 1.
+# Cette balise nécessite que la balise DIRECTORY_GRAPH soit définie sur YES.
+
+DIR_GRAPH_MAX_DEPTH    = 1
+
+# La balise DOT_IMAGE_FORMAT peut être utilisée pour définir le format d'image
+# des images générées par dot. Pour une explication des formats d'image, voir la
+# section des formats de sortie dans la documentation de l'outil dot (Graphviz
+# (see:
+# https://www.graphviz.org/)).
+#
+# Notez que les formats svg:cairo et svg:cairo:cairo ne peuvent pas être
+# utilisés en combinaison avec INTERACTIVE_SVG (le INTERACTIVE_SVG sera défini a
+# NO).
+# Les valeurs possibles sont :png, jpg, gif, svg, png:gd, png:gd:gd, png:cairo,
+# png:cairo:gd, png:cairo:cairo, png:cairo:gdiplus, png:gdiplus,
+# png:gdiplus:gdiplus, svg:cairo, svg:cairo:cairo, svg:svg, svg:svg:core,
+# gif:cairo, gif:cairo:gd, gif:cairo:gdiplus, gif:gdiplus, gif:gdiplus:gdiplus,
+# gif:gd, gif:gd:gd, jpg:cairo, jpg:cairo:gd, jpg:cairo:gdiplus, jpg:gd,
+# jpg:gd:gd, jpg:gdiplusetjpg:gdiplus:gdiplus.
+# La valeur par défaut est : png.
+# Cette balise nécessite que la balise HAVE_DOT soit définie sur YES.
+
+DOT_IMAGE_FORMAT       = svg
+
+# Si DOT_IMAGE_FORMAT est défini a svg ou svg:svg ou svg:svg:core, cette option
+# peut être définie à YES pour activer la génération d'images SVG interactives
+# qui permettent le zoom et le panoramique.
+#
+# Notez que cela nécessite un navigateur moderne autre qu'Internet Explorer.
+# Testes et fonctionnels: Firefox, Chrome, Safari et Opera.
+#
+# Notez que cette option sera automatiquement désactivée lorsque
+# DOT_IMAGE_FORMAT est défini a svg:cairo ou svg:cairo:cairo.
+# La valeur par défaut est : NO.
+# Cette balise nécessite que la balise HAVE_DOT soit définie sur YES.
+
+INTERACTIVE_SVG        = NO
+
+# La balise DOT_PATH peut être utilisée pour spécifier le chemin ou l'outil dot
+# peut être trouvé. Si laissé vide, il est suppose que l'outil dot peut être
+# trouvé dans le path.
+# Cette balise nécessite que la balise HAVE_DOT soit définie sur YES.
+
+DOT_PATH               =
+
+# La balise DOTFILE_DIRS peut être utilisée pour spécifier un ou plusieurs
+# répertoires qui contiennent des fichiers dot qui sont inclus dans la
+# documentation (voir la commande \dotfile).
+# Cette balise nécessite que la balise HAVE_DOT soit définie sur YES.
+
+DOTFILE_DIRS           =
+
+# Vous pouvez inclure des diagrammes faits avec dia dans la documentation
+# Doxygen. Doxygen executera ensuite dia pour produire le diagramme et l'insérer
+# dans la documentation. La balise DIA_PATH vous permet de spécifier le
+# répertoire ou reside le binaire dia. Si laissé vide, dia est suppose être
+# trouve dans le chemin de recherche par défaut.
+
+DIA_PATH               =
+
+# La balise DIAFILE_DIRS peut être utilisée pour spécifier un ou plusieurs
+# répertoires qui contiennent des fichiers dia qui sont inclus dans la
+# documentation (voir la commande \diafile).
+
+DIAFILE_DIRS           =
+
+# Lors de l'utilisation de PlantUML, la balise PLANTUML_JAR_PATH devrait être
+# utilisée pour spécifier le chemin ou java peut trouver le fichier plantuml.jar
+# ou le nom de fichier du fichier jar a utiliser. Si laissé vide, il est suppose
+# que PlantUML n'est pas utilise ou appelé lors d'une étape de prétraitement.
+# Doxygen générera un avertissement lorsqu'il rencontrera une commande \startuml
+# dans ce cas et ne générera pas de sortie pour le diagramme.
+
+PLANTUML_JAR_PATH      =
+
+# Lors de l'utilisation de PlantUML, la balise PLANTUML_CFG_FILE peut être
+# utilisée pour spécifier un fichier de configuration pour PlantUML.
+
+PLANTUML_CFG_FILE      =
+
+# Lors de l'utilisation de PlantUML, les chemins spécifiés sont recherches pour
+# les fichiers spécifiés par l'instruction !include dans un bloc PlantUML.
+
+PLANTUML_INCLUDE_PATH  =
+
+# La balise PLANTUMLFILE_DIRS peut être utilisée pour spécifier un ou plusieurs
+# répertoires qui contiennent des fichiers PlantUml qui sont inclus dans la
+# documentation (voir la commande \plantumlfile).
+
+PLANTUMLFILE_DIRS      =
+
+# Lors de l'utilisation de diagrammes Mermaid avec le rendu CLI, la balise
+# MERMAID_PATH devrait être utilisée pour spécifier le répertoire ou
+# l'exécutable mmdc (Mermaid CLI) peut être trouvé. Si laissé vide, le rendu
+# basé sur CLI est désactivé. Pour la sortie HTML, le rendu côté client via
+# JavaScript est utilisé par défaut et ne nécessite pas mmdc. Pour la sortie
+# LaTeX/PDF, mmdc est requis pour pre-générer les images. Doxygen générera un
+# avertissement lorsque le rendu CLI est nécessaire mais que mmdc n'est pas
+# disponible.
+
+MERMAID_PATH           =
+
+# Lors de l'utilisation de diagrammes Mermaid, la balise MERMAID_CONFIG_FILE
+# peut être utilisée pour spécifier un fichier de configuration JSON pour
+# l'outil Mermaid CLI (mmdc). Ce fichier peut contenir des paramètres de thème
+# et d'autres options de configuration Mermaid.
+
+MERMAID_CONFIG_FILE    =
+
+# La balise MERMAID_RENDER_MODE sélectionne la manière dont les diagrammes
+# Mermaid sont rendus.
+# Les valeurs possibles sont :AUTO (utiliser le rendu côté client pour HTML et
+# mmdc pour LaTeX/PDF et autres formats. Si MERMAID_PATH n'est pas défini, les
+# diagrammes non-HTML produiront un avertissement), CLI (utiliser l'outil mmdc
+# pour pre-générer les images (nécessite Node.js et mermaid-js/mermaid-cli).
+# Fonctionne pour tous les formats de sortie)etCLIENT_SIDE (integrer mermaid.js
+# dans la sortie HTML pour le rendu côté client. Ne nécessite pas mmdc mais
+# fonctionne uniquement pour la sortie HTML).
+# La valeur par défaut est : AUTO.
+
+MERMAID_RENDER_MODE    = AUTO
+
+# La balise MERMAID_JS_URL spécifie l'URL à partir de laquelle charger
+# mermaid.js lors de l'utilisation du rendu côté client (MERMAID_RENDER_MODE est
+# CLIENT_SIDE ou AUTO). Le défaut pointe vers la dernière version Mermaid v11
+# sur le CDN jsDelivr.
+#
+# L'URL CDN par défaut nécessite un accès Internet lors de la consultation de
+# la documentation générée. Pour une utilisation hors ligne, telechargez
+# mermaid.esm.min.mjs et définissez ceci sur un chemin relatif, ou utilisez
+# MERMAID_RENDER_MODE=CLI pour pre-générer les images à la place.
+# Exemples:
+# - Dernière v11 (défaut):
+# https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs
+# - Version épinglée:
+# https://cdn.jsdelivr.net/npm/mermaid@11.3.0/dist/mermaid.esm.min.mjs
+# - Copie locale: ./mermaid.esm.min.mjs (l'utilisateur doit placer le fichier
+# dans le répertoire de sortie HTML)
+# La valeur par défaut est :
+# https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs.
+
+MERMAID_JS_URL         = https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs
+
+# La balise MERMAIDFILE_DIRS peut être utilisée pour spécifier un ou plusieurs
+# répertoires qui contiennent des fichiers Mermaid qui sont inclus dans la
+# documentation (voir la commande \mermaidfile).
+
+MERMAIDFILE_DIRS       =
+
+# La balise DOT_GRAPH_MAX_NODES peut être utilisée pour définir le nombre
+# maximal de nœuds qui seront affichés dans le graphe. Si le nombre de nœuds
+# dans un graphe devient supérieur à cette valeur, Doxygen tronquera le graphe,
+# ce qui est visualise en représentant un nœud comme une boite rouge. Notez que
+# si le nombre d'enfants directs du nœud racine dans un graphe est déjà
+# supérieur à DOT_GRAPH_MAX_NODES, le graphe ne sera pas affiche du tout. Notez
+# également que la taille d'un graphe peut être encore restreinte par
+# MAX_DOT_GRAPH_DEPTH.
+# Valeur minimum : 0, valeur maximum : 10000, valeur par défaut : 50.
+# Cette balise nécessite que la balise HAVE_DOT soit définie sur YES.
+
+DOT_GRAPH_MAX_NODES    = 60
+
+# La balise MAX_DOT_GRAPH_DEPTH peut être utilisée pour définir la profondeur
+# maximale des graphes générés par dot. Une valeur de profondeur de 3 signifie
+# que seuls les nœuds atteignables depuis la racine en suivant un chemin via au
+# maximum 3 arêtes seront affichés. Les nœuds qui se trouvent plus loin du nœud
+# racine seront omis. Notez que définir cette option à 1 ou 2 peut réduire
+# considerablement le temps de calcul nécessaire pour les grandes bases de code.
+# Notez également que la taille d'un graphe peut être encore restreinte par
+# DOT_GRAPH_MAX_NODES. Utiliser une profondeur de 0 signifie aucune restriction
+# de profondeur.
+# Valeur minimum : 0, valeur maximum : 1000, valeur par défaut : 0.
+# Cette balise nécessite que la balise HAVE_DOT soit définie sur YES.
+
+MAX_DOT_GRAPH_DEPTH    = 0
+
+# Si la balise GENERATE_LEGEND est définie à YES, Doxygen générera une page de
+# legende expliquant la signification des diverses boites et flèches dans les
+# graphes générés par dot.
+# Note : Cette balise nécessite que UML_LOOK ne soit pas défini, c'est-à-dire
+# que la representation graphique interne de Doxygen pour les diagrammes
+# d'héritage et de collaboration soit utilisée.
+# La valeur par défaut est : YES.
+# Cette balise nécessite que la balise HAVE_DOT soit définie sur YES.
+
+GENERATE_LEGEND        = YES
+
+# Si la balise DOT_CLEANUP est définie à YES, Doxygen supprimera les fichiers
+# intermédiaires qui sont utilisés pour générer les divers graphes.
+#
+# Note: Ce paramètre est utilisé non seulement pour les fichiers dot mais aussi
+# pour les fichiers temporaires msc.
+# La valeur par défaut est : YES.
+
+DOT_CLEANUP            = YES
+
+# Vous pouvez définir des diagrammes de séquence de messages dans les
+# commentaires Doxygen en utilisant la commande \msc. Si la balise MSCGEN_TOOL
+# est laissée vide (le défaut), Doxygen utilisera une version intégrée de
+# l'outil mscgen pour produire les diagrammes. Alternativement, la balise
+# MSCGEN_TOOL peut également spécifier le nom d'un outil externe. Par exemple,
+# en specifiant prog comme valeur, Doxygen appellera l'outil comme prog -T
+# <outfile_format> -o <outputfile> <inputfile>. L'outil externe devrait prendre
+# en charge les formats de fichier de sortie "png", "eps", "svg" et "ismap".
+
+MSCGEN_TOOL            =
+
+# La balise MSCFILE_DIRS peut être utilisée pour spécifier un ou plusieurs
+# répertoires qui contiennent des fichiers msc qui sont inclus dans la
+# documentation (voir la commande \mscfile).
+
+MSCFILE_DIRS           =

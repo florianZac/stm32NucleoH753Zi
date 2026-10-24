@@ -1,0 +1,1701 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="group__grp__dac" kind="group">
+    <compoundname>grp_dac</compoundname>
+    <title>Pilotage des DAC MCP47FEB28</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__grp__dac_1ga4f3b4b4120ebf5fcecc3f9b14f56afae" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint16_t</type>
+        <definition>static uint16_t VoltageVersCodeDAC</definition>
+        <argsstring>(float tension_desiree, float tension_reference)</argsstring>
+        <name>VoltageVersCodeDAC</name>
+        <param>
+          <type>float</type>
+          <declname>tension_desiree</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>tension_reference</declname>
+        </param>
+        <briefdescription>
+<para>Convertit une tension desiree (en volts) en code numerique 12 bits (0-4095) compris par le DAC, selon la formule : code = (tension_desiree / tension_reference) * 4095. Dans la config actuelle du DAC (registre VREF a sa valeur par defaut, VDD utilise comme reference), tension_reference doit etre la tension VDD REELLE mesuree sur le DAC (pas forcement 5V pile - utilise la valeur que tu as mesuree au multimetre pour plus de precision). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tension_desiree</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tension de sortie voulue, en volts (ex : 5.0f). Ecretee automatiquement entre 0 et tension_reference. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tension_reference</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tension de reference reelle du DAC (VDD mesure), en volts. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>uint16_t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Code 12 bits (0-4095) a passer a EcrireDACVolatile() ou BalayerSortieDAC(). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">//<sp/>Ecrire<sp/>5V<sp/>sur<sp/>VOUT0,<sp/>avec<sp/>un<sp/>VDD<sp/>reellement<sp/>mesure<sp/>a<sp/>5V<sp/>:</highlight></codeline>
+<codeline><highlight class="normal">uint16_t<sp/>code<sp/>=<sp/>VoltageVersCodeDAC(5.0f,<sp/>5.0f);<sp/><sp/><sp/>//<sp/>-&gt;<sp/>4095</highlight></codeline>
+<codeline><highlight class="normal">EcrireDACVolatile(&amp;hi2c1,<sp/>(0x62<sp/>&lt;&lt;<sp/>1),<sp/>0x00,<sp/>code);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Ecrire<sp/>2.5V<sp/>(moitie<sp/>de<sp/>VDD),<sp/>avec<sp/>VDD<sp/>mesure<sp/>a<sp/>4.98V<sp/>:</highlight></codeline>
+<codeline><highlight class="normal">uint16_t<sp/>code2<sp/>=<sp/>VoltageVersCodeDAC(2.5f,<sp/>4.98f);<sp/>//<sp/>-&gt;<sp/>~2056</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="847" column="17" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="847" bodyend="858"/>
+        <references refid="group__grp__dac_1ga4f3b4b4120ebf5fcecc3f9b14f56afae" compoundref="main_8c" startline="847" endline="858">VoltageVersCodeDAC</references>
+        <referencedby refid="group__grp__exti_1ga3a919fef613806da58b99557a009f22a" compoundref="main_8c" startline="1648" endline="1720">ExecuterCaptureComplete</referencedby>
+        <referencedby refid="group__grp__dac_1ga4f3b4b4120ebf5fcecc3f9b14f56afae" compoundref="main_8c" startline="847" endline="858">VoltageVersCodeDAC</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1gab5371264b6f8831689ac30f87a45c4ed" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint8_t *</type>
+        <definition>static uint8_t * ResoudreTableauDacParAdresse</definition>
+        <argsstring>(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal)</argsstring>
+        <name>ResoudreTableauDacParAdresse</name>
+        <param>
+          <type>I2C_HandleTypeDef *</type>
+          <declname>hi2c</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>adresse_hal</declname>
+        </param>
+        <briefdescription>
+<para>Retrouve le tableau DACx_DEF (celui rafraichi en continu par la boucle de StartLwipTask(), voir &quot;USER CODE BEGIN 2&quot;) qui correspond au bus/adresse donnes, ou NULL si aucun ne correspond (adresse non geree par la boucle periodique). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hi2c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Handle I2C (&amp;hi2c1 ou &amp;hi2c2). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>adresse_hal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Adresse I2C 7 bits deja decalee (ex: MCP4725_I2CADDR_DEFAULT). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>uint8_t*</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointeur vers DAC1_DEF, DAC2_DEF... DAC5_DEF, ou NULL. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">uint8_t<sp/>*tab<sp/>=<sp/>ResoudreTableauDacParAdresse(&amp;hi2c1,<sp/>(0x60<sp/>&lt;&lt;<sp/>1));</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>-&gt;<sp/>&amp;DAC1_DEF[0]</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="875" column="16" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="875" bodyend="885"/>
+        <references refid="group__grp__dac_1gab5371264b6f8831689ac30f87a45c4ed" compoundref="main_8c" startline="875" endline="885">ResoudreTableauDacParAdresse</references>
+        <referencedby refid="group__grp__dac_1ga161b95d8fabb7c81f08c2e0629238b6e" compoundref="main_8c" startline="4458" endline="4508">h_BALAYER_DAC</referencedby>
+        <referencedby refid="group__grp__dac_1ga9a556575c443842fc36ade5dc4983b87" compoundref="main_8c" startline="4950" endline="4986">h_GET_DAC_REG</referencedby>
+        <referencedby refid="group__grp__dac_1gab5371264b6f8831689ac30f87a45c4ed" compoundref="main_8c" startline="875" endline="885">ResoudreTableauDacParAdresse</referencedby>
+        <referencedby refid="group__grp__dac_1gafd7df1ea4aaa529649e87bc99b737e42" compoundref="main_8c" startline="912" endline="926">SynchroniserTableauDac</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1gafd7df1ea4aaa529649e87bc99b737e42" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void SynchroniserTableauDac</definition>
+        <argsstring>(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t registre, uint16_t valeur)</argsstring>
+        <name>SynchroniserTableauDac</name>
+        <param>
+          <type>I2C_HandleTypeDef *</type>
+          <declname>hi2c</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>adresse_hal</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>registre</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>valeur</declname>
+        </param>
+        <briefdescription>
+<para>Repercute une ecriture DAC directe (EcrireDACVolatile(), typiquement depuis BalayerSortieDAC()) dans le tableau DACx_DEF correspondant, pour que la boucle periodique de StartLwipTask() retransmette CETTE valeur au lieu d&apos;ecraser la sortie avec l&apos;ancien contenu du tableau (typiquement 0V, voir MCP4725_VAL_DEF_BIN) des la fin de l&apos;ecriture directe. Sans cet appel, une valeur ecrite par un balayage ou un cycle de test &quot;retombait&quot; au palier suivant de la boucle. Ne fait rien si (hi2c, adresse_hal) ne correspond a aucun DACx_DEF connu (ResoudreTableauDacParAdresse() renvoie alors NULL). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hi2c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Handle I2C utilise pour l&apos;ecriture (&amp;hi2c1 ou &amp;hi2c2). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>adresse_hal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Adresse I2C 7 bits deja decalee de la puce ecrite. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>registre</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Registre ecrit (0-7). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>valeur</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Valeur 12 bits ecrite sur ce registre. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">EcrireDACVolatile(hi2c,<sp/>adresse_hal,<sp/>registre,<sp/>valeur);</highlight></codeline>
+<codeline><highlight class="normal">SynchroniserTableauDac(hi2c,<sp/>adresse_hal,<sp/>registre,<sp/>valeur);</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="912" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="912" bodyend="926"/>
+        <references refid="group__grp__dac_1ga924c3b0d97d03d4aba5b24043d36849c" compoundref="main_8c" startline="4043" endline="4065">MajEtatLdoDepuisDac</references>
+        <references refid="group__grp__dac_1gab5371264b6f8831689ac30f87a45c4ed" compoundref="main_8c" startline="875" endline="885">ResoudreTableauDacParAdresse</references>
+        <references refid="group__grp__dac_1gafd7df1ea4aaa529649e87bc99b737e42" compoundref="main_8c" startline="912" endline="926">SynchroniserTableauDac</references>
+        <referencedby refid="group__grp__dac_1ga3b69ec3e3af5d495bc0a095f6e4343eb" compoundref="main_8c" startline="1346" endline="1397">BalayerSortieDAC</referencedby>
+        <referencedby refid="group__grp__dac_1gafd7df1ea4aaa529649e87bc99b737e42" compoundref="main_8c" startline="912" endline="926">SynchroniserTableauDac</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1gaf2d35bfc7d39a06f0e77e0680df9c08d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>HAL_StatusTypeDef</type>
+        <definition>static HAL_StatusTypeDef EcrireDACVolatile</definition>
+        <argsstring>(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t registre, uint16_t valeur)</argsstring>
+        <name>EcrireDACVolatile</name>
+        <param>
+          <type>I2C_HandleTypeDef *</type>
+          <declname>hi2c</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>adresse_hal</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>registre</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>valeur</declname>
+        </param>
+        <briefdescription>
+<para>Ecrit une valeur 12 bits dans un registre VOLATILE du DAC MCP47FEB28 (adresses memoire 00h-07h uniquement). Ne touche JAMAIS l&apos;EEPROM (adresses 10h-1Ah) : refuse d&apos;emettre quoi que ce soit si registre est hors de la plage 0x00-0x07, aucun risque de corrompre l&apos;adresse I2C ou toute autre configuration du DAC, meme en cas d&apos;appel avec un parametre invalide. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hi2c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointeur vers le handle I2C a utiliser (&amp;hi2c1, &amp;hi2c2, ...). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>adresse_hal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Adresse I2C du DAC, deja au format HAL (decalee, ex : 0xC4 pour un DAC a 0x62 en 7 bits). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>registre</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Adresse memoire du registre volatile cible (0x00 = DAC0/VOUT0, 0x01 = DAC1/VOUT1, ... 0x07 = DAC7/VOUT7). Toute valeur &gt; 0x07 est refusee (HAL_ERROR immediat, aucune trame emise) pour eviter tout risque d&apos;ecriture accidentelle dans les registres nonvolatiles (EEPROM). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>valeur</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Valeur 12 bits a ecrire (0-4095). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>HAL_StatusTypeDef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Resultat de la transmission I2C (HAL_OK si le DAC a acquitte les 3 octets, HAL_ERROR si registre est hors plage volatile ou si le DAC a NACK). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">//<sp/>Ecrit<sp/>la<sp/>pleine<sp/>echelle<sp/>(4095)<sp/>sur<sp/>VOUT0<sp/>du<sp/>DAC<sp/>a<sp/>l&apos;adresse<sp/>0x62<sp/>:</highlight></codeline>
+<codeline><highlight class="normal">HAL_StatusTypeDef<sp/>status<sp/>=<sp/>EcrireDACVolatile(&amp;hi2c1,<sp/>(0x62<sp/>&lt;&lt;<sp/>1),<sp/>0x00,<sp/>4095);</highlight></codeline>
+<codeline><highlight class="normal">if<sp/>(status<sp/>==<sp/>HAL_OK)<sp/>{<sp/>...<sp/>}<sp/><sp/><sp/>//<sp/>mesurer<sp/>VOUT0<sp/>au<sp/>voltmetre</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="956" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="956" bodyend="982"/>
+        <references refid="group__grp__dac_1gaf2d35bfc7d39a06f0e77e0680df9c08d" compoundref="main_8c" startline="956" endline="982">EcrireDACVolatile</references>
+        <references refid="group__grp__i2c_1ga5cb1cd70b1dd76a8aadb2bccb2837d2f" compoundref="main_8c" startline="728" endline="731">ResoudreMutexI2C</references>
+        <referencedby refid="group__grp__dac_1ga3b69ec3e3af5d495bc0a095f6e4343eb" compoundref="main_8c" startline="1346" endline="1397">BalayerSortieDAC</referencedby>
+        <referencedby refid="group__grp__dac_1gaf2d35bfc7d39a06f0e77e0680df9c08d" compoundref="main_8c" startline="956" endline="982">EcrireDACVolatile</referencedby>
+        <referencedby refid="group__grp__dac_1ga3c9eb54cd6a878bce23cc531e877692f" compoundref="main_8c" startline="1289" endline="1310">EcrireToutesLesSorties</referencedby>
+        <referencedby refid="group__grp__exti_1ga3a919fef613806da58b99557a009f22a" compoundref="main_8c" startline="1648" endline="1720">ExecuterCaptureComplete</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1gade7258168a59f260de108ec88059f889" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>HAL_StatusTypeDef</type>
+        <definition>static HAL_StatusTypeDef LireRegistreConfigDAC</definition>
+        <argsstring>(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t registre, uint16_t *valeur)</argsstring>
+        <name>LireRegistreConfigDAC</name>
+        <param>
+          <type>I2C_HandleTypeDef *</type>
+          <declname>hi2c</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>adresse_hal</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>registre</declname>
+        </param>
+        <param>
+          <type>uint16_t *</type>
+          <declname>valeur</declname>
+        </param>
+        <briefdescription>
+<para>Lit un registre VOLATILE de CONFIGURATION du DAC MCP47FEB28 (adresses memoire 08h/09h/0Ah UNIQUEMENT - VREF/Power-Down/ Gain, voir Table 4-1 du datasheet DS20006368A). Toute autre adresse est refusee (HAL_ERROR immediat, aucune trame emise) : meme garde-fou que EcrireDACVolatile(), pour ne jamais risquer de lire (et donc plus tard, par erreur de copier-coller, d&apos;ecrire) 0Bh (WiperLock STATUS) ou l&apos;EEPROM (10h-1Ah). Protocole : ecrit l&apos;octet de commande (adresse memoire, bits C1:C0=11 pour READ), puis relit 2 octets de donnee via un Repeated Start (HAL_I2C_Mem_Read gere cette sequence). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hi2c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointeur vers le handle I2C a utiliser (&amp;hi2c1, &amp;hi2c2, ...). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>adresse_hal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Adresse I2C du DAC, deja au format HAL (decalee). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>registre</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>0x08 (VREF), 0x09 (Power-Down) ou 0x0A (Gain/STATUS). Toute autre valeur est refusee. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>valeur</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointeur vers le uint16_t a remplir avec le mot lu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>HAL_StatusTypeDef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Resultat de la lecture I2C (HAL_OK si le DAC a repondu, HAL_ERROR si registre est hors plage autorisee ou si le DAC a NACK/timeout). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">uint16_t<sp/>vref;</highlight></codeline>
+<codeline><highlight class="normal">if<sp/>(LireRegistreConfigDAC(&amp;hi2c1,<sp/>(0x62<sp/>&lt;&lt;<sp/>1),<sp/>0x08,<sp/>&amp;vref)<sp/>==<sp/>HAL_OK)</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>vref<sp/>==<sp/>0x0000<sp/>si<sp/>tous<sp/>les<sp/>canaux<sp/>sont<sp/>sur<sp/>VDD<sp/>(defaut<sp/>usine)</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1013" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1013" bodyend="1037"/>
+        <references refid="group__grp__dac_1gade7258168a59f260de108ec88059f889" compoundref="main_8c" startline="1013" endline="1037">LireRegistreConfigDAC</references>
+        <references refid="group__grp__i2c_1ga5cb1cd70b1dd76a8aadb2bccb2837d2f" compoundref="main_8c" startline="728" endline="731">ResoudreMutexI2C</references>
+        <referencedby refid="group__grp__dac_1ga60bdf8f5f95deb2ebd6667b24e0cef0b" compoundref="main_8c" startline="4527" endline="4554">h_GET_DAC_CONFIG</referencedby>
+        <referencedby refid="group__grp__dac_1ga9a556575c443842fc36ade5dc4983b87" compoundref="main_8c" startline="4950" endline="4986">h_GET_DAC_REG</referencedby>
+        <referencedby refid="group__grp__dac_1gaef2582c078db38424ec959fc1f9f1c5f" compoundref="main_8c" startline="1118" endline="1142">InitialiserConfigDacsI2C1</referencedby>
+        <referencedby refid="group__grp__dac_1gade7258168a59f260de108ec88059f889" compoundref="main_8c" startline="1013" endline="1037">LireRegistreConfigDAC</referencedby>
+        <referencedby refid="group__grp__dac_1gacdf4ad1b5d4a18ab3a5b309318099344" compoundref="main_8c" startline="1228" endline="1267">SurveillerConfigDacsI2C1</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1ga64f4ecd7d147a039d045da6b64975451" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>HAL_StatusTypeDef</type>
+        <definition>static HAL_StatusTypeDef EcrireRegistreConfigDAC</definition>
+        <argsstring>(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t registre, uint16_t valeur)</argsstring>
+        <name>EcrireRegistreConfigDAC</name>
+        <param>
+          <type>I2C_HandleTypeDef *</type>
+          <declname>hi2c</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>adresse_hal</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>registre</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>valeur</declname>
+        </param>
+        <briefdescription>
+<para>Ecrit un registre VOLATILE de CONFIGURATION du DAC MCP47FEB28 (adresses memoire 08h/09h/0Ah UNIQUEMENT). Meme garde-fou que EcrireDACVolatile()/LireRegistreConfigDAC() : toute adresse hors de {0x08, 0x09, 0x0A} est refusee, aucune trame emise. ATTENTION : contrairement a EcrireDACVolatile() (une sortie a la fois), ces 3 registres s&apos;appliquent AUX 8 CANAUX DE LA PUCE A LA FOIS (2 bits/canal pour VREF et Power-Down, 1 bit/ canal pour Gain) - voir Registres 4-2/4-3/4-4 du datasheet. Une seule ecriture ici change donc potentiellement les 8 sorties de cette puce. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hi2c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointeur vers le handle I2C a utiliser (&amp;hi2c1, &amp;hi2c2, ...). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>adresse_hal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Adresse I2C du DAC, deja au format HAL (decalee). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>registre</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>0x08 (VREF), 0x09 (Power-Down) ou 0x0A (Gain). Toute autre valeur est refusee. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>valeur</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Mot 16 bits a ecrire tel quel (voir Registres 4-2/4-3/4-4 pour le format exact bit a bit - c&apos;est a l&apos;appelant de le construire correctement, cette fonction ne fait aucune interpretation). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>HAL_StatusTypeDef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Resultat de l&apos;ecriture I2C. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">//<sp/>VREF<sp/>=<sp/>VDD<sp/>sur<sp/>les<sp/>8<sp/>canaux<sp/>(VRnB:VRnA<sp/>=<sp/>00<sp/>partout)<sp/>:</highlight></codeline>
+<codeline><highlight class="normal">EcrireRegistreConfigDAC(&amp;hi2c1,<sp/>(0x62<sp/>&lt;&lt;<sp/>1),<sp/>0x08,<sp/>0x0000);</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Gain<sp/>=<sp/>1x<sp/>sur<sp/>les<sp/>8<sp/>canaux<sp/>(G7..G0<sp/>=<sp/>0,<sp/>octet<sp/>bas<sp/>ignore)<sp/>:</highlight></codeline>
+<codeline><highlight class="normal">EcrireRegistreConfigDAC(&amp;hi2c1,<sp/>(0x62<sp/>&lt;&lt;<sp/>1),<sp/>0x0A,<sp/>0x0000);</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1068" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1068" bodyend="1086"/>
+        <references refid="group__grp__dac_1ga64f4ecd7d147a039d045da6b64975451" compoundref="main_8c" startline="1068" endline="1086">EcrireRegistreConfigDAC</references>
+        <references refid="group__grp__i2c_1ga5cb1cd70b1dd76a8aadb2bccb2837d2f" compoundref="main_8c" startline="728" endline="731">ResoudreMutexI2C</references>
+        <referencedby refid="group__grp__eeprom_1ga538f60d46cf0ac04119fa65a989274be" compoundref="main_8c" startline="4902" endline="4928">DAC_ConfigurerSeuilsPotentiometre</referencedby>
+        <referencedby refid="group__grp__dac_1ga64f4ecd7d147a039d045da6b64975451" compoundref="main_8c" startline="1068" endline="1086">EcrireRegistreConfigDAC</referencedby>
+        <referencedby refid="group__grp__dac_1ga3f77fbf6480487ff43ce47d7ed7d89e2" compoundref="main_8c" startline="5086" endline="5105">h_SET_DAC_GAIN</referencedby>
+        <referencedby refid="group__grp__dac_1ga0bd0eb566573e23c1258ec14e95e53f0" compoundref="main_8c" startline="5045" endline="5063">h_SET_DAC_PD</referencedby>
+        <referencedby refid="group__grp__dac_1ga459cb06259e765da581fe6170672b59a" compoundref="main_8c" startline="5007" endline="5025">h_SET_DAC_VREF</referencedby>
+        <referencedby refid="group__grp__dac_1gaef2582c078db38424ec959fc1f9f1c5f" compoundref="main_8c" startline="1118" endline="1142">InitialiserConfigDacsI2C1</referencedby>
+        <referencedby refid="group__grp__dac_1gacdf4ad1b5d4a18ab3a5b309318099344" compoundref="main_8c" startline="1228" endline="1267">SurveillerConfigDacsI2C1</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1gaef2582c078db38424ec959fc1f9f1c5f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void InitialiserConfigDacsI2C1</definition>
+        <argsstring>(void)</argsstring>
+        <name>InitialiserConfigDacsI2C1</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Force la configuration VOLATILE des MCP47FEB28 de I2C1 a l&apos;etat attendu par tout le reste du firmware : VREF = VDD (5V) sur les 8 canaux, sortie en fonctionnement normal (pas de Power-Down), gain 1x. Relit ensuite les 3 registres et envoie le resultat sur USART1. Pourquoi : le firmware ne configurait JAMAIS ces registres. Chaque puce demarre donc sur les valeurs de son EEPROM, qui peuvent differer d&apos;une puce a l&apos;autre (programmation anterieure, trame parasite, ex : le texte &quot;Bonjour&quot; de la capture bouton USER, envoye a 0xC0/0xC2 avant le correctif). Si l&apos;EEPROM de la puce 0xC2 contient VREF = bande interdite (~1.2V) ou un mode Power-Down, SET_VAL_LDO_1PLp ne peut pas couvrir 0-5V alors que la puce 0xC0 (1PSp/2PSp) fonctionne. Registres 08h/09h/0Ah volatils uniquement : l&apos;EEPROM n&apos;est jamais touchee. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Une ligne UART par puce : &quot;DAC_INIT:0xC2:VREF=0x0000:PD=0x0000:GAIN=0x0080:OK&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">CreerMutexI2C();</highlight></codeline>
+<codeline><highlight class="normal">CreerMutexUART();</highlight></codeline>
+<codeline><highlight class="normal">InitialiserConfigDacsI2C1();<sp/><sp/><sp/>//<sp/>avant<sp/>udpServer_init()</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1118" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1118" bodyend="1142"/>
+        <references refid="group__grp__dac_1ga64f4ecd7d147a039d045da6b64975451" compoundref="main_8c" startline="1068" endline="1086">EcrireRegistreConfigDAC</references>
+        <references refid="group__grp__dac_1gaef2582c078db38424ec959fc1f9f1c5f" compoundref="main_8c" startline="1118" endline="1142">InitialiserConfigDacsI2C1</references>
+        <references refid="group__grp__dac_1gade7258168a59f260de108ec88059f889" compoundref="main_8c" startline="1013" endline="1037">LireRegistreConfigDAC</references>
+        <references refid="group__grp__comm_1gab9b5dfc109e472981cbbb7867d1b7f92" compoundref="main_8c" startline="1803" endline="1816">UART1_EnvoyerTexte</references>
+        <referencedby refid="group__grp__dac_1gaef2582c078db38424ec959fc1f9f1c5f" compoundref="main_8c" startline="1118" endline="1142">InitialiserConfigDacsI2C1</referencedby>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1gab992619e0a04a6fbb9a6a97c2e284c65" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int IndexDacI2C1</definition>
+        <argsstring>(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal)</argsstring>
+        <name>IndexDacI2C1</name>
+        <param>
+          <type>I2C_HandleTypeDef *</type>
+          <declname>hi2c</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>adresse_hal</declname>
+        </param>
+        <briefdescription>
+<para>Index d&apos;une puce de I2C1 dans dacs_i2c1_adresses[]. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hi2c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Handle I2C (seul &amp;hi2c1 est surveille). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>adresse_hal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Adresse 7 bits decalee (0xC0, 0xC2, 0xC4). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>0..NB_DACS_I2C1-1, ou -1 si la puce n&apos;est pas surveillee. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">int<sp/>k<sp/>=<sp/>IndexDacI2C1(&amp;hi2c1,<sp/>0xC0);<sp/><sp/><sp/>//<sp/>-&gt;<sp/>0</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1175" column="12" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1175" bodyend="1189"/>
+        <references refid="group__grp__dac_1gab992619e0a04a6fbb9a6a97c2e284c65" compoundref="main_8c" startline="1175" endline="1189">IndexDacI2C1</references>
+        <referencedby refid="group__grp__eeprom_1ga538f60d46cf0ac04119fa65a989274be" compoundref="main_8c" startline="4902" endline="4928">DAC_ConfigurerSeuilsPotentiometre</referencedby>
+        <referencedby refid="group__grp__dac_1gab992619e0a04a6fbb9a6a97c2e284c65" compoundref="main_8c" startline="1175" endline="1189">IndexDacI2C1</referencedby>
+        <referencedby refid="group__grp__config_1ga2ba862323ea386969585492246cd74d6" compoundref="main_8c" startline="6223" endline="6264">LDO_Diagnostic</referencedby>
+        <referencedby refid="group__grp__dac_1ga657c4f07f159cff86dc8a577e46d0ddb" compoundref="main_8c" startline="1205" endline="1213">MemoriserConfigDac</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1ga657c4f07f159cff86dc8a577e46d0ddb" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void MemoriserConfigDac</definition>
+        <argsstring>(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t registre, uint16_t mot)</argsstring>
+        <name>MemoriserConfigDac</name>
+        <param>
+          <type>I2C_HandleTypeDef *</type>
+          <declname>hi2c</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>adresse_hal</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>registre</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>mot</declname>
+        </param>
+        <briefdescription>
+<para>Memorise la nouvelle configuration attendue apres un SET_DAC_VREF/ PD/GAIN reussi, pour que la surveillance ne la &quot;corrige&quot; pas. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hi2c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Handle I2C de la puce ecrite. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>adresse_hal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Adresse 7 bits decalee de la puce. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>registre</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>0x08 (VREF), 0x09 (PD) ou 0x0A (Gain). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Mot 16 bits ecrit. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">MemoriserConfigDac(&amp;hi2c1,<sp/>0xC0,<sp/>0x08,<sp/>0x0000);</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1205" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1205" bodyend="1213"/>
+        <references refid="group__grp__dac_1gab992619e0a04a6fbb9a6a97c2e284c65" compoundref="main_8c" startline="1175" endline="1189">IndexDacI2C1</references>
+        <references refid="group__grp__dac_1ga657c4f07f159cff86dc8a577e46d0ddb" compoundref="main_8c" startline="1205" endline="1213">MemoriserConfigDac</references>
+        <referencedby refid="group__grp__eeprom_1ga538f60d46cf0ac04119fa65a989274be" compoundref="main_8c" startline="4902" endline="4928">DAC_ConfigurerSeuilsPotentiometre</referencedby>
+        <referencedby refid="group__grp__dac_1ga3f77fbf6480487ff43ce47d7ed7d89e2" compoundref="main_8c" startline="5086" endline="5105">h_SET_DAC_GAIN</referencedby>
+        <referencedby refid="group__grp__dac_1ga0bd0eb566573e23c1258ec14e95e53f0" compoundref="main_8c" startline="5045" endline="5063">h_SET_DAC_PD</referencedby>
+        <referencedby refid="group__grp__dac_1ga459cb06259e765da581fe6170672b59a" compoundref="main_8c" startline="5007" endline="5025">h_SET_DAC_VREF</referencedby>
+        <referencedby refid="group__grp__dac_1ga657c4f07f159cff86dc8a577e46d0ddb" compoundref="main_8c" startline="1205" endline="1213">MemoriserConfigDac</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1gacdf4ad1b5d4a18ab3a5b309318099344" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void SurveillerConfigDacsI2C1</definition>
+        <argsstring>(void)</argsstring>
+        <name>SurveillerConfigDacsI2C1</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Relit VREF/PD/Gain des puces de I2C1 et reecrit la configuration attendue si une puce l&apos;a perdue. Appelee par la boucle de StartLwipTask(), au plus une fois toutes les DAC_SURVEILLANCE_MS. Une puce qui ne repond pas (NACK) est ignoree jusqu&apos;au tour suivant. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ligne UART a chaque correction : &quot;DAC_RECONFIG:0xC0:VREF=0x5555:PD=0x0000:GAIN=0x0000:NB=1&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">SurveillerConfigDacsI2C1();<sp/><sp/><sp/>//<sp/>dans<sp/>la<sp/>boucle<sp/>for(;;)</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1228" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1228" bodyend="1267"/>
+        <references refid="group__grp__dac_1ga64f4ecd7d147a039d045da6b64975451" compoundref="main_8c" startline="1068" endline="1086">EcrireRegistreConfigDAC</references>
+        <references refid="group__grp__dac_1gade7258168a59f260de108ec88059f889" compoundref="main_8c" startline="1013" endline="1037">LireRegistreConfigDAC</references>
+        <references refid="group__grp__dac_1gacdf4ad1b5d4a18ab3a5b309318099344" compoundref="main_8c" startline="1228" endline="1267">SurveillerConfigDacsI2C1</references>
+        <references refid="group__grp__comm_1gab9b5dfc109e472981cbbb7867d1b7f92" compoundref="main_8c" startline="1803" endline="1816">UART1_EnvoyerTexte</references>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+        <referencedby refid="group__grp__dac_1gacdf4ad1b5d4a18ab3a5b309318099344" compoundref="main_8c" startline="1228" endline="1267">SurveillerConfigDacsI2C1</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1ga3c9eb54cd6a878bce23cc531e877692f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void EcrireToutesLesSorties</definition>
+        <argsstring>(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, const char *nom_dac)</argsstring>
+        <name>EcrireToutesLesSorties</name>
+        <param>
+          <type>I2C_HandleTypeDef *</type>
+          <declname>hi2c</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>adresse_hal</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>nom_dac</declname>
+        </param>
+        <briefdescription>
+<para>Ecrit une valeur sur chacune des 8 sorties volatiles du DAC (VOUT0 a VOUT7, registres 00h-07h), et ajoute une ligne de compte-rendu dans rapport_scan pour chaque canal, au format &quot;DACx:VOUTn:0xNNNN:message&quot;. Une valeur DIFFERENTE est ecrite sur chaque canal (palier croissant) pour verifier facilement au voltmetre que les 8 sorties sont bien independantes les unes des autres. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hi2c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointeur vers le handle I2C a utiliser (&amp;hi2c1, &amp;hi2c2, ...). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>adresse_hal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Adresse I2C du DAC, deja au format HAL (decalee). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nom_dac</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nom du DAC a afficher dans le rapport (ex : &quot;DAC1&quot;). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Complete rapport_scan. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">EcrireToutesLesSorties(&amp;hi2c1,<sp/>(0x62<sp/>&lt;&lt;<sp/>1),<sp/>&quot;DAC1&quot;);</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>rapport_scan<sp/>contient<sp/>alors,<sp/>entre<sp/>autres<sp/>:</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>&quot;DAC1:VOUT0:0x01F4:OK\nDAC1:VOUT1:0x03E8:OK\n...&quot;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1289" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1289" bodyend="1310"/>
+        <references refid="group__grp__dac_1gaf2d35bfc7d39a06f0e77e0680df9c08d" compoundref="main_8c" startline="956" endline="982">EcrireDACVolatile</references>
+        <references refid="group__grp__dac_1ga3c9eb54cd6a878bce23cc531e877692f" compoundref="main_8c" startline="1289" endline="1310">EcrireToutesLesSorties</references>
+        <referencedby refid="group__grp__dac_1ga3c9eb54cd6a878bce23cc531e877692f" compoundref="main_8c" startline="1289" endline="1310">EcrireToutesLesSorties</referencedby>
+        <referencedby refid="group__grp__exti_1ga3a919fef613806da58b99557a009f22a" compoundref="main_8c" startline="1648" endline="1720">ExecuterCaptureComplete</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1ga3b69ec3e3af5d495bc0a095f6e4343eb" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void BalayerSortieDAC</definition>
+        <argsstring>(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t registre, const char *nom_dac, uint16_t valeur_max, uint16_t pas, uint32_t delai_ms, float tension_reference)</argsstring>
+        <name>BalayerSortieDAC</name>
+        <param>
+          <type>I2C_HandleTypeDef *</type>
+          <declname>hi2c</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>adresse_hal</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>registre</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>nom_dac</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>valeur_max</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>pas</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>delai_ms</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>tension_reference</declname>
+        </param>
+        <briefdescription>
+<para>Balaie une seule sortie du DAC de 0 a valeur_max, par pas reguliers, avec une pause entre chaque valeur. Fonction BLOQUANTE : elle ne rend la main qu&apos;une fois le balayage complet termine. Utile pour observer une montee de tension progressive au voltmetre sur une sortie precise. Envoie aussi chaque palier sur USART1 en direct, au format &quot;nom_dac:VOUTn:code:tension_calculeeV&quot;. Generique : fonctionne sur n&apos;importe quel DAC/canal/plage/ vitesse, il suffit de changer les parametres. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hi2c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointeur vers le handle I2C a utiliser (&amp;hi2c1, &amp;hi2c2, ...). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>adresse_hal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Adresse I2C du DAC, deja au format HAL (decalee). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>registre</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Adresse memoire du registre volatile cible (0x00 = VOUT0, 0x01 = VOUT1, ... 0x07 = VOUT7). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nom_dac</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nom du DAC a afficher dans le rapport (ex : &quot;DAC1&quot;). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>valeur_max</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Valeur finale du balayage (0-4095 pour un DAC 12 bits). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pas</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Increment entre deux valeurs successives (ex : 100). Doit etre &gt;= 1. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>delai_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pause en millisecondes entre chaque valeur ecrite (ex : 200 pour bien voir chaque palier au voltmetre). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tension_reference</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tension VDD reelle du DAC (mesuree au multimetre), utilisee uniquement pour calculer la tension affichee dans le rapport (n&apos;affecte pas le code envoye). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Termine toujours exactement sur valeur_max, meme si (valeur_max - 0) n&apos;est pas un multiple exact de pas. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">//<sp/>Balaie<sp/>VOUT0<sp/>du<sp/>DAC<sp/>a<sp/>0x62,<sp/>de<sp/>0<sp/>a<sp/>4095,<sp/>par<sp/>pas<sp/>de<sp/>100,</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>avec<sp/>200<sp/>ms<sp/>entre<sp/>chaque<sp/>palier<sp/>(~8<sp/>secondes<sp/>au<sp/>total),</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>rapporte<sp/>sur<sp/>UART<sp/>avec<sp/>VDD<sp/>mesure<sp/>a<sp/>5V<sp/>:</highlight></codeline>
+<codeline><highlight class="normal">BalayerSortieDAC(&amp;hi2c1,<sp/>(0x62<sp/>&lt;&lt;<sp/>1),<sp/>0x00,<sp/>&quot;DAC1&quot;,<sp/>4095,<sp/>100,<sp/>200,<sp/>5.0f);</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1346" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1346" bodyend="1397"/>
+        <references refid="group__grp__dac_1ga3b69ec3e3af5d495bc0a095f6e4343eb" compoundref="main_8c" startline="1346" endline="1397">BalayerSortieDAC</references>
+        <references refid="group__grp__dac_1gaf2d35bfc7d39a06f0e77e0680df9c08d" compoundref="main_8c" startline="956" endline="982">EcrireDACVolatile</references>
+        <references refid="group__grp__dac_1gafd7df1ea4aaa529649e87bc99b737e42" compoundref="main_8c" startline="912" endline="926">SynchroniserTableauDac</references>
+        <references refid="group__grp__comm_1gab9b5dfc109e472981cbbb7867d1b7f92" compoundref="main_8c" startline="1803" endline="1816">UART1_EnvoyerTexte</references>
+        <referencedby refid="group__grp__dac_1ga3b69ec3e3af5d495bc0a095f6e4343eb" compoundref="main_8c" startline="1346" endline="1397">BalayerSortieDAC</referencedby>
+        <referencedby refid="group__grp__exti_1ga3a919fef613806da58b99557a009f22a" compoundref="main_8c" startline="1648" endline="1720">ExecuterCaptureComplete</referencedby>
+        <referencedby refid="group__grp__dac_1ga161b95d8fabb7c81f08c2e0629238b6e" compoundref="main_8c" startline="4458" endline="4508">h_BALAYER_DAC</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1gad09bc7e6abf4db69f2fea3ab311c637f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint8_t *</type>
+        <definition>static uint8_t * ResoudreTableauDac</definition>
+        <argsstring>(CibleDac_t cible)</argsstring>
+        <name>ResoudreTableauDac</name>
+        <param>
+          <type><ref refid="main_8c_1a75e57bba50363a40a374df0b941bfd58" kindref="member">CibleDac_t</ref></type>
+          <declname>cible</declname>
+        </param>
+        <briefdescription>
+<para>Retourne le pointeur vers le tableau DACx_DEF correspondant a une cible logique. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cible</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cible a resoudre (CIBLE_DAC1..CIBLE_DAC5). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>uint8_t*</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointeur vers DAC1_DEF..DAC5_DEF, ou NULL si CIBLE_AUCUNE ou valeur invalide. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">uint8_t<sp/>*tab<sp/>=<sp/>ResoudreTableauDac(mappingDacLdo[idx].dac_tension);</highlight></codeline>
+<codeline><highlight class="normal">if<sp/>(tab<sp/>!=<sp/>NULL)<sp/>{<sp/>EcrireValeurDac(mappingDacLdo[idx].dac_tension,<sp/>4,<sp/>2048);<sp/>}</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3979" column="16" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3979" bodyend="3989"/>
+        <references refid="group__grp__dac_1gad09bc7e6abf4db69f2fea3ab311c637f" compoundref="main_8c" startline="3979" endline="3989">ResoudreTableauDac</references>
+        <referencedby refid="group__grp__dac_1ga4469a4eb236eb4a995abab435c43c644" compoundref="main_8c" startline="4011" endline="4022">EcrireValeurDac</referencedby>
+        <referencedby refid="group__grp__dac_1ga924c3b0d97d03d4aba5b24043d36849c" compoundref="main_8c" startline="4043" endline="4065">MajEtatLdoDepuisDac</referencedby>
+        <referencedby refid="group__grp__oc_1gaa95aeec744d338f67994e9ecbaf895b9" compoundref="main_8c" startline="4199" endline="4214">OC_LdoDuCanalSeuil</referencedby>
+        <referencedby refid="group__grp__dac_1gad09bc7e6abf4db69f2fea3ab311c637f" compoundref="main_8c" startline="3979" endline="3989">ResoudreTableauDac</referencedby>
+        <referencedby refid="group__grp__dac_1gaeda25d5b60439cf57afc75b5c8096a3d" compoundref="main_8c" startline="4235" endline="4291">SetMappingDacLdo</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1ga4469a4eb236eb4a995abab435c43c644" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void EcrireValeurDac</definition>
+        <argsstring>(CibleDac_t cible, uint8_t canal, uint16_t valeur)</argsstring>
+        <name>EcrireValeurDac</name>
+        <param>
+          <type><ref refid="main_8c_1a75e57bba50363a40a374df0b941bfd58" kindref="member">CibleDac_t</ref></type>
+          <declname>cible</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>canal</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>valeur</declname>
+        </param>
+        <briefdescription>
+<para>Ecrit une valeur 12 bits dans le tableau DACx_DEF/canal designe par une cible logique - remplace les 36 blocs d&apos;ecriture individuels (un par LDO x par type) par UNE seule fonction generique, pilotee par mappingDacLdo[]. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cible</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tableau DACx_DEF a modifier (CIBLE_AUCUNE = ignore). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>canal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Canal 0-7 dans ce tableau (structure par groupes de 3 octets : adresse, MSB, LSB). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>valeur</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Valeur 12 bits a ecrire (0-4095). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Ne fait rien si cible == CIBLE_AUCUNE ou canal hors plage (protege les LDO sans DAC courant, ex : *PLp). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Fonctionnement</title><para>Version identique a celle du 07/10/2026 (ecriture directe, sans mutex ni section critique), retablie le 19/10/2026. </para>
+</simplesect>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">EcrireValeurDac(CIBLE_DAC2,<sp/>3,<sp/>2048);<sp/><sp/>//<sp/>DAC2_DEF,<sp/>canal<sp/>3</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="4011" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="4011" bodyend="4022"/>
+        <references refid="group__grp__dac_1ga4469a4eb236eb4a995abab435c43c644" compoundref="main_8c" startline="4011" endline="4022">EcrireValeurDac</references>
+        <references refid="group__grp__dac_1gad09bc7e6abf4db69f2fea3ab311c637f" compoundref="main_8c" startline="3979" endline="3989">ResoudreTableauDac</references>
+        <referencedby refid="group__grp__eeprom_1gaea23265d4fdedf9ac60d1c4afb886e40" compoundref="main_8c" startline="4822" endline="4885">DAC_RestaurerMemoire</referencedby>
+        <referencedby refid="group__grp__dac_1ga4469a4eb236eb4a995abab435c43c644" compoundref="main_8c" startline="4011" endline="4022">EcrireValeurDac</referencedby>
+        <referencedby refid="group__grp__dac_1ga161b95d8fabb7c81f08c2e0629238b6e" compoundref="main_8c" startline="4458" endline="4508">h_BALAYER_DAC</referencedby>
+        <referencedby refid="group__grp__dac_1ga1b7ca6a4fce7e0d525508dd4951a48f0" compoundref="main_8c" startline="4109" endline="4154">h_SET_CURRENT_LDO_GENERIQUE</referencedby>
+        <referencedby refid="group__grp__dac_1gadcbefabbab52750a575b5dac7150534e" compoundref="main_8c" startline="4084" endline="4093">h_SET_VAL_LDO_GENERIQUE</referencedby>
+        <referencedby refid="group__grp__oc_1ga9358ff0a14ed464e81374dab1f13777d" compoundref="main_8c" startline="4173" endline="4185">OC_InitialiserSeuilsDefaut</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1ga924c3b0d97d03d4aba5b24043d36849c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void MajEtatLdoDepuisDac</definition>
+        <argsstring>(const uint8_t *tableau, uint8_t canal, uint16_t valeur)</argsstring>
+        <name>MajEtatLdoDepuisDac</name>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>tableau</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>canal</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>valeur</declname>
+        </param>
+        <briefdescription>
+<para>Repercute une ecriture directe sur un canal DAC (balayage a distance BALAYER_DAC, capture bouton USER) dans l&apos;etat logiciel de la ou des LDO associees a ce canal par mappingDacLdo[] (VAL_LDO/CURRENT_LDO et struct LDO). Sans cela, apres un balayage sur I2C1 0xC0 ou 0xC2, la sortie restait a la valeur finale du balayage alors que GET_STATUS_LDO_&lt;nom&gt; (page valeur LDO, page dac/&lt;nom&gt;) affichait encore l&apos;ancienne valeur. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tableau</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tableau DACx_DEF ecrit (DAC1_DEF ... DAC5_DEF). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>canal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Canal ecrit (0-7). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>valeur</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Code 12 bits ecrit (0-4095). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Ne fait rien si aucune LDO n&apos;est associee. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">//<sp/>Apres<sp/>un<sp/>balayage<sp/>de<sp/>VOUT3<sp/>du<sp/>DAC<sp/>I2C1<sp/>0xC0<sp/>jusqu&apos;a<sp/>4095<sp/>:</highlight></codeline>
+<codeline><highlight class="normal">MajEtatLdoDepuisDac(DAC1_DEF,<sp/>3,<sp/>4095);<sp/><sp/>//<sp/>-&gt;<sp/>VAL_LDO[0]<sp/>(1PSp)<sp/>=<sp/>4095</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="4043" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="4043" bodyend="4065" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="888" declcolumn="13"/>
+        <references refid="group__grp__dac_1ga924c3b0d97d03d4aba5b24043d36849c" compoundref="main_8c" startline="4043" endline="4065">MajEtatLdoDepuisDac</references>
+        <references refid="group__grp__dac_1gad09bc7e6abf4db69f2fea3ab311c637f" compoundref="main_8c" startline="3979" endline="3989">ResoudreTableauDac</references>
+        <referencedby refid="group__grp__dac_1ga924c3b0d97d03d4aba5b24043d36849c" compoundref="main_8c" startline="4043" endline="4065">MajEtatLdoDepuisDac</referencedby>
+        <referencedby refid="group__grp__dac_1gafd7df1ea4aaa529649e87bc99b737e42" compoundref="main_8c" startline="912" endline="926">SynchroniserTableauDac</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1gadcbefabbab52750a575b5dac7150534e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_SET_VAL_LDO_GENERIQUE</definition>
+        <argsstring>(int idx)</argsstring>
+        <name>h_SET_VAL_LDO_GENERIQUE</name>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Handler GENERIQUE de &quot;SET_VAL_LDO_&lt;nom&gt;:&lt;valeur&gt;&quot; - remplace les 18 anciennes fonctions h_SET_VAL_LDO_&lt;nom&gt; individuelles. Met a jour VAL_LDO[idx]/l&apos;etat logiciel de la LDO, PUIS repercute la valeur sur le DAC reellement associe via mappingDacLdo[idx] (modifiable a chaud, voir SetMappingDacLdo()). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO (0-17), deja resolu par findLdoIndex() dans tc_request() (branche a prefixe &quot;SET_VAL_LDO_&quot;). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Lit last_message (deja positionne apres le &apos;:&apos; par tc_request()) pour la valeur (0-4095). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;SET_VAL_LDO_1PSp:2048&quot;</highlight></codeline>
+<codeline><highlight class="normal">-&gt;<sp/>idx=findLdoIndex(&quot;1PSp&quot;)=0,<sp/>h_SET_VAL_LDO_GENERIQUE(0);</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="4084" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="4084" bodyend="4093"/>
+        <references refid="group__grp__eeprom_1ga0fdcf8780e2127569c1e1a76e9518c5a" compoundref="main_8c" startline="3147" endline="3159">DAC_DemanderSauvegarde</references>
+        <references refid="group__grp__dac_1ga4469a4eb236eb4a995abab435c43c644" compoundref="main_8c" startline="4011" endline="4022">EcrireValeurDac</references>
+        <references refid="group__grp__dac_1gadcbefabbab52750a575b5dac7150534e" compoundref="main_8c" startline="4084" endline="4093">h_SET_VAL_LDO_GENERIQUE</references>
+        <referencedby refid="group__grp__dac_1gadcbefabbab52750a575b5dac7150534e" compoundref="main_8c" startline="4084" endline="4093">h_SET_VAL_LDO_GENERIQUE</referencedby>
+        <referencedby refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" compoundref="main_8c" startline="6290" endline="6439">tc_request</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1ga1b7ca6a4fce7e0d525508dd4951a48f0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_SET_CURRENT_LDO_GENERIQUE</definition>
+        <argsstring>(int idx)</argsstring>
+        <name>h_SET_CURRENT_LDO_GENERIQUE</name>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Handler GENERIQUE de &quot;SET_CURRENT_LDO_&lt;nom&gt;:&lt;valeur&gt;&quot; - remplace les 18 anciennes fonctions h_SET_CURRENT_LDO_&lt;nom&gt;. Repond &quot;NOT FOR YOU&quot; (comme avant) si la LDO n&apos;a pas de DAC courant associe (mappingDacLdo[idx].dac_courant == CIBLE_AUCUNE, cas des 3 LDO *PLp). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO (0-17), deja resolu par findLdoIndex(). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Lit last_message pour la valeur (0-4095). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;SET_CURRENT_LDO_1PSp:1500&quot;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="4109" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="4109" bodyend="4154"/>
+        <references refid="group__grp__eeprom_1ga0fdcf8780e2127569c1e1a76e9518c5a" compoundref="main_8c" startline="3147" endline="3159">DAC_DemanderSauvegarde</references>
+        <references refid="group__grp__dac_1ga4469a4eb236eb4a995abab435c43c644" compoundref="main_8c" startline="4011" endline="4022">EcrireValeurDac</references>
+        <references refid="group__grp__dac_1ga1b7ca6a4fce7e0d525508dd4951a48f0" compoundref="main_8c" startline="4109" endline="4154">h_SET_CURRENT_LDO_GENERIQUE</references>
+        <references refid="group__grp__oc_1ga7851b235d1d1f7564644d659587b3ba2" compoundref="main_8c" startline="3086" endline="3089">OC_EstSurveillee</references>
+        <referencedby refid="group__grp__dac_1ga1b7ca6a4fce7e0d525508dd4951a48f0" compoundref="main_8c" startline="4109" endline="4154">h_SET_CURRENT_LDO_GENERIQUE</referencedby>
+        <referencedby refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" compoundref="main_8c" startline="6290" endline="6439">tc_request</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1gaeda25d5b60439cf57afc75b5c8096a3d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void SetMappingDacLdo</definition>
+        <argsstring>(int idx, const char *nom)</argsstring>
+        <name>SetMappingDacLdo</name>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>nom</declname>
+        </param>
+        <briefdescription>
+<para>Handler de &quot;SET_DAC_MAPPING_LDO_&lt;nom&gt;:&lt;V|I&gt;:&lt;0-5&gt;:&lt;0-7&gt;&quot; - modifie A CHAUD, sans recompilation ni reflash, quel DAC/canal alimente la tension (V) ou le courant (I) d&apos;une LDO. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO (0-17), deja resolu par findLdoIndex(). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nom</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nom texte de la LDO, pour la reponse. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Lit last_message au format &quot;&lt;V|I&gt;:&lt;0-5&gt;:&lt;0-7&gt;&quot; (0 pour le numero de DAC = CIBLE_AUCUNE, &quot;debranche&quot; ce canal). Remplit response avec &quot;DAC_MAP:&lt;nom&gt;:OK\n&quot; si valide, &quot;DAC_MAP:&lt;nom&gt;:ERREUR_PARAMETRES\n&quot; si la trame est mal formee, ou &quot;DAC_MAP:&lt;nom&gt;:REFUS_PROTECTION_OC\n&quot; si la demande deplace le seuil OC d&apos;une LDO surveillee ou vise un canal de seuil OC. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;SET_DAC_MAPPING_LDO_1PSp:V:2:3&quot;</highlight></codeline>
+<codeline><highlight class="normal">-&gt;<sp/>tension<sp/>de<sp/>1PSp<sp/>desormais<sp/>lue/ecrite<sp/>sur<sp/>DAC2_DEF,<sp/>canal<sp/>3.</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="4235" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="4235" bodyend="4291"/>
+        <references refid="group__grp__oc_1ga7851b235d1d1f7564644d659587b3ba2" compoundref="main_8c" startline="3086" endline="3089">OC_EstSurveillee</references>
+        <references refid="group__grp__oc_1gaa95aeec744d338f67994e9ecbaf895b9" compoundref="main_8c" startline="4199" endline="4214">OC_LdoDuCanalSeuil</references>
+        <references refid="group__grp__dac_1gad09bc7e6abf4db69f2fea3ab311c637f" compoundref="main_8c" startline="3979" endline="3989">ResoudreTableauDac</references>
+        <references refid="group__grp__dac_1gaeda25d5b60439cf57afc75b5c8096a3d" compoundref="main_8c" startline="4235" endline="4291">SetMappingDacLdo</references>
+        <referencedby refid="group__grp__dac_1gaeda25d5b60439cf57afc75b5c8096a3d" compoundref="main_8c" startline="4235" endline="4291">SetMappingDacLdo</referencedby>
+        <referencedby refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" compoundref="main_8c" startline="6290" endline="6439">tc_request</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1gac1d35f9367efff87f176072901b295ac" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void GetMappingDacLdo</definition>
+        <argsstring>(int idx, const char *nom)</argsstring>
+        <name>GetMappingDacLdo</name>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>nom</declname>
+        </param>
+        <briefdescription>
+<para>Handler de &quot;GET_DAC_MAPPING_LDO_&lt;nom&gt;&quot; - lit la correspondance DAC/canal actuellement active pour une LDO (tension et courant), sans la modifier. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO (0-17), deja resolu par findLdoIndex(). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nom</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nom texte de la LDO, pour la reponse. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Remplit response au format &quot;DAC_MAP:&lt;nom&gt;:V=&lt;dac&gt;.&lt;canal&gt;:I=&lt;dac&gt;.&lt;canal&gt;\n&quot; (dac=0 signifie CIBLE_AUCUNE, aucun DAC associe a ce canal). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;GET_DAC_MAPPING_LDO_1PSp&quot;</highlight></codeline>
+<codeline><highlight class="normal">Reponse<sp/>type<sp/><sp/><sp/><sp/>:<sp/>&quot;DAC_MAP:1PSp:V=2.3:I=2.1\n&quot;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="4309" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="4309" bodyend="4315"/>
+        <references refid="group__grp__dac_1gac1d35f9367efff87f176072901b295ac" compoundref="main_8c" startline="4309" endline="4315">GetMappingDacLdo</references>
+        <referencedby refid="group__grp__dac_1gac1d35f9367efff87f176072901b295ac" compoundref="main_8c" startline="4309" endline="4315">GetMappingDacLdo</referencedby>
+        <referencedby refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" compoundref="main_8c" startline="6290" endline="6439">tc_request</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1ga161b95d8fabb7c81f08c2e0629238b6e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_BALAYER_DAC</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_BALAYER_DAC</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;BALAYER_DAC&quot;. Declenche BalayerSortieDAC() a distance, avec tous ses parametres fournis dans la trame UDP. ATTENTION : cette fonction est BLOQUANTE (comme BalayerSortieDAC() elle-meme) - pendant toute la duree du balayage, ce thread ne traite plus aucune autre commande UDP (meme comportement que la capture complete du bouton USER). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>parametre C. Lit la variable globale last_message, au format attendu (apres le premier &apos;:&apos; deja consomme par tc_request()) : &quot;&lt;bus&gt;:&lt;adresse_hal_hex&gt;:&lt;registre&gt;:&lt;valeur_max&gt;:&lt;pas&gt;:&lt;delai_ms&gt;:&lt;tension_ref&gt;&quot;<itemizedlist>
+<listitem><para>bus : 1 pour hi2c1, 2 pour hi2c2</para>
+</listitem><listitem><para>adresse_hal_hex : adresse I2C au format HAL, en hexa avec 0x (ex : 0xC4)</para>
+</listitem><listitem><para>registre : 0x00-0x07 (VOUT0-VOUT7)</para>
+</listitem><listitem><para>valeur_max : 0-4095</para>
+</listitem><listitem><para>pas : increment entre paliers</para>
+</listitem><listitem><para>delai_ms : pause entre paliers, en millisecondes</para>
+</listitem><listitem><para>tension_ref : VDD reel du DAC, en volts (ex : 5.0) </para>
+</listitem></itemizedlist>
+</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Remplit response avec &quot;BALAYER_DAC:TERMINE\n&quot; une fois le balayage complet termine, &quot;BALAYER_DAC:ERREUR_PARAMETRES\n&quot; si la trame est mal formee, ou &quot;BALAYER_DAC:REFUS_SEUIL_OC_LDO_ACTIVE:&lt;nom&gt;\n&quot; si le registre vise est le seuil OC d&apos;une LDO active. Sur un registre de seuil OC (LDO coupee), le seuil d&apos;avant le balayage est restaure a la fin. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:</highlight></codeline>
+<codeline><highlight class="normal">&quot;BALAYER_DAC:1:0xC4:0:4095:50:100:5.0&quot;</highlight></codeline>
+<codeline><highlight class="normal">-&gt;<sp/>balaie<sp/>VOUT0<sp/>du<sp/>DAC<sp/>a<sp/>0xC4<sp/>sur<sp/>hi2c1,<sp/>de<sp/>0<sp/>a<sp/>4095<sp/>par<sp/>pas</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>de<sp/>50,<sp/>100ms<sp/>entre<sp/>chaque<sp/>palier,<sp/>VDD=5V.</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="4458" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="4458" bodyend="4508"/>
+        <references refid="group__grp__dac_1ga3b69ec3e3af5d495bc0a095f6e4343eb" compoundref="main_8c" startline="1346" endline="1397">BalayerSortieDAC</references>
+        <references refid="group__grp__dac_1ga4469a4eb236eb4a995abab435c43c644" compoundref="main_8c" startline="4011" endline="4022">EcrireValeurDac</references>
+        <references refid="group__grp__dac_1ga161b95d8fabb7c81f08c2e0629238b6e" compoundref="main_8c" startline="4458" endline="4508">h_BALAYER_DAC</references>
+        <references refid="group__grp__oc_1gaa95aeec744d338f67994e9ecbaf895b9" compoundref="main_8c" startline="4199" endline="4214">OC_LdoDuCanalSeuil</references>
+        <references refid="group__grp__dac_1gab5371264b6f8831689ac30f87a45c4ed" compoundref="main_8c" startline="875" endline="885">ResoudreTableauDacParAdresse</references>
+        <referencedby refid="group__grp__dac_1ga161b95d8fabb7c81f08c2e0629238b6e" compoundref="main_8c" startline="4458" endline="4508">h_BALAYER_DAC</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1ga60bdf8f5f95deb2ebd6667b24e0cef0b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_GET_DAC_CONFIG</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_GET_DAC_CONFIG</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;GET_DAC_CONFIG&quot; - lit et renvoie les 3 registres de configuration (VREF/Power-Down/ Gain) d&apos;une puce DAC MCP47FEB28, adressable par bus et adresse I2C (paametrable, pas fige sur une puce donnee). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>parametre C. Lit last_message, au format attendu &quot;&lt;bus&gt;:&lt;adresse_hal_hex&gt;&quot; - bus : 1 pour hi2c1, 2 pour hi2c2. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Remplit response avec &quot;DAC_CONFIG:&lt;bus&gt;:&lt;adresse&gt;:VREF=0x????:PD=0x????:GAIN=0x????\n&quot; ou &quot;DAC_CONFIG:ERREUR_PARAMETRES\n&quot; / &quot;...:ERREUR_I2C\n&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;GET_DAC_CONFIG:1:0xC4&quot;</highlight></codeline>
+<codeline><highlight class="normal">-&gt;<sp/>lit<sp/>VREF/PD/GAIN<sp/>du<sp/>DAC<sp/>a<sp/>0xC4<sp/>(0x62&lt;&lt;1)<sp/>sur<sp/>hi2c1.</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="4527" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="4527" bodyend="4554"/>
+        <references refid="group__grp__dac_1ga60bdf8f5f95deb2ebd6667b24e0cef0b" compoundref="main_8c" startline="4527" endline="4554">h_GET_DAC_CONFIG</references>
+        <references refid="group__grp__dac_1gade7258168a59f260de108ec88059f889" compoundref="main_8c" startline="1013" endline="1037">LireRegistreConfigDAC</references>
+        <referencedby refid="group__grp__dac_1ga60bdf8f5f95deb2ebd6667b24e0cef0b" compoundref="main_8c" startline="4527" endline="4554">h_GET_DAC_CONFIG</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1gae1030d1ce005f7deac0f86610f9df4af" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>HAL_StatusTypeDef</type>
+        <definition>static HAL_StatusTypeDef LireRegistreValeurDAC</definition>
+        <argsstring>(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t registre, uint16_t *valeur)</argsstring>
+        <name>LireRegistreValeurDAC</name>
+        <param>
+          <type>I2C_HandleTypeDef *</type>
+          <declname>hi2c</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>adresse_hal</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>registre</declname>
+        </param>
+        <param>
+          <type>uint16_t *</type>
+          <declname>valeur</declname>
+        </param>
+        <briefdescription>
+<para>Lit un registre VOLATILE de VALEUR du DAC MCP47FEB28 (adresses memoire 00h a 07h, une par voie). Lecture seule : aucune ecriture n&apos;est possible par cette fonction. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hi2c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointeur vers le handle I2C a utiliser (&amp;hi2c1, &amp;hi2c2). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>adresse_hal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Adresse I2C du DAC, deja au format HAL (decalee). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>registre</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>0x00 a 0x07 (voie 0 a 7, valeur volatile), 0x0B (WiperLock / STATUS) ou 0x10 a 0x17 (valeur de demarrage EEPROM de la voie 0 a 7). Lecture seule. Toute autre valeur est refusee. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>valeur</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointeur vers le uint16_t a remplir avec le mot lu. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>HAL_StatusTypeDef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HAL_OK si le DAC a repondu, HAL_ERROR si le registre est hors plage ou si le DAC a NACK/timeout. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">uint16_t<sp/>v;</highlight></codeline>
+<codeline><highlight class="normal">if<sp/>(LireRegistreValeurDAC(&amp;hi2c1,<sp/>MCP4725_I2CADDR_DEFAULT,<sp/>0x04,<sp/>&amp;v)<sp/>==<sp/>HAL_OK)</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>v<sp/>=<sp/>code<sp/>reellement<sp/>en<sp/>place<sp/>sur<sp/>la<sp/>voie<sp/>4<sp/>(tension<sp/>2PSp)</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="4579" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="4579" bodyend="4600"/>
+        <references refid="group__grp__dac_1gae1030d1ce005f7deac0f86610f9df4af" compoundref="main_8c" startline="4579" endline="4600">LireRegistreValeurDAC</references>
+        <references refid="group__grp__i2c_1ga5cb1cd70b1dd76a8aadb2bccb2837d2f" compoundref="main_8c" startline="728" endline="731">ResoudreMutexI2C</references>
+        <referencedby refid="group__grp__eeprom_1ga461f9e8b58bc45203018e3132c71b989" compoundref="main_8c" startline="4712" endline="4739">DAC_GarderEnEeprom</referencedby>
+        <referencedby refid="group__grp__eeprom_1gaea23265d4fdedf9ac60d1c4afb886e40" compoundref="main_8c" startline="4822" endline="4885">DAC_RestaurerMemoire</referencedby>
+        <referencedby refid="group__grp__dac_1ga9a556575c443842fc36ade5dc4983b87" compoundref="main_8c" startline="4950" endline="4986">h_GET_DAC_REG</referencedby>
+        <referencedby refid="group__grp__dac_1gae1030d1ce005f7deac0f86610f9df4af" compoundref="main_8c" startline="4579" endline="4600">LireRegistreValeurDAC</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1ga9a556575c443842fc36ade5dc4983b87" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_GET_DAC_REG</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_GET_DAC_REG</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;GET_DAC_REG&quot; - diagnostic : relit dans le DAC un registre de valeur (00h-07h) ou de configuration (08h VREF, 09h Power-Down, 0Ah Gain) et le compare a la valeur que le firmware envoie en continu (tableau DACx_DEF). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>parametre C. Lit last_message, au format attendu &quot;&lt;bus&gt;:&lt;adresse_hal_hex&gt;:&lt;registre&gt;&quot; en decimal : 0-7 valeur volatile de la voie, 8-10 VREF/PD/GAIN, 11 WiperLock (0Bh), 16-23 valeur de demarrage EEPROM de la voie 0-7 (10h-17h). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Remplit response avec &quot;DAC_REG:&lt;bus&gt;:&lt;adresse&gt;:REG=&lt;r&gt;:DAC=0x????:FIRMWARE=0x????\n&quot; (FIRMWARE absent pour 08h-0Ah), ou &quot;...:ERREUR_I2C\n&quot; / &quot;DAC_REG:ERREUR_PARAMETRES\n&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;GET_DAC_REG:1:0xC0:4&quot;</highlight></codeline>
+<codeline><highlight class="normal">-&gt;<sp/>&quot;DAC_REG:1:0xC0:REG=4:DAC=0x0BB8:FIRMWARE=0x0BB8&quot;<sp/>apres<sp/>SET_VAL_LDO_2PSp:3000.</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="4950" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="4950" bodyend="4986"/>
+        <references refid="group__grp__dac_1ga9a556575c443842fc36ade5dc4983b87" compoundref="main_8c" startline="4950" endline="4986">h_GET_DAC_REG</references>
+        <references refid="group__grp__dac_1gade7258168a59f260de108ec88059f889" compoundref="main_8c" startline="1013" endline="1037">LireRegistreConfigDAC</references>
+        <references refid="group__grp__dac_1gae1030d1ce005f7deac0f86610f9df4af" compoundref="main_8c" startline="4579" endline="4600">LireRegistreValeurDAC</references>
+        <references refid="group__grp__dac_1gab5371264b6f8831689ac30f87a45c4ed" compoundref="main_8c" startline="875" endline="885">ResoudreTableauDacParAdresse</references>
+        <referencedby refid="group__grp__dac_1ga9a556575c443842fc36ade5dc4983b87" compoundref="main_8c" startline="4950" endline="4986">h_GET_DAC_REG</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1ga459cb06259e765da581fe6170672b59a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_SET_DAC_VREF</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_SET_DAC_VREF</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;SET_DAC_VREF&quot; - ecrit le registre VREF (0x08) d&apos;une puce DAC : source de reference des 8 canaux EN UNE SEULE FOIS (2 bits/canal, voir Registre 4-2 du datasheet - 00=VDD, 01=bande interne 1.22V, 10=VREF pin non bufferisee, 11=VREF pin bufferisee). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>parametre C. Lit last_message, au format attendu &quot;&lt;bus&gt;:&lt;adresse_hal_hex&gt;:&lt;valeur_hex16&gt;&quot;. Ex : 0x0000 pour forcer VDD sur les 8 canaux. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Remplit response avec &quot;SET_DAC_VREF:&lt;bus&gt;:&lt;adresse&gt;:0x????:OK\n&quot; ou &quot;...:ERREUR_I2C\n&quot; / &quot;SET_DAC_VREF:ERREUR_PARAMETRES\n&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;SET_DAC_VREF:1:0xC4:0x0000&quot;</highlight></codeline>
+<codeline><highlight class="normal">-&gt;<sp/>force<sp/>VREF=VDD<sp/>sur<sp/>les<sp/>8<sp/>canaux<sp/>du<sp/>DAC<sp/>a<sp/>0xC4<sp/>sur<sp/>hi2c1.</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5007" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5007" bodyend="5025"/>
+        <references refid="group__grp__dac_1ga64f4ecd7d147a039d045da6b64975451" compoundref="main_8c" startline="1068" endline="1086">EcrireRegistreConfigDAC</references>
+        <references refid="group__grp__dac_1ga459cb06259e765da581fe6170672b59a" compoundref="main_8c" startline="5007" endline="5025">h_SET_DAC_VREF</references>
+        <references refid="group__grp__dac_1ga657c4f07f159cff86dc8a577e46d0ddb" compoundref="main_8c" startline="1205" endline="1213">MemoriserConfigDac</references>
+        <referencedby refid="group__grp__dac_1ga459cb06259e765da581fe6170672b59a" compoundref="main_8c" startline="5007" endline="5025">h_SET_DAC_VREF</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1ga0bd0eb566573e23c1258ec14e95e53f0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_SET_DAC_PD</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_SET_DAC_PD</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;SET_DAC_PD&quot; - ecrit le registre Power-Down (0x09) d&apos;une puce DAC : etat des 8 canaux EN UNE SEULE FOIS (2 bits/canal, voir Registre 4-3 - 00=normal, 01/10/11=power-down avec differentes resistances de tirage). 0x0000 = fonctionnement normal sur les 8 canaux. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>parametre C. Lit last_message, au format attendu &quot;&lt;bus&gt;:&lt;adresse_hal_hex&gt;:&lt;valeur_hex16&gt;&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Remplit response avec &quot;SET_DAC_PD:&lt;bus&gt;:&lt;adresse&gt;:0x????:OK\n&quot; ou &quot;...:ERREUR_I2C\n&quot; / &quot;SET_DAC_PD:ERREUR_PARAMETRES\n&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;SET_DAC_PD:1:0xC4:0x0000&quot;</highlight></codeline>
+<codeline><highlight class="normal">-&gt;<sp/>force<sp/>fonctionnement<sp/>normal<sp/>sur<sp/>les<sp/>8<sp/>canaux<sp/>(pas<sp/>de<sp/>power-down).</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5045" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5045" bodyend="5063"/>
+        <references refid="group__grp__dac_1ga64f4ecd7d147a039d045da6b64975451" compoundref="main_8c" startline="1068" endline="1086">EcrireRegistreConfigDAC</references>
+        <references refid="group__grp__dac_1ga0bd0eb566573e23c1258ec14e95e53f0" compoundref="main_8c" startline="5045" endline="5063">h_SET_DAC_PD</references>
+        <references refid="group__grp__dac_1ga657c4f07f159cff86dc8a577e46d0ddb" compoundref="main_8c" startline="1205" endline="1213">MemoriserConfigDac</references>
+        <referencedby refid="group__grp__dac_1ga0bd0eb566573e23c1258ec14e95e53f0" compoundref="main_8c" startline="5045" endline="5063">h_SET_DAC_PD</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1ga3f77fbf6480487ff43ce47d7ed7d89e2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_SET_DAC_GAIN</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_SET_DAC_GAIN</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;SET_DAC_GAIN&quot; - ecrit le registre Gain (0x0A) d&apos;une puce DAC : gain des 8 canaux EN UNE SEULE FOIS (1 bit/canal, G7..G0 dans l&apos;octet haut - voir Registre 4-4 - 0=1x, 1=2x). L&apos;octet bas (bits status POR/ EEWA) est toujours envoye a 0x00, sans effet indesirable : POR est &quot;clearable&quot; (0 le laisse tel quel a la prochaine lecture), EEWA est en lecture seule. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>parametre C. Lit last_message, au format attendu &quot;&lt;bus&gt;:&lt;adresse_hal_hex&gt;:&lt;valeur_hex8&gt;&quot; - valeur_hex8 = G7..G0 sur 8 bits (ex : 0x00 = gain 1x sur les 8 canaux). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Remplit response avec &quot;SET_DAC_GAIN:&lt;bus&gt;:&lt;adresse&gt;:0x??:OK\n&quot; ou &quot;...:ERREUR_I2C\n&quot; / &quot;SET_DAC_GAIN:ERREUR_PARAMETRES\n&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;SET_DAC_GAIN:1:0xC4:0x00&quot;</highlight></codeline>
+<codeline><highlight class="normal">-&gt;<sp/>force<sp/>gain<sp/>1x<sp/>sur<sp/>les<sp/>8<sp/>canaux<sp/>du<sp/>DAC<sp/>a<sp/>0xC4<sp/>sur<sp/>hi2c1.</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5086" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5086" bodyend="5105"/>
+        <references refid="group__grp__dac_1ga64f4ecd7d147a039d045da6b64975451" compoundref="main_8c" startline="1068" endline="1086">EcrireRegistreConfigDAC</references>
+        <references refid="group__grp__dac_1ga3f77fbf6480487ff43ce47d7ed7d89e2" compoundref="main_8c" startline="5086" endline="5105">h_SET_DAC_GAIN</references>
+        <references refid="group__grp__dac_1ga657c4f07f159cff86dc8a577e46d0ddb" compoundref="main_8c" startline="1205" endline="1213">MemoriserConfigDac</references>
+        <referencedby refid="group__grp__dac_1ga3f77fbf6480487ff43ce47d7ed7d89e2" compoundref="main_8c" startline="5086" endline="5105">h_SET_DAC_GAIN</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__dac_1ga8721dfe3dc61c6a257e56c61a478b703" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_SET_I2C2_ACTIF</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_SET_I2C2_ACTIF</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;SET_I2C2_ACTIF&quot; - active ou desactive a chaud l&apos;emission periodique sur I2C2 (boucle principale, DAC2/DAC4/DAC5). A desactiver tant que le probleme materiel sur ce bus n&apos;est pas resolu : sinon, chaque tentative ratee bloque le thread jusqu&apos;a SPI_TIMEOUT (100 ms), x3 par tour de boucle, ce qui retarde aussi les mises a jour I2C1 (meme thread, sequentiel). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>parametre C. Lit last_message : &quot;0&quot; ou &quot;1&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Remplit response avec &quot;SET_I2C2_ACTIF:0\n&quot; / &quot;SET_I2C2_ACTIF:1\n&quot; ou &quot;SET_I2C2_ACTIF:ERREUR_PARAMETRES\n&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;SET_I2C2_ACTIF:0&quot;<sp/>-&gt;<sp/>coupe<sp/>I2C2.</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5125" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5125" bodyend="5141"/>
+        <references refid="group__grp__dac_1ga8721dfe3dc61c6a257e56c61a478b703" compoundref="main_8c" startline="5125" endline="5141">h_SET_I2C2_ACTIF</references>
+        <referencedby refid="group__grp__dac_1ga8721dfe3dc61c6a257e56c61a478b703" compoundref="main_8c" startline="5125" endline="5141">h_SET_I2C2_ACTIF</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Écriture des tensions et seuils, mapping DAC ↔ LDO, registres de configuration, balayage. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="struct_mux_ldo_config_courant__t" kind="struct" language="C++" prot="public">
+    <compoundname>MuxLdoConfigCourant_t</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_mux_ldo_config_courant__t_1a67d76bb4d0ad7046b5cf4eb17bcc6e04" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t MuxLdoConfigCourant_t::canal_mux</definition>
+        <argsstring></argsstring>
+        <name>canal_mux</name>
+        <qualifiedname>MuxLdoConfigCourant_t::canal_mux</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5534" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5534" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Configuration du multiplexage pour la mesure REELLE de courant. Un element par LDO, MEME INDEXATION que muxLdoConfig (voir findLdoIndex()) - mais seuls les index correspondant a une LDO *PSp, *PSn seront jamais renseignes (les *PLp, *PLn n&apos;ont pas ce circuit de mesure). </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5533" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5533" bodyend="5535"/>
+    <listofallmembers>
+      <member refid="struct_mux_ldo_config_courant__t_1a67d76bb4d0ad7046b5cf4eb17bcc6e04" prot="public" virt="non-virtual"><scope>MuxLdoConfigCourant_t</scope><name>canal_mux</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

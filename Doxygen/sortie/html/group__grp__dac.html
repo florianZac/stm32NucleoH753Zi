@@ -1,0 +1,1996 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lwip_demo_H753 - Controleur de LDO: Pilotage des DAC MCP47FEB28</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Lwip_demo_H753 - Controleur de LDO<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">Firmware STM32H753ZI : pilotage de 18 LDO (configuration CSV, DAC MCP47FEB28, protection OC)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Recherche" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('group__grp__dac.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Pilotage des DAC MCP47FEB28 </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Écriture des tensions et seuils, mapping DAC ↔ LDO, registres de configuration, balayage.  
+<a href="#details">Plus de détails...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:ga4f3b4b4120ebf5fcecc3f9b14f56afae" id="r_ga4f3b4b4120ebf5fcecc3f9b14f56afae"><td class="memItemLeft">static uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#ga4f3b4b4120ebf5fcecc3f9b14f56afae">VoltageVersCodeDAC</a> (float tension_desiree, float tension_reference)</td></tr>
+<tr class="memdesc:ga4f3b4b4120ebf5fcecc3f9b14f56afae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convertit une tension desiree (en volts) en code numerique 12 bits (0-4095) compris par le DAC, selon la formule : code = (tension_desiree / tension_reference) * 4095. Dans la config actuelle du DAC (registre VREF a sa valeur par defaut, VDD utilise comme reference), tension_reference doit etre la tension VDD REELLE mesuree sur le DAC (pas forcement 5V pile - utilise la valeur que tu as mesuree au multimetre pour plus de precision).  <br /></td></tr>
+<tr class="memitem:gab5371264b6f8831689ac30f87a45c4ed" id="r_gab5371264b6f8831689ac30f87a45c4ed"><td class="memItemLeft">static uint8_t *&#160;</td><td class="memItemRight"><a class="el" href="#gab5371264b6f8831689ac30f87a45c4ed">ResoudreTableauDacParAdresse</a> (I2C_HandleTypeDef *hi2c, uint8_t adresse_hal)</td></tr>
+<tr class="memdesc:gab5371264b6f8831689ac30f87a45c4ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrouve le tableau DACx_DEF (celui rafraichi en continu par la boucle de StartLwipTask(), voir "USER CODE BEGIN 2") qui correspond au bus/adresse donnes, ou NULL si aucun ne correspond (adresse non geree par la boucle periodique).  <br /></td></tr>
+<tr class="memitem:gafd7df1ea4aaa529649e87bc99b737e42" id="r_gafd7df1ea4aaa529649e87bc99b737e42"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#gafd7df1ea4aaa529649e87bc99b737e42">SynchroniserTableauDac</a> (I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t registre, uint16_t valeur)</td></tr>
+<tr class="memdesc:gafd7df1ea4aaa529649e87bc99b737e42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Repercute une ecriture DAC directe (EcrireDACVolatile(), typiquement depuis BalayerSortieDAC()) dans le tableau DACx_DEF correspondant, pour que la boucle periodique de StartLwipTask() retransmette CETTE valeur au lieu d'ecraser la sortie avec l'ancien contenu du tableau (typiquement 0V, voir MCP4725_VAL_DEF_BIN) des la fin de l'ecriture directe. Sans cet appel, une valeur ecrite par un balayage ou un cycle de test "retombait" au palier suivant de la boucle. Ne fait rien si (hi2c, adresse_hal) ne correspond a aucun DACx_DEF connu (ResoudreTableauDacParAdresse() renvoie alors NULL).  <br /></td></tr>
+<tr class="memitem:gaf2d35bfc7d39a06f0e77e0680df9c08d" id="r_gaf2d35bfc7d39a06f0e77e0680df9c08d"><td class="memItemLeft">static HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#gaf2d35bfc7d39a06f0e77e0680df9c08d">EcrireDACVolatile</a> (I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t registre, uint16_t valeur)</td></tr>
+<tr class="memdesc:gaf2d35bfc7d39a06f0e77e0680df9c08d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ecrit une valeur 12 bits dans un registre VOLATILE du DAC MCP47FEB28 (adresses memoire 00h-07h uniquement). Ne touche JAMAIS l'EEPROM (adresses 10h-1Ah) : refuse d'emettre quoi que ce soit si registre est hors de la plage 0x00-0x07, aucun risque de corrompre l'adresse I2C ou toute autre configuration du DAC, meme en cas d'appel avec un parametre invalide.  <br /></td></tr>
+<tr class="memitem:gade7258168a59f260de108ec88059f889" id="r_gade7258168a59f260de108ec88059f889"><td class="memItemLeft">static HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#gade7258168a59f260de108ec88059f889">LireRegistreConfigDAC</a> (I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t registre, uint16_t *valeur)</td></tr>
+<tr class="memdesc:gade7258168a59f260de108ec88059f889"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lit un registre VOLATILE de CONFIGURATION du DAC MCP47FEB28 (adresses memoire 08h/09h/0Ah UNIQUEMENT - VREF/Power-Down/ Gain, voir Table 4-1 du datasheet DS20006368A). Toute autre adresse est refusee (HAL_ERROR immediat, aucune trame emise) : meme garde-fou que EcrireDACVolatile(), pour ne jamais risquer de lire (et donc plus tard, par erreur de copier-coller, d'ecrire) 0Bh (WiperLock STATUS) ou l'EEPROM (10h-1Ah). Protocole : ecrit l'octet de commande (adresse memoire, bits C1:C0=11 pour READ), puis relit 2 octets de donnee via un Repeated Start (HAL_I2C_Mem_Read gere cette sequence).  <br /></td></tr>
+<tr class="memitem:ga64f4ecd7d147a039d045da6b64975451" id="r_ga64f4ecd7d147a039d045da6b64975451"><td class="memItemLeft">static HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#ga64f4ecd7d147a039d045da6b64975451">EcrireRegistreConfigDAC</a> (I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t registre, uint16_t valeur)</td></tr>
+<tr class="memdesc:ga64f4ecd7d147a039d045da6b64975451"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ecrit un registre VOLATILE de CONFIGURATION du DAC MCP47FEB28 (adresses memoire 08h/09h/0Ah UNIQUEMENT). Meme garde-fou que EcrireDACVolatile()/LireRegistreConfigDAC() : toute adresse hors de {0x08, 0x09, 0x0A} est refusee, aucune trame emise. ATTENTION : contrairement a EcrireDACVolatile() (une sortie a la fois), ces 3 registres s'appliquent AUX 8 CANAUX DE LA PUCE A LA FOIS (2 bits/canal pour VREF et Power-Down, 1 bit/ canal pour Gain) - voir Registres 4-2/4-3/4-4 du datasheet. Une seule ecriture ici change donc potentiellement les 8 sorties de cette puce.  <br /></td></tr>
+<tr class="memitem:gaef2582c078db38424ec959fc1f9f1c5f" id="r_gaef2582c078db38424ec959fc1f9f1c5f"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#gaef2582c078db38424ec959fc1f9f1c5f">InitialiserConfigDacsI2C1</a> (void)</td></tr>
+<tr class="memdesc:gaef2582c078db38424ec959fc1f9f1c5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Force la configuration VOLATILE des MCP47FEB28 de I2C1 a l'etat attendu par tout le reste du firmware : VREF = VDD (5V) sur les 8 canaux, sortie en fonctionnement normal (pas de Power-Down), gain 1x. Relit ensuite les 3 registres et envoie le resultat sur USART1. Pourquoi : le firmware ne configurait JAMAIS ces registres. Chaque puce demarre donc sur les valeurs de son EEPROM, qui peuvent differer d'une puce a l'autre (programmation anterieure, trame parasite, ex : le texte "Bonjour" de la capture bouton USER, envoye a 0xC0/0xC2 avant le correctif). Si l'EEPROM de la puce 0xC2 contient VREF = bande interdite (~1.2V) ou un mode Power-Down, SET_VAL_LDO_1PLp ne peut pas couvrir 0-5V alors que la puce 0xC0 (1PSp/2PSp) fonctionne. Registres 08h/09h/0Ah volatils uniquement : l'EEPROM n'est jamais touchee.  <br /></td></tr>
+<tr class="memitem:gab992619e0a04a6fbb9a6a97c2e284c65" id="r_gab992619e0a04a6fbb9a6a97c2e284c65"><td class="memItemLeft">static int&#160;</td><td class="memItemRight"><a class="el" href="#gab992619e0a04a6fbb9a6a97c2e284c65">IndexDacI2C1</a> (I2C_HandleTypeDef *hi2c, uint8_t adresse_hal)</td></tr>
+<tr class="memdesc:gab992619e0a04a6fbb9a6a97c2e284c65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index d'une puce de I2C1 dans dacs_i2c1_adresses[].  <br /></td></tr>
+<tr class="memitem:ga657c4f07f159cff86dc8a577e46d0ddb" id="r_ga657c4f07f159cff86dc8a577e46d0ddb"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga657c4f07f159cff86dc8a577e46d0ddb">MemoriserConfigDac</a> (I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t registre, uint16_t mot)</td></tr>
+<tr class="memdesc:ga657c4f07f159cff86dc8a577e46d0ddb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Memorise la nouvelle configuration attendue apres un SET_DAC_VREF/ PD/GAIN reussi, pour que la surveillance ne la "corrige" pas.  <br /></td></tr>
+<tr class="memitem:gacdf4ad1b5d4a18ab3a5b309318099344" id="r_gacdf4ad1b5d4a18ab3a5b309318099344"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#gacdf4ad1b5d4a18ab3a5b309318099344">SurveillerConfigDacsI2C1</a> (void)</td></tr>
+<tr class="memdesc:gacdf4ad1b5d4a18ab3a5b309318099344"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relit VREF/PD/Gain des puces de I2C1 et reecrit la configuration attendue si une puce l'a perdue. Appelee par la boucle de StartLwipTask(), au plus une fois toutes les DAC_SURVEILLANCE_MS. Une puce qui ne repond pas (NACK) est ignoree jusqu'au tour suivant.  <br /></td></tr>
+<tr class="memitem:ga3c9eb54cd6a878bce23cc531e877692f" id="r_ga3c9eb54cd6a878bce23cc531e877692f"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga3c9eb54cd6a878bce23cc531e877692f">EcrireToutesLesSorties</a> (I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, const char *nom_dac)</td></tr>
+<tr class="memdesc:ga3c9eb54cd6a878bce23cc531e877692f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ecrit une valeur sur chacune des 8 sorties volatiles du DAC (VOUT0 a VOUT7, registres 00h-07h), et ajoute une ligne de compte-rendu dans rapport_scan pour chaque canal, au format "DACx:VOUTn:0xNNNN:message". Une valeur DIFFERENTE est ecrite sur chaque canal (palier croissant) pour verifier facilement au voltmetre que les 8 sorties sont bien independantes les unes des autres.  <br /></td></tr>
+<tr class="memitem:ga3b69ec3e3af5d495bc0a095f6e4343eb" id="r_ga3b69ec3e3af5d495bc0a095f6e4343eb"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga3b69ec3e3af5d495bc0a095f6e4343eb">BalayerSortieDAC</a> (I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t registre, const char *nom_dac, uint16_t valeur_max, uint16_t pas, uint32_t delai_ms, float tension_reference)</td></tr>
+<tr class="memdesc:ga3b69ec3e3af5d495bc0a095f6e4343eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Balaie une seule sortie du DAC de 0 a valeur_max, par pas reguliers, avec une pause entre chaque valeur. Fonction BLOQUANTE : elle ne rend la main qu'une fois le balayage complet termine. Utile pour observer une montee de tension progressive au voltmetre sur une sortie precise. Envoie aussi chaque palier sur USART1 en direct, au format "nom_dac:VOUTn:code:tension_calculeeV". Generique : fonctionne sur n'importe quel DAC/canal/plage/ vitesse, il suffit de changer les parametres.  <br /></td></tr>
+<tr class="memitem:gad09bc7e6abf4db69f2fea3ab311c637f" id="r_gad09bc7e6abf4db69f2fea3ab311c637f"><td class="memItemLeft">static uint8_t *&#160;</td><td class="memItemRight"><a class="el" href="#gad09bc7e6abf4db69f2fea3ab311c637f">ResoudreTableauDac</a> (<a class="el" href="main_8c.html#a75e57bba50363a40a374df0b941bfd58">CibleDac_t</a> cible)</td></tr>
+<tr class="memdesc:gad09bc7e6abf4db69f2fea3ab311c637f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retourne le pointeur vers le tableau DACx_DEF correspondant a une cible logique.  <br /></td></tr>
+<tr class="memitem:ga4469a4eb236eb4a995abab435c43c644" id="r_ga4469a4eb236eb4a995abab435c43c644"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga4469a4eb236eb4a995abab435c43c644">EcrireValeurDac</a> (<a class="el" href="main_8c.html#a75e57bba50363a40a374df0b941bfd58">CibleDac_t</a> cible, uint8_t canal, uint16_t valeur)</td></tr>
+<tr class="memdesc:ga4469a4eb236eb4a995abab435c43c644"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ecrit une valeur 12 bits dans le tableau DACx_DEF/canal designe par une cible logique - remplace les 36 blocs d'ecriture individuels (un par LDO x par type) par UNE seule fonction generique, pilotee par mappingDacLdo[].  <br /></td></tr>
+<tr class="memitem:ga924c3b0d97d03d4aba5b24043d36849c" id="r_ga924c3b0d97d03d4aba5b24043d36849c"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga924c3b0d97d03d4aba5b24043d36849c">MajEtatLdoDepuisDac</a> (const uint8_t *tableau, uint8_t canal, uint16_t valeur)</td></tr>
+<tr class="memdesc:ga924c3b0d97d03d4aba5b24043d36849c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Repercute une ecriture directe sur un canal DAC (balayage a distance BALAYER_DAC, capture bouton USER) dans l'etat logiciel de la ou des LDO associees a ce canal par mappingDacLdo[] (VAL_LDO/CURRENT_LDO et struct LDO). Sans cela, apres un balayage sur I2C1 0xC0 ou 0xC2, la sortie restait a la valeur finale du balayage alors que GET_STATUS_LDO_&lt;nom&gt; (page valeur LDO, page dac/&lt;nom&gt;) affichait encore l'ancienne valeur.  <br /></td></tr>
+<tr class="memitem:gadcbefabbab52750a575b5dac7150534e" id="r_gadcbefabbab52750a575b5dac7150534e"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#gadcbefabbab52750a575b5dac7150534e">h_SET_VAL_LDO_GENERIQUE</a> (int idx)</td></tr>
+<tr class="memdesc:gadcbefabbab52750a575b5dac7150534e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler GENERIQUE de "SET_VAL_LDO_&lt;nom&gt;:&lt;valeur&gt;" - remplace les 18 anciennes fonctions h_SET_VAL_LDO_&lt;nom&gt; individuelles. Met a jour VAL_LDO[idx]/l'etat logiciel de la LDO, PUIS repercute la valeur sur le DAC reellement associe via mappingDacLdo[idx] (modifiable a chaud, voir SetMappingDacLdo()).  <br /></td></tr>
+<tr class="memitem:ga1b7ca6a4fce7e0d525508dd4951a48f0" id="r_ga1b7ca6a4fce7e0d525508dd4951a48f0"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga1b7ca6a4fce7e0d525508dd4951a48f0">h_SET_CURRENT_LDO_GENERIQUE</a> (int idx)</td></tr>
+<tr class="memdesc:ga1b7ca6a4fce7e0d525508dd4951a48f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler GENERIQUE de "SET_CURRENT_LDO_&lt;nom&gt;:&lt;valeur&gt;" - remplace les 18 anciennes fonctions h_SET_CURRENT_LDO_&lt;nom&gt;. Repond "NOT FOR YOU" (comme avant) si la LDO n'a pas de DAC courant associe (mappingDacLdo[idx].dac_courant == CIBLE_AUCUNE, cas des 3 LDO *PLp).  <br /></td></tr>
+<tr class="memitem:gaeda25d5b60439cf57afc75b5c8096a3d" id="r_gaeda25d5b60439cf57afc75b5c8096a3d"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#gaeda25d5b60439cf57afc75b5c8096a3d">SetMappingDacLdo</a> (int idx, const char *nom)</td></tr>
+<tr class="memdesc:gaeda25d5b60439cf57afc75b5c8096a3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler de "SET_DAC_MAPPING_LDO_&lt;nom&gt;:&lt;V|I&gt;:&lt;0-5&gt;:&lt;0-7&gt;" - modifie A CHAUD, sans recompilation ni reflash, quel DAC/canal alimente la tension (V) ou le courant (I) d'une LDO.  <br /></td></tr>
+<tr class="memitem:gac1d35f9367efff87f176072901b295ac" id="r_gac1d35f9367efff87f176072901b295ac"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#gac1d35f9367efff87f176072901b295ac">GetMappingDacLdo</a> (int idx, const char *nom)</td></tr>
+<tr class="memdesc:gac1d35f9367efff87f176072901b295ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler de "GET_DAC_MAPPING_LDO_&lt;nom&gt;" - lit la correspondance DAC/canal actuellement active pour une LDO (tension et courant), sans la modifier.  <br /></td></tr>
+<tr class="memitem:ga161b95d8fabb7c81f08c2e0629238b6e" id="r_ga161b95d8fabb7c81f08c2e0629238b6e"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga161b95d8fabb7c81f08c2e0629238b6e">h_BALAYER_DAC</a> (void)</td></tr>
+<tr class="memdesc:ga161b95d8fabb7c81f08c2e0629238b6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler de la commande reseau "BALAYER_DAC". Declenche BalayerSortieDAC() a distance, avec tous ses parametres fournis dans la trame UDP. ATTENTION : cette fonction est BLOQUANTE (comme BalayerSortieDAC() elle-meme) - pendant toute la duree du balayage, ce thread ne traite plus aucune autre commande UDP (meme comportement que la capture complete du bouton USER).  <br /></td></tr>
+<tr class="memitem:ga60bdf8f5f95deb2ebd6667b24e0cef0b" id="r_ga60bdf8f5f95deb2ebd6667b24e0cef0b"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga60bdf8f5f95deb2ebd6667b24e0cef0b">h_GET_DAC_CONFIG</a> (void)</td></tr>
+<tr class="memdesc:ga60bdf8f5f95deb2ebd6667b24e0cef0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler de la commande reseau "GET_DAC_CONFIG" - lit et renvoie les 3 registres de configuration (VREF/Power-Down/ Gain) d'une puce DAC MCP47FEB28, adressable par bus et adresse I2C (paametrable, pas fige sur une puce donnee).  <br /></td></tr>
+<tr class="memitem:gae1030d1ce005f7deac0f86610f9df4af" id="r_gae1030d1ce005f7deac0f86610f9df4af"><td class="memItemLeft">static HAL_StatusTypeDef&#160;</td><td class="memItemRight"><a class="el" href="#gae1030d1ce005f7deac0f86610f9df4af">LireRegistreValeurDAC</a> (I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t registre, uint16_t *valeur)</td></tr>
+<tr class="memdesc:gae1030d1ce005f7deac0f86610f9df4af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lit un registre VOLATILE de VALEUR du DAC MCP47FEB28 (adresses memoire 00h a 07h, une par voie). Lecture seule : aucune ecriture n'est possible par cette fonction.  <br /></td></tr>
+<tr class="memitem:ga9a556575c443842fc36ade5dc4983b87" id="r_ga9a556575c443842fc36ade5dc4983b87"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga9a556575c443842fc36ade5dc4983b87">h_GET_DAC_REG</a> (void)</td></tr>
+<tr class="memdesc:ga9a556575c443842fc36ade5dc4983b87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler de la commande reseau "GET_DAC_REG" - diagnostic : relit dans le DAC un registre de valeur (00h-07h) ou de configuration (08h VREF, 09h Power-Down, 0Ah Gain) et le compare a la valeur que le firmware envoie en continu (tableau DACx_DEF).  <br /></td></tr>
+<tr class="memitem:ga459cb06259e765da581fe6170672b59a" id="r_ga459cb06259e765da581fe6170672b59a"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga459cb06259e765da581fe6170672b59a">h_SET_DAC_VREF</a> (void)</td></tr>
+<tr class="memdesc:ga459cb06259e765da581fe6170672b59a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler de la commande reseau "SET_DAC_VREF" - ecrit le registre VREF (0x08) d'une puce DAC : source de reference des 8 canaux EN UNE SEULE FOIS (2 bits/canal, voir Registre 4-2 du datasheet - 00=VDD, 01=bande interne 1.22V, 10=VREF pin non bufferisee, 11=VREF pin bufferisee).  <br /></td></tr>
+<tr class="memitem:ga0bd0eb566573e23c1258ec14e95e53f0" id="r_ga0bd0eb566573e23c1258ec14e95e53f0"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga0bd0eb566573e23c1258ec14e95e53f0">h_SET_DAC_PD</a> (void)</td></tr>
+<tr class="memdesc:ga0bd0eb566573e23c1258ec14e95e53f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler de la commande reseau "SET_DAC_PD" - ecrit le registre Power-Down (0x09) d'une puce DAC : etat des 8 canaux EN UNE SEULE FOIS (2 bits/canal, voir Registre 4-3 - 00=normal, 01/10/11=power-down avec differentes resistances de tirage). 0x0000 = fonctionnement normal sur les 8 canaux.  <br /></td></tr>
+<tr class="memitem:ga3f77fbf6480487ff43ce47d7ed7d89e2" id="r_ga3f77fbf6480487ff43ce47d7ed7d89e2"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga3f77fbf6480487ff43ce47d7ed7d89e2">h_SET_DAC_GAIN</a> (void)</td></tr>
+<tr class="memdesc:ga3f77fbf6480487ff43ce47d7ed7d89e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler de la commande reseau "SET_DAC_GAIN" - ecrit le registre Gain (0x0A) d'une puce DAC : gain des 8 canaux EN UNE SEULE FOIS (1 bit/canal, G7..G0 dans l'octet haut - voir Registre 4-4 - 0=1x, 1=2x). L'octet bas (bits status POR/ EEWA) est toujours envoye a 0x00, sans effet indesirable : POR est "clearable" (0 le laisse tel quel a la prochaine lecture), EEWA est en lecture seule.  <br /></td></tr>
+<tr class="memitem:ga8721dfe3dc61c6a257e56c61a478b703" id="r_ga8721dfe3dc61c6a257e56c61a478b703"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga8721dfe3dc61c6a257e56c61a478b703">h_SET_I2C2_ACTIF</a> (void)</td></tr>
+<tr class="memdesc:ga8721dfe3dc61c6a257e56c61a478b703"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler de la commande reseau "SET_I2C2_ACTIF" - active ou desactive a chaud l'emission periodique sur I2C2 (boucle principale, DAC2/DAC4/DAC5). A desactiver tant que le probleme materiel sur ce bus n'est pas resolu : sinon, chaque tentative ratee bloque le thread jusqu'a SPI_TIMEOUT (100 ms), x3 par tour de boucle, ce qui retarde aussi les mises a jour I2C1 (meme thread, sequentiel).  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Écriture des tensions et seuils, mapping DAC ↔ LDO, registres de configuration, balayage. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentation des fonctions</h2>
+<a id="ga4f3b4b4120ebf5fcecc3f9b14f56afae" name="ga4f3b4b4120ebf5fcecc3f9b14f56afae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4f3b4b4120ebf5fcecc3f9b14f56afae">&#9670;&#160;</a></span>VoltageVersCodeDAC()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t VoltageVersCodeDAC </td>
+          <td>(</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>tension_desiree</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>tension_reference</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convertit une tension desiree (en volts) en code numerique 12 bits (0-4095) compris par le DAC, selon la formule : code = (tension_desiree / tension_reference) * 4095. Dans la config actuelle du DAC (registre VREF a sa valeur par defaut, VDD utilise comme reference), tension_reference doit etre la tension VDD REELLE mesuree sur le DAC (pas forcement 5V pile - utilise la valeur que tu as mesuree au multimetre pour plus de precision). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tension_desiree</td><td>Tension de sortie voulue, en volts (ex : 5.0f). Ecretee automatiquement entre 0 et tension_reference. </td></tr>
+    <tr><td class="paramname">tension_reference</td><td>Tension de reference reelle du DAC (VDD mesure), en volts. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">uint16_t</td><td>Code 12 bits (0-4095) a passer a EcrireDACVolatile() ou BalayerSortieDAC(). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="comment">// Ecrire 5V sur VOUT0, avec un VDD reellement mesure a 5V :</span></div>
+<div class="line">uint16_t code = <a class="code hl_function" href="#ga4f3b4b4120ebf5fcecc3f9b14f56afae">VoltageVersCodeDAC</a>(5.0f, 5.0f);   <span class="comment">// -&gt; 4095</span></div>
+<div class="line">EcrireDACVolatile(&amp;hi2c1, (0x62 &lt;&lt; 1), 0x00, code);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Ecrire 2.5V (moitie de VDD), avec VDD mesure a 4.98V :</span></div>
+<div class="line">uint16_t code2 = <a class="code hl_function" href="#ga4f3b4b4120ebf5fcecc3f9b14f56afae">VoltageVersCodeDAC</a>(2.5f, 4.98f); <span class="comment">// -&gt; ~2056</span></div>
+<div class="ttc" id="agroup__grp__dac_html_ga4f3b4b4120ebf5fcecc3f9b14f56afae"><div class="ttname"><a href="#ga4f3b4b4120ebf5fcecc3f9b14f56afae">VoltageVersCodeDAC</a></div><div class="ttdeci">static uint16_t VoltageVersCodeDAC(float tension_desiree, float tension_reference)</div><div class="ttdoc">Convertit une tension desiree (en volts) en code numerique 12 bits (0-4095) compris par le DAC,...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l00847">main.c:847</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00847">847</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l00847">VoltageVersCodeDAC()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01648">ExecuterCaptureComplete()</a>, et <a class="el" href="main_8c_source.html#l00847">VoltageVersCodeDAC()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga4f3b4b4120ebf5fcecc3f9b14f56afae_cgraph.svg" width="162" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga4f3b4b4120ebf5fcecc3f9b14f56afae_icgraph.svg" width="635" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gab5371264b6f8831689ac30f87a45c4ed" name="gab5371264b6f8831689ac30f87a45c4ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab5371264b6f8831689ac30f87a45c4ed">&#9670;&#160;</a></span>ResoudreTableauDacParAdresse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t * ResoudreTableauDacParAdresse </td>
+          <td>(</td>
+          <td class="paramtype">I2C_HandleTypeDef *</td>          <td class="paramname"><span class="paramname"><em>hi2c</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>adresse_hal</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retrouve le tableau DACx_DEF (celui rafraichi en continu par la boucle de StartLwipTask(), voir "USER CODE BEGIN 2") qui correspond au bus/adresse donnes, ou NULL si aucun ne correspond (adresse non geree par la boucle periodique). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hi2c</td><td>Handle I2C (&amp;hi2c1 ou &amp;hi2c2). </td></tr>
+    <tr><td class="paramname">adresse_hal</td><td>Adresse I2C 7 bits deja decalee (ex: MCP4725_I2CADDR_DEFAULT). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">uint8_t*</td><td>Pointeur vers DAC1_DEF, DAC2_DEF... DAC5_DEF, ou NULL. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">uint8_t *tab = <a class="code hl_function" href="#gab5371264b6f8831689ac30f87a45c4ed">ResoudreTableauDacParAdresse</a>(&amp;hi2c1, (0x60 &lt;&lt; 1));</div>
+<div class="line"><span class="comment">// -&gt; &amp;DAC1_DEF[0]</span></div>
+<div class="ttc" id="agroup__grp__dac_html_gab5371264b6f8831689ac30f87a45c4ed"><div class="ttname"><a href="#gab5371264b6f8831689ac30f87a45c4ed">ResoudreTableauDacParAdresse</a></div><div class="ttdeci">static uint8_t * ResoudreTableauDacParAdresse(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal)</div><div class="ttdoc">Retrouve le tableau DACx_DEF (celui rafraichi en continu par la boucle de StartLwipTask(),...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l00875">main.c:875</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00875">875</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l00875">ResoudreTableauDacParAdresse()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04458">h_BALAYER_DAC()</a>, <a class="el" href="main_8c_source.html#l04950">h_GET_DAC_REG()</a>, <a class="el" href="main_8c_source.html#l00875">ResoudreTableauDacParAdresse()</a>, et <a class="el" href="main_8c_source.html#l00912">SynchroniserTableauDac()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_gab5371264b6f8831689ac30f87a45c4ed_cgraph.svg" width="226" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_gab5371264b6f8831689ac30f87a45c4ed_icgraph.svg" width="1090" height="192"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gafd7df1ea4aaa529649e87bc99b737e42" name="gafd7df1ea4aaa529649e87bc99b737e42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafd7df1ea4aaa529649e87bc99b737e42">&#9670;&#160;</a></span>SynchroniserTableauDac()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SynchroniserTableauDac </td>
+          <td>(</td>
+          <td class="paramtype">I2C_HandleTypeDef *</td>          <td class="paramname"><span class="paramname"><em>hi2c</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>adresse_hal</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>registre</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>valeur</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Repercute une ecriture DAC directe (EcrireDACVolatile(), typiquement depuis BalayerSortieDAC()) dans le tableau DACx_DEF correspondant, pour que la boucle periodique de StartLwipTask() retransmette CETTE valeur au lieu d'ecraser la sortie avec l'ancien contenu du tableau (typiquement 0V, voir MCP4725_VAL_DEF_BIN) des la fin de l'ecriture directe. Sans cet appel, une valeur ecrite par un balayage ou un cycle de test "retombait" au palier suivant de la boucle. Ne fait rien si (hi2c, adresse_hal) ne correspond a aucun DACx_DEF connu (ResoudreTableauDacParAdresse() renvoie alors NULL). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hi2c</td><td>Handle I2C utilise pour l'ecriture (&amp;hi2c1 ou &amp;hi2c2). </td></tr>
+    <tr><td class="paramname">adresse_hal</td><td>Adresse I2C 7 bits deja decalee de la puce ecrite. </td></tr>
+    <tr><td class="paramname">registre</td><td>Registre ecrit (0-7). </td></tr>
+    <tr><td class="paramname">valeur</td><td>Valeur 12 bits ecrite sur ce registre. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">EcrireDACVolatile(hi2c, adresse_hal, registre, valeur);</div>
+<div class="line"><a class="code hl_function" href="#gafd7df1ea4aaa529649e87bc99b737e42">SynchroniserTableauDac</a>(hi2c, adresse_hal, registre, valeur);</div>
+<div class="ttc" id="agroup__grp__dac_html_gafd7df1ea4aaa529649e87bc99b737e42"><div class="ttname"><a href="#gafd7df1ea4aaa529649e87bc99b737e42">SynchroniserTableauDac</a></div><div class="ttdeci">static void SynchroniserTableauDac(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t registre, uint16_t valeur)</div><div class="ttdoc">Repercute une ecriture DAC directe (EcrireDACVolatile(), typiquement depuis BalayerSortieDAC()) dans ...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l00912">main.c:912</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00912">912</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l04043">MajEtatLdoDepuisDac()</a>, <a class="el" href="main_8c_source.html#l00875">ResoudreTableauDacParAdresse()</a>, et <a class="el" href="main_8c_source.html#l00912">SynchroniserTableauDac()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01346">BalayerSortieDAC()</a>, et <a class="el" href="main_8c_source.html#l00912">SynchroniserTableauDac()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_gafd7df1ea4aaa529649e87bc99b737e42_cgraph.svg" width="634" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_gafd7df1ea4aaa529649e87bc99b737e42_icgraph.svg" width="827" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gaf2d35bfc7d39a06f0e77e0680df9c08d" name="gaf2d35bfc7d39a06f0e77e0680df9c08d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf2d35bfc7d39a06f0e77e0680df9c08d">&#9670;&#160;</a></span>EcrireDACVolatile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">HAL_StatusTypeDef EcrireDACVolatile </td>
+          <td>(</td>
+          <td class="paramtype">I2C_HandleTypeDef *</td>          <td class="paramname"><span class="paramname"><em>hi2c</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>adresse_hal</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>registre</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>valeur</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Ecrit une valeur 12 bits dans un registre VOLATILE du DAC MCP47FEB28 (adresses memoire 00h-07h uniquement). Ne touche JAMAIS l'EEPROM (adresses 10h-1Ah) : refuse d'emettre quoi que ce soit si registre est hors de la plage 0x00-0x07, aucun risque de corrompre l'adresse I2C ou toute autre configuration du DAC, meme en cas d'appel avec un parametre invalide. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hi2c</td><td>Pointeur vers le handle I2C a utiliser (&amp;hi2c1, &amp;hi2c2, ...). </td></tr>
+    <tr><td class="paramname">adresse_hal</td><td>Adresse I2C du DAC, deja au format HAL (decalee, ex : 0xC4 pour un DAC a 0x62 en 7 bits). </td></tr>
+    <tr><td class="paramname">registre</td><td>Adresse memoire du registre volatile cible (0x00 = DAC0/VOUT0, 0x01 = DAC1/VOUT1, ... 0x07 = DAC7/VOUT7). Toute valeur &gt; 0x07 est refusee (HAL_ERROR immediat, aucune trame emise) pour eviter tout risque d'ecriture accidentelle dans les registres nonvolatiles (EEPROM). </td></tr>
+    <tr><td class="paramname">valeur</td><td>Valeur 12 bits a ecrire (0-4095). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">HAL_StatusTypeDef</td><td>Resultat de la transmission I2C (HAL_OK si le DAC a acquitte les 3 octets, HAL_ERROR si registre est hors plage volatile ou si le DAC a NACK). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="comment">// Ecrit la pleine echelle (4095) sur VOUT0 du DAC a l&#39;adresse 0x62 :</span></div>
+<div class="line">HAL_StatusTypeDef status = EcrireDACVolatile(&amp;hi2c1, (0x62 &lt;&lt; 1), 0x00, 4095);</div>
+<div class="line"><span class="keywordflow">if</span> (status == HAL_OK) { ... }   <span class="comment">// mesurer VOUT0 au voltmetre</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00956">956</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l00956">EcrireDACVolatile()</a>, et <a class="el" href="main_8c_source.html#l00728">ResoudreMutexI2C()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01346">BalayerSortieDAC()</a>, <a class="el" href="main_8c_source.html#l00956">EcrireDACVolatile()</a>, <a class="el" href="main_8c_source.html#l01289">EcrireToutesLesSorties()</a>, et <a class="el" href="main_8c_source.html#l01648">ExecuterCaptureComplete()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_gaf2d35bfc7d39a06f0e77e0680df9c08d_cgraph.svg" width="320" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_gaf2d35bfc7d39a06f0e77e0680df9c08d_icgraph.svg" width="815" height="159"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gade7258168a59f260de108ec88059f889" name="gade7258168a59f260de108ec88059f889"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gade7258168a59f260de108ec88059f889">&#9670;&#160;</a></span>LireRegistreConfigDAC()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">HAL_StatusTypeDef LireRegistreConfigDAC </td>
+          <td>(</td>
+          <td class="paramtype">I2C_HandleTypeDef *</td>          <td class="paramname"><span class="paramname"><em>hi2c</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>adresse_hal</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>registre</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t *</td>          <td class="paramname"><span class="paramname"><em>valeur</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Lit un registre VOLATILE de CONFIGURATION du DAC MCP47FEB28 (adresses memoire 08h/09h/0Ah UNIQUEMENT - VREF/Power-Down/ Gain, voir Table 4-1 du datasheet DS20006368A). Toute autre adresse est refusee (HAL_ERROR immediat, aucune trame emise) : meme garde-fou que EcrireDACVolatile(), pour ne jamais risquer de lire (et donc plus tard, par erreur de copier-coller, d'ecrire) 0Bh (WiperLock STATUS) ou l'EEPROM (10h-1Ah). Protocole : ecrit l'octet de commande (adresse memoire, bits C1:C0=11 pour READ), puis relit 2 octets de donnee via un Repeated Start (HAL_I2C_Mem_Read gere cette sequence). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hi2c</td><td>Pointeur vers le handle I2C a utiliser (&amp;hi2c1, &amp;hi2c2, ...). </td></tr>
+    <tr><td class="paramname">adresse_hal</td><td>Adresse I2C du DAC, deja au format HAL (decalee). </td></tr>
+    <tr><td class="paramname">registre</td><td>0x08 (VREF), 0x09 (Power-Down) ou 0x0A (Gain/STATUS). Toute autre valeur est refusee. </td></tr>
+    <tr><td class="paramname">valeur</td><td>Pointeur vers le uint16_t a remplir avec le mot lu. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">HAL_StatusTypeDef</td><td>Resultat de la lecture I2C (HAL_OK si le DAC a repondu, HAL_ERROR si registre est hors plage autorisee ou si le DAC a NACK/timeout). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">uint16_t vref;</div>
+<div class="line"><span class="keywordflow">if</span> (<a class="code hl_function" href="#gade7258168a59f260de108ec88059f889">LireRegistreConfigDAC</a>(&amp;hi2c1, (0x62 &lt;&lt; 1), 0x08, &amp;vref) == HAL_OK)</div>
+<div class="line">{</div>
+<div class="line">    <span class="comment">// vref == 0x0000 si tous les canaux sont sur VDD (defaut usine)</span></div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__grp__dac_html_gade7258168a59f260de108ec88059f889"><div class="ttname"><a href="#gade7258168a59f260de108ec88059f889">LireRegistreConfigDAC</a></div><div class="ttdeci">static HAL_StatusTypeDef LireRegistreConfigDAC(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t registre, uint16_t *valeur)</div><div class="ttdoc">Lit un registre VOLATILE de CONFIGURATION du DAC MCP47FEB28 (adresses memoire 08h/09h/0Ah UNIQUEMENT ...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l01013">main.c:1013</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l01013">1013</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l01013">LireRegistreConfigDAC()</a>, et <a class="el" href="main_8c_source.html#l00728">ResoudreMutexI2C()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04527">h_GET_DAC_CONFIG()</a>, <a class="el" href="main_8c_source.html#l04950">h_GET_DAC_REG()</a>, <a class="el" href="main_8c_source.html#l01118">InitialiserConfigDacsI2C1()</a>, <a class="el" href="main_8c_source.html#l01013">LireRegistreConfigDAC()</a>, et <a class="el" href="main_8c_source.html#l01228">SurveillerConfigDacsI2C1()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_gade7258168a59f260de108ec88059f889_cgraph.svg" width="352" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_gade7258168a59f260de108ec88059f889_icgraph.svg" width="639" height="286"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga64f4ecd7d147a039d045da6b64975451" name="ga64f4ecd7d147a039d045da6b64975451"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga64f4ecd7d147a039d045da6b64975451">&#9670;&#160;</a></span>EcrireRegistreConfigDAC()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">HAL_StatusTypeDef EcrireRegistreConfigDAC </td>
+          <td>(</td>
+          <td class="paramtype">I2C_HandleTypeDef *</td>          <td class="paramname"><span class="paramname"><em>hi2c</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>adresse_hal</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>registre</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>valeur</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Ecrit un registre VOLATILE de CONFIGURATION du DAC MCP47FEB28 (adresses memoire 08h/09h/0Ah UNIQUEMENT). Meme garde-fou que EcrireDACVolatile()/LireRegistreConfigDAC() : toute adresse hors de {0x08, 0x09, 0x0A} est refusee, aucune trame emise. ATTENTION : contrairement a EcrireDACVolatile() (une sortie a la fois), ces 3 registres s'appliquent AUX 8 CANAUX DE LA PUCE A LA FOIS (2 bits/canal pour VREF et Power-Down, 1 bit/ canal pour Gain) - voir Registres 4-2/4-3/4-4 du datasheet. Une seule ecriture ici change donc potentiellement les 8 sorties de cette puce. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hi2c</td><td>Pointeur vers le handle I2C a utiliser (&amp;hi2c1, &amp;hi2c2, ...). </td></tr>
+    <tr><td class="paramname">adresse_hal</td><td>Adresse I2C du DAC, deja au format HAL (decalee). </td></tr>
+    <tr><td class="paramname">registre</td><td>0x08 (VREF), 0x09 (Power-Down) ou 0x0A (Gain). Toute autre valeur est refusee. </td></tr>
+    <tr><td class="paramname">valeur</td><td>Mot 16 bits a ecrire tel quel (voir Registres 4-2/4-3/4-4 pour le format exact bit a bit - c'est a l'appelant de le construire correctement, cette fonction ne fait aucune interpretation). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">HAL_StatusTypeDef</td><td>Resultat de l'ecriture I2C. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="comment">// VREF = VDD sur les 8 canaux (VRnB:VRnA = 00 partout) :</span></div>
+<div class="line"><a class="code hl_function" href="#ga64f4ecd7d147a039d045da6b64975451">EcrireRegistreConfigDAC</a>(&amp;hi2c1, (0x62 &lt;&lt; 1), 0x08, 0x0000);</div>
+<div class="line"><span class="comment">// Gain = 1x sur les 8 canaux (G7..G0 = 0, octet bas ignore) :</span></div>
+<div class="line"><a class="code hl_function" href="#ga64f4ecd7d147a039d045da6b64975451">EcrireRegistreConfigDAC</a>(&amp;hi2c1, (0x62 &lt;&lt; 1), 0x0A, 0x0000);</div>
+<div class="ttc" id="agroup__grp__dac_html_ga64f4ecd7d147a039d045da6b64975451"><div class="ttname"><a href="#ga64f4ecd7d147a039d045da6b64975451">EcrireRegistreConfigDAC</a></div><div class="ttdeci">static HAL_StatusTypeDef EcrireRegistreConfigDAC(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t registre, uint16_t valeur)</div><div class="ttdoc">Ecrit un registre VOLATILE de CONFIGURATION du DAC MCP47FEB28 (adresses memoire 08h/09h/0Ah UNIQUEMEN...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l01068">main.c:1068</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l01068">1068</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l01068">EcrireRegistreConfigDAC()</a>, et <a class="el" href="main_8c_source.html#l00728">ResoudreMutexI2C()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04902">DAC_ConfigurerSeuilsPotentiometre()</a>, <a class="el" href="main_8c_source.html#l01068">EcrireRegistreConfigDAC()</a>, <a class="el" href="main_8c_source.html#l05086">h_SET_DAC_GAIN()</a>, <a class="el" href="main_8c_source.html#l05045">h_SET_DAC_PD()</a>, <a class="el" href="main_8c_source.html#l05007">h_SET_DAC_VREF()</a>, <a class="el" href="main_8c_source.html#l01118">InitialiserConfigDacsI2C1()</a>, et <a class="el" href="main_8c_source.html#l01228">SurveillerConfigDacsI2C1()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga64f4ecd7d147a039d045da6b64975451_cgraph.svg" width="364" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga64f4ecd7d147a039d045da6b64975451_icgraph.svg" width="715" height="435"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gaef2582c078db38424ec959fc1f9f1c5f" name="gaef2582c078db38424ec959fc1f9f1c5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaef2582c078db38424ec959fc1f9f1c5f">&#9670;&#160;</a></span>InitialiserConfigDacsI2C1()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void InitialiserConfigDacsI2C1 </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Force la configuration VOLATILE des MCP47FEB28 de I2C1 a l'etat attendu par tout le reste du firmware : VREF = VDD (5V) sur les 8 canaux, sortie en fonctionnement normal (pas de Power-Down), gain 1x. Relit ensuite les 3 registres et envoie le resultat sur USART1. Pourquoi : le firmware ne configurait JAMAIS ces registres. Chaque puce demarre donc sur les valeurs de son EEPROM, qui peuvent differer d'une puce a l'autre (programmation anterieure, trame parasite, ex : le texte "Bonjour" de la capture bouton USER, envoye a 0xC0/0xC2 avant le correctif). Si l'EEPROM de la puce 0xC2 contient VREF = bande interdite (~1.2V) ou un mode Power-Down, SET_VAL_LDO_1PLp ne peut pas couvrir 0-5V alors que la puce 0xC0 (1PSp/2PSp) fonctionne. Registres 08h/09h/0Ah volatils uniquement : l'EEPROM n'est jamais touchee. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Une ligne UART par puce : "DAC_INIT:0xC2:VREF=0x0000:PD=0x0000:GAIN=0x0080:OK". </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">CreerMutexI2C();</div>
+<div class="line">CreerMutexUART();</div>
+<div class="line">InitialiserConfigDacsI2C1();   <span class="comment">// avant udpServer_init()</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l01118">1118</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l01068">EcrireRegistreConfigDAC()</a>, <a class="el" href="main_8c_source.html#l01118">InitialiserConfigDacsI2C1()</a>, <a class="el" href="main_8c_source.html#l01013">LireRegistreConfigDAC()</a>, et <a class="el" href="main_8c_source.html#l01803">UART1_EnvoyerTexte()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01118">InitialiserConfigDacsI2C1()</a>, et <a class="el" href="main_8c_source.html#l06730">StartLwipTask()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_gaef2582c078db38424ec959fc1f9f1c5f_cgraph.svg" width="583" height="211"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_gaef2582c078db38424ec959fc1f9f1c5f_icgraph.svg" width="431" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gab992619e0a04a6fbb9a6a97c2e284c65" name="gab992619e0a04a6fbb9a6a97c2e284c65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab992619e0a04a6fbb9a6a97c2e284c65">&#9670;&#160;</a></span>IndexDacI2C1()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int IndexDacI2C1 </td>
+          <td>(</td>
+          <td class="paramtype">I2C_HandleTypeDef *</td>          <td class="paramname"><span class="paramname"><em>hi2c</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>adresse_hal</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Index d'une puce de I2C1 dans dacs_i2c1_adresses[]. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hi2c</td><td>Handle I2C (seul &amp;hi2c1 est surveille). </td></tr>
+    <tr><td class="paramname">adresse_hal</td><td>Adresse 7 bits decalee (0xC0, 0xC2, 0xC4). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Index</td><td>0..NB_DACS_I2C1-1, ou -1 si la puce n'est pas surveillee. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="keywordtype">int</span> k = <a class="code hl_function" href="#gab992619e0a04a6fbb9a6a97c2e284c65">IndexDacI2C1</a>(&amp;hi2c1, 0xC0);   <span class="comment">// -&gt; 0</span></div>
+<div class="ttc" id="agroup__grp__dac_html_gab992619e0a04a6fbb9a6a97c2e284c65"><div class="ttname"><a href="#gab992619e0a04a6fbb9a6a97c2e284c65">IndexDacI2C1</a></div><div class="ttdeci">static int IndexDacI2C1(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal)</div><div class="ttdoc">Index d&#39;une puce de I2C1 dans dacs_i2c1_adresses[].</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l01175">main.c:1175</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l01175">1175</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l01175">IndexDacI2C1()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04902">DAC_ConfigurerSeuilsPotentiometre()</a>, <a class="el" href="main_8c_source.html#l01175">IndexDacI2C1()</a>, <a class="el" href="main_8c_source.html#l06223">LDO_Diagnostic()</a>, et <a class="el" href="main_8c_source.html#l01205">MemoriserConfigDac()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_gab992619e0a04a6fbb9a6a97c2e284c65_cgraph.svg" width="116" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_gab992619e0a04a6fbb9a6a97c2e284c65_icgraph.svg" width="1259" height="411"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga657c4f07f159cff86dc8a577e46d0ddb" name="ga657c4f07f159cff86dc8a577e46d0ddb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga657c4f07f159cff86dc8a577e46d0ddb">&#9670;&#160;</a></span>MemoriserConfigDac()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MemoriserConfigDac </td>
+          <td>(</td>
+          <td class="paramtype">I2C_HandleTypeDef *</td>          <td class="paramname"><span class="paramname"><em>hi2c</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>adresse_hal</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>registre</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>mot</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Memorise la nouvelle configuration attendue apres un SET_DAC_VREF/ PD/GAIN reussi, pour que la surveillance ne la "corrige" pas. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hi2c</td><td>Handle I2C de la puce ecrite. </td></tr>
+    <tr><td class="paramname">adresse_hal</td><td>Adresse 7 bits decalee de la puce. </td></tr>
+    <tr><td class="paramname">registre</td><td>0x08 (VREF), 0x09 (PD) ou 0x0A (Gain). </td></tr>
+    <tr><td class="paramname">mot</td><td>Mot 16 bits ecrit. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#ga657c4f07f159cff86dc8a577e46d0ddb">MemoriserConfigDac</a>(&amp;hi2c1, 0xC0, 0x08, 0x0000);</div>
+<div class="ttc" id="agroup__grp__dac_html_ga657c4f07f159cff86dc8a577e46d0ddb"><div class="ttname"><a href="#ga657c4f07f159cff86dc8a577e46d0ddb">MemoriserConfigDac</a></div><div class="ttdeci">static void MemoriserConfigDac(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t registre, uint16_t mot)</div><div class="ttdoc">Memorise la nouvelle configuration attendue apres un SET_DAC_VREF/ PD/GAIN reussi,...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l01205">main.c:1205</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l01205">1205</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l01175">IndexDacI2C1()</a>, et <a class="el" href="main_8c_source.html#l01205">MemoriserConfigDac()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04902">DAC_ConfigurerSeuilsPotentiometre()</a>, <a class="el" href="main_8c_source.html#l05086">h_SET_DAC_GAIN()</a>, <a class="el" href="main_8c_source.html#l05045">h_SET_DAC_PD()</a>, <a class="el" href="main_8c_source.html#l05007">h_SET_DAC_VREF()</a>, et <a class="el" href="main_8c_source.html#l01205">MemoriserConfigDac()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga657c4f07f159cff86dc8a577e46d0ddb_cgraph.svg" width="308" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga657c4f07f159cff86dc8a577e46d0ddb_icgraph.svg" width="687" height="286"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gacdf4ad1b5d4a18ab3a5b309318099344" name="gacdf4ad1b5d4a18ab3a5b309318099344"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacdf4ad1b5d4a18ab3a5b309318099344">&#9670;&#160;</a></span>SurveillerConfigDacsI2C1()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SurveillerConfigDacsI2C1 </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Relit VREF/PD/Gain des puces de I2C1 et reecrit la configuration attendue si une puce l'a perdue. Appelee par la boucle de StartLwipTask(), au plus une fois toutes les DAC_SURVEILLANCE_MS. Une puce qui ne repond pas (NACK) est ignoree jusqu'au tour suivant. </p>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun.</td><td>Ligne UART a chaque correction : "DAC_RECONFIG:0xC0:VREF=0x5555:PD=0x0000:GAIN=0x0000:NB=1". </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#gacdf4ad1b5d4a18ab3a5b309318099344">SurveillerConfigDacsI2C1</a>();   <span class="comment">// dans la boucle for(;;)</span></div>
+<div class="ttc" id="agroup__grp__dac_html_gacdf4ad1b5d4a18ab3a5b309318099344"><div class="ttname"><a href="#gacdf4ad1b5d4a18ab3a5b309318099344">SurveillerConfigDacsI2C1</a></div><div class="ttdeci">static void SurveillerConfigDacsI2C1(void)</div><div class="ttdoc">Relit VREF/PD/Gain des puces de I2C1 et reecrit la configuration attendue si une puce l&#39;a perdue....</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l01228">main.c:1228</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l01228">1228</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l01068">EcrireRegistreConfigDAC()</a>, <a class="el" href="main_8c_source.html#l01013">LireRegistreConfigDAC()</a>, <a class="el" href="main_8c_source.html#l01228">SurveillerConfigDacsI2C1()</a>, et <a class="el" href="main_8c_source.html#l01803">UART1_EnvoyerTexte()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06730">StartLwipTask()</a>, et <a class="el" href="main_8c_source.html#l01228">SurveillerConfigDacsI2C1()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_gacdf4ad1b5d4a18ab3a5b309318099344_cgraph.svg" width="586" height="211"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_gacdf4ad1b5d4a18ab3a5b309318099344_icgraph.svg" width="434" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga3c9eb54cd6a878bce23cc531e877692f" name="ga3c9eb54cd6a878bce23cc531e877692f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3c9eb54cd6a878bce23cc531e877692f">&#9670;&#160;</a></span>EcrireToutesLesSorties()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EcrireToutesLesSorties </td>
+          <td>(</td>
+          <td class="paramtype">I2C_HandleTypeDef *</td>          <td class="paramname"><span class="paramname"><em>hi2c</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>adresse_hal</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>nom_dac</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Ecrit une valeur sur chacune des 8 sorties volatiles du DAC (VOUT0 a VOUT7, registres 00h-07h), et ajoute une ligne de compte-rendu dans rapport_scan pour chaque canal, au format "DACx:VOUTn:0xNNNN:message". Une valeur DIFFERENTE est ecrite sur chaque canal (palier croissant) pour verifier facilement au voltmetre que les 8 sorties sont bien independantes les unes des autres. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hi2c</td><td>Pointeur vers le handle I2C a utiliser (&amp;hi2c1, &amp;hi2c2, ...). </td></tr>
+    <tr><td class="paramname">adresse_hal</td><td>Adresse I2C du DAC, deja au format HAL (decalee). </td></tr>
+    <tr><td class="paramname">nom_dac</td><td>Nom du DAC a afficher dans le rapport (ex : "DAC1"). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Complete rapport_scan. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#ga3c9eb54cd6a878bce23cc531e877692f">EcrireToutesLesSorties</a>(&amp;hi2c1, (0x62 &lt;&lt; 1), <span class="stringliteral">&quot;DAC1&quot;</span>);</div>
+<div class="line"><span class="comment">// rapport_scan contient alors, entre autres :</span></div>
+<div class="line"><span class="comment">// &quot;DAC1:VOUT0:0x01F4:OK\nDAC1:VOUT1:0x03E8:OK\n...&quot;</span></div>
+<div class="ttc" id="agroup__grp__dac_html_ga3c9eb54cd6a878bce23cc531e877692f"><div class="ttname"><a href="#ga3c9eb54cd6a878bce23cc531e877692f">EcrireToutesLesSorties</a></div><div class="ttdeci">static void EcrireToutesLesSorties(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, const char *nom_dac)</div><div class="ttdoc">Ecrit une valeur sur chacune des 8 sorties volatiles du DAC (VOUT0 a VOUT7, registres 00h-07h),...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l01289">main.c:1289</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l01289">1289</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l00956">EcrireDACVolatile()</a>, et <a class="el" href="main_8c_source.html#l01289">EcrireToutesLesSorties()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01289">EcrireToutesLesSorties()</a>, et <a class="el" href="main_8c_source.html#l01648">ExecuterCaptureComplete()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga3c9eb54cd6a878bce23cc531e877692f_cgraph.svg" width="524" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga3c9eb54cd6a878bce23cc531e877692f_icgraph.svg" width="640" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga3b69ec3e3af5d495bc0a095f6e4343eb" name="ga3b69ec3e3af5d495bc0a095f6e4343eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3b69ec3e3af5d495bc0a095f6e4343eb">&#9670;&#160;</a></span>BalayerSortieDAC()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BalayerSortieDAC </td>
+          <td>(</td>
+          <td class="paramtype">I2C_HandleTypeDef *</td>          <td class="paramname"><span class="paramname"><em>hi2c</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>adresse_hal</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>registre</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>nom_dac</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>valeur_max</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>pas</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>delai_ms</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>tension_reference</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Balaie une seule sortie du DAC de 0 a valeur_max, par pas reguliers, avec une pause entre chaque valeur. Fonction BLOQUANTE : elle ne rend la main qu'une fois le balayage complet termine. Utile pour observer une montee de tension progressive au voltmetre sur une sortie precise. Envoie aussi chaque palier sur USART1 en direct, au format "nom_dac:VOUTn:code:tension_calculeeV". Generique : fonctionne sur n'importe quel DAC/canal/plage/ vitesse, il suffit de changer les parametres. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hi2c</td><td>Pointeur vers le handle I2C a utiliser (&amp;hi2c1, &amp;hi2c2, ...). </td></tr>
+    <tr><td class="paramname">adresse_hal</td><td>Adresse I2C du DAC, deja au format HAL (decalee). </td></tr>
+    <tr><td class="paramname">registre</td><td>Adresse memoire du registre volatile cible (0x00 = VOUT0, 0x01 = VOUT1, ... 0x07 = VOUT7). </td></tr>
+    <tr><td class="paramname">nom_dac</td><td>Nom du DAC a afficher dans le rapport (ex : "DAC1"). </td></tr>
+    <tr><td class="paramname">valeur_max</td><td>Valeur finale du balayage (0-4095 pour un DAC 12 bits). </td></tr>
+    <tr><td class="paramname">pas</td><td>Increment entre deux valeurs successives (ex : 100). Doit etre &gt;= 1. </td></tr>
+    <tr><td class="paramname">delai_ms</td><td>Pause en millisecondes entre chaque valeur ecrite (ex : 200 pour bien voir chaque palier au voltmetre). </td></tr>
+    <tr><td class="paramname">tension_reference</td><td>Tension VDD reelle du DAC (mesuree au multimetre), utilisee uniquement pour calculer la tension affichee dans le rapport (n'affecte pas le code envoye). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Termine toujours exactement sur valeur_max, meme si (valeur_max - 0) n'est pas un multiple exact de pas. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="comment">// Balaie VOUT0 du DAC a 0x62, de 0 a 4095, par pas de 100,</span></div>
+<div class="line"><span class="comment">// avec 200 ms entre chaque palier (~8 secondes au total),</span></div>
+<div class="line"><span class="comment">// rapporte sur UART avec VDD mesure a 5V :</span></div>
+<div class="line"><a class="code hl_function" href="#ga3b69ec3e3af5d495bc0a095f6e4343eb">BalayerSortieDAC</a>(&amp;hi2c1, (0x62 &lt;&lt; 1), 0x00, <span class="stringliteral">&quot;DAC1&quot;</span>, 4095, 100, 200, 5.0f);</div>
+<div class="ttc" id="agroup__grp__dac_html_ga3b69ec3e3af5d495bc0a095f6e4343eb"><div class="ttname"><a href="#ga3b69ec3e3af5d495bc0a095f6e4343eb">BalayerSortieDAC</a></div><div class="ttdeci">static void BalayerSortieDAC(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t registre, const char *nom_dac, uint16_t valeur_max, uint16_t pas, uint32_t delai_ms, float tension_reference)</div><div class="ttdoc">Balaie une seule sortie du DAC de 0 a valeur_max, par pas reguliers, avec une pause entre chaque vale...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l01346">main.c:1346</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l01346">1346</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l01346">BalayerSortieDAC()</a>, <a class="el" href="main_8c_source.html#l00956">EcrireDACVolatile()</a>, <a class="el" href="main_8c_source.html#l00912">SynchroniserTableauDac()</a>, et <a class="el" href="main_8c_source.html#l01803">UART1_EnvoyerTexte()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01346">BalayerSortieDAC()</a>, <a class="el" href="main_8c_source.html#l01648">ExecuterCaptureComplete()</a>, et <a class="el" href="main_8c_source.html#l04458">h_BALAYER_DAC()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga3b69ec3e3af5d495bc0a095f6e4343eb_cgraph.svg" width="811" height="211"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga3b69ec3e3af5d495bc0a095f6e4343eb_icgraph.svg" width="612" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gad09bc7e6abf4db69f2fea3ab311c637f" name="gad09bc7e6abf4db69f2fea3ab311c637f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad09bc7e6abf4db69f2fea3ab311c637f">&#9670;&#160;</a></span>ResoudreTableauDac()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t * ResoudreTableauDac </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="main_8c.html#a75e57bba50363a40a374df0b941bfd58">CibleDac_t</a></td>          <td class="paramname"><span class="paramname"><em>cible</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retourne le pointeur vers le tableau DACx_DEF correspondant a une cible logique. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cible</td><td>Cible a resoudre (CIBLE_DAC1..CIBLE_DAC5). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">uint8_t*</td><td>Pointeur vers DAC1_DEF..DAC5_DEF, ou NULL si CIBLE_AUCUNE ou valeur invalide. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">uint8_t *tab = <a class="code hl_function" href="#gad09bc7e6abf4db69f2fea3ab311c637f">ResoudreTableauDac</a>(mappingDacLdo[idx].dac_tension);</div>
+<div class="line"><span class="keywordflow">if</span> (tab != NULL) { EcrireValeurDac(mappingDacLdo[idx].dac_tension, 4, 2048); }</div>
+<div class="ttc" id="agroup__grp__dac_html_gad09bc7e6abf4db69f2fea3ab311c637f"><div class="ttname"><a href="#gad09bc7e6abf4db69f2fea3ab311c637f">ResoudreTableauDac</a></div><div class="ttdeci">static uint8_t * ResoudreTableauDac(CibleDac_t cible)</div><div class="ttdoc">Retourne le pointeur vers le tableau DACx_DEF correspondant a une cible logique.</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l03979">main.c:3979</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l03979">3979</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03979">ResoudreTableauDac()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04011">EcrireValeurDac()</a>, <a class="el" href="main_8c_source.html#l04043">MajEtatLdoDepuisDac()</a>, <a class="el" href="main_8c_source.html#l04199">OC_LdoDuCanalSeuil()</a>, <a class="el" href="main_8c_source.html#l03979">ResoudreTableauDac()</a>, et <a class="el" href="main_8c_source.html#l04235">SetMappingDacLdo()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_gad09bc7e6abf4db69f2fea3ab311c637f_cgraph.svg" width="158" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_gad09bc7e6abf4db69f2fea3ab311c637f_icgraph.svg" width="1583" height="512"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga4469a4eb236eb4a995abab435c43c644" name="ga4469a4eb236eb4a995abab435c43c644"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4469a4eb236eb4a995abab435c43c644">&#9670;&#160;</a></span>EcrireValeurDac()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EcrireValeurDac </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="main_8c.html#a75e57bba50363a40a374df0b941bfd58">CibleDac_t</a></td>          <td class="paramname"><span class="paramname"><em>cible</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>canal</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>valeur</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Ecrit une valeur 12 bits dans le tableau DACx_DEF/canal designe par une cible logique - remplace les 36 blocs d'ecriture individuels (un par LDO x par type) par UNE seule fonction generique, pilotee par mappingDacLdo[]. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cible</td><td>Tableau DACx_DEF a modifier (CIBLE_AUCUNE = ignore). </td></tr>
+    <tr><td class="paramname">canal</td><td>Canal 0-7 dans ce tableau (structure par groupes de 3 octets : adresse, MSB, LSB). </td></tr>
+    <tr><td class="paramname">valeur</td><td>Valeur 12 bits a ecrire (0-4095). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Ne fait rien si cible == CIBLE_AUCUNE ou canal hors plage (protege les LDO sans DAC courant, ex : *PLp). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Fonctionnement</dt><dd>Version identique a celle du 07/10/2026 (ecriture directe, sans mutex ni section critique), retablie le 19/10/2026. </dd></dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">EcrireValeurDac(CIBLE_DAC2, 3, 2048);  <span class="comment">// DAC2_DEF, canal 3</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l04011">4011</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l04011">EcrireValeurDac()</a>, et <a class="el" href="main_8c_source.html#l03979">ResoudreTableauDac()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04822">DAC_RestaurerMemoire()</a>, <a class="el" href="main_8c_source.html#l04011">EcrireValeurDac()</a>, <a class="el" href="main_8c_source.html#l04458">h_BALAYER_DAC()</a>, <a class="el" href="main_8c_source.html#l04109">h_SET_CURRENT_LDO_GENERIQUE()</a>, <a class="el" href="main_8c_source.html#l04084">h_SET_VAL_LDO_GENERIQUE()</a>, et <a class="el" href="main_8c_source.html#l04173">OC_InitialiserSeuilsDefaut()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga4469a4eb236eb4a995abab435c43c644_cgraph.svg" width="320" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga4469a4eb236eb4a995abab435c43c644_icgraph.svg" width="1340" height="355"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga924c3b0d97d03d4aba5b24043d36849c" name="ga924c3b0d97d03d4aba5b24043d36849c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga924c3b0d97d03d4aba5b24043d36849c">&#9670;&#160;</a></span>MajEtatLdoDepuisDac()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MajEtatLdoDepuisDac </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *</td>          <td class="paramname"><span class="paramname"><em>tableau</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>canal</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>valeur</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Repercute une ecriture directe sur un canal DAC (balayage a distance BALAYER_DAC, capture bouton USER) dans l'etat logiciel de la ou des LDO associees a ce canal par mappingDacLdo[] (VAL_LDO/CURRENT_LDO et struct LDO). Sans cela, apres un balayage sur I2C1 0xC0 ou 0xC2, la sortie restait a la valeur finale du balayage alors que GET_STATUS_LDO_&lt;nom&gt; (page valeur LDO, page dac/&lt;nom&gt;) affichait encore l'ancienne valeur. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tableau</td><td>Tableau DACx_DEF ecrit (DAC1_DEF ... DAC5_DEF). </td></tr>
+    <tr><td class="paramname">canal</td><td>Canal ecrit (0-7). </td></tr>
+    <tr><td class="paramname">valeur</td><td>Code 12 bits ecrit (0-4095). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Ne fait rien si aucune LDO n'est associee. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="comment">// Apres un balayage de VOUT3 du DAC I2C1 0xC0 jusqu&#39;a 4095 :</span></div>
+<div class="line"><a class="code hl_function" href="#ga924c3b0d97d03d4aba5b24043d36849c">MajEtatLdoDepuisDac</a>(DAC1_DEF, 3, 4095);  <span class="comment">// -&gt; VAL_LDO[0] (1PSp) = 4095</span></div>
+<div class="ttc" id="agroup__grp__dac_html_ga924c3b0d97d03d4aba5b24043d36849c"><div class="ttname"><a href="#ga924c3b0d97d03d4aba5b24043d36849c">MajEtatLdoDepuisDac</a></div><div class="ttdeci">static void MajEtatLdoDepuisDac(const uint8_t *tableau, uint8_t canal, uint16_t valeur)</div><div class="ttdoc">Repercute une ecriture directe sur un canal DAC (balayage a distance BALAYER_DAC, capture bouton USER...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l04043">main.c:4043</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l04043">4043</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l04043">MajEtatLdoDepuisDac()</a>, et <a class="el" href="main_8c_source.html#l03979">ResoudreTableauDac()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04043">MajEtatLdoDepuisDac()</a>, et <a class="el" href="main_8c_source.html#l00912">SynchroniserTableauDac()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga924c3b0d97d03d4aba5b24043d36849c_cgraph.svg" width="358" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga924c3b0d97d03d4aba5b24043d36849c_icgraph.svg" width="1027" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gadcbefabbab52750a575b5dac7150534e" name="gadcbefabbab52750a575b5dac7150534e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gadcbefabbab52750a575b5dac7150534e">&#9670;&#160;</a></span>h_SET_VAL_LDO_GENERIQUE()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void h_SET_VAL_LDO_GENERIQUE </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handler GENERIQUE de "SET_VAL_LDO_&lt;nom&gt;:&lt;valeur&gt;" - remplace les 18 anciennes fonctions h_SET_VAL_LDO_&lt;nom&gt; individuelles. Met a jour VAL_LDO[idx]/l'etat logiciel de la LDO, PUIS repercute la valeur sur le DAC reellement associe via mappingDacLdo[idx] (modifiable a chaud, voir SetMappingDacLdo()). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idx</td><td>Index de la LDO (0-17), deja resolu par findLdoIndex() dans tc_request() (branche a prefixe "SET_VAL_LDO_"). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Lit last_message (deja positionne apres le ':' par tc_request()) pour la valeur (0-4095). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Trame UDP recue : <span class="stringliteral">&quot;SET_VAL_LDO_1PSp:2048&quot;</span></div>
+<div class="line">-&gt; idx=<a class="code hl_function" href="group__grp__config.html#gadc686ab4f6036d732a6f2b1ecb6dbd01">findLdoIndex</a>(<span class="stringliteral">&quot;1PSp&quot;</span>)=0, <a class="code hl_function" href="#gadcbefabbab52750a575b5dac7150534e">h_SET_VAL_LDO_GENERIQUE</a>(0);</div>
+<div class="ttc" id="agroup__grp__config_html_gadc686ab4f6036d732a6f2b1ecb6dbd01"><div class="ttname"><a href="group__grp__config.html#gadc686ab4f6036d732a6f2b1ecb6dbd01">findLdoIndex</a></div><div class="ttdeci">static int findLdoIndex(const char *suffix)</div><div class="ttdoc">Recherche l&#39;indice (0 a NB_LDO-1) d&#39;une LDO dans le tableau ldoConfig[] a partir de son suffixe de no...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l02727">main.c:2727</a></div></div>
+<div class="ttc" id="agroup__grp__dac_html_gadcbefabbab52750a575b5dac7150534e"><div class="ttname"><a href="#gadcbefabbab52750a575b5dac7150534e">h_SET_VAL_LDO_GENERIQUE</a></div><div class="ttdeci">static void h_SET_VAL_LDO_GENERIQUE(int idx)</div><div class="ttdoc">Handler GENERIQUE de &quot;SET_VAL_LDO_&lt;nom&gt;:&lt;valeur&gt;&quot; - remplace les 18 anciennes fonctions h_SET_VAL_LDO...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l04084">main.c:4084</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l04084">4084</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03147">DAC_DemanderSauvegarde()</a>, <a class="el" href="main_8c_source.html#l04011">EcrireValeurDac()</a>, et <a class="el" href="main_8c_source.html#l04084">h_SET_VAL_LDO_GENERIQUE()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04084">h_SET_VAL_LDO_GENERIQUE()</a>, et <a class="el" href="main_8c_source.html#l06290">tc_request()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_gadcbefabbab52750a575b5dac7150534e_cgraph.svg" width="654" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_gadcbefabbab52750a575b5dac7150534e_icgraph.svg" width="1023" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga1b7ca6a4fce7e0d525508dd4951a48f0" name="ga1b7ca6a4fce7e0d525508dd4951a48f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1b7ca6a4fce7e0d525508dd4951a48f0">&#9670;&#160;</a></span>h_SET_CURRENT_LDO_GENERIQUE()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void h_SET_CURRENT_LDO_GENERIQUE </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handler GENERIQUE de "SET_CURRENT_LDO_&lt;nom&gt;:&lt;valeur&gt;" - remplace les 18 anciennes fonctions h_SET_CURRENT_LDO_&lt;nom&gt;. Repond "NOT FOR YOU" (comme avant) si la LDO n'a pas de DAC courant associe (mappingDacLdo[idx].dac_courant == CIBLE_AUCUNE, cas des 3 LDO *PLp). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idx</td><td>Index de la LDO (0-17), deja resolu par findLdoIndex(). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Lit last_message pour la valeur (0-4095). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Trame UDP recue : <span class="stringliteral">&quot;SET_CURRENT_LDO_1PSp:1500&quot;</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l04109">4109</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03147">DAC_DemanderSauvegarde()</a>, <a class="el" href="main_8c_source.html#l04011">EcrireValeurDac()</a>, <a class="el" href="main_8c_source.html#l04109">h_SET_CURRENT_LDO_GENERIQUE()</a>, et <a class="el" href="main_8c_source.html#l03086">OC_EstSurveillee()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04109">h_SET_CURRENT_LDO_GENERIQUE()</a>, et <a class="el" href="main_8c_source.html#l06290">tc_request()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga1b7ca6a4fce7e0d525508dd4951a48f0_cgraph.svg" width="698" height="211"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga1b7ca6a4fce7e0d525508dd4951a48f0_icgraph.svg" width="1066" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gaeda25d5b60439cf57afc75b5c8096a3d" name="gaeda25d5b60439cf57afc75b5c8096a3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaeda25d5b60439cf57afc75b5c8096a3d">&#9670;&#160;</a></span>SetMappingDacLdo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SetMappingDacLdo </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>nom</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handler de "SET_DAC_MAPPING_LDO_&lt;nom&gt;:&lt;V|I&gt;:&lt;0-5&gt;:&lt;0-7&gt;" - modifie A CHAUD, sans recompilation ni reflash, quel DAC/canal alimente la tension (V) ou le courant (I) d'une LDO. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idx</td><td>Index de la LDO (0-17), deja resolu par findLdoIndex(). </td></tr>
+    <tr><td class="paramname">nom</td><td>Nom texte de la LDO, pour la reponse. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Lit last_message au format "&lt;V|I&gt;:&lt;0-5&gt;:&lt;0-7&gt;" (0 pour le numero de DAC = CIBLE_AUCUNE, "debranche" ce canal). Remplit response avec "DAC_MAP:&lt;nom&gt;:OK\n" si valide, "DAC_MAP:&lt;nom&gt;:ERREUR_PARAMETRES\n" si la trame est mal formee, ou "DAC_MAP:&lt;nom&gt;:REFUS_PROTECTION_OC\n" si la demande deplace le seuil OC d'une LDO surveillee ou vise un canal de seuil OC. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Trame UDP recue : <span class="stringliteral">&quot;SET_DAC_MAPPING_LDO_1PSp:V:2:3&quot;</span></div>
+<div class="line">-&gt; tension de 1PSp desormais lue/ecrite sur DAC2_DEF, canal 3.</div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l04235">4235</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03086">OC_EstSurveillee()</a>, <a class="el" href="main_8c_source.html#l04199">OC_LdoDuCanalSeuil()</a>, <a class="el" href="main_8c_source.html#l03979">ResoudreTableauDac()</a>, et <a class="el" href="main_8c_source.html#l04235">SetMappingDacLdo()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04235">SetMappingDacLdo()</a>, et <a class="el" href="main_8c_source.html#l06290">tc_request()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_gaeda25d5b60439cf57afc75b5c8096a3d_cgraph.svg" width="538" height="148"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_gaeda25d5b60439cf57afc75b5c8096a3d_icgraph.svg" width="944" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gac1d35f9367efff87f176072901b295ac" name="gac1d35f9367efff87f176072901b295ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac1d35f9367efff87f176072901b295ac">&#9670;&#160;</a></span>GetMappingDacLdo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GetMappingDacLdo </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>nom</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handler de "GET_DAC_MAPPING_LDO_&lt;nom&gt;" - lit la correspondance DAC/canal actuellement active pour une LDO (tension et courant), sans la modifier. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idx</td><td>Index de la LDO (0-17), deja resolu par findLdoIndex(). </td></tr>
+    <tr><td class="paramname">nom</td><td>Nom texte de la LDO, pour la reponse. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Remplit response au format "DAC_MAP:&lt;nom&gt;:V=&lt;dac&gt;.&lt;canal&gt;:I=&lt;dac&gt;.&lt;canal&gt;\n" (dac=0 signifie CIBLE_AUCUNE, aucun DAC associe a ce canal). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Trame UDP recue : <span class="stringliteral">&quot;GET_DAC_MAPPING_LDO_1PSp&quot;</span></div>
+<div class="line">Reponse type    : <span class="stringliteral">&quot;DAC_MAP:1PSp:V=2.3:I=2.1\n&quot;</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l04309">4309</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l04309">GetMappingDacLdo()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04309">GetMappingDacLdo()</a>, et <a class="el" href="main_8c_source.html#l06290">tc_request()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_gac1d35f9367efff87f176072901b295ac_cgraph.svg" width="147" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_gac1d35f9367efff87f176072901b295ac_icgraph.svg" width="946" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga161b95d8fabb7c81f08c2e0629238b6e" name="ga161b95d8fabb7c81f08c2e0629238b6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga161b95d8fabb7c81f08c2e0629238b6e">&#9670;&#160;</a></span>h_BALAYER_DAC()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void h_BALAYER_DAC </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handler de la commande reseau "BALAYER_DAC". Declenche BalayerSortieDAC() a distance, avec tous ses parametres fournis dans la trame UDP. ATTENTION : cette fonction est BLOQUANTE (comme BalayerSortieDAC() elle-meme) - pendant toute la duree du balayage, ce thread ne traite plus aucune autre commande UDP (meme comportement que la capture complete du bouton USER). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun</td><td>parametre C. Lit la variable globale last_message, au format attendu (apres le premier ':' deja consomme par tc_request()) : "&lt;bus&gt;:&lt;adresse_hal_hex&gt;:&lt;registre&gt;:&lt;valeur_max&gt;:&lt;pas&gt;:&lt;delai_ms&gt;:&lt;tension_ref&gt;"<ul>
+<li>bus : 1 pour hi2c1, 2 pour hi2c2</li>
+<li>adresse_hal_hex : adresse I2C au format HAL, en hexa avec 0x (ex : 0xC4)</li>
+<li>registre : 0x00-0x07 (VOUT0-VOUT7)</li>
+<li>valeur_max : 0-4095</li>
+<li>pas : increment entre paliers</li>
+<li>delai_ms : pause entre paliers, en millisecondes</li>
+<li>tension_ref : VDD reel du DAC, en volts (ex : 5.0) </li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Remplit response avec "BALAYER_DAC:TERMINE\n" une fois le balayage complet termine, "BALAYER_DAC:ERREUR_PARAMETRES\n" si la trame est mal formee, ou "BALAYER_DAC:REFUS_SEUIL_OC_LDO_ACTIVE:&lt;nom&gt;\n" si le registre vise est le seuil OC d'une LDO active. Sur un registre de seuil OC (LDO coupee), le seuil d'avant le balayage est restaure a la fin. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Trame UDP recue :</div>
+<div class="line"><span class="stringliteral">&quot;BALAYER_DAC:1:0xC4:0:4095:50:100:5.0&quot;</span></div>
+<div class="line">-&gt; balaie VOUT0 du DAC a 0xC4 sur hi2c1, de 0 a 4095 par pas</div>
+<div class="line">   de 50, 100ms entre chaque palier, VDD=5V.</div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l04458">4458</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l01346">BalayerSortieDAC()</a>, <a class="el" href="main_8c_source.html#l04011">EcrireValeurDac()</a>, <a class="el" href="main_8c_source.html#l04458">h_BALAYER_DAC()</a>, <a class="el" href="main_8c_source.html#l04199">OC_LdoDuCanalSeuil()</a>, et <a class="el" href="main_8c_source.html#l00875">ResoudreTableauDacParAdresse()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04458">h_BALAYER_DAC()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga161b95d8fabb7c81f08c2e0629238b6e_cgraph.svg" width="1012" height="450"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga161b95d8fabb7c81f08c2e0629238b6e_icgraph.svg" width="143" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga60bdf8f5f95deb2ebd6667b24e0cef0b" name="ga60bdf8f5f95deb2ebd6667b24e0cef0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga60bdf8f5f95deb2ebd6667b24e0cef0b">&#9670;&#160;</a></span>h_GET_DAC_CONFIG()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void h_GET_DAC_CONFIG </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handler de la commande reseau "GET_DAC_CONFIG" - lit et renvoie les 3 registres de configuration (VREF/Power-Down/ Gain) d'une puce DAC MCP47FEB28, adressable par bus et adresse I2C (paametrable, pas fige sur une puce donnee). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun</td><td>parametre C. Lit last_message, au format attendu "&lt;bus&gt;:&lt;adresse_hal_hex&gt;" - bus : 1 pour hi2c1, 2 pour hi2c2. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Remplit response avec "DAC_CONFIG:&lt;bus&gt;:&lt;adresse&gt;:VREF=0x????:PD=0x????:GAIN=0x????\n" ou "DAC_CONFIG:ERREUR_PARAMETRES\n" / "...:ERREUR_I2C\n". </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Trame UDP recue : <span class="stringliteral">&quot;GET_DAC_CONFIG:1:0xC4&quot;</span></div>
+<div class="line">-&gt; lit VREF/PD/GAIN du DAC a 0xC4 (0x62&lt;&lt;1) sur hi2c1.</div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l04527">4527</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l04527">h_GET_DAC_CONFIG()</a>, et <a class="el" href="main_8c_source.html#l01013">LireRegistreConfigDAC()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04527">h_GET_DAC_CONFIG()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga60bdf8f5f95deb2ebd6667b24e0cef0b_cgraph.svg" width="558" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga60bdf8f5f95deb2ebd6667b24e0cef0b_icgraph.svg" width="168" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gae1030d1ce005f7deac0f86610f9df4af" name="gae1030d1ce005f7deac0f86610f9df4af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae1030d1ce005f7deac0f86610f9df4af">&#9670;&#160;</a></span>LireRegistreValeurDAC()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">HAL_StatusTypeDef LireRegistreValeurDAC </td>
+          <td>(</td>
+          <td class="paramtype">I2C_HandleTypeDef *</td>          <td class="paramname"><span class="paramname"><em>hi2c</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>adresse_hal</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>registre</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t *</td>          <td class="paramname"><span class="paramname"><em>valeur</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Lit un registre VOLATILE de VALEUR du DAC MCP47FEB28 (adresses memoire 00h a 07h, une par voie). Lecture seule : aucune ecriture n'est possible par cette fonction. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hi2c</td><td>Pointeur vers le handle I2C a utiliser (&amp;hi2c1, &amp;hi2c2). </td></tr>
+    <tr><td class="paramname">adresse_hal</td><td>Adresse I2C du DAC, deja au format HAL (decalee). </td></tr>
+    <tr><td class="paramname">registre</td><td>0x00 a 0x07 (voie 0 a 7, valeur volatile), 0x0B (WiperLock / STATUS) ou 0x10 a 0x17 (valeur de demarrage EEPROM de la voie 0 a 7). Lecture seule. Toute autre valeur est refusee. </td></tr>
+    <tr><td class="paramname">valeur</td><td>Pointeur vers le uint16_t a remplir avec le mot lu. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">HAL_StatusTypeDef</td><td>HAL_OK si le DAC a repondu, HAL_ERROR si le registre est hors plage ou si le DAC a NACK/timeout. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">uint16_t v;</div>
+<div class="line"><span class="keywordflow">if</span> (<a class="code hl_function" href="#gae1030d1ce005f7deac0f86610f9df4af">LireRegistreValeurDAC</a>(&amp;hi2c1, MCP4725_I2CADDR_DEFAULT, 0x04, &amp;v) == HAL_OK)</div>
+<div class="line">{</div>
+<div class="line">    <span class="comment">// v = code reellement en place sur la voie 4 (tension 2PSp)</span></div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__grp__dac_html_gae1030d1ce005f7deac0f86610f9df4af"><div class="ttname"><a href="#gae1030d1ce005f7deac0f86610f9df4af">LireRegistreValeurDAC</a></div><div class="ttdeci">static HAL_StatusTypeDef LireRegistreValeurDAC(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t registre, uint16_t *valeur)</div><div class="ttdoc">Lit un registre VOLATILE de VALEUR du DAC MCP47FEB28 (adresses memoire 00h a 07h, une par voie)....</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l04579">main.c:4579</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l04579">4579</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l04579">LireRegistreValeurDAC()</a>, et <a class="el" href="main_8c_source.html#l00728">ResoudreMutexI2C()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04712">DAC_GarderEnEeprom()</a>, <a class="el" href="main_8c_source.html#l04822">DAC_RestaurerMemoire()</a>, <a class="el" href="main_8c_source.html#l04950">h_GET_DAC_REG()</a>, et <a class="el" href="main_8c_source.html#l04579">LireRegistreValeurDAC()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_gae1030d1ce005f7deac0f86610f9df4af_cgraph.svg" width="350" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_gae1030d1ce005f7deac0f86610f9df4af_icgraph.svg" width="840" height="204"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga9a556575c443842fc36ade5dc4983b87" name="ga9a556575c443842fc36ade5dc4983b87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9a556575c443842fc36ade5dc4983b87">&#9670;&#160;</a></span>h_GET_DAC_REG()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void h_GET_DAC_REG </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handler de la commande reseau "GET_DAC_REG" - diagnostic : relit dans le DAC un registre de valeur (00h-07h) ou de configuration (08h VREF, 09h Power-Down, 0Ah Gain) et le compare a la valeur que le firmware envoie en continu (tableau DACx_DEF). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun</td><td>parametre C. Lit last_message, au format attendu "&lt;bus&gt;:&lt;adresse_hal_hex&gt;:&lt;registre&gt;" en decimal : 0-7 valeur volatile de la voie, 8-10 VREF/PD/GAIN, 11 WiperLock (0Bh), 16-23 valeur de demarrage EEPROM de la voie 0-7 (10h-17h). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Remplit response avec "DAC_REG:&lt;bus&gt;:&lt;adresse&gt;:REG=&lt;r&gt;:DAC=0x????:FIRMWARE=0x????\n" (FIRMWARE absent pour 08h-0Ah), ou "...:ERREUR_I2C\n" / "DAC_REG:ERREUR_PARAMETRES\n". </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Trame UDP recue : <span class="stringliteral">&quot;GET_DAC_REG:1:0xC0:4&quot;</span></div>
+<div class="line">-&gt; <span class="stringliteral">&quot;DAC_REG:1:0xC0:REG=4:DAC=0x0BB8:FIRMWARE=0x0BB8&quot;</span> apres SET_VAL_LDO_2PSp:3000.</div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l04950">4950</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l04950">h_GET_DAC_REG()</a>, <a class="el" href="main_8c_source.html#l01013">LireRegistreConfigDAC()</a>, <a class="el" href="main_8c_source.html#l04579">LireRegistreValeurDAC()</a>, et <a class="el" href="main_8c_source.html#l00875">ResoudreTableauDacParAdresse()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04950">h_GET_DAC_REG()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga9a556575c443842fc36ade5dc4983b87_cgraph.svg" width="590" height="211"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga9a556575c443842fc36ade5dc4983b87_icgraph.svg" width="146" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga459cb06259e765da581fe6170672b59a" name="ga459cb06259e765da581fe6170672b59a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga459cb06259e765da581fe6170672b59a">&#9670;&#160;</a></span>h_SET_DAC_VREF()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void h_SET_DAC_VREF </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handler de la commande reseau "SET_DAC_VREF" - ecrit le registre VREF (0x08) d'une puce DAC : source de reference des 8 canaux EN UNE SEULE FOIS (2 bits/canal, voir Registre 4-2 du datasheet - 00=VDD, 01=bande interne 1.22V, 10=VREF pin non bufferisee, 11=VREF pin bufferisee). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun</td><td>parametre C. Lit last_message, au format attendu "&lt;bus&gt;:&lt;adresse_hal_hex&gt;:&lt;valeur_hex16&gt;". Ex : 0x0000 pour forcer VDD sur les 8 canaux. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Remplit response avec "SET_DAC_VREF:&lt;bus&gt;:&lt;adresse&gt;:0x????:OK\n" ou "...:ERREUR_I2C\n" / "SET_DAC_VREF:ERREUR_PARAMETRES\n". </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Trame UDP recue : <span class="stringliteral">&quot;SET_DAC_VREF:1:0xC4:0x0000&quot;</span></div>
+<div class="line">-&gt; force VREF=VDD sur les 8 canaux du DAC a 0xC4 sur hi2c1.</div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l05007">5007</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l01068">EcrireRegistreConfigDAC()</a>, <a class="el" href="main_8c_source.html#l05007">h_SET_DAC_VREF()</a>, et <a class="el" href="main_8c_source.html#l01205">MemoriserConfigDac()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l05007">h_SET_DAC_VREF()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga459cb06259e765da581fe6170672b59a_cgraph.svg" width="554" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga459cb06259e765da581fe6170672b59a_icgraph.svg" width="151" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga0bd0eb566573e23c1258ec14e95e53f0" name="ga0bd0eb566573e23c1258ec14e95e53f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0bd0eb566573e23c1258ec14e95e53f0">&#9670;&#160;</a></span>h_SET_DAC_PD()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void h_SET_DAC_PD </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handler de la commande reseau "SET_DAC_PD" - ecrit le registre Power-Down (0x09) d'une puce DAC : etat des 8 canaux EN UNE SEULE FOIS (2 bits/canal, voir Registre 4-3 - 00=normal, 01/10/11=power-down avec differentes resistances de tirage). 0x0000 = fonctionnement normal sur les 8 canaux. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun</td><td>parametre C. Lit last_message, au format attendu "&lt;bus&gt;:&lt;adresse_hal_hex&gt;:&lt;valeur_hex16&gt;". </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Remplit response avec "SET_DAC_PD:&lt;bus&gt;:&lt;adresse&gt;:0x????:OK\n" ou "...:ERREUR_I2C\n" / "SET_DAC_PD:ERREUR_PARAMETRES\n". </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Trame UDP recue : <span class="stringliteral">&quot;SET_DAC_PD:1:0xC4:0x0000&quot;</span></div>
+<div class="line">-&gt; force fonctionnement normal sur les 8 canaux (pas de power-down).</div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l05045">5045</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l01068">EcrireRegistreConfigDAC()</a>, <a class="el" href="main_8c_source.html#l05045">h_SET_DAC_PD()</a>, et <a class="el" href="main_8c_source.html#l01205">MemoriserConfigDac()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l05045">h_SET_DAC_PD()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga0bd0eb566573e23c1258ec14e95e53f0_cgraph.svg" width="536" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga0bd0eb566573e23c1258ec14e95e53f0_icgraph.svg" width="135" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga3f77fbf6480487ff43ce47d7ed7d89e2" name="ga3f77fbf6480487ff43ce47d7ed7d89e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3f77fbf6480487ff43ce47d7ed7d89e2">&#9670;&#160;</a></span>h_SET_DAC_GAIN()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void h_SET_DAC_GAIN </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handler de la commande reseau "SET_DAC_GAIN" - ecrit le registre Gain (0x0A) d'une puce DAC : gain des 8 canaux EN UNE SEULE FOIS (1 bit/canal, G7..G0 dans l'octet haut - voir Registre 4-4 - 0=1x, 1=2x). L'octet bas (bits status POR/ EEWA) est toujours envoye a 0x00, sans effet indesirable : POR est "clearable" (0 le laisse tel quel a la prochaine lecture), EEWA est en lecture seule. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun</td><td>parametre C. Lit last_message, au format attendu "&lt;bus&gt;:&lt;adresse_hal_hex&gt;:&lt;valeur_hex8&gt;" - valeur_hex8 = G7..G0 sur 8 bits (ex : 0x00 = gain 1x sur les 8 canaux). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Remplit response avec "SET_DAC_GAIN:&lt;bus&gt;:&lt;adresse&gt;:0x??:OK\n" ou "...:ERREUR_I2C\n" / "SET_DAC_GAIN:ERREUR_PARAMETRES\n". </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Trame UDP recue : <span class="stringliteral">&quot;SET_DAC_GAIN:1:0xC4:0x00&quot;</span></div>
+<div class="line">-&gt; force gain 1x sur les 8 canaux du DAC a 0xC4 sur hi2c1.</div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l05086">5086</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l01068">EcrireRegistreConfigDAC()</a>, <a class="el" href="main_8c_source.html#l05086">h_SET_DAC_GAIN()</a>, et <a class="el" href="main_8c_source.html#l01205">MemoriserConfigDac()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l05086">h_SET_DAC_GAIN()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga3f77fbf6480487ff43ce47d7ed7d89e2_cgraph.svg" width="550" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga3f77fbf6480487ff43ce47d7ed7d89e2_icgraph.svg" width="148" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga8721dfe3dc61c6a257e56c61a478b703" name="ga8721dfe3dc61c6a257e56c61a478b703"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8721dfe3dc61c6a257e56c61a478b703">&#9670;&#160;</a></span>h_SET_I2C2_ACTIF()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void h_SET_I2C2_ACTIF </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handler de la commande reseau "SET_I2C2_ACTIF" - active ou desactive a chaud l'emission periodique sur I2C2 (boucle principale, DAC2/DAC4/DAC5). A desactiver tant que le probleme materiel sur ce bus n'est pas resolu : sinon, chaque tentative ratee bloque le thread jusqu'a SPI_TIMEOUT (100 ms), x3 par tour de boucle, ce qui retarde aussi les mises a jour I2C1 (meme thread, sequentiel). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun</td><td>parametre C. Lit last_message : "0" ou "1". </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Remplit response avec "SET_I2C2_ACTIF:0\n" / "SET_I2C2_ACTIF:1\n" ou "SET_I2C2_ACTIF:ERREUR_PARAMETRES\n". </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Trame UDP recue : <span class="stringliteral">&quot;SET_I2C2_ACTIF:0&quot;</span> -&gt; coupe I2C2.</div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l05125">5125</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l05125">h_SET_I2C2_ACTIF()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l05125">h_SET_I2C2_ACTIF()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga8721dfe3dc61c6a257e56c61a478b703_cgraph.svg" width="154" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__dac_ga8721dfe3dc61c6a257e56c61a478b703_icgraph.svg" width="154" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

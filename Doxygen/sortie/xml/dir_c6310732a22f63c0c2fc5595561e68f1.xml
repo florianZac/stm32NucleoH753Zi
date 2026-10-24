@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="dir_c6310732a22f63c0c2fc5595561e68f1" kind="dir">
+    <compoundname>C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core</compoundname>
+    <innerdir refid="dir_e2489e887f17afa3cbc07a4ec152cdd2">C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc</innerdir>
+    <innerdir refid="dir_b596f468b52957496e4f78b80e029268">C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/"/>
+  </compounddef>
+</doxygen>

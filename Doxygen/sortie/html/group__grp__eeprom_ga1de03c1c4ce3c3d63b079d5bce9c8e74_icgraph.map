@@ -1,0 +1,16 @@
+<map id="EcrireDACEeprom" name="EcrireDACEeprom">
+<area shape="rect" id="Node000001" title="Ecrit le code de demarrage (EEPROM, registre non volatil 10h + voie) d&#39;une voie du MCP47FEB28...." alt="" coords="679,29,808,56"/>
+<area shape="poly" id="edge9_Node000001_Node000001" title=" " alt="" coords="775,14,765,10,743,8,723,10,713,15,710,20,715,30,711,28,705,21,709,11,722,5,743,3,766,5,780,15"/>
+<area shape="rect" id="Node000002" href="$group__grp__eeprom.html#ga461f9e8b58bc45203018e3132c71b989" title="Garde un code dans l&#39;EEPROM d&#39;une voie : relit la valeur en EEPROM, n&#39;ecrit que si elle differe,..." alt="" coords="473,29,631,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="660,43,631,45,631,40,666,43"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="583,14,573,10,552,8,532,10,521,15,519,20,524,30,519,28,514,21,518,11,531,5,552,3,575,5,588,15"/>
+<area shape="rect" id="Node000003" href="$group__grp__eeprom.html#ga5f9ce30ec25412cc3efbe118447a5a11" title="Traite AU PLUS UNE demande de sauvegarde EEPROM par appel (une LDO : voie tension puis voie seuil)...." alt="" coords="255,29,425,56"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="455,43,426,45,426,40,460,43"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="370,14,361,10,340,8,321,10,311,15,308,20,313,30,308,28,303,21,307,11,319,5,340,3,362,5,376,15"/>
+<area shape="rect" id="Node000004" href="$group__grp__tache.html#gae9bf934dd2f4a12a5c5975d81afa3063" title="Tache FreeRTOS principale (lwipTask). Initialise LwIP, les verrous (I2C, UART, commandes),..." alt="" coords="103,29,207,56"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="237,43,207,45,207,40,242,43"/>
+<area shape="poly" id="edge8_Node000004_Node000004" title=" " alt="" coords="174,14,168,10,155,8,142,10,136,14,134,20,137,30,133,28,129,21,131,11,140,5,155,3,170,5,180,15"/>
+<area shape="rect" id="Node000005" href="$group__grp__cubemx.html#ga840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,29,55,56"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="84,44,55,45,55,40,89,42"/>
+<area shape="poly" id="edge7_Node000005_Node000005" title=" " alt="" coords="49,15,43,10,30,8,18,10,11,14,9,20,13,28,8,29,4,21,7,11,16,5,30,3,46,5,55,14"/>
+</map>

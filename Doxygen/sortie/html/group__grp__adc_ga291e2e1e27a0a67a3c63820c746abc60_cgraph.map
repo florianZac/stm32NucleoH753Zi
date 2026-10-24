@@ -1,0 +1,22 @@
+<map id="GetMesureCourantReelle" name="GetMesureCourantReelle">
+<area shape="rect" id="Node000001" title="Handler de la commande reseau &quot;GET_MESURE_COURANT_REELLE_&lt;nom&gt;&quot; (voir le branchement dans tc_request(..." alt="" coords="5,104,174,131"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="50,104,44,95,48,85,64,79,90,77,117,80,133,89,128,90,116,85,89,83,65,85,52,89,49,95,55,103"/>
+<area shape="rect" id="Node000002" href="$group__grp__adc.html#ga4feb141ddc6376d2ada1a4e0f58416e1" title="Lit le canal ADC courant et convertit en courant REEL (mA), a partir du gain de l&#39;AOP differentiel (x..." alt="" coords="262,29,380,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="123,101,221,65,250,59,245,62,223,71,125,106"/>
+<area shape="rect" id="Node000004" href="$group__grp__adc.html#ga58dc9f0471184fd3cc5f8030ba048bcd" title="Selectionne un canal (0&#45;15) parmi les 2 ADG728 de la chaine COURANT (bus I2C2). Meme principe que Sel..." alt="" coords="222,104,420,131"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="174,115,209,117,203,118,175,120"/>
+<area shape="rect" id="Node000007" href="$group__grp__comm.html#gab9b5dfc109e472981cbbb7867d1b7f92" title="Envoie une chaine de caracteres sur USART1 (PB6/PB7, via un adaptateur USB&#45;UART externe),..." alt="" coords="245,179,396,205"/>
+<area shape="poly" id="edge12_Node000001_Node000007" title=" " alt="" coords="134,129,265,172,261,175,133,134"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="286,28,280,21,284,11,298,5,321,3,345,5,360,14,354,14,344,10,321,8,299,10,288,15,285,20,291,29"/>
+<area shape="rect" id="Node000003" href="$group__grp__adc.html#ga6bcd15aecac42670e775f0796aa0b8ec" title="Lit une conversion ADC sur le canal donne et la convertit en tension REELLE cote LDO (avant le pont d..." alt="" coords="468,29,584,56"/>
+<area shape="poly" id="edge4_Node000002_Node000003" title=" " alt="" coords="379,40,455,42,450,43,380,45"/>
+<area shape="poly" id="edge5_Node000003_Node000003" title=" " alt="" coords="496,28,491,21,495,11,507,5,526,3,547,5,559,14,554,14,545,10,526,8,508,10,499,15,496,20,501,30"/>
+<area shape="poly" id="edge11_Node000004_Node000004" title=" " alt="" coords="286,103,280,95,284,86,298,79,321,77,345,80,360,89,354,89,344,85,321,83,299,85,288,89,285,95,291,104"/>
+<area shape="rect" id="Node000005" href="$group__grp__adc.html#ga74a9c056e466dd59ca9ea5b9110125f0" title="Ecrit le masque de canaux actifs sur un ADG728 (un octet, un bit par canal &#45; voir datasheet ADG728,..." alt="" coords="474,104,579,131"/>
+<area shape="poly" id="edge7_Node000004_Node000005" title=" " alt="" coords="420,115,460,117,455,118,421,120"/>
+<area shape="poly" id="edge8_Node000005_Node000005" title=" " alt="" coords="496,102,491,95,495,86,507,80,526,77,547,80,559,89,554,88,545,85,526,83,508,85,499,89,496,95,501,105"/>
+<area shape="rect" id="Node000006" href="$group__grp__i2c.html#ga5cb1cd70b1dd76a8aadb2bccb2837d2f" title="Retourne le mutex correspondant au bus d&#39;un handle I2C donne." alt="" coords="632,104,767,131"/>
+<area shape="poly" id="edge9_Node000005_Node000006" title=" " alt="" coords="579,115,620,117,614,118,579,120"/>
+<area shape="poly" id="edge10_Node000006_Node000006" title=" " alt="" coords="670,102,664,95,668,86,680,80,700,77,720,80,733,89,728,88,719,85,699,83,682,85,672,89,670,95,674,105"/>
+<area shape="poly" id="edge13_Node000007_Node000007" title=" " alt="" coords="286,177,280,170,284,160,298,154,321,152,345,155,360,164,354,163,344,160,321,157,299,159,288,164,285,169,291,179"/>
+</map>

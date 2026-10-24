@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="ldo__config__csv_8py" kind="file" language="Python">
+    <compoundname>ldo_config_csv.py</compoundname>
+    <innerclass refid="classldo__config__csv_1_1_ligne" prot="public">ldo_config_csv::Ligne</innerclass>
+    <innernamespace refid="namespaceldo__config__csv">ldo_config_csv</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py"/>
+  </compounddef>
+</doxygen>

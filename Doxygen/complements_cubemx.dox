@@ -1,0 +1,200 @@
+/**
+ * @file complements_cubemx.dox
+ * @brief Documentation des fonctions generees par STM32CubeMX.
+ *
+ * Les commentaires de ces fonctions dans main.c sont reecrits par CubeMX a
+ * chaque generation de code : leur documentation (role dans le projet,
+ * exemple d'utilisation, module) est donc ecrite ici. Doxygen la fusionne avec
+ * le commentaire d'origine de main.c.
+ */
+
+/**
+ * @fn int main(void)
+ * @ingroup grp_cubemx
+ * @par Role dans le projet
+ * Point d'entree. Configure la MPU, active les caches, initialise le HAL, attend 1 s, configure
+ * les horloges, debloque les deux bus I2C (I2C_BusRecovery() sur PB8/PB9 et
+ * PB10/PB11), initialise les GPIO et peripheriques CubeMX, puis LDO_GPIO_Init()
+ * (broches des LDO depuis ldoConfig[]). Cree ensuite la tache lwipTask
+ * (StartLwipTask()) et demarre FreeRTOS : la boucle while(1) n'est jamais atteinte.
+ * @par Exemple d'utilisation
+ * @code
+ * // appele par le code de demarrage (startup_stm32h753zitx.s), ne pas appeler directement
+ * @endcode
+ */
+
+/**
+ * @fn void SystemClock_Config(void)
+ * @ingroup grp_cubemx
+ * @par Role dans le projet
+ * Horloge systeme : HSI 64 MHz, PLL1 (M = 4, N = 60, P = 2) -> SYSCLK 480 MHz,
+ * HCLK 240 MHz (AHB / 2), regulateur en VOS0, latence flash 4 cycles.
+ * @par Exemple d'utilisation
+ * @code
+ * HAL_Init();
+ * SystemClock_Config();
+ * PeriphCommonClock_Config();
+ * @endcode
+ */
+
+/**
+ * @fn void PeriphCommonClock_Config(void)
+ * @ingroup grp_cubemx
+ * @par Role dans le projet
+ * Horloge commune des peripheriques (CKPER = HSI), utilisee par les ADC.
+ * @par Exemple d'utilisation
+ * @code
+ * SystemClock_Config();
+ * PeriphCommonClock_Config();
+ * @endcode
+ */
+
+/**
+ * @fn static void MX_ADC1_Init(void)
+ * @ingroup grp_cubemx
+ * @par Role dans le projet
+ * ADC1, resolution 16 bits, conversion unique, canal 10 (PC0) : mesure de
+ * tension par le multiplexeur ADG728 (LireTensionADC()).
+ * @par Exemple d'utilisation
+ * @code
+ * MX_ADC1_Init();
+ * float v = LireTensionADC(&hadc1, ADC_CANAL_TENSION, MUX_RATIO_PONT);
+ * @endcode
+ */
+
+/**
+ * @fn static void MX_ADC2_Init(void)
+ * @ingroup grp_cubemx
+ * @par Role dans le projet
+ * ADC2, resolution 16 bits, canal VBAT (configuration CubeMX, non utilise par
+ * l'application).
+ * @par Exemple d'utilisation
+ * @code
+ * MX_ADC2_Init();
+ * @endcode
+ */
+
+/**
+ * @fn static void MX_ADC3_Init(void)
+ * @ingroup grp_cubemx
+ * @par Role dans le projet
+ * ADC3, resolution 16 bits, conversion unique : mesure de courant par le
+ * multiplexeur (PF4, canal 9 selectionne au moment de la lecture) et
+ * commandes GET_CURRENT_x.
+ * @par Exemple d'utilisation
+ * @code
+ * MX_ADC3_Init();
+ * float i_mA = LireCourantADC(&hadc3, ADC_CANAL_COURANT, MUX_RATIO_PONT);
+ * @endcode
+ */
+
+/**
+ * @fn static void MX_I2C1_Init(void)
+ * @ingroup grp_cubemx
+ * @par Role dans le projet
+ * I2C1 (PB8 = SCL, PB9 = SDA), Timing 0x307075B1 : bus actif des DAC
+ * MCP47FEB28 0xC0 / 0xC2 et des ADG728 de mesure de tension. Precede de
+ * I2C_BusRecovery() dans main().
+ * @par Exemple d'utilisation
+ * @code
+ * I2C_BusRecovery(GPIOB, GPIO_PIN_8, GPIO_PIN_9, GPIO_AF4_I2C1);
+ * MX_I2C1_Init();
+ * @endcode
+ */
+
+/**
+ * @fn static void MX_I2C2_Init(void)
+ * @ingroup grp_cubemx
+ * @par Role dans le projet
+ * I2C2 (PB10 = SCL, PB11 = SDA), Timing 0x307075B1. Initialise mais non
+ * utilise tant que i2c2_actif = 0 (commande SET_I2C2_ACTIF:1 pour l'activer).
+ * @par Exemple d'utilisation
+ * @code
+ * I2C_BusRecovery(GPIOB, GPIO_PIN_10, GPIO_PIN_11, GPIO_AF4_I2C2);
+ * MX_I2C2_Init();
+ * @endcode
+ */
+
+/**
+ * @fn static void MX_USART1_UART_Init(void)
+ * @ingroup grp_cubemx
+ * @par Role dans le projet
+ * USART1 (PB6 = TX, PB7 = RX), 115200 bauds 8N1 sans controle de flux :
+ * rapports de diagnostic et commandes (reception demarree par
+ * UART1_DemarrerReceptionCommandes()).
+ * @par Exemple d'utilisation
+ * @code
+ * MX_USART1_UART_Init();
+ * UART1_EnvoyerTexte("HB\r\n");
+ * @endcode
+ */
+
+/**
+ * @fn static void MX_GPIO_Init(void)
+ * @ingroup grp_cubemx
+ * @par Role dans le projet
+ * Horloges des ports A a H et GPIO declarees dans le .ioc (bouton USER PC13
+ * en EXTI, etc.). La zone USER CODE MX_GPIO_Init_2 appelle
+ * MX_MuxResetSync_GPIO_Init(). Les broches des LDO sont (re)configurees
+ * ensuite par LDO_GPIO_Init() a partir du CSV : c'est cette derniere qui fait foi.
+ * @par Exemple d'utilisation
+ * @code
+ * MX_GPIO_Init();
+ * LDO_GPIO_Init();
+ * @endcode
+ */
+
+/**
+ * @fn void MPU_Config(void)
+ * @ingroup grp_cubemx
+ * @brief Configuration de la MPU (zones SRAM D2 utilisees par LwIP et l'Ethernet).
+ * @par Role dans le projet
+ * Region 0 : fond 4 Go sans acces ; regions 1 et 2 : SRAM D2 a 0x30020000
+ * (128 Ko) et 0x30040000 (512 o), utilisee par LwIP et le DMA Ethernet, avec
+ * des attributs de cache compatibles avec le DMA. Appelee au debut de main().
+ * @param Aucun.
+ * @retval Aucun (void).
+ * @par Exemple d'utilisation
+ * @code
+ * MPU_Config();   // debut de main(), avant SCB_EnableICache() / SCB_EnableDCache()
+ * @endcode
+ */
+
+/**
+ * @fn void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+ * @ingroup grp_cubemx
+ * @par Role dans le projet
+ * Base de temps du HAL sur TIM6 (SysTick reserve a FreeRTOS) : incremente
+ * uwTick, donc HAL_GetTick() et HAL_Delay().
+ * @par Exemple d'utilisation
+ * @code
+ * // appele par HAL_TIM_IRQHandler() (TIM6), ne pas appeler directement
+ * @endcode
+ */
+
+/**
+ * @fn void Error_Handler(void)
+ * @ingroup grp_cubemx
+ * @par Role dans le projet
+ * Appele quand une initialisation HAL echoue : masque les interruptions et
+ * boucle indefiniment (point d'arret conseille en debogage).
+ * @par Exemple d'utilisation
+ * @code
+ * if (HAL_I2C_Init(&hi2c1) != HAL_OK)
+ * {
+ *     Error_Handler();
+ * }
+ * @endcode
+ */
+
+/**
+ * @fn void assert_failed(uint8_t *file, uint32_t line)
+ * @ingroup grp_cubemx
+ * @par Role dans le projet
+ * Compile seulement si USE_FULL_ASSERT est defini : appele par assert_param()
+ * quand un parametre HAL est invalide. Vide dans ce projet.
+ * @par Exemple d'utilisation
+ * @code
+ * assert_param(IS_GPIO_PIN(pin));   // appelle assert_failed(__FILE__, __LINE__) si faux
+ * @endcode
+ */

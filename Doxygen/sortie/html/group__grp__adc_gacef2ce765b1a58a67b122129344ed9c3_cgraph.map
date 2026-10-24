@@ -1,0 +1,7 @@
+<map id="h_GET_ADC_BRUT" name="h_GET_ADC_BRUT">
+<area shape="rect" id="Node000001" title="Handler de la commande reseau &quot;GET_ADC_BRUT:&lt;numero_adc&gt;:&lt;canal&gt;&quot;." alt="" coords="5,29,148,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="46,29,41,21,44,11,57,5,77,3,98,5,111,14,105,14,96,10,76,8,58,10,48,15,46,20,51,29"/>
+<area shape="rect" id="Node000002" href="$group__grp__adc.html#ga6bcd15aecac42670e775f0796aa0b8ec" title="Lit une conversion ADC sur le canal donne et la convertit en tension REELLE cote LDO (avant le pont d..." alt="" coords="196,29,312,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="148,40,183,43,177,43,148,45"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="223,28,218,21,222,11,234,5,254,3,275,5,288,14,283,14,273,10,254,8,235,10,226,15,223,20,228,30"/>
+</map>

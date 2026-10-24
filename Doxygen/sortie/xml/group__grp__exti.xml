@@ -1,0 +1,456 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="group__grp__exti" kind="group">
+    <compoundname>grp_exti</compoundname>
+    <title>Capture complète, boutons et interruptions EXTI</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__grp__exti_1gaca19a894d35c5407313b2afaca72d390" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void FormaterTempsEcoule</definition>
+        <argsstring>(char *dest, size_t taille)</argsstring>
+        <name>FormaterTempsEcoule</name>
+        <param>
+          <type>char *</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>taille</declname>
+        </param>
+        <briefdescription>
+<para>Formate le temps ecoule depuis le demarrage (HAL_GetTick(), en millisecondes) en une chaine &quot;HH:MM:SS&quot;. Le STM32 n&apos;a pas de RTC configuree dans ce projet : ce n&apos;est donc PAS une heure murale reelle, seulement une duree depuis le reset de la carte. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Buffer de sortie, doit faire au moins 9 octets (8 caracteres &quot;HH:MM:SS&quot; + &apos;\0&apos;). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>taille</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Taille du buffer dest, pour eviter tout debordement. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Ecrit la chaine formatee dans dest. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">char<sp/>temps[9];</highlight></codeline>
+<codeline><highlight class="normal">FormaterTempsEcoule(temps,<sp/>sizeof(temps));</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>temps<sp/>contient<sp/>par<sp/>exemple<sp/>&quot;00:02:37&quot;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1417" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1417" bodyend="1426"/>
+        <references refid="group__grp__exti_1gaca19a894d35c5407313b2afaca72d390" compoundref="main_8c" startline="1417" endline="1426">FormaterTempsEcoule</references>
+        <referencedby refid="group__grp__i2c_1ga78897222189585f100bc3855e98e25cc" compoundref="main_8c" startline="1484" endline="1527">EnvoyerBonjourATous</referencedby>
+        <referencedby refid="group__grp__exti_1ga3a919fef613806da58b99557a009f22a" compoundref="main_8c" startline="1648" endline="1720">ExecuterCaptureComplete</referencedby>
+        <referencedby refid="group__grp__exti_1gaca19a894d35c5407313b2afaca72d390" compoundref="main_8c" startline="1417" endline="1426">FormaterTempsEcoule</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__exti_1ga3a919fef613806da58b99557a009f22a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void ExecuterCaptureComplete</definition>
+        <argsstring>(void)</argsstring>
+        <name>ExecuterCaptureComplete</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Capture complete de diagnostic : scan I2C1+I2C2, message &quot;Bonjour&quot; a chaque adresse trouvee, ecriture d&apos;un palier different sur chacune des 8 sorties du DAC, balayage complet de VOUT0 (0 a 4095), ecriture de 2.5V sur VOUT1. Le tout encadre par des marqueurs SAVE_BEGIN/SAVE_END (avec numero de cycle et heure ecoulee), envoye en une fois sur USART1. Les marqueurs SAVE_BEGIN/SAVE_END permettent a un outil PC (ex : le script Python de controle) de detecter le debut et la fin d&apos;une capture dans le flux UART, et de la sauvegarder automatiquement en fichier des qu&apos;elle est complete. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Effet de bord : ecrit sur le bus I2C1, incremente numero_cycle, envoie plusieurs kilo-octets sur USART1 (duree totale ~8-10 secondes, dominee par BalayerSortieDAC()). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Appelee<sp/>depuis<sp/>la<sp/>boucle<sp/>de<sp/>StartLwipTask()<sp/>quand<sp/>bouton_appuye</highlight></codeline>
+<codeline><highlight class="normal">est<sp/>a<sp/>1<sp/>(mis<sp/>par<sp/>l&apos;interruption<sp/>du<sp/>bouton<sp/>B1/PC13)<sp/>:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>if<sp/>(bouton_appuye)<sp/>{<sp/>bouton_appuye<sp/>=<sp/>0;<sp/>ExecuterCaptureComplete();<sp/>}</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1648" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1648" bodyend="1720"/>
+        <references refid="group__grp__dac_1ga3b69ec3e3af5d495bc0a095f6e4343eb" compoundref="main_8c" startline="1346" endline="1397">BalayerSortieDAC</references>
+        <references refid="group__grp__dac_1gaf2d35bfc7d39a06f0e77e0680df9c08d" compoundref="main_8c" startline="956" endline="982">EcrireDACVolatile</references>
+        <references refid="group__grp__dac_1ga3c9eb54cd6a878bce23cc531e877692f" compoundref="main_8c" startline="1289" endline="1310">EcrireToutesLesSorties</references>
+        <references refid="group__grp__i2c_1ga78897222189585f100bc3855e98e25cc" compoundref="main_8c" startline="1484" endline="1527">EnvoyerBonjourATous</references>
+        <references refid="group__grp__exti_1ga3a919fef613806da58b99557a009f22a" compoundref="main_8c" startline="1648" endline="1720">ExecuterCaptureComplete</references>
+        <references refid="group__grp__i2c_1ga66520b068519c774eaeaa10c91bc87e4" compoundref="main_8c" startline="802" endline="814">FormaterRapport</references>
+        <references refid="group__grp__exti_1gaca19a894d35c5407313b2afaca72d390" compoundref="main_8c" startline="1417" endline="1426">FormaterTempsEcoule</references>
+        <references refid="group__grp__adc_1ga5620dbaf6425610dff776e64b7f6c3ca" compoundref="main_8c" startline="5474" endline="5501">GetMesureReelle</references>
+        <references refid="group__grp__i2c_1ga779f08189cf1996577c596f37e17f128" compoundref="main_8c" startline="748" endline="777">ScanI2C</references>
+        <references refid="group__grp__comm_1gab9b5dfc109e472981cbbb7867d1b7f92" compoundref="main_8c" startline="1803" endline="1816">UART1_EnvoyerTexte</references>
+        <references refid="group__grp__dac_1ga4f3b4b4120ebf5fcecc3f9b14f56afae" compoundref="main_8c" startline="847" endline="858">VoltageVersCodeDAC</references>
+        <referencedby refid="group__grp__exti_1ga3a919fef613806da58b99557a009f22a" compoundref="main_8c" startline="1648" endline="1720">ExecuterCaptureComplete</referencedby>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__exti_1ga49cfdd46eb8d0ef3e1987514aa9343dc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EXTI1_IRQHandler</definition>
+        <argsstring>(void)</argsstring>
+        <name>EXTI1_IRQHandler</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Interruption EXTI ligne 1 : delegue a HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_1) (broche OC d&apos;une LDO declaree oc_interruption = 1 dans le CSV). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">//<sp/>appele<sp/>par<sp/>le<sp/>materiel,<sp/>ne<sp/>pas<sp/>appeler<sp/>directement</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6562" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6562" bodyend="6562"/>
+        <references refid="group__grp__exti_1ga49cfdd46eb8d0ef3e1987514aa9343dc" compoundref="main_8c" startline="6562" endline="6562">EXTI1_IRQHandler</references>
+        <referencedby refid="group__grp__exti_1ga49cfdd46eb8d0ef3e1987514aa9343dc" compoundref="main_8c" startline="6562" endline="6562">EXTI1_IRQHandler</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__exti_1gab5a1d9e9c8ef50e0cb9ddb5745a20a14" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EXTI2_IRQHandler</definition>
+        <argsstring>(void)</argsstring>
+        <name>EXTI2_IRQHandler</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Interruption EXTI ligne 2 : delegue a HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_2) (broche OC d&apos;une LDO declaree oc_interruption = 1 dans le CSV). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">//<sp/>appele<sp/>par<sp/>le<sp/>materiel,<sp/>ne<sp/>pas<sp/>appeler<sp/>directement</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6574" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6574" bodyend="6574"/>
+        <references refid="group__grp__exti_1gab5a1d9e9c8ef50e0cb9ddb5745a20a14" compoundref="main_8c" startline="6574" endline="6574">EXTI2_IRQHandler</references>
+        <referencedby refid="group__grp__exti_1gab5a1d9e9c8ef50e0cb9ddb5745a20a14" compoundref="main_8c" startline="6574" endline="6574">EXTI2_IRQHandler</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__exti_1ga30c045de96d18ec9c67a7b9e4350920f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EXTI3_IRQHandler</definition>
+        <argsstring>(void)</argsstring>
+        <name>EXTI3_IRQHandler</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Interruption EXTI ligne 3 : delegue a HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_3) (broche OC d&apos;une LDO declaree oc_interruption = 1 dans le CSV). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">//<sp/>appele<sp/>par<sp/>le<sp/>materiel,<sp/>ne<sp/>pas<sp/>appeler<sp/>directement</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6586" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6586" bodyend="6586"/>
+        <references refid="group__grp__exti_1ga30c045de96d18ec9c67a7b9e4350920f" compoundref="main_8c" startline="6586" endline="6586">EXTI3_IRQHandler</references>
+        <referencedby refid="group__grp__exti_1ga30c045de96d18ec9c67a7b9e4350920f" compoundref="main_8c" startline="6586" endline="6586">EXTI3_IRQHandler</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__exti_1ga290cb997018c8d85d4b965b4a242842f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EXTI4_IRQHandler</definition>
+        <argsstring>(void)</argsstring>
+        <name>EXTI4_IRQHandler</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Interruption EXTI ligne 4 : delegue a HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_4) (broche OC d&apos;une LDO declaree oc_interruption = 1 dans le CSV, ex : PE4 pour 2PSp). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">//<sp/>appele<sp/>par<sp/>le<sp/>materiel,<sp/>ne<sp/>pas<sp/>appeler<sp/>directement</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6598" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6598" bodyend="6598"/>
+        <references refid="group__grp__exti_1ga290cb997018c8d85d4b965b4a242842f" compoundref="main_8c" startline="6598" endline="6598">EXTI4_IRQHandler</references>
+        <referencedby refid="group__grp__exti_1ga290cb997018c8d85d4b965b4a242842f" compoundref="main_8c" startline="6598" endline="6598">EXTI4_IRQHandler</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__exti_1ga7b2096b8b2643286dc3a7e5110e5ae85" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EXTI9_5_IRQHandler</definition>
+        <argsstring>(void)</argsstring>
+        <name>EXTI9_5_IRQHandler</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Interruption EXTI lignes 9 a 5 : delegue a HAL_GPIO_EXTI_IRQHandler() pour les broches 5 a 9 (broches OC declarees en interruption). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">//<sp/>appele<sp/>par<sp/>le<sp/>materiel,<sp/>ne<sp/>pas<sp/>appeler<sp/>directement</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6610" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6610" bodyend="6617"/>
+        <references refid="group__grp__exti_1ga7b2096b8b2643286dc3a7e5110e5ae85" compoundref="main_8c" startline="6610" endline="6617">EXTI9_5_IRQHandler</references>
+        <referencedby refid="group__grp__exti_1ga7b2096b8b2643286dc3a7e5110e5ae85" compoundref="main_8c" startline="6610" endline="6617">EXTI9_5_IRQHandler</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__exti_1ga738473a5b43f6c92b80ce1d3d6f77ed9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EXTI15_10_IRQHandler</definition>
+        <argsstring>(void)</argsstring>
+        <name>EXTI15_10_IRQHandler</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Gestionnaire d&apos;interruption EXTI ligne 15:10 (couvre PC13, bouton USER B1). Delegue immediatement a HAL_GPIO_EXTI_IRQHandler(), qui identifie la broche et appelle HAL_GPIO_EXTI_Callback(). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">//<sp/>appele<sp/>par<sp/>le<sp/>materiel,<sp/>ne<sp/>pas<sp/>appeler<sp/>directement</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6631" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6631" bodyend="6642" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="86" declcolumn="6"/>
+        <references refid="group__grp__exti_1ga738473a5b43f6c92b80ce1d3d6f77ed9" compoundref="main_8c" startline="6631" endline="6642">EXTI15_10_IRQHandler</references>
+        <referencedby refid="group__grp__exti_1ga738473a5b43f6c92b80ce1d3d6f77ed9" compoundref="main_8c" startline="6631" endline="6642">EXTI15_10_IRQHandler</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__exti_1ga17e9789a29a87d2df54f12b94dd1a0b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EXTI0_IRQHandler</definition>
+        <argsstring>(void)</argsstring>
+        <name>EXTI0_IRQHandler</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Gestionnaire d&apos;interruption EXTI ligne 0 (couvre PD0, bouton de RESET materiel des ADG728). Meme principe que EXTI15_10_IRQHandler() ci-dessus. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">//<sp/>appele<sp/>par<sp/>le<sp/>materiel,<sp/>ne<sp/>pas<sp/>appeler<sp/>directement</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6656" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6656" bodyend="6659" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="87" declcolumn="6"/>
+        <references refid="group__grp__exti_1ga17e9789a29a87d2df54f12b94dd1a0b6" compoundref="main_8c" startline="6656" endline="6659">EXTI0_IRQHandler</references>
+        <referencedby refid="group__grp__exti_1ga17e9789a29a87d2df54f12b94dd1a0b6" compoundref="main_8c" startline="6656" endline="6659">EXTI0_IRQHandler</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__exti_1ga0cd91fd3a9608559c2a87a8ba6cba55f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void HAL_GPIO_EXTI_Callback</definition>
+        <argsstring>(uint16_t GPIO_Pin)</argsstring>
+        <name>HAL_GPIO_EXTI_Callback</name>
+        <param>
+          <type>uint16_t</type>
+          <declname>GPIO_Pin</declname>
+        </param>
+        <briefdescription>
+<para>Callback appele par le HAL a chaque interruption EXTI, quelle que soit la broche. Boutons (PC13, PD0) : ne fait QUE positionner un flag, le traitement est fait par la boucle de StartLwipTask() (anti-rebond 250 ms par HAL_GetTick()). Broche OC d&apos;une LDO dont l&apos;EXTI est active (oc_it_active[]) : coupure de l&apos;EN dans l&apos;interruption (quelques us), voir OC_SurFrontIT(). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>GPIO_Pin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Broche ayant declenche l&apos;interruption. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">//<sp/>appele<sp/>par<sp/>HAL_GPIO_EXTI_IRQHandler(),<sp/>ne<sp/>pas<sp/>appeler<sp/>directement</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6676" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6676" bodyend="6707"/>
+        <references refid="group__grp__exti_1ga0cd91fd3a9608559c2a87a8ba6cba55f" compoundref="main_8c" startline="6676" endline="6707">HAL_GPIO_EXTI_Callback</references>
+        <references refid="group__grp__oc_1gafaa9094a90053ac8bf6eace70669f172" compoundref="main_8c" startline="3283" endline="3294">OC_SurFrontIT</references>
+        <referencedby refid="group__grp__exti_1ga0cd91fd3a9608559c2a87a8ba6cba55f" compoundref="main_8c" startline="6676" endline="6707">HAL_GPIO_EXTI_Callback</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Bouton USER, bouton de reset des multiplexeurs, gestionnaires EXTI. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

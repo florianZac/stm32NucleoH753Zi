@@ -1,0 +1,42 @@
+# =============================================================================
+#  CONFIGURATION DES LDO - UNE LIGNE PAR RAIL D'ALIMENTATION
+#  Seul fichier a modifier (ou page /dac/config du controleur).
+#  Separateur : point-virgule. Lignes commencant par # : commentaires.
+#  L'ORDRE DES LIGNES = index des LDO (SET_EN_TAB, SET_BL_TAB, IHM).
+#  Apres modification : mettre_a_jour.bat (ou compiler dans CubeIDE puis flasher).
+#
+#  rang             Numero de la LDO (1, 2, 3...). Renumerote automatiquement : l'ordre des lignes fait foi.
+#  nom              Nom des commandes : SET_VAL_LDO_<nom>, SET_EN_LDO_<nom>... (lettres et chiffres, 12 max).
+#  affichage        PRINCIPAL = affichee dans /dac ; DE_COTE = mise de cote (toujours geree par la carte).
+#  en               Broche Enable (sortie), ex : PE5.
+#  bld              Broche Bleeder (sortie), ex : PF1.
+#  bld_actif        Niveau qui fait conduire le bleeder : HAUT ou BAS.
+#  oc               Broche Over-Current (entree, sortie du LM211), ex : PE4.
+#  oc_interruption  1 = coupure de l'EN en interruption (quelques us) ; 0 = par la boucle (~5 ms).
+#  pg               Broche Power-Good (entree), ex : PF2.
+#  dac_tension      DAC de tension : BUS:ADRESSE:VOIE (ex : I2C1:0xC0:4), ou - si aucun.
+#  dac_courant      DAC du seuil de courant : BUS:ADRESSE:VOIE (ex : I2C1:0xC0:5), ou - si aucun.
+#  protection       LM211 = circuit shunt + OP184 + LM211 cable (OC surveille) ; SANS = OC affiche seulement.
+#  seuil            Source du seuil : DEFAUT (define LIMITATION_PAR_POTENTIOMETRE), DAC ou POT.
+#  memoire          EEPROM = codes DAC gardes a la coupure (EEPROM du MCP47FEB28) ; RAM = 0 au demarrage.
+#  commentaire      Texte libre (sans point-virgule).
+# =============================================================================
+rang;nom;affichage;en;bld;bld_actif;oc;oc_interruption;pg;dac_tension;dac_courant;protection;seuil;memoire;commentaire
+1;1PSp;PRINCIPAL;PF0;PF8;HAUT;PF9;0;PD1;I2C1:0xC0:3;I2C1:0xC0:1;LM211;DEFAUT;RAM;I2C1 0xC0
+2;2PSp;PRINCIPAL;PE5;PF1;HAUT;PE4;1;PF2;I2C1:0xC0:4;I2C1:0xC0:5;LM211;DEFAUT;EEPROM;I2C1 0xC0, OC en EXTI (PE4)
+3;3PSp;PRINCIPAL;PE2;PD7;HAUT;PD6;0;PE3;I2C2:0xC0:0;I2C2:0xC0:2;LM211;DEFAUT;RAM;I2C2 (heritage)
+4;4PSp;PRINCIPAL;PA0;PC15;HAUT;PB0;0;PA4;-;-;SANS;DEFAUT;RAM;conflit 1PSp
+5;5PSp;PRINCIPAL;PF7;PC13;HAUT;PF6;0;PC14;-;-;SANS;DEFAUT;RAM;conflit 2PSp
+6;6PSp;PRINCIPAL;PC10;PD2;HAUT;PC11;0;PC12;-;-;SANS;DEFAUT;RAM;non cable
+7;7PSp;PRINCIPAL;PC8;PC9;HAUT;PC6;0;PD8;-;-;SANS;DEFAUT;RAM;ex-1PSn (non cable)
+8;8PSp;PRINCIPAL;PA6;PA5;HAUT;PA11;0;PB12;-;-;SANS;DEFAUT;RAM;ex-2PSn (non cable)
+9;9PSp;PRINCIPAL;PB4;PB1;HAUT;PB3;0;PF5;-;-;SANS;DEFAUT;RAM;ex-3PSn (conflit 1PLp)
+10;10PSp;PRINCIPAL;PD15;PD14;HAUT;PF14;0;PE9;I2C2:0xC2:4;I2C2:0xC2:6;LM211;DEFAUT;RAM;ex-4PSn (I2C2 (heritage))
+11;11PSp;PRINCIPAL;PF3;PE11;HAUT;PF15;0;PF11;I2C2:0xC2:0;I2C2:0xC2:2;LM211;DEFAUT;RAM;ex-5PSn (I2C2 (heritage))
+12;12PSp;PRINCIPAL;PG8;PE0;HAUT;PG5;0;PG6;I2C2:0xC2:1;I2C2:0xC2:3;LM211;DEFAUT;RAM;ex-6PSn (I2C2 (heritage))
+13;13PSp;PRINCIPAL;PE1;PG12;HAUT;PG10;0;PD0;I2C1:0xC2:0;-;SANS;DEFAUT;RAM;ex-1PLp (I2C1 0xC2, pas de courant)
+14;14PSp;PRINCIPAL;PA3;PD12;HAUT;PE10;0;PG1;I2C2:0xC4:2;-;SANS;DEFAUT;RAM;ex-2PLp (pas de courant)
+15;15PSp;PRINCIPAL;PF13;PF12;HAUT;PG4;0;PE15;I2C2:0xC2:5;-;SANS;DEFAUT;RAM;ex-3PLp (pas de courant)
+16;16PSp;PRINCIPAL;PG0;PE6;HAUT;PD9;0;PG9;I2C2:0xC4:3;I2C2:0xC4:5;LM211;DEFAUT;RAM;ex-1PLn (I2C2 (heritage))
+17;2PLn;DE_COTE;PA10;PE12;HAUT;PD11;0;PD13;I2C2:0xC4:7;I2C2:0xC4:6;LM211;DEFAUT;RAM;I2C2 (heritage)
+18;3PLn;DE_COTE;PE13;PD10;HAUT;PG7;0;PE14;I2C2:0xC4:4;I2C2:0xC2:7;LM211;DEFAUT;RAM;I2C2 (heritage)

@@ -1,0 +1,7 @@
+<map id="MX_I2C2_Init" name="MX_I2C2_Init">
+<area shape="rect" id="Node000001" title="I2C2 Initialization Function." alt="" coords="5,29,107,56"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="30,29,25,21,29,11,39,5,56,3,74,5,85,14,80,14,72,10,56,8,41,10,33,14,31,20,35,29"/>
+<area shape="rect" id="Node000002" href="$group__grp__cubemx.html#ga1730ffe1e560465665eb47d9264826f9" title="This function is executed in case of error occurrence." alt="" coords="155,29,256,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,40,142,42,137,43,107,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="179,28,175,21,178,11,188,5,205,3,224,5,234,15,229,14,222,10,205,8,190,10,182,14,180,20,184,30"/>
+</map>

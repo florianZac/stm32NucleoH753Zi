@@ -1,0 +1,32 @@
+<map id="DAC_TraiterSauvegardes" name="DAC_TraiterSauvegardes">
+<area shape="rect" id="Node000001" title="Traite AU PLUS UNE demande de sauvegarde EEPROM par appel (une LDO : voie tension puis voie seuil)...." alt="" coords="5,179,176,205"/>
+<area shape="poly" id="edge16_Node000001_Node000001" title=" " alt="" coords="52,179,45,170,50,160,66,154,91,152,117,155,133,163,128,164,116,160,90,157,67,159,54,164,51,169,57,178"/>
+<area shape="rect" id="Node000002" href="$group__grp__eeprom.html#ga0fdcf8780e2127569c1e1a76e9518c5a" title="Demande l&#39;ecriture en EEPROM du MCP47FEB28 des codes DAC (tension et seuil de courant) d&#39;une LDO decl..." alt="" coords="224,67,410,93"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,176,157,140,223,103,243,97,238,100,225,108,160,144,111,180"/>
+<area shape="rect" id="Node000003" href="$group__grp__eeprom.html#ga461f9e8b58bc45203018e3132c71b989" title="Garde un code dans l&#39;EEPROM d&#39;une voie : relit la valeur en EEPROM, n&#39;ecrit que si elle differe,..." alt="" coords="238,141,396,168"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="174,176,225,169,220,171,176,181"/>
+<area shape="rect" id="Node000009" href="$group__grp__oc.html#ga7851b235d1d1f7564644d659587b3ba2" title="Indique si la LDO est surveillee : ldoConfig[idx].oc.surveille = 1 ET un DAC de seuil (dac_courant) d..." alt="" coords="254,216,380,243"/>
+<area shape="poly" id="edge17_Node000001_Node000009" title=" " alt="" coords="175,203,242,216,237,217,175,209"/>
+<area shape="rect" id="Node000010" href="$group__grp__comm.html#gab9b5dfc109e472981cbbb7867d1b7f92" title="Envoie une chaine de caracteres sur USART1 (PB6/PB7, via un adaptateur USB&#45;UART externe),..." alt="" coords="241,291,392,317"/>
+<area shape="poly" id="edge19_Node000001_Node000010" title=" " alt="" coords="120,203,276,282,272,285,119,209"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="279,66,273,58,278,48,293,42,317,40,343,43,358,51,353,52,341,48,317,45,294,47,281,52,278,57,285,66"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="279,140,273,133,278,123,293,117,317,115,343,117,358,126,353,126,341,122,317,120,294,122,281,127,278,132,285,141"/>
+<area shape="rect" id="Node000004" href="$group__grp__eeprom.html#ga411fdeb5f1d7a54dc6d8ecf893d7d0a9" title="Puce DAC (ligne de tableDac[]) correspondant a une cible logique." alt="" coords="469,29,603,56"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="346,138,408,103,432,84,457,66,472,61,468,63,459,70,435,88,412,108,348,143"/>
+<area shape="rect" id="Node000005" href="$group__grp__eeprom.html#ga9038fec6d17da09fb1543c560d3e7965" title="Indique si une puce DAC est joignable maintenant : bus I2C1, ou I2C2 active (i2c2_actif),..." alt="" coords="465,104,607,131"/>
+<area shape="poly" id="edge7_Node000003_Node000005" title=" " alt="" coords="395,139,452,131,447,133,396,144"/>
+<area shape="rect" id="Node000006" href="$group__grp__eeprom.html#ga1de03c1c4ce3c3d63b079d5bce9c8e74" title="Ecrit le code de demarrage (EEPROM, registre non volatil 10h + voie) d&#39;une voie du MCP47FEB28...." alt="" coords="472,179,601,205"/>
+<area shape="poly" id="edge9_Node000003_Node000006" title=" " alt="" coords="396,165,459,178,454,179,396,171"/>
+<area shape="rect" id="Node000008" href="$group__grp__dac.html#gae1030d1ce005f7deac0f86610f9df4af" title="Lit un registre VOLATILE de VALEUR du DAC MCP47FEB28 (adresses memoire 00h a 07h, une par voie)...." alt="" coords="458,253,614,280"/>
+<area shape="poly" id="edge13_Node000003_Node000008" title=" " alt="" coords="382,166,411,178,436,195,460,215,502,245,496,244,456,219,433,199,409,182,382,171"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="503,28,497,21,501,11,515,5,536,3,559,5,573,14,568,14,558,10,536,8,516,10,505,15,503,20,508,29"/>
+<area shape="poly" id="edge8_Node000005_Node000005" title=" " alt="" coords="503,103,497,95,501,86,515,79,536,77,559,80,573,89,568,89,558,85,536,83,516,85,505,89,503,95,508,104"/>
+<area shape="poly" id="edge10_Node000006_Node000006" title=" " alt="" coords="503,177,497,170,501,160,515,154,536,152,559,155,573,164,568,163,558,160,536,157,516,159,505,164,503,169,508,179"/>
+<area shape="rect" id="Node000007" href="$group__grp__i2c.html#ga5cb1cd70b1dd76a8aadb2bccb2837d2f" title="Retourne le mutex correspondant au bus d&#39;un handle I2C donne." alt="" coords="662,216,797,243"/>
+<area shape="poly" id="edge11_Node000006_Node000007" title=" " alt="" coords="601,202,649,213,644,213,601,207"/>
+<area shape="poly" id="edge12_Node000007_Node000007" title=" " alt="" coords="696,214,691,207,695,198,708,191,730,189,753,192,766,201,761,200,751,197,729,195,709,197,699,201,696,207,701,217"/>
+<area shape="poly" id="edge15_Node000008_Node000007" title=" " alt="" coords="608,250,645,246,650,245,609,255"/>
+<area shape="poly" id="edge14_Node000008_Node000008" title=" " alt="" coords="503,252,497,245,501,235,515,229,536,227,559,229,573,239,568,238,558,234,536,232,516,234,505,239,503,244,508,254"/>
+<area shape="poly" id="edge18_Node000009_Node000009" title=" " alt="" coords="279,215,273,207,278,197,293,191,317,189,343,192,358,201,353,201,341,197,317,195,294,197,281,201,278,207,285,216"/>
+<area shape="poly" id="edge20_Node000010_Node000010" title=" " alt="" coords="280,289,273,282,278,272,293,266,317,264,343,267,358,276,353,275,341,272,317,269,294,271,281,276,278,281,284,291"/>
+</map>

@@ -1,0 +1,191 @@
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:6017: warning: found documented return type for LDO_InitialiserTables that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:6062: warning: found documented return type for LDO_ActiverHorlogePort that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:6109: warning: found documented return type for LDO_GPIO_Init that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:6165: warning: found documented return type for h_GET_CONFIG_LDO that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:6209: warning: found documented return type for LDO_Diagnostic that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2743: warning: found documented return type for buildStatusResponse that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2794: warning: argument 'Aucun.' of command @param is not found in the argument list of h_SET_EN_LDO_ALL(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2794: warning: found documented return type for h_SET_EN_LDO_ALL that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2807: warning: argument 'Aucun.' of command @param is not found in the argument list of h_RST_EN_LDO_ALL(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2807: warning: found documented return type for h_RST_EN_LDO_ALL that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2820: warning: argument 'Aucun.' of command @param is not found in the argument list of h_SET_BL_LDO_ALL(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2820: warning: found documented return type for h_SET_BL_LDO_ALL that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2833: warning: argument 'Aucun.' of command @param is not found in the argument list of h_RST_BL_LDO_ALL(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2833: warning: found documented return type for h_RST_BL_LDO_ALL that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2847: warning: argument 'Aucun' of command @param is not found in the argument list of h_SET_EN_TAB(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2847: warning: found documented return type for h_SET_EN_TAB that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2875: warning: argument 'Aucun' of command @param is not found in the argument list of h_SET_BL_TAB(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2875: warning: found documented return type for h_SET_BL_TAB that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3299: warning: found documented return type for LDO_MettreAJour that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3179: warning: found documented return type for OC_Verrouiller that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3275: warning: found documented return type for OC_SurFrontIT that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3891: warning: found documented return type for OC_SignalerEvenements that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3920: warning: found documented return type for OC_Rearmer that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3942: warning: found documented return type for OC_Etat that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4163: warning: argument 'Aucun.' of command @param is not found in the argument list of OC_InitialiserSeuilsDefaut(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4163: warning: found documented return type for OC_InitialiserSeuilsDefaut that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:6502: warning: found documented return type for MX_OC_EXTI_Init that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3427: warning: found documented return type for CmdOnOff_Initialiser that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3557: warning: found documented return type for CmdOnOff_TraiterSauvegarde that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3587: warning: found documented return type for CmdOnOff_BasculerOc that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3617: warning: found documented return type for CmdOnOff_BasculerBld that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3644: warning: found documented return type for CmdOnOff_Repondre that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:900: warning: found documented return type for SynchroniserTableauDac that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:1107: warning: argument 'Aucun.' of command @param is not found in the argument list of InitialiserConfigDacsI2C1(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:1107: warning: found documented return type for InitialiserConfigDacsI2C1 that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:1194: warning: found documented return type for MemoriserConfigDac that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:1220: warning: found documented return type for SurveillerConfigDacsI2C1 that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:1277: warning: found documented return type for EcrireToutesLesSorties that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:1322: warning: found documented return type for BalayerSortieDAC that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3996: warning: found documented return type for EcrireValeurDac that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4032: warning: found documented return type for MajEtatLdoDepuisDac that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4073: warning: found documented return type for h_SET_VAL_LDO_GENERIQUE that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4101: warning: found documented return type for h_SET_CURRENT_LDO_GENERIQUE that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4220: warning: found documented return type for SetMappingDacLdo that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4297: warning: found documented return type for GetMappingDacLdo that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4432: warning: argument 'Aucun' of command @param is not found in the argument list of h_BALAYER_DAC(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4432: warning: found documented return type for h_BALAYER_DAC that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4515: warning: argument 'Aucun' of command @param is not found in the argument list of h_GET_DAC_CONFIG(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4515: warning: found documented return type for h_GET_DAC_CONFIG that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4935: warning: argument 'Aucun' of command @param is not found in the argument list of h_GET_DAC_REG(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4935: warning: found documented return type for h_GET_DAC_REG that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4994: warning: argument 'Aucun' of command @param is not found in the argument list of h_SET_DAC_VREF(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4994: warning: found documented return type for h_SET_DAC_VREF that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5033: warning: argument 'Aucun' of command @param is not found in the argument list of h_SET_DAC_PD(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5033: warning: found documented return type for h_SET_DAC_PD that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5073: warning: argument 'Aucun' of command @param is not found in the argument list of h_SET_DAC_GAIN(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5073: warning: found documented return type for h_SET_DAC_GAIN that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5115: warning: argument 'Aucun' of command @param is not found in the argument list of h_SET_I2C2_ACTIF(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5115: warning: found documented return type for h_SET_I2C2_ACTIF that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3137: warning: found documented return type for DAC_DemanderSauvegarde that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4747: warning: found documented return type for DAC_TraiterSauvegardes that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4814: warning: found documented return type for DAC_RestaurerMemoire that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4894: warning: found documented return type for DAC_ConfigurerSeuilsPotentiometre that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:458: warning: argument 'Aucun.' of command @param is not found in the argument list of I2C1_BusRecovery(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:458: warning: found documented return type for I2C1_BusRecovery that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:526: warning: found documented return type for I2C_BusRecovery that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:679: warning: argument 'Aucun.' of command @param is not found in the argument list of CreerMutexI2C(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:679: warning: found documented return type for CreerMutexI2C that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:738: warning: found documented return type for ScanI2C that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:785: warning: found documented return type for FormaterRapport that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:1468: warning: found documented return type for EnvoyerBonjourATous that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4370: warning: argument 'Aucun.' of command @param is not found in the argument list of h_SCAN_I2C1(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4370: warning: found documented return type for h_SCAN_I2C1 that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4399: warning: argument 'Aucun.' of command @param is not found in the argument list of h_SCAN_I2C2(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4399: warning: found documented return type for h_SCAN_I2C2 that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:1568: warning: argument 'Aucun.' of command @param is not found in the argument list of MX_MuxResetSync_GPIO_Init(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:1568: warning: found documented return type for MX_MuxResetSync_GPIO_Init that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:1600: warning: argument 'Aucun.' of command @param is not found in the argument list of TraiterResetMultiplexeur(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:1600: warning: found documented return type for TraiterResetMultiplexeur that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4323: warning: argument 'Aucun.' of command @param is not found in the argument list of h_GET_CURRENT_1(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4323: warning: found documented return type for h_GET_CURRENT_1 that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4346: warning: argument 'Aucun.' of command @param is not found in the argument list of h_GET_CURRENT_2(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:4346: warning: found documented return type for h_GET_CURRENT_2 that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5237: warning: found documented return type for SelectionnerCanalMuxTension that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5275: warning: found documented return type for SelectionnerCanalMuxCourant that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5335: warning: found documented return type for SetMuxLdo that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5367: warning: found documented return type for GetMuxLdo that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5459: warning: found documented return type for GetMesureReelle that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5580: warning: found documented return type for GetMesureCourantReelle that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5622: warning: found documented return type for SetMuxCourantLdo that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5655: warning: found documented return type for GetMuxCourantLdo that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5683: warning: argument 'Aucun' of command @param is not found in the argument list of h_SET_MUX_CANAL_TENSION(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5683: warning: found documented return type for h_SET_MUX_CANAL_TENSION that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5716: warning: argument 'Aucun.' of command @param is not found in the argument list of h_GET_MUX_CANAL_TENSION(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5716: warning: found documented return type for h_GET_MUX_CANAL_TENSION that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5741: warning: argument 'Aucun' of command @param is not found in the argument list of h_SET_MUX_CANAL_COURANT(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5741: warning: found documented return type for h_SET_MUX_CANAL_COURANT that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5773: warning: argument 'Aucun.' of command @param is not found in the argument list of h_GET_MUX_CANAL_COURANT(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5773: warning: found documented return type for h_GET_MUX_CANAL_COURANT that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5798: warning: argument 'Aucun' of command @param is not found in the argument list of h_GET_ADC_BRUT(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5798: warning: found documented return type for h_GET_ADC_BRUT that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:1405: warning: found documented return type for FormaterTempsEcoule that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:1636: warning: argument 'Aucun.' of command @param is not found in the argument list of ExecuterCaptureComplete(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:1636: warning: found documented return type for ExecuterCaptureComplete that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:6554: warning: argument 'Aucun.' of command @param is not found in the argument list of EXTI1_IRQHandler(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:6554: warning: found documented return type for EXTI1_IRQHandler that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:6566: warning: argument 'Aucun.' of command @param is not found in the argument list of EXTI2_IRQHandler(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:6566: warning: found documented return type for EXTI2_IRQHandler that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:6578: warning: argument 'Aucun.' of command @param is not found in the argument list of EXTI3_IRQHandler(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:6578: warning: found documented return type for EXTI3_IRQHandler that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:6590: warning: argument 'Aucun.' of command @param is not found in the argument list of EXTI4_IRQHandler(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:6590: warning: found documented return type for EXTI4_IRQHandler that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:6602: warning: argument 'Aucun.' of command @param is not found in the argument list of EXTI9_5_IRQHandler(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:6602: warning: found documented return type for EXTI9_5_IRQHandler that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:6623: warning: argument 'Aucun.' of command @param is not found in the argument list of EXTI15_10_IRQHandler(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:6623: warning: found documented return type for EXTI15_10_IRQHandler that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:6648: warning: argument 'Aucun.' of command @param is not found in the argument list of EXTI0_IRQHandler(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:6648: warning: found documented return type for EXTI0_IRQHandler that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:6668: warning: found documented return type for HAL_GPIO_EXTI_Callback that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:699: warning: argument 'Aucun.' of command @param is not found in the argument list of CreerMutexUART(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:699: warning: found documented return type for CreerMutexUART that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:1732: warning: argument 'Aucun.' of command @param is not found in the argument list of MX_USART1_GPIO_Init(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:1732: warning: found documented return type for MX_USART1_GPIO_Init that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:1759: warning: argument 'Aucun.' of command @param is not found in the argument list of MX_USART1_Init(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:1759: warning: found documented return type for MX_USART1_Init that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:1795: warning: found documented return type for UART1_EnvoyerTexte that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2546: warning: argument 'Aucun.' of command @param is not found in the argument list of udpServer_init(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2546: warning: found documented return type for udpServer_init that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2605: warning: found documented return type for udp_receive_callback that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3682: warning: found documented return type for CreerMutexCommandes that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3699: warning: argument 'Aucun.' of command @param is not found in the argument list of Commande_Verrouiller(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3699: warning: found documented return type for Commande_Verrouiller that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3720: warning: argument 'Aucun.' of command @param is not found in the argument list of Commande_Deverrouiller(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3720: warning: found documented return type for Commande_Deverrouiller that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3740: warning: found documented return type for UART1_DemarrerReceptionCommandes that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3757: warning: argument 'Aucun.' of command @param is not found in the argument list of USART1_IRQHandler(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3757: warning: found documented return type for USART1_IRQHandler that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3774: warning: found documented return type for HAL_UART_RxCpltCallback that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3821: warning: found documented return type for HAL_UART_ErrorCallback that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3841: warning: found documented return type for UART1_TraiterCommande that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5846: warning: found documented return type for h_WHO that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5993: warning: argument 'Aucun.' of command @param is not found in the argument list of sortCommandTable(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:5993: warning: found documented return type for sortCommandTable that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:6279: warning: argument 'Aucun' of command @param is not found in the argument list of tc_request(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:6279: warning: found documented return type for tc_request that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2904: warning: argument 'Aucun' of command @param is not found in the argument list of h_SET_DELTA_DVDD_AVDD(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2904: warning: found documented return type for h_SET_DELTA_DVDD_AVDD that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2918: warning: argument 'Aucun' of command @param is not found in the argument list of h_SET_DELTA_AVDD_VREF(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2918: warning: found documented return type for h_SET_DELTA_AVDD_VREF that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2932: warning: argument 'Aucun' of command @param is not found in the argument list of h_SET_DELTA_VREF_NRST(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2932: warning: found documented return type for h_SET_DELTA_VREF_NRST that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2946: warning: argument 'Aucun' of command @param is not found in the argument list of h_SET_DELTA_NRST_VREF(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2946: warning: found documented return type for h_SET_DELTA_NRST_VREF that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2960: warning: argument 'Aucun' of command @param is not found in the argument list of h_SET_DELTA_VREF_AVDD(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2960: warning: found documented return type for h_SET_DELTA_VREF_AVDD that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2974: warning: argument 'Aucun' of command @param is not found in the argument list of h_SET_DELTA_AVDD_DVDD(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2974: warning: found documented return type for h_SET_DELTA_AVDD_DVDD that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2987: warning: argument 'Aucun.' of command @param is not found in the argument list of h_RST_DELTA_DVDD_AVDD(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2987: warning: found documented return type for h_RST_DELTA_DVDD_AVDD that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2999: warning: argument 'Aucun.' of command @param is not found in the argument list of h_RST_DELTA_AVDD_VREF(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:2999: warning: found documented return type for h_RST_DELTA_AVDD_VREF that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3011: warning: argument 'Aucun.' of command @param is not found in the argument list of h_RST_DELTA_VREF_NRST(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3011: warning: found documented return type for h_RST_DELTA_VREF_NRST that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3023: warning: argument 'Aucun.' of command @param is not found in the argument list of h_RST_DELTA_NRST_VREF(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3023: warning: found documented return type for h_RST_DELTA_NRST_VREF that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3035: warning: argument 'Aucun.' of command @param is not found in the argument list of h_RST_DELTA_VREF_AVDD(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3035: warning: found documented return type for h_RST_DELTA_VREF_AVDD that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3047: warning: argument 'Aucun.' of command @param is not found in the argument list of h_RST_DELTA_AVDD_DVDD(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:3047: warning: found documented return type for h_RST_DELTA_AVDD_DVDD that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c:6719: warning: found documented return type for StartLwipTask that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Doxygen/complements_cubemx.dox:29: warning: found documented return type for SystemClock_Config that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Doxygen/complements_cubemx.dox:43: warning: found documented return type for PeriphCommonClock_Config that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Doxygen/complements_cubemx.dox:55: warning: argument 'None' of command @param is not found in the argument list of MX_ADC1_Init(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Doxygen/complements_cubemx.dox:55: warning: found documented return type for MX_ADC1_Init that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Doxygen/complements_cubemx.dox:68: warning: argument 'None' of command @param is not found in the argument list of MX_ADC2_Init(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Doxygen/complements_cubemx.dox:68: warning: found documented return type for MX_ADC2_Init that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Doxygen/complements_cubemx.dox:80: warning: argument 'None' of command @param is not found in the argument list of MX_ADC3_Init(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Doxygen/complements_cubemx.dox:80: warning: found documented return type for MX_ADC3_Init that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Doxygen/complements_cubemx.dox:94: warning: argument 'None' of command @param is not found in the argument list of MX_I2C1_Init(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Doxygen/complements_cubemx.dox:94: warning: found documented return type for MX_I2C1_Init that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Doxygen/complements_cubemx.dox:108: warning: argument 'None' of command @param is not found in the argument list of MX_I2C2_Init(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Doxygen/complements_cubemx.dox:108: warning: found documented return type for MX_I2C2_Init that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Doxygen/complements_cubemx.dox:121: warning: argument 'None' of command @param is not found in the argument list of MX_USART1_UART_Init(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Doxygen/complements_cubemx.dox:121: warning: found documented return type for MX_USART1_UART_Init that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Doxygen/complements_cubemx.dox:135: warning: argument 'None' of command @param is not found in the argument list of MX_GPIO_Init(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Doxygen/complements_cubemx.dox:135: warning: found documented return type for MX_GPIO_Init that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Doxygen/complements_cubemx.dox:150: warning: argument 'Aucun.' of command @param is not found in the argument list of MPU_Config(void)
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Doxygen/complements_cubemx.dox:150: warning: found documented return type for MPU_Config that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Doxygen/complements_cubemx.dox:166: warning: found documented return type for HAL_TIM_PeriodElapsedCallback that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Doxygen/complements_cubemx.dox:178: warning: found documented return type for Error_Handler that does not return anything
+C:/Users/Admin/Documents/flo/Lwip_demo_H753/Doxygen/complements_cubemx.dox:193: warning: found documented return type for assert_failed that does not return anything

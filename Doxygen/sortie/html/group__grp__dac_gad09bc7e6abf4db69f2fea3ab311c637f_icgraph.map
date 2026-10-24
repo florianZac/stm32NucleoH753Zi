@@ -1,0 +1,67 @@
+<map id="ResoudreTableauDac" name="ResoudreTableauDac">
+<area shape="rect" id="Node000001" title="Retourne le pointeur vers le tableau DACx_DEF correspondant a une cible logique." alt="" coords="1431,368,1577,395"/>
+<area shape="poly" id="edge45_Node000001_Node000001" title=" " alt="" coords="1536,352,1526,349,1504,347,1483,349,1472,353,1470,359,1475,369,1470,366,1464,359,1468,350,1482,343,1504,341,1527,344,1541,353"/>
+<area shape="rect" id="Node000002" href="$group__grp__dac.html#ga4469a4eb236eb4a995abab435c43c644" title="Ecrit une valeur 12 bits dans le tableau DACx_DEF/canal designe par une cible logique &#45; remplace les ..." alt="" coords="1249,192,1364,219"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1474,357,1322,222,1324,217,1479,358"/>
+<area shape="rect" id="Node000014" href="$group__grp__dac.html#ga924c3b0d97d03d4aba5b24043d36849c" title="Repercute une ecriture directe sur un canal DAC (balayage a distance BALAYER_DAC, capture bouton USER..." alt="" coords="1230,480,1383,507"/>
+<area shape="poly" id="edge29_Node000001_Node000014" title=" " alt="" coords="1468,402,1333,482,1331,477,1463,403"/>
+<area shape="rect" id="Node000018" href="$group__grp__oc.html#gaa95aeec744d338f67994e9ecbaf895b9" title="Cherche la LDO surveillee dont le seuil de courant est sur le canal donne d&#39;un tableau DACx_DEF." alt="" coords="1232,405,1381,432"/>
+<area shape="poly" id="edge39_Node000001_Node000018" title=" " alt="" coords="1418,398,1381,407,1380,402,1412,398"/>
+<area shape="rect" id="Node000019" href="$group__grp__dac.html#gaeda25d5b60439cf57afc75b5c8096a3d" title="Handler de &quot;SET_DAC_MAPPING_LDO_&lt;nom&gt;:&lt;V|I&gt;:&lt;0&#45;5&gt;:&lt;0&#45;7&gt;&quot; &#45; modifie A CHAUD, sans recompilation ni ref..." alt="" coords="986,355,1121,381"/>
+<area shape="poly" id="edge46_Node000001_Node000019" title=" " alt="" coords="1412,372,1383,372,1243,368,1122,369,1121,364,1243,363,1383,367,1418,372"/>
+<area shape="poly" id="edge8_Node000002_Node000002" title=" " alt="" coords="1339,176,1329,173,1306,171,1286,173,1275,177,1272,183,1278,193,1273,191,1267,183,1271,174,1285,167,1307,165,1330,168,1344,177"/>
+<area shape="rect" id="Node000003" href="$group__grp__eeprom.html#gaea23265d4fdedf9ac60d1c4afb886e40" title="Au demarrage, recharge depuis l&#39;EEPROM du MCP47FEB28 les codes de tension et de seuil des LDO declare..." alt="" coords="260,104,425,131"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1278,181,1236,149,1210,133,1182,121,1117,108,1031,100,930,96,820,96,601,104,426,114,424,109,601,98,820,91,930,91,1031,94,1118,102,1183,116,1212,128,1239,144,1284,182"/>
+<area shape="rect" id="Node000006" href="$group__grp__dac.html#ga161b95d8fabb7c81f08c2e0629238b6e" title="Handler de la commande reseau &quot;BALAYER_DAC&quot;. Declenche BalayerSortieDAC() a distance,..." alt="" coords="500,405,632,432"/>
+<area shape="poly" id="edge9_Node000002_Node000006" title=" " alt="" coords="1272,226,1230,251,1183,271,1112,291,1055,300,998,307,926,321,753,367,613,407,612,402,751,362,924,316,997,302,1055,295,1111,286,1181,265,1228,246,1267,228"/>
+<area shape="rect" id="Node000007" href="$group__grp__dac.html#ga1b7ca6a4fce7e0d525508dd4951a48f0" title="Handler GENERIQUE de &quot;SET_CURRENT_LDO_&lt;nom&gt;:&lt;valeur&gt;&quot; &#45; remplace les 18 anciennes fonctions h_SET_CUR..." alt="" coords="925,155,1182,181"/>
+<area shape="poly" id="edge11_Node000002_Node000007" title=" " alt="" coords="1231,195,1148,185,1148,179,1236,194"/>
+<area shape="rect" id="Node000012" href="$group__grp__dac.html#gadcbefabbab52750a575b5dac7150534e" title="Handler GENERIQUE de &quot;SET_VAL_LDO_&lt;nom&gt;:&lt;valeur&gt;&quot; &#45; remplace les 18 anciennes fonctions h_SET_VAL_LDO..." alt="" coords="946,229,1161,256"/>
+<area shape="poly" id="edge23_Node000002_Node000012" title=" " alt="" coords="1231,217,1149,231,1148,226,1236,216"/>
+<area shape="rect" id="Node000013" href="$group__grp__oc.html#ga9358ff0a14ed464e81374dab1f13777d" title="Programme le seuil de courant par defaut (ldoConfig[i].oc.seuil_defaut, 0,50 A par defaut) sur toutes..." alt="" coords="702,29,877,56"/>
+<area shape="poly" id="edge26_Node000002_Node000013" title=" " alt="" coords="1286,178,1244,125,1215,98,1181,77,1144,62,1105,50,1024,37,946,33,878,35,877,30,946,27,1025,31,1106,45,1146,57,1184,72,1218,94,1248,122,1292,179"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="373,89,364,85,343,83,323,85,313,89,310,95,315,104,310,103,305,95,309,86,322,79,343,77,365,80,378,88"/>
+<area shape="rect" id="Node000004" href="$group__grp__tache.html#gae9bf934dd2f4a12a5c5975d81afa3063" title="Tache FreeRTOS principale (lwipTask). Initialise LwIP, les verrous (I2C, UART, commandes),..." alt="" coords="103,179,207,205"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="272,137,256,145,182,180,179,176,254,140,276,134"/>
+<area shape="poly" id="edge7_Node000004_Node000004" title=" " alt="" coords="174,164,168,160,155,157,142,159,136,164,134,170,138,178,132,178,129,170,131,161,140,154,155,152,170,155,179,163"/>
+<area shape="rect" id="Node000005" href="$group__grp__cubemx.html#ga840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,179,55,205"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="85,194,56,194,53,190,89,190"/>
+<area shape="poly" id="edge6_Node000005_Node000005" title=" " alt="" coords="50,164,43,160,30,157,18,159,11,164,9,170,13,178,8,179,4,170,7,161,16,154,30,152,46,155,55,162"/>
+<area shape="poly" id="edge10_Node000006_Node000006" title=" " alt="" coords="603,390,591,386,566,384,543,386,530,391,527,396,533,406,528,404,522,397,526,387,541,381,566,379,592,381,608,390"/>
+<area shape="poly" id="edge12_Node000007_Node000007" title=" " alt="" coords="1096,140,1083,136,1054,133,1027,135,1012,140,1009,145,1016,155,1011,154,1004,146,1009,136,1026,130,1054,128,1084,131,1101,140"/>
+<area shape="rect" id="Node000008" href="$group__grp__comm.html#gad6e271fe1796ab0b2a698260f0b78533" title="Analyseur (parser) principal des trames recues par UDP. Extrait le premier token de la trame (avant l..." alt="" coords="748,229,830,256"/>
+<area shape="poly" id="edge13_Node000007_Node000008" title=" " alt="" coords="955,186,926,196,825,231,823,226,924,191,960,184"/>
+<area shape="poly" id="edge14_Node000008_Node000008" title=" " alt="" coords="826,214,814,210,789,208,766,210,753,215,750,220,756,230,751,228,745,221,750,211,765,205,789,203,816,205,831,214"/>
+<area shape="rect" id="Node000009" href="$group__grp__comm.html#gabcc2bb9c188ed5dd0c34bf573bdb04e6" title="Execute la commande recue sur l&#39;UART (s&#39;il y en a une) et renvoie la reponse sur l&#39;UART...." alt="" coords="478,248,654,275"/>
+<area shape="poly" id="edge15_Node000008_Node000009" title=" " alt="" coords="730,248,655,257,654,251,735,247"/>
+<area shape="rect" id="Node000010" href="$group__grp__comm.html#ga5b44c65aa41e79871a46aeed1bb4751b" title="Callback LwIP invoque automatiquement a chaque paquet UDP recu sur le port du serveur (enregistre par..." alt="" coords="493,173,639,200"/>
+<area shape="poly" id="edge18_Node000008_Node000010" title=" " alt="" coords="730,229,622,203,622,198,735,228"/>
+<area shape="poly" id="edge16_Node000009_Node000004" title=" " alt="" coords="461,251,362,238,254,220,207,209,206,203,256,215,363,233,466,249"/>
+<area shape="poly" id="edge17_Node000009_Node000009" title=" " alt="" coords="603,233,591,229,566,227,543,229,530,233,527,239,533,248,528,247,522,239,526,229,541,223,566,221,592,224,608,233"/>
+<area shape="poly" id="edge19_Node000010_Node000010" title=" " alt="" coords="603,158,591,154,566,152,543,154,530,159,527,164,533,173,528,172,522,165,526,155,541,149,566,147,592,149,608,158"/>
+<area shape="rect" id="Node000011" href="$group__grp__comm.html#ga78047c519037c4c6091c71e1801519c7" title="Initialise le serveur UDP applicatif. Cree un PCB UDP (udp_new), le lie a l&#39;adresse IP et au port def..." alt="" coords="290,179,395,205"/>
+<area shape="poly" id="edge20_Node000010_Node000011" title=" " alt="" coords="475,190,396,193,395,188,480,188"/>
+<area shape="poly" id="edge21_Node000011_Node000004" title=" " alt="" coords="273,193,208,194,206,190,277,191"/>
+<area shape="poly" id="edge22_Node000011_Node000011" title=" " alt="" coords="373,164,364,160,343,157,323,159,313,164,310,169,315,178,310,178,305,170,309,160,322,154,343,152,365,155,379,163"/>
+<area shape="poly" id="edge25_Node000012_Node000008" title=" " alt="" coords="928,243,831,245,831,240,933,242"/>
+<area shape="poly" id="edge24_Node000012_Node000012" title=" " alt="" coords="1096,214,1083,210,1054,208,1027,210,1012,215,1009,220,1016,230,1011,228,1004,221,1009,211,1026,205,1054,203,1084,205,1101,215"/>
+<area shape="poly" id="edge28_Node000013_Node000004" title=" " alt="" coords="701,27,607,18,492,16,432,21,371,31,312,47,256,70,224,94,198,124,165,180,160,177,193,121,220,90,254,66,310,42,370,25,431,15,492,11,608,13,706,25"/>
+<area shape="poly" id="edge27_Node000013_Node000013" title=" " alt="" coords="826,14,814,10,789,8,766,10,753,15,750,20,756,29,751,28,745,21,750,11,765,5,789,3,816,5,831,14"/>
+<area shape="poly" id="edge30_Node000014_Node000014" title=" " alt="" coords="1339,464,1329,461,1306,459,1286,461,1275,465,1272,471,1278,481,1273,478,1267,471,1271,462,1285,455,1307,453,1330,456,1344,465"/>
+<area shape="rect" id="Node000015" href="$group__grp__dac.html#gafd7df1ea4aaa529649e87bc99b737e42" title="Repercute une ecriture DAC directe (EcrireDACVolatile(), typiquement depuis BalayerSortieDAC()) dans ..." alt="" coords="970,480,1137,507"/>
+<area shape="poly" id="edge31_Node000014_Node000015" title=" " alt="" coords="1212,493,1137,496,1137,491,1217,493"/>
+<area shape="poly" id="edge38_Node000015_Node000015" title=" " alt="" coords="1096,465,1083,461,1054,459,1027,461,1012,466,1009,471,1016,481,1011,478,1004,471,1009,461,1026,455,1054,453,1084,456,1101,466"/>
+<area shape="rect" id="Node000016" href="$group__grp__dac.html#ga3b69ec3e3af5d495bc0a095f6e4343eb" title="Balaie une seule sortie du DAC de 0 a valeur_max, par pas reguliers, avec une pause entre chaque vale..." alt="" coords="725,480,854,507"/>
+<area shape="poly" id="edge32_Node000015_Node000016" title=" " alt="" coords="952,493,854,496,854,491,957,493"/>
+<area shape="poly" id="edge37_Node000016_Node000006" title=" " alt="" coords="730,475,608,435,609,430,736,475"/>
+<area shape="poly" id="edge33_Node000016_Node000016" title=" " alt="" coords="826,464,814,461,789,459,766,461,753,465,750,471,756,481,751,478,745,471,750,461,765,455,789,453,816,456,831,465"/>
+<area shape="rect" id="Node000017" href="$group__grp__exti.html#ga3a919fef613806da58b99557a009f22a" title="Capture complete de diagnostic : scan I2C1+I2C2, message &quot;Bonjour&quot; a chaque adresse trouvee,..." alt="" coords="255,392,430,419"/>
+<area shape="poly" id="edge34_Node000016_Node000017" title=" " alt="" coords="707,484,599,470,478,447,387,422,387,417,479,441,600,464,712,484"/>
+<area shape="poly" id="edge36_Node000017_Node000004" title=" " alt="" coords="317,381,167,208,169,203,322,379"/>
+<area shape="poly" id="edge35_Node000017_Node000017" title=" " alt="" coords="373,377,364,373,343,371,323,373,313,377,310,383,315,392,310,391,305,383,309,374,322,367,343,365,365,368,379,377"/>
+<area shape="poly" id="edge40_Node000018_Node000006" title=" " alt="" coords="1214,420,632,421,632,416,1219,417"/>
+<area shape="poly" id="edge41_Node000018_Node000018" title=" " alt="" coords="1339,390,1329,386,1306,384,1286,386,1275,391,1272,396,1278,406,1273,404,1267,397,1271,387,1285,381,1307,379,1330,381,1344,391"/>
+<area shape="poly" id="edge42_Node000018_Node000019" title=" " alt="" coords="1218,402,1121,384,1122,379,1224,402"/>
+<area shape="poly" id="edge44_Node000019_Node000008" title=" " alt="" coords="1007,348,819,259,820,254,1012,347"/>
+<area shape="poly" id="edge43_Node000019_Node000019" title=" " alt="" coords="1096,340,1083,336,1054,333,1027,335,1012,340,1009,345,1016,355,1011,353,1004,346,1009,336,1026,330,1054,328,1084,331,1101,340"/>
+</map>

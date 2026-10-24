@@ -1,0 +1,10 @@
+<map id="h_SET_BL_TAB" name="h_SET_BL_TAB">
+<area shape="rect" id="Node000001" title="Handler de la commande reseau &quot;SET_BL_TAB&quot;. Renseigne en une seule fois l&#39;etat Bleeder des 18 LDO a p..." alt="" coords="5,29,122,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="32,29,27,21,31,11,43,5,64,3,85,5,98,14,93,14,84,10,63,8,45,10,35,15,32,20,37,29"/>
+<area shape="rect" id="Node000002" href="$group__grp__etat.html#ga4d73884db55d5370dfdce4dca8d1eddf" title="Desactive le bleeder d&#39;une LDO (RST_BL_LDO_&lt;nom&gt;, RST_BL_LDO_ALL, SET_BL_TAB avec 0)...." alt="" coords="170,29,321,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="122,40,156,42,151,43,122,45"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="215,28,209,21,213,11,225,5,245,3,267,5,279,14,274,14,265,10,245,8,227,10,217,15,215,20,220,30"/>
+<area shape="rect" id="Node000003" href="$group__grp__oc.html#ga4c720f3df5385977a33b0d91f63df5f9" title="Lit la broche OC de la LDO et indique si elle signale une surintensite." alt="" coords="369,29,477,56"/>
+<area shape="poly" id="edge4_Node000002_Node000003" title=" " alt="" coords="321,40,356,43,351,43,322,45"/>
+<area shape="poly" id="edge5_Node000003_Node000003" title=" " alt="" coords="393,28,387,21,391,11,403,5,423,3,445,5,457,15,452,14,443,10,423,8,405,10,395,15,393,20,397,30"/>
+</map>

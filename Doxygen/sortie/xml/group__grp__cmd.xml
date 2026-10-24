@@ -1,0 +1,330 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="group__grp__cmd" kind="group">
+    <compoundname>grp_cmd</compoundname>
+    <title>Commandes ON/OFF et flash interne</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__grp__cmd_1ga3ea657061e2d4ecf828155a9ca3a9dba" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>static uint32_t Crc32Mots</definition>
+        <argsstring>(const uint32_t *mots, uint32_t n)</argsstring>
+        <name>Crc32Mots</name>
+        <param>
+          <type>const uint32_t *</type>
+          <declname>mots</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>CRC-32 (polynome 0xEDB88320, comme zlib) d&apos;une suite de mots 32 bits. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mots</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Donnees. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nombre de mots. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>CRC-32.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">uint32_t<sp/>c<sp/>=<sp/>Crc32Mots(enreg,<sp/>15U);</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3407" column="17" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3407" bodyend="3420"/>
+        <references refid="group__grp__cmd_1ga3ea657061e2d4ecf828155a9ca3a9dba" compoundref="main_8c" startline="3407" endline="3420">Crc32Mots</references>
+        <referencedby refid="group__grp__cmd_1gacc19a91cbb61d5aa4f80d4a141306050" compoundref="main_8c" startline="3497" endline="3552">CmdOnOff_EcrireFlash</referencedby>
+        <referencedby refid="group__grp__cmd_1ga3f4f9ffd19d9dfb5f1fccd414e6bd2f3" compoundref="main_8c" startline="3434" endline="3482">CmdOnOff_Initialiser</referencedby>
+        <referencedby refid="group__grp__cmd_1ga3ea657061e2d4ecf828155a9ca3a9dba" compoundref="main_8c" startline="3407" endline="3420">Crc32Mots</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__cmd_1ga3f4f9ffd19d9dfb5f1fccd414e6bd2f3" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void CmdOnOff_Initialiser</definition>
+        <argsstring>(void)</argsstring>
+        <name>CmdOnOff_Initialiser</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Charge les commandes ON/OFF au demarrage : valeurs du CSV, puis le dernier enregistrement valide de la flash s&apos;il correspond a la meme configuration compilee (LDO_CONFIG_CRC32, meme nombre de LDO). Repere aussi le prochain emplacement libre du secteur. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ligne USART1 : &quot;CMD_ON_OFF:FLASH:SEQ=12&quot; ou &quot;CMD_ON_OFF:CSV&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">CmdOnOff_Initialiser();<sp/><sp/><sp/>//<sp/>avant<sp/>MX_OC_EXTI_Init()<sp/>et<sp/>la<sp/>boucle</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3434" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3434" bodyend="3482"/>
+        <references refid="group__grp__cmd_1ga3f4f9ffd19d9dfb5f1fccd414e6bd2f3" compoundref="main_8c" startline="3434" endline="3482">CmdOnOff_Initialiser</references>
+        <references refid="group__grp__cmd_1ga3ea657061e2d4ecf828155a9ca3a9dba" compoundref="main_8c" startline="3407" endline="3420">Crc32Mots</references>
+        <references refid="group__grp__comm_1gab9b5dfc109e472981cbbb7867d1b7f92" compoundref="main_8c" startline="1803" endline="1816">UART1_EnvoyerTexte</references>
+        <referencedby refid="group__grp__cmd_1ga3f4f9ffd19d9dfb5f1fccd414e6bd2f3" compoundref="main_8c" startline="3434" endline="3482">CmdOnOff_Initialiser</referencedby>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__cmd_1gacc19a91cbb61d5aa4f80d4a141306050" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>HAL_StatusTypeDef</type>
+        <definition>static HAL_StatusTypeDef CmdOnOff_EcrireFlash</definition>
+        <argsstring>(void)</argsstring>
+        <name>CmdOnOff_EcrireFlash</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Ecrit l&apos;etat des commandes ON/OFF dans le prochain emplacement libre du secteur (efface le secteur quand il est plein, ~1 fois toutes les 2048 sauvegardes ; l&apos;effacement dure jusqu&apos;a ~2 s, la LDO surveillee en interruption reste protegee pendant ce temps). A appeler depuis la boucle de StartLwipTask() uniquement. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>HAL_OK</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>si l&apos;enregistrement relu est conforme. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">if<sp/>(CmdOnOff_EcrireFlash()<sp/>!=<sp/>HAL_OK)<sp/>{<sp/>...<sp/>}</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3497" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3497" bodyend="3552"/>
+        <references refid="group__grp__cmd_1gacc19a91cbb61d5aa4f80d4a141306050" compoundref="main_8c" startline="3497" endline="3552">CmdOnOff_EcrireFlash</references>
+        <references refid="group__grp__cmd_1ga3ea657061e2d4ecf828155a9ca3a9dba" compoundref="main_8c" startline="3407" endline="3420">Crc32Mots</references>
+        <referencedby refid="group__grp__cmd_1gacc19a91cbb61d5aa4f80d4a141306050" compoundref="main_8c" startline="3497" endline="3552">CmdOnOff_EcrireFlash</referencedby>
+        <referencedby refid="group__grp__cmd_1ga8a6ad7d0ecff45c40c421cbab46b2526" compoundref="main_8c" startline="3564" endline="3581">CmdOnOff_TraiterSauvegarde</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__cmd_1ga8a6ad7d0ecff45c40c421cbab46b2526" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void CmdOnOff_TraiterSauvegarde</definition>
+        <argsstring>(void)</argsstring>
+        <name>CmdOnOff_TraiterSauvegarde</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Ecrit en flash les commandes ON/OFF modifiees, DELAI_MS apres la derniere bascule (plusieurs bascules rapprochees = une ecriture). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ligne USART1 : &quot;CMD_ON_OFF:SAUVE:SEQ=13:OK&quot; (ou &quot;:ERREUR&quot;). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">CmdOnOff_TraiterSauvegarde();<sp/><sp/><sp/>//<sp/>dans<sp/>la<sp/>boucle<sp/>for(;;)</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3564" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3564" bodyend="3581"/>
+        <references refid="group__grp__cmd_1gacc19a91cbb61d5aa4f80d4a141306050" compoundref="main_8c" startline="3497" endline="3552">CmdOnOff_EcrireFlash</references>
+        <references refid="group__grp__cmd_1ga8a6ad7d0ecff45c40c421cbab46b2526" compoundref="main_8c" startline="3564" endline="3581">CmdOnOff_TraiterSauvegarde</references>
+        <references refid="group__grp__comm_1gab9b5dfc109e472981cbbb7867d1b7f92" compoundref="main_8c" startline="1803" endline="1816">UART1_EnvoyerTexte</references>
+        <referencedby refid="group__grp__cmd_1ga8a6ad7d0ecff45c40c421cbab46b2526" compoundref="main_8c" startline="3564" endline="3581">CmdOnOff_TraiterSauvegarde</referencedby>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__cmd_1ga7d468d2e11f2a18d745896a5865ed077" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void CmdOnOff_BasculerOc</definition>
+        <argsstring>(int idx)</argsstring>
+        <name>CmdOnOff_BasculerOc</name>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Bascule CMD_ON_OFF_OC d&apos;une LDO. Passage a OFF : la broche OC est ignoree et un defaut memorise est efface (l&apos;EN reste a 0). Passage a ON : surveillance immediate (pas de masquage si l&apos;EN est deja actif). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">CmdOnOff_BasculerOc(findLdoIndex(&quot;2PSp&quot;));</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3595" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3595" bodyend="3611"/>
+        <references refid="group__grp__cmd_1ga7d468d2e11f2a18d745896a5865ed077" compoundref="main_8c" startline="3595" endline="3611">CmdOnOff_BasculerOc</references>
+        <referencedby refid="group__grp__cmd_1ga7d468d2e11f2a18d745896a5865ed077" compoundref="main_8c" startline="3595" endline="3611">CmdOnOff_BasculerOc</referencedby>
+        <referencedby refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" compoundref="main_8c" startline="6290" endline="6439">tc_request</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__cmd_1ga5d44c3c48f8606b7286fe670f62997b4" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void CmdOnOff_BasculerBld</definition>
+        <argsstring>(int idx)</argsstring>
+        <name>CmdOnOff_BasculerBld</name>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Bascule CMD_ON_OFF_BLD d&apos;une LDO. Passage a OFF : bleeder relache tout de suite et plus commandable. Passage a ON : bleeder commandable, inactif au depart. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">CmdOnOff_BasculerBld(findLdoIndex(&quot;2PSp&quot;));</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3625" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3625" bodyend="3640"/>
+        <references refid="struct_l_d_o___config__t_1a86d4802858f22daa6de74f9451176788" compoundref="main_8c" startline="349">LDO_Config_t::bld_niveau_actif</references>
+        <references refid="struct_l_d_o___config__t_1ae7c0856a698600dac5a3bcf57e9181a7" compoundref="main_8c" startline="337">LDO_Config_t::bld_port</references>
+        <references refid="group__grp__cmd_1ga5d44c3c48f8606b7286fe670f62997b4" compoundref="main_8c" startline="3625" endline="3640">CmdOnOff_BasculerBld</references>
+        <references refid="group__grp__config_1gae28fc29161c8b412bf38609488b281ef" compoundref="main_8c" startline="6096" endline="6099">LDO_BrocheBouton</references>
+        <referencedby refid="group__grp__cmd_1ga5d44c3c48f8606b7286fe670f62997b4" compoundref="main_8c" startline="3625" endline="3640">CmdOnOff_BasculerBld</referencedby>
+        <referencedby refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" compoundref="main_8c" startline="6290" endline="6439">tc_request</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__cmd_1gafb6457db3c48283dd0fb280775957f7a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void CmdOnOff_Repondre</definition>
+        <argsstring>(const char *variable, int idx, uint8_t valeur)</argsstring>
+        <name>CmdOnOff_Repondre</name>
+        <param>
+          <type>const char *</type>
+          <declname>variable</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>valeur</declname>
+        </param>
+        <briefdescription>
+<para>Reponse des commandes GET/SWITCH_CMD_ON_OFF_*. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>variable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>&quot;CMD_ON_OFF_BLD&quot; ou &quot;CMD_ON_OFF_OC&quot;. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>valeur</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Valeur courante (0 ou 1). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ecrit &quot;CMD_ON_OFF_OC:2PSp:1&quot; dans response. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">CmdOnOff_Repondre(&quot;CMD_ON_OFF_OC&quot;,<sp/>idx,<sp/>cmd_on_off_oc[idx]);</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3654" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3654" bodyend="3657"/>
+        <references refid="group__grp__cmd_1gafb6457db3c48283dd0fb280775957f7a" compoundref="main_8c" startline="3654" endline="3657">CmdOnOff_Repondre</references>
+        <referencedby refid="group__grp__cmd_1gafb6457db3c48283dd0fb280775957f7a" compoundref="main_8c" startline="3654" endline="3657">CmdOnOff_Repondre</referencedby>
+        <referencedby refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" compoundref="main_8c" startline="6290" endline="6439">tc_request</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>CMD_ON_OFF_BLD / CMD_ON_OFF_OC par LDO et leur sauvegarde en flash (banque 2, secteur 7). </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

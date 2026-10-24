@@ -1,0 +1,30 @@
+<map id="LDO_BrocheBouton" name="LDO_BrocheBouton">
+<area shape="rect" id="Node000001" title="Indique si une broche appartient a un bouton du firmware (PC13 USER, PD0 reset ADG728)...." alt="" coords="1042,117,1180,144"/>
+<area shape="poly" id="edge16_Node000001_Node000001" title=" " alt="" coords="1143,102,1133,98,1111,96,1090,98,1079,103,1077,108,1082,118,1077,116,1072,109,1076,99,1089,93,1111,91,1135,93,1148,103"/>
+<area shape="rect" id="Node000002" href="$group__grp__cmd.html#ga5d44c3c48f8606b7286fe670f62997b4" title="Bascule CMD_ON_OFF_BLD d&#39;une LDO. Passage a OFF : bleeder relache tout de suite et plus commandable...." alt="" coords="834,87,994,113"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1024,117,995,115,995,110,1030,118"/>
+<area shape="rect" id="Node000009" href="$group__grp__config.html#ga3bce4a57356f1afcbef6d05a989f33f5" title="Configure les broches de TOUTES les LDO a partir de ldoConfig[] (donc du CSV), independamment du ...." alt="" coords="673,155,786,181"/>
+<area shape="poly" id="edge17_Node000001_Node000009" title=" " alt="" coords="1029,139,786,165,786,160,1024,139"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="944,71,935,68,914,65,895,67,885,72,882,77,887,87,882,85,877,78,881,68,894,62,914,60,936,63,949,72"/>
+<area shape="rect" id="Node000003" href="$group__grp__comm.html#gad6e271fe1796ab0b2a698260f0b78533" title="Analyseur (parser) principal des trames recues par UDP. Extrait le premier token de la trame (avant l..." alt="" coords="688,80,770,107"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="815,97,771,97,771,92,821,96"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="758,64,749,61,729,59,711,61,701,65,699,71,703,81,699,78,693,71,697,62,709,55,729,53,751,56,763,65"/>
+<area shape="rect" id="Node000004" href="$group__grp__comm.html#gabcc2bb9c188ed5dd0c34bf573bdb04e6" title="Execute la commande recue sur l&#39;UART (s&#39;il y en a une) et renvoie la reponse sur l&#39;UART...." alt="" coords="255,29,430,56"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="670,78,624,71,524,58,431,50,430,44,524,52,625,65,675,78"/>
+<area shape="rect" id="Node000007" href="$group__grp__comm.html#ga5b44c65aa41e79871a46aeed1bb4751b" title="Callback LwIP invoque automatiquement a chaque paquet UDP recu sur le port du serveur (enregistre par..." alt="" coords="478,104,625,131"/>
+<area shape="poly" id="edge11_Node000003_Node000007" title=" " alt="" coords="675,101,626,110,625,105,670,101"/>
+<area shape="poly" id="edge10_Node000004_Node000004" title=" " alt="" coords="373,14,364,10,343,8,323,10,313,15,310,20,315,30,310,28,305,21,309,11,322,5,343,3,365,5,379,14"/>
+<area shape="rect" id="Node000005" href="$group__grp__tache.html#gae9bf934dd2f4a12a5c5975d81afa3063" title="Tache FreeRTOS principale (lwipTask). Initialise LwIP, les verrous (I2C, UART, commandes),..." alt="" coords="103,104,207,131"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="272,62,256,70,182,106,180,101,254,66,277,60"/>
+<area shape="poly" id="edge9_Node000005_Node000005" title=" " alt="" coords="174,89,168,85,155,83,142,85,136,89,134,95,138,104,132,103,129,95,131,86,140,80,155,77,170,80,180,89"/>
+<area shape="rect" id="Node000006" href="$group__grp__cubemx.html#ga840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,129,55,156"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="85,133,56,140,54,135,89,129"/>
+<area shape="poly" id="edge8_Node000006_Node000006" title=" " alt="" coords="49,115,43,110,30,108,18,110,11,114,9,120,13,128,8,129,4,121,7,111,16,105,30,103,46,105,55,113"/>
+<area shape="poly" id="edge12_Node000007_Node000007" title=" " alt="" coords="580,88,571,85,551,83,533,85,523,89,521,95,526,105,521,102,516,95,519,86,532,79,552,77,573,80,586,89"/>
+<area shape="rect" id="Node000008" href="$group__grp__comm.html#ga78047c519037c4c6091c71e1801519c7" title="Initialise le serveur UDP applicatif. Cree un PCB UDP (udp_new), le lie a l&#39;adresse IP et au port def..." alt="" coords="290,104,395,131"/>
+<area shape="poly" id="edge13_Node000007_Node000008" title=" " alt="" coords="460,118,395,120,395,115,466,117"/>
+<area shape="poly" id="edge14_Node000008_Node000005" title=" " alt="" coords="273,118,207,120,207,115,278,117"/>
+<area shape="poly" id="edge15_Node000008_Node000008" title=" " alt="" coords="373,88,364,85,343,83,323,85,313,89,310,95,315,104,310,103,305,95,309,86,322,79,343,77,365,80,379,89"/>
+<area shape="poly" id="edge19_Node000009_Node000006" title=" " alt="" coords="657,168,55,146,55,141,657,163"/>
+<area shape="poly" id="edge18_Node000009_Node000009" title=" " alt="" coords="758,139,749,136,729,133,711,135,701,140,699,145,703,155,699,153,693,146,697,136,709,130,729,128,751,131,763,140"/>
+</map>

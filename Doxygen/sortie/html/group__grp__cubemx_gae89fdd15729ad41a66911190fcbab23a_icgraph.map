@@ -1,0 +1,7 @@
+<map id="MX_GPIO_Init" name="MX_GPIO_Init">
+<area shape="rect" id="Node000001" title="GPIO Initialization Function." alt="" coords="103,29,209,56"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="175,14,169,10,156,8,143,10,137,14,135,20,138,30,133,28,130,21,132,11,141,5,156,3,171,5,181,15"/>
+<area shape="rect" id="Node000002" href="$group__grp__cubemx.html#ga840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,29,55,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="85,44,55,45,55,40,90,42"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="50,15,43,10,30,8,17,10,11,14,9,20,13,28,7,29,4,21,6,11,15,5,30,3,46,5,55,14"/>
+</map>

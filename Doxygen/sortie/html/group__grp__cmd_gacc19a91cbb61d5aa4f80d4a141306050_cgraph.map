@@ -1,0 +1,7 @@
+<map id="CmdOnOff_EcrireFlash" name="CmdOnOff_EcrireFlash">
+<area shape="rect" id="Node000001" title="Ecrit l&#39;etat des commandes ON/OFF dans le prochain emplacement libre du secteur (efface le secteur qu..." alt="" coords="5,29,162,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="54,29,49,21,53,11,65,5,84,3,104,5,116,14,111,14,102,10,83,8,66,10,57,15,55,20,59,29"/>
+<area shape="rect" id="Node000002" href="$group__grp__cmd.html#ga3ea657061e2d4ecf828155a9ca3a9dba" title="CRC&#45;32 (polynome 0xEDB88320, comme zlib) d&#39;une suite de mots 32 bits." alt="" coords="210,29,295,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="162,40,197,43,191,43,162,45"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="223,28,218,21,222,11,233,5,252,3,273,5,285,15,280,14,271,10,252,8,235,10,226,15,223,20,228,30"/>
+</map>

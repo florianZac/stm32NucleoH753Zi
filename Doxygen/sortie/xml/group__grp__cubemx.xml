@@ -1,0 +1,655 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="group__grp__cubemx" kind="group">
+    <compoundname>grp_cubemx</compoundname>
+    <title>Initialisation matérielle (CubeMX)</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__grp__cubemx_1ga840291bc02cba5474a4cb46a9b9566fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int main</definition>
+        <argsstring>(void)</argsstring>
+        <name>main</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>The application entry point. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>int</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Role dans le projet</title><para>Point d&apos;entree. Configure la MPU, active les caches, initialise le HAL, attend 1 s, configure les horloges, debloque les deux bus I2C (I2C_BusRecovery() sur PB8/PB9 et PB10/PB11), initialise les GPIO et peripheriques CubeMX, puis LDO_GPIO_Init() (broches des LDO depuis ldoConfig[]). Cree ensuite la tache lwipTask (StartLwipTask()) et demarre FreeRTOS : la boucle while(1) n&apos;est jamais atteinte. </para>
+</simplesect>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">//<sp/>appele<sp/>par<sp/>le<sp/>code<sp/>de<sp/>demarrage<sp/>(startup_stm32h753zitx.s),<sp/>ne<sp/>pas<sp/>appeler<sp/>directement</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1824" column="5" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1824" bodyend="1932"/>
+        <references refid="group__grp__i2c_1ga2f7d3957d1b8de76916916f379898287" compoundref="main_8c" startline="539" endline="573">I2C_BusRecovery</references>
+        <references refid="group__grp__config_1ga3bce4a57356f1afcbef6d05a989f33f5" compoundref="main_8c" startline="6117" endline="6159">LDO_GPIO_Init</references>
+        <references refid="group__grp__cubemx_1ga840291bc02cba5474a4cb46a9b9566fe" compoundref="main_8c" startline="1824" endline="1932">main</references>
+        <references refid="group__grp__cubemx_1ga93ce41942d08d309203e0188cad7e54e" compoundref="main_8c" startline="6837" endline="6885">MPU_Config</references>
+        <references refid="group__grp__cubemx_1gaaa163e37853e6fc971474824d9f655ca" compoundref="main_8c" startline="2016" endline="2078">MX_ADC1_Init</references>
+        <references refid="group__grp__cubemx_1ga4e987f0fdef6459c1a03ca830bac23f5" compoundref="main_8c" startline="2085" endline="2138">MX_ADC2_Init</references>
+        <references refid="group__grp__cubemx_1gae1e1b355e2d7714a267fee7e71891e59" compoundref="main_8c" startline="2145" endline="2197">MX_ADC3_Init</references>
+        <references refid="group__grp__cubemx_1gae89fdd15729ad41a66911190fcbab23a" compoundref="main_8c" startline="2348" endline="2537">MX_GPIO_Init</references>
+        <references refid="group__grp__cubemx_1ga4230d11f81d0b16e112f1cc3f40cb42f" compoundref="main_8c" startline="2204" endline="2245">MX_I2C1_Init</references>
+        <references refid="group__grp__cubemx_1gaf71812af4fbb9ebbe0f681165b657433" compoundref="main_8c" startline="2252" endline="2293">MX_I2C2_Init</references>
+        <references refid="group__grp__cubemx_1ga62f4b77e20bccafe98a183771749c20c" compoundref="main_8c" startline="2300" endline="2341">MX_USART1_UART_Init</references>
+        <references refid="group__grp__cubemx_1ga336c5acb34a801b2984e602b97ed7b73" compoundref="main_8c" startline="1997" endline="2009">PeriphCommonClock_Config</references>
+        <references refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</references>
+        <references refid="group__grp__cubemx_1ga70af21c671abfcc773614a9a4f63d920" compoundref="main_8c" startline="1938" endline="1991">SystemClock_Config</references>
+        <referencedby refid="group__grp__cubemx_1ga840291bc02cba5474a4cb46a9b9566fe" compoundref="main_8c" startline="1824" endline="1932">main</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__cubemx_1ga70af21c671abfcc773614a9a4f63d920" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SystemClock_Config</definition>
+        <argsstring>(void)</argsstring>
+        <name>SystemClock_Config</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>System Clock Configuration. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>None</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Role dans le projet</title><para>Horloge systeme : HSI 64 MHz, PLL1 (M = 4, N = 60, P = 2) -&gt; SYSCLK 480 MHz, HCLK 240 MHz (AHB / 2), regulateur en VOS0, latence flash 4 cycles. </para>
+</simplesect>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">HAL_Init();</highlight></codeline>
+<codeline><highlight class="normal">SystemClock_Config();</highlight></codeline>
+<codeline><highlight class="normal">PeriphCommonClock_Config();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+<para>Supply configuration update enable</para>
+<para>Configure the main internal regulator output voltage</para>
+<para>Initializes the RCC Oscillators according to the specified parameters in the RCC_OscInitTypeDef structure.</para>
+<para>Initializes the CPU, AHB and APB buses clocks</para>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1938" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1938" bodyend="1991" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="69" declcolumn="6"/>
+        <references refid="group__grp__cubemx_1ga1730ffe1e560465665eb47d9264826f9" compoundref="main_8c" startline="6913" endline="6922">Error_Handler</references>
+        <references refid="group__grp__cubemx_1ga70af21c671abfcc773614a9a4f63d920" compoundref="main_8c" startline="1938" endline="1991">SystemClock_Config</references>
+        <referencedby refid="group__grp__cubemx_1ga840291bc02cba5474a4cb46a9b9566fe" compoundref="main_8c" startline="1824" endline="1932">main</referencedby>
+        <referencedby refid="group__grp__cubemx_1ga70af21c671abfcc773614a9a4f63d920" compoundref="main_8c" startline="1938" endline="1991">SystemClock_Config</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__cubemx_1ga336c5acb34a801b2984e602b97ed7b73" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PeriphCommonClock_Config</definition>
+        <argsstring>(void)</argsstring>
+        <name>PeriphCommonClock_Config</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Peripherals Common Clock Configuration. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>None</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Role dans le projet</title><para>Horloge commune des peripheriques (CKPER = HSI), utilisee par les ADC. </para>
+</simplesect>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">SystemClock_Config();</highlight></codeline>
+<codeline><highlight class="normal">PeriphCommonClock_Config();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+<para>Initializes the peripherals clock</para>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1997" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1997" bodyend="2009" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="70" declcolumn="6"/>
+        <references refid="group__grp__cubemx_1ga1730ffe1e560465665eb47d9264826f9" compoundref="main_8c" startline="6913" endline="6922">Error_Handler</references>
+        <references refid="group__grp__cubemx_1ga336c5acb34a801b2984e602b97ed7b73" compoundref="main_8c" startline="1997" endline="2009">PeriphCommonClock_Config</references>
+        <referencedby refid="group__grp__cubemx_1ga840291bc02cba5474a4cb46a9b9566fe" compoundref="main_8c" startline="1824" endline="1932">main</referencedby>
+        <referencedby refid="group__grp__cubemx_1ga336c5acb34a801b2984e602b97ed7b73" compoundref="main_8c" startline="1997" endline="2009">PeriphCommonClock_Config</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__cubemx_1gaaa163e37853e6fc971474824d9f655ca" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void MX_ADC1_Init</definition>
+        <argsstring>(void)</argsstring>
+        <name>MX_ADC1_Init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>ADC1 Initialization Function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>None</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>None</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Role dans le projet</title><para>ADC1, resolution 16 bits, conversion unique, canal 10 (PC0) : mesure de tension par le multiplexeur ADG728 (LireTensionADC()). </para>
+</simplesect>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">MX_ADC1_Init();</highlight></codeline>
+<codeline><highlight class="normal">float<sp/>v<sp/>=<sp/>LireTensionADC(&amp;hadc1,<sp/>ADC_CANAL_TENSION,<sp/>MUX_RATIO_PONT);</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+<para>Common config</para>
+<para>Configure the ADC multi-mode</para>
+<para>Configure Regular Channel</para>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="2016" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="2016" bodyend="2078" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="73" declcolumn="13"/>
+        <references refid="group__grp__cubemx_1ga1730ffe1e560465665eb47d9264826f9" compoundref="main_8c" startline="6913" endline="6922">Error_Handler</references>
+        <references refid="group__grp__cubemx_1gaaa163e37853e6fc971474824d9f655ca" compoundref="main_8c" startline="2016" endline="2078">MX_ADC1_Init</references>
+        <referencedby refid="group__grp__cubemx_1ga840291bc02cba5474a4cb46a9b9566fe" compoundref="main_8c" startline="1824" endline="1932">main</referencedby>
+        <referencedby refid="group__grp__cubemx_1gaaa163e37853e6fc971474824d9f655ca" compoundref="main_8c" startline="2016" endline="2078">MX_ADC1_Init</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__cubemx_1ga4e987f0fdef6459c1a03ca830bac23f5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void MX_ADC2_Init</definition>
+        <argsstring>(void)</argsstring>
+        <name>MX_ADC2_Init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>ADC2 Initialization Function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>None</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>None</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Role dans le projet</title><para>ADC2, resolution 16 bits, canal VBAT (configuration CubeMX, non utilise par l&apos;application). </para>
+</simplesect>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">MX_ADC2_Init();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+<para>Common config</para>
+<para>Configure Regular Channel</para>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="2085" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="2085" bodyend="2138" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="78" declcolumn="13"/>
+        <references refid="group__grp__cubemx_1ga1730ffe1e560465665eb47d9264826f9" compoundref="main_8c" startline="6913" endline="6922">Error_Handler</references>
+        <references refid="group__grp__cubemx_1ga4e987f0fdef6459c1a03ca830bac23f5" compoundref="main_8c" startline="2085" endline="2138">MX_ADC2_Init</references>
+        <referencedby refid="group__grp__cubemx_1ga840291bc02cba5474a4cb46a9b9566fe" compoundref="main_8c" startline="1824" endline="1932">main</referencedby>
+        <referencedby refid="group__grp__cubemx_1ga4e987f0fdef6459c1a03ca830bac23f5" compoundref="main_8c" startline="2085" endline="2138">MX_ADC2_Init</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__cubemx_1gae1e1b355e2d7714a267fee7e71891e59" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void MX_ADC3_Init</definition>
+        <argsstring>(void)</argsstring>
+        <name>MX_ADC3_Init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>ADC3 Initialization Function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>None</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>None</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Role dans le projet</title><para>ADC3, resolution 16 bits, conversion unique : mesure de courant par le multiplexeur (PF4, canal 9 selectionne au moment de la lecture) et commandes GET_CURRENT_x. </para>
+</simplesect>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">MX_ADC3_Init();</highlight></codeline>
+<codeline><highlight class="normal">float<sp/>i_mA<sp/>=<sp/>LireCourantADC(&amp;hadc3,<sp/>ADC_CANAL_COURANT,<sp/>MUX_RATIO_PONT);</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+<para>Common config</para>
+<para>Configure Regular Channel</para>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="2145" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="2145" bodyend="2197" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="74" declcolumn="13"/>
+        <references refid="group__grp__cubemx_1ga1730ffe1e560465665eb47d9264826f9" compoundref="main_8c" startline="6913" endline="6922">Error_Handler</references>
+        <references refid="group__grp__cubemx_1gae1e1b355e2d7714a267fee7e71891e59" compoundref="main_8c" startline="2145" endline="2197">MX_ADC3_Init</references>
+        <referencedby refid="group__grp__cubemx_1ga840291bc02cba5474a4cb46a9b9566fe" compoundref="main_8c" startline="1824" endline="1932">main</referencedby>
+        <referencedby refid="group__grp__cubemx_1gae1e1b355e2d7714a267fee7e71891e59" compoundref="main_8c" startline="2145" endline="2197">MX_ADC3_Init</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__cubemx_1ga4230d11f81d0b16e112f1cc3f40cb42f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void MX_I2C1_Init</definition>
+        <argsstring>(void)</argsstring>
+        <name>MX_I2C1_Init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>I2C1 Initialization Function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>None</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>None</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Role dans le projet</title><para>I2C1 (PB8 = SCL, PB9 = SDA), Timing 0x307075B1 : bus actif des DAC MCP47FEB28 0xC0 / 0xC2 et des ADG728 de mesure de tension. Precede de I2C_BusRecovery() dans main(). </para>
+</simplesect>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">I2C_BusRecovery(GPIOB,<sp/>GPIO_PIN_8,<sp/>GPIO_PIN_9,<sp/>GPIO_AF4_I2C1);</highlight></codeline>
+<codeline><highlight class="normal">MX_I2C1_Init();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+<para>Configure Analogue filter</para>
+<para>Configure Digital filter</para>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="2204" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="2204" bodyend="2245" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="75" declcolumn="13"/>
+        <references refid="group__grp__cubemx_1ga1730ffe1e560465665eb47d9264826f9" compoundref="main_8c" startline="6913" endline="6922">Error_Handler</references>
+        <references refid="group__grp__cubemx_1ga4230d11f81d0b16e112f1cc3f40cb42f" compoundref="main_8c" startline="2204" endline="2245">MX_I2C1_Init</references>
+        <referencedby refid="group__grp__cubemx_1ga840291bc02cba5474a4cb46a9b9566fe" compoundref="main_8c" startline="1824" endline="1932">main</referencedby>
+        <referencedby refid="group__grp__cubemx_1ga4230d11f81d0b16e112f1cc3f40cb42f" compoundref="main_8c" startline="2204" endline="2245">MX_I2C1_Init</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__cubemx_1gaf71812af4fbb9ebbe0f681165b657433" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void MX_I2C2_Init</definition>
+        <argsstring>(void)</argsstring>
+        <name>MX_I2C2_Init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>I2C2 Initialization Function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>None</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>None</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Role dans le projet</title><para>I2C2 (PB10 = SCL, PB11 = SDA), Timing 0x307075B1. Initialise mais non utilise tant que i2c2_actif = 0 (commande SET_I2C2_ACTIF:1 pour l&apos;activer). </para>
+</simplesect>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">I2C_BusRecovery(GPIOB,<sp/>GPIO_PIN_10,<sp/>GPIO_PIN_11,<sp/>GPIO_AF4_I2C2);</highlight></codeline>
+<codeline><highlight class="normal">MX_I2C2_Init();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+<para>Configure Analogue filter</para>
+<para>Configure Digital filter</para>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="2252" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="2252" bodyend="2293" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="76" declcolumn="13"/>
+        <references refid="group__grp__cubemx_1ga1730ffe1e560465665eb47d9264826f9" compoundref="main_8c" startline="6913" endline="6922">Error_Handler</references>
+        <references refid="group__grp__cubemx_1gaf71812af4fbb9ebbe0f681165b657433" compoundref="main_8c" startline="2252" endline="2293">MX_I2C2_Init</references>
+        <referencedby refid="group__grp__cubemx_1ga840291bc02cba5474a4cb46a9b9566fe" compoundref="main_8c" startline="1824" endline="1932">main</referencedby>
+        <referencedby refid="group__grp__cubemx_1gaf71812af4fbb9ebbe0f681165b657433" compoundref="main_8c" startline="2252" endline="2293">MX_I2C2_Init</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__cubemx_1ga62f4b77e20bccafe98a183771749c20c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void MX_USART1_UART_Init</definition>
+        <argsstring>(void)</argsstring>
+        <name>MX_USART1_UART_Init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>USART1 Initialization Function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>None</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>None</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Role dans le projet</title><para>USART1 (PB6 = TX, PB7 = RX), 115200 bauds 8N1 sans controle de flux : rapports de diagnostic et commandes (reception demarree par UART1_DemarrerReceptionCommandes()). </para>
+</simplesect>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">MX_USART1_UART_Init();</highlight></codeline>
+<codeline><highlight class="normal">UART1_EnvoyerTexte(&quot;HB\r\n&quot;);</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="2300" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="2300" bodyend="2341" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="77" declcolumn="13"/>
+        <references refid="group__grp__cubemx_1ga1730ffe1e560465665eb47d9264826f9" compoundref="main_8c" startline="6913" endline="6922">Error_Handler</references>
+        <references refid="group__grp__cubemx_1ga62f4b77e20bccafe98a183771749c20c" compoundref="main_8c" startline="2300" endline="2341">MX_USART1_UART_Init</references>
+        <referencedby refid="group__grp__cubemx_1ga840291bc02cba5474a4cb46a9b9566fe" compoundref="main_8c" startline="1824" endline="1932">main</referencedby>
+        <referencedby refid="group__grp__cubemx_1ga62f4b77e20bccafe98a183771749c20c" compoundref="main_8c" startline="2300" endline="2341">MX_USART1_UART_Init</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__cubemx_1gae89fdd15729ad41a66911190fcbab23a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void MX_GPIO_Init</definition>
+        <argsstring>(void)</argsstring>
+        <name>MX_GPIO_Init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>GPIO Initialization Function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>None</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>None</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Role dans le projet</title><para>Horloges des ports A a H et GPIO declarees dans le .ioc (bouton USER PC13 en EXTI, etc.). La zone USER CODE MX_GPIO_Init_2 appelle MX_MuxResetSync_GPIO_Init(). Les broches des LDO sont (re)configurees ensuite par LDO_GPIO_Init() a partir du CSV : c&apos;est cette derniere qui fait foi. </para>
+</simplesect>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">MX_GPIO_Init();</highlight></codeline>
+<codeline><highlight class="normal">LDO_GPIO_Init();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="2348" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="2348" bodyend="2537" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="72" declcolumn="13"/>
+        <references refid="group__grp__cubemx_1gae89fdd15729ad41a66911190fcbab23a" compoundref="main_8c" startline="2348" endline="2537">MX_GPIO_Init</references>
+        <references refid="group__grp__adc_1ga6ff0e6f3d7fd661242785ab1fe918c8c" compoundref="main_8c" startline="1577" endline="1590">MX_MuxResetSync_GPIO_Init</references>
+        <referencedby refid="group__grp__cubemx_1ga840291bc02cba5474a4cb46a9b9566fe" compoundref="main_8c" startline="1824" endline="1932">main</referencedby>
+        <referencedby refid="group__grp__cubemx_1gae89fdd15729ad41a66911190fcbab23a" compoundref="main_8c" startline="2348" endline="2537">MX_GPIO_Init</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__cubemx_1ga93ce41942d08d309203e0188cad7e54e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MPU_Config</definition>
+        <argsstring>(void)</argsstring>
+        <name>MPU_Config</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Configuration de la MPU (zones SRAM D2 utilisees par LwIP et l&apos;Ethernet). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="par"><title>Role dans le projet</title><para>Region 0 : fond 4 Go sans acces ; regions 1 et 2 : SRAM D2 a 0x30020000 (128 Ko) et 0x30040000 (512 o), utilisee par LwIP et le DMA Ethernet, avec des attributs de cache compatibles avec le DMA. Appelee au debut de main(). </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">MPU_Config();<sp/><sp/><sp/>//<sp/>debut<sp/>de<sp/>main(),<sp/>avant<sp/>SCB_EnableICache()<sp/>/<sp/>SCB_EnableDCache()</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+<para>Initializes and configures the Region and the memory to be protected</para>
+<para>Initializes and configures the Region and the memory to be protected</para>
+<para>Initializes and configures the Region and the memory to be protected</para>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6837" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6837" bodyend="6885" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="71" declcolumn="13"/>
+        <references refid="group__grp__cubemx_1ga93ce41942d08d309203e0188cad7e54e" compoundref="main_8c" startline="6837" endline="6885">MPU_Config</references>
+        <referencedby refid="group__grp__cubemx_1ga840291bc02cba5474a4cb46a9b9566fe" compoundref="main_8c" startline="1824" endline="1932">main</referencedby>
+        <referencedby refid="group__grp__cubemx_1ga93ce41942d08d309203e0188cad7e54e" compoundref="main_8c" startline="6837" endline="6885">MPU_Config</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__cubemx_1ga8a3b0ad512a6e6c6157440b68d395eac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void HAL_TIM_PeriodElapsedCallback</definition>
+        <argsstring>(TIM_HandleTypeDef *htim)</argsstring>
+        <name>HAL_TIM_PeriodElapsedCallback</name>
+        <param>
+          <type>TIM_HandleTypeDef *</type>
+          <declname>htim</declname>
+        </param>
+        <briefdescription>
+<para>Period elapsed callback in non blocking mode. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This function is called when TIM6 interrupt took place, inside HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment a global variable &quot;uwTick&quot; used as application time base. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>htim</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>: TIM handle </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>None</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Role dans le projet</title><para>Base de temps du HAL sur TIM6 (SysTick reserve a FreeRTOS) : incremente uwTick, donc HAL_GetTick() et HAL_Delay(). </para>
+</simplesect>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">//<sp/>appele<sp/>par<sp/>HAL_TIM_IRQHandler()<sp/>(TIM6),<sp/>ne<sp/>pas<sp/>appeler<sp/>directement</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6895" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6895" bodyend="6907"/>
+        <references refid="group__grp__cubemx_1ga8a3b0ad512a6e6c6157440b68d395eac" compoundref="main_8c" startline="6895" endline="6907">HAL_TIM_PeriodElapsedCallback</references>
+        <referencedby refid="group__grp__cubemx_1ga8a3b0ad512a6e6c6157440b68d395eac" compoundref="main_8c" startline="6895" endline="6907">HAL_TIM_PeriodElapsedCallback</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__cubemx_1ga1730ffe1e560465665eb47d9264826f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Error_Handler</definition>
+        <argsstring>(void)</argsstring>
+        <name>Error_Handler</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>This function is executed in case of error occurrence. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>None</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Role dans le projet</title><para>Appele quand une initialisation HAL echoue : masque les interruptions et boucle indefiniment (point d&apos;arret conseille en debogage). </para>
+</simplesect>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">if<sp/>(HAL_I2C_Init(&amp;hi2c1)<sp/>!=<sp/>HAL_OK)</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Error_Handler();</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6913" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6913" bodyend="6922"/>
+        <references refid="group__grp__cubemx_1ga1730ffe1e560465665eb47d9264826f9" compoundref="main_8c" startline="6913" endline="6922">Error_Handler</references>
+        <referencedby refid="group__grp__cubemx_1ga1730ffe1e560465665eb47d9264826f9" compoundref="main_8c" startline="6913" endline="6922">Error_Handler</referencedby>
+        <referencedby refid="group__grp__cubemx_1gaaa163e37853e6fc971474824d9f655ca" compoundref="main_8c" startline="2016" endline="2078">MX_ADC1_Init</referencedby>
+        <referencedby refid="group__grp__cubemx_1ga4e987f0fdef6459c1a03ca830bac23f5" compoundref="main_8c" startline="2085" endline="2138">MX_ADC2_Init</referencedby>
+        <referencedby refid="group__grp__cubemx_1gae1e1b355e2d7714a267fee7e71891e59" compoundref="main_8c" startline="2145" endline="2197">MX_ADC3_Init</referencedby>
+        <referencedby refid="group__grp__cubemx_1ga4230d11f81d0b16e112f1cc3f40cb42f" compoundref="main_8c" startline="2204" endline="2245">MX_I2C1_Init</referencedby>
+        <referencedby refid="group__grp__cubemx_1gaf71812af4fbb9ebbe0f681165b657433" compoundref="main_8c" startline="2252" endline="2293">MX_I2C2_Init</referencedby>
+        <referencedby refid="group__grp__comm_1ga59e35c131ee43adc1fad6c4bfdf9fa0a" compoundref="main_8c" startline="1769" endline="1787">MX_USART1_Init</referencedby>
+        <referencedby refid="group__grp__cubemx_1ga62f4b77e20bccafe98a183771749c20c" compoundref="main_8c" startline="2300" endline="2341">MX_USART1_UART_Init</referencedby>
+        <referencedby refid="group__grp__cubemx_1ga336c5acb34a801b2984e602b97ed7b73" compoundref="main_8c" startline="1997" endline="2009">PeriphCommonClock_Config</referencedby>
+        <referencedby refid="group__grp__cubemx_1ga70af21c671abfcc773614a9a4f63d920" compoundref="main_8c" startline="1938" endline="1991">SystemClock_Config</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__cubemx_1ga2532ff72b1a2ff82f65e8c2a5a4dde00" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void assert_failed</definition>
+        <argsstring>(uint8_t *file, uint32_t line)</argsstring>
+        <name>assert_failed</name>
+        <param>
+          <type>uint8_t *</type>
+          <declname>file</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Reports the name of the source file and the source line number where the assert_param error has occurred. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to the source file name </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>assert_param error line source number </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>None</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Role dans le projet</title><para>Compile seulement si USE_FULL_ASSERT est defini : appele par assert_param() quand un parametre HAL est invalide. Vide dans ce projet. </para>
+</simplesect>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">assert_param(IS_GPIO_PIN(pin));<sp/><sp/><sp/>//<sp/>appelle<sp/>assert_failed(__FILE__,<sp/>__LINE__)<sp/>si<sp/>faux</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6931" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6931" bodyend="6937"/>
+        <references refid="group__grp__cubemx_1ga2532ff72b1a2ff82f65e8c2a5a4dde00" compoundref="main_8c" startline="6931" endline="6937">assert_failed</references>
+        <referencedby refid="group__grp__cubemx_1ga2532ff72b1a2ff82f65e8c2a5a4dde00" compoundref="main_8c" startline="6931" endline="6937">assert_failed</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Fonctions générées par STM32CubeMX (documentées dans complements_cubemx.dox). </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

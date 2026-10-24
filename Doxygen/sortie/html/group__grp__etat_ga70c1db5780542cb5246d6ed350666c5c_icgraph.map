@@ -1,0 +1,23 @@
+<map id="buildStatusResponse" name="buildStatusResponse">
+<area shape="rect" id="Node000001" title="Construit la chaine de statut complete d&#39;une LDO et la place dans la variable globale response,..." alt="" coords="803,67,948,93"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="902,51,893,48,876,45,859,47,850,52,848,57,852,67,848,65,843,58,846,48,857,42,876,40,895,43,907,52"/>
+<area shape="rect" id="Node000002" href="$group__grp__comm.html#gad6e271fe1796ab0b2a698260f0b78533" title="Analyseur (parser) principal des trames recues par UDP. Extrait le premier token de la trame (avant l..." alt="" coords="673,67,755,93"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="785,80,756,83,755,77,790,80"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="740,51,732,48,714,45,697,47,688,52,686,57,690,67,686,65,681,58,684,48,696,42,714,40,733,43,745,52"/>
+<area shape="rect" id="Node000003" href="$group__grp__comm.html#gabcc2bb9c188ed5dd0c34bf573bdb04e6" title="Execute la commande recue sur l&#39;UART (s&#39;il y en a une) et renvoie la reponse sur l&#39;UART...." alt="" coords="255,29,430,56"/>
+<area shape="poly" id="edge4_Node000002_Node000003" title=" " alt="" coords="655,72,624,71,431,52,431,47,625,65,660,72"/>
+<area shape="rect" id="Node000006" href="$group__grp__comm.html#ga5b44c65aa41e79871a46aeed1bb4751b" title="Callback LwIP invoque automatiquement a chaque paquet UDP recu sur le port du serveur (enregistre par..." alt="" coords="478,104,625,131"/>
+<area shape="poly" id="edge10_Node000002_Node000006" title=" " alt="" coords="660,92,613,106,612,101,655,93"/>
+<area shape="poly" id="edge9_Node000003_Node000003" title=" " alt="" coords="373,14,364,10,343,8,323,10,313,15,310,20,315,30,310,28,305,21,309,11,322,5,343,3,365,5,379,14"/>
+<area shape="rect" id="Node000004" href="$group__grp__tache.html#gae9bf934dd2f4a12a5c5975d81afa3063" title="Tache FreeRTOS principale (lwipTask). Initialise LwIP, les verrous (I2C, UART, commandes),..." alt="" coords="103,67,207,93"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="255,60,208,72,207,67,260,59"/>
+<area shape="poly" id="edge8_Node000004_Node000004" title=" " alt="" coords="174,51,168,48,155,45,142,47,136,52,134,58,138,67,132,65,129,58,131,49,140,42,155,40,170,43,180,52"/>
+<area shape="rect" id="Node000005" href="$group__grp__cubemx.html#ga840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,67,55,93"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="85,82,55,83,54,77,89,78"/>
+<area shape="poly" id="edge7_Node000005_Node000005" title=" " alt="" coords="49,52,43,48,30,45,18,47,11,52,9,58,13,66,8,67,4,58,7,49,16,42,30,40,46,43,55,51"/>
+<area shape="poly" id="edge11_Node000006_Node000006" title=" " alt="" coords="578,88,569,85,551,83,535,85,526,89,524,95,528,105,523,102,518,95,522,86,533,80,552,77,571,80,583,89"/>
+<area shape="rect" id="Node000007" href="$group__grp__comm.html#ga78047c519037c4c6091c71e1801519c7" title="Initialise le serveur UDP applicatif. Cree un PCB UDP (udp_new), le lie a l&#39;adresse IP et au port def..." alt="" coords="290,104,395,131"/>
+<area shape="poly" id="edge12_Node000006_Node000007" title=" " alt="" coords="460,117,395,120,395,115,466,117"/>
+<area shape="poly" id="edge13_Node000007_Node000004" title=" " alt="" coords="273,104,207,93,207,88,278,104"/>
+<area shape="poly" id="edge14_Node000007_Node000007" title=" " alt="" coords="373,88,364,85,343,83,323,85,313,89,310,95,315,105,310,102,305,95,309,86,322,79,343,77,365,80,378,89"/>
+</map>

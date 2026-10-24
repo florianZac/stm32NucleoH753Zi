@@ -1,0 +1,17 @@
+<map id="FormaterTempsEcoule" name="FormaterTempsEcoule">
+<area shape="rect" id="Node000001" title="Formate le temps ecoule depuis le demarrage (HAL_GetTick(), en millisecondes) en une chaine &quot;HH:MM:SS..." alt="" coords="676,55,828,81"/>
+<area shape="poly" id="edge10_Node000001_Node000001" title=" " alt="" coords="784,39,774,36,752,33,731,35,720,40,717,45,723,55,718,53,712,46,716,36,730,30,752,28,776,31,790,40"/>
+<area shape="rect" id="Node000002" href="$group__grp__i2c.html#ga78897222189585f100bc3855e98e25cc" title="Envoie un message &quot;Bonjour&quot; a chacune des adresses trouvees par un scan I2C prealable (ScanI2C()),..." alt="" coords="478,29,628,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="657,56,628,55,628,49,663,56"/>
+<area shape="rect" id="Node000003" href="$group__grp__exti.html#ga3a919fef613806da58b99557a009f22a" title="Capture complete de diagnostic : scan I2C1+I2C2, message &quot;Bonjour&quot; a chaque adresse trouvee,..." alt="" coords="255,55,430,81"/>
+<area shape="poly" id="edge9_Node000001_Node000003" title=" " alt="" coords="658,68,431,71,431,65,663,68"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="586,14,575,10,553,8,532,10,521,15,518,20,524,30,519,28,513,21,517,11,531,5,553,3,577,5,591,15"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="466,53,431,60,430,55,460,54"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="373,39,364,36,343,33,323,35,313,40,310,45,315,55,310,53,305,46,309,36,322,30,343,28,365,31,378,40"/>
+<area shape="rect" id="Node000004" href="$group__grp__tache.html#gae9bf934dd2f4a12a5c5975d81afa3063" title="Tache FreeRTOS principale (lwipTask). Initialise LwIP, les verrous (I2C, UART, commandes),..." alt="" coords="103,55,207,81"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="237,68,207,71,207,65,242,68"/>
+<area shape="poly" id="edge8_Node000004_Node000004" title=" " alt="" coords="174,39,168,36,155,33,142,35,136,40,134,46,137,55,133,53,129,46,131,37,140,30,155,28,170,31,180,40"/>
+<area shape="rect" id="Node000005" href="$group__grp__cubemx.html#ga840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,55,55,81"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="84,69,55,71,55,65,89,67"/>
+<area shape="poly" id="edge7_Node000005_Node000005" title=" " alt="" coords="49,40,43,36,30,33,18,35,11,40,9,46,13,54,8,55,4,46,7,37,16,30,30,28,46,31,55,39"/>
+</map>

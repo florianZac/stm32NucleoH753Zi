@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="namespacegenerer__config" kind="namespace" language="Python">
+    <compoundname>generer_config</compoundname>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacegenerer__config_1a9809e7ae4fdb7f8794a24094c8ea3b51" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>generer_config.DOSSIER</definition>
+        <argsstring></argsstring>
+        <name>DOSSIER</name>
+        <qualifiedname>generer_config.DOSSIER</qualifiedname>
+        <initializer>=  os.path.dirname(os.path.abspath(__file__))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/generer_config.py" line="23" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/generer_config.py" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacegenerer__config_1afe4fcfa0376d45488ee11bb61e542d6d" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>generer_config.PROJET</definition>
+        <argsstring></argsstring>
+        <name>PROJET</name>
+        <qualifiedname>generer_config.PROJET</qualifiedname>
+        <initializer>=  os.path.dirname(DOSSIER)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/generer_config.py" line="27" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/generer_config.py" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacegenerer__config_1aada7a458bc6c5615a4d4a86ef2f00f6f" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>generer_config.CSV</definition>
+        <argsstring></argsstring>
+        <name>CSV</name>
+        <qualifiedname>generer_config.CSV</qualifiedname>
+        <initializer>=  os.path.join(DOSSIER, &quot;ldo_config.csv&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/generer_config.py" line="28" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/generer_config.py" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacegenerer__config_1af762c2ae347742e0b839fe363a031b8d" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>generer_config.SORTIE_H</definition>
+        <argsstring></argsstring>
+        <name>SORTIE_H</name>
+        <qualifiedname>generer_config.SORTIE_H</qualifiedname>
+        <initializer>=  os.path.join(PROJET, &quot;Core&quot;, &quot;Inc&quot;, &quot;ldo_config_genere.h&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/generer_config.py" line="29" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/generer_config.py" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacegenerer__config_1a1ddbe65efcf94869eeedd42f491b20c8" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>generer_config.SORTIE_INC</definition>
+        <argsstring></argsstring>
+        <name>SORTIE_INC</name>
+        <qualifiedname>generer_config.SORTIE_INC</qualifiedname>
+        <initializer>=  os.path.join(PROJET, &quot;Core&quot;, &quot;Inc&quot;, &quot;ldo_config_lignes.inc&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/generer_config.py" line="30" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/generer_config.py" bodystart="30" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespacegenerer__config_1a20b570b46968be89a291b54aab812ed0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ecrire_si_change</definition>
+        <argsstring>(chemin, texte)</argsstring>
+        <name>ecrire_si_change</name>
+        <qualifiedname>generer_config.ecrire_si_change</qualifiedname>
+        <param>
+          <type>chemin</type>
+          <defname>chemin</defname>
+        </param>
+        <param>
+          <type>texte</type>
+          <defname>texte</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>@brief  Ecrit un fichier seulement si son contenu change.
+@param  chemin : fichier a ecrire.
+@param  texte  : nouveau contenu.
+@retval True si le fichier a ete reecrit.
+@par Exemple d&apos;utilisation
+     ecrire_si_change(&quot;Core/Inc/ldo_config_genere.h&quot;, h)
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/generer_config.py" line="33" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/generer_config.py" bodystart="33" bodyend="50"/>
+        <referencedby refid="namespacegenerer__config_1a51af30a60f9f02777c6396b8247e356f" compoundref="generer__config_8py" startline="51" endline="87">main</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacegenerer__config_1a51af30a60f9f02777c6396b8247e356f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>main</definition>
+        <argsstring>()</argsstring>
+        <name>main</name>
+        <qualifiedname>generer_config.main</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>@brief  Verifie le CSV et genere les fichiers C.
+@retval Code de sortie : 0 = OK, 1 = erreur (la compilation s&apos;arrete).
+@par Exemple d&apos;utilisation
+     python configurationLDO/generer_config.py --verifier
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/generer_config.py" line="51" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/generer_config.py" bodystart="51" bodyend="87"/>
+        <references refid="namespacegenerer__config_1a20b570b46968be89a291b54aab812ed0" compoundref="generer__config_8py" startline="33" endline="50">ecrire_si_change</references>
+        <references refid="namespacegenerer__config_1a51af30a60f9f02777c6396b8247e356f" compoundref="generer__config_8py" startline="51" endline="87">main</references>
+        <referencedby refid="namespacegenerer__config_1a51af30a60f9f02777c6396b8247e356f" compoundref="generer__config_8py" startline="51" endline="87">main</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>@file    generer_config.py
+@brief   Etape &quot;pre-build&quot; de CubeIDE : lit configurationLDO/ldo_config.csv,
+         le verifie, puis genere Core/Inc/ldo_config_genere.h et
+         Core/Inc/ldo_config_lignes.inc. En cas d&apos;erreur, la compilation
+         s&apos;arrete et les messages s&apos;affichent dans la console de CubeIDE.
+@par     Lancement
+         - automatique : C/C++ Build &gt; Settings &gt; Build Steps &gt; Pre-build :
+           python ../configurationLDO/generer_config.py
+         - manuel : python configurationLDO/generer_config.py
+         - verification seule (sans ecrire) : ajouter --verifier
+@par     Les fichiers generes ne sont reecrits que si leur contenu change
+         (pas de recompilation complete inutile).
+@author  Florian Aizac
+@date    22/10/2026
+</verbatim> </para>
+    </detaileddescription>
+    <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/generer_config.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

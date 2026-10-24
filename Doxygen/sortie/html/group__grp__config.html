@@ -1,0 +1,621 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lwip_demo_H753 - Controleur de LDO: Configuration des LDO (CSV) et broches</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Lwip_demo_H753 - Controleur de LDO<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">Firmware STM32H753ZI : pilotage de 18 LDO (configuration CSV, DAC MCP47FEB28, protection OC)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Recherche" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('group__grp__config.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Configuration des LDO (CSV) et broches </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Lecture de ldoConfig[] (généré depuis le CSV), configuration des broches, recherche d'une LDO par son nom.  
+<a href="#details">Plus de détails...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:gadc686ab4f6036d732a6f2b1ecb6dbd01" id="r_gadc686ab4f6036d732a6f2b1ecb6dbd01"><td class="memItemLeft">static int&#160;</td><td class="memItemRight"><a class="el" href="#gadc686ab4f6036d732a6f2b1ecb6dbd01">findLdoIndex</a> (const char *suffix)</td></tr>
+<tr class="memdesc:gadc686ab4f6036d732a6f2b1ecb6dbd01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recherche l'indice (0 a NB_LDO-1) d'une LDO dans le tableau ldoConfig[] a partir de son suffixe de nom.  <br /></td></tr>
+<tr class="memitem:ga8ad9d7191f49b52c41d5a583f774465d" id="r_ga8ad9d7191f49b52c41d5a583f774465d"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga8ad9d7191f49b52c41d5a583f774465d">LDO_InitialiserTables</a> (void)</td></tr>
+<tr class="memdesc:ga8ad9d7191f49b52c41d5a583f774465d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recopie dans les tables RAM modifiables a chaud les valeurs initiales declarees dans ldoConfig[] : mapping DAC tension/courant (mappingDacLdo[]) et voies des multiplexeurs de mesure (muxLdoConfig[], muxLdoConfigCourant[]). A appeler UNE FOIS au demarrage, avant OC_InitialiserSeuilsDefaut() et udpServer_init(). Signale sur USART1 toute ligne incoherente (LDO surveillee sans DAC de seuil, seuil par defaut hors bornes, voie DAC &gt; 7).  <br /></td></tr>
+<tr class="memitem:gaa5729680e86eeadbd61a302f18bf329f" id="r_gaa5729680e86eeadbd61a302f18bf329f"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#gaa5729680e86eeadbd61a302f18bf329f">LDO_ActiverHorlogePort</a> (GPIO_TypeDef *port)</td></tr>
+<tr class="memdesc:gaa5729680e86eeadbd61a302f18bf329f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Active l'horloge d'un port GPIO (A a H).  <br /></td></tr>
+<tr class="memitem:gae28fc29161c8b412bf38609488b281ef" id="r_gae28fc29161c8b412bf38609488b281ef"><td class="memItemLeft">static uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#gae28fc29161c8b412bf38609488b281ef">LDO_BrocheBouton</a> (GPIO_TypeDef *port, uint16_t pin)</td></tr>
+<tr class="memdesc:gae28fc29161c8b412bf38609488b281ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indique si une broche appartient a un bouton du firmware (PC13 USER, PD0 reset ADG728). Ces broches ne sont jamais reconfigurees par LDO_GPIO_Init() (generer_config.py le signale en avertissement).  <br /></td></tr>
+<tr class="memitem:ga3bce4a57356f1afcbef6d05a989f33f5" id="r_ga3bce4a57356f1afcbef6d05a989f33f5"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga3bce4a57356f1afcbef6d05a989f33f5">LDO_GPIO_Init</a> (void)</td></tr>
+<tr class="memdesc:ga3bce4a57356f1afcbef6d05a989f33f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure les broches de TOUTES les LDO a partir de ldoConfig[] (donc du CSV), independamment du .ioc : EN en sortie a 0, BLD en sortie au niveau inactif, OC et PG en entree (sans tirage : R109 et tirages externes). Les broches OC en interruption sont ensuite reprises par MX_OC_EXTI_Init(). Le niveau de sortie est ecrit AVANT le passage en sortie : aucune impulsion sur EN ni BLD. A appeler juste apres MX_GPIO_Init() (USER CODE BEGIN 2).  <br /></td></tr>
+<tr class="memitem:ga8a388f244af9f1ecdae4d35c3126a7ea" id="r_ga8a388f244af9f1ecdae4d35c3126a7ea"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga8a388f244af9f1ecdae4d35c3126a7ea">h_GET_CONFIG_LDO</a> (void)</td></tr>
+<tr class="memdesc:ga8a388f244af9f1ecdae4d35c3126a7ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Commande "GET_CONFIG_LDO" : nombre de LDO et empreinte de la configuration compilee. Le controleur la compare a celle du CSV pour signaler une carte non reflashee apres modification.  <br /></td></tr>
+<tr class="memitem:ga12b4c9909bec1ea781ab3e736da3b356" id="r_ga12b4c9909bec1ea781ab3e736da3b356"><td class="memItemLeft">static char&#160;</td><td class="memItemRight"><a class="el" href="#ga12b4c9909bec1ea781ab3e736da3b356">ModeBroche</a> (GPIO_TypeDef *port, uint16_t pin)</td></tr>
+<tr class="memdesc:ga12b4c9909bec1ea781ab3e736da3b356"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mode d'une broche GPIO lu dans le registre MODER.  <br /></td></tr>
+<tr class="memitem:ga2ba862323ea386969585492246cd74d6" id="r_ga2ba862323ea386969585492246cd74d6"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga2ba862323ea386969585492246cd74d6">LDO_Diagnostic</a> (int idx, const char *nom)</td></tr>
+<tr class="memdesc:ga2ba862323ea386969585492246cd74d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Commande "GET_DIAG_LDO_&lt;nom&gt;" : etat REEL des broches d'une LDO (niveau lu sur la broche, pas seulement la commande logicielle) et de la protection OC. Separe un defaut firmware d'un defaut carte : si BL=1/1O et que le bleeder ne conduit pas, ou si OC reste a 0 avec VU=0 et FR=0 alors que le courant depasse le seuil, le probleme est en aval de la broche (carte), pas dans le code. VU (OC vu actif par la boucle) est remis a 0 a chaque lecture.  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Lecture de ldoConfig[] (généré depuis le CSV), configuration des broches, recherche d'une LDO par son nom. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentation des fonctions</h2>
+<a id="gadc686ab4f6036d732a6f2b1ecb6dbd01" name="gadc686ab4f6036d732a6f2b1ecb6dbd01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gadc686ab4f6036d732a6f2b1ecb6dbd01">&#9670;&#160;</a></span>findLdoIndex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int findLdoIndex </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>suffix</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Recherche l'indice (0 a NB_LDO-1) d'une LDO dans le tableau ldoConfig[] a partir de son suffixe de nom. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">suffix</td><td>Chaine de caracteres identifiant la LDO, sans le prefixe de commande (ex : "1PSp", "3PLn"). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">int</td><td>Indice trouve dans ldoConfig[] (0..17), ou -1 si le suffixe ne correspond a aucune LDO connue. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="keywordtype">int</span> idx = <a class="code hl_function" href="#gadc686ab4f6036d732a6f2b1ecb6dbd01">findLdoIndex</a>(<span class="stringliteral">&quot;2PSn&quot;</span>);   <span class="comment">// idx == 3</span></div>
+<div class="line"><span class="keywordtype">int</span> bad = <a class="code hl_function" href="#gadc686ab4f6036d732a6f2b1ecb6dbd01">findLdoIndex</a>(<span class="stringliteral">&quot;ALL&quot;</span>);    <span class="comment">// bad == -1</span></div>
+<div class="ttc" id="agroup__grp__config_html_gadc686ab4f6036d732a6f2b1ecb6dbd01"><div class="ttname"><a href="#gadc686ab4f6036d732a6f2b1ecb6dbd01">findLdoIndex</a></div><div class="ttdeci">static int findLdoIndex(const char *suffix)</div><div class="ttdoc">Recherche l&#39;indice (0 a NB_LDO-1) d&#39;une LDO dans le tableau ldoConfig[] a partir de son suffixe de no...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l02727">main.c:2727</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l02727">2727</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l02727">findLdoIndex()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l02727">findLdoIndex()</a>, et <a class="el" href="main_8c_source.html#l06290">tc_request()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__config_gadc686ab4f6036d732a6f2b1ecb6dbd01_cgraph.svg" width="107" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__config_gadc686ab4f6036d732a6f2b1ecb6dbd01_icgraph.svg" width="904" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga8ad9d7191f49b52c41d5a583f774465d" name="ga8ad9d7191f49b52c41d5a583f774465d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8ad9d7191f49b52c41d5a583f774465d">&#9670;&#160;</a></span>LDO_InitialiserTables()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LDO_InitialiserTables </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Recopie dans les tables RAM modifiables a chaud les valeurs initiales declarees dans ldoConfig[] : mapping DAC tension/courant (mappingDacLdo[]) et voies des multiplexeurs de mesure (muxLdoConfig[], muxLdoConfigCourant[]). A appeler UNE FOIS au demarrage, avant OC_InitialiserSeuilsDefaut() et udpServer_init(). Signale sur USART1 toute ligne incoherente (LDO surveillee sans DAC de seuil, seuil par defaut hors bornes, voie DAC &gt; 7). </p>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#ga8ad9d7191f49b52c41d5a583f774465d">LDO_InitialiserTables</a>();</div>
+<div class="line">OC_InitialiserSeuilsDefaut();</div>
+<div class="ttc" id="agroup__grp__config_html_ga8ad9d7191f49b52c41d5a583f774465d"><div class="ttname"><a href="#ga8ad9d7191f49b52c41d5a583f774465d">LDO_InitialiserTables</a></div><div class="ttdeci">static void LDO_InitialiserTables(void)</div><div class="ttdoc">Recopie dans les tables RAM modifiables a chaud les valeurs initiales declarees dans ldoConfig[] : ma...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l06025">main.c:6025</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l06025">6025</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l00347">LDO_Config_t::canal_courant</a>, <a class="el" href="main_8c_source.html#l00345">LDO_Config_t::canal_tension</a>, <a class="el" href="main_8c_source.html#l00346">LDO_Config_t::dac_courant</a>, <a class="el" href="main_8c_source.html#l00344">LDO_Config_t::dac_tension</a>, <a class="el" href="main_8c_source.html#l06025">LDO_InitialiserTables()</a>, <a class="el" href="main_8c_source.html#l00353">LDO_Config_t::mux_courant</a>, <a class="el" href="main_8c_source.html#l00352">LDO_Config_t::mux_tension</a>, <a class="el" href="main_8c_source.html#l00334">LDO_Config_t::name</a>, <a class="el" href="main_8c_source.html#l00348">LDO_Config_t::oc</a>, <a class="el" href="main_8c_source.html#l03086">OC_EstSurveillee()</a>, <a class="el" href="main_8c_source.html#l00323">OcConfig_t::seuil_defaut</a>, <a class="el" href="main_8c_source.html#l00325">OcConfig_t::seuil_max</a>, <a class="el" href="main_8c_source.html#l00324">OcConfig_t::seuil_min</a>, <a class="el" href="main_8c_source.html#l00320">OcConfig_t::surveille</a>, et <a class="el" href="main_8c_source.html#l01803">UART1_EnvoyerTexte()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06025">LDO_InitialiserTables()</a>, et <a class="el" href="main_8c_source.html#l06730">StartLwipTask()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__config_ga8ad9d7191f49b52c41d5a583f774465d_cgraph.svg" width="356" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__config_ga8ad9d7191f49b52c41d5a583f774465d_icgraph.svg" width="406" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gaa5729680e86eeadbd61a302f18bf329f" name="gaa5729680e86eeadbd61a302f18bf329f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa5729680e86eeadbd61a302f18bf329f">&#9670;&#160;</a></span>LDO_ActiverHorlogePort()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LDO_ActiverHorlogePort </td>
+          <td>(</td>
+          <td class="paramtype">GPIO_TypeDef *</td>          <td class="paramname"><span class="paramname"><em>port</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Active l'horloge d'un port GPIO (A a H). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">port</td><td>GPIOA ... GPIOH. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#gaa5729680e86eeadbd61a302f18bf329f">LDO_ActiverHorlogePort</a>(GPIOE);</div>
+<div class="ttc" id="agroup__grp__config_html_gaa5729680e86eeadbd61a302f18bf329f"><div class="ttname"><a href="#gaa5729680e86eeadbd61a302f18bf329f">LDO_ActiverHorlogePort</a></div><div class="ttdeci">static void LDO_ActiverHorlogePort(GPIO_TypeDef *port)</div><div class="ttdoc">Active l&#39;horloge d&#39;un port GPIO (A a H).</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l06070">main.c:6070</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l06070">6070</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06070">LDO_ActiverHorlogePort()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06070">LDO_ActiverHorlogePort()</a>, et <a class="el" href="main_8c_source.html#l06117">LDO_GPIO_Init()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__config_gaa5729680e86eeadbd61a302f18bf329f_cgraph.svg" width="176" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__config_gaa5729680e86eeadbd61a302f18bf329f_icgraph.svg" width="435" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gae28fc29161c8b412bf38609488b281ef" name="gae28fc29161c8b412bf38609488b281ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae28fc29161c8b412bf38609488b281ef">&#9670;&#160;</a></span>LDO_BrocheBouton()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t LDO_BrocheBouton </td>
+          <td>(</td>
+          <td class="paramtype">GPIO_TypeDef *</td>          <td class="paramname"><span class="paramname"><em>port</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>pin</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Indique si une broche appartient a un bouton du firmware (PC13 USER, PD0 reset ADG728). Ces broches ne sont jamais reconfigurees par LDO_GPIO_Init() (generer_config.py le signale en avertissement). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">port</td><td>Port GPIO. </td></tr>
+    <tr><td class="paramname">pin</td><td>Masque de broche HAL. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">1</td><td>si la broche est reservee a un bouton, 0 sinon. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="keywordflow">if</span> (<a class="code hl_function" href="#gae28fc29161c8b412bf38609488b281ef">LDO_BrocheBouton</a>(GPIOC, GPIO_PIN_13) != 0U) { ... }</div>
+<div class="ttc" id="agroup__grp__config_html_gae28fc29161c8b412bf38609488b281ef"><div class="ttname"><a href="#gae28fc29161c8b412bf38609488b281ef">LDO_BrocheBouton</a></div><div class="ttdeci">static uint8_t LDO_BrocheBouton(GPIO_TypeDef *port, uint16_t pin)</div><div class="ttdoc">Indique si une broche appartient a un bouton du firmware (PC13 USER, PD0 reset ADG728)....</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l06096">main.c:6096</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l06096">6096</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06096">LDO_BrocheBouton()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l03625">CmdOnOff_BasculerBld()</a>, <a class="el" href="main_8c_source.html#l06096">LDO_BrocheBouton()</a>, et <a class="el" href="main_8c_source.html#l06117">LDO_GPIO_Init()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__config_gae28fc29161c8b412bf38609488b281ef_cgraph.svg" width="148" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__config_gae28fc29161c8b412bf38609488b281ef_icgraph.svg" width="1186" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga3bce4a57356f1afcbef6d05a989f33f5" name="ga3bce4a57356f1afcbef6d05a989f33f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3bce4a57356f1afcbef6d05a989f33f5">&#9670;&#160;</a></span>LDO_GPIO_Init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LDO_GPIO_Init </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Configure les broches de TOUTES les LDO a partir de ldoConfig[] (donc du CSV), independamment du .ioc : EN en sortie a 0, BLD en sortie au niveau inactif, OC et PG en entree (sans tirage : R109 et tirages externes). Les broches OC en interruption sont ensuite reprises par MX_OC_EXTI_Init(). Le niveau de sortie est ecrit AVANT le passage en sortie : aucune impulsion sur EN ni BLD. A appeler juste apres MX_GPIO_Init() (USER CODE BEGIN 2). </p>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">MX_GPIO_Init();</div>
+<div class="line"><a class="code hl_function" href="#ga3bce4a57356f1afcbef6d05a989f33f5">LDO_GPIO_Init</a>();</div>
+<div class="ttc" id="agroup__grp__config_html_ga3bce4a57356f1afcbef6d05a989f33f5"><div class="ttname"><a href="#ga3bce4a57356f1afcbef6d05a989f33f5">LDO_GPIO_Init</a></div><div class="ttdeci">static void LDO_GPIO_Init(void)</div><div class="ttdoc">Configure les broches de TOUTES les LDO a partir de ldoConfig[] (donc du CSV), independamment du ....</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l06117">main.c:6117</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l06117">6117</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l00349">LDO_Config_t::bld_niveau_actif</a>, <a class="el" href="main_8c_source.html#l00337">LDO_Config_t::bld_port</a>, <a class="el" href="main_8c_source.html#l00335">LDO_Config_t::en_port</a>, <a class="el" href="main_8c_source.html#l06070">LDO_ActiverHorlogePort()</a>, <a class="el" href="main_8c_source.html#l06096">LDO_BrocheBouton()</a>, <a class="el" href="main_8c_source.html#l06117">LDO_GPIO_Init()</a>, <a class="el" href="main_8c_source.html#l00339">LDO_Config_t::oc_port</a>, et <a class="el" href="main_8c_source.html#l00341">LDO_Config_t::pg_port</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06117">LDO_GPIO_Init()</a>, et <a class="el" href="main_8c_source.html#l01824">main()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__config_ga3bce4a57356f1afcbef6d05a989f33f5_cgraph.svg" width="338" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__config_ga3bce4a57356f1afcbef6d05a989f33f5_icgraph.svg" width="222" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga8a388f244af9f1ecdae4d35c3126a7ea" name="ga8a388f244af9f1ecdae4d35c3126a7ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8a388f244af9f1ecdae4d35c3126a7ea">&#9670;&#160;</a></span>h_GET_CONFIG_LDO()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void h_GET_CONFIG_LDO </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Commande "GET_CONFIG_LDO" : nombre de LDO et empreinte de la configuration compilee. Le controleur la compare a celle du CSV pour signaler une carte non reflashee apres modification. </p>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun.</td><td>Reponse "CONFIG_LDO:NB=18:CRC=0x3A5E98C0". </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Trame UDP recue : <span class="stringliteral">&quot;GET_CONFIG_LDO&quot;</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l06172">6172</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06172">h_GET_CONFIG_LDO()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06172">h_GET_CONFIG_LDO()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__config_ga8a388f244af9f1ecdae4d35c3126a7ea_cgraph.svg" width="167" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__config_ga8a388f244af9f1ecdae4d35c3126a7ea_icgraph.svg" width="167" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga12b4c9909bec1ea781ab3e736da3b356" name="ga12b4c9909bec1ea781ab3e736da3b356"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga12b4c9909bec1ea781ab3e736da3b356">&#9670;&#160;</a></span>ModeBroche()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">char ModeBroche </td>
+          <td>(</td>
+          <td class="paramtype">GPIO_TypeDef *</td>          <td class="paramname"><span class="paramname"><em>port</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>pin</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Mode d'une broche GPIO lu dans le registre MODER. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">port</td><td>Port GPIO (GPIOA ... GPIOK). </td></tr>
+    <tr><td class="paramname">pin</td><td>Masque de broche HAL (un seul bit). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">'I'</td><td>entree, 'O' sortie, 'F' fonction alternative, 'A' analogique. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="keywordtype">char</span> m = <a class="code hl_function" href="#ga12b4c9909bec1ea781ab3e736da3b356">ModeBroche</a>(GPIOF, GPIO_PIN_1);   <span class="comment">// &#39;O&#39; attendu pour BLD_LDO2_PSp</span></div>
+<div class="ttc" id="agroup__grp__config_html_ga12b4c9909bec1ea781ab3e736da3b356"><div class="ttname"><a href="#ga12b4c9909bec1ea781ab3e736da3b356">ModeBroche</a></div><div class="ttdeci">static char ModeBroche(GPIO_TypeDef *port, uint16_t pin)</div><div class="ttdoc">Mode d&#39;une broche GPIO lu dans le registre MODER.</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l06188">main.c:6188</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l06188">6188</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06188">ModeBroche()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06223">LDO_Diagnostic()</a>, et <a class="el" href="main_8c_source.html#l06188">ModeBroche()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__config_ga12b4c9909bec1ea781ab3e736da3b356_cgraph.svg" width="106" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__config_ga12b4c9909bec1ea781ab3e736da3b356_icgraph.svg" width="1068" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga2ba862323ea386969585492246cd74d6" name="ga2ba862323ea386969585492246cd74d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2ba862323ea386969585492246cd74d6">&#9670;&#160;</a></span>LDO_Diagnostic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LDO_Diagnostic </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>nom</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Commande "GET_DIAG_LDO_&lt;nom&gt;" : etat REEL des broches d'une LDO (niveau lu sur la broche, pas seulement la commande logicielle) et de la protection OC. Separe un defaut firmware d'un defaut carte : si BL=1/1O et que le bleeder ne conduit pas, ou si OC reste a 0 avec VU=0 et FR=0 alors que le courant depasse le seuil, le probleme est en aval de la broche (carte), pas dans le code. VU (OC vu actif par la boucle) est remis a 0 a chaque lecture. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idx</td><td>Index de la LDO (0-17). </td></tr>
+    <tr><td class="paramname">nom</td><td>Nom de la LDO, pour la reponse. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun.</td><td>Reponse (aussi emise sur USART1), par exemple : "DIAG:2PSp:EN=1/1:BL=1/1O:OC=0/0:VU=0:FR=0:IT=1:ARME=1:VER=0:S=1056:1289mV:493mA:PG=1:V=860:DACR=0" EN=commande/broche, BL=commande/broche+mode MODER, OC=defaut/niveau brut, FR=fronts EXTI, S=code seuil, puis VDAC et seuil (hors hysteresis), V=code du DAC de tension en memoire, DACR=reconfigurations de sa puce par SurveillerConfigDacsI2C1(). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Trame UDP recue : <span class="stringliteral">&quot;GET_DIAG_LDO_2PSp&quot;</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l06223">6223</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l00337">LDO_Config_t::bld_port</a>, <a class="el" href="main_8c_source.html#l00335">LDO_Config_t::en_port</a>, <a class="el" href="main_8c_source.html#l01175">IndexDacI2C1()</a>, <a class="el" href="main_8c_source.html#l00327">OcConfig_t::k_mv_par_a</a>, <a class="el" href="main_8c_source.html#l06223">LDO_Diagnostic()</a>, <a class="el" href="main_8c_source.html#l06188">ModeBroche()</a>, <a class="el" href="main_8c_source.html#l00348">LDO_Config_t::oc</a>, <a class="el" href="main_8c_source.html#l03267">OC_EstArme()</a>, <a class="el" href="main_8c_source.html#l03171">OC_LireDefaut()</a>, <a class="el" href="main_8c_source.html#l00339">LDO_Config_t::oc_port</a>, <a class="el" href="main_8c_source.html#l00341">LDO_Config_t::pg_port</a>, et <a class="el" href="main_8c_source.html#l01803">UART1_EnvoyerTexte()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06223">LDO_Diagnostic()</a>, et <a class="el" href="main_8c_source.html#l06290">tc_request()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__config_ga2ba862323ea386969585492246cd74d6_cgraph.svg" width="328" height="360"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__config_ga2ba862323ea386969585492246cd74d6_icgraph.svg" width="926" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,987 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lwip_demo_H753 - Controleur de LDO: Protection de surintensité (OC)</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Lwip_demo_H753 - Controleur de LDO<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">Firmware STM32H753ZI : pilotage de 18 LDO (configuration CSV, DAC MCP47FEB28, protection OC)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Recherche" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('group__grp__oc.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Protection de surintensité (OC) </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Surveillance, verrouillage, signalement et réarmement de la protection LM211.  
+<a href="#details">Plus de détails...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:ga7851b235d1d1f7564644d659587b3ba2" id="r_ga7851b235d1d1f7564644d659587b3ba2"><td class="memItemLeft">static uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#ga7851b235d1d1f7564644d659587b3ba2">OC_EstSurveillee</a> (int idx)</td></tr>
+<tr class="memdesc:ga7851b235d1d1f7564644d659587b3ba2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indique si la LDO est surveillee : ldoConfig[idx].oc.surveille = 1 ET un DAC de seuil (dac_courant) declare dans sa ligne de ldoConfig[]. Ne depend pas du mapping modifiable a chaud.  <br /></td></tr>
+<tr class="memitem:ga5a3191b846544a7dced3ea094018f361" id="r_ga5a3191b846544a7dced3ea094018f361"><td class="memItemLeft">static uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#ga5a3191b846544a7dced3ea094018f361">OC_EstActive</a> (int idx)</td></tr>
+<tr class="memdesc:ga5a3191b846544a7dced3ea094018f361"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indique si la protection OC est AGISSANTE : LDO surveillee (circuit cable, voir OC_EstSurveillee()) ET commande CMD_ON_OFF_OC = 1 (ON). Avec CMD_ON_OFF_OC = 0, la broche OC est ignoree : pas de coupure de l'EN, pas de defaut memorise, l'EN n'attend pas de seuil valide.  <br /></td></tr>
+<tr class="memitem:gafc2057d31d2abd2b3389f0e6ce4cc3a2" id="r_gafc2057d31d2abd2b3389f0e6ce4cc3a2"><td class="memItemLeft">static uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#gafc2057d31d2abd2b3389f0e6ce4cc3a2">OC_SeuilValide</a> (int idx)</td></tr>
+<tr class="memdesc:gafc2057d31d2abd2b3389f0e6ce4cc3a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifie que le seuil programme est dans la plage specifiee du LM211 (VDAC &gt;= 0,5 V). Une LDO non surveillee est toujours valide.  <br /></td></tr>
+<tr class="memitem:ga4c720f3df5385977a33b0d91f63df5f9" id="r_ga4c720f3df5385977a33b0d91f63df5f9"><td class="memItemLeft">static uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#ga4c720f3df5385977a33b0d91f63df5f9">OC_LireDefaut</a> (int idx)</td></tr>
+<tr class="memdesc:ga4c720f3df5385977a33b0d91f63df5f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lit la broche OC de la LDO et indique si elle signale une surintensite.  <br /></td></tr>
+<tr class="memitem:gad5ee0d7de4089f81d1b5309a4919b764" id="r_gad5ee0d7de4089f81d1b5309a4919b764"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#gad5ee0d7de4089f81d1b5309a4919b764">OC_Verrouiller</a> (int idx)</td></tr>
+<tr class="memdesc:gad5ee0d7de4089f81d1b5309a4919b764"><td class="mdescLeft">&#160;</td><td class="mdescRight">Coupe l'EN de la LDO et verrouille le defaut. N'utilise aucune API FreeRTOS : appelable depuis l'interruption EXTI ou depuis la boucle.  <br /></td></tr>
+<tr class="memitem:gab7b892d9b93ae98c0860c1569fb10702" id="r_gab7b892d9b93ae98c0860c1569fb10702"><td class="memItemLeft">static uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#gab7b892d9b93ae98c0860c1569fb10702">OC_EstArme</a> (int idx)</td></tr>
+<tr class="memdesc:gab7b892d9b93ae98c0860c1569fb10702"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indique si la surveillance est armee : EN actif depuis au moins ldoConfig[idx].oc.blanking_ms (fin du soft-start et de l'appel de courant).  <br /></td></tr>
+<tr class="memitem:gafaa9094a90053ac8bf6eace70669f172" id="r_gafaa9094a90053ac8bf6eace70669f172"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#gafaa9094a90053ac8bf6eace70669f172">OC_SurFrontIT</a> (int idx)</td></tr>
+<tr class="memdesc:gafaa9094a90053ac8bf6eace70669f172"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traitement d'un front de la broche OC en interruption.  <br /></td></tr>
+<tr class="memitem:ga66c4ac6f7a9837733484590dbe3081d2" id="r_ga66c4ac6f7a9837733484590dbe3081d2"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga66c4ac6f7a9837733484590dbe3081d2">OC_SignalerEvenements</a> (void)</td></tr>
+<tr class="memdesc:ga66c4ac6f7a9837733484590dbe3081d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emet sur USART1 une ligne par defaut nouvellement verrouille. Appelee depuis la boucle de StartLwipTask(), jamais en interruption.  <br /></td></tr>
+<tr class="memitem:ga61bd3c43a673ea375cabfe6a2de48eb0" id="r_ga61bd3c43a673ea375cabfe6a2de48eb0"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga61bd3c43a673ea375cabfe6a2de48eb0">OC_Rearmer</a> (int idx, const char *nom)</td></tr>
+<tr class="memdesc:ga61bd3c43a673ea375cabfe6a2de48eb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Commande "RST_OC_LDO_&lt;nom&gt;" : deverrouille le defaut si la broche OC est revenue au repos. L'EN reste a 0 : l'operateur doit renvoyer SET_EN_LDO_&lt;nom&gt;.  <br /></td></tr>
+<tr class="memitem:ga53ac0c1da803505e54c72dbd31e4de73" id="r_ga53ac0c1da803505e54c72dbd31e4de73"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga53ac0c1da803505e54c72dbd31e4de73">OC_Etat</a> (int idx, const char *nom)</td></tr>
+<tr class="memdesc:ga53ac0c1da803505e54c72dbd31e4de73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Commande "GET_OC_LDO_&lt;nom&gt;" : etat complet de la protection.  <br /></td></tr>
+<tr class="memitem:ga9358ff0a14ed464e81374dab1f13777d" id="r_ga9358ff0a14ed464e81374dab1f13777d"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga9358ff0a14ed464e81374dab1f13777d">OC_InitialiserSeuilsDefaut</a> (void)</td></tr>
+<tr class="memdesc:ga9358ff0a14ed464e81374dab1f13777d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Programme le seuil de courant par defaut (ldoConfig[i].oc.seuil_defaut, 0,50 A par defaut) sur toutes les LDO surveillees, au demarrage. Sans cela, le seuil vaudrait 0 V (MCP4725_VAL_DEF), hors de la plage d'entree du LM211, et l'activation serait refusee. Doit etre appelee apres LDO_InitialiserTables() et avant tout traitement de commande UDP.  <br /></td></tr>
+<tr class="memitem:gaa95aeec744d338f67994e9ecbaf895b9" id="r_gaa95aeec744d338f67994e9ecbaf895b9"><td class="memItemLeft">static int&#160;</td><td class="memItemRight"><a class="el" href="#gaa95aeec744d338f67994e9ecbaf895b9">OC_LdoDuCanalSeuil</a> (const uint8_t *tableau, uint8_t canal)</td></tr>
+<tr class="memdesc:gaa95aeec744d338f67994e9ecbaf895b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cherche la LDO surveillee dont le seuil de courant est sur le canal donne d'un tableau DACx_DEF.  <br /></td></tr>
+<tr class="memitem:ga3c2340b58426351c26b0ff583df3f970" id="r_ga3c2340b58426351c26b0ff583df3f970"><td class="memItemLeft">static IRQn_Type&#160;</td><td class="memItemRight"><a class="el" href="#ga3c2340b58426351c26b0ff583df3f970">OC_IrqDepuisBroche</a> (uint16_t pin)</td></tr>
+<tr class="memdesc:ga3c2340b58426351c26b0ff583df3f970"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ligne EXTI (IRQn) correspondant a une broche GPIO (la ligne EXTI n est partagee par la broche n de TOUS les ports).  <br /></td></tr>
+<tr class="memitem:ga12ef8bab086612c9ecf3cb2ffed9c776" id="r_ga12ef8bab086612c9ecf3cb2ffed9c776"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga12ef8bab086612c9ecf3cb2ffed9c776">MX_OC_EXTI_Init</a> (void)</td></tr>
+<tr class="memdesc:ga12ef8bab086612c9ecf3cb2ffed9c776"><td class="mdescLeft">&#160;</td><td class="mdescRight">Met en interruption la broche OC de chaque LDO declaree avec oc.interruption = 1 dans ldoConfig[], sur le front qui correspond a l'apparition d'une surintensite (montant si niveau_defaut = SET). Refuse (ligne UART "OC_EXTI:&lt;nom&gt;:REFUS_LIGNE_n") une broche dont la ligne EXTI est deja prise (bouton, ou autre LDO de meme numero de broche sur un autre port) : la LDO reste alors surveillee par la boucle seule. Aucune API FreeRTOS n'est appelee dans l'IT : la priorite 2 peut etre plus haute que configMAX_SYSCALL_INTERRUPT_PRIORITY.  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Surveillance, verrouillage, signalement et réarmement de la protection LM211. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentation des fonctions</h2>
+<a id="ga7851b235d1d1f7564644d659587b3ba2" name="ga7851b235d1d1f7564644d659587b3ba2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7851b235d1d1f7564644d659587b3ba2">&#9670;&#160;</a></span>OC_EstSurveillee()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t OC_EstSurveillee </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Indique si la LDO est surveillee : ldoConfig[idx].oc.surveille = 1 ET un DAC de seuil (dac_courant) declare dans sa ligne de ldoConfig[]. Ne depend pas du mapping modifiable a chaud. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idx</td><td>Index de la LDO (0-17). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">1</td><td>si la LDO est surveillee, 0 sinon. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="keywordflow">if</span> (<a class="code hl_function" href="#ga7851b235d1d1f7564644d659587b3ba2">OC_EstSurveillee</a>(<a class="code hl_function" href="group__grp__config.html#gadc686ab4f6036d732a6f2b1ecb6dbd01">findLdoIndex</a>(<span class="stringliteral">&quot;2PSp&quot;</span>)) != 0U) { ... }</div>
+<div class="ttc" id="agroup__grp__config_html_gadc686ab4f6036d732a6f2b1ecb6dbd01"><div class="ttname"><a href="group__grp__config.html#gadc686ab4f6036d732a6f2b1ecb6dbd01">findLdoIndex</a></div><div class="ttdeci">static int findLdoIndex(const char *suffix)</div><div class="ttdoc">Recherche l&#39;indice (0 a NB_LDO-1) d&#39;une LDO dans le tableau ldoConfig[] a partir de son suffixe de no...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l02727">main.c:2727</a></div></div>
+<div class="ttc" id="agroup__grp__oc_html_ga7851b235d1d1f7564644d659587b3ba2"><div class="ttname"><a href="#ga7851b235d1d1f7564644d659587b3ba2">OC_EstSurveillee</a></div><div class="ttdeci">static uint8_t OC_EstSurveillee(int idx)</div><div class="ttdoc">Indique si la LDO est surveillee : ldoConfig[idx].oc.surveille = 1 ET un DAC de seuil (dac_courant) d...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l03086">main.c:3086</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l03086">3086</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03086">OC_EstSurveillee()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04902">DAC_ConfigurerSeuilsPotentiometre()</a>, <a class="el" href="main_8c_source.html#l04822">DAC_RestaurerMemoire()</a>, <a class="el" href="main_8c_source.html#l04755">DAC_TraiterSauvegardes()</a>, <a class="el" href="main_8c_source.html#l04109">h_SET_CURRENT_LDO_GENERIQUE()</a>, <a class="el" href="main_8c_source.html#l06025">LDO_InitialiserTables()</a>, <a class="el" href="main_8c_source.html#l06510">MX_OC_EXTI_Init()</a>, <a class="el" href="main_8c_source.html#l03104">OC_EstActive()</a>, <a class="el" href="main_8c_source.html#l03086">OC_EstSurveillee()</a>, <a class="el" href="main_8c_source.html#l04173">OC_InitialiserSeuilsDefaut()</a>, <a class="el" href="main_8c_source.html#l04199">OC_LdoDuCanalSeuil()</a>, et <a class="el" href="main_8c_source.html#l04235">SetMappingDacLdo()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_ga7851b235d1d1f7564644d659587b3ba2_cgraph.svg" width="136" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_ga7851b235d1d1f7564644d659587b3ba2_icgraph.svg" width="1830" height="800"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga5a3191b846544a7dced3ea094018f361" name="ga5a3191b846544a7dced3ea094018f361"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5a3191b846544a7dced3ea094018f361">&#9670;&#160;</a></span>OC_EstActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t OC_EstActive </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Indique si la protection OC est AGISSANTE : LDO surveillee (circuit cable, voir OC_EstSurveillee()) ET commande CMD_ON_OFF_OC = 1 (ON). Avec CMD_ON_OFF_OC = 0, la broche OC est ignoree : pas de coupure de l'EN, pas de defaut memorise, l'EN n'attend pas de seuil valide. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idx</td><td>Index de la LDO. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">1</td><td>si la protection agit, 0 sinon. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="keywordflow">if</span> (<a class="code hl_function" href="#ga5a3191b846544a7dced3ea094018f361">OC_EstActive</a>(<a class="code hl_function" href="group__grp__config.html#gadc686ab4f6036d732a6f2b1ecb6dbd01">findLdoIndex</a>(<span class="stringliteral">&quot;2PSp&quot;</span>)) != 0U) { ... }</div>
+<div class="ttc" id="agroup__grp__oc_html_ga5a3191b846544a7dced3ea094018f361"><div class="ttname"><a href="#ga5a3191b846544a7dced3ea094018f361">OC_EstActive</a></div><div class="ttdeci">static uint8_t OC_EstActive(int idx)</div><div class="ttdoc">Indique si la protection OC est AGISSANTE : LDO surveillee (circuit cable, voir OC_EstSurveillee()) E...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l03104">main.c:3104</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l03104">3104</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03104">OC_EstActive()</a>, et <a class="el" href="main_8c_source.html#l03086">OC_EstSurveillee()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l03307">LDO_MettreAJour()</a>, <a class="el" href="main_8c_source.html#l03104">OC_EstActive()</a>, <a class="el" href="main_8c_source.html#l03120">OC_SeuilValide()</a>, et <a class="el" href="main_8c_source.html#l03283">OC_SurFrontIT()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_ga5a3191b846544a7dced3ea094018f361_cgraph.svg" width="290" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_ga5a3191b846544a7dced3ea094018f361_icgraph.svg" width="1304" height="262"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gafc2057d31d2abd2b3389f0e6ce4cc3a2" name="gafc2057d31d2abd2b3389f0e6ce4cc3a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafc2057d31d2abd2b3389f0e6ce4cc3a2">&#9670;&#160;</a></span>OC_SeuilValide()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t OC_SeuilValide </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Verifie que le seuil programme est dans la plage specifiee du LM211 (VDAC &gt;= 0,5 V). Une LDO non surveillee est toujours valide. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idx</td><td>Index de la LDO (0-17). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">1</td><td>si le seuil est valide, 0 sinon. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="keywordflow">if</span> (<a class="code hl_function" href="#gafc2057d31d2abd2b3389f0e6ce4cc3a2">OC_SeuilValide</a>(<a class="code hl_function" href="group__grp__config.html#gadc686ab4f6036d732a6f2b1ecb6dbd01">findLdoIndex</a>(<span class="stringliteral">&quot;2PSp&quot;</span>)) == 0U) { refuser_activation(); }</div>
+<div class="ttc" id="agroup__grp__oc_html_gafc2057d31d2abd2b3389f0e6ce4cc3a2"><div class="ttname"><a href="#gafc2057d31d2abd2b3389f0e6ce4cc3a2">OC_SeuilValide</a></div><div class="ttdeci">static uint8_t OC_SeuilValide(int idx)</div><div class="ttdoc">Verifie que le seuil programme est dans la plage specifiee du LM211 (VDAC &gt;= 0,5 V)....</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l03120">main.c:3120</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l03120">3120</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03104">OC_EstActive()</a>, et <a class="el" href="main_8c_source.html#l03120">OC_SeuilValide()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l03307">LDO_MettreAJour()</a>, <a class="el" href="main_8c_source.html#l03952">OC_Etat()</a>, <a class="el" href="main_8c_source.html#l03120">OC_SeuilValide()</a>, et <a class="el" href="main_8c_source.html#l06290">tc_request()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_gafc2057d31d2abd2b3389f0e6ce4cc3a2_cgraph.svg" width="450" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_gafc2057d31d2abd2b3389f0e6ce4cc3a2_icgraph.svg" width="1086" height="211"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga4c720f3df5385977a33b0d91f63df5f9" name="ga4c720f3df5385977a33b0d91f63df5f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4c720f3df5385977a33b0d91f63df5f9">&#9670;&#160;</a></span>OC_LireDefaut()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t OC_LireDefaut </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Lit la broche OC de la LDO et indique si elle signale une surintensite. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idx</td><td>Index de la LDO (0-17). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">1</td><td>si surintensite, 0 sinon. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">uint8_t defaut = <a class="code hl_function" href="#ga4c720f3df5385977a33b0d91f63df5f9">OC_LireDefaut</a>(<a class="code hl_function" href="group__grp__config.html#gadc686ab4f6036d732a6f2b1ecb6dbd01">findLdoIndex</a>(<span class="stringliteral">&quot;2PSp&quot;</span>));</div>
+<div class="ttc" id="agroup__grp__oc_html_ga4c720f3df5385977a33b0d91f63df5f9"><div class="ttname"><a href="#ga4c720f3df5385977a33b0d91f63df5f9">OC_LireDefaut</a></div><div class="ttdeci">static uint8_t OC_LireDefaut(int idx)</div><div class="ttdoc">Lit la broche OC de la LDO et indique si elle signale une surintensite.</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l03171">main.c:3171</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l03171">3171</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03171">OC_LireDefaut()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06223">LDO_Diagnostic()</a>, <a class="el" href="main_8c_source.html#l03307">LDO_MettreAJour()</a>, <a class="el" href="main_8c_source.html#l03228">LDO_RelacherBleeder()</a>, <a class="el" href="main_8c_source.html#l03952">OC_Etat()</a>, <a class="el" href="main_8c_source.html#l03171">OC_LireDefaut()</a>, <a class="el" href="main_8c_source.html#l03929">OC_Rearmer()</a>, et <a class="el" href="main_8c_source.html#l03283">OC_SurFrontIT()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_ga4c720f3df5385977a33b0d91f63df5f9_cgraph.svg" width="119" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_ga4c720f3df5385977a33b0d91f63df5f9_icgraph.svg" width="1196" height="411"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gad5ee0d7de4089f81d1b5309a4919b764" name="gad5ee0d7de4089f81d1b5309a4919b764"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad5ee0d7de4089f81d1b5309a4919b764">&#9670;&#160;</a></span>OC_Verrouiller()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void OC_Verrouiller </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Coupe l'EN de la LDO et verrouille le defaut. N'utilise aucune API FreeRTOS : appelable depuis l'interruption EXTI ou depuis la boucle. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idx</td><td>Index de la LDO (0-17). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#gad5ee0d7de4089f81d1b5309a4919b764">OC_Verrouiller</a>(<a class="code hl_function" href="group__grp__config.html#gadc686ab4f6036d732a6f2b1ecb6dbd01">findLdoIndex</a>(<span class="stringliteral">&quot;2PSp&quot;</span>));</div>
+<div class="ttc" id="agroup__grp__oc_html_gad5ee0d7de4089f81d1b5309a4919b764"><div class="ttname"><a href="#gad5ee0d7de4089f81d1b5309a4919b764">OC_Verrouiller</a></div><div class="ttdeci">static void OC_Verrouiller(int idx)</div><div class="ttdoc">Coupe l&#39;EN de la LDO et verrouille le defaut. N&#39;utilise aucune API FreeRTOS : appelable depuis l&#39;inte...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l03187">main.c:3187</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l03187">3187</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03147">DAC_DemanderSauvegarde()</a>, et <a class="el" href="main_8c_source.html#l03187">OC_Verrouiller()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l03307">LDO_MettreAJour()</a>, <a class="el" href="main_8c_source.html#l03283">OC_SurFrontIT()</a>, et <a class="el" href="main_8c_source.html#l03187">OC_Verrouiller()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_gad5ee0d7de4089f81d1b5309a4919b764_cgraph.svg" width="351" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_gad5ee0d7de4089f81d1b5309a4919b764_icgraph.svg" width="624" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gab7b892d9b93ae98c0860c1569fb10702" name="gab7b892d9b93ae98c0860c1569fb10702"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab7b892d9b93ae98c0860c1569fb10702">&#9670;&#160;</a></span>OC_EstArme()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t OC_EstArme </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Indique si la surveillance est armee : EN actif depuis au moins ldoConfig[idx].oc.blanking_ms (fin du soft-start et de l'appel de courant). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idx</td><td>Index de la LDO (0-17). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">1</td><td>si armee, 0 sinon. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="keywordflow">if</span> (<a class="code hl_function" href="#gab7b892d9b93ae98c0860c1569fb10702">OC_EstArme</a>(<a class="code hl_function" href="group__grp__config.html#gadc686ab4f6036d732a6f2b1ecb6dbd01">findLdoIndex</a>(<span class="stringliteral">&quot;2PSp&quot;</span>)) != 0U) { ... }</div>
+<div class="ttc" id="agroup__grp__oc_html_gab7b892d9b93ae98c0860c1569fb10702"><div class="ttname"><a href="#gab7b892d9b93ae98c0860c1569fb10702">OC_EstArme</a></div><div class="ttdeci">static uint8_t OC_EstArme(int idx)</div><div class="ttdoc">Indique si la surveillance est armee : EN actif depuis au moins ldoConfig[idx].oc....</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l03267">main.c:3267</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l03267">3267</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03267">OC_EstArme()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06223">LDO_Diagnostic()</a>, <a class="el" href="main_8c_source.html#l03307">LDO_MettreAJour()</a>, <a class="el" href="main_8c_source.html#l03267">OC_EstArme()</a>, et <a class="el" href="main_8c_source.html#l03283">OC_SurFrontIT()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_gab7b892d9b93ae98c0860c1569fb10702_cgraph.svg" width="111" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_gab7b892d9b93ae98c0860c1569fb10702_icgraph.svg" width="1154" height="280"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gafaa9094a90053ac8bf6eace70669f172" name="gafaa9094a90053ac8bf6eace70669f172"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafaa9094a90053ac8bf6eace70669f172">&#9670;&#160;</a></span>OC_SurFrontIT()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void OC_SurFrontIT </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Traitement d'un front de la broche OC en interruption. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idx</td><td>Index de la LDO dont la broche OC a change. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#gafaa9094a90053ac8bf6eace70669f172">OC_SurFrontIT</a>(<a class="code hl_function" href="group__grp__config.html#gadc686ab4f6036d732a6f2b1ecb6dbd01">findLdoIndex</a>(<span class="stringliteral">&quot;2PSp&quot;</span>));   <span class="comment">// depuis HAL_GPIO_EXTI_Callback()</span></div>
+<div class="ttc" id="agroup__grp__oc_html_gafaa9094a90053ac8bf6eace70669f172"><div class="ttname"><a href="#gafaa9094a90053ac8bf6eace70669f172">OC_SurFrontIT</a></div><div class="ttdeci">static void OC_SurFrontIT(int idx)</div><div class="ttdoc">Traitement d&#39;un front de la broche OC en interruption.</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l03283">main.c:3283</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l03283">3283</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03104">OC_EstActive()</a>, <a class="el" href="main_8c_source.html#l03267">OC_EstArme()</a>, <a class="el" href="main_8c_source.html#l03171">OC_LireDefaut()</a>, <a class="el" href="main_8c_source.html#l03283">OC_SurFrontIT()</a>, et <a class="el" href="main_8c_source.html#l03187">OC_Verrouiller()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06676">HAL_GPIO_EXTI_Callback()</a>, et <a class="el" href="main_8c_source.html#l03283">OC_SurFrontIT()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_gafaa9094a90053ac8bf6eace70669f172_cgraph.svg" width="512" height="286"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_gafaa9094a90053ac8bf6eace70669f172_icgraph.svg" width="352" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga66c4ac6f7a9837733484590dbe3081d2" name="ga66c4ac6f7a9837733484590dbe3081d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga66c4ac6f7a9837733484590dbe3081d2">&#9670;&#160;</a></span>OC_SignalerEvenements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void OC_SignalerEvenements </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Emet sur USART1 une ligne par defaut nouvellement verrouille. Appelee depuis la boucle de StartLwipTask(), jamais en interruption. </p>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun.</td><td>Ligne emise : "OC_TRIP:2PSp:NB=1:T_MS=123456:SEUIL=4006". </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#ga66c4ac6f7a9837733484590dbe3081d2">OC_SignalerEvenements</a>();</div>
+<div class="ttc" id="agroup__grp__oc_html_ga66c4ac6f7a9837733484590dbe3081d2"><div class="ttname"><a href="#ga66c4ac6f7a9837733484590dbe3081d2">OC_SignalerEvenements</a></div><div class="ttdeci">static void OC_SignalerEvenements(void)</div><div class="ttdoc">Emet sur USART1 une ligne par defaut nouvellement verrouille. Appelee depuis la boucle de StartLwipTa...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l03898">main.c:3898</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l03898">3898</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03898">OC_SignalerEvenements()</a>, et <a class="el" href="main_8c_source.html#l01803">UART1_EnvoyerTexte()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l03898">OC_SignalerEvenements()</a>, et <a class="el" href="main_8c_source.html#l06730">StartLwipTask()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_ga66c4ac6f7a9837733484590dbe3081d2_cgraph.svg" width="379" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_ga66c4ac6f7a9837733484590dbe3081d2_icgraph.svg" width="430" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga61bd3c43a673ea375cabfe6a2de48eb0" name="ga61bd3c43a673ea375cabfe6a2de48eb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga61bd3c43a673ea375cabfe6a2de48eb0">&#9670;&#160;</a></span>OC_Rearmer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void OC_Rearmer </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>nom</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Commande "RST_OC_LDO_&lt;nom&gt;" : deverrouille le defaut si la broche OC est revenue au repos. L'EN reste a 0 : l'operateur doit renvoyer SET_EN_LDO_&lt;nom&gt;. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idx</td><td>Index de la LDO (0-17). </td></tr>
+    <tr><td class="paramname">nom</td><td>Nom de la LDO, pour la reponse. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun.</td><td>Reponse "OC_RST:&lt;nom&gt;:OK" ou "OC_RST:&lt;nom&gt;:REFUS_OC_ACTIF". </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Trame UDP recue : <span class="stringliteral">&quot;RST_OC_LDO_2PSp&quot;</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l03929">3929</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03171">OC_LireDefaut()</a>, et <a class="el" href="main_8c_source.html#l03929">OC_Rearmer()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l03929">OC_Rearmer()</a>, et <a class="el" href="main_8c_source.html#l06290">tc_request()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_ga61bd3c43a673ea375cabfe6a2de48eb0_cgraph.svg" width="266" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_ga61bd3c43a673ea375cabfe6a2de48eb0_icgraph.svg" width="907" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga53ac0c1da803505e54c72dbd31e4de73" name="ga53ac0c1da803505e54c72dbd31e4de73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga53ac0c1da803505e54c72dbd31e4de73">&#9670;&#160;</a></span>OC_Etat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void OC_Etat </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>nom</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Commande "GET_OC_LDO_&lt;nom&gt;" : etat complet de la protection. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idx</td><td>Index de la LDO (0-17). </td></tr>
+    <tr><td class="paramname">nom</td><td>Nom de la LDO, pour la reponse. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun.</td><td>Reponse "OC_LDO:2PSp:NIV=0:VERROU=1:NB=1:T_MS=123456:SEUIL=4006:SEUIL_VALIDE=1". </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Trame UDP recue : <span class="stringliteral">&quot;GET_OC_LDO_2PSp&quot;</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l03952">3952</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03952">OC_Etat()</a>, <a class="el" href="main_8c_source.html#l03171">OC_LireDefaut()</a>, et <a class="el" href="main_8c_source.html#l03120">OC_SeuilValide()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l03952">OC_Etat()</a>, et <a class="el" href="main_8c_source.html#l06290">tc_request()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_ga53ac0c1da803505e54c72dbd31e4de73_cgraph.svg" width="571" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_ga53ac0c1da803505e54c72dbd31e4de73_icgraph.svg" width="882" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga9358ff0a14ed464e81374dab1f13777d" name="ga9358ff0a14ed464e81374dab1f13777d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9358ff0a14ed464e81374dab1f13777d">&#9670;&#160;</a></span>OC_InitialiserSeuilsDefaut()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void OC_InitialiserSeuilsDefaut </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Programme le seuil de courant par defaut (ldoConfig[i].oc.seuil_defaut, 0,50 A par defaut) sur toutes les LDO surveillees, au demarrage. Sans cela, le seuil vaudrait 0 V (MCP4725_VAL_DEF), hors de la plage d'entree du LM211, et l'activation serait refusee. Doit etre appelee apres LDO_InitialiserTables() et avant tout traitement de commande UDP. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun.</td><td>Met a jour CURRENT_LDO[], ldo-&gt;CURRENT et DACx_DEF ; la boucle de StartLwipTask() l'envoie au DAC au tour suivant. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="group__grp__config.html#ga8ad9d7191f49b52c41d5a583f774465d">LDO_InitialiserTables</a>();</div>
+<div class="line">OC_InitialiserSeuilsDefaut();</div>
+<div class="ttc" id="agroup__grp__config_html_ga8ad9d7191f49b52c41d5a583f774465d"><div class="ttname"><a href="group__grp__config.html#ga8ad9d7191f49b52c41d5a583f774465d">LDO_InitialiserTables</a></div><div class="ttdeci">static void LDO_InitialiserTables(void)</div><div class="ttdoc">Recopie dans les tables RAM modifiables a chaud les valeurs initiales declarees dans ldoConfig[] : ma...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l06025">main.c:6025</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l04173">4173</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l04011">EcrireValeurDac()</a>, <a class="el" href="main_8c_source.html#l03086">OC_EstSurveillee()</a>, et <a class="el" href="main_8c_source.html#l04173">OC_InitialiserSeuilsDefaut()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04173">OC_InitialiserSeuilsDefaut()</a>, et <a class="el" href="main_8c_source.html#l06730">StartLwipTask()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_ga9358ff0a14ed464e81374dab1f13777d_cgraph.svg" width="554" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_ga9358ff0a14ed464e81374dab1f13777d_icgraph.svg" width="436" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gaa95aeec744d338f67994e9ecbaf895b9" name="gaa95aeec744d338f67994e9ecbaf895b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa95aeec744d338f67994e9ecbaf895b9">&#9670;&#160;</a></span>OC_LdoDuCanalSeuil()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int OC_LdoDuCanalSeuil </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *</td>          <td class="paramname"><span class="paramname"><em>tableau</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>canal</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Cherche la LDO surveillee dont le seuil de courant est sur le canal donne d'un tableau DACx_DEF. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tableau</td><td>Tableau DACx_DEF (DAC1_DEF ... DAC5_DEF), peut etre NULL. </td></tr>
+    <tr><td class="paramname">canal</td><td>Canal (0-7). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Index</td><td>de la LDO (0-17), ou -1 si ce canal n'est pas un seuil OC. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="keywordtype">int</span> idx = <a class="code hl_function" href="#gaa95aeec744d338f67994e9ecbaf895b9">OC_LdoDuCanalSeuil</a>(DAC1_DEF, 5);   <span class="comment">// -&gt; 2 (2PSp)</span></div>
+<div class="ttc" id="agroup__grp__oc_html_gaa95aeec744d338f67994e9ecbaf895b9"><div class="ttname"><a href="#gaa95aeec744d338f67994e9ecbaf895b9">OC_LdoDuCanalSeuil</a></div><div class="ttdeci">static int OC_LdoDuCanalSeuil(const uint8_t *tableau, uint8_t canal)</div><div class="ttdoc">Cherche la LDO surveillee dont le seuil de courant est sur le canal donne d&#39;un tableau DACx_DEF.</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l04199">main.c:4199</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l04199">4199</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03086">OC_EstSurveillee()</a>, <a class="el" href="main_8c_source.html#l04199">OC_LdoDuCanalSeuil()</a>, et <a class="el" href="main_8c_source.html#l03979">ResoudreTableauDac()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04458">h_BALAYER_DAC()</a>, <a class="el" href="main_8c_source.html#l04199">OC_LdoDuCanalSeuil()</a>, et <a class="el" href="main_8c_source.html#l04235">SetMappingDacLdo()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_gaa95aeec744d338f67994e9ecbaf895b9_cgraph.svg" width="355" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_gaa95aeec744d338f67994e9ecbaf895b9_icgraph.svg" width="1142" height="174"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga3c2340b58426351c26b0ff583df3f970" name="ga3c2340b58426351c26b0ff583df3f970"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3c2340b58426351c26b0ff583df3f970">&#9670;&#160;</a></span>OC_IrqDepuisBroche()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">IRQn_Type OC_IrqDepuisBroche </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>pin</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Ligne EXTI (IRQn) correspondant a une broche GPIO (la ligne EXTI n est partagee par la broche n de TOUS les ports). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin</td><td>Masque de broche HAL (GPIO_PIN_0 ... GPIO_PIN_15), un seul bit. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">IRQn_Type</td><td>de la ligne EXTI correspondante. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">HAL_NVIC_EnableIRQ(<a class="code hl_function" href="#ga3c2340b58426351c26b0ff583df3f970">OC_IrqDepuisBroche</a>(GPIO_PIN_4));   <span class="comment">// EXTI4_IRQn</span></div>
+<div class="ttc" id="agroup__grp__oc_html_ga3c2340b58426351c26b0ff583df3f970"><div class="ttname"><a href="#ga3c2340b58426351c26b0ff583df3f970">OC_IrqDepuisBroche</a></div><div class="ttdeci">static IRQn_Type OC_IrqDepuisBroche(uint16_t pin)</div><div class="ttdoc">Ligne EXTI (IRQn) correspondant a une broche GPIO (la ligne EXTI n est partagee par la broche n de TO...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l06474">main.c:6474</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l06474">6474</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06474">OC_IrqDepuisBroche()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06510">MX_OC_EXTI_Init()</a>, et <a class="el" href="main_8c_source.html#l06474">OC_IrqDepuisBroche()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_ga3c2340b58426351c26b0ff583df3f970_cgraph.svg" width="156" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_ga3c2340b58426351c26b0ff583df3f970_icgraph.svg" width="584" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga12ef8bab086612c9ecf3cb2ffed9c776" name="ga12ef8bab086612c9ecf3cb2ffed9c776"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga12ef8bab086612c9ecf3cb2ffed9c776">&#9670;&#160;</a></span>MX_OC_EXTI_Init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MX_OC_EXTI_Init </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Met en interruption la broche OC de chaque LDO declaree avec oc.interruption = 1 dans ldoConfig[], sur le front qui correspond a l'apparition d'une surintensite (montant si niveau_defaut = SET). Refuse (ligne UART "OC_EXTI:&lt;nom&gt;:REFUS_LIGNE_n") une broche dont la ligne EXTI est deja prise (bouton, ou autre LDO de meme numero de broche sur un autre port) : la LDO reste alors surveillee par la boucle seule. Aucune API FreeRTOS n'est appelee dans l'IT : la priorite 2 peut etre plus haute que configMAX_SYSCALL_INTERRUPT_PRIORITY. </p>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun.</td><td>Remplit oc_it_active[]. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">InitialiserConfigDacsI2C1();</div>
+<div class="line"><a class="code hl_function" href="#ga12ef8bab086612c9ecf3cb2ffed9c776">MX_OC_EXTI_Init</a>();</div>
+<div class="ttc" id="agroup__grp__oc_html_ga12ef8bab086612c9ecf3cb2ffed9c776"><div class="ttname"><a href="#ga12ef8bab086612c9ecf3cb2ffed9c776">MX_OC_EXTI_Init</a></div><div class="ttdeci">static void MX_OC_EXTI_Init(void)</div><div class="ttdoc">Met en interruption la broche OC de chaque LDO declaree avec oc.interruption = 1 dans ldoConfig[],...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l06510">main.c:6510</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l06510">6510</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l00321">OcConfig_t::interruption</a>, <a class="el" href="main_8c_source.html#l06510">MX_OC_EXTI_Init()</a>, <a class="el" href="main_8c_source.html#l00334">LDO_Config_t::name</a>, <a class="el" href="main_8c_source.html#l00322">OcConfig_t::niveau_defaut</a>, <a class="el" href="main_8c_source.html#l00348">LDO_Config_t::oc</a>, <a class="el" href="main_8c_source.html#l03086">OC_EstSurveillee()</a>, <a class="el" href="main_8c_source.html#l06474">OC_IrqDepuisBroche()</a>, <a class="el" href="main_8c_source.html#l00339">LDO_Config_t::oc_port</a>, et <a class="el" href="main_8c_source.html#l01803">UART1_EnvoyerTexte()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06510">MX_OC_EXTI_Init()</a>, et <a class="el" href="main_8c_source.html#l06730">StartLwipTask()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_ga12ef8bab086612c9ecf3cb2ffed9c776_cgraph.svg" width="340" height="211"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__oc_ga12ef8bab086612c9ecf3cb2ffed9c776_icgraph.svg" width="391" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

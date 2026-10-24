@@ -1,0 +1,25 @@
+<map id="HAL_GPIO_EXTI_Callback" name="HAL_GPIO_EXTI_Callback">
+<area shape="rect" id="Node000001" title="Callback appele par le HAL a chaque interruption EXTI, quelle que soit la broche. Boutons (PC13,..." alt="" coords="5,141,188,168"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="63,141,57,133,62,123,75,117,97,115,120,117,133,125,128,127,118,122,96,120,76,122,65,127,63,132,68,141"/>
+<area shape="rect" id="Node000002" href="$group__grp__oc.html#gafaa9094a90053ac8bf6eace70669f172" title="Traitement d&#39;un front de la broche OC en interruption." alt="" coords="236,141,346,168"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="187,152,222,154,217,156,189,157"/>
+<area shape="poly" id="edge11_Node000002_Node000002" title=" " alt="" coords="263,140,259,133,262,123,273,117,291,115,310,117,321,126,316,126,308,122,291,120,275,122,266,127,264,132,268,142"/>
+<area shape="rect" id="Node000003" href="$group__grp__oc.html#ga5a3191b846544a7dced3ea094018f361" title="Indique si la protection OC est AGISSANTE : LDO surveillee (circuit cable, voir OC_EstSurveillee()) E..." alt="" coords="396,29,501,56"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="304,139,342,104,392,66,398,65,403,63,396,70,346,108,307,143"/>
+<area shape="rect" id="Node000005" href="$group__grp__oc.html#gab7b892d9b93ae98c0860c1569fb10702" title="Indique si la surveillance est armee : EN actif depuis au moins ldoConfig[idx].oc...." alt="" coords="398,104,498,131"/>
+<area shape="poly" id="edge7_Node000002_Node000005" title=" " alt="" coords="345,139,386,132,381,133,347,144"/>
+<area shape="rect" id="Node000006" href="$group__grp__oc.html#ga4c720f3df5385977a33b0d91f63df5f9" title="Lit la broche OC de la LDO et indique si elle signale une surintensite." alt="" coords="394,179,502,205"/>
+<area shape="poly" id="edge9_Node000002_Node000006" title=" " alt="" coords="346,165,382,175,376,176,346,170"/>
+<area shape="rect" id="Node000007" href="$group__grp__oc.html#gad5ee0d7de4089f81d1b5309a4919b764" title="Coupe l&#39;EN de la LDO et verrouille le defaut. N&#39;utilise aucune API FreeRTOS : appelable depuis l&#39;inte..." alt="" coords="396,253,501,280"/>
+<area shape="poly" id="edge12_Node000002_Node000007" title=" " alt="" coords="312,166,418,244,413,244,310,171"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="421,28,416,21,419,11,430,5,448,3,467,5,479,14,473,14,465,10,448,8,432,10,423,15,421,20,426,30"/>
+<area shape="rect" id="Node000004" href="$group__grp__oc.html#ga7851b235d1d1f7564644d659587b3ba2" title="Indique si la LDO est surveillee : ldoConfig[idx].oc.surveille = 1 ET un DAC de seuil (dac_courant) d..." alt="" coords="581,29,706,56"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="501,40,568,42,563,43,502,45"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="610,28,604,21,608,11,622,5,644,3,667,5,681,14,675,14,665,10,643,8,623,10,612,15,610,20,615,30"/>
+<area shape="poly" id="edge8_Node000005_Node000005" title=" " alt="" coords="421,103,416,95,419,86,430,80,448,77,467,80,479,89,473,89,465,85,448,83,432,85,423,89,421,95,426,104"/>
+<area shape="poly" id="edge10_Node000006_Node000006" title=" " alt="" coords="421,177,416,170,419,160,430,154,448,152,467,155,479,164,473,163,465,160,448,157,432,159,423,164,421,169,426,179"/>
+<area shape="poly" id="edge15_Node000007_Node000007" title=" " alt="" coords="421,252,416,245,419,235,430,229,448,227,467,229,479,239,473,237,465,234,448,232,432,234,423,239,421,244,426,254"/>
+<area shape="rect" id="Node000008" href="$group__grp__eeprom.html#ga0fdcf8780e2127569c1e1a76e9518c5a" title="Demande l&#39;ecriture en EEPROM du MCP47FEB28 des codes DAC (tension et seuil de courant) d&#39;une LDO decl..." alt="" coords="550,253,737,280"/>
+<area shape="poly" id="edge13_Node000007_Node000008" title=" " alt="" coords="501,264,537,267,532,267,501,269"/>
+<area shape="poly" id="edge14_Node000008_Node000008" title=" " alt="" coords="610,252,604,245,608,235,622,229,644,227,667,229,681,239,675,238,665,234,643,232,623,234,612,239,610,244,615,254"/>
+</map>

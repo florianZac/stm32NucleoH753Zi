@@ -1,0 +1,13 @@
+<map id="h_SET_MUX_CANAL_TENSION" name="h_SET_MUX_CANAL_TENSION">
+<area shape="rect" id="Node000001" title="Handler de la commande reseau &quot;SET_MUX_CANAL_TENSION:&lt;canal&gt;&quot;." alt="" coords="5,29,223,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="71,29,64,21,69,11,86,5,114,3,145,5,162,15,157,15,143,10,114,8,87,10,72,15,69,20,76,29"/>
+<area shape="rect" id="Node000002" href="$group__grp__adc.html#gaf26fbfed012a3cc53e96a8cf7c284e2d" title="Selectionne un canal (0&#45;23) parmi les 3 ADG728 de la chaine TENSION (bus I2C1). Desactive systematiqu..." alt="" coords="271,29,468,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="223,40,257,43,252,43,223,45"/>
+<area shape="poly" id="edge7_Node000002_Node000002" title=" " alt="" coords="335,28,329,21,334,11,347,5,369,3,393,5,407,15,402,14,392,10,369,8,349,10,337,15,335,20,340,30"/>
+<area shape="rect" id="Node000003" href="$group__grp__adc.html#ga74a9c056e466dd59ca9ea5b9110125f0" title="Ecrit le masque de canaux actifs sur un ADG728 (un octet, un bit par canal &#45; voir datasheet ADG728,..." alt="" coords="516,29,621,56"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="468,40,503,43,498,43,468,45"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="540,28,535,21,538,11,550,5,569,3,589,5,601,15,596,13,587,10,569,8,551,10,542,15,540,20,544,30"/>
+<area shape="rect" id="Node000004" href="$group__grp__i2c.html#ga5cb1cd70b1dd76a8aadb2bccb2837d2f" title="Retourne le mutex correspondant au bus d&#39;un handle I2C donne." alt="" coords="669,29,804,56"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="622,40,656,43,651,43,622,45"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="707,28,702,21,706,11,718,5,737,3,757,5,769,15,764,13,755,10,736,8,719,10,710,15,708,20,712,30"/>
+</map>

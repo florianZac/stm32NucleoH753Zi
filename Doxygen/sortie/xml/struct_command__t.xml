@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="struct_command__t" kind="struct" language="C++" prot="public">
+    <compoundname>Command_t</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_command__t_1a9ecf81c7eb7e29a6ff50ac45f7d5075d" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* Command_t::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>Command_t::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5868" column="12" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5868" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_command__t_1ad90ca7f5bf4fb93d59de89a453ec1d31" prot="public" static="no" mutable="no">
+        <type>void(*)</type>
+        <definition>void(*) Command_t::handler(void)</definition>
+        <argsstring>(void)</argsstring>
+        <name>handler</name>
+        <qualifiedname>Command_t::handler</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5869" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5869" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5867" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5867" bodyend="5870"/>
+    <listofallmembers>
+      <member refid="struct_command__t_1ad90ca7f5bf4fb93d59de89a453ec1d31" prot="public" virt="non-virtual"><scope>Command_t</scope><name>handler</name></member>
+      <member refid="struct_command__t_1a9ecf81c7eb7e29a6ff50ac45f7d5075d" prot="public" virt="non-virtual"><scope>Command_t</scope><name>name</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

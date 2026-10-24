@@ -1,0 +1,7 @@
+<map id="OC_SignalerEvenements" name="OC_SignalerEvenements">
+<area shape="rect" id="Node000001" title="Emet sur USART1 une ligne par defaut nouvellement verrouille. Appelee depuis la boucle de StartLwipTa..." alt="" coords="5,29,174,56"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="54,29,48,21,52,11,66,5,90,3,114,5,129,14,124,14,113,10,89,8,68,10,56,15,53,20,59,29"/>
+<area shape="rect" id="Node000002" href="$group__grp__comm.html#gab9b5dfc109e472981cbbb7867d1b7f92" title="Envoie une chaine de caracteres sur USART1 (PB6/PB7, via un adaptateur USB&#45;UART externe),..." alt="" coords="222,29,373,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="174,40,209,43,203,43,174,45"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="262,28,256,21,260,11,274,5,297,3,322,5,337,14,331,14,321,10,297,8,276,10,264,15,261,20,267,30"/>
+</map>

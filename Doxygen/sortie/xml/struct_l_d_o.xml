@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="struct_l_d_o" kind="struct" language="C++" prot="public">
+    <compoundname>LDO</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_l_d_o_1ad392afd0441b3325e80ef32844c2cf55" prot="public" static="no" mutable="no">
+        <type>_Bool</type>
+        <definition>_Bool LDO::EN</definition>
+        <argsstring></argsstring>
+        <name>EN</name>
+        <qualifiedname>LDO::EN</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc/main.h" line="232" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc/main.h" bodystart="232" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o_1a09328794ba03616aa44f34f7ce1f7372" prot="public" static="no" mutable="no">
+        <type>_Bool</type>
+        <definition>_Bool LDO::PG</definition>
+        <argsstring></argsstring>
+        <name>PG</name>
+        <qualifiedname>LDO::PG</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc/main.h" line="233" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc/main.h" bodystart="233" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o_1ad2ad90c26ea2e16471b200f69970d6d4" prot="public" static="no" mutable="no">
+        <type>_Bool</type>
+        <definition>_Bool LDO::OC</definition>
+        <argsstring></argsstring>
+        <name>OC</name>
+        <qualifiedname>LDO::OC</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc/main.h" line="234" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc/main.h" bodystart="234" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o_1a5b39a9f07d8394bd35fe9ad43f318280" prot="public" static="no" mutable="no">
+        <type>_Bool</type>
+        <definition>_Bool LDO::BLD</definition>
+        <argsstring></argsstring>
+        <name>BLD</name>
+        <qualifiedname>LDO::BLD</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc/main.h" line="235" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc/main.h" bodystart="235" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o_1a8379ed33ae8671bf656b973ae3fa51db" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t LDO::VAL</definition>
+        <argsstring></argsstring>
+        <name>VAL</name>
+        <qualifiedname>LDO::VAL</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc/main.h" line="236" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc/main.h" bodystart="236" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o_1a16cd1040d64c6008c3c6f232d02fbcb9" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t LDO::CURRENT</definition>
+        <argsstring></argsstring>
+        <name>CURRENT</name>
+        <qualifiedname>LDO::CURRENT</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc/main.h" line="237" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc/main.h" bodystart="237" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o_1a4d37dc493006141e9d9fe18c567512fa" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t LDO::RET</definition>
+        <argsstring></argsstring>
+        <name>RET</name>
+        <qualifiedname>LDO::RET</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc/main.h" line="238" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc/main.h" bodystart="238" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o_1aa6569c9b63697dad36c3b93f8102a3ea" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t LDO::RET_OFF</definition>
+        <argsstring></argsstring>
+        <name>RET_OFF</name>
+        <qualifiedname>LDO::RET_OFF</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc/main.h" line="239" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc/main.h" bodystart="239" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc/main.h" line="231" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc/main.h" bodystart="231" bodyend="240"/>
+    <listofallmembers>
+      <member refid="struct_l_d_o_1a5b39a9f07d8394bd35fe9ad43f318280" prot="public" virt="non-virtual"><scope>LDO</scope><name>BLD</name></member>
+      <member refid="struct_l_d_o_1a16cd1040d64c6008c3c6f232d02fbcb9" prot="public" virt="non-virtual"><scope>LDO</scope><name>CURRENT</name></member>
+      <member refid="struct_l_d_o_1ad392afd0441b3325e80ef32844c2cf55" prot="public" virt="non-virtual"><scope>LDO</scope><name>EN</name></member>
+      <member refid="struct_l_d_o_1ad2ad90c26ea2e16471b200f69970d6d4" prot="public" virt="non-virtual"><scope>LDO</scope><name>OC</name></member>
+      <member refid="struct_l_d_o_1a09328794ba03616aa44f34f7ce1f7372" prot="public" virt="non-virtual"><scope>LDO</scope><name>PG</name></member>
+      <member refid="struct_l_d_o_1a4d37dc493006141e9d9fe18c567512fa" prot="public" virt="non-virtual"><scope>LDO</scope><name>RET</name></member>
+      <member refid="struct_l_d_o_1aa6569c9b63697dad36c3b93f8102a3ea" prot="public" virt="non-virtual"><scope>LDO</scope><name>RET_OFF</name></member>
+      <member refid="struct_l_d_o_1a8379ed33ae8671bf656b973ae3fa51db" prot="public" virt="non-virtual"><scope>LDO</scope><name>VAL</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

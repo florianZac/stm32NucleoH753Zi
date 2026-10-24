@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="struct_mapping_dac_ldo__t" kind="struct" language="C++" prot="public">
+    <compoundname>MappingDacLdo_t</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_mapping_dac_ldo__t_1ab9b8fd854eb559e380e90da741091814" prot="public" static="no" mutable="no">
+        <type><ref refid="main_8c_1a75e57bba50363a40a374df0b941bfd58" kindref="member">CibleDac_t</ref></type>
+        <definition>CibleDac_t MappingDacLdo_t::dac_tension</definition>
+        <argsstring></argsstring>
+        <name>dac_tension</name>
+        <qualifiedname>MappingDacLdo_t::dac_tension</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="284" column="16" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="284" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_mapping_dac_ldo__t_1aeb1f07e40ffaf2dbebc10592b13f6fbd" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t MappingDacLdo_t::canal_tension</definition>
+        <argsstring></argsstring>
+        <name>canal_tension</name>
+        <qualifiedname>MappingDacLdo_t::canal_tension</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="285" column="16" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="285" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_mapping_dac_ldo__t_1a08a6ab48af9282925c564ddd068fa849" prot="public" static="no" mutable="no">
+        <type><ref refid="main_8c_1a75e57bba50363a40a374df0b941bfd58" kindref="member">CibleDac_t</ref></type>
+        <definition>CibleDac_t MappingDacLdo_t::dac_courant</definition>
+        <argsstring></argsstring>
+        <name>dac_courant</name>
+        <qualifiedname>MappingDacLdo_t::dac_courant</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="286" column="16" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="286" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_mapping_dac_ldo__t_1aafbb4664a844505b825fe0682df73c63" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t MappingDacLdo_t::canal_courant</definition>
+        <argsstring></argsstring>
+        <name>canal_courant</name>
+        <qualifiedname>MappingDacLdo_t::canal_courant</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="287" column="16" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="287" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Correspondance DAC &lt;-&gt; LDO d&apos;une LDO : puce et voie (0-7) pour la tension, idem pour le courant (CIBLE_AUCUNE si non applicable). Copie RAM de ldoConfig[], modifiable a chaud (SetMappingDacLdo()). </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="283" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="283" bodyend="288"/>
+    <listofallmembers>
+      <member refid="struct_mapping_dac_ldo__t_1aafbb4664a844505b825fe0682df73c63" prot="public" virt="non-virtual"><scope>MappingDacLdo_t</scope><name>canal_courant</name></member>
+      <member refid="struct_mapping_dac_ldo__t_1aeb1f07e40ffaf2dbebc10592b13f6fbd" prot="public" virt="non-virtual"><scope>MappingDacLdo_t</scope><name>canal_tension</name></member>
+      <member refid="struct_mapping_dac_ldo__t_1a08a6ab48af9282925c564ddd068fa849" prot="public" virt="non-virtual"><scope>MappingDacLdo_t</scope><name>dac_courant</name></member>
+      <member refid="struct_mapping_dac_ldo__t_1ab9b8fd854eb559e380e90da741091814" prot="public" virt="non-virtual"><scope>MappingDacLdo_t</scope><name>dac_tension</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

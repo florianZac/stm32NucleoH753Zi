@@ -1,0 +1,7 @@
+<map id="OC_Verrouiller" name="OC_Verrouiller">
+<area shape="rect" id="Node000001" title="Coupe l&#39;EN de la LDO et verrouille le defaut. N&#39;utilise aucune API FreeRTOS : appelable depuis l&#39;inte..." alt="" coords="5,29,111,56"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="25,29,19,21,23,11,36,5,58,3,81,5,95,14,90,14,80,10,58,8,38,10,27,15,24,20,30,28"/>
+<area shape="rect" id="Node000002" href="$group__grp__eeprom.html#ga0fdcf8780e2127569c1e1a76e9518c5a" title="Demande l&#39;ecriture en EEPROM du MCP47FEB28 des codes DAC (tension et seuil de courant) d&#39;une LDO decl..." alt="" coords="159,29,345,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,40,146,42,140,43,111,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="219,28,213,21,217,11,230,5,252,3,275,5,289,14,283,14,273,10,252,8,232,10,221,15,218,20,223,30"/>
+</map>

@@ -1,0 +1,376 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lwip_demo_H753 - Controleur de LDO: Variables globale</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Lwip_demo_H753 - Controleur de LDO<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">Firmware STM32H753ZI : pilotage de 18 LDO (configuration CSV, DAC MCP47FEB28, protection OC)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Recherche" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('globals.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="contents">
+<div class="textblock">Liste de toutes les fonctions, variables, macros, enumérations, et définitions de type documentés avec des liens vers la documentation :</div><br/>
+<div class="qindex"><a class="qindex" href="#index_a">A</a><div class="alphasepar"></div><a class="qindex" href="#index_b">B</a><div class="alphasepar"></div><a class="qindex" href="#index_c">C</a><div class="alphasepar"></div><a class="qindex" href="#index_d">D</a><div class="alphasepar"></div><a class="qindex" href="#index_e">E</a><div class="alphasepar"></div><a class="qindex" href="#index_f">F</a><div class="alphasepar"></div><a class="qindex" href="#index_g">G</a><div class="alphasepar"></div><a class="qindex" href="#index_h">H</a><div class="alphasepar"></div><a class="qindex" href="#index_i">I</a><div class="alphasepar"></div><a class="qindex" href="#index_l">L</a><div class="alphasepar"></div><a class="qindex" href="#index_m">M</a><div class="alphasepar"></div><a class="qindex" href="#index_n">N</a><div class="alphasepar"></div><a class="qindex" href="#index_o">O</a><div class="alphasepar"></div><a class="qindex" href="#index_p">P</a><div class="alphasepar"></div><a class="qindex" href="#index_r">R</a><div class="alphasepar"></div><a class="qindex" href="#index_s">S</a><div class="alphasepar"></div><a class="qindex" href="#index_t">T</a><div class="alphasepar"></div><a class="qindex" href="#index_u">U</a><div class="alphasepar"></div><a class="qindex" href="#index_v">V</a></div>
+
+
+<h3 class="doxsection"><a id="index_a" name="index_a"></a>- a -</h3><ul>
+<li>assert_failed()&#160;:&#160;<a class="el" href="group__grp__cubemx.html#ga2532ff72b1a2ff82f65e8c2a5a4dde00">main.c</a></li>
+</ul>
+
+
+<h3 class="doxsection"><a id="index_b" name="index_b"></a>- b -</h3><ul>
+<li>BalayerSortieDAC()&#160;:&#160;<a class="el" href="group__grp__dac.html#ga3b69ec3e3af5d495bc0a095f6e4343eb">main.c</a></li>
+<li>BLD_BAS&#160;:&#160;<a class="el" href="main_8c.html#a193f9751aee3a39a3f5d185415f075fb">main.c</a></li>
+<li>BLD_HAUT&#160;:&#160;<a class="el" href="main_8c.html#ac0dd7ece0376f26dc4c9f6e25df445fc">main.c</a></li>
+<li>BROCHES_LDO&#160;:&#160;<a class="el" href="main_8c.html#aad16d67bcfc63c84ce3147fad2107467">main.c</a></li>
+<li>buildStatusResponse()&#160;:&#160;<a class="el" href="group__grp__etat.html#ga70c1db5780542cb5246d6ed350666c5c">main.c</a></li>
+</ul>
+
+
+<h3 class="doxsection"><a id="index_c" name="index_c"></a>- c -</h3><ul>
+<li>CibleDac_t&#160;:&#160;<a class="el" href="main_8c.html#a75e57bba50363a40a374df0b941bfd58">main.c</a></li>
+<li>CmdOnOff_BasculerBld()&#160;:&#160;<a class="el" href="group__grp__cmd.html#ga5d44c3c48f8606b7286fe670f62997b4">main.c</a></li>
+<li>CmdOnOff_BasculerOc()&#160;:&#160;<a class="el" href="group__grp__cmd.html#ga7d468d2e11f2a18d745896a5865ed077">main.c</a></li>
+<li>CmdOnOff_EcrireFlash()&#160;:&#160;<a class="el" href="group__grp__cmd.html#gacc19a91cbb61d5aa4f80d4a141306050">main.c</a></li>
+<li>CmdOnOff_Initialiser()&#160;:&#160;<a class="el" href="group__grp__cmd.html#ga3f4f9ffd19d9dfb5f1fccd414e6bd2f3">main.c</a></li>
+<li>CmdOnOff_Repondre()&#160;:&#160;<a class="el" href="group__grp__cmd.html#gafb6457db3c48283dd0fb280775957f7a">main.c</a></li>
+<li>CmdOnOff_TraiterSauvegarde()&#160;:&#160;<a class="el" href="group__grp__cmd.html#ga8a6ad7d0ecff45c40c421cbab46b2526">main.c</a></li>
+<li>Commande_Deverrouiller()&#160;:&#160;<a class="el" href="group__grp__comm.html#ga8f851878b9fa126696fa20796cb7c274">main.c</a></li>
+<li>Commande_Verrouiller()&#160;:&#160;<a class="el" href="group__grp__comm.html#ga700668cb98e6ac2d4c9e2a1f80bd365a">main.c</a></li>
+<li>compareCommand()&#160;:&#160;<a class="el" href="group__grp__comm.html#ga5e4e310aeaafd17d31d0c9fd0874ad0c">main.c</a></li>
+<li>compareCommandForSort()&#160;:&#160;<a class="el" href="group__grp__comm.html#ga2f7f33500ff00c489e30866948d48e3c">main.c</a></li>
+<li>Crc32Mots()&#160;:&#160;<a class="el" href="group__grp__cmd.html#ga3ea657061e2d4ecf828155a9ca3a9dba">main.c</a></li>
+<li>CreerMutexCommandes()&#160;:&#160;<a class="el" href="group__grp__comm.html#ga7e95f093ea99a8f73f132b261bdebc2f">main.c</a></li>
+<li>CreerMutexI2C()&#160;:&#160;<a class="el" href="group__grp__i2c.html#ga9c1e98ecaf3c304b9045320209882bf7">main.c</a></li>
+<li>CreerMutexUART()&#160;:&#160;<a class="el" href="group__grp__comm.html#ga59372978b4f9f6b427161864e8bc4dd6">main.c</a></li>
+</ul>
+
+
+<h3 class="doxsection"><a id="index_d" name="index_d"></a>- d -</h3><ul>
+<li>DAC_ConfigurerSeuilsPotentiometre()&#160;:&#160;<a class="el" href="group__grp__eeprom.html#ga538f60d46cf0ac04119fa65a989274be">main.c</a></li>
+<li>DAC_DemanderSauvegarde()&#160;:&#160;<a class="el" href="group__grp__eeprom.html#ga0fdcf8780e2127569c1e1a76e9518c5a">main.c</a></li>
+<li>DAC_GarderEnEeprom()&#160;:&#160;<a class="el" href="group__grp__eeprom.html#ga461f9e8b58bc45203018e3132c71b989">main.c</a></li>
+<li>DAC_PuceDeCible()&#160;:&#160;<a class="el" href="group__grp__eeprom.html#ga411fdeb5f1d7a54dc6d8ecf893d7d0a9">main.c</a></li>
+<li>DAC_PuceJoignable()&#160;:&#160;<a class="el" href="group__grp__eeprom.html#ga9038fec6d17da09fb1543c560d3e7965">main.c</a></li>
+<li>DAC_RestaurerMemoire()&#160;:&#160;<a class="el" href="group__grp__eeprom.html#gaea23265d4fdedf9ac60d1c4afb886e40">main.c</a></li>
+<li>DAC_TraiterSauvegardes()&#160;:&#160;<a class="el" href="group__grp__eeprom.html#ga5f9ce30ec25412cc3efbe118447a5a11">main.c</a></li>
+</ul>
+
+
+<h3 class="doxsection"><a id="index_e" name="index_e"></a>- e -</h3><ul>
+<li>EcrireADG728()&#160;:&#160;<a class="el" href="group__grp__adc.html#ga74a9c056e466dd59ca9ea5b9110125f0">main.c</a></li>
+<li>EcrireDACEeprom()&#160;:&#160;<a class="el" href="group__grp__eeprom.html#ga1de03c1c4ce3c3d63b079d5bce9c8e74">main.c</a></li>
+<li>EcrireDACVolatile()&#160;:&#160;<a class="el" href="group__grp__dac.html#gaf2d35bfc7d39a06f0e77e0680df9c08d">main.c</a></li>
+<li>EcrireRegistreConfigDAC()&#160;:&#160;<a class="el" href="group__grp__dac.html#ga64f4ecd7d147a039d045da6b64975451">main.c</a></li>
+<li>EcrireToutesLesSorties()&#160;:&#160;<a class="el" href="group__grp__dac.html#ga3c9eb54cd6a878bce23cc531e877692f">main.c</a></li>
+<li>EcrireValeurDac()&#160;:&#160;<a class="el" href="group__grp__dac.html#ga4469a4eb236eb4a995abab435c43c644">main.c</a></li>
+<li>EnvoyerBonjourATous()&#160;:&#160;<a class="el" href="group__grp__i2c.html#ga78897222189585f100bc3855e98e25cc">main.c</a></li>
+<li>Error_Handler()&#160;:&#160;<a class="el" href="group__grp__cubemx.html#ga1730ffe1e560465665eb47d9264826f9">main.c</a>, <a class="el" href="group__grp__cubemx.html#ga1730ffe1e560465665eb47d9264826f9">main.h</a></li>
+<li>EstDansListe()&#160;:&#160;<a class="el" href="group__grp__i2c.html#gad3e3e81fe86eb2d85a4b3a6e84e0b550">main.c</a></li>
+<li>ExecuterCaptureComplete()&#160;:&#160;<a class="el" href="group__grp__exti.html#ga3a919fef613806da58b99557a009f22a">main.c</a></li>
+<li>EXTI0_IRQHandler()&#160;:&#160;<a class="el" href="group__grp__exti.html#ga17e9789a29a87d2df54f12b94dd1a0b6">main.c</a></li>
+<li>EXTI15_10_IRQHandler()&#160;:&#160;<a class="el" href="group__grp__exti.html#ga738473a5b43f6c92b80ce1d3d6f77ed9">main.c</a></li>
+<li>EXTI1_IRQHandler()&#160;:&#160;<a class="el" href="group__grp__exti.html#ga49cfdd46eb8d0ef3e1987514aa9343dc">main.c</a></li>
+<li>EXTI2_IRQHandler()&#160;:&#160;<a class="el" href="group__grp__exti.html#gab5a1d9e9c8ef50e0cb9ddb5745a20a14">main.c</a></li>
+<li>EXTI3_IRQHandler()&#160;:&#160;<a class="el" href="group__grp__exti.html#ga30c045de96d18ec9c67a7b9e4350920f">main.c</a></li>
+<li>EXTI4_IRQHandler()&#160;:&#160;<a class="el" href="group__grp__exti.html#ga290cb997018c8d85d4b965b4a242842f">main.c</a></li>
+<li>EXTI9_5_IRQHandler()&#160;:&#160;<a class="el" href="group__grp__exti.html#ga7b2096b8b2643286dc3a7e5110e5ae85">main.c</a></li>
+</ul>
+
+
+<h3 class="doxsection"><a id="index_f" name="index_f"></a>- f -</h3><ul>
+<li>findCommandHandler&#160;:&#160;<a class="el" href="group__grp__comm.html#ga768693a9fdf4a85d1ba355e3c321e075">main.c</a></li>
+<li>findLdoIndex()&#160;:&#160;<a class="el" href="group__grp__config.html#gadc686ab4f6036d732a6f2b1ecb6dbd01">main.c</a></li>
+<li>FormaterRapport()&#160;:&#160;<a class="el" href="group__grp__i2c.html#ga66520b068519c774eaeaa10c91bc87e4">main.c</a></li>
+<li>FormaterTempsEcoule()&#160;:&#160;<a class="el" href="group__grp__exti.html#gaca19a894d35c5407313b2afaca72d390">main.c</a></li>
+</ul>
+
+
+<h3 class="doxsection"><a id="index_g" name="index_g"></a>- g -</h3><ul>
+<li>GetMappingDacLdo()&#160;:&#160;<a class="el" href="group__grp__dac.html#gac1d35f9367efff87f176072901b295ac">main.c</a></li>
+<li>GetMesureCourantReelle()&#160;:&#160;<a class="el" href="group__grp__adc.html#ga291e2e1e27a0a67a3c63820c746abc60">main.c</a></li>
+<li>GetMesureReelle()&#160;:&#160;<a class="el" href="group__grp__adc.html#ga5620dbaf6425610dff776e64b7f6c3ca">main.c</a></li>
+<li>GetMuxCourantLdo()&#160;:&#160;<a class="el" href="group__grp__adc.html#gac835b21b6948669a86732fd2683d8fd6">main.c</a></li>
+<li>GetMuxLdo()&#160;:&#160;<a class="el" href="group__grp__adc.html#ga9ab7d7bc3c2e86fe9886ff9a25b5d2d4">main.c</a></li>
+</ul>
+
+
+<h3 class="doxsection"><a id="index_h" name="index_h"></a>- h -</h3><ul>
+<li>h_BALAYER_DAC()&#160;:&#160;<a class="el" href="group__grp__dac.html#ga161b95d8fabb7c81f08c2e0629238b6e">main.c</a></li>
+<li>h_GET_ADC_BRUT()&#160;:&#160;<a class="el" href="group__grp__adc.html#gacef2ce765b1a58a67b122129344ed9c3">main.c</a></li>
+<li>h_GET_CONFIG_LDO()&#160;:&#160;<a class="el" href="group__grp__config.html#ga8a388f244af9f1ecdae4d35c3126a7ea">main.c</a></li>
+<li>h_GET_CURRENT_1()&#160;:&#160;<a class="el" href="group__grp__adc.html#ga096a71e898411e3976c99187adaddc11">main.c</a></li>
+<li>h_GET_CURRENT_2()&#160;:&#160;<a class="el" href="group__grp__adc.html#ga861c7e50b324d97f26759930fa7390a2">main.c</a></li>
+<li>h_GET_DAC_CONFIG()&#160;:&#160;<a class="el" href="group__grp__dac.html#ga60bdf8f5f95deb2ebd6667b24e0cef0b">main.c</a></li>
+<li>h_GET_DAC_REG()&#160;:&#160;<a class="el" href="group__grp__dac.html#ga9a556575c443842fc36ade5dc4983b87">main.c</a></li>
+<li>h_GET_MUX_CANAL_COURANT()&#160;:&#160;<a class="el" href="group__grp__adc.html#ga67624c69d417f4b658d797a9bfcf85c9">main.c</a></li>
+<li>h_GET_MUX_CANAL_TENSION()&#160;:&#160;<a class="el" href="group__grp__adc.html#ga135b6adb8e9bb52953618d4160a21035">main.c</a></li>
+<li>h_RST_BL_LDO_ALL()&#160;:&#160;<a class="el" href="group__grp__etat.html#ga9b73881c339d3de0d81a83298d3c74c6">main.c</a></li>
+<li>h_RST_DELTA_AVDD_DVDD()&#160;:&#160;<a class="el" href="group__grp__seq.html#gab0984c31ea124d09363e7ed26ea7191c">main.c</a></li>
+<li>h_RST_DELTA_AVDD_VREF()&#160;:&#160;<a class="el" href="group__grp__seq.html#gaa3fe1ad448a429d3760b5fbef9c41f07">main.c</a></li>
+<li>h_RST_DELTA_DVDD_AVDD()&#160;:&#160;<a class="el" href="group__grp__seq.html#gab8a97c1e4d7e30955e1e037a892379bf">main.c</a></li>
+<li>h_RST_DELTA_NRST_VREF()&#160;:&#160;<a class="el" href="group__grp__seq.html#gaaf5aa614e94e4b5e58f55b372a3dc575">main.c</a></li>
+<li>h_RST_DELTA_VREF_AVDD()&#160;:&#160;<a class="el" href="group__grp__seq.html#gaa9d31428d43e4e992c4c104147df4fc4">main.c</a></li>
+<li>h_RST_DELTA_VREF_NRST()&#160;:&#160;<a class="el" href="group__grp__seq.html#gafa476ad70dfb2f285f7dff1b041e04dd">main.c</a></li>
+<li>h_RST_EN_LDO_ALL()&#160;:&#160;<a class="el" href="group__grp__etat.html#ga0484ceea1d95b83765fa039e1343e8fb">main.c</a></li>
+<li>h_SCAN_I2C1()&#160;:&#160;<a class="el" href="group__grp__i2c.html#ga45ca114e0fa3b65a4923db15bbc51a0e">main.c</a></li>
+<li>h_SCAN_I2C2()&#160;:&#160;<a class="el" href="group__grp__i2c.html#gaf5fe51ec000f68a1b5a11cea7a1ffd32">main.c</a></li>
+<li>h_SET_BL_LDO_ALL()&#160;:&#160;<a class="el" href="group__grp__etat.html#gad253a15902d4faf160fb7108c2996a53">main.c</a></li>
+<li>h_SET_BL_TAB()&#160;:&#160;<a class="el" href="group__grp__etat.html#ga31a850bfb276c79400e40e6272d933ae">main.c</a></li>
+<li>h_SET_CURRENT_LDO_GENERIQUE()&#160;:&#160;<a class="el" href="group__grp__dac.html#ga1b7ca6a4fce7e0d525508dd4951a48f0">main.c</a></li>
+<li>h_SET_DAC_GAIN()&#160;:&#160;<a class="el" href="group__grp__dac.html#ga3f77fbf6480487ff43ce47d7ed7d89e2">main.c</a></li>
+<li>h_SET_DAC_PD()&#160;:&#160;<a class="el" href="group__grp__dac.html#ga0bd0eb566573e23c1258ec14e95e53f0">main.c</a></li>
+<li>h_SET_DAC_VREF()&#160;:&#160;<a class="el" href="group__grp__dac.html#ga459cb06259e765da581fe6170672b59a">main.c</a></li>
+<li>h_SET_DELTA_AVDD_DVDD()&#160;:&#160;<a class="el" href="group__grp__seq.html#gad370c2ace608cdb8daf1afd3ca3b202f">main.c</a></li>
+<li>h_SET_DELTA_AVDD_VREF()&#160;:&#160;<a class="el" href="group__grp__seq.html#ga447238e5b551e58c8b0e7ae98584b5e8">main.c</a></li>
+<li>h_SET_DELTA_DVDD_AVDD()&#160;:&#160;<a class="el" href="group__grp__seq.html#ga8024c7bf9dc251e781f90eb02093c068">main.c</a></li>
+<li>h_SET_DELTA_NRST_VREF()&#160;:&#160;<a class="el" href="group__grp__seq.html#gad624d55c33c1c9d1fa936ec32c703b45">main.c</a></li>
+<li>h_SET_DELTA_VREF_AVDD()&#160;:&#160;<a class="el" href="group__grp__seq.html#gac6a1155f69e7a25d7bb385ae35b93aae">main.c</a></li>
+<li>h_SET_DELTA_VREF_NRST()&#160;:&#160;<a class="el" href="group__grp__seq.html#gad6a88754ddfa232341e56f1002eec8c0">main.c</a></li>
+<li>h_SET_EN_LDO_ALL()&#160;:&#160;<a class="el" href="group__grp__etat.html#ga2198514337355fbc3eed31749b6b70ed">main.c</a></li>
+<li>h_SET_EN_TAB()&#160;:&#160;<a class="el" href="group__grp__etat.html#ga2826c6768d6a04792faf92ff00a74d4e">main.c</a></li>
+<li>h_SET_I2C2_ACTIF()&#160;:&#160;<a class="el" href="group__grp__dac.html#ga8721dfe3dc61c6a257e56c61a478b703">main.c</a></li>
+<li>h_SET_MUX_CANAL_COURANT()&#160;:&#160;<a class="el" href="group__grp__adc.html#ga70cfdd7f1ddad05ce9fe0f32762d5d9d">main.c</a></li>
+<li>h_SET_MUX_CANAL_TENSION()&#160;:&#160;<a class="el" href="group__grp__adc.html#ga2a74a6a59230cb5a091b0e9709d54fe4">main.c</a></li>
+<li>h_SET_VAL_LDO_GENERIQUE()&#160;:&#160;<a class="el" href="group__grp__dac.html#gadcbefabbab52750a575b5dac7150534e">main.c</a></li>
+<li>h_WHO()&#160;:&#160;<a class="el" href="group__grp__comm.html#ga69203767b05a3021fd164dfbc0b4d6c5">main.c</a></li>
+<li>HAL_GPIO_EXTI_Callback()&#160;:&#160;<a class="el" href="group__grp__exti.html#ga0cd91fd3a9608559c2a87a8ba6cba55f">main.c</a></li>
+<li>HAL_TIM_PeriodElapsedCallback()&#160;:&#160;<a class="el" href="group__grp__cubemx.html#ga8a3b0ad512a6e6c6157440b68d395eac">main.c</a></li>
+<li>HAL_UART_ErrorCallback()&#160;:&#160;<a class="el" href="group__grp__comm.html#ga0e0456ea96d55db31de947fb3e954f18">main.c</a></li>
+<li>HAL_UART_RxCpltCallback()&#160;:&#160;<a class="el" href="group__grp__comm.html#gae494a9643f29b87d6d81e5264e60e57b">main.c</a></li>
+</ul>
+
+
+<h3 class="doxsection"><a id="index_i" name="index_i"></a>- i -</h3><ul>
+<li>I2C1_BusRecovery()&#160;:&#160;<a class="el" href="group__grp__i2c.html#ga64c71e2587dfe3b42d37bd356dd021a0">main.c</a></li>
+<li>I2C_BusRecovery()&#160;:&#160;<a class="el" href="group__grp__i2c.html#ga2f7d3957d1b8de76916916f379898287">main.c</a></li>
+<li>IndexDacI2C1()&#160;:&#160;<a class="el" href="group__grp__dac.html#gab992619e0a04a6fbb9a6a97c2e284c65">main.c</a></li>
+<li>InitialiserConfigDacsI2C1()&#160;:&#160;<a class="el" href="group__grp__dac.html#gaef2582c078db38424ec959fc1f9f1c5f">main.c</a></li>
+</ul>
+
+
+<h3 class="doxsection"><a id="index_l" name="index_l"></a>- l -</h3><ul>
+<li>LDO_ActiverHorlogePort()&#160;:&#160;<a class="el" href="group__grp__config.html#gaa5729680e86eeadbd61a302f18bf329f">main.c</a></li>
+<li>LDO_BrocheBouton()&#160;:&#160;<a class="el" href="group__grp__config.html#gae28fc29161c8b412bf38609488b281ef">main.c</a></li>
+<li>LDO_Diagnostic()&#160;:&#160;<a class="el" href="group__grp__config.html#ga2ba862323ea386969585492246cd74d6">main.c</a></li>
+<li>LDO_GPIO_Init()&#160;:&#160;<a class="el" href="group__grp__config.html#ga3bce4a57356f1afcbef6d05a989f33f5">main.c</a></li>
+<li>LDO_InitialiserTables()&#160;:&#160;<a class="el" href="group__grp__config.html#ga8ad9d7191f49b52c41d5a583f774465d">main.c</a></li>
+<li>LDO_MettreAJour()&#160;:&#160;<a class="el" href="group__grp__etat.html#gad7a2801e95c498fa0a2f1982238ae732">main.c</a></li>
+<li>LDO_RelacherBleeder()&#160;:&#160;<a class="el" href="group__grp__etat.html#ga4d73884db55d5370dfdce4dca8d1eddf">main.c</a></li>
+<li>LireCourantADC()&#160;:&#160;<a class="el" href="group__grp__adc.html#ga4feb141ddc6376d2ada1a4e0f58416e1">main.c</a></li>
+<li>LireRegistreConfigDAC()&#160;:&#160;<a class="el" href="group__grp__dac.html#gade7258168a59f260de108ec88059f889">main.c</a></li>
+<li>LireRegistreValeurDAC()&#160;:&#160;<a class="el" href="group__grp__dac.html#gae1030d1ce005f7deac0f86610f9df4af">main.c</a></li>
+<li>LireTensionADC()&#160;:&#160;<a class="el" href="group__grp__adc.html#ga6bcd15aecac42670e775f0796aa0b8ec">main.c</a></li>
+</ul>
+
+
+<h3 class="doxsection"><a id="index_m" name="index_m"></a>- m -</h3><ul>
+<li>main()&#160;:&#160;<a class="el" href="group__grp__cubemx.html#ga840291bc02cba5474a4cb46a9b9566fe">main.c</a></li>
+<li>MajEtatLdoDepuisDac()&#160;:&#160;<a class="el" href="group__grp__dac.html#ga924c3b0d97d03d4aba5b24043d36849c">main.c</a></li>
+<li>map()&#160;:&#160;<a class="el" href="group__grp__outils.html#ga4264917775e9932f98b48713bf592321">main.c</a></li>
+<li>MEM_RAM&#160;:&#160;<a class="el" href="main_8c.html#ad6c37c89b2eb47f604659c8cedf12ff5">main.c</a></li>
+<li>MemoriserConfigDac()&#160;:&#160;<a class="el" href="group__grp__dac.html#ga657c4f07f159cff86dc8a577e46d0ddb">main.c</a></li>
+<li>ModeBroche()&#160;:&#160;<a class="el" href="group__grp__config.html#ga12b4c9909bec1ea781ab3e736da3b356">main.c</a></li>
+<li>MPU_Config()&#160;:&#160;<a class="el" href="group__grp__cubemx.html#ga93ce41942d08d309203e0188cad7e54e">main.c</a></li>
+<li>MUX_NC&#160;:&#160;<a class="el" href="main_8c.html#ac65a284ddb5507b9b4b8db18f96cf108">main.c</a></li>
+<li>MX_ADC1_Init()&#160;:&#160;<a class="el" href="group__grp__cubemx.html#gaaa163e37853e6fc971474824d9f655ca">main.c</a></li>
+<li>MX_ADC2_Init()&#160;:&#160;<a class="el" href="group__grp__cubemx.html#ga4e987f0fdef6459c1a03ca830bac23f5">main.c</a></li>
+<li>MX_ADC3_Init()&#160;:&#160;<a class="el" href="group__grp__cubemx.html#gae1e1b355e2d7714a267fee7e71891e59">main.c</a></li>
+<li>MX_GPIO_Init()&#160;:&#160;<a class="el" href="group__grp__cubemx.html#gae89fdd15729ad41a66911190fcbab23a">main.c</a></li>
+<li>MX_I2C1_Init()&#160;:&#160;<a class="el" href="group__grp__cubemx.html#ga4230d11f81d0b16e112f1cc3f40cb42f">main.c</a></li>
+<li>MX_I2C2_Init()&#160;:&#160;<a class="el" href="group__grp__cubemx.html#gaf71812af4fbb9ebbe0f681165b657433">main.c</a></li>
+<li>MX_MuxResetSync_GPIO_Init()&#160;:&#160;<a class="el" href="group__grp__adc.html#ga6ff0e6f3d7fd661242785ab1fe918c8c">main.c</a></li>
+<li>MX_OC_EXTI_Init()&#160;:&#160;<a class="el" href="group__grp__oc.html#ga12ef8bab086612c9ecf3cb2ffed9c776">main.c</a></li>
+<li>MX_USART1_GPIO_Init()&#160;:&#160;<a class="el" href="group__grp__comm.html#ga5294dbf6a367b9a48010296000e1430a">main.c</a></li>
+<li>MX_USART1_Init()&#160;:&#160;<a class="el" href="group__grp__comm.html#ga59e35c131ee43adc1fad6c4bfdf9fa0a">main.c</a></li>
+<li>MX_USART1_UART_Init()&#160;:&#160;<a class="el" href="group__grp__cubemx.html#ga62f4b77e20bccafe98a183771749c20c">main.c</a></li>
+</ul>
+
+
+<h3 class="doxsection"><a id="index_n" name="index_n"></a>- n -</h3><ul>
+<li>nv_a_sauver&#160;:&#160;<a class="el" href="main_8c.html#ab91ba2025bc116af02237c8cd912d23b">main.c</a></li>
+<li>nv_essais&#160;:&#160;<a class="el" href="main_8c.html#a84eb6014508b64ca7409c685af6cb3dc">main.c</a></li>
+<li>nv_immediat&#160;:&#160;<a class="el" href="main_8c.html#a1acf61734b798ac869d4d7fe0ced5d0a">main.c</a></li>
+<li>nv_tick_demande&#160;:&#160;<a class="el" href="main_8c.html#aa0fa904d4cb16a94c2afe4e638237ca6">main.c</a></li>
+</ul>
+
+
+<h3 class="doxsection"><a id="index_o" name="index_o"></a>- o -</h3><ul>
+<li>OC_EstActive()&#160;:&#160;<a class="el" href="group__grp__oc.html#ga5a3191b846544a7dced3ea094018f361">main.c</a></li>
+<li>OC_EstArme()&#160;:&#160;<a class="el" href="group__grp__oc.html#gab7b892d9b93ae98c0860c1569fb10702">main.c</a></li>
+<li>OC_EstSurveillee()&#160;:&#160;<a class="el" href="group__grp__oc.html#ga7851b235d1d1f7564644d659587b3ba2">main.c</a></li>
+<li>OC_Etat()&#160;:&#160;<a class="el" href="group__grp__oc.html#ga53ac0c1da803505e54c72dbd31e4de73">main.c</a></li>
+<li>OC_InitialiserSeuilsDefaut()&#160;:&#160;<a class="el" href="group__grp__oc.html#ga9358ff0a14ed464e81374dab1f13777d">main.c</a></li>
+<li>OC_IrqDepuisBroche()&#160;:&#160;<a class="el" href="group__grp__oc.html#ga3c2340b58426351c26b0ff583df3f970">main.c</a></li>
+<li>OC_K_MV_PAR_A&#160;:&#160;<a class="el" href="main_8c.html#a99dfb57cf3bbe3e87e309120be4c4219">main.c</a></li>
+<li>OC_LdoDuCanalSeuil()&#160;:&#160;<a class="el" href="group__grp__oc.html#gaa95aeec744d338f67994e9ecbaf895b9">main.c</a></li>
+<li>OC_LireDefaut()&#160;:&#160;<a class="el" href="group__grp__oc.html#ga4c720f3df5385977a33b0d91f63df5f9">main.c</a></li>
+<li>OC_LM211&#160;:&#160;<a class="el" href="main_8c.html#a43bd5bee2587d25e1f08cb497c760519">main.c</a></li>
+<li>OC_Rearmer()&#160;:&#160;<a class="el" href="group__grp__oc.html#ga61bd3c43a673ea375cabfe6a2de48eb0">main.c</a></li>
+<li>OC_SANS&#160;:&#160;<a class="el" href="main_8c.html#a123ef4d7cf17e6fc5a3263af6280cd46">main.c</a></li>
+<li>OC_SeuilValide()&#160;:&#160;<a class="el" href="group__grp__oc.html#gafc2057d31d2abd2b3389f0e6ce4cc3a2">main.c</a></li>
+<li>OC_SignalerEvenements()&#160;:&#160;<a class="el" href="group__grp__oc.html#ga66c4ac6f7a9837733484590dbe3081d2">main.c</a></li>
+<li>OC_SurFrontIT()&#160;:&#160;<a class="el" href="group__grp__oc.html#gafaa9094a90053ac8bf6eace70669f172">main.c</a></li>
+<li>OC_Verrouiller()&#160;:&#160;<a class="el" href="group__grp__oc.html#gad5ee0d7de4089f81d1b5309a4919b764">main.c</a></li>
+</ul>
+
+
+<h3 class="doxsection"><a id="index_p" name="index_p"></a>- p -</h3><ul>
+<li>PeriphCommonClock_Config()&#160;:&#160;<a class="el" href="group__grp__cubemx.html#ga336c5acb34a801b2984e602b97ed7b73">main.c</a></li>
+</ul>
+
+
+<h3 class="doxsection"><a id="index_r" name="index_r"></a>- r -</h3><ul>
+<li>ResoudreMutexI2C()&#160;:&#160;<a class="el" href="group__grp__i2c.html#ga5cb1cd70b1dd76a8aadb2bccb2837d2f">main.c</a></li>
+<li>ResoudreTableauDac()&#160;:&#160;<a class="el" href="group__grp__dac.html#gad09bc7e6abf4db69f2fea3ab311c637f">main.c</a></li>
+<li>ResoudreTableauDacParAdresse()&#160;:&#160;<a class="el" href="group__grp__dac.html#gab5371264b6f8831689ac30f87a45c4ed">main.c</a></li>
+</ul>
+
+
+<h3 class="doxsection"><a id="index_s" name="index_s"></a>- s -</h3><ul>
+<li>ScanI2C()&#160;:&#160;<a class="el" href="group__grp__i2c.html#ga779f08189cf1996577c596f37e17f128">main.c</a></li>
+<li>SelectionnerCanalMuxCourant()&#160;:&#160;<a class="el" href="group__grp__adc.html#ga58dc9f0471184fd3cc5f8030ba048bcd">main.c</a></li>
+<li>SelectionnerCanalMuxTension()&#160;:&#160;<a class="el" href="group__grp__adc.html#gaf26fbfed012a3cc53e96a8cf7c284e2d">main.c</a></li>
+<li>SetMappingDacLdo()&#160;:&#160;<a class="el" href="group__grp__dac.html#gaeda25d5b60439cf57afc75b5c8096a3d">main.c</a></li>
+<li>SetMuxCourantLdo()&#160;:&#160;<a class="el" href="group__grp__adc.html#ga17dfb24c9ed80c2dca43e9d81d13e130">main.c</a></li>
+<li>SetMuxLdo()&#160;:&#160;<a class="el" href="group__grp__adc.html#gabea253a3031b6371c35f5c1b206728c6">main.c</a></li>
+<li>SEUIL_DAC&#160;:&#160;<a class="el" href="main_8c.html#af04729f8279b12f4ada1b213537159d4">main.c</a></li>
+<li>sortCommandTable()&#160;:&#160;<a class="el" href="group__grp__comm.html#gaa8eed1e7f490101de8fcefc4af23882c">main.c</a></li>
+<li>StartLwipTask()&#160;:&#160;<a class="el" href="group__grp__tache.html#gae9bf934dd2f4a12a5c5975d81afa3063">main.c</a></li>
+<li>SurveillerConfigDacsI2C1()&#160;:&#160;<a class="el" href="group__grp__dac.html#gacdf4ad1b5d4a18ab3a5b309318099344">main.c</a></li>
+<li>SynchroniserTableauDac()&#160;:&#160;<a class="el" href="group__grp__dac.html#gafd7df1ea4aaa529649e87bc99b737e42">main.c</a></li>
+<li>SystemClock_Config()&#160;:&#160;<a class="el" href="group__grp__cubemx.html#ga70af21c671abfcc773614a9a4f63d920">main.c</a></li>
+</ul>
+
+
+<h3 class="doxsection"><a id="index_t" name="index_t"></a>- t -</h3><ul>
+<li>tc_request()&#160;:&#160;<a class="el" href="group__grp__comm.html#gad6e271fe1796ab0b2a698260f0b78533">main.c</a></li>
+<li>TraiterResetMultiplexeur()&#160;:&#160;<a class="el" href="group__grp__adc.html#ga22145e0da7150e80ea9faf528fa8e7c3">main.c</a></li>
+</ul>
+
+
+<h3 class="doxsection"><a id="index_u" name="index_u"></a>- u -</h3><ul>
+<li>UART1_DemarrerReceptionCommandes()&#160;:&#160;<a class="el" href="group__grp__comm.html#ga6b6a3cef741ac3270119f7e1890f58eb">main.c</a></li>
+<li>UART1_EnvoyerTexte()&#160;:&#160;<a class="el" href="group__grp__comm.html#gab9b5dfc109e472981cbbb7867d1b7f92">main.c</a></li>
+<li>UART1_TraiterCommande()&#160;:&#160;<a class="el" href="group__grp__comm.html#gabcc2bb9c188ed5dd0c34bf573bdb04e6">main.c</a></li>
+<li>udp_receive_callback()&#160;:&#160;<a class="el" href="group__grp__comm.html#ga5b44c65aa41e79871a46aeed1bb4751b">main.c</a></li>
+<li>udpServer_init()&#160;:&#160;<a class="el" href="group__grp__comm.html#ga78047c519037c4c6091c71e1801519c7">main.c</a></li>
+<li>USART1_IRQHandler()&#160;:&#160;<a class="el" href="group__grp__comm.html#ga7139cd4baabbbcbab0c1fe6d7d4ae1cc">main.c</a></li>
+</ul>
+
+
+<h3 class="doxsection"><a id="index_v" name="index_v"></a>- v -</h3><ul>
+<li>VoltageVersCodeDAC()&#160;:&#160;<a class="el" href="group__grp__dac.html#ga4f3b4b4120ebf5fcecc3f9b14f56afae">main.c</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

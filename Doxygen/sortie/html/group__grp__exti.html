@@ -1,0 +1,681 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lwip_demo_H753 - Controleur de LDO: Capture complète, boutons et interruptions EXTI</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Lwip_demo_H753 - Controleur de LDO<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">Firmware STM32H753ZI : pilotage de 18 LDO (configuration CSV, DAC MCP47FEB28, protection OC)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Recherche" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('group__grp__exti.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Capture complète, boutons et interruptions EXTI </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Bouton USER, bouton de reset des multiplexeurs, gestionnaires EXTI.  
+<a href="#details">Plus de détails...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:gaca19a894d35c5407313b2afaca72d390" id="r_gaca19a894d35c5407313b2afaca72d390"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#gaca19a894d35c5407313b2afaca72d390">FormaterTempsEcoule</a> (char *dest, size_t taille)</td></tr>
+<tr class="memdesc:gaca19a894d35c5407313b2afaca72d390"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formate le temps ecoule depuis le demarrage (HAL_GetTick(), en millisecondes) en une chaine "HH:MM:SS". Le STM32 n'a pas de RTC configuree dans ce projet : ce n'est donc PAS une heure murale reelle, seulement une duree depuis le reset de la carte.  <br /></td></tr>
+<tr class="memitem:ga3a919fef613806da58b99557a009f22a" id="r_ga3a919fef613806da58b99557a009f22a"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga3a919fef613806da58b99557a009f22a">ExecuterCaptureComplete</a> (void)</td></tr>
+<tr class="memdesc:ga3a919fef613806da58b99557a009f22a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Capture complete de diagnostic : scan I2C1+I2C2, message "Bonjour" a chaque adresse trouvee, ecriture d'un palier different sur chacune des 8 sorties du DAC, balayage complet de VOUT0 (0 a 4095), ecriture de 2.5V sur VOUT1. Le tout encadre par des marqueurs SAVE_BEGIN/SAVE_END (avec numero de cycle et heure ecoulee), envoye en une fois sur USART1. Les marqueurs SAVE_BEGIN/SAVE_END permettent a un outil PC (ex : le script Python de controle) de detecter le debut et la fin d'une capture dans le flux UART, et de la sauvegarder automatiquement en fichier des qu'elle est complete.  <br /></td></tr>
+<tr class="memitem:ga49cfdd46eb8d0ef3e1987514aa9343dc" id="r_ga49cfdd46eb8d0ef3e1987514aa9343dc"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga49cfdd46eb8d0ef3e1987514aa9343dc">EXTI1_IRQHandler</a> (void)</td></tr>
+<tr class="memdesc:ga49cfdd46eb8d0ef3e1987514aa9343dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interruption EXTI ligne 1 : delegue a HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_1) (broche OC d'une LDO declaree oc_interruption = 1 dans le CSV).  <br /></td></tr>
+<tr class="memitem:gab5a1d9e9c8ef50e0cb9ddb5745a20a14" id="r_gab5a1d9e9c8ef50e0cb9ddb5745a20a14"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gab5a1d9e9c8ef50e0cb9ddb5745a20a14">EXTI2_IRQHandler</a> (void)</td></tr>
+<tr class="memdesc:gab5a1d9e9c8ef50e0cb9ddb5745a20a14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interruption EXTI ligne 2 : delegue a HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_2) (broche OC d'une LDO declaree oc_interruption = 1 dans le CSV).  <br /></td></tr>
+<tr class="memitem:ga30c045de96d18ec9c67a7b9e4350920f" id="r_ga30c045de96d18ec9c67a7b9e4350920f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga30c045de96d18ec9c67a7b9e4350920f">EXTI3_IRQHandler</a> (void)</td></tr>
+<tr class="memdesc:ga30c045de96d18ec9c67a7b9e4350920f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interruption EXTI ligne 3 : delegue a HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_3) (broche OC d'une LDO declaree oc_interruption = 1 dans le CSV).  <br /></td></tr>
+<tr class="memitem:ga290cb997018c8d85d4b965b4a242842f" id="r_ga290cb997018c8d85d4b965b4a242842f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga290cb997018c8d85d4b965b4a242842f">EXTI4_IRQHandler</a> (void)</td></tr>
+<tr class="memdesc:ga290cb997018c8d85d4b965b4a242842f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interruption EXTI ligne 4 : delegue a HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_4) (broche OC d'une LDO declaree oc_interruption = 1 dans le CSV, ex : PE4 pour 2PSp).  <br /></td></tr>
+<tr class="memitem:ga7b2096b8b2643286dc3a7e5110e5ae85" id="r_ga7b2096b8b2643286dc3a7e5110e5ae85"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga7b2096b8b2643286dc3a7e5110e5ae85">EXTI9_5_IRQHandler</a> (void)</td></tr>
+<tr class="memdesc:ga7b2096b8b2643286dc3a7e5110e5ae85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interruption EXTI lignes 9 a 5 : delegue a HAL_GPIO_EXTI_IRQHandler() pour les broches 5 a 9 (broches OC declarees en interruption).  <br /></td></tr>
+<tr class="memitem:ga738473a5b43f6c92b80ce1d3d6f77ed9" id="r_ga738473a5b43f6c92b80ce1d3d6f77ed9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga738473a5b43f6c92b80ce1d3d6f77ed9">EXTI15_10_IRQHandler</a> (void)</td></tr>
+<tr class="memdesc:ga738473a5b43f6c92b80ce1d3d6f77ed9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gestionnaire d'interruption EXTI ligne 15:10 (couvre PC13, bouton USER B1). Delegue immediatement a HAL_GPIO_EXTI_IRQHandler(), qui identifie la broche et appelle HAL_GPIO_EXTI_Callback().  <br /></td></tr>
+<tr class="memitem:ga17e9789a29a87d2df54f12b94dd1a0b6" id="r_ga17e9789a29a87d2df54f12b94dd1a0b6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga17e9789a29a87d2df54f12b94dd1a0b6">EXTI0_IRQHandler</a> (void)</td></tr>
+<tr class="memdesc:ga17e9789a29a87d2df54f12b94dd1a0b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gestionnaire d'interruption EXTI ligne 0 (couvre PD0, bouton de RESET materiel des ADG728). Meme principe que EXTI15_10_IRQHandler() ci-dessus.  <br /></td></tr>
+<tr class="memitem:ga0cd91fd3a9608559c2a87a8ba6cba55f" id="r_ga0cd91fd3a9608559c2a87a8ba6cba55f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga0cd91fd3a9608559c2a87a8ba6cba55f">HAL_GPIO_EXTI_Callback</a> (uint16_t GPIO_Pin)</td></tr>
+<tr class="memdesc:ga0cd91fd3a9608559c2a87a8ba6cba55f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback appele par le HAL a chaque interruption EXTI, quelle que soit la broche. Boutons (PC13, PD0) : ne fait QUE positionner un flag, le traitement est fait par la boucle de StartLwipTask() (anti-rebond 250 ms par HAL_GetTick()). Broche OC d'une LDO dont l'EXTI est active (oc_it_active[]) : coupure de l'EN dans l'interruption (quelques us), voir OC_SurFrontIT().  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Bouton USER, bouton de reset des multiplexeurs, gestionnaires EXTI. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentation des fonctions</h2>
+<a id="gaca19a894d35c5407313b2afaca72d390" name="gaca19a894d35c5407313b2afaca72d390"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaca19a894d35c5407313b2afaca72d390">&#9670;&#160;</a></span>FormaterTempsEcoule()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FormaterTempsEcoule </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>dest</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>taille</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Formate le temps ecoule depuis le demarrage (HAL_GetTick(), en millisecondes) en une chaine "HH:MM:SS". Le STM32 n'a pas de RTC configuree dans ce projet : ce n'est donc PAS une heure murale reelle, seulement une duree depuis le reset de la carte. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dest</td><td>Buffer de sortie, doit faire au moins 9 octets (8 caracteres "HH:MM:SS" + '\0'). </td></tr>
+    <tr><td class="paramname">taille</td><td>Taille du buffer dest, pour eviter tout debordement. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Ecrit la chaine formatee dans dest. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="keywordtype">char</span> temps[9];</div>
+<div class="line"><a class="code hl_function" href="#gaca19a894d35c5407313b2afaca72d390">FormaterTempsEcoule</a>(temps, <span class="keyword">sizeof</span>(temps));</div>
+<div class="line"><span class="comment">// temps contient par exemple &quot;00:02:37&quot;</span></div>
+<div class="ttc" id="agroup__grp__exti_html_gaca19a894d35c5407313b2afaca72d390"><div class="ttname"><a href="#gaca19a894d35c5407313b2afaca72d390">FormaterTempsEcoule</a></div><div class="ttdeci">static void FormaterTempsEcoule(char *dest, size_t taille)</div><div class="ttdoc">Formate le temps ecoule depuis le demarrage (HAL_GetTick(), en millisecondes) en une chaine &quot;HH:MM:SS...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l01417">main.c:1417</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l01417">1417</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l01417">FormaterTempsEcoule()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01484">EnvoyerBonjourATous()</a>, <a class="el" href="main_8c_source.html#l01648">ExecuterCaptureComplete()</a>, et <a class="el" href="main_8c_source.html#l01417">FormaterTempsEcoule()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__exti_gaca19a894d35c5407313b2afaca72d390_cgraph.svg" width="163" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__exti_gaca19a894d35c5407313b2afaca72d390_icgraph.svg" width="834" height="87"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga3a919fef613806da58b99557a009f22a" name="ga3a919fef613806da58b99557a009f22a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3a919fef613806da58b99557a009f22a">&#9670;&#160;</a></span>ExecuterCaptureComplete()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ExecuterCaptureComplete </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Capture complete de diagnostic : scan I2C1+I2C2, message "Bonjour" a chaque adresse trouvee, ecriture d'un palier different sur chacune des 8 sorties du DAC, balayage complet de VOUT0 (0 a 4095), ecriture de 2.5V sur VOUT1. Le tout encadre par des marqueurs SAVE_BEGIN/SAVE_END (avec numero de cycle et heure ecoulee), envoye en une fois sur USART1. Les marqueurs SAVE_BEGIN/SAVE_END permettent a un outil PC (ex : le script Python de controle) de detecter le debut et la fin d'une capture dans le flux UART, et de la sauvegarder automatiquement en fichier des qu'elle est complete. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Effet de bord : ecrit sur le bus I2C1, incremente numero_cycle, envoie plusieurs kilo-octets sur USART1 (duree totale ~8-10 secondes, dominee par BalayerSortieDAC()). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Appelee depuis la boucle de <a class="code hl_function" href="group__grp__tache.html#gae9bf934dd2f4a12a5c5975d81afa3063">StartLwipTask</a>() quand bouton_appuye</div>
+<div class="line">est a 1 (mis par l&#39;interruption du bouton B1/PC13) :</div>
+<div class="line">    if (bouton_appuye) { bouton_appuye = 0; <a class="code hl_function" href="#ga3a919fef613806da58b99557a009f22a">ExecuterCaptureComplete</a>(); }</div>
+<div class="ttc" id="agroup__grp__exti_html_ga3a919fef613806da58b99557a009f22a"><div class="ttname"><a href="#ga3a919fef613806da58b99557a009f22a">ExecuterCaptureComplete</a></div><div class="ttdeci">static void ExecuterCaptureComplete(void)</div><div class="ttdoc">Capture complete de diagnostic : scan I2C1+I2C2, message &quot;Bonjour&quot; a chaque adresse trouvee,...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l01648">main.c:1648</a></div></div>
+<div class="ttc" id="agroup__grp__tache_html_gae9bf934dd2f4a12a5c5975d81afa3063"><div class="ttname"><a href="group__grp__tache.html#gae9bf934dd2f4a12a5c5975d81afa3063">StartLwipTask</a></div><div class="ttdeci">void StartLwipTask(void const *argument)</div><div class="ttdoc">Tache FreeRTOS principale (lwipTask). Initialise LwIP, les verrous (I2C, UART, commandes),...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l06730">main.c:6730</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l01648">1648</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l01346">BalayerSortieDAC()</a>, <a class="el" href="main_8c_source.html#l00956">EcrireDACVolatile()</a>, <a class="el" href="main_8c_source.html#l01289">EcrireToutesLesSorties()</a>, <a class="el" href="main_8c_source.html#l01484">EnvoyerBonjourATous()</a>, <a class="el" href="main_8c_source.html#l01648">ExecuterCaptureComplete()</a>, <a class="el" href="main_8c_source.html#l00802">FormaterRapport()</a>, <a class="el" href="main_8c_source.html#l01417">FormaterTempsEcoule()</a>, <a class="el" href="main_8c_source.html#l05474">GetMesureReelle()</a>, <a class="el" href="main_8c_source.html#l00748">ScanI2C()</a>, <a class="el" href="main_8c_source.html#l01803">UART1_EnvoyerTexte()</a>, et <a class="el" href="main_8c_source.html#l00847">VoltageVersCodeDAC()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01648">ExecuterCaptureComplete()</a>, et <a class="el" href="main_8c_source.html#l06730">StartLwipTask()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__exti_ga3a919fef613806da58b99557a009f22a_cgraph.svg" width="1092" height="712"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__exti_ga3a919fef613806da58b99557a009f22a_icgraph.svg" width="436" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga49cfdd46eb8d0ef3e1987514aa9343dc" name="ga49cfdd46eb8d0ef3e1987514aa9343dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga49cfdd46eb8d0ef3e1987514aa9343dc">&#9670;&#160;</a></span>EXTI1_IRQHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EXTI1_IRQHandler </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Interruption EXTI ligne 1 : delegue a HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_1) (broche OC d'une LDO declaree oc_interruption = 1 dans le CSV). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="comment">// appele par le materiel, ne pas appeler directement</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l06562">6562</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06562">EXTI1_IRQHandler()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06562">EXTI1_IRQHandler()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__exti_ga49cfdd46eb8d0ef3e1987514aa9343dc_cgraph.svg" width="146" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__exti_ga49cfdd46eb8d0ef3e1987514aa9343dc_icgraph.svg" width="146" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gab5a1d9e9c8ef50e0cb9ddb5745a20a14" name="gab5a1d9e9c8ef50e0cb9ddb5745a20a14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab5a1d9e9c8ef50e0cb9ddb5745a20a14">&#9670;&#160;</a></span>EXTI2_IRQHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EXTI2_IRQHandler </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Interruption EXTI ligne 2 : delegue a HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_2) (broche OC d'une LDO declaree oc_interruption = 1 dans le CSV). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="comment">// appele par le materiel, ne pas appeler directement</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l06574">6574</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06574">EXTI2_IRQHandler()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06574">EXTI2_IRQHandler()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__exti_gab5a1d9e9c8ef50e0cb9ddb5745a20a14_cgraph.svg" width="146" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__exti_gab5a1d9e9c8ef50e0cb9ddb5745a20a14_icgraph.svg" width="146" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga30c045de96d18ec9c67a7b9e4350920f" name="ga30c045de96d18ec9c67a7b9e4350920f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga30c045de96d18ec9c67a7b9e4350920f">&#9670;&#160;</a></span>EXTI3_IRQHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EXTI3_IRQHandler </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Interruption EXTI ligne 3 : delegue a HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_3) (broche OC d'une LDO declaree oc_interruption = 1 dans le CSV). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="comment">// appele par le materiel, ne pas appeler directement</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l06586">6586</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06586">EXTI3_IRQHandler()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06586">EXTI3_IRQHandler()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__exti_ga30c045de96d18ec9c67a7b9e4350920f_cgraph.svg" width="146" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__exti_ga30c045de96d18ec9c67a7b9e4350920f_icgraph.svg" width="146" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga290cb997018c8d85d4b965b4a242842f" name="ga290cb997018c8d85d4b965b4a242842f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga290cb997018c8d85d4b965b4a242842f">&#9670;&#160;</a></span>EXTI4_IRQHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EXTI4_IRQHandler </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Interruption EXTI ligne 4 : delegue a HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_4) (broche OC d'une LDO declaree oc_interruption = 1 dans le CSV, ex : PE4 pour 2PSp). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="comment">// appele par le materiel, ne pas appeler directement</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l06598">6598</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06598">EXTI4_IRQHandler()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06598">EXTI4_IRQHandler()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__exti_ga290cb997018c8d85d4b965b4a242842f_cgraph.svg" width="146" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__exti_ga290cb997018c8d85d4b965b4a242842f_icgraph.svg" width="146" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga7b2096b8b2643286dc3a7e5110e5ae85" name="ga7b2096b8b2643286dc3a7e5110e5ae85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7b2096b8b2643286dc3a7e5110e5ae85">&#9670;&#160;</a></span>EXTI9_5_IRQHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EXTI9_5_IRQHandler </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Interruption EXTI lignes 9 a 5 : delegue a HAL_GPIO_EXTI_IRQHandler() pour les broches 5 a 9 (broches OC declarees en interruption). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="comment">// appele par le materiel, ne pas appeler directement</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l06610">6610</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06610">EXTI9_5_IRQHandler()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06610">EXTI9_5_IRQHandler()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__exti_ga7b2096b8b2643286dc3a7e5110e5ae85_cgraph.svg" width="159" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__exti_ga7b2096b8b2643286dc3a7e5110e5ae85_icgraph.svg" width="159" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga738473a5b43f6c92b80ce1d3d6f77ed9" name="ga738473a5b43f6c92b80ce1d3d6f77ed9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga738473a5b43f6c92b80ce1d3d6f77ed9">&#9670;&#160;</a></span>EXTI15_10_IRQHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EXTI15_10_IRQHandler </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gestionnaire d'interruption EXTI ligne 15:10 (couvre PC13, bouton USER B1). Delegue immediatement a HAL_GPIO_EXTI_IRQHandler(), qui identifie la broche et appelle HAL_GPIO_EXTI_Callback(). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="comment">// appele par le materiel, ne pas appeler directement</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l06631">6631</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06631">EXTI15_10_IRQHandler()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06631">EXTI15_10_IRQHandler()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__exti_ga738473a5b43f6c92b80ce1d3d6f77ed9_cgraph.svg" width="174" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__exti_ga738473a5b43f6c92b80ce1d3d6f77ed9_icgraph.svg" width="174" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga17e9789a29a87d2df54f12b94dd1a0b6" name="ga17e9789a29a87d2df54f12b94dd1a0b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga17e9789a29a87d2df54f12b94dd1a0b6">&#9670;&#160;</a></span>EXTI0_IRQHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EXTI0_IRQHandler </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gestionnaire d'interruption EXTI ligne 0 (couvre PD0, bouton de RESET materiel des ADG728). Meme principe que EXTI15_10_IRQHandler() ci-dessus. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="comment">// appele par le materiel, ne pas appeler directement</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l06656">6656</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06656">EXTI0_IRQHandler()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06656">EXTI0_IRQHandler()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__exti_ga17e9789a29a87d2df54f12b94dd1a0b6_cgraph.svg" width="146" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__exti_ga17e9789a29a87d2df54f12b94dd1a0b6_icgraph.svg" width="146" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga0cd91fd3a9608559c2a87a8ba6cba55f" name="ga0cd91fd3a9608559c2a87a8ba6cba55f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0cd91fd3a9608559c2a87a8ba6cba55f">&#9670;&#160;</a></span>HAL_GPIO_EXTI_Callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HAL_GPIO_EXTI_Callback </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>GPIO_Pin</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Callback appele par le HAL a chaque interruption EXTI, quelle que soit la broche. Boutons (PC13, PD0) : ne fait QUE positionner un flag, le traitement est fait par la boucle de StartLwipTask() (anti-rebond 250 ms par HAL_GetTick()). Broche OC d'une LDO dont l'EXTI est active (oc_it_active[]) : coupure de l'EN dans l'interruption (quelques us), voir OC_SurFrontIT(). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">GPIO_Pin</td><td>Broche ayant declenche l'interruption. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="comment">// appele par HAL_GPIO_EXTI_IRQHandler(), ne pas appeler directement</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l06676">6676</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06676">HAL_GPIO_EXTI_Callback()</a>, et <a class="el" href="main_8c_source.html#l03283">OC_SurFrontIT()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06676">HAL_GPIO_EXTI_Callback()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__exti_ga0cd91fd3a9608559c2a87a8ba6cba55f_cgraph.svg" width="743" height="286"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__exti_ga0cd91fd3a9608559c2a87a8ba6cba55f_icgraph.svg" width="194" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

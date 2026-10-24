@@ -1,0 +1,69 @@
+<map id="ExecuterCaptureComplete" name="ExecuterCaptureComplete">
+<area shape="rect" id="Node000001" title="Capture complete de diagnostic : scan I2C1+I2C2, message &quot;Bonjour&quot; a chaque adresse trouvee,..." alt="" coords="5,380,181,407"/>
+<area shape="poly" id="edge28_Node000001_Node000001" title=" " alt="" coords="56,380,50,371,55,362,69,355,93,353,118,356,133,364,128,366,117,361,93,359,71,361,58,365,56,371,62,379"/>
+<area shape="rect" id="Node000002" href="$group__grp__dac.html#ga3b69ec3e3af5d495bc0a095f6e4343eb" title="Balaie une seule sortie du DAC de 0 a valeur_max, par pas reguliers, avec une pause entre chaque vale..." alt="" coords="243,229,371,256"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="103,378,153,324,189,293,227,266,241,261,237,264,230,270,192,297,157,328,108,381"/>
+<area shape="rect" id="Node000003" href="$group__grp__dac.html#gaf2d35bfc7d39a06f0e77e0680df9c08d" title="Ecrit une valeur 12 bits dans un registre VOLATILE du DAC MCP47FEB28 (adresses memoire 00h&#45;07h unique..." alt="" coords="468,335,595,361"/>
+<area shape="poly" id="edge17_Node000001_Node000003" title=" " alt="" coords="180,382,455,354,452,358,182,387"/>
+<area shape="rect" id="Node000009" href="$group__grp__comm.html#gab9b5dfc109e472981cbbb7867d1b7f92" title="Envoie une chaine de caracteres sur USART1 (PB6/PB7, via un adaptateur USB&#45;UART externe),..." alt="" coords="456,179,607,205"/>
+<area shape="poly" id="edge45_Node000001_Node000009" title=" " alt="" coords="96,379,111,339,137,286,176,233,200,210,227,191,256,178,286,170,349,162,410,165,465,174,460,176,409,170,349,168,287,175,258,183,230,196,203,214,180,236,142,289,116,341,101,381"/>
+<area shape="rect" id="Node000010" href="$group__grp__dac.html#ga3c9eb54cd6a878bce23cc531e877692f" title="Ecrit une valeur sur chacune des 8 sorties volatiles du DAC (VOUT0 a VOUT7, registres 00h&#45;07h),..." alt="" coords="229,304,385,331"/>
+<area shape="poly" id="edge18_Node000001_Node000010" title=" " alt="" coords="132,377,254,334,251,339,135,382"/>
+<area shape="rect" id="Node000011" href="$group__grp__i2c.html#ga78897222189585f100bc3855e98e25cc" title="Envoie un message &quot;Bonjour&quot; a chacune des adresses trouvees par un scan I2C prealable (ScanI2C()),..." alt="" coords="232,555,382,581"/>
+<area shape="poly" id="edge21_Node000001_Node000011" title=" " alt="" coords="107,404,161,456,230,517,271,546,266,547,227,521,157,460,107,410"/>
+<area shape="rect" id="Node000013" href="$group__grp__exti.html#gaca19a894d35c5407313b2afaca72d390" title="Formate le temps ecoule depuis le demarrage (HAL_GetTick(), en millisecondes) en une chaine &quot;HH:MM:SS..." alt="" coords="456,417,608,444"/>
+<area shape="poly" id="edge31_Node000001_Node000013" title=" " alt="" coords="181,398,442,421,438,425,181,403"/>
+<area shape="rect" id="Node000014" href="$group__grp__i2c.html#ga66520b068519c774eaeaa10c91bc87e4" title="Construit, dans le buffer global rapport_scan, une ligne &quot;I2Cx:0xNN:message&quot; pour chaque adresse trou..." alt="" coords="247,480,366,507"/>
+<area shape="poly" id="edge29_Node000001_Node000014" title=" " alt="" coords="124,405,265,471,260,474,124,410"/>
+<area shape="rect" id="Node000015" href="$group__grp__adc.html#ga5620dbaf6425610dff776e64b7f6c3ca" title="Handler de la commande reseau &quot;GET_MESURE_REELLE_&lt;nom&gt;&quot; (voir le branchement dans tc_request(),..." alt="" coords="246,104,368,131"/>
+<area shape="poly" id="edge32_Node000001_Node000015" title=" " alt="" coords="96,379,111,335,137,274,176,207,200,175,227,147,246,136,243,140,230,151,204,179,180,210,142,276,116,337,101,380"/>
+<area shape="rect" id="Node000019" href="$group__grp__i2c.html#ga779f08189cf1996577c596f37e17f128" title="Scanne toutes les adresses I2C possibles (hors General Call =&gt; 0x00) sur le bus passe en parametre,..." alt="" coords="749,576,822,603"/>
+<area shape="poly" id="edge42_Node000001_Node000019" title=" " alt="" coords="99,404,116,445,142,498,180,550,203,573,230,591,295,618,364,634,435,641,506,640,573,634,635,625,732,605,737,604,636,630,574,639,506,645,435,646,363,639,293,623,227,596,200,577,175,554,137,500,111,447,98,410"/>
+<area shape="rect" id="Node000020" href="$group__grp__dac.html#ga4f3b4b4120ebf5fcecc3f9b14f56afae" title="Convertit une tension desiree (en volts) en code numerique 12 bits (0&#45;4095) compris par le DAC,..." alt="" coords="232,680,382,707"/>
+<area shape="poly" id="edge46_Node000001_Node000020" title=" " alt="" coords="100,405,147,508,185,574,231,636,271,672,266,671,227,639,180,576,142,510,99,410"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="270,229,264,221,269,211,283,205,307,203,332,205,347,213,342,215,331,210,307,208,284,210,272,215,269,220,276,229"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="354,254,386,266,496,326,491,327,384,270,356,259"/>
+<area shape="rect" id="Node000005" href="$group__grp__dac.html#gafd7df1ea4aaa529649e87bc99b737e42" title="Repercute une ecriture DAC directe (EcrireDACVolatile(), typiquement depuis BalayerSortieDAC()) dans ..." alt="" coords="448,253,615,280"/>
+<area shape="poly" id="edge7_Node000002_Node000005" title=" " alt="" coords="370,247,435,255,431,257,372,252"/>
+<area shape="poly" id="edge15_Node000002_Node000009" title=" " alt="" coords="368,226,457,208,452,211,371,231"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="493,334,487,326,492,316,507,310,532,308,558,311,574,319,569,320,557,316,532,313,508,315,495,320,492,325,499,335"/>
+<area shape="rect" id="Node000004" href="$group__grp__i2c.html#ga5cb1cd70b1dd76a8aadb2bccb2837d2f" title="Retourne le mutex correspondant au bus d&#39;un handle I2C donne." alt="" coords="947,435,1081,461"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="595,358,934,430,929,432,595,364"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="975,433,968,426,973,416,989,410,1014,408,1041,411,1057,420,1052,420,1040,416,1014,413,990,415,977,420,974,425,980,435"/>
+<area shape="poly" id="edge14_Node000005_Node000005" title=" " alt="" coords="493,253,487,245,492,235,507,229,532,227,558,229,574,238,569,238,557,234,532,232,508,234,495,239,492,244,499,253"/>
+<area shape="rect" id="Node000006" href="$group__grp__dac.html#ga924c3b0d97d03d4aba5b24043d36849c" title="Repercute une ecriture directe sur un canal DAC (balayage a distance BALAYER_DAC, capture bouton USER..." alt="" coords="709,221,862,248"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="614,254,696,245,691,247,616,259"/>
+<area shape="rect" id="Node000008" href="$group__grp__dac.html#gab5371264b6f8831689ac30f87a45c4ed" title="Retrouve le tableau DACx_DEF (celui rafraichi en continu par la boucle de StartLwipTask(),..." alt="" coords="678,296,893,323"/>
+<area shape="poly" id="edge12_Node000005_Node000008" title=" " alt="" coords="615,278,690,292,685,294,616,283"/>
+<area shape="poly" id="edge9_Node000006_Node000006" title=" " alt="" coords="747,220,740,213,745,203,760,197,786,195,813,197,829,206,824,207,812,202,785,200,761,202,748,207,745,212,752,221"/>
+<area shape="rect" id="Node000007" href="$group__grp__dac.html#gad09bc7e6abf4db69f2fea3ab311c637f" title="Retourne le pointeur vers le tableau DACx_DEF correspondant a une cible logique." alt="" coords="941,221,1087,248"/>
+<area shape="poly" id="edge10_Node000006_Node000007" title=" " alt="" coords="861,232,928,234,923,235,863,237"/>
+<area shape="poly" id="edge11_Node000007_Node000007" title=" " alt="" coords="975,220,968,213,973,203,989,197,1014,195,1041,197,1057,206,1052,207,1040,202,1014,200,990,202,977,207,974,212,980,221"/>
+<area shape="poly" id="edge13_Node000008_Node000008" title=" " alt="" coords="747,295,740,287,745,277,760,271,786,269,813,272,829,281,824,281,812,277,785,275,761,277,748,281,745,287,752,296"/>
+<area shape="poly" id="edge16_Node000009_Node000009" title=" " alt="" coords="493,178,487,170,492,160,507,154,532,152,558,155,574,163,569,164,557,160,532,157,508,159,495,164,492,169,499,178"/>
+<area shape="poly" id="edge19_Node000010_Node000003" title=" " alt="" coords="385,325,456,336,451,338,386,331"/>
+<area shape="poly" id="edge20_Node000010_Node000010" title=" " alt="" coords="270,304,264,295,269,286,283,279,307,277,332,280,347,288,342,289,331,285,307,283,284,285,272,289,269,295,276,303"/>
+<area shape="poly" id="edge27_Node000011_Node000004" title=" " alt="" coords="336,552,381,533,432,516,568,488,704,468,830,456,934,451,928,452,830,461,705,473,569,493,434,521,383,538,338,557"/>
+<area shape="poly" id="edge22_Node000011_Node000011" title=" " alt="" coords="270,554,264,546,269,536,283,530,307,528,332,531,347,539,342,540,331,536,307,533,284,535,272,540,269,545,275,555"/>
+<area shape="rect" id="Node000012" href="$group__grp__i2c.html#gad3e3e81fe86eb2d85a4b3a6e84e0b550" title="Verifie si une adresse (format HAL) fait partie d&#39;une liste donnee. Fonction utilitaire generique,..." alt="" coords="482,555,582,581"/>
+<area shape="poly" id="edge23_Node000011_Node000012" title=" " alt="" coords="382,565,468,567,463,569,382,571"/>
+<area shape="poly" id="edge25_Node000011_Node000013" title=" " alt="" coords="332,552,383,517,406,491,416,479,432,466,470,449,465,451,434,470,420,482,410,494,387,521,334,556"/>
+<area shape="poly" id="edge24_Node000012_Node000012" title=" " alt="" coords="493,553,487,546,492,536,507,530,532,528,558,531,574,540,569,539,557,536,532,533,508,535,495,540,492,545,498,555"/>
+<area shape="poly" id="edge26_Node000013_Node000013" title=" " alt="" coords="493,416,487,409,492,399,507,393,532,391,558,393,574,402,569,402,557,398,532,396,508,398,495,403,492,408,499,417"/>
+<area shape="poly" id="edge30_Node000014_Node000014" title=" " alt="" coords="270,479,264,471,269,462,283,455,307,453,332,456,347,464,342,465,331,461,307,459,284,461,272,465,269,471,276,480"/>
+<area shape="poly" id="edge41_Node000015_Node000009" title=" " alt="" coords="349,129,477,172,472,174,350,134"/>
+<area shape="poly" id="edge33_Node000015_Node000015" title=" " alt="" coords="270,104,264,95,269,86,283,79,307,77,332,80,347,88,342,90,331,85,307,83,284,85,272,89,269,95,276,103"/>
+<area shape="rect" id="Node000016" href="$group__grp__adc.html#ga6bcd15aecac42670e775f0796aa0b8ec" title="Lit une conversion ADC sur le canal donne et la convertit en tension REELLE cote LDO (avant le pont d..." alt="" coords="474,29,590,56"/>
+<area shape="poly" id="edge34_Node000015_Node000016" title=" " alt="" coords="339,101,432,65,461,59,456,62,434,71,342,106"/>
+<area shape="rect" id="Node000017" href="$group__grp__adc.html#gaf26fbfed012a3cc53e96a8cf7c284e2d" title="Selectionne un canal (0&#45;23) parmi les 3 ADG728 de la chaine TENSION (bus I2C1). Desactive systematiqu..." alt="" coords="433,104,630,131"/>
+<area shape="poly" id="edge36_Node000015_Node000017" title=" " alt="" coords="367,115,420,116,415,119,369,120"/>
+<area shape="poly" id="edge35_Node000016_Node000016" title=" " alt="" coords="493,29,487,21,492,11,507,5,532,3,558,5,574,13,569,15,557,10,532,8,508,10,495,15,492,20,499,29"/>
+<area shape="poly" id="edge40_Node000017_Node000017" title=" " alt="" coords="493,104,487,95,492,85,507,79,532,77,558,80,574,88,569,89,557,85,532,83,508,85,495,89,492,95,499,104"/>
+<area shape="rect" id="Node000018" href="$group__grp__adc.html#ga74a9c056e466dd59ca9ea5b9110125f0" title="Ecrit le masque de canaux actifs sur un ADG728 (un octet, un bit par canal &#45; voir datasheet ADG728,..." alt="" coords="733,125,838,152"/>
+<area shape="poly" id="edge37_Node000017_Node000018" title=" " alt="" coords="630,123,720,132,715,134,632,128"/>
+<area shape="poly" id="edge39_Node000018_Node000004" title=" " alt="" coords="838,150,868,164,895,183,924,227,955,292,1005,421,1000,419,950,294,919,230,891,187,865,168,838,155"/>
+<area shape="poly" id="edge38_Node000018_Node000018" title=" " alt="" coords="747,125,740,117,745,107,760,101,786,99,813,101,829,110,824,111,812,106,785,104,761,106,748,111,745,116,752,125"/>
+<area shape="poly" id="edge43_Node000019_Node000004" title=" " alt="" coords="808,573,975,470,980,469,810,578"/>
+<area shape="poly" id="edge44_Node000019_Node000019" title=" " alt="" coords="747,575,740,567,745,557,760,551,786,549,813,552,829,562,824,561,812,557,785,555,761,557,748,561,745,567,752,576"/>
+<area shape="poly" id="edge47_Node000020_Node000020" title=" " alt="" coords="270,679,264,671,269,662,283,655,307,653,332,656,347,665,342,664,331,661,307,659,284,661,272,665,269,671,275,681"/>
+</map>

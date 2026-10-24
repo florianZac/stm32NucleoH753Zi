@@ -1,0 +1,689 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lwip_demo_H753 - Controleur de LDO: État des LDO, Enable et bleeder</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Lwip_demo_H753 - Controleur de LDO<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">Firmware STM32H753ZI : pilotage de 18 LDO (configuration CSV, DAC MCP47FEB28, protection OC)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Recherche" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('group__grp__etat.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">État des LDO, Enable et bleeder </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Mise à jour cyclique des GPIO EN / BLD / OC / PG et commandes d'activation.  
+<a href="#details">Plus de détails...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:ga70c1db5780542cb5246d6ed350666c5c" id="r_ga70c1db5780542cb5246d6ed350666c5c"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga70c1db5780542cb5246d6ed350666c5c">buildStatusResponse</a> (int idx)</td></tr>
+<tr class="memdesc:ga70c1db5780542cb5246d6ed350666c5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construit la chaine de statut complete d'une LDO et la place dans la variable globale response, pour repondre a une commande "GET_STATUS_LDO_&lt;nom&gt;". Cas particulier : pour les LDO de type "PL_p" (ex: 1PLp, 2PLp, 3PLp), qui n'ont pas de mesure de courant, le champ Current affiche "NONE" au lieu d'une valeur numerique.  <br /></td></tr>
+<tr class="memitem:ga2198514337355fbc3eed31749b6b70ed" id="r_ga2198514337355fbc3eed31749b6b70ed"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga2198514337355fbc3eed31749b6b70ed">h_SET_EN_LDO_ALL</a> (void)</td></tr>
+<tr class="memdesc:ga2198514337355fbc3eed31749b6b70ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler de la commande reseau "SET_EN_LDO_ALL". Parcourt les 18 LDO et active (Enable=1) pour chacune d'entre elles (tableau global EN_LDO[NB_LDO]).  <br /></td></tr>
+<tr class="memitem:ga0484ceea1d95b83765fa039e1343e8fb" id="r_ga0484ceea1d95b83765fa039e1343e8fb"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga0484ceea1d95b83765fa039e1343e8fb">h_RST_EN_LDO_ALL</a> (void)</td></tr>
+<tr class="memdesc:ga0484ceea1d95b83765fa039e1343e8fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler de la commande reseau "RST_EN_LDO_ALL". Parcourt les 18 LDO et desactive (Enable=0) pour chacune d'entre elles (tableau global EN_LDO[NB_LDO]).  <br /></td></tr>
+<tr class="memitem:gad253a15902d4faf160fb7108c2996a53" id="r_gad253a15902d4faf160fb7108c2996a53"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#gad253a15902d4faf160fb7108c2996a53">h_SET_BL_LDO_ALL</a> (void)</td></tr>
+<tr class="memdesc:gad253a15902d4faf160fb7108c2996a53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler de la commande reseau "SET_BL_LDO_ALL". Parcourt les 18 LDO et active le bleeder (Bl=1) pour chacune d'entre elles (tableau global BL_LDO[NB_LDO]).  <br /></td></tr>
+<tr class="memitem:ga9b73881c339d3de0d81a83298d3c74c6" id="r_ga9b73881c339d3de0d81a83298d3c74c6"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga9b73881c339d3de0d81a83298d3c74c6">h_RST_BL_LDO_ALL</a> (void)</td></tr>
+<tr class="memdesc:ga9b73881c339d3de0d81a83298d3c74c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler de la commande reseau "RST_BL_LDO_ALL". Parcourt les 18 LDO et desactive le bleeder (Bl=0) pour chacune d'entre elles (tableau global BL_LDO[NB_LDO]).  <br /></td></tr>
+<tr class="memitem:ga2826c6768d6a04792faf92ff00a74d4e" id="r_ga2826c6768d6a04792faf92ff00a74d4e"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga2826c6768d6a04792faf92ff00a74d4e">h_SET_EN_TAB</a> (void)</td></tr>
+<tr class="memdesc:ga2826c6768d6a04792faf92ff00a74d4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler de la commande reseau "SET_EN_TAB". Renseigne en une seule fois l'etat Enable des 18 LDO a partir d'un tableau texte recu dans la trame.  <br /></td></tr>
+<tr class="memitem:ga31a850bfb276c79400e40e6272d933ae" id="r_ga31a850bfb276c79400e40e6272d933ae"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga31a850bfb276c79400e40e6272d933ae">h_SET_BL_TAB</a> (void)</td></tr>
+<tr class="memdesc:ga31a850bfb276c79400e40e6272d933ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler de la commande reseau "SET_BL_TAB". Renseigne en une seule fois l'etat Bleeder des 18 LDO a partir d'un tableau texte recu dans la trame.  <br /></td></tr>
+<tr class="memitem:ga4d73884db55d5370dfdce4dca8d1eddf" id="r_ga4d73884db55d5370dfdce4dca8d1eddf"><td class="memItemLeft">static uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#ga4d73884db55d5370dfdce4dca8d1eddf">LDO_RelacherBleeder</a> (int idx)</td></tr>
+<tr class="memdesc:ga4d73884db55d5370dfdce4dca8d1eddf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Desactive le bleeder d'une LDO (RST_BL_LDO_&lt;nom&gt;, RST_BL_LDO_ALL, SET_BL_TAB avec 0). C'est aussi la procedure de rearmement apres un declenchement OC : le defaut memorise est efface si la broche OC est revenue au repos ; sinon le bleeder reste actif et le defaut aussi. L'EN reste a 0 dans tous les cas : l'operateur le reactive ensuite.  <br /></td></tr>
+<tr class="memitem:gad7a2801e95c498fa0a2f1982238ae732" id="r_gad7a2801e95c498fa0a2f1982238ae732"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#gad7a2801e95c498fa0a2f1982238ae732">LDO_MettreAJour</a> (int i)</td></tr>
+<tr class="memdesc:gad7a2801e95c498fa0a2f1982238ae732"><td class="mdescLeft">&#160;</td><td class="mdescRight">Met a jour EN, BLD, OC et PG d'une LDO. Remplace le corps de la boucle for de StartLwipTask(). OC est lu AVANT l'ecriture de EN.  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Mise à jour cyclique des GPIO EN / BLD / OC / PG et commandes d'activation. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentation des fonctions</h2>
+<a id="ga70c1db5780542cb5246d6ed350666c5c" name="ga70c1db5780542cb5246d6ed350666c5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga70c1db5780542cb5246d6ed350666c5c">&#9670;&#160;</a></span>buildStatusResponse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void buildStatusResponse </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construit la chaine de statut complete d'une LDO et la place dans la variable globale response, pour repondre a une commande "GET_STATUS_LDO_&lt;nom&gt;". Cas particulier : pour les LDO de type "PL_p" (ex: 1PLp, 2PLp, 3PLp), qui n'ont pas de mesure de courant, le champ Current affiche "NONE" au lieu d'une valeur numerique. </p>
+<p>ATTENTION a l'interpretation du champ OC : ce n'est PAS un defaut absolu, mais la sortie d'un comparateur analogique dont le SEUIL de declenchement est fixe par la valeur "Current" elle-meme (via un pont diviseur pilote par le DAC courant, voir le commentaire au-dessus de la declaration des struct LDO_x_PS_p/n plus haut dans ce fichier). Un meme courant reel peut donc donner OC=0 ou OC=1 selon la valeur de Current configuree au moment de la lecture - toujours lire les deux champs ensemble, jamais OC isolement. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idx</td><td>Indice de la LDO dans ldoConfig[] (0..17), typiquement obtenu via findLdoIndex(). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Ecrit la chaine formatee dans response, ex : "LDO_1PSp:: En:1, Bl:0, PG:1, OC:0, Voltage:2047, Current:2047,
+        delta_ON:0, delta_OFF:0". </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="keywordtype">int</span> idx = <a class="code hl_function" href="group__grp__config.html#gadc686ab4f6036d732a6f2b1ecb6dbd01">findLdoIndex</a>(<span class="stringliteral">&quot;1PSp&quot;</span>);</div>
+<div class="line"><span class="keywordflow">if</span> (idx != -1) <a class="code hl_function" href="#ga70c1db5780542cb5246d6ed350666c5c">buildStatusResponse</a>(idx);</div>
+<div class="ttc" id="agroup__grp__config_html_gadc686ab4f6036d732a6f2b1ecb6dbd01"><div class="ttname"><a href="group__grp__config.html#gadc686ab4f6036d732a6f2b1ecb6dbd01">findLdoIndex</a></div><div class="ttdeci">static int findLdoIndex(const char *suffix)</div><div class="ttdoc">Recherche l&#39;indice (0 a NB_LDO-1) d&#39;une LDO dans le tableau ldoConfig[] a partir de son suffixe de no...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l02727">main.c:2727</a></div></div>
+<div class="ttc" id="agroup__grp__etat_html_ga70c1db5780542cb5246d6ed350666c5c"><div class="ttname"><a href="#ga70c1db5780542cb5246d6ed350666c5c">buildStatusResponse</a></div><div class="ttdeci">static void buildStatusResponse(int idx)</div><div class="ttdoc">Construit la chaine de statut complete d&#39;une LDO et la place dans la variable globale response,...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l02764">main.c:2764</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l02764">2764</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l02764">buildStatusResponse()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l02764">buildStatusResponse()</a>, et <a class="el" href="main_8c_source.html#l06290">tc_request()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__etat_ga70c1db5780542cb5246d6ed350666c5c_cgraph.svg" width="156" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__etat_ga70c1db5780542cb5246d6ed350666c5c_icgraph.svg" width="954" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga2198514337355fbc3eed31749b6b70ed" name="ga2198514337355fbc3eed31749b6b70ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2198514337355fbc3eed31749b6b70ed">&#9670;&#160;</a></span>h_SET_EN_LDO_ALL()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void h_SET_EN_LDO_ALL </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handler de la commande reseau "SET_EN_LDO_ALL". Parcourt les 18 LDO et active (Enable=1) pour chacune d'entre elles (tableau global EN_LDO[NB_LDO]). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Effet de bord : EN_LDO[0..17] = 1. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Trame UDP recue : <span class="stringliteral">&quot;SET_EN_LDO_ALL&quot;</span> -&gt; <a class="code hl_function" href="#ga2198514337355fbc3eed31749b6b70ed">h_SET_EN_LDO_ALL</a>();</div>
+<div class="ttc" id="agroup__grp__etat_html_ga2198514337355fbc3eed31749b6b70ed"><div class="ttname"><a href="#ga2198514337355fbc3eed31749b6b70ed">h_SET_EN_LDO_ALL</a></div><div class="ttdeci">static void h_SET_EN_LDO_ALL(void)</div><div class="ttdoc">Handler de la commande reseau &quot;SET_EN_LDO_ALL&quot;. Parcourt les 18 LDO et active (Enable=1) pour chacune...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l02802">main.c:2802</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l02802">2802</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l02802">h_SET_EN_LDO_ALL()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l02802">h_SET_EN_LDO_ALL()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__etat_ga2198514337355fbc3eed31749b6b70ed_cgraph.svg" width="163" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__etat_ga2198514337355fbc3eed31749b6b70ed_icgraph.svg" width="163" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga0484ceea1d95b83765fa039e1343e8fb" name="ga0484ceea1d95b83765fa039e1343e8fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0484ceea1d95b83765fa039e1343e8fb">&#9670;&#160;</a></span>h_RST_EN_LDO_ALL()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void h_RST_EN_LDO_ALL </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handler de la commande reseau "RST_EN_LDO_ALL". Parcourt les 18 LDO et desactive (Enable=0) pour chacune d'entre elles (tableau global EN_LDO[NB_LDO]). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Effet de bord : EN_LDO[0..17] = 0. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Trame UDP recue : <span class="stringliteral">&quot;RST_EN_LDO_ALL&quot;</span> -&gt; <a class="code hl_function" href="#ga0484ceea1d95b83765fa039e1343e8fb">h_RST_EN_LDO_ALL</a>();</div>
+<div class="ttc" id="agroup__grp__etat_html_ga0484ceea1d95b83765fa039e1343e8fb"><div class="ttname"><a href="#ga0484ceea1d95b83765fa039e1343e8fb">h_RST_EN_LDO_ALL</a></div><div class="ttdeci">static void h_RST_EN_LDO_ALL(void)</div><div class="ttdoc">Handler de la commande reseau &quot;RST_EN_LDO_ALL&quot;. Parcourt les 18 LDO et desactive (Enable=0) pour chac...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l02815">main.c:2815</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l02815">2815</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l02815">h_RST_EN_LDO_ALL()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l02815">h_RST_EN_LDO_ALL()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__etat_ga0484ceea1d95b83765fa039e1343e8fb_cgraph.svg" width="163" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__etat_ga0484ceea1d95b83765fa039e1343e8fb_icgraph.svg" width="163" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gad253a15902d4faf160fb7108c2996a53" name="gad253a15902d4faf160fb7108c2996a53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad253a15902d4faf160fb7108c2996a53">&#9670;&#160;</a></span>h_SET_BL_LDO_ALL()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void h_SET_BL_LDO_ALL </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handler de la commande reseau "SET_BL_LDO_ALL". Parcourt les 18 LDO et active le bleeder (Bl=1) pour chacune d'entre elles (tableau global BL_LDO[NB_LDO]). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Effet de bord : BL_LDO[0..17] = 1. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Trame UDP recue : <span class="stringliteral">&quot;SET_BL_LDO_ALL&quot;</span> -&gt; <a class="code hl_function" href="#gad253a15902d4faf160fb7108c2996a53">h_SET_BL_LDO_ALL</a>();</div>
+<div class="ttc" id="agroup__grp__etat_html_gad253a15902d4faf160fb7108c2996a53"><div class="ttname"><a href="#gad253a15902d4faf160fb7108c2996a53">h_SET_BL_LDO_ALL</a></div><div class="ttdeci">static void h_SET_BL_LDO_ALL(void)</div><div class="ttdoc">Handler de la commande reseau &quot;SET_BL_LDO_ALL&quot;. Parcourt les 18 LDO et active le bleeder (Bl=1) pour ...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l02828">main.c:2828</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l02828">2828</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l02828">h_SET_BL_LDO_ALL()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l02828">h_SET_BL_LDO_ALL()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__etat_gad253a15902d4faf160fb7108c2996a53_cgraph.svg" width="159" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__etat_gad253a15902d4faf160fb7108c2996a53_icgraph.svg" width="159" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga9b73881c339d3de0d81a83298d3c74c6" name="ga9b73881c339d3de0d81a83298d3c74c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9b73881c339d3de0d81a83298d3c74c6">&#9670;&#160;</a></span>h_RST_BL_LDO_ALL()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void h_RST_BL_LDO_ALL </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handler de la commande reseau "RST_BL_LDO_ALL". Parcourt les 18 LDO et desactive le bleeder (Bl=0) pour chacune d'entre elles (tableau global BL_LDO[NB_LDO]). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Effet de bord : BL_LDO[0..17] = 0. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Trame UDP recue : <span class="stringliteral">&quot;RST_BL_LDO_ALL&quot;</span> -&gt; <a class="code hl_function" href="#ga9b73881c339d3de0d81a83298d3c74c6">h_RST_BL_LDO_ALL</a>();</div>
+<div class="ttc" id="agroup__grp__etat_html_ga9b73881c339d3de0d81a83298d3c74c6"><div class="ttname"><a href="#ga9b73881c339d3de0d81a83298d3c74c6">h_RST_BL_LDO_ALL</a></div><div class="ttdeci">static void h_RST_BL_LDO_ALL(void)</div><div class="ttdoc">Handler de la commande reseau &quot;RST_BL_LDO_ALL&quot;. Parcourt les 18 LDO et desactive le bleeder (Bl=0) po...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l02841">main.c:2841</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l02841">2841</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l02841">h_RST_BL_LDO_ALL()</a>, et <a class="el" href="main_8c_source.html#l03228">LDO_RelacherBleeder()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l02841">h_RST_BL_LDO_ALL()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__etat_ga9b73881c339d3de0d81a83298d3c74c6_cgraph.svg" width="516" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__etat_ga9b73881c339d3de0d81a83298d3c74c6_icgraph.svg" width="160" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga2826c6768d6a04792faf92ff00a74d4e" name="ga2826c6768d6a04792faf92ff00a74d4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2826c6768d6a04792faf92ff00a74d4e">&#9670;&#160;</a></span>h_SET_EN_TAB()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void h_SET_EN_TAB </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handler de la commande reseau "SET_EN_TAB". Renseigne en une seule fois l'etat Enable des 18 LDO a partir d'un tableau texte recu dans la trame. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun</td><td>parametre C. Lit la variable globale last_message, au format attendu "SET_EN_TAB[v0,v1,v2,...,v17]" ou chaque vN vaut 0 ou 1. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Effet de bord : EN_LDO[0..17] mis a jour. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Trame UDP recue : <span class="stringliteral">&quot;SET_EN_TAB[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]&quot;</span></div>
+<div class="line">-&gt; <a class="code hl_function" href="group__grp__comm.html#gad6e271fe1796ab0b2a698260f0b78533">tc_request</a>() appelle automatiquement <a class="code hl_function" href="#ga2826c6768d6a04792faf92ff00a74d4e">h_SET_EN_TAB</a>();</div>
+<div class="ttc" id="agroup__grp__comm_html_gad6e271fe1796ab0b2a698260f0b78533"><div class="ttname"><a href="group__grp__comm.html#gad6e271fe1796ab0b2a698260f0b78533">tc_request</a></div><div class="ttdeci">void tc_request(void)</div><div class="ttdoc">Analyseur (parser) principal des trames recues par UDP. Extrait le premier token de la trame (avant l...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l06290">main.c:6290</a></div></div>
+<div class="ttc" id="agroup__grp__etat_html_ga2826c6768d6a04792faf92ff00a74d4e"><div class="ttname"><a href="#ga2826c6768d6a04792faf92ff00a74d4e">h_SET_EN_TAB</a></div><div class="ttdeci">static void h_SET_EN_TAB(void)</div><div class="ttdoc">Handler de la commande reseau &quot;SET_EN_TAB&quot;. Renseigne en une seule fois l&#39;etat Enable des 18 LDO a pa...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l02857">main.c:2857</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l02857">2857</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l02857">h_SET_EN_TAB()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l02857">h_SET_EN_TAB()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__etat_ga2826c6768d6a04792faf92ff00a74d4e_cgraph.svg" width="131" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__etat_ga2826c6768d6a04792faf92ff00a74d4e_icgraph.svg" width="131" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga31a850bfb276c79400e40e6272d933ae" name="ga31a850bfb276c79400e40e6272d933ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga31a850bfb276c79400e40e6272d933ae">&#9670;&#160;</a></span>h_SET_BL_TAB()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void h_SET_BL_TAB </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handler de la commande reseau "SET_BL_TAB". Renseigne en une seule fois l'etat Bleeder des 18 LDO a partir d'un tableau texte recu dans la trame. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun</td><td>parametre C. Lit la variable globale last_message, au format attendu "SET_BL_TAB[v0,v1,v2,...,v17]" ou chaque vN vaut 0 ou 1. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Effet de bord : BL_LDO[0..17] mis a jour. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Trame UDP recue : <span class="stringliteral">&quot;SET_BL_TAB[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]&quot;</span></div>
+<div class="line">-&gt; <a class="code hl_function" href="group__grp__comm.html#gad6e271fe1796ab0b2a698260f0b78533">tc_request</a>() appelle automatiquement <a class="code hl_function" href="#ga31a850bfb276c79400e40e6272d933ae">h_SET_BL_TAB</a>();</div>
+<div class="ttc" id="agroup__grp__etat_html_ga31a850bfb276c79400e40e6272d933ae"><div class="ttname"><a href="#ga31a850bfb276c79400e40e6272d933ae">h_SET_BL_TAB</a></div><div class="ttdeci">static void h_SET_BL_TAB(void)</div><div class="ttdoc">Handler de la commande reseau &quot;SET_BL_TAB&quot;. Renseigne en une seule fois l&#39;etat Bleeder des 18 LDO a p...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l02885">main.c:2885</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l02885">2885</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l02885">h_SET_BL_TAB()</a>, et <a class="el" href="main_8c_source.html#l03228">LDO_RelacherBleeder()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l02885">h_SET_BL_TAB()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__etat_ga31a850bfb276c79400e40e6272d933ae_cgraph.svg" width="483" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__etat_ga31a850bfb276c79400e40e6272d933ae_icgraph.svg" width="127" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga4d73884db55d5370dfdce4dca8d1eddf" name="ga4d73884db55d5370dfdce4dca8d1eddf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4d73884db55d5370dfdce4dca8d1eddf">&#9670;&#160;</a></span>LDO_RelacherBleeder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t LDO_RelacherBleeder </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Desactive le bleeder d'une LDO (RST_BL_LDO_&lt;nom&gt;, RST_BL_LDO_ALL, SET_BL_TAB avec 0). C'est aussi la procedure de rearmement apres un declenchement OC : le defaut memorise est efface si la broche OC est revenue au repos ; sinon le bleeder reste actif et le defaut aussi. L'EN reste a 0 dans tous les cas : l'operateur le reactive ensuite. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idx</td><td>Index de la LDO (0-17). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>= bleeder desactive, aucun defaut ; 1 = bleeder desactive ET defaut OC efface (rearme) ; 2 = refus : la broche OC signale encore une surintensite. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="keywordflow">if</span> (<a class="code hl_function" href="#ga4d73884db55d5370dfdce4dca8d1eddf">LDO_RelacherBleeder</a>(<a class="code hl_function" href="group__grp__config.html#gadc686ab4f6036d732a6f2b1ecb6dbd01">findLdoIndex</a>(<span class="stringliteral">&quot;2PSp&quot;</span>)) == 2U) { refuser(); }</div>
+<div class="ttc" id="agroup__grp__etat_html_ga4d73884db55d5370dfdce4dca8d1eddf"><div class="ttname"><a href="#ga4d73884db55d5370dfdce4dca8d1eddf">LDO_RelacherBleeder</a></div><div class="ttdeci">static uint8_t LDO_RelacherBleeder(int idx)</div><div class="ttdoc">Desactive le bleeder d&#39;une LDO (RST_BL_LDO_&lt;nom&gt;, RST_BL_LDO_ALL, SET_BL_TAB avec 0)....</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l03228">main.c:3228</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l03228">3228</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03228">LDO_RelacherBleeder()</a>, et <a class="el" href="main_8c_source.html#l03171">OC_LireDefaut()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l02841">h_RST_BL_LDO_ALL()</a>, <a class="el" href="main_8c_source.html#l02885">h_SET_BL_TAB()</a>, <a class="el" href="main_8c_source.html#l03228">LDO_RelacherBleeder()</a>, et <a class="el" href="main_8c_source.html#l06290">tc_request()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__etat_ga4d73884db55d5370dfdce4dca8d1eddf_cgraph.svg" width="319" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__etat_ga4d73884db55d5370dfdce4dca8d1eddf_icgraph.svg" width="1027" height="248"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gad7a2801e95c498fa0a2f1982238ae732" name="gad7a2801e95c498fa0a2f1982238ae732"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad7a2801e95c498fa0a2f1982238ae732">&#9670;&#160;</a></span>LDO_MettreAJour()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LDO_MettreAJour </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Met a jour EN, BLD, OC et PG d'une LDO. Remplace le corps de la boucle for de StartLwipTask(). OC est lu AVANT l'ecriture de EN. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>Index de la LDO (0-17). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; NB_LDO; i++) { <a class="code hl_function" href="#gad7a2801e95c498fa0a2f1982238ae732">LDO_MettreAJour</a>(i); }</div>
+<div class="ttc" id="agroup__grp__etat_html_gad7a2801e95c498fa0a2f1982238ae732"><div class="ttname"><a href="#gad7a2801e95c498fa0a2f1982238ae732">LDO_MettreAJour</a></div><div class="ttdeci">static void LDO_MettreAJour(int i)</div><div class="ttdoc">Met a jour EN, BLD, OC et PG d&#39;une LDO. Remplace le corps de la boucle for de StartLwipTask()....</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l03307">main.c:3307</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l03307">3307</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l00350">LDO_Config_t::bld_coupe_en</a>, <a class="el" href="main_8c_source.html#l00349">LDO_Config_t::bld_niveau_actif</a>, <a class="el" href="main_8c_source.html#l00337">LDO_Config_t::bld_port</a>, <a class="el" href="main_8c_source.html#l00335">LDO_Config_t::en_port</a>, <a class="el" href="main_8c_source.html#l00343">LDO_Config_t::ldo</a>, <a class="el" href="main_8c_source.html#l03307">LDO_MettreAJour()</a>, <a class="el" href="main_8c_source.html#l03104">OC_EstActive()</a>, <a class="el" href="main_8c_source.html#l03267">OC_EstArme()</a>, <a class="el" href="main_8c_source.html#l03171">OC_LireDefaut()</a>, <a class="el" href="main_8c_source.html#l03120">OC_SeuilValide()</a>, <a class="el" href="main_8c_source.html#l03187">OC_Verrouiller()</a>, et <a class="el" href="main_8c_source.html#l00341">LDO_Config_t::pg_port</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l03307">LDO_MettreAJour()</a>, et <a class="el" href="main_8c_source.html#l06730">StartLwipTask()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__etat_gad7a2801e95c498fa0a2f1982238ae732_cgraph.svg" width="706" height="311"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__etat_gad7a2801e95c498fa0a2f1982238ae732_icgraph.svg" width="387" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

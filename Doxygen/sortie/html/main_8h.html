@@ -1,0 +1,3265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lwip_demo_H753 - Controleur de LDO: Référence du fichier C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Inc/main.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Lwip_demo_H753 - Controleur de LDO<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">Firmware STM32H753ZI : pilotage de 18 LDO (configuration CSV, DAC MCP47FEB28, protection OC)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Recherche" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('main_8h.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Référence du fichier main.h</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>: Header for main.c file. This file contains the common defines of the application.  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &quot;stm32h7xx_hal.h&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Graphe des dépendances par inclusion de main.h:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="main_8h__incl.svg" width="198" height="144"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div><div class="textblock"><div class="dynheader">
+Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="main_8h__dep__incl.svg" width="198" height="176"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+<p><a href="main_8h_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Structures de données</h2></td></tr>
+<tr class="memitem:LDO" id="r_LDO"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_l_d_o.html">LDO</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a3a284247c886cfd31757b99efc5206b9" id="r_a3a284247c886cfd31757b99efc5206b9"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a3a284247c886cfd31757b99efc5206b9">EN_LDO3_PSp_Pin</a>&#160;&#160;&#160;GPIO_PIN_2</td></tr>
+<tr class="memitem:a0b92f886508a6165765a2c4d986e8e6e" id="r_a0b92f886508a6165765a2c4d986e8e6e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a0b92f886508a6165765a2c4d986e8e6e">EN_LDO3_PSp_GPIO_Port</a>&#160;&#160;&#160;GPIOE</td></tr>
+<tr class="memitem:ab487baaf47ac5883e683b04701b68a3a" id="r_ab487baaf47ac5883e683b04701b68a3a"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ab487baaf47ac5883e683b04701b68a3a">PG_LDO3_PSp_Pin</a>&#160;&#160;&#160;GPIO_PIN_3</td></tr>
+<tr class="memitem:a852a0203f947af72aa2dd214c1b0677f" id="r_a852a0203f947af72aa2dd214c1b0677f"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a852a0203f947af72aa2dd214c1b0677f">PG_LDO3_PSp_GPIO_Port</a>&#160;&#160;&#160;GPIOE</td></tr>
+<tr class="memitem:afb4682bae1cb7e0183afafe74d59b650" id="r_afb4682bae1cb7e0183afafe74d59b650"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#afb4682bae1cb7e0183afafe74d59b650">OC_LDO2_PSp_Pin</a>&#160;&#160;&#160;GPIO_PIN_4</td></tr>
+<tr class="memitem:a3262461bac106feaec803daccbb8eb10" id="r_a3262461bac106feaec803daccbb8eb10"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a3262461bac106feaec803daccbb8eb10">OC_LDO2_PSp_GPIO_Port</a>&#160;&#160;&#160;GPIOE</td></tr>
+<tr class="memitem:a8005f6df258ddc9b3e29a53cd515d61a" id="r_a8005f6df258ddc9b3e29a53cd515d61a"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a8005f6df258ddc9b3e29a53cd515d61a">EN_LDO2_PSp_Pin</a>&#160;&#160;&#160;GPIO_PIN_5</td></tr>
+<tr class="memitem:a77b5f14105497e7e82aea4259de3122d" id="r_a77b5f14105497e7e82aea4259de3122d"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a77b5f14105497e7e82aea4259de3122d">EN_LDO2_PSp_GPIO_Port</a>&#160;&#160;&#160;GPIOE</td></tr>
+<tr class="memitem:af2f66a66a11f73c321702bb36b0cc5af" id="r_af2f66a66a11f73c321702bb36b0cc5af"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#af2f66a66a11f73c321702bb36b0cc5af">BLD_LDO1_PLn_Pin</a>&#160;&#160;&#160;GPIO_PIN_6</td></tr>
+<tr class="memitem:a5eb468e951c1ecc339f23bedbe02210c" id="r_a5eb468e951c1ecc339f23bedbe02210c"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a5eb468e951c1ecc339f23bedbe02210c">BLD_LDO1_PLn_GPIO_Port</a>&#160;&#160;&#160;GPIOE</td></tr>
+<tr class="memitem:a3156dfb35bd5e925e00c08387890a271" id="r_a3156dfb35bd5e925e00c08387890a271"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a3156dfb35bd5e925e00c08387890a271">BLD_LDO5_PSp_Pin</a>&#160;&#160;&#160;GPIO_PIN_13</td></tr>
+<tr class="memitem:a5b7095f432e38bf675f65912825775c3" id="r_a5b7095f432e38bf675f65912825775c3"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a5b7095f432e38bf675f65912825775c3">BLD_LDO5_PSp_GPIO_Port</a>&#160;&#160;&#160;GPIOC</td></tr>
+<tr class="memitem:abf463767c5e79c0d3443a51f045eef41" id="r_abf463767c5e79c0d3443a51f045eef41"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#abf463767c5e79c0d3443a51f045eef41">PG_LDO5_PSp_Pin</a>&#160;&#160;&#160;GPIO_PIN_14</td></tr>
+<tr class="memitem:a77f967d8b19896b34081f4012468d5a8" id="r_a77f967d8b19896b34081f4012468d5a8"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a77f967d8b19896b34081f4012468d5a8">PG_LDO5_PSp_GPIO_Port</a>&#160;&#160;&#160;GPIOC</td></tr>
+<tr class="memitem:a616e6c2906e2081b942ac609ced06c40" id="r_a616e6c2906e2081b942ac609ced06c40"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a616e6c2906e2081b942ac609ced06c40">BLD_LDO4_PSp_Pin</a>&#160;&#160;&#160;GPIO_PIN_15</td></tr>
+<tr class="memitem:a90d57b1e397035727db35e252893f6f5" id="r_a90d57b1e397035727db35e252893f6f5"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a90d57b1e397035727db35e252893f6f5">BLD_LDO4_PSp_GPIO_Port</a>&#160;&#160;&#160;GPIOC</td></tr>
+<tr class="memitem:aec6faad694cd6f3a4fac2dd06d655e02" id="r_aec6faad694cd6f3a4fac2dd06d655e02"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aec6faad694cd6f3a4fac2dd06d655e02">EN_LDO1_PSp_Pin</a>&#160;&#160;&#160;GPIO_PIN_0</td></tr>
+<tr class="memitem:a046e03b7fe7921fedd9299d85863afb9" id="r_a046e03b7fe7921fedd9299d85863afb9"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a046e03b7fe7921fedd9299d85863afb9">EN_LDO1_PSp_GPIO_Port</a>&#160;&#160;&#160;GPIOF</td></tr>
+<tr class="memitem:a02cd4d82868ce783dbe4d34eba022d86" id="r_a02cd4d82868ce783dbe4d34eba022d86"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a02cd4d82868ce783dbe4d34eba022d86">BLD_LDO2_PSp_Pin</a>&#160;&#160;&#160;GPIO_PIN_1</td></tr>
+<tr class="memitem:a9907132080df36f13b9d35f006a1c331" id="r_a9907132080df36f13b9d35f006a1c331"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a9907132080df36f13b9d35f006a1c331">BLD_LDO2_PSp_GPIO_Port</a>&#160;&#160;&#160;GPIOF</td></tr>
+<tr class="memitem:ad0ac04e7a62c46edb9db13d0ca420c7c" id="r_ad0ac04e7a62c46edb9db13d0ca420c7c"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ad0ac04e7a62c46edb9db13d0ca420c7c">PG_LDO2_PSp_Pin</a>&#160;&#160;&#160;GPIO_PIN_2</td></tr>
+<tr class="memitem:a008aa2064cc1a7d1e1a319f1caf8dec5" id="r_a008aa2064cc1a7d1e1a319f1caf8dec5"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a008aa2064cc1a7d1e1a319f1caf8dec5">PG_LDO2_PSp_GPIO_Port</a>&#160;&#160;&#160;GPIOF</td></tr>
+<tr class="memitem:a7e54b43c9cd6a025eac815d3b202d8ad" id="r_a7e54b43c9cd6a025eac815d3b202d8ad"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a7e54b43c9cd6a025eac815d3b202d8ad">EN_LDO5_PSn_Pin</a>&#160;&#160;&#160;GPIO_PIN_3</td></tr>
+<tr class="memitem:a829ef389a5da38b2dd98a8ef9cc2ff07" id="r_a829ef389a5da38b2dd98a8ef9cc2ff07"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a829ef389a5da38b2dd98a8ef9cc2ff07">EN_LDO5_PSn_GPIO_Port</a>&#160;&#160;&#160;GPIOF</td></tr>
+<tr class="memitem:a4db490fd63173467fb529302c48d979b" id="r_a4db490fd63173467fb529302c48d979b"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a4db490fd63173467fb529302c48d979b">PG_LDO3_PSn_Pin</a>&#160;&#160;&#160;GPIO_PIN_5</td></tr>
+<tr class="memitem:a810f01620bc3a25c2cc0aead74300398" id="r_a810f01620bc3a25c2cc0aead74300398"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a810f01620bc3a25c2cc0aead74300398">PG_LDO3_PSn_GPIO_Port</a>&#160;&#160;&#160;GPIOF</td></tr>
+<tr class="memitem:abdef5dc827bdfd234a7e9d2780c804bd" id="r_abdef5dc827bdfd234a7e9d2780c804bd"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#abdef5dc827bdfd234a7e9d2780c804bd">OC_LDO5_PSp_Pin</a>&#160;&#160;&#160;GPIO_PIN_6</td></tr>
+<tr class="memitem:a3d15cf0cb6a25fb8a2222b19b5b9c6d1" id="r_a3d15cf0cb6a25fb8a2222b19b5b9c6d1"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a3d15cf0cb6a25fb8a2222b19b5b9c6d1">OC_LDO5_PSp_GPIO_Port</a>&#160;&#160;&#160;GPIOF</td></tr>
+<tr class="memitem:a9abefebb47eb9d579633522729121491" id="r_a9abefebb47eb9d579633522729121491"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a9abefebb47eb9d579633522729121491">EN_LDO5_PSp_Pin</a>&#160;&#160;&#160;GPIO_PIN_7</td></tr>
+<tr class="memitem:a3a9ab4bcb7e410b9caef972e682eb759" id="r_a3a9ab4bcb7e410b9caef972e682eb759"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a3a9ab4bcb7e410b9caef972e682eb759">EN_LDO5_PSp_GPIO_Port</a>&#160;&#160;&#160;GPIOF</td></tr>
+<tr class="memitem:af5b0819fcd329748ee98524903ebef61" id="r_af5b0819fcd329748ee98524903ebef61"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#af5b0819fcd329748ee98524903ebef61">BLD_LDO1_PSp_Pin</a>&#160;&#160;&#160;GPIO_PIN_8</td></tr>
+<tr class="memitem:aa3e696d08fa03193c7b6f7bee37b8f46" id="r_aa3e696d08fa03193c7b6f7bee37b8f46"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aa3e696d08fa03193c7b6f7bee37b8f46">BLD_LDO1_PSp_GPIO_Port</a>&#160;&#160;&#160;GPIOF</td></tr>
+<tr class="memitem:aa034a067d1be621ba8bb41025496b87a" id="r_aa034a067d1be621ba8bb41025496b87a"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aa034a067d1be621ba8bb41025496b87a">OC_LDO1_PSp_Pin</a>&#160;&#160;&#160;GPIO_PIN_9</td></tr>
+<tr class="memitem:abd6e9d6543a593db07d0c83cacdf56fd" id="r_abd6e9d6543a593db07d0c83cacdf56fd"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#abd6e9d6543a593db07d0c83cacdf56fd">OC_LDO1_PSp_GPIO_Port</a>&#160;&#160;&#160;GPIOF</td></tr>
+<tr class="memitem:afaccd46497978f6c4ee58ea4bb22d0cf" id="r_afaccd46497978f6c4ee58ea4bb22d0cf"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#afaccd46497978f6c4ee58ea4bb22d0cf">EN_LDO4_PSp_Pin</a>&#160;&#160;&#160;GPIO_PIN_0</td></tr>
+<tr class="memitem:ae5c328f7b27736fc83564045f4b5d0d9" id="r_ae5c328f7b27736fc83564045f4b5d0d9"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ae5c328f7b27736fc83564045f4b5d0d9">EN_LDO4_PSp_GPIO_Port</a>&#160;&#160;&#160;GPIOA</td></tr>
+<tr class="memitem:a11b43a557ccdd0da5de87dac79c24ffd" id="r_a11b43a557ccdd0da5de87dac79c24ffd"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a11b43a557ccdd0da5de87dac79c24ffd">EN_LDO2_PLp_Pin</a>&#160;&#160;&#160;GPIO_PIN_3</td></tr>
+<tr class="memitem:a9f098e6dbae0ac99d8ed7e5e13058243" id="r_a9f098e6dbae0ac99d8ed7e5e13058243"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a9f098e6dbae0ac99d8ed7e5e13058243">EN_LDO2_PLp_GPIO_Port</a>&#160;&#160;&#160;GPIOA</td></tr>
+<tr class="memitem:a7516a6ff741d6a8e5661a8abca27da92" id="r_a7516a6ff741d6a8e5661a8abca27da92"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a7516a6ff741d6a8e5661a8abca27da92">PG_LDO4_PSp_Pin</a>&#160;&#160;&#160;GPIO_PIN_4</td></tr>
+<tr class="memitem:ad5258943b1cd688493a8f901ba410ad5" id="r_ad5258943b1cd688493a8f901ba410ad5"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ad5258943b1cd688493a8f901ba410ad5">PG_LDO4_PSp_GPIO_Port</a>&#160;&#160;&#160;GPIOA</td></tr>
+<tr class="memitem:a12171d17a4c2cda4730dda62db8024f8" id="r_a12171d17a4c2cda4730dda62db8024f8"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a12171d17a4c2cda4730dda62db8024f8">BLD_LDO2_PSn_Pin</a>&#160;&#160;&#160;GPIO_PIN_5</td></tr>
+<tr class="memitem:a476282845ddb9486433d5559a82b4c13" id="r_a476282845ddb9486433d5559a82b4c13"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a476282845ddb9486433d5559a82b4c13">BLD_LDO2_PSn_GPIO_Port</a>&#160;&#160;&#160;GPIOA</td></tr>
+<tr class="memitem:af3cbf1d9d28611c11f8deacf6550ceb1" id="r_af3cbf1d9d28611c11f8deacf6550ceb1"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#af3cbf1d9d28611c11f8deacf6550ceb1">EN_LDO2_PSn_Pin</a>&#160;&#160;&#160;GPIO_PIN_6</td></tr>
+<tr class="memitem:aeb4cd2321b971a398c24c02eaa9ab4c4" id="r_aeb4cd2321b971a398c24c02eaa9ab4c4"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aeb4cd2321b971a398c24c02eaa9ab4c4">EN_LDO2_PSn_GPIO_Port</a>&#160;&#160;&#160;GPIOA</td></tr>
+<tr class="memitem:a7779435b35bbd4b911cb537e450df439" id="r_a7779435b35bbd4b911cb537e450df439"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a7779435b35bbd4b911cb537e450df439">OC_LDO4_PSp_Pin</a>&#160;&#160;&#160;GPIO_PIN_0</td></tr>
+<tr class="memitem:a7a096352b39680bd8acf356580404ca3" id="r_a7a096352b39680bd8acf356580404ca3"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a7a096352b39680bd8acf356580404ca3">OC_LDO4_PSp_GPIO_Port</a>&#160;&#160;&#160;GPIOB</td></tr>
+<tr class="memitem:a6f53c1c0f0fa8c8d727913004294598c" id="r_a6f53c1c0f0fa8c8d727913004294598c"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a6f53c1c0f0fa8c8d727913004294598c">BLD_LDO3_PSn_Pin</a>&#160;&#160;&#160;GPIO_PIN_1</td></tr>
+<tr class="memitem:a3c5612b4a7fc3c16f425e2451f719cae" id="r_a3c5612b4a7fc3c16f425e2451f719cae"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a3c5612b4a7fc3c16f425e2451f719cae">BLD_LDO3_PSn_GPIO_Port</a>&#160;&#160;&#160;GPIOB</td></tr>
+<tr class="memitem:a04fbc9b31054f68fb7a3b0322d258b50" id="r_a04fbc9b31054f68fb7a3b0322d258b50"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a04fbc9b31054f68fb7a3b0322d258b50">PG_LDO5_PSn_Pin</a>&#160;&#160;&#160;GPIO_PIN_11</td></tr>
+<tr class="memitem:a2ba5ef320240130580a1cd4ffb10cfbb" id="r_a2ba5ef320240130580a1cd4ffb10cfbb"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a2ba5ef320240130580a1cd4ffb10cfbb">PG_LDO5_PSn_GPIO_Port</a>&#160;&#160;&#160;GPIOF</td></tr>
+<tr class="memitem:a42a33c3edb0274256ca3475c52640872" id="r_a42a33c3edb0274256ca3475c52640872"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a42a33c3edb0274256ca3475c52640872">BLD_LDO3_PLp_Pin</a>&#160;&#160;&#160;GPIO_PIN_12</td></tr>
+<tr class="memitem:a4ae0545b23ddc82fc28ef4ce4c81ad00" id="r_a4ae0545b23ddc82fc28ef4ce4c81ad00"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a4ae0545b23ddc82fc28ef4ce4c81ad00">BLD_LDO3_PLp_GPIO_Port</a>&#160;&#160;&#160;GPIOF</td></tr>
+<tr class="memitem:a2695dfb1eb5e405131b504f38421ee98" id="r_a2695dfb1eb5e405131b504f38421ee98"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a2695dfb1eb5e405131b504f38421ee98">EN_LDO3_PLp_Pin</a>&#160;&#160;&#160;GPIO_PIN_13</td></tr>
+<tr class="memitem:ad3a209bfc2cc2979afa7842b0893d68f" id="r_ad3a209bfc2cc2979afa7842b0893d68f"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ad3a209bfc2cc2979afa7842b0893d68f">EN_LDO3_PLp_GPIO_Port</a>&#160;&#160;&#160;GPIOF</td></tr>
+<tr class="memitem:a7bd3b6d1b78a276b8e8d7d808c9667c6" id="r_a7bd3b6d1b78a276b8e8d7d808c9667c6"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a7bd3b6d1b78a276b8e8d7d808c9667c6">OC_LDO4_PSn_Pin</a>&#160;&#160;&#160;GPIO_PIN_14</td></tr>
+<tr class="memitem:a904108691189752d2831a2b4ea5de470" id="r_a904108691189752d2831a2b4ea5de470"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a904108691189752d2831a2b4ea5de470">OC_LDO4_PSn_GPIO_Port</a>&#160;&#160;&#160;GPIOF</td></tr>
+<tr class="memitem:a2b0a955286ad6b81217bda6fdb8c02f4" id="r_a2b0a955286ad6b81217bda6fdb8c02f4"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a2b0a955286ad6b81217bda6fdb8c02f4">OC_LDO5_PSn_Pin</a>&#160;&#160;&#160;GPIO_PIN_15</td></tr>
+<tr class="memitem:a0f45a990260aa64d04f6405cbbc28d62" id="r_a0f45a990260aa64d04f6405cbbc28d62"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a0f45a990260aa64d04f6405cbbc28d62">OC_LDO5_PSn_GPIO_Port</a>&#160;&#160;&#160;GPIOF</td></tr>
+<tr class="memitem:a2ad4bbc3eb63c66f59a7422193e725ca" id="r_a2ad4bbc3eb63c66f59a7422193e725ca"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a2ad4bbc3eb63c66f59a7422193e725ca">EN_LDO1_PLn_Pin</a>&#160;&#160;&#160;GPIO_PIN_0</td></tr>
+<tr class="memitem:ab1403c51ce5299a37ee218dbe6c15b7e" id="r_ab1403c51ce5299a37ee218dbe6c15b7e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ab1403c51ce5299a37ee218dbe6c15b7e">EN_LDO1_PLn_GPIO_Port</a>&#160;&#160;&#160;GPIOG</td></tr>
+<tr class="memitem:ab78b0c1222df5713e90ec334dc1009a7" id="r_ab78b0c1222df5713e90ec334dc1009a7"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ab78b0c1222df5713e90ec334dc1009a7">PG_LDO2_PLp_Pin</a>&#160;&#160;&#160;GPIO_PIN_1</td></tr>
+<tr class="memitem:a6ab389b134ca190c559cfa5bbf4526e5" id="r_a6ab389b134ca190c559cfa5bbf4526e5"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a6ab389b134ca190c559cfa5bbf4526e5">PG_LDO2_PLp_GPIO_Port</a>&#160;&#160;&#160;GPIOG</td></tr>
+<tr class="memitem:af730589affedc3de046f97d5afbcac0f" id="r_af730589affedc3de046f97d5afbcac0f"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#af730589affedc3de046f97d5afbcac0f">PG_LDO4_PSn_Pin</a>&#160;&#160;&#160;GPIO_PIN_9</td></tr>
+<tr class="memitem:a5b67e762e301c056f3703dc19996318e" id="r_a5b67e762e301c056f3703dc19996318e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a5b67e762e301c056f3703dc19996318e">PG_LDO4_PSn_GPIO_Port</a>&#160;&#160;&#160;GPIOE</td></tr>
+<tr class="memitem:a212ad5af773cd2de806da8ca3a62ace4" id="r_a212ad5af773cd2de806da8ca3a62ace4"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a212ad5af773cd2de806da8ca3a62ace4">OC_LDO2_PLp_Pin</a>&#160;&#160;&#160;GPIO_PIN_10</td></tr>
+<tr class="memitem:ae56a8117ab5920d45dc5a41eac2075ff" id="r_ae56a8117ab5920d45dc5a41eac2075ff"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ae56a8117ab5920d45dc5a41eac2075ff">OC_LDO2_PLp_GPIO_Port</a>&#160;&#160;&#160;GPIOE</td></tr>
+<tr class="memitem:a18948085978c5bdf6074ef952d64001c" id="r_a18948085978c5bdf6074ef952d64001c"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a18948085978c5bdf6074ef952d64001c">BLD_LDO5_PSn_Pin</a>&#160;&#160;&#160;GPIO_PIN_11</td></tr>
+<tr class="memitem:a17e70a14b3108f6531237878dd66d9f8" id="r_a17e70a14b3108f6531237878dd66d9f8"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a17e70a14b3108f6531237878dd66d9f8">BLD_LDO5_PSn_GPIO_Port</a>&#160;&#160;&#160;GPIOE</td></tr>
+<tr class="memitem:a70a518700044693e7e2c683976f1866e" id="r_a70a518700044693e7e2c683976f1866e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a70a518700044693e7e2c683976f1866e">BLD_LDO2_PLn_Pin</a>&#160;&#160;&#160;GPIO_PIN_12</td></tr>
+<tr class="memitem:a42cb1a5bf524c02ed016c5b191894eca" id="r_a42cb1a5bf524c02ed016c5b191894eca"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a42cb1a5bf524c02ed016c5b191894eca">BLD_LDO2_PLn_GPIO_Port</a>&#160;&#160;&#160;GPIOE</td></tr>
+<tr class="memitem:a5733ace1cd9be673adea74ae85a5918a" id="r_a5733ace1cd9be673adea74ae85a5918a"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a5733ace1cd9be673adea74ae85a5918a">EN_LDO3_PLn_Pin</a>&#160;&#160;&#160;GPIO_PIN_13</td></tr>
+<tr class="memitem:a4b53f74d6371bf3398171a53b811f3ce" id="r_a4b53f74d6371bf3398171a53b811f3ce"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a4b53f74d6371bf3398171a53b811f3ce">EN_LDO3_PLn_GPIO_Port</a>&#160;&#160;&#160;GPIOE</td></tr>
+<tr class="memitem:a759eaef9ae277004b09c696df1c14fe6" id="r_a759eaef9ae277004b09c696df1c14fe6"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a759eaef9ae277004b09c696df1c14fe6">PG_LDO3_PLn_Pin</a>&#160;&#160;&#160;GPIO_PIN_14</td></tr>
+<tr class="memitem:a9509efd59362ced2e17780bfb7171275" id="r_a9509efd59362ced2e17780bfb7171275"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a9509efd59362ced2e17780bfb7171275">PG_LDO3_PLn_GPIO_Port</a>&#160;&#160;&#160;GPIOE</td></tr>
+<tr class="memitem:afa6d2cfafc1f8c736be83f5c67a30995" id="r_afa6d2cfafc1f8c736be83f5c67a30995"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#afa6d2cfafc1f8c736be83f5c67a30995">PG_LDO3_PLp_Pin</a>&#160;&#160;&#160;GPIO_PIN_15</td></tr>
+<tr class="memitem:ac85f3c9ccb3ebd4a6a06c029eaddb164" id="r_ac85f3c9ccb3ebd4a6a06c029eaddb164"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ac85f3c9ccb3ebd4a6a06c029eaddb164">PG_LDO3_PLp_GPIO_Port</a>&#160;&#160;&#160;GPIOE</td></tr>
+<tr class="memitem:a14fe06b3d7686bebf3153448c41a0a69" id="r_a14fe06b3d7686bebf3153448c41a0a69"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a14fe06b3d7686bebf3153448c41a0a69">PG_LDO2_PSn_Pin</a>&#160;&#160;&#160;GPIO_PIN_12</td></tr>
+<tr class="memitem:a7b0bbc809537fc74a79f982fcccc7b4f" id="r_a7b0bbc809537fc74a79f982fcccc7b4f"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a7b0bbc809537fc74a79f982fcccc7b4f">PG_LDO2_PSn_GPIO_Port</a>&#160;&#160;&#160;GPIOB</td></tr>
+<tr class="memitem:acb3b16a078becce04aa5656f0956b3d1" id="r_acb3b16a078becce04aa5656f0956b3d1"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#acb3b16a078becce04aa5656f0956b3d1">PG_LDO1_PSn_Pin</a>&#160;&#160;&#160;GPIO_PIN_8</td></tr>
+<tr class="memitem:abb3d12dbd724ab0a1bfb49c5a90a3ba5" id="r_abb3d12dbd724ab0a1bfb49c5a90a3ba5"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#abb3d12dbd724ab0a1bfb49c5a90a3ba5">PG_LDO1_PSn_GPIO_Port</a>&#160;&#160;&#160;GPIOD</td></tr>
+<tr class="memitem:a955e0292189de5f01a19df31b8b837d5" id="r_a955e0292189de5f01a19df31b8b837d5"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a955e0292189de5f01a19df31b8b837d5">OC_LDO1_PLn_Pin</a>&#160;&#160;&#160;GPIO_PIN_9</td></tr>
+<tr class="memitem:a3443c259f58e6c105641f929ccae2e91" id="r_a3443c259f58e6c105641f929ccae2e91"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a3443c259f58e6c105641f929ccae2e91">OC_LDO1_PLn_GPIO_Port</a>&#160;&#160;&#160;GPIOD</td></tr>
+<tr class="memitem:a187233976b99167827a8335a8e6a5566" id="r_a187233976b99167827a8335a8e6a5566"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a187233976b99167827a8335a8e6a5566">BLD_LDO3_PLn_Pin</a>&#160;&#160;&#160;GPIO_PIN_10</td></tr>
+<tr class="memitem:abda36ab88d1add00176c49c8ed978c2b" id="r_abda36ab88d1add00176c49c8ed978c2b"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#abda36ab88d1add00176c49c8ed978c2b">BLD_LDO3_PLn_GPIO_Port</a>&#160;&#160;&#160;GPIOD</td></tr>
+<tr class="memitem:ac0b18426452bcf3e87f7e582a3f6d580" id="r_ac0b18426452bcf3e87f7e582a3f6d580"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ac0b18426452bcf3e87f7e582a3f6d580">OC_LDO2_PLn_Pin</a>&#160;&#160;&#160;GPIO_PIN_11</td></tr>
+<tr class="memitem:a9a34503639da3520f4d1310f7d7087c0" id="r_a9a34503639da3520f4d1310f7d7087c0"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a9a34503639da3520f4d1310f7d7087c0">OC_LDO2_PLn_GPIO_Port</a>&#160;&#160;&#160;GPIOD</td></tr>
+<tr class="memitem:a6be5816457207e9437da46ca304f0083" id="r_a6be5816457207e9437da46ca304f0083"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a6be5816457207e9437da46ca304f0083">BLD_LDO2_PLp_Pin</a>&#160;&#160;&#160;GPIO_PIN_12</td></tr>
+<tr class="memitem:a2a0ce4bd10487775174639a68994c132" id="r_a2a0ce4bd10487775174639a68994c132"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a2a0ce4bd10487775174639a68994c132">BLD_LDO2_PLp_GPIO_Port</a>&#160;&#160;&#160;GPIOD</td></tr>
+<tr class="memitem:ac37133e8167cf959841f3fa3a39919d7" id="r_ac37133e8167cf959841f3fa3a39919d7"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ac37133e8167cf959841f3fa3a39919d7">PG_LDO2_PLn_Pin</a>&#160;&#160;&#160;GPIO_PIN_13</td></tr>
+<tr class="memitem:aed355f3940c89ede79cb63158d0d51ae" id="r_aed355f3940c89ede79cb63158d0d51ae"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aed355f3940c89ede79cb63158d0d51ae">PG_LDO2_PLn_GPIO_Port</a>&#160;&#160;&#160;GPIOD</td></tr>
+<tr class="memitem:a6b23c5741e25f764df0d00dfc6787923" id="r_a6b23c5741e25f764df0d00dfc6787923"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a6b23c5741e25f764df0d00dfc6787923">BLD_LDO4_PSn_Pin</a>&#160;&#160;&#160;GPIO_PIN_14</td></tr>
+<tr class="memitem:a4c473ee59868a989f49381f74b40c081" id="r_a4c473ee59868a989f49381f74b40c081"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a4c473ee59868a989f49381f74b40c081">BLD_LDO4_PSn_GPIO_Port</a>&#160;&#160;&#160;GPIOD</td></tr>
+<tr class="memitem:ab35768381101d391f3322a0e44882367" id="r_ab35768381101d391f3322a0e44882367"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ab35768381101d391f3322a0e44882367">EN_LDO4_PSn_Pin</a>&#160;&#160;&#160;GPIO_PIN_15</td></tr>
+<tr class="memitem:a9688691770cccfa09aed1cfd1b12c288" id="r_a9688691770cccfa09aed1cfd1b12c288"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a9688691770cccfa09aed1cfd1b12c288">EN_LDO4_PSn_GPIO_Port</a>&#160;&#160;&#160;GPIOD</td></tr>
+<tr class="memitem:a056969596a4cd50e645ef874a759027e" id="r_a056969596a4cd50e645ef874a759027e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a056969596a4cd50e645ef874a759027e">OC_LDO3_PLp_Pin</a>&#160;&#160;&#160;GPIO_PIN_4</td></tr>
+<tr class="memitem:a37029dfaab14acdbc7bc8cf359233b93" id="r_a37029dfaab14acdbc7bc8cf359233b93"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a37029dfaab14acdbc7bc8cf359233b93">OC_LDO3_PLp_GPIO_Port</a>&#160;&#160;&#160;GPIOG</td></tr>
+<tr class="memitem:a2a1142ab2f9279ec0fdb1761687bb90b" id="r_a2a1142ab2f9279ec0fdb1761687bb90b"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a2a1142ab2f9279ec0fdb1761687bb90b">OC_LDO6_PSn_Pin</a>&#160;&#160;&#160;GPIO_PIN_5</td></tr>
+<tr class="memitem:aff8640227495d75406bc41eaa12799d2" id="r_aff8640227495d75406bc41eaa12799d2"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aff8640227495d75406bc41eaa12799d2">OC_LDO6_PSn_GPIO_Port</a>&#160;&#160;&#160;GPIOG</td></tr>
+<tr class="memitem:a9734ec4ad382e7ab394c8600c69a254b" id="r_a9734ec4ad382e7ab394c8600c69a254b"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a9734ec4ad382e7ab394c8600c69a254b">PG_LDO6_PSn_Pin</a>&#160;&#160;&#160;GPIO_PIN_6</td></tr>
+<tr class="memitem:a5e40e6b2b717d142f24f5e15695b3917" id="r_a5e40e6b2b717d142f24f5e15695b3917"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a5e40e6b2b717d142f24f5e15695b3917">PG_LDO6_PSn_GPIO_Port</a>&#160;&#160;&#160;GPIOG</td></tr>
+<tr class="memitem:a1e29c7ecc1ba979390112bfcf4eca225" id="r_a1e29c7ecc1ba979390112bfcf4eca225"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a1e29c7ecc1ba979390112bfcf4eca225">OC_LDO3_PLn_Pin</a>&#160;&#160;&#160;GPIO_PIN_7</td></tr>
+<tr class="memitem:a610d0b4babb192c94756e93ee3486606" id="r_a610d0b4babb192c94756e93ee3486606"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a610d0b4babb192c94756e93ee3486606">OC_LDO3_PLn_GPIO_Port</a>&#160;&#160;&#160;GPIOG</td></tr>
+<tr class="memitem:a6d3ab737e960661d814c2561cd5bef91" id="r_a6d3ab737e960661d814c2561cd5bef91"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a6d3ab737e960661d814c2561cd5bef91">EN_LDO6_PSn_Pin</a>&#160;&#160;&#160;GPIO_PIN_8</td></tr>
+<tr class="memitem:a15d1bc0c3f0f5ea183af16192cd1c153" id="r_a15d1bc0c3f0f5ea183af16192cd1c153"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a15d1bc0c3f0f5ea183af16192cd1c153">EN_LDO6_PSn_GPIO_Port</a>&#160;&#160;&#160;GPIOG</td></tr>
+<tr class="memitem:af371bc33af3c645a53046543537ea79e" id="r_af371bc33af3c645a53046543537ea79e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#af371bc33af3c645a53046543537ea79e">OC_LDO1_PSn_Pin</a>&#160;&#160;&#160;GPIO_PIN_6</td></tr>
+<tr class="memitem:ad85467ab73372761348e1c5b49c26060" id="r_ad85467ab73372761348e1c5b49c26060"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ad85467ab73372761348e1c5b49c26060">OC_LDO1_PSn_GPIO_Port</a>&#160;&#160;&#160;GPIOC</td></tr>
+<tr class="memitem:ab21151fd8a518c9360e2224b2b1b0131" id="r_ab21151fd8a518c9360e2224b2b1b0131"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ab21151fd8a518c9360e2224b2b1b0131">EN_LDO1_PSn_Pin</a>&#160;&#160;&#160;GPIO_PIN_8</td></tr>
+<tr class="memitem:a497a8b63b40d6f6b8a8a7e4197acaedc" id="r_a497a8b63b40d6f6b8a8a7e4197acaedc"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a497a8b63b40d6f6b8a8a7e4197acaedc">EN_LDO1_PSn_GPIO_Port</a>&#160;&#160;&#160;GPIOC</td></tr>
+<tr class="memitem:aa9a143dd0f25097852ed1334666f7fa7" id="r_aa9a143dd0f25097852ed1334666f7fa7"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aa9a143dd0f25097852ed1334666f7fa7">BLD_LDO1_PSn_Pin</a>&#160;&#160;&#160;GPIO_PIN_9</td></tr>
+<tr class="memitem:abee07d8f56f1a525d7bd28d5240423bd" id="r_abee07d8f56f1a525d7bd28d5240423bd"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#abee07d8f56f1a525d7bd28d5240423bd">BLD_LDO1_PSn_GPIO_Port</a>&#160;&#160;&#160;GPIOC</td></tr>
+<tr class="memitem:a7191aa3165fad8a28676ed85608b6961" id="r_a7191aa3165fad8a28676ed85608b6961"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a7191aa3165fad8a28676ed85608b6961">EN_LDO2_PLn_Pin</a>&#160;&#160;&#160;GPIO_PIN_10</td></tr>
+<tr class="memitem:a435b73d2faf4284ed61a36b7d9e9e18f" id="r_a435b73d2faf4284ed61a36b7d9e9e18f"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a435b73d2faf4284ed61a36b7d9e9e18f">EN_LDO2_PLn_GPIO_Port</a>&#160;&#160;&#160;GPIOA</td></tr>
+<tr class="memitem:ab0a3c3a0ebd7ce3820dd8e32d71895fd" id="r_ab0a3c3a0ebd7ce3820dd8e32d71895fd"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ab0a3c3a0ebd7ce3820dd8e32d71895fd">OC_LDO2_PSn_Pin</a>&#160;&#160;&#160;GPIO_PIN_11</td></tr>
+<tr class="memitem:a2c1829b47e8f5a37e56f0192695030f0" id="r_a2c1829b47e8f5a37e56f0192695030f0"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a2c1829b47e8f5a37e56f0192695030f0">OC_LDO2_PSn_GPIO_Port</a>&#160;&#160;&#160;GPIOA</td></tr>
+<tr class="memitem:a7e179875e02f5b099f7158818bca9ad2" id="r_a7e179875e02f5b099f7158818bca9ad2"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a7e179875e02f5b099f7158818bca9ad2">EN_LDO6_PSp_Pin</a>&#160;&#160;&#160;GPIO_PIN_10</td></tr>
+<tr class="memitem:a8d2bfed3efeb2ecdad55a2a655dfa45e" id="r_a8d2bfed3efeb2ecdad55a2a655dfa45e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a8d2bfed3efeb2ecdad55a2a655dfa45e">EN_LDO6_PSp_GPIO_Port</a>&#160;&#160;&#160;GPIOC</td></tr>
+<tr class="memitem:a3697dee85dc70532818cee772beb20a7" id="r_a3697dee85dc70532818cee772beb20a7"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a3697dee85dc70532818cee772beb20a7">OC_LDO6_PSp_Pin</a>&#160;&#160;&#160;GPIO_PIN_11</td></tr>
+<tr class="memitem:aad50239369cca94a6cd3a34445312c44" id="r_aad50239369cca94a6cd3a34445312c44"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aad50239369cca94a6cd3a34445312c44">OC_LDO6_PSp_GPIO_Port</a>&#160;&#160;&#160;GPIOC</td></tr>
+<tr class="memitem:a713b997e095b061bec351ea82cd9092b" id="r_a713b997e095b061bec351ea82cd9092b"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a713b997e095b061bec351ea82cd9092b">PG_LDO6_PSp_Pin</a>&#160;&#160;&#160;GPIO_PIN_12</td></tr>
+<tr class="memitem:ab587786d4f8c3ec298b6489e6c13599a" id="r_ab587786d4f8c3ec298b6489e6c13599a"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ab587786d4f8c3ec298b6489e6c13599a">PG_LDO6_PSp_GPIO_Port</a>&#160;&#160;&#160;GPIOC</td></tr>
+<tr class="memitem:a3dd40e1df84533d310afd3d26eaaa3a5" id="r_a3dd40e1df84533d310afd3d26eaaa3a5"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a3dd40e1df84533d310afd3d26eaaa3a5">PG_LDO1_PLp_Pin</a>&#160;&#160;&#160;GPIO_PIN_0</td></tr>
+<tr class="memitem:ac8d329173c3b6d122b9b6d12697f0c52" id="r_ac8d329173c3b6d122b9b6d12697f0c52"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ac8d329173c3b6d122b9b6d12697f0c52">PG_LDO1_PLp_GPIO_Port</a>&#160;&#160;&#160;GPIOD</td></tr>
+<tr class="memitem:a594d097b214e9148c4b19fde7ec22ca8" id="r_a594d097b214e9148c4b19fde7ec22ca8"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a594d097b214e9148c4b19fde7ec22ca8">PG_LDO1_PSp_Pin</a>&#160;&#160;&#160;GPIO_PIN_1</td></tr>
+<tr class="memitem:aa64552f0d1b40a29f3d2316c53161f41" id="r_aa64552f0d1b40a29f3d2316c53161f41"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aa64552f0d1b40a29f3d2316c53161f41">PG_LDO1_PSp_GPIO_Port</a>&#160;&#160;&#160;GPIOD</td></tr>
+<tr class="memitem:a814d9d09a8d8a292d860002e4c0bc19c" id="r_a814d9d09a8d8a292d860002e4c0bc19c"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a814d9d09a8d8a292d860002e4c0bc19c">BLD_LDO6_PSp_Pin</a>&#160;&#160;&#160;GPIO_PIN_2</td></tr>
+<tr class="memitem:a4b18043f71de0980ffedbc8ab9a7d8b9" id="r_a4b18043f71de0980ffedbc8ab9a7d8b9"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a4b18043f71de0980ffedbc8ab9a7d8b9">BLD_LDO6_PSp_GPIO_Port</a>&#160;&#160;&#160;GPIOD</td></tr>
+<tr class="memitem:a5bed9919f47e471c2491ee6d16f9182e" id="r_a5bed9919f47e471c2491ee6d16f9182e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a5bed9919f47e471c2491ee6d16f9182e">OC_LDO3_PSp_Pin</a>&#160;&#160;&#160;GPIO_PIN_6</td></tr>
+<tr class="memitem:a68628ab3ca8517fce19d757cab3af4a2" id="r_a68628ab3ca8517fce19d757cab3af4a2"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a68628ab3ca8517fce19d757cab3af4a2">OC_LDO3_PSp_GPIO_Port</a>&#160;&#160;&#160;GPIOD</td></tr>
+<tr class="memitem:a1f5d4f3c16572af55c52616ef55b7908" id="r_a1f5d4f3c16572af55c52616ef55b7908"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a1f5d4f3c16572af55c52616ef55b7908">BLD_LDO3_PSp_Pin</a>&#160;&#160;&#160;GPIO_PIN_7</td></tr>
+<tr class="memitem:a18f03f14823d0559da8067ebd8629b6d" id="r_a18f03f14823d0559da8067ebd8629b6d"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a18f03f14823d0559da8067ebd8629b6d">BLD_LDO3_PSp_GPIO_Port</a>&#160;&#160;&#160;GPIOD</td></tr>
+<tr class="memitem:a6d1a81797d3167970040526b977eef44" id="r_a6d1a81797d3167970040526b977eef44"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a6d1a81797d3167970040526b977eef44">PG_LDO1_PLn_Pin</a>&#160;&#160;&#160;GPIO_PIN_9</td></tr>
+<tr class="memitem:a781a52e3cdd65a41415295c07464d22a" id="r_a781a52e3cdd65a41415295c07464d22a"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a781a52e3cdd65a41415295c07464d22a">PG_LDO1_PLn_GPIO_Port</a>&#160;&#160;&#160;GPIOG</td></tr>
+<tr class="memitem:a86b9b238a4b57fd4e7240dd7f5056ab5" id="r_a86b9b238a4b57fd4e7240dd7f5056ab5"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a86b9b238a4b57fd4e7240dd7f5056ab5">OC_LDO1_PLp_Pin</a>&#160;&#160;&#160;GPIO_PIN_10</td></tr>
+<tr class="memitem:ada2e8184e51a9cb675bd7465d98811b4" id="r_ada2e8184e51a9cb675bd7465d98811b4"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ada2e8184e51a9cb675bd7465d98811b4">OC_LDO1_PLp_GPIO_Port</a>&#160;&#160;&#160;GPIOG</td></tr>
+<tr class="memitem:aa860e308cbcf7ceced8bf59ee31cdff6" id="r_aa860e308cbcf7ceced8bf59ee31cdff6"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aa860e308cbcf7ceced8bf59ee31cdff6">BLD_LDO1_PLp_Pin</a>&#160;&#160;&#160;GPIO_PIN_12</td></tr>
+<tr class="memitem:a04400dbda199374978b5399de41a2ef3" id="r_a04400dbda199374978b5399de41a2ef3"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a04400dbda199374978b5399de41a2ef3">BLD_LDO1_PLp_GPIO_Port</a>&#160;&#160;&#160;GPIOG</td></tr>
+<tr class="memitem:aa860178702df223d9df5f7f68f8ab3e8" id="r_aa860178702df223d9df5f7f68f8ab3e8"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aa860178702df223d9df5f7f68f8ab3e8">OC_LDO3_PSn_Pin</a>&#160;&#160;&#160;GPIO_PIN_3</td></tr>
+<tr class="memitem:a02eb3791be3cb33a6f2f047e1800fe30" id="r_a02eb3791be3cb33a6f2f047e1800fe30"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a02eb3791be3cb33a6f2f047e1800fe30">OC_LDO3_PSn_GPIO_Port</a>&#160;&#160;&#160;GPIOB</td></tr>
+<tr class="memitem:a5bb2230875c647d41b42262a0536d8a2" id="r_a5bb2230875c647d41b42262a0536d8a2"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a5bb2230875c647d41b42262a0536d8a2">EN_LDO3_PSn_Pin</a>&#160;&#160;&#160;GPIO_PIN_4</td></tr>
+<tr class="memitem:ae42b743fa22828f219e761dda0a1f4f6" id="r_ae42b743fa22828f219e761dda0a1f4f6"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ae42b743fa22828f219e761dda0a1f4f6">EN_LDO3_PSn_GPIO_Port</a>&#160;&#160;&#160;GPIOB</td></tr>
+<tr class="memitem:a5e21dd979becc2a1bdad8e29a431162a" id="r_a5e21dd979becc2a1bdad8e29a431162a"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a5e21dd979becc2a1bdad8e29a431162a">BLD_LDO6_PSn_Pin</a>&#160;&#160;&#160;GPIO_PIN_0</td></tr>
+<tr class="memitem:ab20dbfd4226de1bc27f041c2ccb00d80" id="r_ab20dbfd4226de1bc27f041c2ccb00d80"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ab20dbfd4226de1bc27f041c2ccb00d80">BLD_LDO6_PSn_GPIO_Port</a>&#160;&#160;&#160;GPIOE</td></tr>
+<tr class="memitem:a59072a4c74df02b1acff660255a981e2" id="r_a59072a4c74df02b1acff660255a981e2"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a59072a4c74df02b1acff660255a981e2">EN_LDO1_PLp_Pin</a>&#160;&#160;&#160;GPIO_PIN_1</td></tr>
+<tr class="memitem:a7802b7f224d026e46195aca35e222413" id="r_a7802b7f224d026e46195aca35e222413"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a7802b7f224d026e46195aca35e222413">EN_LDO1_PLp_GPIO_Port</a>&#160;&#160;&#160;GPIOE</td></tr>
+<tr class="memitem:a9fcb9e460d175bfc7ab4d80bf788b43a" id="r_a9fcb9e460d175bfc7ab4d80bf788b43a"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a9fcb9e460d175bfc7ab4d80bf788b43a">WHO_AM_I</a>&#160;&#160;&#160;&quot;STM32 NULCEO H753ZI IRIS V1.0\n&quot;</td></tr>
+<tr class="memitem:a536e7d84f87b2761d765d4164e9e3ffe" id="r_a536e7d84f87b2761d765d4164e9e3ffe"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a536e7d84f87b2761d765d4164e9e3ffe">DELTA_INIT_DVDD_AVDD</a>&#160;&#160;&#160;500</td></tr>
+<tr class="memitem:a5b9ac978d3feb04ff8a6c53665489d58" id="r_a5b9ac978d3feb04ff8a6c53665489d58"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a5b9ac978d3feb04ff8a6c53665489d58">DELTA_INIT_AVDD_VREF</a>&#160;&#160;&#160;500</td></tr>
+<tr class="memitem:adecf6a2a914a54b750c60757276c0ba3" id="r_adecf6a2a914a54b750c60757276c0ba3"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#adecf6a2a914a54b750c60757276c0ba3">DELTA_INIT_VREF_NRST</a>&#160;&#160;&#160;500</td></tr>
+<tr class="memitem:a45af039f3e9c3de7af36b8190b836438" id="r_a45af039f3e9c3de7af36b8190b836438"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a45af039f3e9c3de7af36b8190b836438">DELTA_INIT_NRST_VREF</a>&#160;&#160;&#160;500</td></tr>
+<tr class="memitem:a7557c4c4fb5b47bb4a5585063f7917ff" id="r_a7557c4c4fb5b47bb4a5585063f7917ff"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a7557c4c4fb5b47bb4a5585063f7917ff">DELTA_INIT_VREF_AVDD</a>&#160;&#160;&#160;500</td></tr>
+<tr class="memitem:ae2a14ffb173bd31765a52413c2fceace" id="r_ae2a14ffb173bd31765a52413c2fceace"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ae2a14ffb173bd31765a52413c2fceace">DELTA_INIT_AVDD_DVDD</a>&#160;&#160;&#160;500</td></tr>
+<tr class="memitem:ac381d2938f198a26fd07bcd814bfd4b7" id="r_ac381d2938f198a26fd07bcd814bfd4b7"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ac381d2938f198a26fd07bcd814bfd4b7">IP4_1</a>&#160;&#160;&#160;192</td></tr>
+<tr class="memitem:a2cb2523fcb81aa3234f8a2dbd96496d2" id="r_a2cb2523fcb81aa3234f8a2dbd96496d2"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a2cb2523fcb81aa3234f8a2dbd96496d2">IP4_2</a>&#160;&#160;&#160;168</td></tr>
+<tr class="memitem:ae9b33c92e4f868becc7159c4380eb018" id="r_ae9b33c92e4f868becc7159c4380eb018"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ae9b33c92e4f868becc7159c4380eb018">IP4_3</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:ae435ad4396315888cc5c759227224cd3" id="r_ae435ad4396315888cc5c759227224cd3"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ae435ad4396315888cc5c759227224cd3">IP4_4</a>&#160;&#160;&#160;123</td></tr>
+<tr class="memitem:a9245add78f421992c6f1aff393305143" id="r_a9245add78f421992c6f1aff393305143"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a9245add78f421992c6f1aff393305143">UDP_SERVER_PORT</a>&#160;&#160;&#160;7</td></tr>
+<tr class="memitem:a3bdf596b534db154cacdbfb427bd2501" id="r_a3bdf596b534db154cacdbfb427bd2501"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a3bdf596b534db154cacdbfb427bd2501">LDO_1PSp_VAL_MIN</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:a5b8a801c968ee2e98084611828795fa3" id="r_a5b8a801c968ee2e98084611828795fa3"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a5b8a801c968ee2e98084611828795fa3">LDO_1PSp_VAL_MAX</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:a0d6d6fd812f5126d6829861c405b6e1a" id="r_a0d6d6fd812f5126d6829861c405b6e1a"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a0d6d6fd812f5126d6829861c405b6e1a">LDO_1PSp_CUR_MIN</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:a7a6aca782982d9735290082647635e09" id="r_a7a6aca782982d9735290082647635e09"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a7a6aca782982d9735290082647635e09">LDO_1PSp_CUR_MAX</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:a88bc6709e2e065402239c288c60c5a51" id="r_a88bc6709e2e065402239c288c60c5a51"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a88bc6709e2e065402239c288c60c5a51">LDO_1PSn_VAL_MIN</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:a8a5290bec9ed3280566601174953beb3" id="r_a8a5290bec9ed3280566601174953beb3"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a8a5290bec9ed3280566601174953beb3">LDO_1PSn_VAL_MAX</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:ad32fca84831ca0ed4bde4c48cd53ba03" id="r_ad32fca84831ca0ed4bde4c48cd53ba03"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ad32fca84831ca0ed4bde4c48cd53ba03">LDO_1PSn_CUR_MIN</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:aad6255dca6b1d6503e161b9ee4b4cc92" id="r_aad6255dca6b1d6503e161b9ee4b4cc92"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aad6255dca6b1d6503e161b9ee4b4cc92">LDO_1PSn_CUR_MAX</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:ac68b0f144e070ae516cb993f46ff00d9" id="r_ac68b0f144e070ae516cb993f46ff00d9"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ac68b0f144e070ae516cb993f46ff00d9">MCP4725_I2CADDR_DEFAULT</a>&#160;&#160;&#160;(0x60 &lt;&lt; 1)</td></tr>
+<tr class="memitem:a0358cd3822bde19276f9c14a49eb0b5a" id="r_a0358cd3822bde19276f9c14a49eb0b5a"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a0358cd3822bde19276f9c14a49eb0b5a">MPC4725_I2CADDR_A0</a>&#160;&#160;&#160;(0x61 &lt;&lt; 1)</td></tr>
+<tr class="memitem:af56e638511efb0abb685c92a5889ff8e" id="r_af56e638511efb0abb685c92a5889ff8e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#af56e638511efb0abb685c92a5889ff8e">MPC4725_I2CADDR_A1</a>&#160;&#160;&#160;(0x62 &lt;&lt; 1)</td></tr>
+<tr class="memitem:a5f06483588c52d15bb46f04f47696c21" id="r_a5f06483588c52d15bb46f04f47696c21"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a5f06483588c52d15bb46f04f47696c21">MCP4725_VAL_DEF</a>&#160;&#160;&#160;(0x000)</td></tr>
+<tr class="memitem:a0153e7c4e656b888501c21a8b5775ed4" id="r_a0153e7c4e656b888501c21a8b5775ed4"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a0153e7c4e656b888501c21a8b5775ed4">MCP4725_VAL_DEF_BIN</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:a6b60c98325cc917f3a3ab2b3f9300797" id="r_a6b60c98325cc917f3a3ab2b3f9300797"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a6b60c98325cc917f3a3ab2b3f9300797">SPI_SIZE</a>&#160;&#160;&#160;24</td></tr>
+<tr class="memitem:a0131f2774f4e3dd71567400683b60405" id="r_a0131f2774f4e3dd71567400683b60405"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a0131f2774f4e3dd71567400683b60405">SPI_TIMEOUT</a>&#160;&#160;&#160;100</td></tr>
+<tr class="memitem:a0c0dba278c3d74e388ad6f1f2ca53236" id="r_a0c0dba278c3d74e388ad6f1f2ca53236"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a0c0dba278c3d74e388ad6f1f2ca53236">CARTE_LIM_CORRIGEE</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memitem:a3e61280b89d8f2676ee3b712c3788acc" id="r_a3e61280b89d8f2676ee3b712c3788acc"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a3e61280b89d8f2676ee3b712c3788acc">OC_K_V_PAR_A</a>&#160;&#160;&#160;10.0f</td></tr>
+<tr class="memitem:a8cddcabf16e69a6e9529be5ff373237b" id="r_a8cddcabf16e69a6e9529be5ff373237b"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a8cddcabf16e69a6e9529be5ff373237b">OC_BLANKING_MS</a>&#160;&#160;&#160;60U</td></tr>
+<tr class="memitem:a2155aff8c9b5e761d21f451ffe56709d" id="r_a2155aff8c9b5e761d21f451ffe56709d"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a2155aff8c9b5e761d21f451ffe56709d">OC_CODE_SEUIL_MAX</a>&#160;&#160;&#160;4095U</td></tr>
+<tr class="memitem:a7b285666c2c29693a2cbf72f6865950a" id="r_a7b285666c2c29693a2cbf72f6865950a"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a7b285666c2c29693a2cbf72f6865950a">OC_CODE_SEUIL_DEFAUT</a>&#160;&#160;&#160;4095U</td></tr>
+<tr class="memitem:a345fe4cc2f4044fa1c3f041765a74b37" id="r_a345fe4cc2f4044fa1c3f041765a74b37"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a345fe4cc2f4044fa1c3f041765a74b37">OC_CODE_SEUIL_MIN</a>&#160;&#160;&#160;410U</td></tr>
+<tr class="memitem:a201915d36bdca5b5fb0649e83548b6e6" id="r_a201915d36bdca5b5fb0649e83548b6e6"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a201915d36bdca5b5fb0649e83548b6e6">OC_NIVEAU_DEFAUT</a>&#160;&#160;&#160;GPIO_PIN_SET</td></tr>
+<tr class="memitem:a2b1ae22d0ef9cacf88eff295dbcfccb8" id="r_a2b1ae22d0ef9cacf88eff295dbcfccb8"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a2b1ae22d0ef9cacf88eff295dbcfccb8">LIMITATION_PAR_POTENTIOMETRE</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:a4451e99bed027cc9712659d482653693" id="r_a4451e99bed027cc9712659d482653693"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a4451e99bed027cc9712659d482653693">DAC_EEPROM_TWC_MS</a>&#160;&#160;&#160;20U</td></tr>
+<tr class="memitem:ae4696e46679bea8777f051036e5048ac" id="r_ae4696e46679bea8777f051036e5048ac"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ae4696e46679bea8777f051036e5048ac">DAC_EEPROM_DELAI_MS</a>&#160;&#160;&#160;2000U</td></tr>
+<tr class="memitem:a6267cb2374ff2cec76e74e7f6e436cda" id="r_a6267cb2374ff2cec76e74e7f6e436cda"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a6267cb2374ff2cec76e74e7f6e436cda">DAC_EEPROM_ESSAIS_MAX</a>&#160;&#160;&#160;3U</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:ga1730ffe1e560465665eb47d9264826f9" id="r_ga1730ffe1e560465665eb47d9264826f9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__grp__cubemx.html#ga1730ffe1e560465665eb47d9264826f9">Error_Handler</a> (void)</td></tr>
+<tr class="memdesc:ga1730ffe1e560465665eb47d9264826f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is executed in case of error occurrence.  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>: Header for main.c file. This file contains the common defines of the application. </p>
+<dl class="section attention"><dt>Attention</dt><dd></dd></dl>
+<p>Copyright (c) 2025 STMicroelectronics. All rights reserved.</p>
+<p>This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-IS. </p>
+
+<p class="definition">Définition dans le fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+</div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Documentation des macros</h2>
+<a id="a3a284247c886cfd31757b99efc5206b9" name="a3a284247c886cfd31757b99efc5206b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a284247c886cfd31757b99efc5206b9">&#9670;&#160;</a></span>EN_LDO3_PSp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO3_PSp_Pin&#160;&#160;&#160;GPIO_PIN_2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00060">60</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a0b92f886508a6165765a2c4d986e8e6e" name="a0b92f886508a6165765a2c4d986e8e6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b92f886508a6165765a2c4d986e8e6e">&#9670;&#160;</a></span>EN_LDO3_PSp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO3_PSp_GPIO_Port&#160;&#160;&#160;GPIOE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00061">61</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ab487baaf47ac5883e683b04701b68a3a" name="ab487baaf47ac5883e683b04701b68a3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab487baaf47ac5883e683b04701b68a3a">&#9670;&#160;</a></span>PG_LDO3_PSp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO3_PSp_Pin&#160;&#160;&#160;GPIO_PIN_3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00062">62</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a852a0203f947af72aa2dd214c1b0677f" name="a852a0203f947af72aa2dd214c1b0677f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a852a0203f947af72aa2dd214c1b0677f">&#9670;&#160;</a></span>PG_LDO3_PSp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO3_PSp_GPIO_Port&#160;&#160;&#160;GPIOE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00063">63</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="afb4682bae1cb7e0183afafe74d59b650" name="afb4682bae1cb7e0183afafe74d59b650"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb4682bae1cb7e0183afafe74d59b650">&#9670;&#160;</a></span>OC_LDO2_PSp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO2_PSp_Pin&#160;&#160;&#160;GPIO_PIN_4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00064">64</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a3262461bac106feaec803daccbb8eb10" name="a3262461bac106feaec803daccbb8eb10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3262461bac106feaec803daccbb8eb10">&#9670;&#160;</a></span>OC_LDO2_PSp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO2_PSp_GPIO_Port&#160;&#160;&#160;GPIOE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00065">65</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a8005f6df258ddc9b3e29a53cd515d61a" name="a8005f6df258ddc9b3e29a53cd515d61a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8005f6df258ddc9b3e29a53cd515d61a">&#9670;&#160;</a></span>EN_LDO2_PSp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO2_PSp_Pin&#160;&#160;&#160;GPIO_PIN_5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00066">66</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a77b5f14105497e7e82aea4259de3122d" name="a77b5f14105497e7e82aea4259de3122d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77b5f14105497e7e82aea4259de3122d">&#9670;&#160;</a></span>EN_LDO2_PSp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO2_PSp_GPIO_Port&#160;&#160;&#160;GPIOE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00067">67</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="af2f66a66a11f73c321702bb36b0cc5af" name="af2f66a66a11f73c321702bb36b0cc5af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2f66a66a11f73c321702bb36b0cc5af">&#9670;&#160;</a></span>BLD_LDO1_PLn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO1_PLn_Pin&#160;&#160;&#160;GPIO_PIN_6</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00068">68</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a5eb468e951c1ecc339f23bedbe02210c" name="a5eb468e951c1ecc339f23bedbe02210c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5eb468e951c1ecc339f23bedbe02210c">&#9670;&#160;</a></span>BLD_LDO1_PLn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO1_PLn_GPIO_Port&#160;&#160;&#160;GPIOE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00069">69</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a3156dfb35bd5e925e00c08387890a271" name="a3156dfb35bd5e925e00c08387890a271"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3156dfb35bd5e925e00c08387890a271">&#9670;&#160;</a></span>BLD_LDO5_PSp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO5_PSp_Pin&#160;&#160;&#160;GPIO_PIN_13</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00070">70</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a5b7095f432e38bf675f65912825775c3" name="a5b7095f432e38bf675f65912825775c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b7095f432e38bf675f65912825775c3">&#9670;&#160;</a></span>BLD_LDO5_PSp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO5_PSp_GPIO_Port&#160;&#160;&#160;GPIOC</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00071">71</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="abf463767c5e79c0d3443a51f045eef41" name="abf463767c5e79c0d3443a51f045eef41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf463767c5e79c0d3443a51f045eef41">&#9670;&#160;</a></span>PG_LDO5_PSp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO5_PSp_Pin&#160;&#160;&#160;GPIO_PIN_14</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00072">72</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a77f967d8b19896b34081f4012468d5a8" name="a77f967d8b19896b34081f4012468d5a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77f967d8b19896b34081f4012468d5a8">&#9670;&#160;</a></span>PG_LDO5_PSp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO5_PSp_GPIO_Port&#160;&#160;&#160;GPIOC</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00073">73</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a616e6c2906e2081b942ac609ced06c40" name="a616e6c2906e2081b942ac609ced06c40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a616e6c2906e2081b942ac609ced06c40">&#9670;&#160;</a></span>BLD_LDO4_PSp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO4_PSp_Pin&#160;&#160;&#160;GPIO_PIN_15</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00074">74</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a90d57b1e397035727db35e252893f6f5" name="a90d57b1e397035727db35e252893f6f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90d57b1e397035727db35e252893f6f5">&#9670;&#160;</a></span>BLD_LDO4_PSp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO4_PSp_GPIO_Port&#160;&#160;&#160;GPIOC</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00075">75</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="aec6faad694cd6f3a4fac2dd06d655e02" name="aec6faad694cd6f3a4fac2dd06d655e02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec6faad694cd6f3a4fac2dd06d655e02">&#9670;&#160;</a></span>EN_LDO1_PSp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO1_PSp_Pin&#160;&#160;&#160;GPIO_PIN_0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00076">76</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a046e03b7fe7921fedd9299d85863afb9" name="a046e03b7fe7921fedd9299d85863afb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a046e03b7fe7921fedd9299d85863afb9">&#9670;&#160;</a></span>EN_LDO1_PSp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO1_PSp_GPIO_Port&#160;&#160;&#160;GPIOF</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00077">77</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a02cd4d82868ce783dbe4d34eba022d86" name="a02cd4d82868ce783dbe4d34eba022d86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02cd4d82868ce783dbe4d34eba022d86">&#9670;&#160;</a></span>BLD_LDO2_PSp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO2_PSp_Pin&#160;&#160;&#160;GPIO_PIN_1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00078">78</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a9907132080df36f13b9d35f006a1c331" name="a9907132080df36f13b9d35f006a1c331"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9907132080df36f13b9d35f006a1c331">&#9670;&#160;</a></span>BLD_LDO2_PSp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO2_PSp_GPIO_Port&#160;&#160;&#160;GPIOF</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00079">79</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ad0ac04e7a62c46edb9db13d0ca420c7c" name="ad0ac04e7a62c46edb9db13d0ca420c7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0ac04e7a62c46edb9db13d0ca420c7c">&#9670;&#160;</a></span>PG_LDO2_PSp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO2_PSp_Pin&#160;&#160;&#160;GPIO_PIN_2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00080">80</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a008aa2064cc1a7d1e1a319f1caf8dec5" name="a008aa2064cc1a7d1e1a319f1caf8dec5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a008aa2064cc1a7d1e1a319f1caf8dec5">&#9670;&#160;</a></span>PG_LDO2_PSp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO2_PSp_GPIO_Port&#160;&#160;&#160;GPIOF</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00081">81</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a7e54b43c9cd6a025eac815d3b202d8ad" name="a7e54b43c9cd6a025eac815d3b202d8ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e54b43c9cd6a025eac815d3b202d8ad">&#9670;&#160;</a></span>EN_LDO5_PSn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO5_PSn_Pin&#160;&#160;&#160;GPIO_PIN_3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00082">82</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a829ef389a5da38b2dd98a8ef9cc2ff07" name="a829ef389a5da38b2dd98a8ef9cc2ff07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a829ef389a5da38b2dd98a8ef9cc2ff07">&#9670;&#160;</a></span>EN_LDO5_PSn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO5_PSn_GPIO_Port&#160;&#160;&#160;GPIOF</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00083">83</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a4db490fd63173467fb529302c48d979b" name="a4db490fd63173467fb529302c48d979b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4db490fd63173467fb529302c48d979b">&#9670;&#160;</a></span>PG_LDO3_PSn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO3_PSn_Pin&#160;&#160;&#160;GPIO_PIN_5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00084">84</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a810f01620bc3a25c2cc0aead74300398" name="a810f01620bc3a25c2cc0aead74300398"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a810f01620bc3a25c2cc0aead74300398">&#9670;&#160;</a></span>PG_LDO3_PSn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO3_PSn_GPIO_Port&#160;&#160;&#160;GPIOF</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00085">85</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="abdef5dc827bdfd234a7e9d2780c804bd" name="abdef5dc827bdfd234a7e9d2780c804bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdef5dc827bdfd234a7e9d2780c804bd">&#9670;&#160;</a></span>OC_LDO5_PSp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO5_PSp_Pin&#160;&#160;&#160;GPIO_PIN_6</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00086">86</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a3d15cf0cb6a25fb8a2222b19b5b9c6d1" name="a3d15cf0cb6a25fb8a2222b19b5b9c6d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d15cf0cb6a25fb8a2222b19b5b9c6d1">&#9670;&#160;</a></span>OC_LDO5_PSp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO5_PSp_GPIO_Port&#160;&#160;&#160;GPIOF</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00087">87</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a9abefebb47eb9d579633522729121491" name="a9abefebb47eb9d579633522729121491"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9abefebb47eb9d579633522729121491">&#9670;&#160;</a></span>EN_LDO5_PSp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO5_PSp_Pin&#160;&#160;&#160;GPIO_PIN_7</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00088">88</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a3a9ab4bcb7e410b9caef972e682eb759" name="a3a9ab4bcb7e410b9caef972e682eb759"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a9ab4bcb7e410b9caef972e682eb759">&#9670;&#160;</a></span>EN_LDO5_PSp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO5_PSp_GPIO_Port&#160;&#160;&#160;GPIOF</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00089">89</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="af5b0819fcd329748ee98524903ebef61" name="af5b0819fcd329748ee98524903ebef61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5b0819fcd329748ee98524903ebef61">&#9670;&#160;</a></span>BLD_LDO1_PSp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO1_PSp_Pin&#160;&#160;&#160;GPIO_PIN_8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00090">90</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="aa3e696d08fa03193c7b6f7bee37b8f46" name="aa3e696d08fa03193c7b6f7bee37b8f46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3e696d08fa03193c7b6f7bee37b8f46">&#9670;&#160;</a></span>BLD_LDO1_PSp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO1_PSp_GPIO_Port&#160;&#160;&#160;GPIOF</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00091">91</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="aa034a067d1be621ba8bb41025496b87a" name="aa034a067d1be621ba8bb41025496b87a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa034a067d1be621ba8bb41025496b87a">&#9670;&#160;</a></span>OC_LDO1_PSp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO1_PSp_Pin&#160;&#160;&#160;GPIO_PIN_9</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00092">92</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="abd6e9d6543a593db07d0c83cacdf56fd" name="abd6e9d6543a593db07d0c83cacdf56fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd6e9d6543a593db07d0c83cacdf56fd">&#9670;&#160;</a></span>OC_LDO1_PSp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO1_PSp_GPIO_Port&#160;&#160;&#160;GPIOF</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00093">93</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="afaccd46497978f6c4ee58ea4bb22d0cf" name="afaccd46497978f6c4ee58ea4bb22d0cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afaccd46497978f6c4ee58ea4bb22d0cf">&#9670;&#160;</a></span>EN_LDO4_PSp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO4_PSp_Pin&#160;&#160;&#160;GPIO_PIN_0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00094">94</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ae5c328f7b27736fc83564045f4b5d0d9" name="ae5c328f7b27736fc83564045f4b5d0d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5c328f7b27736fc83564045f4b5d0d9">&#9670;&#160;</a></span>EN_LDO4_PSp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO4_PSp_GPIO_Port&#160;&#160;&#160;GPIOA</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00095">95</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a11b43a557ccdd0da5de87dac79c24ffd" name="a11b43a557ccdd0da5de87dac79c24ffd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11b43a557ccdd0da5de87dac79c24ffd">&#9670;&#160;</a></span>EN_LDO2_PLp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO2_PLp_Pin&#160;&#160;&#160;GPIO_PIN_3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00096">96</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a9f098e6dbae0ac99d8ed7e5e13058243" name="a9f098e6dbae0ac99d8ed7e5e13058243"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f098e6dbae0ac99d8ed7e5e13058243">&#9670;&#160;</a></span>EN_LDO2_PLp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO2_PLp_GPIO_Port&#160;&#160;&#160;GPIOA</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00097">97</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a7516a6ff741d6a8e5661a8abca27da92" name="a7516a6ff741d6a8e5661a8abca27da92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7516a6ff741d6a8e5661a8abca27da92">&#9670;&#160;</a></span>PG_LDO4_PSp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO4_PSp_Pin&#160;&#160;&#160;GPIO_PIN_4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00098">98</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ad5258943b1cd688493a8f901ba410ad5" name="ad5258943b1cd688493a8f901ba410ad5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5258943b1cd688493a8f901ba410ad5">&#9670;&#160;</a></span>PG_LDO4_PSp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO4_PSp_GPIO_Port&#160;&#160;&#160;GPIOA</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00099">99</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a12171d17a4c2cda4730dda62db8024f8" name="a12171d17a4c2cda4730dda62db8024f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12171d17a4c2cda4730dda62db8024f8">&#9670;&#160;</a></span>BLD_LDO2_PSn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO2_PSn_Pin&#160;&#160;&#160;GPIO_PIN_5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00100">100</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a476282845ddb9486433d5559a82b4c13" name="a476282845ddb9486433d5559a82b4c13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a476282845ddb9486433d5559a82b4c13">&#9670;&#160;</a></span>BLD_LDO2_PSn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO2_PSn_GPIO_Port&#160;&#160;&#160;GPIOA</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00101">101</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="af3cbf1d9d28611c11f8deacf6550ceb1" name="af3cbf1d9d28611c11f8deacf6550ceb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3cbf1d9d28611c11f8deacf6550ceb1">&#9670;&#160;</a></span>EN_LDO2_PSn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO2_PSn_Pin&#160;&#160;&#160;GPIO_PIN_6</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00102">102</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="aeb4cd2321b971a398c24c02eaa9ab4c4" name="aeb4cd2321b971a398c24c02eaa9ab4c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb4cd2321b971a398c24c02eaa9ab4c4">&#9670;&#160;</a></span>EN_LDO2_PSn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO2_PSn_GPIO_Port&#160;&#160;&#160;GPIOA</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00103">103</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a7779435b35bbd4b911cb537e450df439" name="a7779435b35bbd4b911cb537e450df439"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7779435b35bbd4b911cb537e450df439">&#9670;&#160;</a></span>OC_LDO4_PSp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO4_PSp_Pin&#160;&#160;&#160;GPIO_PIN_0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00104">104</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a7a096352b39680bd8acf356580404ca3" name="a7a096352b39680bd8acf356580404ca3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a096352b39680bd8acf356580404ca3">&#9670;&#160;</a></span>OC_LDO4_PSp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO4_PSp_GPIO_Port&#160;&#160;&#160;GPIOB</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00105">105</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a6f53c1c0f0fa8c8d727913004294598c" name="a6f53c1c0f0fa8c8d727913004294598c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f53c1c0f0fa8c8d727913004294598c">&#9670;&#160;</a></span>BLD_LDO3_PSn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO3_PSn_Pin&#160;&#160;&#160;GPIO_PIN_1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00106">106</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a3c5612b4a7fc3c16f425e2451f719cae" name="a3c5612b4a7fc3c16f425e2451f719cae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c5612b4a7fc3c16f425e2451f719cae">&#9670;&#160;</a></span>BLD_LDO3_PSn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO3_PSn_GPIO_Port&#160;&#160;&#160;GPIOB</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00107">107</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a04fbc9b31054f68fb7a3b0322d258b50" name="a04fbc9b31054f68fb7a3b0322d258b50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04fbc9b31054f68fb7a3b0322d258b50">&#9670;&#160;</a></span>PG_LDO5_PSn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO5_PSn_Pin&#160;&#160;&#160;GPIO_PIN_11</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00108">108</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a2ba5ef320240130580a1cd4ffb10cfbb" name="a2ba5ef320240130580a1cd4ffb10cfbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ba5ef320240130580a1cd4ffb10cfbb">&#9670;&#160;</a></span>PG_LDO5_PSn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO5_PSn_GPIO_Port&#160;&#160;&#160;GPIOF</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00109">109</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a42a33c3edb0274256ca3475c52640872" name="a42a33c3edb0274256ca3475c52640872"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42a33c3edb0274256ca3475c52640872">&#9670;&#160;</a></span>BLD_LDO3_PLp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO3_PLp_Pin&#160;&#160;&#160;GPIO_PIN_12</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00110">110</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a4ae0545b23ddc82fc28ef4ce4c81ad00" name="a4ae0545b23ddc82fc28ef4ce4c81ad00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ae0545b23ddc82fc28ef4ce4c81ad00">&#9670;&#160;</a></span>BLD_LDO3_PLp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO3_PLp_GPIO_Port&#160;&#160;&#160;GPIOF</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00111">111</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a2695dfb1eb5e405131b504f38421ee98" name="a2695dfb1eb5e405131b504f38421ee98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2695dfb1eb5e405131b504f38421ee98">&#9670;&#160;</a></span>EN_LDO3_PLp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO3_PLp_Pin&#160;&#160;&#160;GPIO_PIN_13</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00112">112</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ad3a209bfc2cc2979afa7842b0893d68f" name="ad3a209bfc2cc2979afa7842b0893d68f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3a209bfc2cc2979afa7842b0893d68f">&#9670;&#160;</a></span>EN_LDO3_PLp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO3_PLp_GPIO_Port&#160;&#160;&#160;GPIOF</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00113">113</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a7bd3b6d1b78a276b8e8d7d808c9667c6" name="a7bd3b6d1b78a276b8e8d7d808c9667c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bd3b6d1b78a276b8e8d7d808c9667c6">&#9670;&#160;</a></span>OC_LDO4_PSn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO4_PSn_Pin&#160;&#160;&#160;GPIO_PIN_14</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00114">114</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a904108691189752d2831a2b4ea5de470" name="a904108691189752d2831a2b4ea5de470"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a904108691189752d2831a2b4ea5de470">&#9670;&#160;</a></span>OC_LDO4_PSn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO4_PSn_GPIO_Port&#160;&#160;&#160;GPIOF</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00115">115</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a2b0a955286ad6b81217bda6fdb8c02f4" name="a2b0a955286ad6b81217bda6fdb8c02f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b0a955286ad6b81217bda6fdb8c02f4">&#9670;&#160;</a></span>OC_LDO5_PSn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO5_PSn_Pin&#160;&#160;&#160;GPIO_PIN_15</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00116">116</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a0f45a990260aa64d04f6405cbbc28d62" name="a0f45a990260aa64d04f6405cbbc28d62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f45a990260aa64d04f6405cbbc28d62">&#9670;&#160;</a></span>OC_LDO5_PSn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO5_PSn_GPIO_Port&#160;&#160;&#160;GPIOF</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00117">117</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a2ad4bbc3eb63c66f59a7422193e725ca" name="a2ad4bbc3eb63c66f59a7422193e725ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ad4bbc3eb63c66f59a7422193e725ca">&#9670;&#160;</a></span>EN_LDO1_PLn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO1_PLn_Pin&#160;&#160;&#160;GPIO_PIN_0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00118">118</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ab1403c51ce5299a37ee218dbe6c15b7e" name="ab1403c51ce5299a37ee218dbe6c15b7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1403c51ce5299a37ee218dbe6c15b7e">&#9670;&#160;</a></span>EN_LDO1_PLn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO1_PLn_GPIO_Port&#160;&#160;&#160;GPIOG</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00119">119</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ab78b0c1222df5713e90ec334dc1009a7" name="ab78b0c1222df5713e90ec334dc1009a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab78b0c1222df5713e90ec334dc1009a7">&#9670;&#160;</a></span>PG_LDO2_PLp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO2_PLp_Pin&#160;&#160;&#160;GPIO_PIN_1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00120">120</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a6ab389b134ca190c559cfa5bbf4526e5" name="a6ab389b134ca190c559cfa5bbf4526e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ab389b134ca190c559cfa5bbf4526e5">&#9670;&#160;</a></span>PG_LDO2_PLp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO2_PLp_GPIO_Port&#160;&#160;&#160;GPIOG</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00121">121</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="af730589affedc3de046f97d5afbcac0f" name="af730589affedc3de046f97d5afbcac0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af730589affedc3de046f97d5afbcac0f">&#9670;&#160;</a></span>PG_LDO4_PSn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO4_PSn_Pin&#160;&#160;&#160;GPIO_PIN_9</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00122">122</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a5b67e762e301c056f3703dc19996318e" name="a5b67e762e301c056f3703dc19996318e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b67e762e301c056f3703dc19996318e">&#9670;&#160;</a></span>PG_LDO4_PSn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO4_PSn_GPIO_Port&#160;&#160;&#160;GPIOE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00123">123</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a212ad5af773cd2de806da8ca3a62ace4" name="a212ad5af773cd2de806da8ca3a62ace4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a212ad5af773cd2de806da8ca3a62ace4">&#9670;&#160;</a></span>OC_LDO2_PLp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO2_PLp_Pin&#160;&#160;&#160;GPIO_PIN_10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00124">124</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ae56a8117ab5920d45dc5a41eac2075ff" name="ae56a8117ab5920d45dc5a41eac2075ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae56a8117ab5920d45dc5a41eac2075ff">&#9670;&#160;</a></span>OC_LDO2_PLp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO2_PLp_GPIO_Port&#160;&#160;&#160;GPIOE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00125">125</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a18948085978c5bdf6074ef952d64001c" name="a18948085978c5bdf6074ef952d64001c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18948085978c5bdf6074ef952d64001c">&#9670;&#160;</a></span>BLD_LDO5_PSn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO5_PSn_Pin&#160;&#160;&#160;GPIO_PIN_11</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00126">126</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a17e70a14b3108f6531237878dd66d9f8" name="a17e70a14b3108f6531237878dd66d9f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17e70a14b3108f6531237878dd66d9f8">&#9670;&#160;</a></span>BLD_LDO5_PSn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO5_PSn_GPIO_Port&#160;&#160;&#160;GPIOE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00127">127</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a70a518700044693e7e2c683976f1866e" name="a70a518700044693e7e2c683976f1866e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70a518700044693e7e2c683976f1866e">&#9670;&#160;</a></span>BLD_LDO2_PLn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO2_PLn_Pin&#160;&#160;&#160;GPIO_PIN_12</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00128">128</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a42cb1a5bf524c02ed016c5b191894eca" name="a42cb1a5bf524c02ed016c5b191894eca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42cb1a5bf524c02ed016c5b191894eca">&#9670;&#160;</a></span>BLD_LDO2_PLn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO2_PLn_GPIO_Port&#160;&#160;&#160;GPIOE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00129">129</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a5733ace1cd9be673adea74ae85a5918a" name="a5733ace1cd9be673adea74ae85a5918a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5733ace1cd9be673adea74ae85a5918a">&#9670;&#160;</a></span>EN_LDO3_PLn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO3_PLn_Pin&#160;&#160;&#160;GPIO_PIN_13</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00130">130</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a4b53f74d6371bf3398171a53b811f3ce" name="a4b53f74d6371bf3398171a53b811f3ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b53f74d6371bf3398171a53b811f3ce">&#9670;&#160;</a></span>EN_LDO3_PLn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO3_PLn_GPIO_Port&#160;&#160;&#160;GPIOE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00131">131</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a759eaef9ae277004b09c696df1c14fe6" name="a759eaef9ae277004b09c696df1c14fe6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a759eaef9ae277004b09c696df1c14fe6">&#9670;&#160;</a></span>PG_LDO3_PLn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO3_PLn_Pin&#160;&#160;&#160;GPIO_PIN_14</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00132">132</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a9509efd59362ced2e17780bfb7171275" name="a9509efd59362ced2e17780bfb7171275"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9509efd59362ced2e17780bfb7171275">&#9670;&#160;</a></span>PG_LDO3_PLn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO3_PLn_GPIO_Port&#160;&#160;&#160;GPIOE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00133">133</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="afa6d2cfafc1f8c736be83f5c67a30995" name="afa6d2cfafc1f8c736be83f5c67a30995"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa6d2cfafc1f8c736be83f5c67a30995">&#9670;&#160;</a></span>PG_LDO3_PLp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO3_PLp_Pin&#160;&#160;&#160;GPIO_PIN_15</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00134">134</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ac85f3c9ccb3ebd4a6a06c029eaddb164" name="ac85f3c9ccb3ebd4a6a06c029eaddb164"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac85f3c9ccb3ebd4a6a06c029eaddb164">&#9670;&#160;</a></span>PG_LDO3_PLp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO3_PLp_GPIO_Port&#160;&#160;&#160;GPIOE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00135">135</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a14fe06b3d7686bebf3153448c41a0a69" name="a14fe06b3d7686bebf3153448c41a0a69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14fe06b3d7686bebf3153448c41a0a69">&#9670;&#160;</a></span>PG_LDO2_PSn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO2_PSn_Pin&#160;&#160;&#160;GPIO_PIN_12</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00136">136</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a7b0bbc809537fc74a79f982fcccc7b4f" name="a7b0bbc809537fc74a79f982fcccc7b4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b0bbc809537fc74a79f982fcccc7b4f">&#9670;&#160;</a></span>PG_LDO2_PSn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO2_PSn_GPIO_Port&#160;&#160;&#160;GPIOB</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00137">137</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="acb3b16a078becce04aa5656f0956b3d1" name="acb3b16a078becce04aa5656f0956b3d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb3b16a078becce04aa5656f0956b3d1">&#9670;&#160;</a></span>PG_LDO1_PSn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO1_PSn_Pin&#160;&#160;&#160;GPIO_PIN_8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00138">138</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="abb3d12dbd724ab0a1bfb49c5a90a3ba5" name="abb3d12dbd724ab0a1bfb49c5a90a3ba5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb3d12dbd724ab0a1bfb49c5a90a3ba5">&#9670;&#160;</a></span>PG_LDO1_PSn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO1_PSn_GPIO_Port&#160;&#160;&#160;GPIOD</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00139">139</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a955e0292189de5f01a19df31b8b837d5" name="a955e0292189de5f01a19df31b8b837d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a955e0292189de5f01a19df31b8b837d5">&#9670;&#160;</a></span>OC_LDO1_PLn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO1_PLn_Pin&#160;&#160;&#160;GPIO_PIN_9</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00140">140</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a3443c259f58e6c105641f929ccae2e91" name="a3443c259f58e6c105641f929ccae2e91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3443c259f58e6c105641f929ccae2e91">&#9670;&#160;</a></span>OC_LDO1_PLn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO1_PLn_GPIO_Port&#160;&#160;&#160;GPIOD</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00141">141</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a187233976b99167827a8335a8e6a5566" name="a187233976b99167827a8335a8e6a5566"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a187233976b99167827a8335a8e6a5566">&#9670;&#160;</a></span>BLD_LDO3_PLn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO3_PLn_Pin&#160;&#160;&#160;GPIO_PIN_10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00142">142</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="abda36ab88d1add00176c49c8ed978c2b" name="abda36ab88d1add00176c49c8ed978c2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abda36ab88d1add00176c49c8ed978c2b">&#9670;&#160;</a></span>BLD_LDO3_PLn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO3_PLn_GPIO_Port&#160;&#160;&#160;GPIOD</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00143">143</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ac0b18426452bcf3e87f7e582a3f6d580" name="ac0b18426452bcf3e87f7e582a3f6d580"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0b18426452bcf3e87f7e582a3f6d580">&#9670;&#160;</a></span>OC_LDO2_PLn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO2_PLn_Pin&#160;&#160;&#160;GPIO_PIN_11</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00144">144</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a9a34503639da3520f4d1310f7d7087c0" name="a9a34503639da3520f4d1310f7d7087c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a34503639da3520f4d1310f7d7087c0">&#9670;&#160;</a></span>OC_LDO2_PLn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO2_PLn_GPIO_Port&#160;&#160;&#160;GPIOD</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00145">145</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a6be5816457207e9437da46ca304f0083" name="a6be5816457207e9437da46ca304f0083"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6be5816457207e9437da46ca304f0083">&#9670;&#160;</a></span>BLD_LDO2_PLp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO2_PLp_Pin&#160;&#160;&#160;GPIO_PIN_12</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00146">146</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a2a0ce4bd10487775174639a68994c132" name="a2a0ce4bd10487775174639a68994c132"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a0ce4bd10487775174639a68994c132">&#9670;&#160;</a></span>BLD_LDO2_PLp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO2_PLp_GPIO_Port&#160;&#160;&#160;GPIOD</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00147">147</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ac37133e8167cf959841f3fa3a39919d7" name="ac37133e8167cf959841f3fa3a39919d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac37133e8167cf959841f3fa3a39919d7">&#9670;&#160;</a></span>PG_LDO2_PLn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO2_PLn_Pin&#160;&#160;&#160;GPIO_PIN_13</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00148">148</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="aed355f3940c89ede79cb63158d0d51ae" name="aed355f3940c89ede79cb63158d0d51ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed355f3940c89ede79cb63158d0d51ae">&#9670;&#160;</a></span>PG_LDO2_PLn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO2_PLn_GPIO_Port&#160;&#160;&#160;GPIOD</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00149">149</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a6b23c5741e25f764df0d00dfc6787923" name="a6b23c5741e25f764df0d00dfc6787923"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b23c5741e25f764df0d00dfc6787923">&#9670;&#160;</a></span>BLD_LDO4_PSn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO4_PSn_Pin&#160;&#160;&#160;GPIO_PIN_14</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00150">150</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a4c473ee59868a989f49381f74b40c081" name="a4c473ee59868a989f49381f74b40c081"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c473ee59868a989f49381f74b40c081">&#9670;&#160;</a></span>BLD_LDO4_PSn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO4_PSn_GPIO_Port&#160;&#160;&#160;GPIOD</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00151">151</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ab35768381101d391f3322a0e44882367" name="ab35768381101d391f3322a0e44882367"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab35768381101d391f3322a0e44882367">&#9670;&#160;</a></span>EN_LDO4_PSn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO4_PSn_Pin&#160;&#160;&#160;GPIO_PIN_15</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00152">152</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a9688691770cccfa09aed1cfd1b12c288" name="a9688691770cccfa09aed1cfd1b12c288"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9688691770cccfa09aed1cfd1b12c288">&#9670;&#160;</a></span>EN_LDO4_PSn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO4_PSn_GPIO_Port&#160;&#160;&#160;GPIOD</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00153">153</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a056969596a4cd50e645ef874a759027e" name="a056969596a4cd50e645ef874a759027e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a056969596a4cd50e645ef874a759027e">&#9670;&#160;</a></span>OC_LDO3_PLp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO3_PLp_Pin&#160;&#160;&#160;GPIO_PIN_4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00154">154</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a37029dfaab14acdbc7bc8cf359233b93" name="a37029dfaab14acdbc7bc8cf359233b93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37029dfaab14acdbc7bc8cf359233b93">&#9670;&#160;</a></span>OC_LDO3_PLp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO3_PLp_GPIO_Port&#160;&#160;&#160;GPIOG</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00155">155</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a2a1142ab2f9279ec0fdb1761687bb90b" name="a2a1142ab2f9279ec0fdb1761687bb90b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a1142ab2f9279ec0fdb1761687bb90b">&#9670;&#160;</a></span>OC_LDO6_PSn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO6_PSn_Pin&#160;&#160;&#160;GPIO_PIN_5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00156">156</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="aff8640227495d75406bc41eaa12799d2" name="aff8640227495d75406bc41eaa12799d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff8640227495d75406bc41eaa12799d2">&#9670;&#160;</a></span>OC_LDO6_PSn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO6_PSn_GPIO_Port&#160;&#160;&#160;GPIOG</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00157">157</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a9734ec4ad382e7ab394c8600c69a254b" name="a9734ec4ad382e7ab394c8600c69a254b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9734ec4ad382e7ab394c8600c69a254b">&#9670;&#160;</a></span>PG_LDO6_PSn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO6_PSn_Pin&#160;&#160;&#160;GPIO_PIN_6</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00158">158</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a5e40e6b2b717d142f24f5e15695b3917" name="a5e40e6b2b717d142f24f5e15695b3917"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e40e6b2b717d142f24f5e15695b3917">&#9670;&#160;</a></span>PG_LDO6_PSn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO6_PSn_GPIO_Port&#160;&#160;&#160;GPIOG</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00159">159</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a1e29c7ecc1ba979390112bfcf4eca225" name="a1e29c7ecc1ba979390112bfcf4eca225"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e29c7ecc1ba979390112bfcf4eca225">&#9670;&#160;</a></span>OC_LDO3_PLn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO3_PLn_Pin&#160;&#160;&#160;GPIO_PIN_7</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00160">160</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a610d0b4babb192c94756e93ee3486606" name="a610d0b4babb192c94756e93ee3486606"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a610d0b4babb192c94756e93ee3486606">&#9670;&#160;</a></span>OC_LDO3_PLn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO3_PLn_GPIO_Port&#160;&#160;&#160;GPIOG</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00161">161</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a6d3ab737e960661d814c2561cd5bef91" name="a6d3ab737e960661d814c2561cd5bef91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d3ab737e960661d814c2561cd5bef91">&#9670;&#160;</a></span>EN_LDO6_PSn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO6_PSn_Pin&#160;&#160;&#160;GPIO_PIN_8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00162">162</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a15d1bc0c3f0f5ea183af16192cd1c153" name="a15d1bc0c3f0f5ea183af16192cd1c153"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15d1bc0c3f0f5ea183af16192cd1c153">&#9670;&#160;</a></span>EN_LDO6_PSn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO6_PSn_GPIO_Port&#160;&#160;&#160;GPIOG</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00163">163</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="af371bc33af3c645a53046543537ea79e" name="af371bc33af3c645a53046543537ea79e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af371bc33af3c645a53046543537ea79e">&#9670;&#160;</a></span>OC_LDO1_PSn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO1_PSn_Pin&#160;&#160;&#160;GPIO_PIN_6</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00164">164</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ad85467ab73372761348e1c5b49c26060" name="ad85467ab73372761348e1c5b49c26060"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad85467ab73372761348e1c5b49c26060">&#9670;&#160;</a></span>OC_LDO1_PSn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO1_PSn_GPIO_Port&#160;&#160;&#160;GPIOC</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00165">165</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ab21151fd8a518c9360e2224b2b1b0131" name="ab21151fd8a518c9360e2224b2b1b0131"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab21151fd8a518c9360e2224b2b1b0131">&#9670;&#160;</a></span>EN_LDO1_PSn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO1_PSn_Pin&#160;&#160;&#160;GPIO_PIN_8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00166">166</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a497a8b63b40d6f6b8a8a7e4197acaedc" name="a497a8b63b40d6f6b8a8a7e4197acaedc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a497a8b63b40d6f6b8a8a7e4197acaedc">&#9670;&#160;</a></span>EN_LDO1_PSn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO1_PSn_GPIO_Port&#160;&#160;&#160;GPIOC</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00167">167</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="aa9a143dd0f25097852ed1334666f7fa7" name="aa9a143dd0f25097852ed1334666f7fa7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9a143dd0f25097852ed1334666f7fa7">&#9670;&#160;</a></span>BLD_LDO1_PSn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO1_PSn_Pin&#160;&#160;&#160;GPIO_PIN_9</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00168">168</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="abee07d8f56f1a525d7bd28d5240423bd" name="abee07d8f56f1a525d7bd28d5240423bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abee07d8f56f1a525d7bd28d5240423bd">&#9670;&#160;</a></span>BLD_LDO1_PSn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO1_PSn_GPIO_Port&#160;&#160;&#160;GPIOC</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00169">169</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a7191aa3165fad8a28676ed85608b6961" name="a7191aa3165fad8a28676ed85608b6961"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7191aa3165fad8a28676ed85608b6961">&#9670;&#160;</a></span>EN_LDO2_PLn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO2_PLn_Pin&#160;&#160;&#160;GPIO_PIN_10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00170">170</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a435b73d2faf4284ed61a36b7d9e9e18f" name="a435b73d2faf4284ed61a36b7d9e9e18f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a435b73d2faf4284ed61a36b7d9e9e18f">&#9670;&#160;</a></span>EN_LDO2_PLn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO2_PLn_GPIO_Port&#160;&#160;&#160;GPIOA</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00171">171</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ab0a3c3a0ebd7ce3820dd8e32d71895fd" name="ab0a3c3a0ebd7ce3820dd8e32d71895fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0a3c3a0ebd7ce3820dd8e32d71895fd">&#9670;&#160;</a></span>OC_LDO2_PSn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO2_PSn_Pin&#160;&#160;&#160;GPIO_PIN_11</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00172">172</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a2c1829b47e8f5a37e56f0192695030f0" name="a2c1829b47e8f5a37e56f0192695030f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c1829b47e8f5a37e56f0192695030f0">&#9670;&#160;</a></span>OC_LDO2_PSn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO2_PSn_GPIO_Port&#160;&#160;&#160;GPIOA</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00173">173</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a7e179875e02f5b099f7158818bca9ad2" name="a7e179875e02f5b099f7158818bca9ad2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e179875e02f5b099f7158818bca9ad2">&#9670;&#160;</a></span>EN_LDO6_PSp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO6_PSp_Pin&#160;&#160;&#160;GPIO_PIN_10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00174">174</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a8d2bfed3efeb2ecdad55a2a655dfa45e" name="a8d2bfed3efeb2ecdad55a2a655dfa45e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d2bfed3efeb2ecdad55a2a655dfa45e">&#9670;&#160;</a></span>EN_LDO6_PSp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO6_PSp_GPIO_Port&#160;&#160;&#160;GPIOC</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00175">175</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a3697dee85dc70532818cee772beb20a7" name="a3697dee85dc70532818cee772beb20a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3697dee85dc70532818cee772beb20a7">&#9670;&#160;</a></span>OC_LDO6_PSp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO6_PSp_Pin&#160;&#160;&#160;GPIO_PIN_11</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00176">176</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="aad50239369cca94a6cd3a34445312c44" name="aad50239369cca94a6cd3a34445312c44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad50239369cca94a6cd3a34445312c44">&#9670;&#160;</a></span>OC_LDO6_PSp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO6_PSp_GPIO_Port&#160;&#160;&#160;GPIOC</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00177">177</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a713b997e095b061bec351ea82cd9092b" name="a713b997e095b061bec351ea82cd9092b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a713b997e095b061bec351ea82cd9092b">&#9670;&#160;</a></span>PG_LDO6_PSp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO6_PSp_Pin&#160;&#160;&#160;GPIO_PIN_12</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00178">178</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ab587786d4f8c3ec298b6489e6c13599a" name="ab587786d4f8c3ec298b6489e6c13599a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab587786d4f8c3ec298b6489e6c13599a">&#9670;&#160;</a></span>PG_LDO6_PSp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO6_PSp_GPIO_Port&#160;&#160;&#160;GPIOC</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00179">179</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a3dd40e1df84533d310afd3d26eaaa3a5" name="a3dd40e1df84533d310afd3d26eaaa3a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3dd40e1df84533d310afd3d26eaaa3a5">&#9670;&#160;</a></span>PG_LDO1_PLp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO1_PLp_Pin&#160;&#160;&#160;GPIO_PIN_0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00180">180</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ac8d329173c3b6d122b9b6d12697f0c52" name="ac8d329173c3b6d122b9b6d12697f0c52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8d329173c3b6d122b9b6d12697f0c52">&#9670;&#160;</a></span>PG_LDO1_PLp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO1_PLp_GPIO_Port&#160;&#160;&#160;GPIOD</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00181">181</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a594d097b214e9148c4b19fde7ec22ca8" name="a594d097b214e9148c4b19fde7ec22ca8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a594d097b214e9148c4b19fde7ec22ca8">&#9670;&#160;</a></span>PG_LDO1_PSp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO1_PSp_Pin&#160;&#160;&#160;GPIO_PIN_1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00182">182</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="aa64552f0d1b40a29f3d2316c53161f41" name="aa64552f0d1b40a29f3d2316c53161f41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa64552f0d1b40a29f3d2316c53161f41">&#9670;&#160;</a></span>PG_LDO1_PSp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO1_PSp_GPIO_Port&#160;&#160;&#160;GPIOD</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00183">183</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a814d9d09a8d8a292d860002e4c0bc19c" name="a814d9d09a8d8a292d860002e4c0bc19c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a814d9d09a8d8a292d860002e4c0bc19c">&#9670;&#160;</a></span>BLD_LDO6_PSp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO6_PSp_Pin&#160;&#160;&#160;GPIO_PIN_2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00184">184</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a4b18043f71de0980ffedbc8ab9a7d8b9" name="a4b18043f71de0980ffedbc8ab9a7d8b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b18043f71de0980ffedbc8ab9a7d8b9">&#9670;&#160;</a></span>BLD_LDO6_PSp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO6_PSp_GPIO_Port&#160;&#160;&#160;GPIOD</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00185">185</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a5bed9919f47e471c2491ee6d16f9182e" name="a5bed9919f47e471c2491ee6d16f9182e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bed9919f47e471c2491ee6d16f9182e">&#9670;&#160;</a></span>OC_LDO3_PSp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO3_PSp_Pin&#160;&#160;&#160;GPIO_PIN_6</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00186">186</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a68628ab3ca8517fce19d757cab3af4a2" name="a68628ab3ca8517fce19d757cab3af4a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68628ab3ca8517fce19d757cab3af4a2">&#9670;&#160;</a></span>OC_LDO3_PSp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO3_PSp_GPIO_Port&#160;&#160;&#160;GPIOD</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00187">187</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a1f5d4f3c16572af55c52616ef55b7908" name="a1f5d4f3c16572af55c52616ef55b7908"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f5d4f3c16572af55c52616ef55b7908">&#9670;&#160;</a></span>BLD_LDO3_PSp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO3_PSp_Pin&#160;&#160;&#160;GPIO_PIN_7</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00188">188</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a18f03f14823d0559da8067ebd8629b6d" name="a18f03f14823d0559da8067ebd8629b6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18f03f14823d0559da8067ebd8629b6d">&#9670;&#160;</a></span>BLD_LDO3_PSp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO3_PSp_GPIO_Port&#160;&#160;&#160;GPIOD</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00189">189</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a6d1a81797d3167970040526b977eef44" name="a6d1a81797d3167970040526b977eef44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d1a81797d3167970040526b977eef44">&#9670;&#160;</a></span>PG_LDO1_PLn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO1_PLn_Pin&#160;&#160;&#160;GPIO_PIN_9</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00190">190</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a781a52e3cdd65a41415295c07464d22a" name="a781a52e3cdd65a41415295c07464d22a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a781a52e3cdd65a41415295c07464d22a">&#9670;&#160;</a></span>PG_LDO1_PLn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PG_LDO1_PLn_GPIO_Port&#160;&#160;&#160;GPIOG</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00191">191</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a86b9b238a4b57fd4e7240dd7f5056ab5" name="a86b9b238a4b57fd4e7240dd7f5056ab5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86b9b238a4b57fd4e7240dd7f5056ab5">&#9670;&#160;</a></span>OC_LDO1_PLp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO1_PLp_Pin&#160;&#160;&#160;GPIO_PIN_10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00192">192</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ada2e8184e51a9cb675bd7465d98811b4" name="ada2e8184e51a9cb675bd7465d98811b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada2e8184e51a9cb675bd7465d98811b4">&#9670;&#160;</a></span>OC_LDO1_PLp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO1_PLp_GPIO_Port&#160;&#160;&#160;GPIOG</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00193">193</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="aa860e308cbcf7ceced8bf59ee31cdff6" name="aa860e308cbcf7ceced8bf59ee31cdff6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa860e308cbcf7ceced8bf59ee31cdff6">&#9670;&#160;</a></span>BLD_LDO1_PLp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO1_PLp_Pin&#160;&#160;&#160;GPIO_PIN_12</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00194">194</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a04400dbda199374978b5399de41a2ef3" name="a04400dbda199374978b5399de41a2ef3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04400dbda199374978b5399de41a2ef3">&#9670;&#160;</a></span>BLD_LDO1_PLp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO1_PLp_GPIO_Port&#160;&#160;&#160;GPIOG</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00195">195</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="aa860178702df223d9df5f7f68f8ab3e8" name="aa860178702df223d9df5f7f68f8ab3e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa860178702df223d9df5f7f68f8ab3e8">&#9670;&#160;</a></span>OC_LDO3_PSn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO3_PSn_Pin&#160;&#160;&#160;GPIO_PIN_3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00196">196</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a02eb3791be3cb33a6f2f047e1800fe30" name="a02eb3791be3cb33a6f2f047e1800fe30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02eb3791be3cb33a6f2f047e1800fe30">&#9670;&#160;</a></span>OC_LDO3_PSn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_LDO3_PSn_GPIO_Port&#160;&#160;&#160;GPIOB</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00197">197</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a5bb2230875c647d41b42262a0536d8a2" name="a5bb2230875c647d41b42262a0536d8a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bb2230875c647d41b42262a0536d8a2">&#9670;&#160;</a></span>EN_LDO3_PSn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO3_PSn_Pin&#160;&#160;&#160;GPIO_PIN_4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00198">198</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ae42b743fa22828f219e761dda0a1f4f6" name="ae42b743fa22828f219e761dda0a1f4f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae42b743fa22828f219e761dda0a1f4f6">&#9670;&#160;</a></span>EN_LDO3_PSn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO3_PSn_GPIO_Port&#160;&#160;&#160;GPIOB</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00199">199</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a5e21dd979becc2a1bdad8e29a431162a" name="a5e21dd979becc2a1bdad8e29a431162a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e21dd979becc2a1bdad8e29a431162a">&#9670;&#160;</a></span>BLD_LDO6_PSn_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO6_PSn_Pin&#160;&#160;&#160;GPIO_PIN_0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00200">200</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ab20dbfd4226de1bc27f041c2ccb00d80" name="ab20dbfd4226de1bc27f041c2ccb00d80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab20dbfd4226de1bc27f041c2ccb00d80">&#9670;&#160;</a></span>BLD_LDO6_PSn_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLD_LDO6_PSn_GPIO_Port&#160;&#160;&#160;GPIOE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00201">201</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a59072a4c74df02b1acff660255a981e2" name="a59072a4c74df02b1acff660255a981e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59072a4c74df02b1acff660255a981e2">&#9670;&#160;</a></span>EN_LDO1_PLp_Pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO1_PLp_Pin&#160;&#160;&#160;GPIO_PIN_1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00202">202</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a7802b7f224d026e46195aca35e222413" name="a7802b7f224d026e46195aca35e222413"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7802b7f224d026e46195aca35e222413">&#9670;&#160;</a></span>EN_LDO1_PLp_GPIO_Port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EN_LDO1_PLp_GPIO_Port&#160;&#160;&#160;GPIOE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00203">203</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a9fcb9e460d175bfc7ab4d80bf788b43a" name="a9fcb9e460d175bfc7ab4d80bf788b43a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fcb9e460d175bfc7ab4d80bf788b43a">&#9670;&#160;</a></span>WHO_AM_I</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define WHO_AM_I&#160;&#160;&#160;&quot;STM32 NULCEO H753ZI IRIS V1.0\n&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00206">206</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a536e7d84f87b2761d765d4164e9e3ffe" name="a536e7d84f87b2761d765d4164e9e3ffe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a536e7d84f87b2761d765d4164e9e3ffe">&#9670;&#160;</a></span>DELTA_INIT_DVDD_AVDD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DELTA_INIT_DVDD_AVDD&#160;&#160;&#160;500</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00207">207</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a5b9ac978d3feb04ff8a6c53665489d58" name="a5b9ac978d3feb04ff8a6c53665489d58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b9ac978d3feb04ff8a6c53665489d58">&#9670;&#160;</a></span>DELTA_INIT_AVDD_VREF</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DELTA_INIT_AVDD_VREF&#160;&#160;&#160;500</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00208">208</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="adecf6a2a914a54b750c60757276c0ba3" name="adecf6a2a914a54b750c60757276c0ba3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adecf6a2a914a54b750c60757276c0ba3">&#9670;&#160;</a></span>DELTA_INIT_VREF_NRST</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DELTA_INIT_VREF_NRST&#160;&#160;&#160;500</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00209">209</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a45af039f3e9c3de7af36b8190b836438" name="a45af039f3e9c3de7af36b8190b836438"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45af039f3e9c3de7af36b8190b836438">&#9670;&#160;</a></span>DELTA_INIT_NRST_VREF</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DELTA_INIT_NRST_VREF&#160;&#160;&#160;500</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00211">211</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a7557c4c4fb5b47bb4a5585063f7917ff" name="a7557c4c4fb5b47bb4a5585063f7917ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7557c4c4fb5b47bb4a5585063f7917ff">&#9670;&#160;</a></span>DELTA_INIT_VREF_AVDD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DELTA_INIT_VREF_AVDD&#160;&#160;&#160;500</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00212">212</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ae2a14ffb173bd31765a52413c2fceace" name="ae2a14ffb173bd31765a52413c2fceace"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2a14ffb173bd31765a52413c2fceace">&#9670;&#160;</a></span>DELTA_INIT_AVDD_DVDD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DELTA_INIT_AVDD_DVDD&#160;&#160;&#160;500</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00213">213</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ac381d2938f198a26fd07bcd814bfd4b7" name="ac381d2938f198a26fd07bcd814bfd4b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac381d2938f198a26fd07bcd814bfd4b7">&#9670;&#160;</a></span>IP4_1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define IP4_1&#160;&#160;&#160;192</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00215">215</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a2cb2523fcb81aa3234f8a2dbd96496d2" name="a2cb2523fcb81aa3234f8a2dbd96496d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cb2523fcb81aa3234f8a2dbd96496d2">&#9670;&#160;</a></span>IP4_2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define IP4_2&#160;&#160;&#160;168</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00216">216</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ae9b33c92e4f868becc7159c4380eb018" name="ae9b33c92e4f868becc7159c4380eb018"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9b33c92e4f868becc7159c4380eb018">&#9670;&#160;</a></span>IP4_3</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define IP4_3&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00217">217</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ae435ad4396315888cc5c759227224cd3" name="ae435ad4396315888cc5c759227224cd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae435ad4396315888cc5c759227224cd3">&#9670;&#160;</a></span>IP4_4</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define IP4_4&#160;&#160;&#160;123</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00218">218</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a9245add78f421992c6f1aff393305143" name="a9245add78f421992c6f1aff393305143"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9245add78f421992c6f1aff393305143">&#9670;&#160;</a></span>UDP_SERVER_PORT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UDP_SERVER_PORT&#160;&#160;&#160;7</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00219">219</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a3bdf596b534db154cacdbfb427bd2501" name="a3bdf596b534db154cacdbfb427bd2501"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bdf596b534db154cacdbfb427bd2501">&#9670;&#160;</a></span>LDO_1PSp_VAL_MIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LDO_1PSp_VAL_MIN&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00222">222</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a5b8a801c968ee2e98084611828795fa3" name="a5b8a801c968ee2e98084611828795fa3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b8a801c968ee2e98084611828795fa3">&#9670;&#160;</a></span>LDO_1PSp_VAL_MAX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LDO_1PSp_VAL_MAX&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00223">223</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a0d6d6fd812f5126d6829861c405b6e1a" name="a0d6d6fd812f5126d6829861c405b6e1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d6d6fd812f5126d6829861c405b6e1a">&#9670;&#160;</a></span>LDO_1PSp_CUR_MIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LDO_1PSp_CUR_MIN&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00224">224</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a7a6aca782982d9735290082647635e09" name="a7a6aca782982d9735290082647635e09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a6aca782982d9735290082647635e09">&#9670;&#160;</a></span>LDO_1PSp_CUR_MAX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LDO_1PSp_CUR_MAX&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00225">225</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a88bc6709e2e065402239c288c60c5a51" name="a88bc6709e2e065402239c288c60c5a51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88bc6709e2e065402239c288c60c5a51">&#9670;&#160;</a></span>LDO_1PSn_VAL_MIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LDO_1PSn_VAL_MIN&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00226">226</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a8a5290bec9ed3280566601174953beb3" name="a8a5290bec9ed3280566601174953beb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a5290bec9ed3280566601174953beb3">&#9670;&#160;</a></span>LDO_1PSn_VAL_MAX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LDO_1PSn_VAL_MAX&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00227">227</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ad32fca84831ca0ed4bde4c48cd53ba03" name="ad32fca84831ca0ed4bde4c48cd53ba03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad32fca84831ca0ed4bde4c48cd53ba03">&#9670;&#160;</a></span>LDO_1PSn_CUR_MIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LDO_1PSn_CUR_MIN&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00228">228</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="aad6255dca6b1d6503e161b9ee4b4cc92" name="aad6255dca6b1d6503e161b9ee4b4cc92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad6255dca6b1d6503e161b9ee4b4cc92">&#9670;&#160;</a></span>LDO_1PSn_CUR_MAX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LDO_1PSn_CUR_MAX&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00229">229</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ac68b0f144e070ae516cb993f46ff00d9" name="ac68b0f144e070ae516cb993f46ff00d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac68b0f144e070ae516cb993f46ff00d9">&#9670;&#160;</a></span>MCP4725_I2CADDR_DEFAULT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MCP4725_I2CADDR_DEFAULT&#160;&#160;&#160;(0x60 &lt;&lt; 1)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00248">248</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a0358cd3822bde19276f9c14a49eb0b5a" name="a0358cd3822bde19276f9c14a49eb0b5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0358cd3822bde19276f9c14a49eb0b5a">&#9670;&#160;</a></span>MPC4725_I2CADDR_A0</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MPC4725_I2CADDR_A0&#160;&#160;&#160;(0x61 &lt;&lt; 1)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00249">249</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="af56e638511efb0abb685c92a5889ff8e" name="af56e638511efb0abb685c92a5889ff8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af56e638511efb0abb685c92a5889ff8e">&#9670;&#160;</a></span>MPC4725_I2CADDR_A1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MPC4725_I2CADDR_A1&#160;&#160;&#160;(0x62 &lt;&lt; 1)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00250">250</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a5f06483588c52d15bb46f04f47696c21" name="a5f06483588c52d15bb46f04f47696c21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f06483588c52d15bb46f04f47696c21">&#9670;&#160;</a></span>MCP4725_VAL_DEF</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MCP4725_VAL_DEF&#160;&#160;&#160;(0x000)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00261">261</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a0153e7c4e656b888501c21a8b5775ed4" name="a0153e7c4e656b888501c21a8b5775ed4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0153e7c4e656b888501c21a8b5775ed4">&#9670;&#160;</a></span>MCP4725_VAL_DEF_BIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MCP4725_VAL_DEF_BIN&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00262">262</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a6b60c98325cc917f3a3ab2b3f9300797" name="a6b60c98325cc917f3a3ab2b3f9300797"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b60c98325cc917f3a3ab2b3f9300797">&#9670;&#160;</a></span>SPI_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SPI_SIZE&#160;&#160;&#160;24</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00264">264</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a0131f2774f4e3dd71567400683b60405" name="a0131f2774f4e3dd71567400683b60405"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0131f2774f4e3dd71567400683b60405">&#9670;&#160;</a></span>SPI_TIMEOUT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SPI_TIMEOUT&#160;&#160;&#160;100</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00265">265</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a0c0dba278c3d74e388ad6f1f2ca53236" name="a0c0dba278c3d74e388ad6f1f2ca53236"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c0dba278c3d74e388ad6f1f2ca53236">&#9670;&#160;</a></span>CARTE_LIM_CORRIGEE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CARTE_LIM_CORRIGEE&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00276">276</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a3e61280b89d8f2676ee3b712c3788acc" name="a3e61280b89d8f2676ee3b712c3788acc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e61280b89d8f2676ee3b712c3788acc">&#9670;&#160;</a></span>OC_K_V_PAR_A</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_K_V_PAR_A&#160;&#160;&#160;10.0f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00284">284</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a8cddcabf16e69a6e9529be5ff373237b" name="a8cddcabf16e69a6e9529be5ff373237b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cddcabf16e69a6e9529be5ff373237b">&#9670;&#160;</a></span>OC_BLANKING_MS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_BLANKING_MS&#160;&#160;&#160;60U</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00285">285</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a2155aff8c9b5e761d21f451ffe56709d" name="a2155aff8c9b5e761d21f451ffe56709d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2155aff8c9b5e761d21f451ffe56709d">&#9670;&#160;</a></span>OC_CODE_SEUIL_MAX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_CODE_SEUIL_MAX&#160;&#160;&#160;4095U</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00286">286</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a7b285666c2c29693a2cbf72f6865950a" name="a7b285666c2c29693a2cbf72f6865950a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b285666c2c29693a2cbf72f6865950a">&#9670;&#160;</a></span>OC_CODE_SEUIL_DEFAUT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_CODE_SEUIL_DEFAUT&#160;&#160;&#160;4095U</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00287">287</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a345fe4cc2f4044fa1c3f041765a74b37" name="a345fe4cc2f4044fa1c3f041765a74b37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a345fe4cc2f4044fa1c3f041765a74b37">&#9670;&#160;</a></span>OC_CODE_SEUIL_MIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_CODE_SEUIL_MIN&#160;&#160;&#160;410U</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00292">292</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a201915d36bdca5b5fb0649e83548b6e6" name="a201915d36bdca5b5fb0649e83548b6e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a201915d36bdca5b5fb0649e83548b6e6">&#9670;&#160;</a></span>OC_NIVEAU_DEFAUT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OC_NIVEAU_DEFAUT&#160;&#160;&#160;GPIO_PIN_SET</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00298">298</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a2b1ae22d0ef9cacf88eff295dbcfccb8" name="a2b1ae22d0ef9cacf88eff295dbcfccb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b1ae22d0ef9cacf88eff295dbcfccb8">&#9670;&#160;</a></span>LIMITATION_PAR_POTENTIOMETRE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LIMITATION_PAR_POTENTIOMETRE&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00311">311</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a4451e99bed027cc9712659d482653693" name="a4451e99bed027cc9712659d482653693"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4451e99bed027cc9712659d482653693">&#9670;&#160;</a></span>DAC_EEPROM_TWC_MS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DAC_EEPROM_TWC_MS&#160;&#160;&#160;20U</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00322">322</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="ae4696e46679bea8777f051036e5048ac" name="ae4696e46679bea8777f051036e5048ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4696e46679bea8777f051036e5048ac">&#9670;&#160;</a></span>DAC_EEPROM_DELAI_MS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DAC_EEPROM_DELAI_MS&#160;&#160;&#160;2000U</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00323">323</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+<a id="a6267cb2374ff2cec76e74e7f6e436cda" name="a6267cb2374ff2cec76e74e7f6e436cda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6267cb2374ff2cec76e74e7f6e436cda">&#9670;&#160;</a></span>DAC_EEPROM_ESSAIS_MAX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DAC_EEPROM_ESSAIS_MAX&#160;&#160;&#160;3U</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8h_source.html#l00324">324</a> du fichier <a class="el" href="main_8h_source.html">main.h</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>Core</b></li><li class="navelem"><b>Inc</b></li><li class="navelem"><a href="main_8h.html">main.h</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

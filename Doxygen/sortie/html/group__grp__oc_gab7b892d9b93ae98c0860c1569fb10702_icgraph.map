@@ -1,0 +1,36 @@
+<map id="OC_EstArme" name="OC_EstArme">
+<area shape="rect" id="Node000001" title="Indique si la surveillance est armee : EN actif depuis au moins ldoConfig[idx].oc...." alt="" coords="1048,173,1148,200"/>
+<area shape="poly" id="edge19_Node000001_Node000001" title=" " alt="" coords="1123,157,1115,154,1098,152,1082,154,1073,159,1071,164,1076,174,1071,172,1066,165,1069,155,1080,149,1098,147,1117,149,1128,159"/>
+<area shape="rect" id="Node000002" href="$group__grp__config.html#ga2ba862323ea386969585492246cd74d6" title="Commande &quot;GET_DIAG_LDO_&lt;nom&gt;&quot; : etat REEL des broches d&#39;une LDO (niveau lu sur la broche,..." alt="" coords="883,116,1000,143"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1043,167,980,146,981,141,1048,168"/>
+<area shape="rect" id="Node000009" href="$group__grp__etat.html#gad7a2801e95c498fa0a2f1982238ae732" title="Met a jour EN, BLD, OC et PG d&#39;une LDO. Remplace le corps de la boucle for de StartLwipTask()...." alt="" coords="255,179,381,205"/>
+<area shape="poly" id="edge16_Node000001_Node000009" title=" " alt="" coords="1033,190,382,194,382,189,1033,184"/>
+<area shape="rect" id="Node000010" href="$group__grp__oc.html#gafaa9094a90053ac8bf6eace70669f172" title="Traitement d&#39;un front de la broche OC en interruption." alt="" coords="886,248,997,275"/>
+<area shape="poly" id="edge20_Node000001_Node000010" title=" " alt="" coords="1057,207,972,250,971,245,1052,208"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="967,100,959,97,942,95,926,97,917,101,915,107,919,117,914,114,910,107,913,98,924,92,942,89,961,92,972,101"/>
+<area shape="rect" id="Node000003" href="$group__grp__comm.html#gad6e271fe1796ab0b2a698260f0b78533" title="Analyseur (parser) principal des trames recues par UDP. Extrait le premier token de la trame (avant l..." alt="" coords="703,104,785,131"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="865,125,786,122,785,117,870,125"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="776,88,766,85,744,83,723,85,712,89,709,95,715,104,710,103,704,95,708,86,722,79,744,77,767,80,781,89"/>
+<area shape="rect" id="Node000004" href="$group__grp__comm.html#gabcc2bb9c188ed5dd0c34bf573bdb04e6" title="Execute la commande recue sur l&#39;UART (s&#39;il y en a une) et renvoie la reponse sur l&#39;UART...." alt="" coords="429,29,605,56"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="689,98,604,71,568,59,568,54,605,65,694,98"/>
+<area shape="rect" id="Node000007" href="$group__grp__comm.html#ga5b44c65aa41e79871a46aeed1bb4751b" title="Callback LwIP invoque automatiquement a chaque paquet UDP recu sur le port du serveur (enregistre par..." alt="" coords="444,104,590,131"/>
+<area shape="poly" id="edge11_Node000003_Node000007" title=" " alt="" coords="685,118,591,120,590,115,690,117"/>
+<area shape="poly" id="edge10_Node000004_Node000004" title=" " alt="" coords="549,14,539,10,517,8,496,10,485,15,482,20,488,30,483,28,477,21,481,11,495,5,517,3,541,5,555,14"/>
+<area shape="rect" id="Node000005" href="$group__grp__tache.html#gae9bf934dd2f4a12a5c5975d81afa3063" title="Tache FreeRTOS principale (lwipTask). Initialise LwIP, les verrous (I2C, UART, commandes),..." alt="" coords="103,104,207,131"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="412,45,336,54,256,71,214,87,179,106,176,101,212,82,254,65,335,49,417,43"/>
+<area shape="poly" id="edge9_Node000005_Node000005" title=" " alt="" coords="174,89,168,85,155,83,142,85,136,89,134,95,138,104,132,103,129,95,131,86,140,80,155,77,170,80,180,88"/>
+<area shape="rect" id="Node000006" href="$group__grp__cubemx.html#ga840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,104,55,131"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="85,119,56,120,54,115,89,116"/>
+<area shape="poly" id="edge8_Node000006_Node000006" title=" " alt="" coords="50,90,43,85,30,83,18,85,11,89,9,95,13,103,8,104,4,95,7,86,16,80,30,77,46,80,55,88"/>
+<area shape="poly" id="edge12_Node000007_Node000007" title=" " alt="" coords="549,89,539,85,517,83,496,85,485,89,482,95,488,104,483,103,477,95,481,86,495,79,517,77,541,80,555,89"/>
+<area shape="rect" id="Node000008" href="$group__grp__comm.html#ga78047c519037c4c6091c71e1801519c7" title="Initialise le serveur UDP applicatif. Cree un PCB UDP (udp_new), le lie a l&#39;adresse IP et au port def..." alt="" coords="266,104,370,131"/>
+<area shape="poly" id="edge13_Node000007_Node000008" title=" " alt="" coords="426,118,371,120,370,115,431,117"/>
+<area shape="poly" id="edge14_Node000008_Node000005" title=" " alt="" coords="248,118,208,120,207,115,253,116"/>
+<area shape="poly" id="edge15_Node000008_Node000008" title=" " alt="" coords="344,89,336,85,318,83,301,85,292,89,290,95,295,104,290,103,285,95,288,86,300,80,318,77,338,80,350,89"/>
+<area shape="poly" id="edge18_Node000009_Node000005" title=" " alt="" coords="271,173,186,134,186,128,276,171"/>
+<area shape="poly" id="edge17_Node000009_Node000009" title=" " alt="" coords="344,163,336,160,318,157,301,159,292,164,290,169,295,179,290,177,285,170,288,160,300,154,318,152,338,155,350,164"/>
+<area shape="poly" id="edge23_Node000010_Node000010" title=" " alt="" coords="967,232,959,229,942,227,926,229,917,233,915,239,919,249,915,246,910,239,913,230,924,224,942,221,961,224,972,233"/>
+<area shape="rect" id="Node000011" href="$group__grp__exti.html#ga0cd91fd3a9608559c2a87a8ba6cba55f" title="Callback appele par le HAL a chaque interruption EXTI, quelle que soit la broche. Boutons (PC13,..." alt="" coords="653,248,835,275"/>
+<area shape="poly" id="edge21_Node000010_Node000011" title=" " alt="" coords="868,261,836,264,835,259,873,261"/>
+<area shape="poly" id="edge22_Node000011_Node000011" title=" " alt="" coords="776,232,766,229,744,227,723,229,712,233,709,239,715,249,710,246,704,239,708,230,722,223,744,221,767,224,781,233"/>
+</map>

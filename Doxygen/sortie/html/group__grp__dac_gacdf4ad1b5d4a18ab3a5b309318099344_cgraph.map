@@ -1,0 +1,17 @@
+<map id="SurveillerConfigDacsI2C1" name="SurveillerConfigDacsI2C1">
+<area shape="rect" id="Node000001" title="Relit VREF/PD/Gain des puces de I2C1 et reecrit la configuration attendue si une puce l&#39;a perdue...." alt="" coords="5,104,178,131"/>
+<area shape="poly" id="edge8_Node000001_Node000001" title=" " alt="" coords="54,104,48,95,52,85,67,79,92,77,118,80,133,88,128,89,116,85,91,83,68,85,56,89,53,95,59,103"/>
+<area shape="rect" id="Node000002" href="$group__grp__dac.html#ga64f4ecd7d147a039d045da6b64975451" title="Ecrit un registre VOLATILE de CONFIGURATION du DAC MCP47FEB28 (adresses memoire 08h/09h/0Ah UNIQUEMEN..." alt="" coords="226,29,397,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,101,225,65,249,60,245,62,227,71,129,106"/>
+<area shape="rect" id="Node000004" href="$group__grp__dac.html#gade7258168a59f260de108ec88059f889" title="Lit un registre VOLATILE de CONFIGURATION du DAC MCP47FEB28 (adresses memoire 08h/09h/0Ah UNIQUEMENT ..." alt="" coords="232,104,390,131"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="178,115,219,117,214,118,178,120"/>
+<area shape="rect" id="Node000005" href="$group__grp__comm.html#gab9b5dfc109e472981cbbb7867d1b7f92" title="Envoie une chaine de caracteres sur USART1 (PB6/PB7, via un adaptateur USB&#45;UART externe),..." alt="" coords="236,179,387,205"/>
+<area shape="poly" id="edge9_Node000001_Node000005" title=" " alt="" coords="134,129,257,172,253,175,133,134"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="277,28,271,21,275,11,289,5,311,3,335,5,349,14,344,14,334,10,311,8,290,10,279,15,276,20,282,29"/>
+<area shape="rect" id="Node000003" href="$group__grp__i2c.html#ga5cb1cd70b1dd76a8aadb2bccb2837d2f" title="Retourne le mutex correspondant au bus d&#39;un handle I2C donne." alt="" coords="445,67,579,93"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="386,54,433,64,427,65,387,59"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="478,65,472,58,476,48,490,42,512,40,536,43,550,52,545,51,535,48,512,45,491,47,480,52,477,57,483,67"/>
+<area shape="poly" id="edge7_Node000004_Node000003" title=" " alt="" coords="386,101,433,95,427,96,387,106"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="277,103,271,95,275,86,289,79,311,77,335,80,349,89,344,89,334,85,311,83,290,85,279,89,276,95,282,104"/>
+<area shape="poly" id="edge10_Node000005_Node000005" title=" " alt="" coords="277,177,271,170,275,160,289,154,311,152,335,155,349,164,344,163,334,160,311,157,290,159,279,164,276,169,282,179"/>
+</map>

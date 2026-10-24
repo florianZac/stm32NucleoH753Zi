@@ -1,0 +1,23 @@
+<map id="LireRegistreConfigDAC" name="LireRegistreConfigDAC">
+<area shape="rect" id="Node000001" title="Lit un registre VOLATILE de CONFIGURATION du DAC MCP47FEB28 (adresses memoire 08h/09h/0Ah UNIQUEMENT ..." alt="" coords="475,141,634,168"/>
+<area shape="poly" id="edge11_Node000001_Node000001" title=" " alt="" coords="590,126,578,122,554,120,532,122,520,127,517,132,523,142,518,140,512,133,516,123,531,117,555,115,580,117,595,126"/>
+<area shape="rect" id="Node000002" href="$group__grp__dac.html#ga60bdf8f5f95deb2ebd6667b24e0cef0b" title="Handler de la commande reseau &quot;GET_DAC_CONFIG&quot; &#45; lit et renvoie les 3 registres de configuration (VRE..." alt="" coords="262,29,420,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="522,131,479,101,426,70,398,59,398,54,428,66,482,97,527,131"/>
+<area shape="rect" id="Node000003" href="$group__grp__dac.html#ga9a556575c443842fc36ade5dc4983b87" title="Handler de la commande reseau &quot;GET_DAC_REG&quot; &#45; diagnostic : relit dans le DAC un registre de valeur (0..." alt="" coords="274,104,408,131"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="457,138,409,132,409,126,462,138"/>
+<area shape="rect" id="Node000004" href="$group__grp__dac.html#gaef2582c078db38424ec959fc1f9f1c5f" title="Force la configuration VOLATILE des MCP47FEB28 de I2C1 a l&#39;etat attendu par tout le reste du firmware..." alt="" coords="256,179,426,205"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="457,172,422,181,421,175,462,171"/>
+<area shape="rect" id="Node000007" href="$group__grp__dac.html#gacdf4ad1b5d4a18ab3a5b309318099344" title="Relit VREF/PD/Gain des puces de I2C1 et reecrit la configuration attendue si une puce l&#39;a perdue...." alt="" coords="255,253,427,280"/>
+<area shape="poly" id="edge12_Node000001_Node000007" title=" " alt="" coords="516,175,370,255,368,250,511,176"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="371,14,362,10,341,8,322,10,311,15,309,20,314,29,309,29,304,21,308,11,320,5,341,3,363,5,377,14"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="371,89,362,85,341,83,322,85,311,89,309,95,314,104,309,103,304,95,308,86,320,79,341,77,363,80,377,89"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="371,163,362,160,341,157,322,159,311,164,309,169,314,179,309,177,304,170,308,160,320,154,341,152,363,155,377,164"/>
+<area shape="rect" id="Node000005" href="$group__grp__tache.html#gae9bf934dd2f4a12a5c5975d81afa3063" title="Tache FreeRTOS principale (lwipTask). Initialise LwIP, les verrous (I2C, UART, commandes),..." alt="" coords="103,216,207,243"/>
+<area shape="poly" id="edge7_Node000004_Node000005" title=" " alt="" coords="254,210,208,222,207,216,259,208"/>
+<area shape="poly" id="edge10_Node000005_Node000005" title=" " alt="" coords="174,201,168,197,155,195,142,197,136,201,134,207,138,216,132,215,129,207,131,198,140,192,155,189,170,192,180,201"/>
+<area shape="rect" id="Node000006" href="$group__grp__cubemx.html#ga840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,216,55,243"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="85,231,55,232,54,227,89,228"/>
+<area shape="poly" id="edge9_Node000006_Node000006" title=" " alt="" coords="49,201,43,197,30,195,18,197,11,201,9,207,13,215,8,216,4,207,7,198,16,192,30,189,46,192,55,200"/>
+<area shape="poly" id="edge13_Node000007_Node000005" title=" " alt="" coords="254,250,207,242,208,237,259,250"/>
+<area shape="poly" id="edge14_Node000007_Node000007" title=" " alt="" coords="371,238,362,234,341,232,322,234,311,239,309,244,314,254,309,252,304,245,308,235,320,229,341,227,363,229,377,239"/>
+</map>

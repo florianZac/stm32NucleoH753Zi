@@ -1,0 +1,24 @@
+<map id="DAC_PuceDeCible" name="DAC_PuceDeCible">
+<area shape="rect" id="Node000001" title="Puce DAC (ligne de tableDac[]) correspondant a une cible logique." alt="" coords="756,104,890,131"/>
+<area shape="poly" id="edge12_Node000001_Node000001" title=" " alt="" coords="862,89,850,85,823,83,798,85,785,89,782,95,788,105,783,103,777,95,782,85,797,79,823,77,851,80,867,90"/>
+<area shape="rect" id="Node000002" href="$group__grp__eeprom.html#ga538f60d46cf0ac04119fa65a989274be" title="Mode potentiometre (LDO dont la colonne &quot;seuil&quot; vaut SEUIL_POT) : met la voie du DAC de courant en Po..." alt="" coords="473,29,708,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="777,97,707,71,666,59,666,54,709,65,782,97"/>
+<area shape="rect" id="Node000005" href="$group__grp__eeprom.html#ga461f9e8b58bc45203018e3132c71b989" title="Garde un code dans l&#39;EEPROM d&#39;une voie : relit la valeur en EEPROM, n&#39;ecrit que si elle differe,..." alt="" coords="512,104,669,131"/>
+<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="738,118,670,120,669,115,743,117"/>
+<area shape="rect" id="Node000007" href="$group__grp__eeprom.html#gaea23265d4fdedf9ac60d1c4afb886e40" title="Au demarrage, recharge depuis l&#39;EEPROM du MCP47FEB28 les codes de tension et de seuil des LDO declare..." alt="" coords="258,179,422,205"/>
+<area shape="poly" id="edge13_Node000001_Node000007" title=" " alt="" coords="751,134,708,145,557,169,423,186,423,180,556,163,707,140,746,135"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="629,14,617,10,590,8,566,10,553,15,550,20,556,30,551,28,544,21,549,11,565,5,591,3,619,5,635,15"/>
+<area shape="rect" id="Node000003" href="$group__grp__tache.html#gae9bf934dd2f4a12a5c5975d81afa3063" title="Tache FreeRTOS principale (lwipTask). Initialise LwIP, les verrous (I2C, UART, commandes),..." alt="" coords="103,104,207,131"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="455,42,358,51,306,59,256,71,214,87,179,106,177,101,212,82,254,65,305,54,357,46,460,40"/>
+<area shape="poly" id="edge6_Node000003_Node000003" title=" " alt="" coords="174,89,168,85,155,83,142,85,136,89,134,95,138,104,132,103,129,95,131,86,140,80,155,77,170,80,180,89"/>
+<area shape="rect" id="Node000004" href="$group__grp__cubemx.html#ga840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,104,55,131"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="85,119,56,120,54,115,89,116"/>
+<area shape="poly" id="edge5_Node000004_Node000004" title=" " alt="" coords="50,90,43,85,30,83,18,85,11,89,9,95,13,103,8,104,4,95,7,86,16,80,30,77,46,80,55,88"/>
+<area shape="poly" id="edge8_Node000005_Node000005" title=" " alt="" coords="629,89,617,85,590,83,566,85,553,89,550,95,556,104,551,103,544,95,549,85,565,79,591,77,619,80,635,89"/>
+<area shape="rect" id="Node000006" href="$group__grp__eeprom.html#ga5f9ce30ec25412cc3efbe118447a5a11" title="Traite AU PLUS UNE demande de sauvegarde EEPROM par appel (une LDO : voie tension puis voie seuil)...." alt="" coords="255,104,425,131"/>
+<area shape="poly" id="edge9_Node000005_Node000006" title=" " alt="" coords="494,118,426,120,426,115,499,117"/>
+<area shape="poly" id="edge11_Node000006_Node000003" title=" " alt="" coords="237,118,208,120,207,115,242,117"/>
+<area shape="poly" id="edge10_Node000006_Node000006" title=" " alt="" coords="370,89,361,85,340,83,321,85,311,89,308,95,313,104,308,103,303,95,307,86,319,79,340,77,362,80,376,89"/>
+<area shape="poly" id="edge15_Node000007_Node000003" title=" " alt="" coords="288,173,189,134,190,129,294,172"/>
+<area shape="poly" id="edge14_Node000007_Node000007" title=" " alt="" coords="370,163,361,160,340,157,321,159,311,164,308,169,313,179,308,177,303,170,307,160,319,154,340,152,362,155,376,164"/>
+</map>

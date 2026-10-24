@@ -1,0 +1,1301 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lwip_demo_H753 - Controleur de LDO: Communication UART / UDP et commandes</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Lwip_demo_H753 - Controleur de LDO<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">Firmware STM32H753ZI : pilotage de 18 LDO (configuration CSV, DAC MCP47FEB28, protection OC)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Recherche" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('group__grp__comm.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Communication UART / UDP et commandes </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Réception et émission UART, serveur UDP, analyse et dispatch des commandes.  
+<a href="#details">Plus de détails...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:ga59372978b4f9f6b427161864e8bc4dd6" id="r_ga59372978b4f9f6b427161864e8bc4dd6"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga59372978b4f9f6b427161864e8bc4dd6">CreerMutexUART</a> (void)</td></tr>
+<tr class="memdesc:ga59372978b4f9f6b427161864e8bc4dd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cree le mutex qui serialise les emissions de texte sur USART1 (voir UART1_EnvoyerTexte()). A appeler UNE SEULE FOIS, depuis StartLwipTask(), juste apres CreerMutexI2C(), avant que la boucle ou une commande reseau puisse emettre sur l'UART.  <br /></td></tr>
+<tr class="memitem:ga5294dbf6a367b9a48010296000e1430a" id="r_ga5294dbf6a367b9a48010296000e1430a"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga5294dbf6a367b9a48010296000e1430a">MX_USART1_GPIO_Init</a> (void)</td></tr>
+<tr class="memdesc:ga5294dbf6a367b9a48010296000e1430a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure les broches PB6 (USART1_TX) et PB7 (USART1_RX) en Alternate Function. ATTENTION : ces broches ne sont PAS reliees au port COM virtuel du ST-LINK - il faut un adaptateur USB-UART externe branche sur PB6/PB7 pour voir quoi que ce soit dans un terminal (Hercules, etc.).  <br /></td></tr>
+<tr class="memitem:ga59e35c131ee43adc1fad6c4bfdf9fa0a" id="r_ga59e35c131ee43adc1fad6c4bfdf9fa0a"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga59e35c131ee43adc1fad6c4bfdf9fa0a">MX_USART1_Init</a> (void)</td></tr>
+<tr class="memdesc:ga59e35c131ee43adc1fad6c4bfdf9fa0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise USART1 : 115200 bauds, 8 bits, sans parite, 1 bit de stop, sans controle de flux (correspond a la config Hercules : "8 b, pas de parity, handshake off").  <br /></td></tr>
+<tr class="memitem:gab9b5dfc109e472981cbbb7867d1b7f92" id="r_gab9b5dfc109e472981cbbb7867d1b7f92"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gab9b5dfc109e472981cbbb7867d1b7f92">UART1_EnvoyerTexte</a> (const char *texte)</td></tr>
+<tr class="memdesc:gab9b5dfc109e472981cbbb7867d1b7f92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Envoie une chaine de caracteres sur USART1 (PB6/PB7, via un adaptateur USB-UART externe), en mode bloquant. L'emission est protegee par uart1_mutex_id (une seule emission a la fois, depuis n'importe quelle tache) pour ne jamais perdre une ligne sur un HAL_BUSY ; sans verrou tant que le mutex n'est pas cree.  <br /></td></tr>
+<tr class="memitem:ga78047c519037c4c6091c71e1801519c7" id="r_ga78047c519037c4c6091c71e1801519c7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga78047c519037c4c6091c71e1801519c7">udpServer_init</a> (void)</td></tr>
+<tr class="memdesc:ga78047c519037c4c6091c71e1801519c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise le serveur UDP applicatif. Cree un PCB UDP (udp_new), le lie a l'adresse IP et au port definis par les macros IP4_1..IP4_4 et UDP_SERVER_PORT (main.h), puis enregistre udp_receive_callback() comme fonction de reception. En cas d'echec de udp_bind(), le PCB est libere (udp_remove).  <br /></td></tr>
+<tr class="memitem:ga5b44c65aa41e79871a46aeed1bb4751b" id="r_ga5b44c65aa41e79871a46aeed1bb4751b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga5b44c65aa41e79871a46aeed1bb4751b">udp_receive_callback</a> (void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)</td></tr>
+<tr class="memdesc:ga5b44c65aa41e79871a46aeed1bb4751b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback LwIP invoque automatiquement a chaque paquet UDP recu sur le port du serveur (enregistre par udpServer_init via udp_recv). Recupere le message recu, appelle tc_request() pour l'interpreter et construire la reponse, puis renvoie cette reponse a l'expediteur. Chaque commande est tracee sur l'UART ("[UDP] RX commande", "[UDP]
+        REPONSE", "[UDP] TX OK"), SAUF "WHO" : c'est la sonde de liaison que l'interface PC envoie en continu, sa trace noierait le journal UART.  <br /></td></tr>
+<tr class="memitem:ga7e95f093ea99a8f73f132b261bdebc2f" id="r_ga7e95f093ea99a8f73f132b261bdebc2f"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga7e95f093ea99a8f73f132b261bdebc2f">CreerMutexCommandes</a> (void)</td></tr>
+<tr class="memdesc:ga7e95f093ea99a8f73f132b261bdebc2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cree le verrou des commandes (UDP + UART). A appeler avant udpServer_init().  <br /></td></tr>
+<tr class="memitem:ga700668cb98e6ac2d4c9e2a1f80bd365a" id="r_ga700668cb98e6ac2d4c9e2a1f80bd365a"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga700668cb98e6ac2d4c9e2a1f80bd365a">Commande_Verrouiller</a> (void)</td></tr>
+<tr class="memdesc:ga700668cb98e6ac2d4c9e2a1f80bd365a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prend le verrou des commandes (tc_mutex). Sans effet tant qu'il n'est pas cree. Garantit que tc_request() (qui utilise les globales last_message et response) n'est jamais execute par l'UDP et l'UART en meme temps.  <br /></td></tr>
+<tr class="memitem:ga8f851878b9fa126696fa20796cb7c274" id="r_ga8f851878b9fa126696fa20796cb7c274"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga8f851878b9fa126696fa20796cb7c274">Commande_Deverrouiller</a> (void)</td></tr>
+<tr class="memdesc:ga8f851878b9fa126696fa20796cb7c274"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rend le verrou des commandes pris par Commande_Verrouiller().  <br /></td></tr>
+<tr class="memitem:ga6b6a3cef741ac3270119f7e1890f58eb" id="r_ga6b6a3cef741ac3270119f7e1890f58eb"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga6b6a3cef741ac3270119f7e1890f58eb">UART1_DemarrerReceptionCommandes</a> (void)</td></tr>
+<tr class="memdesc:ga6b6a3cef741ac3270119f7e1890f58eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Demarre la reception des commandes sur USART1 (interruption, 1 octet).  <br /></td></tr>
+<tr class="memitem:ga7139cd4baabbbcbab0c1fe6d7d4ae1cc" id="r_ga7139cd4baabbbcbab0c1fe6d7d4ae1cc"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga7139cd4baabbbcbab0c1fe6d7d4ae1cc">USART1_IRQHandler</a> (void)</td></tr>
+<tr class="memdesc:ga7139cd4baabbbcbab0c1fe6d7d4ae1cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interruption USART1 : delegue au HAL, qui appelle HAL_UART_RxCpltCallback() a chaque octet recu (commandes UART).  <br /></td></tr>
+<tr class="memitem:gae494a9643f29b87d6d81e5264e60e57b" id="r_gae494a9643f29b87d6d81e5264e60e57b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gae494a9643f29b87d6d81e5264e60e57b">HAL_UART_RxCpltCallback</a> (UART_HandleTypeDef *huart)</td></tr>
+<tr class="memdesc:gae494a9643f29b87d6d81e5264e60e57b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Octet recu sur USART1 : assemble la ligne ; CR ou LF la termine et la confie a la boucle (une ligne en attente au plus, les suivantes sont comptees comme perdues). Aucune API FreeRTOS ici.  <br /></td></tr>
+<tr class="memitem:ga0e0456ea96d55db31de947fb3e954f18" id="r_ga0e0456ea96d55db31de947fb3e954f18"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga0e0456ea96d55db31de947fb3e954f18">HAL_UART_ErrorCallback</a> (UART_HandleTypeDef *huart)</td></tr>
+<tr class="memdesc:ga0e0456ea96d55db31de947fb3e954f18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erreur de reception USART1 (debordement, bruit...) : relance la reception.  <br /></td></tr>
+<tr class="memitem:gabcc2bb9c188ed5dd0c34bf573bdb04e6" id="r_gabcc2bb9c188ed5dd0c34bf573bdb04e6"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#gabcc2bb9c188ed5dd0c34bf573bdb04e6">UART1_TraiterCommande</a> (void)</td></tr>
+<tr class="memdesc:gabcc2bb9c188ed5dd0c34bf573bdb04e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute la commande recue sur l'UART (s'il y en a une) et renvoie la reponse sur l'UART. Meme traitement que l'UDP (tc_request()).  <br /></td></tr>
+<tr class="memitem:ga69203767b05a3021fd164dfbc0b4d6c5" id="r_ga69203767b05a3021fd164dfbc0b4d6c5"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ga69203767b05a3021fd164dfbc0b4d6c5">h_WHO</a> (void)</td></tr>
+<tr class="memdesc:ga69203767b05a3021fd164dfbc0b4d6c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler de la commande reseau "WHO". Renvoie la chaine d'identification de la carte (macro WHO_AM_I definie dans main.h).  <br /></td></tr>
+<tr class="memitem:ga5e4e310aeaafd17d31d0c9fd0874ad0c" id="r_ga5e4e310aeaafd17d31d0c9fd0874ad0c"><td class="memItemLeft">static int&#160;</td><td class="memItemRight"><a class="el" href="#ga5e4e310aeaafd17d31d0c9fd0874ad0c">compareCommand</a> (const void *key, const void *elem)</td></tr>
+<tr class="memdesc:ga5e4e310aeaafd17d31d0c9fd0874ad0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction de comparaison utilisee par bsearch() pour retrouver une commande dans commandTable[] (qui doit etre triee, voir sortCommandTable()).  <br /></td></tr>
+<tr class="memitem:ga2f7f33500ff00c489e30866948d48e3c" id="r_ga2f7f33500ff00c489e30866948d48e3c"><td class="memItemLeft">static int&#160;</td><td class="memItemRight"><a class="el" href="#ga2f7f33500ff00c489e30866948d48e3c">compareCommandForSort</a> (const void *a, const void *b)</td></tr>
+<tr class="memdesc:ga2f7f33500ff00c489e30866948d48e3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction de comparaison utilisee par qsort() pour trier commandTable[] par ordre alphabetique de commande, prealable indispensable a l'utilisation de bsearch() dans findCommandHandler().  <br /></td></tr>
+<tr class="memitem:gaa8eed1e7f490101de8fcefc4af23882c" id="r_gaa8eed1e7f490101de8fcefc4af23882c"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#gaa8eed1e7f490101de8fcefc4af23882c">sortCommandTable</a> (void)</td></tr>
+<tr class="memdesc:gaa8eed1e7f490101de8fcefc4af23882c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trie une bonne fois pour toutes (au demarrage) le tableau commandTable[] par ordre alphabetique de commande. Doit imperativement etre appelee avant le premier appel a tc_request()/findCommandHandler(), sous peine de resultats de bsearch() incorrects.  <br /></td></tr>
+<tr class="memitem:gad6e271fe1796ab0b2a698260f0b78533" id="r_gad6e271fe1796ab0b2a698260f0b78533"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gad6e271fe1796ab0b2a698260f0b78533">tc_request</a> (void)</td></tr>
+<tr class="memdesc:gad6e271fe1796ab0b2a698260f0b78533"><td class="mdescLeft">&#160;</td><td class="mdescRight">Analyseur (parser) principal des trames recues par UDP. Extrait le premier token de la trame (avant le premier ":"), puis tente de le faire correspondre, dans l'ordre : 1) aux prefixes indexes par LDO (SET_EN_LDO_, RST_EN_LDO_, SET_BL_LDO_, RST_BL_LDO_, GET_STATUS_LDO_) via findLdoIndex() ; 2) sinon, a une commande exacte de commandTable[] via findCommandHandler(), dont le handler associe est alors execute. Si aucune correspondance n'est trouvee, la reponse "UNKNOWN" est renvoyee.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ga768693a9fdf4a85d1ba355e3c321e075" id="r_ga768693a9fdf4a85d1ba355e3c321e075"><td class="memItemLeft">static void(*)(void)&#160;</td><td class="memItemRight"><a class="el" href="#ga768693a9fdf4a85d1ba355e3c321e075">findCommandHandler</a> (const char *cmd)</td></tr>
+<tr class="memdesc:ga768693a9fdf4a85d1ba355e3c321e075"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recherche par dichotomie (bsearch) le handler associe a une commande exacte dans commandTable[].  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Réception et émission UART, serveur UDP, analyse et dispatch des commandes. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentation des fonctions</h2>
+<a id="ga59372978b4f9f6b427161864e8bc4dd6" name="ga59372978b4f9f6b427161864e8bc4dd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga59372978b4f9f6b427161864e8bc4dd6">&#9670;&#160;</a></span>CreerMutexUART()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CreerMutexUART </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Cree le mutex qui serialise les emissions de texte sur USART1 (voir UART1_EnvoyerTexte()). A appeler UNE SEULE FOIS, depuis StartLwipTask(), juste apres CreerMutexI2C(), avant que la boucle ou une commande reseau puisse emettre sur l'UART. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Remplit uart1_mutex_id. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">CreerMutexI2C();</div>
+<div class="line">CreerMutexUART();   <span class="comment">// dans StartLwipTask(), avant udpServer_init()</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00708">708</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l00708">CreerMutexUART()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l00708">CreerMutexUART()</a>, et <a class="el" href="main_8c_source.html#l06730">StartLwipTask()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga59372978b4f9f6b427161864e8bc4dd6_cgraph.svg" width="136" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga59372978b4f9f6b427161864e8bc4dd6_icgraph.svg" width="386" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga5294dbf6a367b9a48010296000e1430a" name="ga5294dbf6a367b9a48010296000e1430a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5294dbf6a367b9a48010296000e1430a">&#9670;&#160;</a></span>MX_USART1_GPIO_Init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MX_USART1_GPIO_Init </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Configure les broches PB6 (USART1_TX) et PB7 (USART1_RX) en Alternate Function. ATTENTION : ces broches ne sont PAS reliees au port COM virtuel du ST-LINK - il faut un adaptateur USB-UART externe branche sur PB6/PB7 pour voir quoi que ce soit dans un terminal (Hercules, etc.). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#ga5294dbf6a367b9a48010296000e1430a">MX_USART1_GPIO_Init</a>();</div>
+<div class="line">MX_USART1_Init();</div>
+<div class="ttc" id="agroup__grp__comm_html_ga5294dbf6a367b9a48010296000e1430a"><div class="ttname"><a href="#ga5294dbf6a367b9a48010296000e1430a">MX_USART1_GPIO_Init</a></div><div class="ttdeci">static void MX_USART1_GPIO_Init(void)</div><div class="ttdoc">Configure les broches PB6 (USART1_TX) et PB7 (USART1_RX) en Alternate Function. ATTENTION : ces broch...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l01741">main.c:1741</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l01741">1741</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l01741">MX_USART1_GPIO_Init()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01741">MX_USART1_GPIO_Init()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga5294dbf6a367b9a48010296000e1430a_cgraph.svg" width="176" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga5294dbf6a367b9a48010296000e1430a_icgraph.svg" width="176" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga59e35c131ee43adc1fad6c4bfdf9fa0a" name="ga59e35c131ee43adc1fad6c4bfdf9fa0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga59e35c131ee43adc1fad6c4bfdf9fa0a">&#9670;&#160;</a></span>MX_USART1_Init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MX_USART1_Init </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initialise USART1 : 115200 bauds, 8 bits, sans parite, 1 bit de stop, sans controle de flux (correspond a la config Hercules : "8 b, pas de parity, handshake off"). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Initialise le handle global huart1. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#ga5294dbf6a367b9a48010296000e1430a">MX_USART1_GPIO_Init</a>();</div>
+<div class="line">MX_USART1_Init();</div>
+<div class="line"><a class="code hl_function" href="#gab9b5dfc109e472981cbbb7867d1b7f92">UART1_EnvoyerTexte</a>(<span class="stringliteral">&quot;Test\r\n&quot;</span>);</div>
+<div class="ttc" id="agroup__grp__comm_html_gab9b5dfc109e472981cbbb7867d1b7f92"><div class="ttname"><a href="#gab9b5dfc109e472981cbbb7867d1b7f92">UART1_EnvoyerTexte</a></div><div class="ttdeci">void UART1_EnvoyerTexte(const char *texte)</div><div class="ttdoc">Envoie une chaine de caracteres sur USART1 (PB6/PB7, via un adaptateur USB-UART externe),...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l01803">main.c:1803</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l01769">1769</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l06913">Error_Handler()</a>, et <a class="el" href="main_8c_source.html#l01769">MX_USART1_Init()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01769">MX_USART1_Init()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga59e35c131ee43adc1fad6c4bfdf9fa0a_cgraph.svg" width="286" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga59e35c131ee43adc1fad6c4bfdf9fa0a_icgraph.svg" width="136" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gab9b5dfc109e472981cbbb7867d1b7f92" name="gab9b5dfc109e472981cbbb7867d1b7f92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab9b5dfc109e472981cbbb7867d1b7f92">&#9670;&#160;</a></span>UART1_EnvoyerTexte()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UART1_EnvoyerTexte </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>texte</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Envoie une chaine de caracteres sur USART1 (PB6/PB7, via un adaptateur USB-UART externe), en mode bloquant. L'emission est protegee par uart1_mutex_id (une seule emission a la fois, depuis n'importe quelle tache) pour ne jamais perdre une ligne sur un HAL_BUSY ; sans verrou tant que le mutex n'est pas cree. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">texte</td><td>Chaine C terminee par '\0' a transmettre. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#gab9b5dfc109e472981cbbb7867d1b7f92">UART1_EnvoyerTexte</a>(rapport_scan);</div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l01803">1803</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l01803">UART1_EnvoyerTexte()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l01346">BalayerSortieDAC()</a>, <a class="el" href="main_8c_source.html#l03434">CmdOnOff_Initialiser()</a>, <a class="el" href="main_8c_source.html#l03564">CmdOnOff_TraiterSauvegarde()</a>, <a class="el" href="main_8c_source.html#l04902">DAC_ConfigurerSeuilsPotentiometre()</a>, <a class="el" href="main_8c_source.html#l04822">DAC_RestaurerMemoire()</a>, <a class="el" href="main_8c_source.html#l04755">DAC_TraiterSauvegardes()</a>, <a class="el" href="main_8c_source.html#l01648">ExecuterCaptureComplete()</a>, <a class="el" href="main_8c_source.html#l05595">GetMesureCourantReelle()</a>, <a class="el" href="main_8c_source.html#l05474">GetMesureReelle()</a>, <a class="el" href="main_8c_source.html#l01118">InitialiserConfigDacsI2C1()</a>, <a class="el" href="main_8c_source.html#l06223">LDO_Diagnostic()</a>, <a class="el" href="main_8c_source.html#l06025">LDO_InitialiserTables()</a>, <a class="el" href="main_8c_source.html#l06510">MX_OC_EXTI_Init()</a>, <a class="el" href="main_8c_source.html#l03898">OC_SignalerEvenements()</a>, <a class="el" href="main_8c_source.html#l06730">StartLwipTask()</a>, <a class="el" href="main_8c_source.html#l01228">SurveillerConfigDacsI2C1()</a>, <a class="el" href="main_8c_source.html#l01611">TraiterResetMultiplexeur()</a>, <a class="el" href="main_8c_source.html#l01803">UART1_EnvoyerTexte()</a>, <a class="el" href="main_8c_source.html#l03849">UART1_TraiterCommande()</a>, <a class="el" href="main_8c_source.html#l02619">udp_receive_callback()</a>, et <a class="el" href="main_8c_source.html#l02556">udpServer_init()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_gab9b5dfc109e472981cbbb7867d1b7f92_cgraph.svg" width="163" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_gab9b5dfc109e472981cbbb7867d1b7f92_icgraph.svg" width="1379" height="1202"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga78047c519037c4c6091c71e1801519c7" name="ga78047c519037c4c6091c71e1801519c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga78047c519037c4c6091c71e1801519c7">&#9670;&#160;</a></span>udpServer_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void udpServer_init </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialise le serveur UDP applicatif. Cree un PCB UDP (udp_new), le lie a l'adresse IP et au port definis par les macros IP4_1..IP4_4 et UDP_SERVER_PORT (main.h), puis enregistre udp_receive_callback() comme fonction de reception. En cas d'echec de udp_bind(), le PCB est libere (udp_remove). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Appelee une seule fois au demarrage de la tache reseau :</div>
+<div class="line">    osDelay(1000);</div>
+<div class="line">    <a class="code hl_function" href="#ga78047c519037c4c6091c71e1801519c7">udpServer_init</a>();</div>
+<div class="ttc" id="agroup__grp__comm_html_ga78047c519037c4c6091c71e1801519c7"><div class="ttname"><a href="#ga78047c519037c4c6091c71e1801519c7">udpServer_init</a></div><div class="ttdeci">void udpServer_init(void)</div><div class="ttdoc">Initialise le serveur UDP applicatif. Cree un PCB UDP (udp_new), le lie a l&#39;adresse IP et au port def...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l02556">main.c:2556</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l02556">2556</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l01803">UART1_EnvoyerTexte()</a>, <a class="el" href="main_8c_source.html#l02619">udp_receive_callback()</a>, et <a class="el" href="main_8c_source.html#l02556">udpServer_init()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06730">StartLwipTask()</a>, et <a class="el" href="main_8c_source.html#l02556">udpServer_init()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga78047c519037c4c6091c71e1801519c7_cgraph.svg" width="1455" height="1603"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga78047c519037c4c6091c71e1801519c7_icgraph.svg" width="366" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga5b44c65aa41e79871a46aeed1bb4751b" name="ga5b44c65aa41e79871a46aeed1bb4751b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5b44c65aa41e79871a46aeed1bb4751b">&#9670;&#160;</a></span>udp_receive_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void udp_receive_callback </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>arg</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct udp_pcb *</td>          <td class="paramname"><span class="paramname"><em>upcb</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct pbuf *</td>          <td class="paramname"><span class="paramname"><em>p</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const ip_addr_t *</td>          <td class="paramname"><span class="paramname"><em>addr</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u16_t</td>          <td class="paramname"><span class="paramname"><em>port</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Callback LwIP invoque automatiquement a chaque paquet UDP recu sur le port du serveur (enregistre par udpServer_init via udp_recv). Recupere le message recu, appelle tc_request() pour l'interpreter et construire la reponse, puis renvoie cette reponse a l'expediteur. Chaque commande est tracee sur l'UART ("[UDP] RX commande", "[UDP]
+        REPONSE", "[UDP] TX OK"), SAUF "WHO" : c'est la sonde de liaison que l'interface PC envoie en continu, sa trace noierait le journal UART. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arg</td><td>Parametre optionnel LwIP (non utilise ici). </td></tr>
+    <tr><td class="paramname">upcb</td><td>Pointeur vers le PCB UDP ayant recu le paquet. </td></tr>
+    <tr><td class="paramname">p</td><td>Buffer LwIP (pbuf) contenant les donnees recues (p-&gt;payload). </td></tr>
+    <tr><td class="paramname">addr</td><td>Adresse IP de l'expediteur. </td></tr>
+    <tr><td class="paramname">port</td><td>Port UDP de l'expediteur. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Jamais appelee directement dans le code applicatif : c<span class="stringliteral">&#39;est LwIP</span></div>
+<div class="line"><span class="stringliteral">qui l&#39;</span>invoque des qu<span class="stringliteral">&#39;un datagramme arrive sur le port ecoute</span></div>
+<div class="line"><span class="stringliteral">(voir udp_recv(upcb, udp_receive_callback, NULL) dans udpServer_init).</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l02619">2619</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03730">Commande_Deverrouiller()</a>, <a class="el" href="main_8c_source.html#l03710">Commande_Verrouiller()</a>, <a class="el" href="main_8c_source.html#l06290">tc_request()</a>, <a class="el" href="main_8c_source.html#l01803">UART1_EnvoyerTexte()</a>, et <a class="el" href="main_8c_source.html#l02619">udp_receive_callback()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l02619">udp_receive_callback()</a>, et <a class="el" href="main_8c_source.html#l02556">udpServer_init()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga5b44c65aa41e79871a46aeed1bb4751b_cgraph.svg" width="1302" height="1682"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga5b44c65aa41e79871a46aeed1bb4751b_icgraph.svg" width="559" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga7e95f093ea99a8f73f132b261bdebc2f" name="ga7e95f093ea99a8f73f132b261bdebc2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7e95f093ea99a8f73f132b261bdebc2f">&#9670;&#160;</a></span>CreerMutexCommandes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CreerMutexCommandes </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Cree le verrou des commandes (UDP + UART). A appeler avant udpServer_init(). </p>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#ga7e95f093ea99a8f73f132b261bdebc2f">CreerMutexCommandes</a>();</div>
+<div class="ttc" id="agroup__grp__comm_html_ga7e95f093ea99a8f73f132b261bdebc2f"><div class="ttname"><a href="#ga7e95f093ea99a8f73f132b261bdebc2f">CreerMutexCommandes</a></div><div class="ttdeci">static void CreerMutexCommandes(void)</div><div class="ttdoc">Cree le verrou des commandes (UDP + UART). A appeler avant udpServer_init().</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l03689">main.c:3689</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l03689">3689</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03689">CreerMutexCommandes()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l03689">CreerMutexCommandes()</a>, et <a class="el" href="main_8c_source.html#l06730">StartLwipTask()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga7e95f093ea99a8f73f132b261bdebc2f_cgraph.svg" width="175" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga7e95f093ea99a8f73f132b261bdebc2f_icgraph.svg" width="424" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga700668cb98e6ac2d4c9e2a1f80bd365a" name="ga700668cb98e6ac2d4c9e2a1f80bd365a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga700668cb98e6ac2d4c9e2a1f80bd365a">&#9670;&#160;</a></span>Commande_Verrouiller()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Commande_Verrouiller </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Prend le verrou des commandes (tc_mutex). Sans effet tant qu'il n'est pas cree. Garantit que tc_request() (qui utilise les globales last_message et response) n'est jamais execute par l'UDP et l'UART en meme temps. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#ga700668cb98e6ac2d4c9e2a1f80bd365a">Commande_Verrouiller</a>();</div>
+<div class="line">last_message = ligne;</div>
+<div class="line"><a class="code hl_function" href="#gad6e271fe1796ab0b2a698260f0b78533">tc_request</a>();</div>
+<div class="line">Commande_Deverrouiller();</div>
+<div class="ttc" id="agroup__grp__comm_html_ga700668cb98e6ac2d4c9e2a1f80bd365a"><div class="ttname"><a href="#ga700668cb98e6ac2d4c9e2a1f80bd365a">Commande_Verrouiller</a></div><div class="ttdeci">static void Commande_Verrouiller(void)</div><div class="ttdoc">Prend le verrou des commandes (tc_mutex). Sans effet tant qu&#39;il n&#39;est pas cree. Garantit que tc_reque...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l03710">main.c:3710</a></div></div>
+<div class="ttc" id="agroup__grp__comm_html_gad6e271fe1796ab0b2a698260f0b78533"><div class="ttname"><a href="#gad6e271fe1796ab0b2a698260f0b78533">tc_request</a></div><div class="ttdeci">void tc_request(void)</div><div class="ttdoc">Analyseur (parser) principal des trames recues par UDP. Extrait le premier token de la trame (avant l...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l06290">main.c:6290</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l03710">3710</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03710">Commande_Verrouiller()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l03710">Commande_Verrouiller()</a>, <a class="el" href="main_8c_source.html#l03849">UART1_TraiterCommande()</a>, et <a class="el" href="main_8c_source.html#l02619">udp_receive_callback()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga700668cb98e6ac2d4c9e2a1f80bd365a_cgraph.svg" width="163" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga700668cb98e6ac2d4c9e2a1f80bd365a_icgraph.svg" width="831" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga8f851878b9fa126696fa20796cb7c274" name="ga8f851878b9fa126696fa20796cb7c274"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8f851878b9fa126696fa20796cb7c274">&#9670;&#160;</a></span>Commande_Deverrouiller()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Commande_Deverrouiller </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Rend le verrou des commandes pris par Commande_Verrouiller(). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#ga700668cb98e6ac2d4c9e2a1f80bd365a">Commande_Verrouiller</a>();</div>
+<div class="line"><a class="code hl_function" href="#gad6e271fe1796ab0b2a698260f0b78533">tc_request</a>();</div>
+<div class="line">Commande_Deverrouiller();   <span class="comment">// toujours apres la copie de response</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l03730">3730</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03730">Commande_Deverrouiller()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l03730">Commande_Deverrouiller()</a>, <a class="el" href="main_8c_source.html#l03849">UART1_TraiterCommande()</a>, et <a class="el" href="main_8c_source.html#l02619">udp_receive_callback()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga8f851878b9fa126696fa20796cb7c274_cgraph.svg" width="179" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga8f851878b9fa126696fa20796cb7c274_icgraph.svg" width="847" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga6b6a3cef741ac3270119f7e1890f58eb" name="ga6b6a3cef741ac3270119f7e1890f58eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6b6a3cef741ac3270119f7e1890f58eb">&#9670;&#160;</a></span>UART1_DemarrerReceptionCommandes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UART1_DemarrerReceptionCommandes </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Demarre la reception des commandes sur USART1 (interruption, 1 octet). </p>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#ga6b6a3cef741ac3270119f7e1890f58eb">UART1_DemarrerReceptionCommandes</a>();   <span class="comment">// apres MX_USART1_UART_Init()</span></div>
+<div class="ttc" id="agroup__grp__comm_html_ga6b6a3cef741ac3270119f7e1890f58eb"><div class="ttname"><a href="#ga6b6a3cef741ac3270119f7e1890f58eb">UART1_DemarrerReceptionCommandes</a></div><div class="ttdeci">static void UART1_DemarrerReceptionCommandes(void)</div><div class="ttdoc">Demarre la reception des commandes sur USART1 (interruption, 1 octet).</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l03747">main.c:3747</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l03747">3747</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03747">UART1_DemarrerReceptionCommandes()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06730">StartLwipTask()</a>, et <a class="el" href="main_8c_source.html#l03747">UART1_DemarrerReceptionCommandes()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga6b6a3cef741ac3270119f7e1890f58eb_cgraph.svg" width="270" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga6b6a3cef741ac3270119f7e1890f58eb_icgraph.svg" width="519" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga7139cd4baabbbcbab0c1fe6d7d4ae1cc" name="ga7139cd4baabbbcbab0c1fe6d7d4ae1cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7139cd4baabbbcbab0c1fe6d7d4ae1cc">&#9670;&#160;</a></span>USART1_IRQHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void USART1_IRQHandler </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Interruption USART1 : delegue au HAL, qui appelle HAL_UART_RxCpltCallback() a chaque octet recu (commandes UART). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="comment">// appele par le materiel (vecteur USART1_IRQn, priorite 6), ne pas appeler directement</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l03765">3765</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03765">USART1_IRQHandler()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l03765">USART1_IRQHandler()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga7139cd4baabbbcbab0c1fe6d7d4ae1cc_cgraph.svg" width="160" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga7139cd4baabbbcbab0c1fe6d7d4ae1cc_icgraph.svg" width="160" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gae494a9643f29b87d6d81e5264e60e57b" name="gae494a9643f29b87d6d81e5264e60e57b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae494a9643f29b87d6d81e5264e60e57b">&#9670;&#160;</a></span>HAL_UART_RxCpltCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HAL_UART_RxCpltCallback </td>
+          <td>(</td>
+          <td class="paramtype">UART_HandleTypeDef *</td>          <td class="paramname"><span class="paramname"><em>huart</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Octet recu sur USART1 : assemble la ligne ; CR ou LF la termine et la confie a la boucle (une ligne en attente au plus, les suivantes sont comptees comme perdues). Aucune API FreeRTOS ici. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">huart</td><td>Handle UART de l'interruption. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="comment">// appele par HAL_UART_IRQHandler() ; la ligne &quot;WHO\r&quot; donne uart_cmd = &quot;WHO&quot;,</span></div>
+<div class="line"><span class="comment">// uart_cmd_prete = 1, puis UART1_TraiterCommande() l&#39;execute dans la boucle</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l03783">3783</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03783">HAL_UART_RxCpltCallback()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l03783">HAL_UART_RxCpltCallback()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_gae494a9643f29b87d6d81e5264e60e57b_cgraph.svg" width="200" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_gae494a9643f29b87d6d81e5264e60e57b_icgraph.svg" width="200" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga0e0456ea96d55db31de947fb3e954f18" name="ga0e0456ea96d55db31de947fb3e954f18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0e0456ea96d55db31de947fb3e954f18">&#9670;&#160;</a></span>HAL_UART_ErrorCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HAL_UART_ErrorCallback </td>
+          <td>(</td>
+          <td class="paramtype">UART_HandleTypeDef *</td>          <td class="paramname"><span class="paramname"><em>huart</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Erreur de reception USART1 (debordement, bruit...) : relance la reception. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">huart</td><td>Handle UART. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><span class="comment">// appele par le HAL sur erreur ; la ligne en cours est abandonnee</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l03829">3829</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03829">HAL_UART_ErrorCallback()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l03829">HAL_UART_ErrorCallback()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga0e0456ea96d55db31de947fb3e954f18_cgraph.svg" width="187" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga0e0456ea96d55db31de947fb3e954f18_icgraph.svg" width="187" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gabcc2bb9c188ed5dd0c34bf573bdb04e6" name="gabcc2bb9c188ed5dd0c34bf573bdb04e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabcc2bb9c188ed5dd0c34bf573bdb04e6">&#9670;&#160;</a></span>UART1_TraiterCommande()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UART1_TraiterCommande </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Execute la commande recue sur l'UART (s'il y en a une) et renvoie la reponse sur l'UART. Meme traitement que l'UDP (tc_request()). </p>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#gabcc2bb9c188ed5dd0c34bf573bdb04e6">UART1_TraiterCommande</a>();   <span class="comment">// dans la boucle for(;;)</span></div>
+<div class="line">  <span class="comment">// terminal : &quot;GET_CMD_ON_OFF_OC_LDO_2PSp&quot; -&gt; &quot;CMD_ON_OFF_OC:2PSp:0&quot;</span></div>
+<div class="ttc" id="agroup__grp__comm_html_gabcc2bb9c188ed5dd0c34bf573bdb04e6"><div class="ttname"><a href="#gabcc2bb9c188ed5dd0c34bf573bdb04e6">UART1_TraiterCommande</a></div><div class="ttdeci">static void UART1_TraiterCommande(void)</div><div class="ttdoc">Execute la commande recue sur l&#39;UART (s&#39;il y en a une) et renvoie la reponse sur l&#39;UART....</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l03849">main.c:3849</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l03849">3849</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l03730">Commande_Deverrouiller()</a>, <a class="el" href="main_8c_source.html#l03710">Commande_Verrouiller()</a>, <a class="el" href="main_8c_source.html#l06290">tc_request()</a>, <a class="el" href="main_8c_source.html#l01803">UART1_EnvoyerTexte()</a>, et <a class="el" href="main_8c_source.html#l03849">UART1_TraiterCommande()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06730">StartLwipTask()</a>, et <a class="el" href="main_8c_source.html#l03849">UART1_TraiterCommande()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_gabcc2bb9c188ed5dd0c34bf573bdb04e6_cgraph.svg" width="1331" height="1682"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_gabcc2bb9c188ed5dd0c34bf573bdb04e6_icgraph.svg" width="436" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga69203767b05a3021fd164dfbc0b4d6c5" name="ga69203767b05a3021fd164dfbc0b4d6c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga69203767b05a3021fd164dfbc0b4d6c5">&#9670;&#160;</a></span>h_WHO()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void h_WHO </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handler de la commande reseau "WHO". Renvoie la chaine d'identification de la carte (macro WHO_AM_I definie dans main.h). </p>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Ecrit WHO_AM_I dans la variable globale response. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Trame UDP recue : <span class="stringliteral">&quot;WHO&quot;</span> -&gt; reponse <span class="stringliteral">&quot;STM32 NULCEO H753ZI IRIS V1.0&quot;</span>.</div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l05853">5853</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l05853">h_WHO()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l05853">h_WHO()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga69203767b05a3021fd164dfbc0b4d6c5_cgraph.svg" width="79" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga69203767b05a3021fd164dfbc0b4d6c5_icgraph.svg" width="79" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga5e4e310aeaafd17d31d0c9fd0874ad0c" name="ga5e4e310aeaafd17d31d0c9fd0874ad0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5e4e310aeaafd17d31d0c9fd0874ad0c">&#9670;&#160;</a></span>compareCommand()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int compareCommand </td>
+          <td>(</td>
+          <td class="paramtype">const void *</td>          <td class="paramname"><span class="paramname"><em>key</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *</td>          <td class="paramname"><span class="paramname"><em>elem</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fonction de comparaison utilisee par bsearch() pour retrouver une commande dans commandTable[] (qui doit etre triee, voir sortCommandTable()). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>Pointeur vers la chaine de caracteres recherchee (le token de commande extrait de la trame, ex: "WHO"). </td></tr>
+    <tr><td class="paramname">elem</td><td>Pointeur vers l'entree Command_t courante du tableau, fourni automatiquement par bsearch(). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">int</td><td>Resultat de strcmp() entre key et elem-&gt;name : negatif si key &lt; elem-&gt;name, 0 si egal, positif si key &gt; elem-&gt;name. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Jamais appelee directement : passee en argument a bsearch()</div>
+<div class="line">dans findCommandHandler().</div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l05931">5931</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l05931">compareCommand()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l05931">compareCommand()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga5e4e310aeaafd17d31d0c9fd0874ad0c_cgraph.svg" width="143" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga5e4e310aeaafd17d31d0c9fd0874ad0c_icgraph.svg" width="143" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga2f7f33500ff00c489e30866948d48e3c" name="ga2f7f33500ff00c489e30866948d48e3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2f7f33500ff00c489e30866948d48e3c">&#9670;&#160;</a></span>compareCommandForSort()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int compareCommandForSort </td>
+          <td>(</td>
+          <td class="paramtype">const void *</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *</td>          <td class="paramname"><span class="paramname"><em>b</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fonction de comparaison utilisee par qsort() pour trier commandTable[] par ordre alphabetique de commande, prealable indispensable a l'utilisation de bsearch() dans findCommandHandler(). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>Pointeur vers une premiere entree Command_t du tableau. </td></tr>
+    <tr><td class="paramname">b</td><td>Pointeur vers une seconde entree Command_t du tableau. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">int</td><td>Resultat de strcmp() entre les deux noms de commande. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Jamais appelee directement : passee en argument a qsort()</div>
+<div class="line">dans sortCommandTable().</div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l05976">5976</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l05976">compareCommandForSort()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l05976">compareCommandForSort()</a>, et <a class="el" href="main_8c_source.html#l06004">sortCommandTable()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga2f7f33500ff00c489e30866948d48e3c_cgraph.svg" width="186" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_ga2f7f33500ff00c489e30866948d48e3c_icgraph.svg" width="618" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gaa8eed1e7f490101de8fcefc4af23882c" name="gaa8eed1e7f490101de8fcefc4af23882c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa8eed1e7f490101de8fcefc4af23882c">&#9670;&#160;</a></span>sortCommandTable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sortCommandTable </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Trie une bonne fois pour toutes (au demarrage) le tableau commandTable[] par ordre alphabetique de commande. Doit imperativement etre appelee avant le premier appel a tc_request()/findCommandHandler(), sous peine de resultats de bsearch() incorrects. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun.</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). Trie commandTable[] en place. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">Appelee une seule fois dans <a class="code hl_function" href="group__grp__tache.html#gae9bf934dd2f4a12a5c5975d81afa3063">StartLwipTask</a>(), avant la boucle</div>
+<div class="line">infinie :</div>
+<div class="line">    <a class="code hl_function" href="#ga78047c519037c4c6091c71e1801519c7">udpServer_init</a>();</div>
+<div class="line">    sortCommandTable();</div>
+<div class="ttc" id="agroup__grp__tache_html_gae9bf934dd2f4a12a5c5975d81afa3063"><div class="ttname"><a href="group__grp__tache.html#gae9bf934dd2f4a12a5c5975d81afa3063">StartLwipTask</a></div><div class="ttdeci">void StartLwipTask(void const *argument)</div><div class="ttdoc">Tache FreeRTOS principale (lwipTask). Initialise LwIP, les verrous (I2C, UART, commandes),...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l06730">main.c:6730</a></div></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l06004">6004</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l05976">compareCommandForSort()</a>, et <a class="el" href="main_8c_source.html#l06004">sortCommandTable()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06004">sortCommandTable()</a>, et <a class="el" href="main_8c_source.html#l06730">StartLwipTask()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_gaa8eed1e7f490101de8fcefc4af23882c_cgraph.svg" width="368" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_gaa8eed1e7f490101de8fcefc4af23882c_icgraph.svg" width="395" height="62"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gad6e271fe1796ab0b2a698260f0b78533" name="gad6e271fe1796ab0b2a698260f0b78533"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad6e271fe1796ab0b2a698260f0b78533">&#9670;&#160;</a></span>tc_request()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tc_request </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Analyseur (parser) principal des trames recues par UDP. Extrait le premier token de la trame (avant le premier ":"), puis tente de le faire correspondre, dans l'ordre : 1) aux prefixes indexes par LDO (SET_EN_LDO_, RST_EN_LDO_, SET_BL_LDO_, RST_BL_LDO_, GET_STATUS_LDO_) via findLdoIndex() ; 2) sinon, a une commande exacte de commandTable[] via findCommandHandler(), dont le handler associe est alors execute. Si aucune correspondance n'est trouvee, la reponse "UNKNOWN" est renvoyee. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Aucun</td><td>parametre C. Lit et modifie la variable globale last_message (message brut recu), et ecrit le resultat dans la variable globale response. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Aucun</td><td>(void). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">last_message = <span class="stringliteral">&quot;SET_VAL_LDO_1PSp:2048&quot;</span>;</div>
+<div class="line"><a class="code hl_function" href="#gad6e271fe1796ab0b2a698260f0b78533">tc_request</a>();   <span class="comment">// -&gt; execute h_SET_VAL_LDO_1PSp(), response=&quot;DONE&quot;</span></div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l06290">6290</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Références <a class="el" href="main_8c_source.html#l02764">buildStatusResponse()</a>, <a class="el" href="main_8c_source.html#l03625">CmdOnOff_BasculerBld()</a>, <a class="el" href="main_8c_source.html#l03595">CmdOnOff_BasculerOc()</a>, <a class="el" href="main_8c_source.html#l03654">CmdOnOff_Repondre()</a>, <a class="el" href="main_8c_source.html#l05952">findCommandHandler</a>, <a class="el" href="main_8c_source.html#l02727">findLdoIndex()</a>, <a class="el" href="main_8c_source.html#l04309">GetMappingDacLdo()</a>, <a class="el" href="main_8c_source.html#l05595">GetMesureCourantReelle()</a>, <a class="el" href="main_8c_source.html#l05474">GetMesureReelle()</a>, <a class="el" href="main_8c_source.html#l05667">GetMuxCourantLdo()</a>, <a class="el" href="main_8c_source.html#l05379">GetMuxLdo()</a>, <a class="el" href="main_8c_source.html#l04109">h_SET_CURRENT_LDO_GENERIQUE()</a>, <a class="el" href="main_8c_source.html#l04084">h_SET_VAL_LDO_GENERIQUE()</a>, <a class="el" href="main_8c_source.html#l06223">LDO_Diagnostic()</a>, <a class="el" href="main_8c_source.html#l03228">LDO_RelacherBleeder()</a>, <a class="el" href="main_8c_source.html#l03952">OC_Etat()</a>, <a class="el" href="main_8c_source.html#l03929">OC_Rearmer()</a>, <a class="el" href="main_8c_source.html#l03120">OC_SeuilValide()</a>, <a class="el" href="main_8c_source.html#l04235">SetMappingDacLdo()</a>, <a class="el" href="main_8c_source.html#l05637">SetMuxCourantLdo()</a>, <a class="el" href="main_8c_source.html#l05349">SetMuxLdo()</a>, et <a class="el" href="main_8c_source.html#l06290">tc_request()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06290">tc_request()</a>, <a class="el" href="main_8c_source.html#l03849">UART1_TraiterCommande()</a>, et <a class="el" href="main_8c_source.html#l02619">udp_receive_callback()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_gad6e271fe1796ab0b2a698260f0b78533_cgraph.svg" width="1022" height="1456"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="group__grp__comm_gad6e271fe1796ab0b2a698260f0b78533_icgraph.svg" width="760" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Documentation des variables</h2>
+<a id="ga768693a9fdf4a85d1ba355e3c321e075" name="ga768693a9fdf4a85d1ba355e3c321e075"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga768693a9fdf4a85d1ba355e3c321e075">&#9670;&#160;</a></span>findCommandHandler</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(*)(void) findCommandHandler(const char *cmd) </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>cmd</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Recherche par dichotomie (bsearch) le handler associe a une commande exacte dans commandTable[]. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cmd</td><td>Chaine de commande complete telle qu'extraite de la trame (ex : "WHO", "SET_EN_TAB", "SET_VAL_LDO_1PSp"). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valeurs retournées</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">void(*)(void)</td><td>Pointeur vers la fonction handler correspondante, ou NULL si la commande est inconnue. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Exemple d'utilisation</dt><dd><div class="fragment"><div class="line">void (*h)(void) = findCommandHandler(<span class="stringliteral">&quot;WHO&quot;</span>);</div>
+<div class="line"><span class="keywordflow">if</span> (h != NULL) h();</div>
+</div><!-- fragment --> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l05952">5952</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06290">tc_request()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

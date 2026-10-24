@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="classldo__config__csv_1_1_ligne" kind="class" language="Python" prot="public">
+    <compoundname>ldo_config_csv::Ligne</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">dict</basecompoundref>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classldo__config__csv_1_1_ligne_1a5c56adad3474de6563b0501dcb9a96ff" prot="public" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int ldo_config_csv.Ligne::numero_fichier</definition>
+        <argsstring></argsstring>
+        <name>numero_fichier</name>
+        <qualifiedname>ldo_config_csv.Ligne.numero_fichier</qualifiedname>
+        <initializer>=  0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="94" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="94" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Une LDO du CSV (dictionnaire colonne -&gt; texte normalise) + numero de ligne du fichier.</verbatim> </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>dict</label>
+      </node>
+      <node id="1">
+        <label>ldo_config_csv.Ligne</label>
+        <link refid="classldo__config__csv_1_1_ligne"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>dict</label>
+      </node>
+      <node id="1">
+        <label>ldo_config_csv.Ligne</label>
+        <link refid="classldo__config__csv_1_1_ligne"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="92" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="92" bodyend="99"/>
+    <listofallmembers>
+      <member refid="classldo__config__csv_1_1_ligne_1a5c56adad3474de6563b0501dcb9a96ff" prot="public" virt="non-virtual"><scope>ldo_config_csv::Ligne</scope><name>numero_fichier</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

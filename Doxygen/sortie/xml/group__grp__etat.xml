@@ -1,0 +1,409 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="group__grp__etat" kind="group">
+    <compoundname>grp_etat</compoundname>
+    <title>État des LDO, Enable et bleeder</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__grp__etat_1ga70c1db5780542cb5246d6ed350666c5c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void buildStatusResponse</definition>
+        <argsstring>(int idx)</argsstring>
+        <name>buildStatusResponse</name>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Construit la chaine de statut complete d&apos;une LDO et la place dans la variable globale response, pour repondre a une commande &quot;GET_STATUS_LDO_&lt;nom&gt;&quot;. Cas particulier : pour les LDO de type &quot;PL_p&quot; (ex: 1PLp, 2PLp, 3PLp), qui n&apos;ont pas de mesure de courant, le champ Current affiche &quot;NONE&quot; au lieu d&apos;une valeur numerique. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>ATTENTION a l&apos;interpretation du champ OC : ce n&apos;est PAS un defaut absolu, mais la sortie d&apos;un comparateur analogique dont le SEUIL de declenchement est fixe par la valeur &quot;Current&quot; elle-meme (via un pont diviseur pilote par le DAC courant, voir le commentaire au-dessus de la declaration des struct LDO_x_PS_p/n plus haut dans ce fichier). Un meme courant reel peut donc donner OC=0 ou OC=1 selon la valeur de Current configuree au moment de la lecture - toujours lire les deux champs ensemble, jamais OC isolement. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indice de la LDO dans ldoConfig[] (0..17), typiquement obtenu via findLdoIndex(). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Ecrit la chaine formatee dans response, ex : &quot;LDO_1PSp:: En:1, Bl:0, PG:1, OC:0, Voltage:2047, Current:2047,
+        delta_ON:0, delta_OFF:0&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">int<sp/>idx<sp/>=<sp/>findLdoIndex(&quot;1PSp&quot;);</highlight></codeline>
+<codeline><highlight class="normal">if<sp/>(idx<sp/>!=<sp/>-1)<sp/>buildStatusResponse(idx);</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="2764" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="2764" bodyend="2782"/>
+        <references refid="group__grp__etat_1ga70c1db5780542cb5246d6ed350666c5c" compoundref="main_8c" startline="2764" endline="2782">buildStatusResponse</references>
+        <referencedby refid="group__grp__etat_1ga70c1db5780542cb5246d6ed350666c5c" compoundref="main_8c" startline="2764" endline="2782">buildStatusResponse</referencedby>
+        <referencedby refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" compoundref="main_8c" startline="6290" endline="6439">tc_request</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__etat_1ga2198514337355fbc3eed31749b6b70ed" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_SET_EN_LDO_ALL</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_SET_EN_LDO_ALL</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;SET_EN_LDO_ALL&quot;. Parcourt les 18 LDO et active (Enable=1) pour chacune d&apos;entre elles (tableau global EN_LDO[NB_LDO]). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Effet de bord : EN_LDO[0..17] = 1. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;SET_EN_LDO_ALL&quot;<sp/>-&gt;<sp/>h_SET_EN_LDO_ALL();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="2802" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="2802" bodyend="2802"/>
+        <references refid="group__grp__etat_1ga2198514337355fbc3eed31749b6b70ed" compoundref="main_8c" startline="2802" endline="2802">h_SET_EN_LDO_ALL</references>
+        <referencedby refid="group__grp__etat_1ga2198514337355fbc3eed31749b6b70ed" compoundref="main_8c" startline="2802" endline="2802">h_SET_EN_LDO_ALL</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__etat_1ga0484ceea1d95b83765fa039e1343e8fb" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_RST_EN_LDO_ALL</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_RST_EN_LDO_ALL</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;RST_EN_LDO_ALL&quot;. Parcourt les 18 LDO et desactive (Enable=0) pour chacune d&apos;entre elles (tableau global EN_LDO[NB_LDO]). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Effet de bord : EN_LDO[0..17] = 0. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;RST_EN_LDO_ALL&quot;<sp/>-&gt;<sp/>h_RST_EN_LDO_ALL();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="2815" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="2815" bodyend="2815"/>
+        <references refid="group__grp__etat_1ga0484ceea1d95b83765fa039e1343e8fb" compoundref="main_8c" startline="2815" endline="2815">h_RST_EN_LDO_ALL</references>
+        <referencedby refid="group__grp__etat_1ga0484ceea1d95b83765fa039e1343e8fb" compoundref="main_8c" startline="2815" endline="2815">h_RST_EN_LDO_ALL</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__etat_1gad253a15902d4faf160fb7108c2996a53" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_SET_BL_LDO_ALL</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_SET_BL_LDO_ALL</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;SET_BL_LDO_ALL&quot;. Parcourt les 18 LDO et active le bleeder (Bl=1) pour chacune d&apos;entre elles (tableau global BL_LDO[NB_LDO]). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Effet de bord : BL_LDO[0..17] = 1. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;SET_BL_LDO_ALL&quot;<sp/>-&gt;<sp/>h_SET_BL_LDO_ALL();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="2828" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="2828" bodyend="2828"/>
+        <references refid="group__grp__etat_1gad253a15902d4faf160fb7108c2996a53" compoundref="main_8c" startline="2828" endline="2828">h_SET_BL_LDO_ALL</references>
+        <referencedby refid="group__grp__etat_1gad253a15902d4faf160fb7108c2996a53" compoundref="main_8c" startline="2828" endline="2828">h_SET_BL_LDO_ALL</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__etat_1ga9b73881c339d3de0d81a83298d3c74c6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_RST_BL_LDO_ALL</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_RST_BL_LDO_ALL</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;RST_BL_LDO_ALL&quot;. Parcourt les 18 LDO et desactive le bleeder (Bl=0) pour chacune d&apos;entre elles (tableau global BL_LDO[NB_LDO]). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Effet de bord : BL_LDO[0..17] = 0. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;RST_BL_LDO_ALL&quot;<sp/>-&gt;<sp/>h_RST_BL_LDO_ALL();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="2841" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="2841" bodyend="2841"/>
+        <references refid="group__grp__etat_1ga9b73881c339d3de0d81a83298d3c74c6" compoundref="main_8c" startline="2841" endline="2841">h_RST_BL_LDO_ALL</references>
+        <references refid="group__grp__etat_1ga4d73884db55d5370dfdce4dca8d1eddf" compoundref="main_8c" startline="3228" endline="3254">LDO_RelacherBleeder</references>
+        <referencedby refid="group__grp__etat_1ga9b73881c339d3de0d81a83298d3c74c6" compoundref="main_8c" startline="2841" endline="2841">h_RST_BL_LDO_ALL</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__etat_1ga2826c6768d6a04792faf92ff00a74d4e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_SET_EN_TAB</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_SET_EN_TAB</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;SET_EN_TAB&quot;. Renseigne en une seule fois l&apos;etat Enable des 18 LDO a partir d&apos;un tableau texte recu dans la trame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>parametre C. Lit la variable globale last_message, au format attendu &quot;SET_EN_TAB[v0,v1,v2,...,v17]&quot; ou chaque vN vaut 0 ou 1. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Effet de bord : EN_LDO[0..17] mis a jour. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;SET_EN_TAB[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]&quot;</highlight></codeline>
+<codeline><highlight class="normal">-&gt;<sp/>tc_request()<sp/>appelle<sp/>automatiquement<sp/>h_SET_EN_TAB();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="2857" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="2857" bodyend="2869"/>
+        <references refid="group__grp__etat_1ga2826c6768d6a04792faf92ff00a74d4e" compoundref="main_8c" startline="2857" endline="2869">h_SET_EN_TAB</references>
+        <referencedby refid="group__grp__etat_1ga2826c6768d6a04792faf92ff00a74d4e" compoundref="main_8c" startline="2857" endline="2869">h_SET_EN_TAB</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__etat_1ga31a850bfb276c79400e40e6272d933ae" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_SET_BL_TAB</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_SET_BL_TAB</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;SET_BL_TAB&quot;. Renseigne en une seule fois l&apos;etat Bleeder des 18 LDO a partir d&apos;un tableau texte recu dans la trame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>parametre C. Lit la variable globale last_message, au format attendu &quot;SET_BL_TAB[v0,v1,v2,...,v17]&quot; ou chaque vN vaut 0 ou 1. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Effet de bord : BL_LDO[0..17] mis a jour. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;SET_BL_TAB[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]&quot;</highlight></codeline>
+<codeline><highlight class="normal">-&gt;<sp/>tc_request()<sp/>appelle<sp/>automatiquement<sp/>h_SET_BL_TAB();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="2885" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="2885" bodyend="2897"/>
+        <references refid="group__grp__etat_1ga31a850bfb276c79400e40e6272d933ae" compoundref="main_8c" startline="2885" endline="2897">h_SET_BL_TAB</references>
+        <references refid="group__grp__etat_1ga4d73884db55d5370dfdce4dca8d1eddf" compoundref="main_8c" startline="3228" endline="3254">LDO_RelacherBleeder</references>
+        <referencedby refid="group__grp__etat_1ga31a850bfb276c79400e40e6272d933ae" compoundref="main_8c" startline="2885" endline="2897">h_SET_BL_TAB</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__etat_1ga4d73884db55d5370dfdce4dca8d1eddf" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>static uint8_t LDO_RelacherBleeder</definition>
+        <argsstring>(int idx)</argsstring>
+        <name>LDO_RelacherBleeder</name>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Desactive le bleeder d&apos;une LDO (RST_BL_LDO_&lt;nom&gt;, RST_BL_LDO_ALL, SET_BL_TAB avec 0). C&apos;est aussi la procedure de rearmement apres un declenchement OC : le defaut memorise est efface si la broche OC est revenue au repos ; sinon le bleeder reste actif et le defaut aussi. L&apos;EN reste a 0 dans tous les cas : l&apos;operateur le reactive ensuite. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO (0-17). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>= bleeder desactive, aucun defaut ; 1 = bleeder desactive ET defaut OC efface (rearme) ; 2 = refus : la broche OC signale encore une surintensite. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">if<sp/>(LDO_RelacherBleeder(findLdoIndex(&quot;2PSp&quot;))<sp/>==<sp/>2U)<sp/>{<sp/>refuser();<sp/>}</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3228" column="16" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3228" bodyend="3254" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="109" declcolumn="16"/>
+        <references refid="group__grp__etat_1ga4d73884db55d5370dfdce4dca8d1eddf" compoundref="main_8c" startline="3228" endline="3254">LDO_RelacherBleeder</references>
+        <references refid="group__grp__oc_1ga4c720f3df5385977a33b0d91f63df5f9" compoundref="main_8c" startline="3171" endline="3174">OC_LireDefaut</references>
+        <referencedby refid="group__grp__etat_1ga9b73881c339d3de0d81a83298d3c74c6" compoundref="main_8c" startline="2841" endline="2841">h_RST_BL_LDO_ALL</referencedby>
+        <referencedby refid="group__grp__etat_1ga31a850bfb276c79400e40e6272d933ae" compoundref="main_8c" startline="2885" endline="2897">h_SET_BL_TAB</referencedby>
+        <referencedby refid="group__grp__etat_1ga4d73884db55d5370dfdce4dca8d1eddf" compoundref="main_8c" startline="3228" endline="3254">LDO_RelacherBleeder</referencedby>
+        <referencedby refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" compoundref="main_8c" startline="6290" endline="6439">tc_request</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__etat_1gad7a2801e95c498fa0a2f1982238ae732" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void LDO_MettreAJour</definition>
+        <argsstring>(int i)</argsstring>
+        <name>LDO_MettreAJour</name>
+        <param>
+          <type>int</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+<para>Met a jour EN, BLD, OC et PG d&apos;une LDO. Remplace le corps de la boucle for de StartLwipTask(). OC est lu AVANT l&apos;ecriture de EN. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>i</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO (0-17). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">for<sp/>(int<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>NB_LDO;<sp/>i++)<sp/>{<sp/>LDO_MettreAJour(i);<sp/>}</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3307" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3307" bodyend="3361"/>
+        <references refid="struct_l_d_o___config__t_1a636c9637a723e0c7d5de0c74573e0480" compoundref="main_8c" startline="350">LDO_Config_t::bld_coupe_en</references>
+        <references refid="struct_l_d_o___config__t_1a86d4802858f22daa6de74f9451176788" compoundref="main_8c" startline="349">LDO_Config_t::bld_niveau_actif</references>
+        <references refid="struct_l_d_o___config__t_1ae7c0856a698600dac5a3bcf57e9181a7" compoundref="main_8c" startline="337">LDO_Config_t::bld_port</references>
+        <references refid="struct_l_d_o___config__t_1ae9dd3d03509308f932bec9ff533476dc" compoundref="main_8c" startline="335">LDO_Config_t::en_port</references>
+        <references refid="struct_l_d_o___config__t_1a5bd88c21655b6be5ff18e2851cdddeaf" compoundref="main_8c" startline="343">LDO_Config_t::ldo</references>
+        <references refid="group__grp__etat_1gad7a2801e95c498fa0a2f1982238ae732" compoundref="main_8c" startline="3307" endline="3361">LDO_MettreAJour</references>
+        <references refid="group__grp__oc_1ga5a3191b846544a7dced3ea094018f361" compoundref="main_8c" startline="3104" endline="3107">OC_EstActive</references>
+        <references refid="group__grp__oc_1gab7b892d9b93ae98c0860c1569fb10702" compoundref="main_8c" startline="3267" endline="3271">OC_EstArme</references>
+        <references refid="group__grp__oc_1ga4c720f3df5385977a33b0d91f63df5f9" compoundref="main_8c" startline="3171" endline="3174">OC_LireDefaut</references>
+        <references refid="group__grp__oc_1gafc2057d31d2abd2b3389f0e6ce4cc3a2" compoundref="main_8c" startline="3120" endline="3128">OC_SeuilValide</references>
+        <references refid="group__grp__oc_1gad5ee0d7de4089f81d1b5309a4919b764" compoundref="main_8c" startline="3187" endline="3210">OC_Verrouiller</references>
+        <references refid="struct_l_d_o___config__t_1a7730ca2fec0b799905356ab0d30ef0c9" compoundref="main_8c" startline="341">LDO_Config_t::pg_port</references>
+        <referencedby refid="group__grp__etat_1gad7a2801e95c498fa0a2f1982238ae732" compoundref="main_8c" startline="3307" endline="3361">LDO_MettreAJour</referencedby>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Mise à jour cyclique des GPIO EN / BLD / OC / PG et commandes d&apos;activation. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

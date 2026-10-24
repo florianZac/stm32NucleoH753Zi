@@ -1,0 +1,7 @@
+<map id="MemoriserConfigDac" name="MemoriserConfigDac">
+<area shape="rect" id="Node000001" title="Memorise la nouvelle configuration attendue apres un SET_DAC_VREF/ PD/GAIN reussi,..." alt="" coords="5,29,150,56"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="47,29,42,21,46,11,58,5,78,3,98,5,111,14,105,14,97,10,77,8,60,10,50,15,48,20,53,29"/>
+<area shape="rect" id="Node000002" href="$group__grp__dac.html#gab992619e0a04a6fbb9a6a97c2e284c65" title="Index d&#39;une puce de I2C1 dans dacs_i2c1_adresses[]." alt="" coords="198,29,303,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="150,40,185,43,179,43,150,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="220,28,215,21,219,11,231,5,250,3,271,5,284,15,278,14,269,10,250,8,232,10,223,15,221,20,225,30"/>
+</map>

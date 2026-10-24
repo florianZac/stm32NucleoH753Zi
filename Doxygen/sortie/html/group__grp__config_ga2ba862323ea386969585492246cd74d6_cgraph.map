@@ -1,0 +1,19 @@
+<map id="LDO_Diagnostic" name="LDO_Diagnostic">
+<area shape="rect" id="Node000001" title="Commande &quot;GET_DIAG_LDO_&lt;nom&gt;&quot; : etat REEL des broches d&#39;une LDO (niveau lu sur la broche,..." alt="" coords="5,179,123,205"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="32,179,27,170,31,160,44,154,64,152,86,155,99,162,94,164,84,160,64,157,45,159,35,164,33,169,38,178"/>
+<area shape="rect" id="Node000002" href="$group__grp__dac.html#gab992619e0a04a6fbb9a6a97c2e284c65" title="Index d&#39;une puce de I2C1 dans dacs_i2c1_adresses[]." alt="" coords="194,29,299,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,177,109,123,137,93,169,66,181,61,178,65,172,70,141,96,113,127,76,180"/>
+<area shape="rect" id="Node000003" href="$group__grp__config.html#ga12b4c9909bec1ea781ab3e736da3b356" title="Mode d&#39;une broche GPIO lu dans le registre MODER." alt="" coords="199,104,294,131"/>
+<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="91,176,170,140,190,135,185,138,172,145,94,180"/>
+<area shape="rect" id="Node000004" href="$group__grp__oc.html#gab7b892d9b93ae98c0860c1569fb10702" title="Indique si la surveillance est armee : EN actif depuis au moins ldoConfig[idx].oc...." alt="" coords="197,179,296,205"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="122,189,184,190,179,194,124,195"/>
+<area shape="rect" id="Node000005" href="$group__grp__oc.html#ga4c720f3df5385977a33b0d91f63df5f9" title="Lit la broche OC de la LDO et indique si elle signale une surintensite." alt="" coords="192,253,300,280"/>
+<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="99,203,200,246,196,249,98,209"/>
+<area shape="rect" id="Node000006" href="$group__grp__comm.html#gab9b5dfc109e472981cbbb7867d1b7f92" title="Envoie une chaine de caracteres sur USART1 (PB6/PB7, via un adaptateur USB&#45;UART externe),..." alt="" coords="171,328,322,355"/>
+<area shape="poly" id="edge10_Node000001_Node000006" title=" " alt="" coords="79,203,120,244,172,290,212,319,206,319,169,294,117,248,78,208"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="215,29,210,21,213,11,226,5,246,3,268,5,281,13,276,15,267,10,246,8,227,10,217,15,215,20,220,29"/>
+<area shape="poly" id="edge5_Node000003_Node000003" title=" " alt="" coords="215,103,210,95,213,86,226,79,246,77,268,80,281,88,276,89,267,85,246,83,227,85,217,89,215,95,220,104"/>
+<area shape="poly" id="edge7_Node000004_Node000004" title=" " alt="" coords="215,178,210,170,213,160,226,154,246,152,268,155,281,163,276,164,267,160,246,157,227,159,217,164,215,169,220,179"/>
+<area shape="poly" id="edge9_Node000005_Node000005" title=" " alt="" coords="215,252,210,245,213,235,226,229,246,227,268,229,281,238,276,238,267,234,246,232,227,234,217,239,215,244,220,254"/>
+<area shape="poly" id="edge11_Node000006_Node000006" title=" " alt="" coords="215,326,210,319,213,310,226,303,246,301,268,304,281,313,276,312,267,309,246,307,227,309,217,313,215,319,220,329"/>
+</map>

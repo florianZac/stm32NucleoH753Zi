@@ -1,0 +1,475 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="group__grp__eeprom" kind="group">
+    <compoundname>grp_eeprom</compoundname>
+    <title>Mémoire EEPROM des DAC et potentiomètre</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__grp__eeprom_1ga0fdcf8780e2127569c1e1a76e9518c5a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void DAC_DemanderSauvegarde</definition>
+        <argsstring>(int idx, uint8_t immediat)</argsstring>
+        <name>DAC_DemanderSauvegarde</name>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>immediat</declname>
+        </param>
+        <briefdescription>
+<para>Demande l&apos;ecriture en EEPROM du MCP47FEB28 des codes DAC (tension et seuil de courant) d&apos;une LDO declaree MEM_EEPROM dans ldoConfig[]. Sans effet pour une LDO MEM_RAM. N&apos;ecrit rien sur le bus : la boucle de StartLwipTask() fait l&apos;ecriture (DAC_TraiterSauvegardes()). Appelable depuis l&apos;interruption OC et depuis le contexte lwIP. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO (0-17). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>immediat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>1 = au prochain tour de boucle (declenchement OC), 0 = apres DAC_EEPROM_DELAI_MS sans nouvelle valeur (SET_VAL). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">DAC_DemanderSauvegarde(findLdoIndex(&quot;2PSp&quot;),<sp/>0U);<sp/><sp/><sp/>//<sp/>apres<sp/>SET_VAL_LDO_2PSp</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3147" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3147" bodyend="3159"/>
+        <references refid="group__grp__eeprom_1ga0fdcf8780e2127569c1e1a76e9518c5a" compoundref="main_8c" startline="3147" endline="3159">DAC_DemanderSauvegarde</references>
+        <references refid="main_8c_1ab91ba2025bc116af02237c8cd912d23b" compoundref="main_8c" startline="440">nv_a_sauver</references>
+        <references refid="main_8c_1a1acf61734b798ac869d4d7fe0ced5d0a" compoundref="main_8c" startline="441">nv_immediat</references>
+        <references refid="main_8c_1aa0fa904d4cb16a94c2afe4e638237ca6" compoundref="main_8c" startline="442">nv_tick_demande</references>
+        <referencedby refid="group__grp__eeprom_1ga0fdcf8780e2127569c1e1a76e9518c5a" compoundref="main_8c" startline="3147" endline="3159">DAC_DemanderSauvegarde</referencedby>
+        <referencedby refid="group__grp__eeprom_1gaea23265d4fdedf9ac60d1c4afb886e40" compoundref="main_8c" startline="4822" endline="4885">DAC_RestaurerMemoire</referencedby>
+        <referencedby refid="group__grp__eeprom_1ga5f9ce30ec25412cc3efbe118447a5a11" compoundref="main_8c" startline="4755" endline="4804">DAC_TraiterSauvegardes</referencedby>
+        <referencedby refid="group__grp__dac_1ga1b7ca6a4fce7e0d525508dd4951a48f0" compoundref="main_8c" startline="4109" endline="4154">h_SET_CURRENT_LDO_GENERIQUE</referencedby>
+        <referencedby refid="group__grp__dac_1gadcbefabbab52750a575b5dac7150534e" compoundref="main_8c" startline="4084" endline="4093">h_SET_VAL_LDO_GENERIQUE</referencedby>
+        <referencedby refid="group__grp__oc_1gad5ee0d7de4089f81d1b5309a4919b764" compoundref="main_8c" startline="3187" endline="3210">OC_Verrouiller</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__eeprom_1ga411fdeb5f1d7a54dc6d8ecf893d7d0a9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="struct_dac_puce__t" kindref="compound">DacPuce_t</ref> *</type>
+        <definition>static const DacPuce_t * DAC_PuceDeCible</definition>
+        <argsstring>(CibleDac_t cible)</argsstring>
+        <name>DAC_PuceDeCible</name>
+        <param>
+          <type><ref refid="main_8c_1a75e57bba50363a40a374df0b941bfd58" kindref="member">CibleDac_t</ref></type>
+          <declname>cible</declname>
+        </param>
+        <briefdescription>
+<para>Puce DAC (ligne de tableDac[]) correspondant a une cible logique. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cible</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>CIBLE_DAC1 ... CIBLE_DAC5. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Pointeur</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vers la ligne de tableDac[], ou NULL (CIBLE_AUCUNE/inconnue). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">const<sp/>DacPuce_t<sp/>*p<sp/>=<sp/>DAC_PuceDeCible(CIBLE_DAC1);<sp/><sp/><sp/>//<sp/>I2C1,<sp/>0xC0</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="4624" column="24" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="4624" bodyend="4634"/>
+        <references refid="group__grp__eeprom_1ga411fdeb5f1d7a54dc6d8ecf893d7d0a9" compoundref="main_8c" startline="4624" endline="4634">DAC_PuceDeCible</references>
+        <referencedby refid="group__grp__eeprom_1ga538f60d46cf0ac04119fa65a989274be" compoundref="main_8c" startline="4902" endline="4928">DAC_ConfigurerSeuilsPotentiometre</referencedby>
+        <referencedby refid="group__grp__eeprom_1ga461f9e8b58bc45203018e3132c71b989" compoundref="main_8c" startline="4712" endline="4739">DAC_GarderEnEeprom</referencedby>
+        <referencedby refid="group__grp__eeprom_1ga411fdeb5f1d7a54dc6d8ecf893d7d0a9" compoundref="main_8c" startline="4624" endline="4634">DAC_PuceDeCible</referencedby>
+        <referencedby refid="group__grp__eeprom_1gaea23265d4fdedf9ac60d1c4afb886e40" compoundref="main_8c" startline="4822" endline="4885">DAC_RestaurerMemoire</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__eeprom_1ga9038fec6d17da09fb1543c560d3e7965" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>static uint8_t DAC_PuceJoignable</definition>
+        <argsstring>(const DacPuce_t *puce)</argsstring>
+        <name>DAC_PuceJoignable</name>
+        <param>
+          <type>const <ref refid="struct_dac_puce__t" kindref="compound">DacPuce_t</ref> *</type>
+          <declname>puce</declname>
+        </param>
+        <briefdescription>
+<para>Indique si une puce DAC est joignable maintenant : bus I2C1, ou I2C2 active (i2c2_actif), et pas en cours de balayage (BALAYER_DAC). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>puce</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ligne de tableDac[] (peut etre NULL). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>si la puce peut etre lue/ecrite, 0 sinon. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">if<sp/>(DAC_PuceJoignable(DAC_PuceDeCible(CIBLE_DAC1))<sp/>!=<sp/>0U)<sp/>{<sp/>...<sp/>}</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="4647" column="16" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="4647" bodyend="4658"/>
+        <references refid="struct_dac_puce__t_1a5282fbac84522f70703e90c87793c301" compoundref="main_8c" startline="296">DacPuce_t::adresse_hal</references>
+        <references refid="group__grp__eeprom_1ga9038fec6d17da09fb1543c560d3e7965" compoundref="main_8c" startline="4647" endline="4658">DAC_PuceJoignable</references>
+        <references refid="struct_dac_puce__t_1ac5991a30280e6d3eccfa12cb476e69a1" compoundref="main_8c" startline="295">DacPuce_t::hi2c</references>
+        <referencedby refid="group__grp__eeprom_1ga461f9e8b58bc45203018e3132c71b989" compoundref="main_8c" startline="4712" endline="4739">DAC_GarderEnEeprom</referencedby>
+        <referencedby refid="group__grp__eeprom_1ga9038fec6d17da09fb1543c560d3e7965" compoundref="main_8c" startline="4647" endline="4658">DAC_PuceJoignable</referencedby>
+        <referencedby refid="group__grp__eeprom_1gaea23265d4fdedf9ac60d1c4afb886e40" compoundref="main_8c" startline="4822" endline="4885">DAC_RestaurerMemoire</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__eeprom_1ga1de03c1c4ce3c3d63b079d5bce9c8e74" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>HAL_StatusTypeDef</type>
+        <definition>static HAL_StatusTypeDef EcrireDACEeprom</definition>
+        <argsstring>(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t voie, uint16_t valeur)</argsstring>
+        <name>EcrireDACEeprom</name>
+        <param>
+          <type>I2C_HandleTypeDef *</type>
+          <declname>hi2c</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>adresse_hal</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>voie</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>valeur</declname>
+        </param>
+        <briefdescription>
+<para>Ecrit le code de demarrage (EEPROM, registre non volatil 10h + voie) d&apos;une voie du MCP47FEB28. Commande &quot;Write&quot; simple (3 octets), seul mode autorise vers la memoire non volatile. La sortie analogique ne change pas (seul le registre volatil 00h-07h la pilote). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hi2c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>&amp;hi2c1 ou &amp;hi2c2. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>adresse_hal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Adresse 7 bits decalee (0xC0, 0xC2, 0xC4). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>voie</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Voie 0-7 ; toute autre valeur est refusee. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>valeur</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Code 12 bits (0-4095). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>HAL_StatusTypeDef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>de la transmission (HAL_ERROR si voie &gt; 7). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">EcrireDACEeprom(&amp;hi2c1,<sp/>0xC0,<sp/>5,<sp/>1056);<sp/><sp/><sp/>//<sp/>seuil<sp/>2PSp<sp/>garde<sp/>a<sp/>la<sp/>coupure</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="4676" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="4676" bodyend="4693"/>
+        <references refid="group__grp__eeprom_1ga1de03c1c4ce3c3d63b079d5bce9c8e74" compoundref="main_8c" startline="4676" endline="4693">EcrireDACEeprom</references>
+        <references refid="group__grp__i2c_1ga5cb1cd70b1dd76a8aadb2bccb2837d2f" compoundref="main_8c" startline="728" endline="731">ResoudreMutexI2C</references>
+        <referencedby refid="group__grp__eeprom_1ga461f9e8b58bc45203018e3132c71b989" compoundref="main_8c" startline="4712" endline="4739">DAC_GarderEnEeprom</referencedby>
+        <referencedby refid="group__grp__eeprom_1ga1de03c1c4ce3c3d63b079d5bce9c8e74" compoundref="main_8c" startline="4676" endline="4693">EcrireDACEeprom</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__eeprom_1ga461f9e8b58bc45203018e3132c71b989" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>static uint8_t DAC_GarderEnEeprom</definition>
+        <argsstring>(CibleDac_t cible, uint8_t voie, uint16_t valeur, uint16_t *lu)</argsstring>
+        <name>DAC_GarderEnEeprom</name>
+        <param>
+          <type><ref refid="main_8c_1a75e57bba50363a40a374df0b941bfd58" kindref="member">CibleDac_t</ref></type>
+          <declname>cible</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>voie</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>valeur</declname>
+        </param>
+        <param>
+          <type>uint16_t *</type>
+          <declname>lu</declname>
+        </param>
+        <briefdescription>
+<para>Garde un code dans l&apos;EEPROM d&apos;une voie : relit la valeur en EEPROM, n&apos;ecrit que si elle differe, attend DAC_EEPROM_TWC_MS et relit pour controler. A n&apos;appeler que depuis la boucle de StartLwipTask(). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cible</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Puce (CIBLE_DAC1 ... CIBLE_DAC5). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>voie</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Voie 0-7. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>valeur</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Code 12 bits a garder. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Recoit le code relu en EEPROM apres l&apos;operation (peut etre NULL). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>= code en EEPROM conforme, 1 = puce non joignable (ignore), 2 = erreur I2C ou relecture differente. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">uint16_t<sp/>lu;</highlight></codeline>
+<codeline><highlight class="normal">if<sp/>(DAC_GarderEnEeprom(CIBLE_DAC1,<sp/>4,<sp/>VAL_LDO[2],<sp/>&amp;lu)<sp/>==<sp/>2U)<sp/>{<sp/>...<sp/>}</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="4712" column="16" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="4712" bodyend="4739"/>
+        <references refid="struct_dac_puce__t_1a5282fbac84522f70703e90c87793c301" compoundref="main_8c" startline="296">DacPuce_t::adresse_hal</references>
+        <references refid="group__grp__eeprom_1ga461f9e8b58bc45203018e3132c71b989" compoundref="main_8c" startline="4712" endline="4739">DAC_GarderEnEeprom</references>
+        <references refid="group__grp__eeprom_1ga411fdeb5f1d7a54dc6d8ecf893d7d0a9" compoundref="main_8c" startline="4624" endline="4634">DAC_PuceDeCible</references>
+        <references refid="group__grp__eeprom_1ga9038fec6d17da09fb1543c560d3e7965" compoundref="main_8c" startline="4647" endline="4658">DAC_PuceJoignable</references>
+        <references refid="group__grp__eeprom_1ga1de03c1c4ce3c3d63b079d5bce9c8e74" compoundref="main_8c" startline="4676" endline="4693">EcrireDACEeprom</references>
+        <references refid="struct_dac_puce__t_1ac5991a30280e6d3eccfa12cb476e69a1" compoundref="main_8c" startline="295">DacPuce_t::hi2c</references>
+        <references refid="group__grp__dac_1gae1030d1ce005f7deac0f86610f9df4af" compoundref="main_8c" startline="4579" endline="4600">LireRegistreValeurDAC</references>
+        <referencedby refid="group__grp__eeprom_1ga461f9e8b58bc45203018e3132c71b989" compoundref="main_8c" startline="4712" endline="4739">DAC_GarderEnEeprom</referencedby>
+        <referencedby refid="group__grp__eeprom_1ga5f9ce30ec25412cc3efbe118447a5a11" compoundref="main_8c" startline="4755" endline="4804">DAC_TraiterSauvegardes</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__eeprom_1ga5f9ce30ec25412cc3efbe118447a5a11" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void DAC_TraiterSauvegardes</definition>
+        <argsstring>(void)</argsstring>
+        <name>DAC_TraiterSauvegardes</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Traite AU PLUS UNE demande de sauvegarde EEPROM par appel (une LDO : voie tension puis voie seuil). Une demande &quot;differee&quot; (SET_VAL, SET_CURRENT) n&apos;est traitee qu&apos;apres DAC_EEPROM_DELAI_MS sans nouvelle valeur ; une demande &quot;immediate&quot; (declenchement OC) au tour suivant. En cas d&apos;echec, nouvel essai, jusqu&apos;a DAC_EEPROM_ESSAIS_MAX. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ligne USART1 a chaque ecriture : &quot;DAC_NV:2PSp:V=860:I=1056:OK&quot; (ou &quot;:ERREUR_n&quot;). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">DAC_TraiterSauvegardes();<sp/><sp/><sp/>//<sp/>dans<sp/>la<sp/>boucle<sp/>for(;;)<sp/>de<sp/>StartLwipTask()</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="4755" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="4755" bodyend="4804"/>
+        <references refid="struct_l_d_o___config__t_1ab1b433037254fabc41638d891ec6499c" compoundref="main_8c" startline="347">LDO_Config_t::canal_courant</references>
+        <references refid="struct_l_d_o___config__t_1a363ddabe5e06a850e79f08385c46207a" compoundref="main_8c" startline="346">LDO_Config_t::dac_courant</references>
+        <references refid="group__grp__eeprom_1ga0fdcf8780e2127569c1e1a76e9518c5a" compoundref="main_8c" startline="3147" endline="3159">DAC_DemanderSauvegarde</references>
+        <references refid="group__grp__eeprom_1ga461f9e8b58bc45203018e3132c71b989" compoundref="main_8c" startline="4712" endline="4739">DAC_GarderEnEeprom</references>
+        <references refid="group__grp__eeprom_1ga5f9ce30ec25412cc3efbe118447a5a11" compoundref="main_8c" startline="4755" endline="4804">DAC_TraiterSauvegardes</references>
+        <references refid="struct_l_d_o___config__t_1a758e71184ba8cf7c7469b54870bd0dc7" compoundref="main_8c" startline="334">LDO_Config_t::name</references>
+        <references refid="main_8c_1ab91ba2025bc116af02237c8cd912d23b" compoundref="main_8c" startline="440">nv_a_sauver</references>
+        <references refid="main_8c_1a84eb6014508b64ca7409c685af6cb3dc" compoundref="main_8c" startline="443">nv_essais</references>
+        <references refid="main_8c_1a1acf61734b798ac869d4d7fe0ced5d0a" compoundref="main_8c" startline="441">nv_immediat</references>
+        <references refid="main_8c_1aa0fa904d4cb16a94c2afe4e638237ca6" compoundref="main_8c" startline="442">nv_tick_demande</references>
+        <references refid="group__grp__oc_1ga7851b235d1d1f7564644d659587b3ba2" compoundref="main_8c" startline="3086" endline="3089">OC_EstSurveillee</references>
+        <references refid="struct_l_d_o___config__t_1a887afe1ed570ca20840e0497730798e8" compoundref="main_8c" startline="354">LDO_Config_t::seuil_par_pot</references>
+        <references refid="group__grp__comm_1gab9b5dfc109e472981cbbb7867d1b7f92" compoundref="main_8c" startline="1803" endline="1816">UART1_EnvoyerTexte</references>
+        <referencedby refid="group__grp__eeprom_1ga5f9ce30ec25412cc3efbe118447a5a11" compoundref="main_8c" startline="4755" endline="4804">DAC_TraiterSauvegardes</referencedby>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__eeprom_1gaea23265d4fdedf9ac60d1c4afb886e40" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void DAC_RestaurerMemoire</definition>
+        <argsstring>(void)</argsstring>
+        <name>DAC_RestaurerMemoire</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Au demarrage, recharge depuis l&apos;EEPROM du MCP47FEB28 les codes de tension et de seuil des LDO declarees MEM_EEPROM, dans VAL_LDO[], CURRENT_LDO[] et les trames DACx_DEF (la boucle les reemet ensuite). Un seuil lu hors de [seuil_min, seuil_max] est remplace par le seuil par defaut, qui est alors ecrit en EEPROM. L&apos;EN reste a 0. A appeler apres CreerMutexI2C(), OC_InitialiserSeuilsDefaut() et InitialiserConfigDacsI2C1(), avant udpServer_init(). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Une ligne USART1 par LDO : &quot;DAC_NV_INIT:2PSp:V=860:I=1056:OK&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">InitialiserConfigDacsI2C1();</highlight></codeline>
+<codeline><highlight class="normal">DAC_RestaurerMemoire();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="4822" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="4822" bodyend="4885"/>
+        <references refid="struct_dac_puce__t_1a5282fbac84522f70703e90c87793c301" compoundref="main_8c" startline="296">DacPuce_t::adresse_hal</references>
+        <references refid="struct_l_d_o___config__t_1ab1b433037254fabc41638d891ec6499c" compoundref="main_8c" startline="347">LDO_Config_t::canal_courant</references>
+        <references refid="struct_l_d_o___config__t_1a363ddabe5e06a850e79f08385c46207a" compoundref="main_8c" startline="346">LDO_Config_t::dac_courant</references>
+        <references refid="group__grp__eeprom_1ga0fdcf8780e2127569c1e1a76e9518c5a" compoundref="main_8c" startline="3147" endline="3159">DAC_DemanderSauvegarde</references>
+        <references refid="group__grp__eeprom_1ga411fdeb5f1d7a54dc6d8ecf893d7d0a9" compoundref="main_8c" startline="4624" endline="4634">DAC_PuceDeCible</references>
+        <references refid="group__grp__eeprom_1ga9038fec6d17da09fb1543c560d3e7965" compoundref="main_8c" startline="4647" endline="4658">DAC_PuceJoignable</references>
+        <references refid="group__grp__eeprom_1gaea23265d4fdedf9ac60d1c4afb886e40" compoundref="main_8c" startline="4822" endline="4885">DAC_RestaurerMemoire</references>
+        <references refid="group__grp__dac_1ga4469a4eb236eb4a995abab435c43c644" compoundref="main_8c" startline="4011" endline="4022">EcrireValeurDac</references>
+        <references refid="struct_dac_puce__t_1ac5991a30280e6d3eccfa12cb476e69a1" compoundref="main_8c" startline="295">DacPuce_t::hi2c</references>
+        <references refid="struct_l_d_o___config__t_1a5bd88c21655b6be5ff18e2851cdddeaf" compoundref="main_8c" startline="343">LDO_Config_t::ldo</references>
+        <references refid="group__grp__dac_1gae1030d1ce005f7deac0f86610f9df4af" compoundref="main_8c" startline="4579" endline="4600">LireRegistreValeurDAC</references>
+        <references refid="struct_l_d_o___config__t_1a4090d7bdf9494c405adff20231e59dd6" compoundref="main_8c" startline="355">LDO_Config_t::memoire_dac</references>
+        <references refid="struct_l_d_o___config__t_1a758e71184ba8cf7c7469b54870bd0dc7" compoundref="main_8c" startline="334">LDO_Config_t::name</references>
+        <references refid="struct_l_d_o___config__t_1a59768e079b3397e54037a129ef4f9c2d" compoundref="main_8c" startline="348">LDO_Config_t::oc</references>
+        <references refid="group__grp__oc_1ga7851b235d1d1f7564644d659587b3ba2" compoundref="main_8c" startline="3086" endline="3089">OC_EstSurveillee</references>
+        <references refid="struct_oc_config__t_1a98afa44ff3ce1b9dea487d408539ec0e" compoundref="main_8c" startline="324">OcConfig_t::seuil_min</references>
+        <references refid="struct_l_d_o___config__t_1a887afe1ed570ca20840e0497730798e8" compoundref="main_8c" startline="354">LDO_Config_t::seuil_par_pot</references>
+        <references refid="group__grp__comm_1gab9b5dfc109e472981cbbb7867d1b7f92" compoundref="main_8c" startline="1803" endline="1816">UART1_EnvoyerTexte</references>
+        <referencedby refid="group__grp__eeprom_1gaea23265d4fdedf9ac60d1c4afb886e40" compoundref="main_8c" startline="4822" endline="4885">DAC_RestaurerMemoire</referencedby>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__eeprom_1ga538f60d46cf0ac04119fa65a989274be" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void DAC_ConfigurerSeuilsPotentiometre</definition>
+        <argsstring>(void)</argsstring>
+        <name>DAC_ConfigurerSeuilsPotentiometre</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Mode potentiometre (LDO dont la colonne &quot;seuil&quot; vaut SEUIL_POT) : met la voie du DAC de courant en Power-Down 11 (sortie ouverte) pour qu&apos;elle ne pilote plus IN- du LM211, et memorise cette configuration pour que SurveillerConfigDacsI2C1() la conserve. Sans effet si aucune LDO n&apos;est en SEUIL_POT (cas actuel). Puces de I2C1 uniquement. Codage PDnB:PDnA = 11 a confirmer (DS20006368A, registre 4-3). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ligne USART1 : &quot;DAC_PD_POT:2PSp:0xC0:PD=0x0C00:OK&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">InitialiserConfigDacsI2C1();</highlight></codeline>
+<codeline><highlight class="normal">DAC_ConfigurerSeuilsPotentiometre();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="4902" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="4902" bodyend="4928"/>
+        <references refid="struct_dac_puce__t_1a5282fbac84522f70703e90c87793c301" compoundref="main_8c" startline="296">DacPuce_t::adresse_hal</references>
+        <references refid="struct_l_d_o___config__t_1ab1b433037254fabc41638d891ec6499c" compoundref="main_8c" startline="347">LDO_Config_t::canal_courant</references>
+        <references refid="group__grp__eeprom_1ga538f60d46cf0ac04119fa65a989274be" compoundref="main_8c" startline="4902" endline="4928">DAC_ConfigurerSeuilsPotentiometre</references>
+        <references refid="struct_l_d_o___config__t_1a363ddabe5e06a850e79f08385c46207a" compoundref="main_8c" startline="346">LDO_Config_t::dac_courant</references>
+        <references refid="group__grp__eeprom_1ga411fdeb5f1d7a54dc6d8ecf893d7d0a9" compoundref="main_8c" startline="4624" endline="4634">DAC_PuceDeCible</references>
+        <references refid="group__grp__dac_1ga64f4ecd7d147a039d045da6b64975451" compoundref="main_8c" startline="1068" endline="1086">EcrireRegistreConfigDAC</references>
+        <references refid="struct_dac_puce__t_1ac5991a30280e6d3eccfa12cb476e69a1" compoundref="main_8c" startline="295">DacPuce_t::hi2c</references>
+        <references refid="group__grp__dac_1gab992619e0a04a6fbb9a6a97c2e284c65" compoundref="main_8c" startline="1175" endline="1189">IndexDacI2C1</references>
+        <references refid="group__grp__dac_1ga657c4f07f159cff86dc8a577e46d0ddb" compoundref="main_8c" startline="1205" endline="1213">MemoriserConfigDac</references>
+        <references refid="struct_l_d_o___config__t_1a758e71184ba8cf7c7469b54870bd0dc7" compoundref="main_8c" startline="334">LDO_Config_t::name</references>
+        <references refid="group__grp__oc_1ga7851b235d1d1f7564644d659587b3ba2" compoundref="main_8c" startline="3086" endline="3089">OC_EstSurveillee</references>
+        <references refid="struct_l_d_o___config__t_1a887afe1ed570ca20840e0497730798e8" compoundref="main_8c" startline="354">LDO_Config_t::seuil_par_pot</references>
+        <references refid="group__grp__comm_1gab9b5dfc109e472981cbbb7867d1b7f92" compoundref="main_8c" startline="1803" endline="1816">UART1_EnvoyerTexte</references>
+        <referencedby refid="group__grp__eeprom_1ga538f60d46cf0ac04119fa65a989274be" compoundref="main_8c" startline="4902" endline="4928">DAC_ConfigurerSeuilsPotentiometre</referencedby>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Sauvegarde différée et restauration des codes DAC dans l&apos;EEPROM du MCP47FEB28. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

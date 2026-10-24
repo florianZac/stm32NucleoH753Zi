@@ -1,0 +1,606 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="group__grp__i2c" kind="group">
+    <compoundname>grp_i2c</compoundname>
+    <title>Scan et diagnostic I2C</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__grp__i2c_1ga64c71e2587dfe3b42d37bd356dd021a0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void I2C1_BusRecovery</definition>
+        <argsstring>(void)</argsstring>
+        <name>I2C1_BusRecovery</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Sequence de recuperation du bus I2C1 (PB8=SCL, PB9=SDA) en cas de bus bloque (SDA maintenu bas par un esclave en plein transfert interrompu). Reconfigure temporairement les broches en GPIO, genere jusqu&apos;a 9 fronts d&apos;horloge pour forcer l&apos;esclave a liberer SDA, emet une condition STOP manuelle, puis restaure la configuration I2C normale. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Appeler<sp/>UNE<sp/>FOIS<sp/>juste<sp/>avant<sp/>MX_I2C1_Init()<sp/>dans<sp/>main(),</highlight></codeline>
+<codeline><highlight class="normal">si<sp/>HAL_I2C_IsDeviceReady()<sp/>renvoie<sp/>systematiquement<sp/>HAL_BUSY.</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="467" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="467" bodyend="519"/>
+        <references refid="group__grp__i2c_1ga64c71e2587dfe3b42d37bd356dd021a0" compoundref="main_8c" startline="467" endline="519">I2C1_BusRecovery</references>
+        <referencedby refid="group__grp__i2c_1ga64c71e2587dfe3b42d37bd356dd021a0" compoundref="main_8c" startline="467" endline="519">I2C1_BusRecovery</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__i2c_1ga2f7d3957d1b8de76916916f379898287" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void I2C_BusRecovery</definition>
+        <argsstring>(GPIO_TypeDef *port, uint16_t scl_pin, uint16_t sda_pin, uint8_t af_i2c)</argsstring>
+        <name>I2C_BusRecovery</name>
+        <param>
+          <type>GPIO_TypeDef *</type>
+          <declname>port</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>scl_pin</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>sda_pin</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>af_i2c</declname>
+        </param>
+        <briefdescription>
+<para>Version generique de I2C1_BusRecovery() pour n&apos;importe quel bus : passe SCL/SDA en sorties open-drain, envoie jusqu&apos;a 9 fronts d&apos;horloge pour qu&apos;un esclave bloque relache SDA, genere un STOP manuel, puis remet les broches en fonction alternative I2C. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Port GPIO des deux broches (ex : GPIOB). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>scl_pin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Broche SCL (ex : GPIO_PIN_10 pour I2C2). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sda_pin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Broche SDA (ex : GPIO_PIN_11 pour I2C2). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>af_i2c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Fonction alternative I2C a restaurer (ex : GPIO_AF4_I2C2). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">//<sp/>Bus<sp/>I2C2<sp/>bloque<sp/>(SDA<sp/>tenue<sp/>a<sp/>0<sp/>par<sp/>un<sp/>esclave)<sp/>:</highlight></codeline>
+<codeline><highlight class="normal">I2C_BusRecovery(GPIOB,<sp/>GPIO_PIN_10,<sp/>GPIO_PIN_11,<sp/>GPIO_AF4_I2C2);</highlight></codeline>
+<codeline><highlight class="normal">MX_I2C2_Init();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="539" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="539" bodyend="573"/>
+        <references refid="group__grp__i2c_1ga2f7d3957d1b8de76916916f379898287" compoundref="main_8c" startline="539" endline="573">I2C_BusRecovery</references>
+        <referencedby refid="group__grp__i2c_1ga2f7d3957d1b8de76916916f379898287" compoundref="main_8c" startline="539" endline="573">I2C_BusRecovery</referencedby>
+        <referencedby refid="group__grp__cubemx_1ga840291bc02cba5474a4cb46a9b9566fe" compoundref="main_8c" startline="1824" endline="1932">main</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__i2c_1ga9c1e98ecaf3c304b9045320209882bf7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void CreerMutexI2C</definition>
+        <argsstring>(void)</argsstring>
+        <name>CreerMutexI2C</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Cree les deux mutex I2C (un par bus). A appeler UNE SEULE FOIS, avant que quoi que ce soit puisse emettre sur hi2c1/ hi2c2 (donc avant udpServer_init() dans StartLwipTask() et avant la premiere iteration de la boucle for(;;)). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Remplit i2c1_mutex_id/i2c2_mutex_id. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">//<sp/>Debut<sp/>de<sp/>StartLwipTask(),<sp/>avant<sp/>udpServer_init()<sp/>:</highlight></codeline>
+<codeline><highlight class="normal">CreerMutexI2C();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="688" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="688" bodyend="692"/>
+        <references refid="group__grp__i2c_1ga9c1e98ecaf3c304b9045320209882bf7" compoundref="main_8c" startline="688" endline="692">CreerMutexI2C</references>
+        <referencedby refid="group__grp__i2c_1ga9c1e98ecaf3c304b9045320209882bf7" compoundref="main_8c" startline="688" endline="692">CreerMutexI2C</referencedby>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__i2c_1ga5cb1cd70b1dd76a8aadb2bccb2837d2f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>osMutexId</type>
+        <definition>static osMutexId ResoudreMutexI2C</definition>
+        <argsstring>(I2C_HandleTypeDef *hi2c)</argsstring>
+        <name>ResoudreMutexI2C</name>
+        <param>
+          <type>I2C_HandleTypeDef *</type>
+          <declname>hi2c</declname>
+        </param>
+        <briefdescription>
+<para>Retourne le mutex correspondant au bus d&apos;un handle I2C donne. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hi2c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Handle I2C (&amp;hi2c1 ou &amp;hi2c2). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>osMutexId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>i2c2_mutex_id si hi2c == &amp;hi2c2, i2c1_mutex_id sinon (comportement par defaut : hi2c1, comme ailleurs dans ce fichier ou &quot;bus == 2&quot; bascule sur hi2c2). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">osMutexId<sp/>m<sp/>=<sp/>ResoudreMutexI2C(hi2c);</highlight></codeline>
+<codeline><highlight class="normal">osMutexWait(m,<sp/>osWaitForever);</highlight></codeline>
+<codeline><highlight class="normal">HAL_I2C_Master_Transmit(hi2c,<sp/>...);</highlight></codeline>
+<codeline><highlight class="normal">osMutexRelease(m);</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="728" column="18" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="728" bodyend="731"/>
+        <references refid="group__grp__i2c_1ga5cb1cd70b1dd76a8aadb2bccb2837d2f" compoundref="main_8c" startline="728" endline="731">ResoudreMutexI2C</references>
+        <referencedby refid="group__grp__adc_1ga74a9c056e466dd59ca9ea5b9110125f0" compoundref="main_8c" startline="5222" endline="5229">EcrireADG728</referencedby>
+        <referencedby refid="group__grp__eeprom_1ga1de03c1c4ce3c3d63b079d5bce9c8e74" compoundref="main_8c" startline="4676" endline="4693">EcrireDACEeprom</referencedby>
+        <referencedby refid="group__grp__dac_1gaf2d35bfc7d39a06f0e77e0680df9c08d" compoundref="main_8c" startline="956" endline="982">EcrireDACVolatile</referencedby>
+        <referencedby refid="group__grp__dac_1ga64f4ecd7d147a039d045da6b64975451" compoundref="main_8c" startline="1068" endline="1086">EcrireRegistreConfigDAC</referencedby>
+        <referencedby refid="group__grp__i2c_1ga78897222189585f100bc3855e98e25cc" compoundref="main_8c" startline="1484" endline="1527">EnvoyerBonjourATous</referencedby>
+        <referencedby refid="group__grp__dac_1gade7258168a59f260de108ec88059f889" compoundref="main_8c" startline="1013" endline="1037">LireRegistreConfigDAC</referencedby>
+        <referencedby refid="group__grp__dac_1gae1030d1ce005f7deac0f86610f9df4af" compoundref="main_8c" startline="4579" endline="4600">LireRegistreValeurDAC</referencedby>
+        <referencedby refid="group__grp__i2c_1ga5cb1cd70b1dd76a8aadb2bccb2837d2f" compoundref="main_8c" startline="728" endline="731">ResoudreMutexI2C</referencedby>
+        <referencedby refid="group__grp__i2c_1ga779f08189cf1996577c596f37e17f128" compoundref="main_8c" startline="748" endline="777">ScanI2C</referencedby>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__i2c_1ga779f08189cf1996577c596f37e17f128" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void ScanI2C</definition>
+        <argsstring>(I2C_HandleTypeDef *hi2c, ScanResult_t *result)</argsstring>
+        <name>ScanI2C</name>
+        <param>
+          <type>I2C_HandleTypeDef *</type>
+          <declname>hi2c</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_scan_result__t" kindref="compound">ScanResult_t</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Scanne toutes les adresses I2C possibles (hors General Call =&gt; 0x00) sur le bus passe en parametre, et remplit le resultat. Fonction &quot;pure&quot; : aucun effet de bord sur rapport_scan ou toute autre variable globale de texte. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hi2c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointeur vers le handle I2C a scanner (&amp;hi2c1, &amp;hi2c2, ...). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointeur vers la structure a remplir avec les resultats. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">static<sp/>ScanResult_t<sp/>res_i2c1;</highlight></codeline>
+<codeline><highlight class="normal">ScanI2C(&amp;hi2c1,<sp/>&amp;res_i2c1);</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="748" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="748" bodyend="777"/>
+        <references refid="group__grp__i2c_1ga5cb1cd70b1dd76a8aadb2bccb2837d2f" compoundref="main_8c" startline="728" endline="731">ResoudreMutexI2C</references>
+        <references refid="group__grp__i2c_1ga779f08189cf1996577c596f37e17f128" compoundref="main_8c" startline="748" endline="777">ScanI2C</references>
+        <referencedby refid="group__grp__exti_1ga3a919fef613806da58b99557a009f22a" compoundref="main_8c" startline="1648" endline="1720">ExecuterCaptureComplete</referencedby>
+        <referencedby refid="group__grp__i2c_1ga45ca114e0fa3b65a4923db15bbc51a0e" compoundref="main_8c" startline="4380" endline="4394">h_SCAN_I2C1</referencedby>
+        <referencedby refid="group__grp__i2c_1gaf5fe51ec000f68a1b5a11cea7a1ffd32" compoundref="main_8c" startline="4408" endline="4422">h_SCAN_I2C2</referencedby>
+        <referencedby refid="group__grp__i2c_1ga779f08189cf1996577c596f37e17f128" compoundref="main_8c" startline="748" endline="777">ScanI2C</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__i2c_1ga66520b068519c774eaeaa10c91bc87e4" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void FormaterRapport</definition>
+        <argsstring>(const char *nom_bus, const ScanResult_t *result)</argsstring>
+        <name>FormaterRapport</name>
+        <param>
+          <type>const char *</type>
+          <declname>nom_bus</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_scan_result__t" kindref="compound">ScanResult_t</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Construit, dans le buffer global rapport_scan, une ligne &quot;I2Cx:0xNN:message&quot; pour chaque adresse trouvee dans un resultat de scan. N&apos;efface PAS rapport_scan avant d&apos;ecrire : permet d&apos;enchainer plusieurs bus dans le meme rapport (voir exemple). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>nom_bus</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nom du bus a afficher dans le rapport (ex : &quot;I2C1&quot;). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointeur vers un resultat deja rempli par ScanI2C(). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Complete rapport_scan. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">static<sp/>ScanResult_t<sp/>res_i2c1,<sp/>res_i2c2;</highlight></codeline>
+<codeline><highlight class="normal">ScanI2C(&amp;hi2c1,<sp/>&amp;res_i2c1);</highlight></codeline>
+<codeline><highlight class="normal">ScanI2C(&amp;hi2c2,<sp/>&amp;res_i2c2);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">rapport_scan[0]<sp/>=<sp/>&apos;\0&apos;;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>vide<sp/>le<sp/>rapport<sp/>avant<sp/>de<sp/>le<sp/>reconstruire</highlight></codeline>
+<codeline><highlight class="normal">FormaterRapport(&quot;I2C1&quot;,<sp/>&amp;res_i2c1);</highlight></codeline>
+<codeline><highlight class="normal">FormaterRapport(&quot;I2C2&quot;,<sp/>&amp;res_i2c2);</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>rapport_scan<sp/>contient<sp/>alors<sp/>par<sp/>exemple<sp/>:</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>&quot;I2C1:0x84:OK\nI2C1:0xC4:OK\nI2C2:0x50:OK\n&quot;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="802" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="802" bodyend="814"/>
+        <references refid="group__grp__i2c_1ga66520b068519c774eaeaa10c91bc87e4" compoundref="main_8c" startline="802" endline="814">FormaterRapport</references>
+        <referencedby refid="group__grp__exti_1ga3a919fef613806da58b99557a009f22a" compoundref="main_8c" startline="1648" endline="1720">ExecuterCaptureComplete</referencedby>
+        <referencedby refid="group__grp__i2c_1ga66520b068519c774eaeaa10c91bc87e4" compoundref="main_8c" startline="802" endline="814">FormaterRapport</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__i2c_1gad3e3e81fe86eb2d85a4b3a6e84e0b550" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int EstDansListe</definition>
+        <argsstring>(uint16_t adresse, const uint16_t *liste, uint8_t taille)</argsstring>
+        <name>EstDansListe</name>
+        <param>
+          <type>uint16_t</type>
+          <declname>adresse</declname>
+        </param>
+        <param>
+          <type>const uint16_t *</type>
+          <declname>liste</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>taille</declname>
+        </param>
+        <briefdescription>
+<para>Verifie si une adresse (format HAL) fait partie d&apos;une liste donnee. Fonction utilitaire generique, reutilisable pour n&apos;importe quelle liste d&apos;adresses (exclusion, inclusion, ...). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>adresse</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Adresse a rechercher (format HAL, deja decalee). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>liste</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tableau d&apos;adresses (format HAL) dans lequel chercher. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>taille</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nombre d&apos;elements dans liste. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>int</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>1 si l&apos;adresse est trouvee dans la liste, 0 sinon. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">static<sp/>const<sp/>uint16_t<sp/>exclues[]<sp/>=<sp/>{<sp/>0xC4<sp/>};</highlight></codeline>
+<codeline><highlight class="normal">if<sp/>(EstDansListe(0xC4,<sp/>exclues,<sp/>1))<sp/>{<sp/>/<sp/>*<sp/>ignorer<sp/>*<sp/>/<sp/>}</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1443" column="12" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1443" bodyend="1453"/>
+        <references refid="group__grp__i2c_1gad3e3e81fe86eb2d85a4b3a6e84e0b550" compoundref="main_8c" startline="1443" endline="1453">EstDansListe</references>
+        <referencedby refid="group__grp__i2c_1ga78897222189585f100bc3855e98e25cc" compoundref="main_8c" startline="1484" endline="1527">EnvoyerBonjourATous</referencedby>
+        <referencedby refid="group__grp__i2c_1gad3e3e81fe86eb2d85a4b3a6e84e0b550" compoundref="main_8c" startline="1443" endline="1453">EstDansListe</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__i2c_1ga78897222189585f100bc3855e98e25cc" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void EnvoyerBonjourATous</definition>
+        <argsstring>(I2C_HandleTypeDef *hi2c, const char *nom_bus, const ScanResult_t *result, const uint16_t *adresses_exclues, uint8_t nb_exclues)</argsstring>
+        <name>EnvoyerBonjourATous</name>
+        <param>
+          <type>I2C_HandleTypeDef *</type>
+          <declname>hi2c</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>nom_bus</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_scan_result__t" kindref="compound">ScanResult_t</ref> *</type>
+          <declname>result</declname>
+        </param>
+        <param>
+          <type>const uint16_t *</type>
+          <declname>adresses_exclues</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>nb_exclues</declname>
+        </param>
+        <briefdescription>
+<para>Envoie un message &quot;Bonjour&quot; a chacune des adresses trouvees par un scan I2C prealable (ScanI2C()), SAUF celles listees dans adresses_exclues (utile pour eviter d&apos;envoyer du texte libre a un appareil qui attend un protocole binaire strict, comme un DAC - il repondrait par un NACK/ERROR sans que ce soit une vraie panne). Le message inclut : l&apos;identifiant du maitre (STM32, texte fixe - un maitre I2C n&apos;a pas d&apos;adresse de bus a proprement parler), l&apos;adresse de l&apos;esclave destinataire, et le temps ecoule depuis le demarrage du STM32 (voir FormaterTempsEcoule()). Ajoute une ligne de compte-rendu dans rapport_scan pour chaque envoi (et pour chaque adresse ignoree). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hi2c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointeur vers le handle I2C a utiliser (&amp;hi2c1, &amp;hi2c2, ...). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nom_bus</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nom du bus a afficher dans le rapport (ex : &quot;I2C1&quot;). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointeur vers un resultat de scan deja rempli par ScanI2C(). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>adresses_exclues</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tableau d&apos;adresses (format HAL) a ne PAS contacter. Passer NULL et 0 si aucune exclusion. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nb_exclues</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nombre d&apos;elements dans adresses_exclues. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Complete rapport_scan. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">static<sp/>const<sp/>uint16_t<sp/>exclues[]<sp/>=<sp/>{<sp/>(0x62<sp/>&lt;&lt;<sp/>1)<sp/>};<sp/><sp/>//<sp/>le<sp/>DAC</highlight></codeline>
+<codeline><highlight class="normal">EnvoyerBonjourATous(&amp;hi2c1,<sp/>&quot;I2C1&quot;,<sp/>&amp;res_i2c1,<sp/>exclues,<sp/>1);</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>ou,<sp/>sans<sp/>aucune<sp/>exclusion<sp/>:</highlight></codeline>
+<codeline><highlight class="normal">EnvoyerBonjourATous(&amp;hi2c1,<sp/>&quot;I2C1&quot;,<sp/>&amp;res_i2c1,<sp/>NULL,<sp/>0);</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1484" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1484" bodyend="1527"/>
+        <references refid="group__grp__i2c_1ga78897222189585f100bc3855e98e25cc" compoundref="main_8c" startline="1484" endline="1527">EnvoyerBonjourATous</references>
+        <references refid="group__grp__i2c_1gad3e3e81fe86eb2d85a4b3a6e84e0b550" compoundref="main_8c" startline="1443" endline="1453">EstDansListe</references>
+        <references refid="group__grp__exti_1gaca19a894d35c5407313b2afaca72d390" compoundref="main_8c" startline="1417" endline="1426">FormaterTempsEcoule</references>
+        <references refid="group__grp__i2c_1ga5cb1cd70b1dd76a8aadb2bccb2837d2f" compoundref="main_8c" startline="728" endline="731">ResoudreMutexI2C</references>
+        <referencedby refid="group__grp__i2c_1ga78897222189585f100bc3855e98e25cc" compoundref="main_8c" startline="1484" endline="1527">EnvoyerBonjourATous</referencedby>
+        <referencedby refid="group__grp__exti_1ga3a919fef613806da58b99557a009f22a" compoundref="main_8c" startline="1648" endline="1720">ExecuterCaptureComplete</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__i2c_1ga45ca114e0fa3b65a4923db15bbc51a0e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_SCAN_I2C1</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_SCAN_I2C1</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;SCAN_I2C1&quot;. Relance un scan complet du bus I2C1 (ScanI2C()) et renvoie le contenu integral de la structure ScanResult_t (compteurs + liste des adresses trouvees) dans la reponse UDP. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Remplit response avec le format : &quot;SCAN:I2C1:ok=&lt;n&gt;:err=&lt;n&gt;:busy=&lt;n&gt;:to=&lt;n&gt;:trouve=0xNN,0xNN,...\n&quot; </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;SCAN_I2C1&quot;<sp/>-&gt;<sp/>h_SCAN_I2C1();</highlight></codeline>
+<codeline><highlight class="normal">Reponse<sp/>type<sp/>:<sp/>&quot;SCAN:I2C1:ok=1:err=126:busy=0:to=0:trouve=0xC4\n&quot;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="4380" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="4380" bodyend="4394"/>
+        <references refid="group__grp__i2c_1ga45ca114e0fa3b65a4923db15bbc51a0e" compoundref="main_8c" startline="4380" endline="4394">h_SCAN_I2C1</references>
+        <references refid="group__grp__i2c_1ga779f08189cf1996577c596f37e17f128" compoundref="main_8c" startline="748" endline="777">ScanI2C</references>
+        <referencedby refid="group__grp__i2c_1ga45ca114e0fa3b65a4923db15bbc51a0e" compoundref="main_8c" startline="4380" endline="4394">h_SCAN_I2C1</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__i2c_1gaf5fe51ec000f68a1b5a11cea7a1ffd32" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_SCAN_I2C2</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_SCAN_I2C2</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;SCAN_I2C2&quot;. Identique a h_SCAN_I2C1() mais sur le bus I2C2. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Remplit response, meme format que h_SCAN_I2C1() avec &quot;I2C2&quot; a la place de &quot;I2C1&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;SCAN_I2C2&quot;<sp/>-&gt;<sp/>h_SCAN_I2C2();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="4408" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="4408" bodyend="4422"/>
+        <references refid="group__grp__i2c_1gaf5fe51ec000f68a1b5a11cea7a1ffd32" compoundref="main_8c" startline="4408" endline="4422">h_SCAN_I2C2</references>
+        <references refid="group__grp__i2c_1ga779f08189cf1996577c596f37e17f128" compoundref="main_8c" startline="748" endline="777">ScanI2C</references>
+        <referencedby refid="group__grp__i2c_1gaf5fe51ec000f68a1b5a11cea7a1ffd32" compoundref="main_8c" startline="4408" endline="4422">h_SCAN_I2C2</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Déblocage des bus, verrous I2C, scan et rapports. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

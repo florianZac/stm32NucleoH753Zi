@@ -1,0 +1,630 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="namespaceldo__config__csv" kind="namespace" language="Python">
+    <compoundname>ldo_config_csv</compoundname>
+    <innerclass refid="classldo__config__csv_1_1_ligne" prot="public">ldo_config_csv::Ligne</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="namespaceldo__config__csv_1a0ab66cebd411faadcfba80bcff310163" prot="public" static="no" mutable="no">
+        <type>str</type>
+        <definition>str ldo_config_csv.SEPARATEUR</definition>
+        <argsstring></argsstring>
+        <name>SEPARATEUR</name>
+        <qualifiedname>ldo_config_csv.SEPARATEUR</qualifiedname>
+        <initializer>=  &quot;;&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="26" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaceldo__config__csv_1a68495d7e8c7ad548a3662872780fb908" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ldo_config_csv.NB_LDO_MAX</definition>
+        <argsstring></argsstring>
+        <name>NB_LDO_MAX</name>
+        <qualifiedname>ldo_config_csv.NB_LDO_MAX</qualifiedname>
+        <initializer>=  24</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="27" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaceldo__config__csv_1a779751292d2b17a9d68b2484dcbe4205" prot="public" static="no" mutable="no">
+        <type>list</type>
+        <definition>list ldo_config_csv.COLONNES</definition>
+        <argsstring></argsstring>
+        <name>COLONNES</name>
+        <qualifiedname>ldo_config_csv.COLONNES</qualifiedname>
+        <initializer>=  [
+    &quot;rang&quot;, &quot;nom&quot;, &quot;affichage&quot;,
+    &quot;en&quot;, &quot;bld&quot;, &quot;bld_actif&quot;, &quot;oc&quot;, &quot;oc_interruption&quot;, &quot;pg&quot;,
+    &quot;dac_tension&quot;, &quot;dac_courant&quot;,
+    &quot;protection&quot;, &quot;seuil&quot;, &quot;memoire&quot;, &quot;CMD_ON_OFF_BLD&quot;, &quot;CMD_ON_OFF_OC&quot;, &quot;commentaire&quot;,
+]</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="30" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaceldo__config__csv_1a18a51b4c36c216e887aa3053b0930bad" prot="public" static="no" mutable="no">
+        <type>tuple</type>
+        <definition>tuple ldo_config_csv.COLONNES_FACULTATIVES</definition>
+        <argsstring></argsstring>
+        <name>COLONNES_FACULTATIVES</name>
+        <qualifiedname>ldo_config_csv.COLONNES_FACULTATIVES</qualifiedname>
+        <initializer>=  (&quot;rang&quot;, &quot;CMD_ON_OFF_BLD&quot;, &quot;CMD_ON_OFF_OC&quot;, &quot;commentaire&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="38" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaceldo__config__csv_1af06d3e5e67cb30a97cc0ef58d8977b8c" prot="public" static="no" mutable="no">
+        <type>dict</type>
+        <definition>dict ldo_config_csv.DESCRIPTION_COLONNES</definition>
+        <argsstring></argsstring>
+        <name>DESCRIPTION_COLONNES</name>
+        <qualifiedname>ldo_config_csv.DESCRIPTION_COLONNES</qualifiedname>
+        <initializer>=  {
+    &quot;rang&quot;: &quot;Numero de la <ref refid="struct_l_d_o" kindref="compound">LDO</ref> (1, 2, 3...). Renumerote automatiquement : l&apos;ordre des lignes fait foi.&quot;,
+    &quot;nom&quot;: &quot;Nom des commandes : SET_VAL_LDO_&lt;nom&gt;, SET_EN_LDO_&lt;nom&gt;... (lettres et chiffres, 12 max).&quot;,
+    &quot;affichage&quot;: &quot;PRINCIPAL = affichee dans /dac ; DE_COTE = mise de cote (toujours geree par la carte).&quot;,
+    &quot;en&quot;: &quot;Broche Enable (sortie), ex : PE5.&quot;,
+    &quot;bld&quot;: &quot;Broche Bleeder (sortie), ex : PF1.&quot;,
+    &quot;bld_actif&quot;: &quot;Niveau qui fait conduire le bleeder : HAUT ou BAS.&quot;,
+    &quot;oc&quot;: &quot;Broche Over-Current (entree, sortie du LM211), ex : PE4.&quot;,
+    &quot;oc_interruption&quot;: &quot;1 = coupure de l&apos;EN en interruption (quelques us) ; 0 = par la boucle (~5 ms).&quot;,
+    &quot;pg&quot;: &quot;Broche Power-Good (entree), ex : PF2.&quot;,
+    &quot;dac_tension&quot;: &quot;DAC de tension : BUS:ADRESSE:VOIE (ex : I2C1:0xC0:4), ou - si aucun.&quot;,
+    &quot;dac_courant&quot;: &quot;DAC du seuil de courant : BUS:ADRESSE:VOIE (ex : I2C1:0xC0:5), ou - si aucun.&quot;,
+    &quot;protection&quot;: &quot;LM211 = circuit shunt + OP184 + LM211 cable (OC surveille) ; SANS = OC affiche seulement.&quot;,
+    &quot;seuil&quot;: &quot;Source du seuil : DEFAUT (define LIMITATION_PAR_POTENTIOMETRE), DAC ou POT.&quot;,
+    &quot;memoire&quot;: &quot;EEPROM = codes DAC gardes a la coupure (EEPROM du MCP47FEB28) ; RAM = 0 au demarrage.&quot;,
+    &quot;CMD_ON_OFF_BLD&quot;: &quot;Bleeder au premier demarrage : 1 = ON (commandable), 0 = OFF (ignore, gris). &quot;
+                      &quot;Ensuite la valeur des switchs de /dac est gardee en flash du STM32.&quot;,
+    &quot;CMD_ON_OFF_OC&quot;: &quot;Protection OC au premier demarrage : 1 = ON (coupure sur surintensite), 0 = OFF &quot;
+                     &quot;(OC ignore, gris). Ensuite la valeur des switchs de /dac est gardee en flash du STM32.&quot;,
+    &quot;commentaire&quot;: &quot;Texte libre (sans point-virgule).&quot;,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="41" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaceldo__config__csv_1ab32b6b404a5c130865c934ed75a6ca79" prot="public" static="no" mutable="no">
+        <type>dict</type>
+        <definition>dict ldo_config_csv.DACS_AUTORISES</definition>
+        <argsstring></argsstring>
+        <name>DACS_AUTORISES</name>
+        <qualifiedname>ldo_config_csv.DACS_AUTORISES</qualifiedname>
+        <initializer>=  {
+    (&quot;I2C1&quot;, 0xC0): &quot;CIBLE_DAC1&quot;,
+    (&quot;I2C2&quot;, 0xC0): &quot;CIBLE_DAC2&quot;,
+    (&quot;I2C1&quot;, 0xC2): &quot;CIBLE_DAC3&quot;,
+    (&quot;I2C2&quot;, 0xC4): &quot;CIBLE_DAC4&quot;,
+    (&quot;I2C2&quot;, 0xC2): &quot;CIBLE_DAC5&quot;,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="64" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaceldo__config__csv_1a0d9d635f032f9acd021277a9fce51a3b" prot="public" static="no" mutable="no">
+        <type>dict</type>
+        <definition>dict ldo_config_csv.BROCHES_RESERVEES_DEFAUT</definition>
+        <argsstring></argsstring>
+        <name>BROCHES_RESERVEES_DEFAUT</name>
+        <qualifiedname>ldo_config_csv.BROCHES_RESERVEES_DEFAUT</qualifiedname>
+        <initializer>=  {
+    &quot;PA1&quot;: &quot;ETH_REF_CLK&quot;, &quot;PA2&quot;: &quot;ETH_MDIO&quot;, &quot;PA7&quot;: &quot;ETH_CRS_DV&quot;, &quot;PB13&quot;: &quot;ETH_TXD1&quot;,
+    &quot;PC1&quot;: &quot;ETH_MDC&quot;, &quot;PC4&quot;: &quot;ETH_RXD0&quot;, &quot;PC5&quot;: &quot;ETH_RXD1&quot;, &quot;PG11&quot;: &quot;ETH_TX_EN&quot;, &quot;PG13&quot;: &quot;ETH_TXD0&quot;,
+    &quot;PB8&quot;: &quot;I2C1_SCL&quot;, &quot;PB9&quot;: &quot;I2C1_SDA&quot;, &quot;PB10&quot;: &quot;I2C2_SCL&quot;, &quot;PB11&quot;: &quot;I2C2_SDA&quot;,
+    &quot;PB6&quot;: &quot;USART1_TX&quot;, &quot;PB7&quot;: &quot;USART1_RX&quot;, &quot;PA13&quot;: &quot;SWDIO&quot;, &quot;PA14&quot;: &quot;SWCLK&quot;,
+    &quot;PC0&quot;: &quot;ADC&quot;, &quot;PF4&quot;: &quot;ADC3_INP9&quot;, &quot;PF10&quot;: &quot;ADC3_INP6&quot;,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="73" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaceldo__config__csv_1a358b517121fdf24ab922edcfacbed770" prot="public" static="no" mutable="no">
+        <type>dict</type>
+        <definition>dict ldo_config_csv.BROCHES_BOUTONS</definition>
+        <argsstring></argsstring>
+        <name>BROCHES_BOUTONS</name>
+        <qualifiedname>ldo_config_csv.BROCHES_BOUTONS</qualifiedname>
+        <initializer>=  {&quot;PC13&quot;: &quot;bouton USER B1 (EXTI13)&quot;, &quot;PD0&quot;: &quot;bouton reset ADG728 (EXTI0)&quot;}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="82" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaceldo__config__csv_1a1ec88aa2fa9d73e98953bf31ef86cd52" prot="public" static="no" mutable="no">
+        <type>dict</type>
+        <definition>dict ldo_config_csv.LIGNES_EXTI_RESERVEES</definition>
+        <argsstring></argsstring>
+        <name>LIGNES_EXTI_RESERVEES</name>
+        <qualifiedname>ldo_config_csv.LIGNES_EXTI_RESERVEES</qualifiedname>
+        <initializer>=  {0, 13}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="85" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaceldo__config__csv_1af821a15127c9ad43cacb62c0e461a7b9" prot="protected" static="no" mutable="no">
+        <type></type>
+        <definition>ldo_config_csv._RE_NOM</definition>
+        <argsstring></argsstring>
+        <name>_RE_NOM</name>
+        <qualifiedname>ldo_config_csv._RE_NOM</qualifiedname>
+        <initializer>=  re.compile(r&quot;^[0-9A-Za-z]{1,12}$&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="87" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaceldo__config__csv_1a846d4dc31db1cd9f4a2e193bcd606e87" prot="protected" static="no" mutable="no">
+        <type></type>
+        <definition>ldo_config_csv._RE_BROCHE</definition>
+        <argsstring></argsstring>
+        <name>_RE_BROCHE</name>
+        <qualifiedname>ldo_config_csv._RE_BROCHE</qualifiedname>
+        <initializer>=  re.compile(r&quot;^P([A-H])(\d{1,2})$&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="88" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaceldo__config__csv_1aa14d2b5d89d283804eee40966e891a14" prot="protected" static="no" mutable="no">
+        <type></type>
+        <definition>ldo_config_csv._RE_DAC</definition>
+        <argsstring></argsstring>
+        <name>_RE_DAC</name>
+        <qualifiedname>ldo_config_csv._RE_DAC</qualifiedname>
+        <initializer>=  re.compile(r&quot;^(?:(I2C[12]):)?(0X[0-9A-F]{2}):([0-9]+)$&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="89" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaceldo__config__csv_1ae2fbc2e4f7b90560c8a7b45a5e44eb06" prot="protected" static="no" mutable="no">
+        <type></type>
+        <definition>ldo_config_csv._RE_IOC</definition>
+        <argsstring></argsstring>
+        <name>_RE_IOC</name>
+        <qualifiedname>ldo_config_csv._RE_IOC</qualifiedname>
+        <initializer>=  re.compile(r&quot;^(P[A-K]\d{1,2})(?:[-\\ ][^.=]*)?\.Signal=(.+)$&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="251" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="251" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespaceldo__config__csv_1a37fa9def3033a3f8af32a59542385bf9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>normaliser_broche</definition>
+        <argsstring>(texte)</argsstring>
+        <name>normaliser_broche</name>
+        <qualifiedname>ldo_config_csv.normaliser_broche</qualifiedname>
+        <param>
+          <type>texte</type>
+          <defname>texte</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>@brief  Met une broche au format PE5 (majuscules, sans espace).
+@param  texte : saisie (ex : &quot; pe5 &quot;).
+@retval Broche normalisee, ou la saisie en majuscules si invalide.
+@par Exemple d&apos;utilisation
+     normaliser_broche(&quot;pe5&quot;)  # -&gt; &quot;PE5&quot;
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="100" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="100" bodyend="110"/>
+        <referencedby refid="namespaceldo__config__csv_1a9831324bd62fc0edfbb81a47f4e9df4d" compoundref="ldo__config__csv_8py" startline="129" endline="159">normaliser_ligne</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespaceldo__config__csv_1aaf47e66fb7cde90c02340e43ebba665c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>normaliser_dac</definition>
+        <argsstring>(texte)</argsstring>
+        <name>normaliser_dac</name>
+        <qualifiedname>ldo_config_csv.normaliser_dac</qualifiedname>
+        <param>
+          <type>texte</type>
+          <defname>texte</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>@brief  Met un champ DAC au format I2C1:0xC0:4 (&quot;-&quot; si vide).
+@param  texte : saisie (ex : &quot;0XC0:4&quot;, &quot;i2c2:0xc2:3&quot;, &quot;-&quot;).
+@retval Champ normalise ; un bus absent vaut I2C1. Saisie inchangee si invalide.
+@par Exemple d&apos;utilisation
+     normaliser_dac(&quot;0XC0:4&quot;)  # -&gt; &quot;I2C1:0xC0:4&quot;
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="111" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="111" bodyend="128"/>
+        <referencedby refid="namespaceldo__config__csv_1a9831324bd62fc0edfbb81a47f4e9df4d" compoundref="ldo__config__csv_8py" startline="129" endline="159">normaliser_ligne</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespaceldo__config__csv_1a9831324bd62fc0edfbb81a47f4e9df4d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>normaliser_ligne</definition>
+        <argsstring>(brut)</argsstring>
+        <name>normaliser_ligne</name>
+        <qualifiedname>ldo_config_csv.normaliser_ligne</qualifiedname>
+        <param>
+          <type>brut</type>
+          <defname>brut</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>@brief  Normalise toutes les colonnes d&apos;une LDO (majuscules, valeurs par defaut).
+@param  brut : dict colonne -&gt; texte (colonnes absentes acceptees).
+@retval Ligne normalisee.
+@par Exemple d&apos;utilisation
+     l = normaliser_ligne({&quot;nom&quot;: &quot;2PSp&quot;, &quot;en&quot;: &quot;pe5&quot;, ...})
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="129" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="129" bodyend="159"/>
+        <references refid="namespaceldo__config__csv_1a37fa9def3033a3f8af32a59542385bf9" compoundref="ldo__config__csv_8py" startline="100" endline="110">normaliser_broche</references>
+        <references refid="namespaceldo__config__csv_1aaf47e66fb7cde90c02340e43ebba665c" compoundref="ldo__config__csv_8py" startline="111" endline="128">normaliser_dac</references>
+        <referencedby refid="namespaceldo__config__csv_1ae13ae04d824d3e4ef44203ace3510c65" compoundref="ldo__config__csv_8py" startline="409" endline="426">empreinte</referencedby>
+        <referencedby refid="namespaceldo__config__csv_1add5edc00560b683b44f194fa7cb345ea" compoundref="ldo__config__csv_8py" startline="160" endline="192">lire_texte</referencedby>
+        <referencedby refid="namespaceldo__config__csv_1a820a443863bc420ed6f8c56689a0969c" compoundref="ldo__config__csv_8py" startline="205" endline="231">texte_csv</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespaceldo__config__csv_1add5edc00560b683b44f194fa7cb345ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>lire_texte</definition>
+        <argsstring>(texte)</argsstring>
+        <name>lire_texte</name>
+        <qualifiedname>ldo_config_csv.lire_texte</qualifiedname>
+        <param>
+          <type>texte</type>
+          <defname>texte</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>@brief  Lit le contenu d&apos;un CSV (lignes # = commentaires).
+@param  texte : contenu du fichier.
+@retval (lignes, erreurs) : liste de Ligne normalisees, liste de messages
+        d&apos;erreur de format (colonnes manquantes...).
+@par Exemple d&apos;utilisation
+     lignes, erreurs = lire_texte(open(&quot;ldo_config.csv&quot;, encoding=&quot;utf-8&quot;).read())
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="160" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="160" bodyend="192"/>
+        <references refid="namespaceldo__config__csv_1a9831324bd62fc0edfbb81a47f4e9df4d" compoundref="ldo__config__csv_8py" startline="129" endline="159">normaliser_ligne</references>
+        <referencedby refid="namespaceldo__config__csv_1ae0d2ad7c8459c6ca61e654b4692c4a86" compoundref="ldo__config__csv_8py" startline="193" endline="204">lire_fichier</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespaceldo__config__csv_1ae0d2ad7c8459c6ca61e654b4692c4a86" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>lire_fichier</definition>
+        <argsstring>(chemin)</argsstring>
+        <name>lire_fichier</name>
+        <qualifiedname>ldo_config_csv.lire_fichier</qualifiedname>
+        <param>
+          <type>chemin</type>
+          <defname>chemin</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>@brief  Lit le CSV sur disque (UTF-8, BOM accepte).
+@param  chemin : chemin du fichier ldo_config.csv.
+@retval (lignes, erreurs), voir lire_texte().
+@par Exemple d&apos;utilisation
+     lignes, erreurs = lire_fichier(&quot;configurationLDO/ldo_config.csv&quot;)
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="193" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="193" bodyend="204"/>
+        <references refid="namespaceldo__config__csv_1add5edc00560b683b44f194fa7cb345ea" compoundref="ldo__config__csv_8py" startline="160" endline="192">lire_texte</references>
+      </memberdef>
+      <memberdef kind="function" id="namespaceldo__config__csv_1a820a443863bc420ed6f8c56689a0969c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>texte_csv</definition>
+        <argsstring>(lignes)</argsstring>
+        <name>texte_csv</name>
+        <qualifiedname>ldo_config_csv.texte_csv</qualifiedname>
+        <param>
+          <type>lignes</type>
+          <defname>lignes</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>@brief  Produit le texte complet du CSV (en-tete explicatif + lignes renumerotees).
+@param  lignes : liste de Ligne (ou de dict).
+@retval Texte du fichier.
+@par Exemple d&apos;utilisation
+     open(&quot;ldo_config.csv&quot;, &quot;w&quot;, encoding=&quot;utf-8&quot;).write(texte_csv(lignes))
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="205" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="205" bodyend="231"/>
+        <references refid="namespaceldo__config__csv_1a9831324bd62fc0edfbb81a47f4e9df4d" compoundref="ldo__config__csv_8py" startline="129" endline="159">normaliser_ligne</references>
+        <referencedby refid="namespaceldo__config__csv_1af19bfc842b7b882af076b03fc4adc9ef" compoundref="ldo__config__csv_8py" startline="232" endline="250">ecrire_fichier</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespaceldo__config__csv_1af19bfc842b7b882af076b03fc4adc9ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ecrire_fichier</definition>
+        <argsstring>(chemin, lignes)</argsstring>
+        <name>ecrire_fichier</name>
+        <qualifiedname>ldo_config_csv.ecrire_fichier</qualifiedname>
+        <param>
+          <type>chemin</type>
+          <defname>chemin</defname>
+        </param>
+        <param>
+          <type>lignes</type>
+          <defname>lignes</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>@brief  Ecrit le CSV sur disque sans risque de fichier tronque (fichier
+        temporaire puis remplacement).
+@param  chemin : chemin du fichier ldo_config.csv.
+@param  lignes : liste de Ligne.
+@retval Aucun.
+@par Exemple d&apos;utilisation
+     ecrire_fichier(&quot;configurationLDO/ldo_config.csv&quot;, lignes)
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="232" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="232" bodyend="250"/>
+        <references refid="namespaceldo__config__csv_1a820a443863bc420ed6f8c56689a0969c" compoundref="ldo__config__csv_8py" startline="205" endline="231">texte_csv</references>
+      </memberdef>
+      <memberdef kind="function" id="namespaceldo__config__csv_1a14b2f76708258ed39b495b41ec566847" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>broches_reservees_ioc</definition>
+        <argsstring>(chemin_ioc)</argsstring>
+        <name>broches_reservees_ioc</name>
+        <qualifiedname>ldo_config_csv.broches_reservees_ioc</qualifiedname>
+        <param>
+          <type>chemin_ioc</type>
+          <defname>chemin_ioc</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>@brief  Liste les broches attribuees a un peripherique dans le .ioc
+        (Ethernet, I2C, UART, ADC, SWD...). Les broches GPIO (anciennes
+        broches LDO) ne sont pas reservees. Le .ioc n&apos;est jamais modifie.
+@param  chemin_ioc : chemin du fichier .ioc, ou None.
+@retval dict broche -&gt; signal ; BROCHES_RESERVEES_DEFAUT si le .ioc est absent.
+@par Exemple d&apos;utilisation
+     r = broches_reservees_ioc(&quot;../Lwip_demo_H753.ioc&quot;)  # {&quot;PB8&quot;: &quot;I2C1_SCL&quot;, ...}
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="254" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="254" bodyend="277"/>
+        <referencedby refid="namespaceldo__config__csv_1a78a6efd2fce8f8c1e971c4275ac5e5d9" compoundref="ldo__config__csv_8py" startline="294" endline="408">verifier</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespaceldo__config__csv_1a14e11408eb2c0ebf0795869e1f3d4ccf" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>_decoder_dac</definition>
+        <argsstring>(champ)</argsstring>
+        <name>_decoder_dac</name>
+        <qualifiedname>ldo_config_csv._decoder_dac</qualifiedname>
+        <param>
+          <type>champ</type>
+          <defname>champ</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>(bus, adresse, voie) d&apos;un champ DAC normalise, ou None pour &apos;-&apos;. Leve ValueError si invalide.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="278" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="278" bodyend="293"/>
+        <referencedby refid="namespaceldo__config__csv_1ae13ae04d824d3e4ef44203ace3510c65" compoundref="ldo__config__csv_8py" startline="409" endline="426">empreinte</referencedby>
+        <referencedby refid="namespaceldo__config__csv_1a78a6efd2fce8f8c1e971c4275ac5e5d9" compoundref="ldo__config__csv_8py" startline="294" endline="408">verifier</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespaceldo__config__csv_1a78a6efd2fce8f8c1e971c4275ac5e5d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>verifier</definition>
+        <argsstring>(lignes, chemin_ioc=None)</argsstring>
+        <name>verifier</name>
+        <qualifiedname>ldo_config_csv.verifier</qualifiedname>
+        <param>
+          <type>lignes</type>
+          <defname>lignes</defname>
+        </param>
+        <param>
+          <type>chemin_ioc</type>
+          <defname>chemin_ioc</defname>
+          <defval>None</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>@brief  Verifie une configuration complete : noms, broches (doublons,
+        peripheriques du .ioc, boutons), DAC (puce connue, voie 0-7, pas de
+        doublon), interruptions OC (une ligne EXTI par OC), coherences.
+@param  lignes     : liste de Ligne normalisees.
+@param  chemin_ioc : .ioc du projet (broches reservees), ou None (liste par defaut).
+@retval (erreurs, avertissements) : listes de messages. Erreur = la
+        configuration est refusee (pas de generation, pas d&apos;enregistrement).
+@par Exemple d&apos;utilisation
+     erreurs, avert = verifier(lignes, &quot;../Lwip_demo_H753.ioc&quot;)
+     if erreurs: print(&quot;\\n&quot;.join(erreurs))
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="294" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="294" bodyend="408"/>
+        <references refid="namespaceldo__config__csv_1a14e11408eb2c0ebf0795869e1f3d4ccf" compoundref="ldo__config__csv_8py" startline="278" endline="293">_decoder_dac</references>
+        <references refid="namespaceldo__config__csv_1a14b2f76708258ed39b495b41ec566847" compoundref="ldo__config__csv_8py" startline="254" endline="277">broches_reservees_ioc</references>
+      </memberdef>
+      <memberdef kind="function" id="namespaceldo__config__csv_1ae13ae04d824d3e4ef44203ace3510c65" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>empreinte</definition>
+        <argsstring>(lignes)</argsstring>
+        <name>empreinte</name>
+        <qualifiedname>ldo_config_csv.empreinte</qualifiedname>
+        <param>
+          <type>lignes</type>
+          <defname>lignes</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>@brief  CRC32 de la configuration (sans rang ni commentaire). Le firmware
+        la renvoie (GET_CONFIG_LDO) : si elle differe de celle du CSV, la
+        carte n&apos;a pas ete reflashee avec ce fichier.
+@param  lignes : liste de Ligne normalisees.
+@retval Entier 32 bits.
+@par Exemple d&apos;utilisation
+     &quot;0x%08X&quot; % empreinte(lignes)
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="409" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="409" bodyend="426"/>
+        <references refid="namespaceldo__config__csv_1a14e11408eb2c0ebf0795869e1f3d4ccf" compoundref="ldo__config__csv_8py" startline="278" endline="293">_decoder_dac</references>
+        <references refid="namespaceldo__config__csv_1a9831324bd62fc0edfbb81a47f4e9df4d" compoundref="ldo__config__csv_8py" startline="129" endline="159">normaliser_ligne</references>
+        <referencedby refid="namespaceldo__config__csv_1ae5b2fcb4eec4c52b9966d20e84c5093c" compoundref="ldo__config__csv_8py" startline="439" endline="474">generer_c</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespaceldo__config__csv_1acc97e1b89184d81ed6ec6b13c6661d10" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>_broche_c</definition>
+        <argsstring>(b)</argsstring>
+        <name>_broche_c</name>
+        <qualifiedname>ldo_config_csv._broche_c</qualifiedname>
+        <param>
+          <type>b</type>
+          <defname>b</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="427" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="427" bodyend="431"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceldo__config__csv_1ad3fa63858ce0bf9c6862f3b22ffcd2f7" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>_dac_c</definition>
+        <argsstring>(champ)</argsstring>
+        <name>_dac_c</name>
+        <qualifiedname>ldo_config_csv._dac_c</qualifiedname>
+        <param>
+          <type>champ</type>
+          <defname>champ</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="432" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="432" bodyend="438"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceldo__config__csv_1ae5b2fcb4eec4c52b9966d20e84c5093c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>generer_c</definition>
+        <argsstring>(lignes, nom_csv=&quot;ldo_config.csv&quot;)</argsstring>
+        <name>generer_c</name>
+        <qualifiedname>ldo_config_csv.generer_c</qualifiedname>
+        <param>
+          <type>lignes</type>
+          <defname>lignes</defname>
+        </param>
+        <param>
+          <type>nom_csv</type>
+          <defname>nom_csv</defname>
+          <defval>&quot;ldo_config.csv&quot;</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>@brief  Produit les deux fichiers C a partir d&apos;une configuration verifiee.
+@param  lignes  : liste de Ligne verifiees (verifier() sans erreur).
+@param  nom_csv : nom du CSV source, cite dans les commentaires.
+@retval (texte_h, texte_inc) : ldo_config_genere.h (LDO_NB, empreinte) et
+        ldo_config_lignes.inc (lignes de ldoConfig[]).
+@par Exemple d&apos;utilisation
+     h, inc = generer_c(lignes)
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="439" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" bodystart="439" bodyend="474"/>
+        <references refid="namespaceldo__config__csv_1ae13ae04d824d3e4ef44203ace3510c65" compoundref="ldo__config__csv_8py" startline="409" endline="426">empreinte</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>@file    ldo_config_csv.py
+@brief   Lecture, verification, ecriture et generation C du fichier de
+         configuration des LDO (configurationLDO/ldo_config.csv).
+@par     Utilise par :
+         - generer_config.py (firmware, etape &quot;pre-build&quot; de CubeIDE) :
+           genere Core/Inc/ldo_config_genere.h et Core/Inc/ldo_config_lignes.inc ;
+         - le controleur Python (page /dac/config) : lecture, verification et
+           enregistrement du CSV, liste des LDO de l&apos;IHM.
+         Les deux utilisent CE fichier : une seule regle de verification.
+@par     Dependances : bibliotheque standard Python 3.8+ uniquement.
+@author  Florian Aizac
+@date    22/10/2026
+</verbatim> </para>
+    </detaileddescription>
+    <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/ldo_config_csv.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

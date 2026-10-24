@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lwip_demo_H753 - Controleur de LDO: Document de conception — firmware Lwip_demo_H753</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Lwip_demo_H753 - Controleur de LDO<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">Firmware STM32H753ZI : pilotage de 18 LDO (configuration CSV, DAC MCP47FEB28, protection OC)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Recherche" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('index.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Document de conception — firmware Lwip_demo_H753 </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h1 class="doxsection"><a class="anchor" id="sec_objet"></a>
+1. Objet et périmètre</h1>
+<p>Ce document s'adresse aux développeurs qui reprennent ou font évoluer le firmware de la carte STM32H753ZI (Nucleo-144) qui pilote les régulateurs LDO. Il est <b>généré par Doxygen</b> à partir des commentaires du code : toute fonction documentée dans <span class="tt">Core/Src/main.c</span> y apparaît automatiquement avec son rôle, ses paramètres, sa valeur de retour et un exemple d'utilisation. Les chapitres 1 à 9 (ce fichier, <span class="tt">Doxygen/conception.dox</span>) décrivent la conception d'ensemble ; la suite décrit chaque fonction, module par module.</p>
+<p>Périmètre : <span class="tt">Core/Src/main.c</span>, <span class="tt">Core/Inc/main.h</span>, l'en-tête généré <span class="tt">Core/Inc/ldo_config_genere.h</span> et les scripts Python de <span class="tt">configurationLDO/</span>. Les pilotes HAL, LwIP et FreeRTOS fournis par ST ne sont pas décrits.</p>
+<h1 class="doxsection"><a class="anchor" id="sec_archi"></a>
+2. Architecture</h1>
+<h2 class="doxsection"><a class="anchor" id="sec_archi_mat"></a>
+2.1 Matériel piloté</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Élément  </th><th class="markdownTableHeadNone">Liaison  </th><th class="markdownTableHeadNone">Rôle  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">18 LDO (1PSp à 16PSp, 2PLn, 3PLn)  </td><td class="markdownTableBodyNone">GPIO EN / BLD (sorties), OC / PG (entrées)  </td><td class="markdownTableBodyNone">Rails d'alimentation pilotés  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">MCP47FEB28 0xC0, 0xC2  </td><td class="markdownTableBodyNone">I2C1 (PB8/PB9), actif  </td><td class="markdownTableBodyNone">Tension et seuil de courant des LDO (voies décrites dans le CSV)  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">MCP47FEB28 0xC0, 0xC2, 0xC4  </td><td class="markdownTableBodyNone">I2C2 (PB10/PB11), désactivé par défaut  </td><td class="markdownTableBodyNone">DAC des autres LDO (héritage)  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">3× ADG728 (0x4C-0x4E)  </td><td class="markdownTableBodyNone">I2C1  </td><td class="markdownTableBodyNone">Multiplexeur de mesure de tension vers PC0 (ADC1, canal 10)  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">2× ADG728 (0x4C-0x4D)  </td><td class="markdownTableBodyNone">I2C2  </td><td class="markdownTableBodyNone">Multiplexeur de mesure de courant vers PF4 (ADC3, canal 9)  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Shunt R97 + OP184 + LM211  </td><td class="markdownTableBodyNone">broche OC  </td><td class="markdownTableBodyNone">Protection de surintensité (2,61 V/A)  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Ethernet (LwIP)  </td><td class="markdownTableBodyNone">UDP 192.168.0.123:7  </td><td class="markdownTableBodyNone">Commandes depuis le contrôleur PC  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">USART1 (PB6/PB7) 115200 8N1  </td><td class="markdownTableBodyNone">UART  </td><td class="markdownTableBodyNone">Rapports de diagnostic et commandes  </td></tr>
+</table>
+<h2 class="doxsection"><a class="anchor" id="sec_archi_demarrage"></a>
+2.2 Séquence de démarrage</h2>
+<ol type="1">
+<li><span class="tt">main()</span> (code CubeMX) : caches, <span class="tt">HAL_Init()</span>, horloges, déblocage des bus I2C (I2C_BusRecovery()), <span class="tt">MX_GPIO_Init()</span> et périphériques, puis LDO_GPIO_Init() qui configure les broches des LDO à partir de <span class="tt">ldoConfig[]</span>.</li>
+<li>Création de la tâche <span class="tt">lwipTask</span> (StartLwipTask()) et démarrage de FreeRTOS.</li>
+<li>StartLwipTask() : LwIP, verrous (CreerMutexI2C(), CreerMutexUART(), CreerMutexCommandes()), réception UART, LDO_InitialiserTables(), OC_InitialiserSeuilsDefaut(), InitialiserConfigDacsI2C1(), DAC_RestaurerMemoire(), DAC_ConfigurerSeuilsPotentiometre(), CmdOnOff_Initialiser(), MX_OC_EXTI_Init(), udpServer_init(), sortCommandTable().</li>
+</ol>
+<h2 class="doxsection"><a class="anchor" id="sec_archi_boucle"></a>
+2.3 Boucle principale</h2>
+<p>Une seule tâche applicative. À chaque tour de la boucle de StartLwipTask() :</p>
+<ol type="1">
+<li>LDO_MettreAJour() pour chaque LDO : lecture OC (avant l'écriture de EN), verrouillage éventuel, écriture EN / BLD, lecture PG ;</li>
+<li>OC_SignalerEvenements() : une ligne <span class="tt">OC_TRIP:&lt;nom&gt;:...</span> par nouveau défaut ;</li>
+<li>rafraîchissement des puces DAC (<span class="tt">tableDac[]</span>), sauf puces I2C2 si <span class="tt">i2c2_actif = 0</span> et sauf puce en cours de balayage ;</li>
+<li>boutons : capture complète (ExecuterCaptureComplete()), reset des multiplexeurs ;</li>
+<li>SurveillerConfigDacsI2C1(), DAC_TraiterSauvegardes() (EEPROM), CmdOnOff_TraiterSauvegarde() (flash) ;</li>
+<li>UART1_TraiterCommande() : commande UART en attente ;</li>
+<li>battement de cœur <span class="tt">HB</span> sur l'UART.</li>
+</ol>
+<p>Les commandes UDP sont traitées dans le contexte LwIP (udp_receive_callback()) ; les deux chemins appellent tc_request() sous le verrou des commandes.</p>
+<h2 class="doxsection"><a class="anchor" id="sec_archi_commande"></a>
+2.4 Chemin d'une commande</h2>
+<div class="fragment"><div class="line">UDP  : <a class="code hl_function" href="group__grp__comm.html#ga5b44c65aa41e79871a46aeed1bb4751b">udp_receive_callback</a>() --+</div>
+<div class="line">                                +--&gt; Commande_Verrouiller()</div>
+<div class="line">UART : <a class="code hl_function" href="group__grp__comm.html#gae494a9643f29b87d6d81e5264e60e57b">HAL_UART_RxCpltCallback</a>()|      last_message = trame</div>
+<div class="line">       -&gt; UART1_TraiterCommande()+      <a class="code hl_function" href="group__grp__comm.html#gad6e271fe1796ab0b2a698260f0b78533">tc_request</a>()  -&gt; handler -&gt; response</div>
+<div class="line">                                       Commande_Deverrouiller()</div>
+<div class="line">                                     reponse renvoyee sur le canal d&#39;origine</div>
+<div class="ttc" id="agroup__grp__comm_html_ga5b44c65aa41e79871a46aeed1bb4751b"><div class="ttname"><a href="group__grp__comm.html#ga5b44c65aa41e79871a46aeed1bb4751b">udp_receive_callback</a></div><div class="ttdeci">void udp_receive_callback(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)</div><div class="ttdoc">Callback LwIP invoque automatiquement a chaque paquet UDP recu sur le port du serveur (enregistre par...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l02619">main.c:2619</a></div></div>
+<div class="ttc" id="agroup__grp__comm_html_gad6e271fe1796ab0b2a698260f0b78533"><div class="ttname"><a href="group__grp__comm.html#gad6e271fe1796ab0b2a698260f0b78533">tc_request</a></div><div class="ttdeci">void tc_request(void)</div><div class="ttdoc">Analyseur (parser) principal des trames recues par UDP. Extrait le premier token de la trame (avant l...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l06290">main.c:6290</a></div></div>
+<div class="ttc" id="agroup__grp__comm_html_gae494a9643f29b87d6d81e5264e60e57b"><div class="ttname"><a href="group__grp__comm.html#gae494a9643f29b87d6d81e5264e60e57b">HAL_UART_RxCpltCallback</a></div><div class="ttdeci">void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)</div><div class="ttdoc">Octet recu sur USART1 : assemble la ligne ; CR ou LF la termine et la confie a la boucle (une ligne e...</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l03783">main.c:3783</a></div></div>
+</div><!-- fragment --><p>tc_request() traite d'abord les commandes à suffixe LDO (<span class="tt">SET_EN_LDO_&lt;nom&gt;</span>, <span class="tt">SET_VAL_LDO_&lt;nom&gt;:&lt;code&gt;</span>…, nom résolu par findLdoIndex()), puis les commandes fixes de <span class="tt">commandTable[]</span>, triée au démarrage par sortCommandTable() et recherchée par dichotomie (findCommandHandler()).</p>
+<h1 class="doxsection"><a class="anchor" id="sec_csv"></a>
+3. Configuration des LDO (CSV)</h1>
+<p>Le câblage des LDO n'est écrit ni dans main.c ni dans le .ioc : il est décrit par <span class="tt">configurationLDO/ldo_config.csv</span>, une ligne par LDO, l'ordre des lignes donnant l'index (0 à <span class="tt">LDO_NB</span>-1).</p>
+<div class="fragment"><div class="line">ldo_config.csv --(pre-build CubeIDE : python ../configurationLDO/<a class="code hl_namespace" href="namespacegenerer__config.html">generer_config</a>.py)--&gt;</div>
+<div class="line">    Core/Inc/ldo_config_genere.h   : LDO_NB, LDO_CONFIG_CRC32</div>
+<div class="line">    Core/Inc/ldo_config_lignes.inc : lignes de ldoConfig[] (<a class="code hl_struct" href="struct_l_d_o___config__t.html">LDO_Config_t</a>)</div>
+<div class="ttc" id="anamespacegenerer__config_html"><div class="ttname"><a href="namespacegenerer__config.html">generer_config</a></div><div class="ttdef"><b>Définition</b> <a href="generer__config_8py_source.html#l00001">generer_config.py:1</a></div></div>
+<div class="ttc" id="astruct_l_d_o___config__t_html"><div class="ttname"><a href="struct_l_d_o___config__t.html">LDO_Config_t</a></div><div class="ttdoc">Description complete d&#39;une LDO : UNE ligne de ldoConfig[].</div><div class="ttdef"><b>Définition</b> <a href="main_8c_source.html#l00333">main.c:333</a></div></div>
+</div><!-- fragment --><ul>
+<li>LDO_GPIO_Init() configure les broches à partir de <span class="tt">ldoConfig[]</span> (le .ioc ne contient plus que la configuration système) ;</li>
+<li>LDO_InitialiserTables() recopie dans les tables modifiables à chaud (<span class="tt">mappingDacLdo[]</span>, <span class="tt">muxLdoConfig[]</span>, <span class="tt">muxLdoConfigCourant[]</span>) les valeurs du CSV ;</li>
+<li>h_GET_CONFIG_LDO() renvoie <span class="tt">CONFIG_LDO:NB=&lt;n&gt;:CRC=0x&lt;empreinte&gt;</span>, que le contrôleur PC compare à son propre CSV ;</li>
+<li>ne jamais éditer à la main les deux fichiers générés : ils sont réécrits à chaque compilation.</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="sec_donnees"></a>
+4. Données principales</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Donnée  </th><th class="markdownTableHeadNone">Type  </th><th class="markdownTableHeadNone">Rôle  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">ldoConfig[NB_LDO]</span>  </td><td class="markdownTableBodyNone">LDO_Config_t (const)  </td><td class="markdownTableBodyNone">Description de chaque LDO, issue du CSV  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">EN_LDO[]</span>, <span class="tt">BL_LDO[]</span>  </td><td class="markdownTableBodyNone"><span class="tt">volatile _Bool</span>  </td><td class="markdownTableBodyNone">Consignes Enable / Bleeder écrites sur les GPIO par LDO_MettreAJour()  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">VAL_LDO[]</span>, <span class="tt">CURRENT_LDO[]</span>  </td><td class="markdownTableBodyNone"><span class="tt">uint16_t</span>  </td><td class="markdownTableBodyNone">Codes DAC de tension / de seuil de courant  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">DAC1_DEF</span> … <span class="tt">DAC5_DEF</span>  </td><td class="markdownTableBodyNone">trames de 24 octets  </td><td class="markdownTableBodyNone">Image des 8 voies de chaque puce, réémise à chaque tour  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">tableDac[]</span>  </td><td class="markdownTableBodyNone">DacPuce_t  </td><td class="markdownTableBodyNone">Puce, bus, adresse, trame de chaque MCP47FEB28  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">mappingDacLdo[]</span>  </td><td class="markdownTableBodyNone">MappingDacLdo_t  </td><td class="markdownTableBodyNone">DAC et voie de chaque LDO, modifiable par <span class="tt">SET_DAC_MAPPING_LDO_</span>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">muxLdoConfig[]</span>, <span class="tt">muxLdoConfigCourant[]</span>  </td><td class="markdownTableBodyNone">MuxLdoConfig_t  </td><td class="markdownTableBodyNone">Voie de multiplexeur de chaque LDO (<span class="tt">MUX_NC</span> = 0xFF)  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">oc_verrou[]</span>, <span class="tt">oc_nb_declenchements[]</span> …  </td><td class="markdownTableBodyNone">tableaux par LDO  </td><td class="markdownTableBodyNone">État de la protection OC  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">cmd_on_off_bld[]</span>, <span class="tt">cmd_on_off_oc[]</span>  </td><td class="markdownTableBodyNone"><span class="tt">uint8_t</span>  </td><td class="markdownTableBodyNone">Commandes ON/OFF, sauvegardées en flash  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt">commandTable[]</span>  </td><td class="markdownTableBodyNone">Command_t  </td><td class="markdownTableBodyNone">Commandes fixes et leur gestionnaire  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="sec_oc"></a>
+5. Protection de surintensité (OC)</h1>
+<p>Pour une LDO <span class="tt">protection = LM211</span>, la sortie du LM211 arrive sur la broche OC.</p>
+<ol type="1">
+<li>Masquage : pendant <span class="tt">OC_BLANKING_MS</span> (10 ms) après la mise à 1 de EN, l'OC est ignoré (soft-start).</li>
+<li>Déclenchement : OC actif et protection armée → OC_Verrouiller() : EN coupé, défaut verrouillé, bleeder forcé, compteur incrémenté. Si <span class="tt">oc_interruption = 1</span>, la coupure est faite dans l'interruption EXTI (OC_SurFrontIT()), en quelques microsecondes.</li>
+<li>Signalement : OC_SignalerEvenements() émet <span class="tt">OC_TRIP:&lt;nom&gt;:...</span> sur l'UART.</li>
+<li>Réarmement : <span class="tt">RST_BL_LDO_&lt;nom&gt;</span> (LDO_RelacherBleeder()) ou <span class="tt">RST_OC_LDO_&lt;nom&gt;</span> (OC_Rearmer()), refusé tant que la broche OC signale encore la surintensité.</li>
+<li>Verrous : <span class="tt">SET_EN_LDO_&lt;nom&gt;</span> est refusé tant que le défaut est verrouillé (<span class="tt">REFUS_OC_VERROUILLE</span>) ou que le bleeder est actif (<span class="tt">REFUS_BLEEDER_ACTIF</span>).</li>
+</ol>
+<p>Seuil : code DAC de 410 à 4006 (0,19 à 1,90 A), 1056 (0,50 A) au démarrage. Seuil (A) = code × 5 V / 4096 / 2,61 V/A, hors hystérésis. <span class="tt">CMD_ON_OFF_OC = 0</span> neutralise la surveillance (LED grise côté IHM).</p>
+<h1 class="doxsection"><a class="anchor" id="sec_persist"></a>
+6. Persistance</h1>
+<h2 class="doxsection"><a class="anchor" id="sec_persist_eeprom"></a>
+6.1 Codes DAC en EEPROM du MCP47FEB28</h2>
+<p>Pour une LDO <span class="tt">memoire = EEPROM</span> : après chaque modification, DAC_DemanderSauvegarde() programme une écriture différée ; DAC_TraiterSauvegardes() écrit le registre non volatil (10h-17h, tWC = 16 ms max) ; au démarrage DAC_RestaurerMemoire() relit ces valeurs.</p>
+<h2 class="doxsection"><a class="anchor" id="sec_persist_flash"></a>
+6.2 Commandes ON/OFF en flash interne</h2>
+<ul>
+<li>Zone : banque 2, secteur 7, <span class="tt">0x081E0000</span>, 128 Ko, réservée dans <span class="tt">STM32H753ZITX_FLASH.ld</span> (FLASH LENGTH = 1920K) ;</li>
+<li>enregistrements de 64 octets écrits à la suite : magic <span class="tt">"CMD1"</span>, <span class="tt">LDO_CONFIG_CRC32</span>, numéro de séquence, <span class="tt">LDO_NB</span>, masques BLD et OC, CRC32 ;</li>
+<li>CmdOnOff_Initialiser() retient le dernier enregistrement valide de même empreinte ; sinon valeurs du CSV (<span class="tt">CMD_ON_OFF_BLD</span>, <span class="tt">CMD_ON_OFF_OC</span>) ;</li>
+<li>CmdOnOff_TraiterSauvegarde() regroupe les bascules (500 ms) ; le secteur n'est effacé que lorsqu'il est plein (environ toutes les 2048 sauvegardes).</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="sec_concurrence"></a>
+7. Concurrence et interruptions</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Ressource  </th><th class="markdownTableHeadNone">Protection  </th><th class="markdownTableHeadNone">Règle  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">hi2c1</span>, <span class="tt">hi2c2</span>  </td><td class="markdownTableBodyNone">un mutex par bus (CreerMutexI2C(), ResoudreMutexI2C())  </td><td class="markdownTableBodyNone">Toute transaction I2C hors interruption prend le mutex du bus  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">USART1 en émission  </td><td class="markdownTableBodyNone">mutex UART (UART1_EnvoyerTexte())  </td><td class="markdownTableBodyNone">Jamais d'émission depuis une interruption  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt">last_message</span>, <span class="tt">response</span>  </td><td class="markdownTableBodyNone">verrou des commandes (Commande_Verrouiller())  </td><td class="markdownTableBodyNone">tc_request() n'est jamais exécuté deux fois en parallèle  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Interruptions EXTI  </td><td class="markdownTableBodyNone">—  </td><td class="markdownTableBodyNone">Positionnent un drapeau ; seule exception : coupure OC (OC_SurFrontIT())  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Réception UART  </td><td class="markdownTableBodyNone">—  </td><td class="markdownTableBodyNone">HAL_UART_RxCpltCallback() n'appelle aucune API FreeRTOS  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="sec_evolutions"></a>
+8. Faire évoluer le firmware</h1>
+<h2 class="doxsection"><a class="anchor" id="sec_evol_ldo"></a>
+8.1 Ajouter ou recâbler une LDO</h2>
+<ol type="1">
+<li>Modifier <span class="tt">configurationLDO/ldo_config.csv</span> (ou la page /dac/config du contrôleur) ;</li>
+<li>compiler dans CubeIDE (le pre-build régénère les fichiers) et flasher ;</li>
+<li>vérifier <span class="tt">GET_CONFIG_LDO</span> : l'empreinte doit être celle du CSV du contrôleur.</li>
+</ol>
+<p>Aucune ligne de main.c n'est à modifier.</p>
+<h2 class="doxsection"><a class="anchor" id="sec_evol_cmd"></a>
+8.2 Ajouter une commande fixe</h2>
+<ol type="1">
+<li>Écrire le gestionnaire <span class="tt">static void h_MA_COMMANDE(void)</span>, qui lit ses paramètres dans <span class="tt">last_message</span> (<span class="tt">strsep(&amp;last_message, ":")</span>) et écrit sa réponse dans <span class="tt">response</span> ;</li>
+<li>le documenter (modèle du chapitre 9, avec <span class="tt">@ingroup</span>) ;</li>
+<li>ajouter <span class="tt">{ "MA_COMMANDE", h_MA_COMMANDE }</span> dans <span class="tt">commandTable[]</span> (ordre indifférent : la table est triée au démarrage) ;</li>
+<li>déclarer le prototype dans la zone <span class="tt">USER CODE BEGIN PFP</span>.</li>
+</ol>
+<h2 class="doxsection"><a class="anchor" id="sec_evol_cmd_ldo"></a>
+8.3 Ajouter une commande par LDO</h2>
+<p>Ajouter une branche <span class="tt">else if (strncmp(token, "PREFIXE_", n) == 0 &amp;&amp; (idx = findLdoIndex(token + n)) != -1)</span> dans tc_request(), avant les branches de préfixes plus courts qui pourraient la masquer.</p>
+<h2 class="doxsection"><a class="anchor" id="sec_evol_cubemx"></a>
+8.4 Régénération CubeMX</h2>
+<p>Tout le code applicatif est dans des zones <span class="tt">USER CODE BEGIN / END</span>. Les commentaires des fonctions générées par CubeMX (main(), MX_*_Init()…) sont réécrits à chaque génération : leur documentation est donc dans <span class="tt">Doxygen/complements_cubemx.dox</span>.</p>
+<h1 class="doxsection"><a class="anchor" id="sec_convention"></a>
+9. Convention de commentaire</h1>
+<p>Chaque fonction est précédée d'un bloc Doxygen en français :</p>
+<pre class="fragment">/**
+  * @brief  Ce que fait la fonction, en une ou deux phrases.
+  * @param  idx  Index de la LDO (0 a NB_LDO-1).
+  * @retval uint8_t  1 si ..., 0 sinon.
+  * @par    Exemple d'utilisation
+  * @code
+  * if (OC_EstSurveillee(idx) != 0U) { ... }
+  * @endcode
+  * @ingroup grp_oc
+  */
+</pre><p>Une fonction sans paramètre porte <span class="tt">@param Aucun.</span>, une fonction <span class="tt">void</span> porte <span class="tt">@retval Aucun (void).</span>. L'exemple est toujours encadré par <span class="tt">@code</span> / <span class="tt">@endcode</span> et <span class="tt">@ingroup</span> range la fonction dans son module (liste des modules à la fin de <span class="tt">Doxygen/conception.dox</span>).</p>
+<p>Le document Word de conception est produit par <span class="tt">Doxygen/generer_doc_conception.bat</span> (Doxygen puis <span class="tt">doxygen_vers_docx.py</span>) : voir la notice Doxygen du projet. </p>
+</div></div><!-- PageDoc -->
+<a href="doxygen_crawl.html"></a>
+</div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

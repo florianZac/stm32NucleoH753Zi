@@ -1,0 +1,460 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="struct_l_d_o___config__t" kind="struct" language="C++" prot="public">
+    <compoundname>LDO_Config_t</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_l_d_o___config__t_1a758e71184ba8cf7c7469b54870bd0dc7" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* LDO_Config_t::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>LDO_Config_t::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>nom des commandes (SET_EN_LDO_&lt;name&gt;) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="334" column="21" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="334" bodyend="-1"/>
+        <referencedby refid="group__grp__eeprom_1ga538f60d46cf0ac04119fa65a989274be" compoundref="main_8c" startline="4902" endline="4928">DAC_ConfigurerSeuilsPotentiometre</referencedby>
+        <referencedby refid="group__grp__eeprom_1gaea23265d4fdedf9ac60d1c4afb886e40" compoundref="main_8c" startline="4822" endline="4885">DAC_RestaurerMemoire</referencedby>
+        <referencedby refid="group__grp__eeprom_1ga5f9ce30ec25412cc3efbe118447a5a11" compoundref="main_8c" startline="4755" endline="4804">DAC_TraiterSauvegardes</referencedby>
+        <referencedby refid="group__grp__config_1ga8ad9d7191f49b52c41d5a583f774465d" compoundref="main_8c" startline="6025" endline="6058">LDO_InitialiserTables</referencedby>
+        <referencedby refid="group__grp__oc_1ga12ef8bab086612c9ecf3cb2ffed9c776" compoundref="main_8c" startline="6510" endline="6543">MX_OC_EXTI_Init</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o___config__t_1ae9dd3d03509308f932bec9ff533476dc" prot="public" static="no" mutable="no">
+        <type>GPIO_TypeDef *</type>
+        <definition>GPIO_TypeDef* LDO_Config_t::en_port</definition>
+        <argsstring></argsstring>
+        <name>en_port</name>
+        <qualifiedname>LDO_Config_t::en_port</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Enable (sortie) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="335" column="21" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="335" bodyend="-1"/>
+        <referencedby refid="group__grp__config_1ga2ba862323ea386969585492246cd74d6" compoundref="main_8c" startline="6223" endline="6264">LDO_Diagnostic</referencedby>
+        <referencedby refid="group__grp__config_1ga3bce4a57356f1afcbef6d05a989f33f5" compoundref="main_8c" startline="6117" endline="6159">LDO_GPIO_Init</referencedby>
+        <referencedby refid="group__grp__etat_1gad7a2801e95c498fa0a2f1982238ae732" compoundref="main_8c" startline="3307" endline="3361">LDO_MettreAJour</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o___config__t_1a0fcfe6cd6e6e7b80b4f5a45cb0b6629a" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t LDO_Config_t::en_pin</definition>
+        <argsstring></argsstring>
+        <name>en_pin</name>
+        <qualifiedname>LDO_Config_t::en_pin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="336" column="22" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="336" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o___config__t_1ae7c0856a698600dac5a3bcf57e9181a7" prot="public" static="no" mutable="no">
+        <type>GPIO_TypeDef *</type>
+        <definition>GPIO_TypeDef* LDO_Config_t::bld_port</definition>
+        <argsstring></argsstring>
+        <name>bld_port</name>
+        <qualifiedname>LDO_Config_t::bld_port</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Bleeder (sortie) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="337" column="21" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="337" bodyend="-1"/>
+        <referencedby refid="group__grp__cmd_1ga5d44c3c48f8606b7286fe670f62997b4" compoundref="main_8c" startline="3625" endline="3640">CmdOnOff_BasculerBld</referencedby>
+        <referencedby refid="group__grp__config_1ga2ba862323ea386969585492246cd74d6" compoundref="main_8c" startline="6223" endline="6264">LDO_Diagnostic</referencedby>
+        <referencedby refid="group__grp__config_1ga3bce4a57356f1afcbef6d05a989f33f5" compoundref="main_8c" startline="6117" endline="6159">LDO_GPIO_Init</referencedby>
+        <referencedby refid="group__grp__etat_1gad7a2801e95c498fa0a2f1982238ae732" compoundref="main_8c" startline="3307" endline="3361">LDO_MettreAJour</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o___config__t_1a2a81aac43428a27f84ca183d5c2e25f5" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t LDO_Config_t::bld_pin</definition>
+        <argsstring></argsstring>
+        <name>bld_pin</name>
+        <qualifiedname>LDO_Config_t::bld_pin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="338" column="22" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="338" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o___config__t_1a5ed27972c794409b5b714fe682915bfd" prot="public" static="no" mutable="no">
+        <type>GPIO_TypeDef *</type>
+        <definition>GPIO_TypeDef* LDO_Config_t::oc_port</definition>
+        <argsstring></argsstring>
+        <name>oc_port</name>
+        <qualifiedname>LDO_Config_t::oc_port</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Over-Current (entree) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="339" column="21" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="339" bodyend="-1"/>
+        <referencedby refid="group__grp__config_1ga2ba862323ea386969585492246cd74d6" compoundref="main_8c" startline="6223" endline="6264">LDO_Diagnostic</referencedby>
+        <referencedby refid="group__grp__config_1ga3bce4a57356f1afcbef6d05a989f33f5" compoundref="main_8c" startline="6117" endline="6159">LDO_GPIO_Init</referencedby>
+        <referencedby refid="group__grp__oc_1ga12ef8bab086612c9ecf3cb2ffed9c776" compoundref="main_8c" startline="6510" endline="6543">MX_OC_EXTI_Init</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o___config__t_1a4f362942c9d68afa09b311969e0a6308" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t LDO_Config_t::oc_pin</definition>
+        <argsstring></argsstring>
+        <name>oc_pin</name>
+        <qualifiedname>LDO_Config_t::oc_pin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="340" column="22" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="340" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o___config__t_1a7730ca2fec0b799905356ab0d30ef0c9" prot="public" static="no" mutable="no">
+        <type>GPIO_TypeDef *</type>
+        <definition>GPIO_TypeDef* LDO_Config_t::pg_port</definition>
+        <argsstring></argsstring>
+        <name>pg_port</name>
+        <qualifiedname>LDO_Config_t::pg_port</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Power-Good (entree) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="341" column="21" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="341" bodyend="-1"/>
+        <referencedby refid="group__grp__config_1ga2ba862323ea386969585492246cd74d6" compoundref="main_8c" startline="6223" endline="6264">LDO_Diagnostic</referencedby>
+        <referencedby refid="group__grp__config_1ga3bce4a57356f1afcbef6d05a989f33f5" compoundref="main_8c" startline="6117" endline="6159">LDO_GPIO_Init</referencedby>
+        <referencedby refid="group__grp__etat_1gad7a2801e95c498fa0a2f1982238ae732" compoundref="main_8c" startline="3307" endline="3361">LDO_MettreAJour</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o___config__t_1a5ebb072c54d0c8e06e4191c33bb66ca4" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t LDO_Config_t::pg_pin</definition>
+        <argsstring></argsstring>
+        <name>pg_pin</name>
+        <qualifiedname>LDO_Config_t::pg_pin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="342" column="22" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="342" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o___config__t_1a5bd88c21655b6be5ff18e2851cdddeaf" prot="public" static="no" mutable="no">
+        <type>LDO_TypeDef *</type>
+        <definition>LDO_TypeDef* LDO_Config_t::ldo</definition>
+        <argsstring></argsstring>
+        <name>ldo</name>
+        <qualifiedname>LDO_Config_t::ldo</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>etat logiciel (struct LDO) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="343" column="21" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="343" bodyend="-1"/>
+        <referencedby refid="group__grp__eeprom_1gaea23265d4fdedf9ac60d1c4afb886e40" compoundref="main_8c" startline="4822" endline="4885">DAC_RestaurerMemoire</referencedby>
+        <referencedby refid="group__grp__etat_1gad7a2801e95c498fa0a2f1982238ae732" compoundref="main_8c" startline="3307" endline="3361">LDO_MettreAJour</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o___config__t_1a436d89c79fab8032e135f8f962bb9d58" prot="public" static="no" mutable="no">
+        <type><ref refid="main_8c_1a75e57bba50363a40a374df0b941bfd58" kindref="member">CibleDac_t</ref></type>
+        <definition>CibleDac_t LDO_Config_t::dac_tension</definition>
+        <argsstring></argsstring>
+        <name>dac_tension</name>
+        <qualifiedname>LDO_Config_t::dac_tension</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>puce du DAC de tension </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="344" column="22" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="344" bodyend="-1"/>
+        <referencedby refid="group__grp__config_1ga8ad9d7191f49b52c41d5a583f774465d" compoundref="main_8c" startline="6025" endline="6058">LDO_InitialiserTables</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o___config__t_1a4a931dcafdf172ee7114cf1c9602bc1d" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t LDO_Config_t::canal_tension</definition>
+        <argsstring></argsstring>
+        <name>canal_tension</name>
+        <qualifiedname>LDO_Config_t::canal_tension</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>voie 0-7 du DAC de tension </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="345" column="22" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="345" bodyend="-1"/>
+        <referencedby refid="group__grp__config_1ga8ad9d7191f49b52c41d5a583f774465d" compoundref="main_8c" startline="6025" endline="6058">LDO_InitialiserTables</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o___config__t_1a363ddabe5e06a850e79f08385c46207a" prot="public" static="no" mutable="no">
+        <type><ref refid="main_8c_1a75e57bba50363a40a374df0b941bfd58" kindref="member">CibleDac_t</ref></type>
+        <definition>CibleDac_t LDO_Config_t::dac_courant</definition>
+        <argsstring></argsstring>
+        <name>dac_courant</name>
+        <qualifiedname>LDO_Config_t::dac_courant</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>puce du DAC de seuil de courant </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="346" column="22" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="346" bodyend="-1"/>
+        <referencedby refid="group__grp__eeprom_1ga538f60d46cf0ac04119fa65a989274be" compoundref="main_8c" startline="4902" endline="4928">DAC_ConfigurerSeuilsPotentiometre</referencedby>
+        <referencedby refid="group__grp__eeprom_1gaea23265d4fdedf9ac60d1c4afb886e40" compoundref="main_8c" startline="4822" endline="4885">DAC_RestaurerMemoire</referencedby>
+        <referencedby refid="group__grp__eeprom_1ga5f9ce30ec25412cc3efbe118447a5a11" compoundref="main_8c" startline="4755" endline="4804">DAC_TraiterSauvegardes</referencedby>
+        <referencedby refid="group__grp__config_1ga8ad9d7191f49b52c41d5a583f774465d" compoundref="main_8c" startline="6025" endline="6058">LDO_InitialiserTables</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o___config__t_1ab1b433037254fabc41638d891ec6499c" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t LDO_Config_t::canal_courant</definition>
+        <argsstring></argsstring>
+        <name>canal_courant</name>
+        <qualifiedname>LDO_Config_t::canal_courant</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>voie 0-7 du DAC de seuil de courant </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="347" column="22" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="347" bodyend="-1"/>
+        <referencedby refid="group__grp__eeprom_1ga538f60d46cf0ac04119fa65a989274be" compoundref="main_8c" startline="4902" endline="4928">DAC_ConfigurerSeuilsPotentiometre</referencedby>
+        <referencedby refid="group__grp__eeprom_1gaea23265d4fdedf9ac60d1c4afb886e40" compoundref="main_8c" startline="4822" endline="4885">DAC_RestaurerMemoire</referencedby>
+        <referencedby refid="group__grp__eeprom_1ga5f9ce30ec25412cc3efbe118447a5a11" compoundref="main_8c" startline="4755" endline="4804">DAC_TraiterSauvegardes</referencedby>
+        <referencedby refid="group__grp__config_1ga8ad9d7191f49b52c41d5a583f774465d" compoundref="main_8c" startline="6025" endline="6058">LDO_InitialiserTables</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o___config__t_1a59768e079b3397e54037a129ef4f9c2d" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_oc_config__t" kindref="compound">OcConfig_t</ref></type>
+        <definition>OcConfig_t LDO_Config_t::oc</definition>
+        <argsstring></argsstring>
+        <name>oc</name>
+        <qualifiedname>LDO_Config_t::oc</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>protection surintensite </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="348" column="22" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="348" bodyend="-1"/>
+        <referencedby refid="group__grp__eeprom_1gaea23265d4fdedf9ac60d1c4afb886e40" compoundref="main_8c" startline="4822" endline="4885">DAC_RestaurerMemoire</referencedby>
+        <referencedby refid="group__grp__config_1ga2ba862323ea386969585492246cd74d6" compoundref="main_8c" startline="6223" endline="6264">LDO_Diagnostic</referencedby>
+        <referencedby refid="group__grp__config_1ga8ad9d7191f49b52c41d5a583f774465d" compoundref="main_8c" startline="6025" endline="6058">LDO_InitialiserTables</referencedby>
+        <referencedby refid="group__grp__oc_1ga12ef8bab086612c9ecf3cb2ffed9c776" compoundref="main_8c" startline="6510" endline="6543">MX_OC_EXTI_Init</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o___config__t_1a86d4802858f22daa6de74f9451176788" prot="public" static="no" mutable="no">
+        <type>GPIO_PinState</type>
+        <definition>GPIO_PinState LDO_Config_t::bld_niveau_actif</definition>
+        <argsstring></argsstring>
+        <name>bld_niveau_actif</name>
+        <qualifiedname>LDO_Config_t::bld_niveau_actif</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>niveau de BLD qui fait conduire le bleeder </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="349" column="22" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="349" bodyend="-1"/>
+        <referencedby refid="group__grp__cmd_1ga5d44c3c48f8606b7286fe670f62997b4" compoundref="main_8c" startline="3625" endline="3640">CmdOnOff_BasculerBld</referencedby>
+        <referencedby refid="group__grp__config_1ga3bce4a57356f1afcbef6d05a989f33f5" compoundref="main_8c" startline="6117" endline="6159">LDO_GPIO_Init</referencedby>
+        <referencedby refid="group__grp__etat_1gad7a2801e95c498fa0a2f1982238ae732" compoundref="main_8c" startline="3307" endline="3361">LDO_MettreAJour</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o___config__t_1a636c9637a723e0c7d5de0c74573e0480" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t LDO_Config_t::bld_coupe_en</definition>
+        <argsstring></argsstring>
+        <name>bld_coupe_en</name>
+        <qualifiedname>LDO_Config_t::bld_coupe_en</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>1 = bleeder actif -&gt; EN coupe (protection de la sortie) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="350" column="22" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="350" bodyend="-1"/>
+        <referencedby refid="group__grp__etat_1gad7a2801e95c498fa0a2f1982238ae732" compoundref="main_8c" startline="3307" endline="3361">LDO_MettreAJour</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o___config__t_1a6faf3257e5843570bfbd7e6e4ac69875" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t LDO_Config_t::bld_sur_coupure_oc</definition>
+        <argsstring></argsstring>
+        <name>bld_sur_coupure_oc</name>
+        <qualifiedname>LDO_Config_t::bld_sur_coupure_oc</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>1 = bleeder force tant que le defaut OC est verrouille </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="351" column="22" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="351" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o___config__t_1a8bf1c02ea03f58433b9cca6ab5475dd6" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t LDO_Config_t::mux_tension</definition>
+        <argsstring></argsstring>
+        <name>mux_tension</name>
+        <qualifiedname>LDO_Config_t::mux_tension</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>voie initiale mux mesure tension (MUX_NC) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="352" column="22" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="352" bodyend="-1"/>
+        <referencedby refid="group__grp__config_1ga8ad9d7191f49b52c41d5a583f774465d" compoundref="main_8c" startline="6025" endline="6058">LDO_InitialiserTables</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o___config__t_1a9602612e2a2bd9e967025a7d357dcf6d" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t LDO_Config_t::mux_courant</definition>
+        <argsstring></argsstring>
+        <name>mux_courant</name>
+        <qualifiedname>LDO_Config_t::mux_courant</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>voie initiale mux mesure courant (MUX_NC) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="353" column="22" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="353" bodyend="-1"/>
+        <referencedby refid="group__grp__config_1ga8ad9d7191f49b52c41d5a583f774465d" compoundref="main_8c" startline="6025" endline="6058">LDO_InitialiserTables</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o___config__t_1a887afe1ed570ca20840e0497730798e8" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t LDO_Config_t::seuil_par_pot</definition>
+        <argsstring></argsstring>
+        <name>seuil_par_pot</name>
+        <qualifiedname>LDO_Config_t::seuil_par_pot</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>SEUIL_DAC (0) ou SEUIL_POT (1) : source du seuil OC </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="354" column="22" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="354" bodyend="-1"/>
+        <referencedby refid="group__grp__eeprom_1ga538f60d46cf0ac04119fa65a989274be" compoundref="main_8c" startline="4902" endline="4928">DAC_ConfigurerSeuilsPotentiometre</referencedby>
+        <referencedby refid="group__grp__eeprom_1gaea23265d4fdedf9ac60d1c4afb886e40" compoundref="main_8c" startline="4822" endline="4885">DAC_RestaurerMemoire</referencedby>
+        <referencedby refid="group__grp__eeprom_1ga5f9ce30ec25412cc3efbe118447a5a11" compoundref="main_8c" startline="4755" endline="4804">DAC_TraiterSauvegardes</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o___config__t_1a4090d7bdf9494c405adff20231e59dd6" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t LDO_Config_t::memoire_dac</definition>
+        <argsstring></argsstring>
+        <name>memoire_dac</name>
+        <qualifiedname>LDO_Config_t::memoire_dac</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>MEM_EEPROM (1) : codes DAC sauvegardes/restaures en EEPROM </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="355" column="22" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="355" bodyend="-1"/>
+        <referencedby refid="group__grp__eeprom_1gaea23265d4fdedf9ac60d1c4afb886e40" compoundref="main_8c" startline="4822" endline="4885">DAC_RestaurerMemoire</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o___config__t_1a7b83694b76200985dda7b928bc6d9d47" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t LDO_Config_t::cmd_bld_defaut</definition>
+        <argsstring></argsstring>
+        <name>cmd_bld_defaut</name>
+        <qualifiedname>LDO_Config_t::cmd_bld_defaut</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>CMD_ON_OFF_BLD du CSV : 1 = bleeder ON au 1er demarrage </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="356" column="22" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="356" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_l_d_o___config__t_1a45b6f0c5fd33dda21bf63ec901361c37" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t LDO_Config_t::cmd_oc_defaut</definition>
+        <argsstring></argsstring>
+        <name>cmd_oc_defaut</name>
+        <qualifiedname>LDO_Config_t::cmd_oc_defaut</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>CMD_ON_OFF_OC du CSV : 1 = protection OC ON au 1er demarrage </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="357" column="22" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="357" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Description complete d&apos;une LDO : UNE ligne de ldoConfig[]. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>LDO</label>
+        <link refid="struct_l_d_o"/>
+      </node>
+      <node id="1">
+        <label>LDO_Config_t</label>
+        <link refid="struct_l_d_o___config__t"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>ldo</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>oc</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>OcConfig_t</label>
+        <link refid="struct_oc_config__t"/>
+      </node>
+    </collaborationgraph>
+    <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="333" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="333" bodyend="358"/>
+    <listofallmembers>
+      <member refid="struct_l_d_o___config__t_1a636c9637a723e0c7d5de0c74573e0480" prot="public" virt="non-virtual"><scope>LDO_Config_t</scope><name>bld_coupe_en</name></member>
+      <member refid="struct_l_d_o___config__t_1a86d4802858f22daa6de74f9451176788" prot="public" virt="non-virtual"><scope>LDO_Config_t</scope><name>bld_niveau_actif</name></member>
+      <member refid="struct_l_d_o___config__t_1a2a81aac43428a27f84ca183d5c2e25f5" prot="public" virt="non-virtual"><scope>LDO_Config_t</scope><name>bld_pin</name></member>
+      <member refid="struct_l_d_o___config__t_1ae7c0856a698600dac5a3bcf57e9181a7" prot="public" virt="non-virtual"><scope>LDO_Config_t</scope><name>bld_port</name></member>
+      <member refid="struct_l_d_o___config__t_1a6faf3257e5843570bfbd7e6e4ac69875" prot="public" virt="non-virtual"><scope>LDO_Config_t</scope><name>bld_sur_coupure_oc</name></member>
+      <member refid="struct_l_d_o___config__t_1ab1b433037254fabc41638d891ec6499c" prot="public" virt="non-virtual"><scope>LDO_Config_t</scope><name>canal_courant</name></member>
+      <member refid="struct_l_d_o___config__t_1a4a931dcafdf172ee7114cf1c9602bc1d" prot="public" virt="non-virtual"><scope>LDO_Config_t</scope><name>canal_tension</name></member>
+      <member refid="struct_l_d_o___config__t_1a7b83694b76200985dda7b928bc6d9d47" prot="public" virt="non-virtual"><scope>LDO_Config_t</scope><name>cmd_bld_defaut</name></member>
+      <member refid="struct_l_d_o___config__t_1a45b6f0c5fd33dda21bf63ec901361c37" prot="public" virt="non-virtual"><scope>LDO_Config_t</scope><name>cmd_oc_defaut</name></member>
+      <member refid="struct_l_d_o___config__t_1a363ddabe5e06a850e79f08385c46207a" prot="public" virt="non-virtual"><scope>LDO_Config_t</scope><name>dac_courant</name></member>
+      <member refid="struct_l_d_o___config__t_1a436d89c79fab8032e135f8f962bb9d58" prot="public" virt="non-virtual"><scope>LDO_Config_t</scope><name>dac_tension</name></member>
+      <member refid="struct_l_d_o___config__t_1a0fcfe6cd6e6e7b80b4f5a45cb0b6629a" prot="public" virt="non-virtual"><scope>LDO_Config_t</scope><name>en_pin</name></member>
+      <member refid="struct_l_d_o___config__t_1ae9dd3d03509308f932bec9ff533476dc" prot="public" virt="non-virtual"><scope>LDO_Config_t</scope><name>en_port</name></member>
+      <member refid="struct_l_d_o___config__t_1a5bd88c21655b6be5ff18e2851cdddeaf" prot="public" virt="non-virtual"><scope>LDO_Config_t</scope><name>ldo</name></member>
+      <member refid="struct_l_d_o___config__t_1a4090d7bdf9494c405adff20231e59dd6" prot="public" virt="non-virtual"><scope>LDO_Config_t</scope><name>memoire_dac</name></member>
+      <member refid="struct_l_d_o___config__t_1a9602612e2a2bd9e967025a7d357dcf6d" prot="public" virt="non-virtual"><scope>LDO_Config_t</scope><name>mux_courant</name></member>
+      <member refid="struct_l_d_o___config__t_1a8bf1c02ea03f58433b9cca6ab5475dd6" prot="public" virt="non-virtual"><scope>LDO_Config_t</scope><name>mux_tension</name></member>
+      <member refid="struct_l_d_o___config__t_1a758e71184ba8cf7c7469b54870bd0dc7" prot="public" virt="non-virtual"><scope>LDO_Config_t</scope><name>name</name></member>
+      <member refid="struct_l_d_o___config__t_1a59768e079b3397e54037a129ef4f9c2d" prot="public" virt="non-virtual"><scope>LDO_Config_t</scope><name>oc</name></member>
+      <member refid="struct_l_d_o___config__t_1a4f362942c9d68afa09b311969e0a6308" prot="public" virt="non-virtual"><scope>LDO_Config_t</scope><name>oc_pin</name></member>
+      <member refid="struct_l_d_o___config__t_1a5ed27972c794409b5b714fe682915bfd" prot="public" virt="non-virtual"><scope>LDO_Config_t</scope><name>oc_port</name></member>
+      <member refid="struct_l_d_o___config__t_1a5ebb072c54d0c8e06e4191c33bb66ca4" prot="public" virt="non-virtual"><scope>LDO_Config_t</scope><name>pg_pin</name></member>
+      <member refid="struct_l_d_o___config__t_1a7730ca2fec0b799905356ab0d30ef0c9" prot="public" virt="non-virtual"><scope>LDO_Config_t</scope><name>pg_port</name></member>
+      <member refid="struct_l_d_o___config__t_1a887afe1ed570ca20840e0497730798e8" prot="public" virt="non-virtual"><scope>LDO_Config_t</scope><name>seuil_par_pot</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,678 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="group__grp__oc" kind="group">
+    <compoundname>grp_oc</compoundname>
+    <title>Protection de surintensité (OC)</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__grp__oc_1ga7851b235d1d1f7564644d659587b3ba2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>static uint8_t OC_EstSurveillee</definition>
+        <argsstring>(int idx)</argsstring>
+        <name>OC_EstSurveillee</name>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Indique si la LDO est surveillee : ldoConfig[idx].oc.surveille = 1 ET un DAC de seuil (dac_courant) declare dans sa ligne de ldoConfig[]. Ne depend pas du mapping modifiable a chaud. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO (0-17). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>si la LDO est surveillee, 0 sinon. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">if<sp/>(OC_EstSurveillee(findLdoIndex(&quot;2PSp&quot;))<sp/>!=<sp/>0U)<sp/>{<sp/>...<sp/>}</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3086" column="16" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3086" bodyend="3089"/>
+        <references refid="group__grp__oc_1ga7851b235d1d1f7564644d659587b3ba2" compoundref="main_8c" startline="3086" endline="3089">OC_EstSurveillee</references>
+        <referencedby refid="group__grp__eeprom_1ga538f60d46cf0ac04119fa65a989274be" compoundref="main_8c" startline="4902" endline="4928">DAC_ConfigurerSeuilsPotentiometre</referencedby>
+        <referencedby refid="group__grp__eeprom_1gaea23265d4fdedf9ac60d1c4afb886e40" compoundref="main_8c" startline="4822" endline="4885">DAC_RestaurerMemoire</referencedby>
+        <referencedby refid="group__grp__eeprom_1ga5f9ce30ec25412cc3efbe118447a5a11" compoundref="main_8c" startline="4755" endline="4804">DAC_TraiterSauvegardes</referencedby>
+        <referencedby refid="group__grp__dac_1ga1b7ca6a4fce7e0d525508dd4951a48f0" compoundref="main_8c" startline="4109" endline="4154">h_SET_CURRENT_LDO_GENERIQUE</referencedby>
+        <referencedby refid="group__grp__config_1ga8ad9d7191f49b52c41d5a583f774465d" compoundref="main_8c" startline="6025" endline="6058">LDO_InitialiserTables</referencedby>
+        <referencedby refid="group__grp__oc_1ga12ef8bab086612c9ecf3cb2ffed9c776" compoundref="main_8c" startline="6510" endline="6543">MX_OC_EXTI_Init</referencedby>
+        <referencedby refid="group__grp__oc_1ga5a3191b846544a7dced3ea094018f361" compoundref="main_8c" startline="3104" endline="3107">OC_EstActive</referencedby>
+        <referencedby refid="group__grp__oc_1ga7851b235d1d1f7564644d659587b3ba2" compoundref="main_8c" startline="3086" endline="3089">OC_EstSurveillee</referencedby>
+        <referencedby refid="group__grp__oc_1ga9358ff0a14ed464e81374dab1f13777d" compoundref="main_8c" startline="4173" endline="4185">OC_InitialiserSeuilsDefaut</referencedby>
+        <referencedby refid="group__grp__oc_1gaa95aeec744d338f67994e9ecbaf895b9" compoundref="main_8c" startline="4199" endline="4214">OC_LdoDuCanalSeuil</referencedby>
+        <referencedby refid="group__grp__dac_1gaeda25d5b60439cf57afc75b5c8096a3d" compoundref="main_8c" startline="4235" endline="4291">SetMappingDacLdo</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__oc_1ga5a3191b846544a7dced3ea094018f361" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>static uint8_t OC_EstActive</definition>
+        <argsstring>(int idx)</argsstring>
+        <name>OC_EstActive</name>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Indique si la protection OC est AGISSANTE : LDO surveillee (circuit cable, voir OC_EstSurveillee()) ET commande CMD_ON_OFF_OC = 1 (ON). Avec CMD_ON_OFF_OC = 0, la broche OC est ignoree : pas de coupure de l&apos;EN, pas de defaut memorise, l&apos;EN n&apos;attend pas de seuil valide. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>si la protection agit, 0 sinon. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">if<sp/>(OC_EstActive(findLdoIndex(&quot;2PSp&quot;))<sp/>!=<sp/>0U)<sp/>{<sp/>...<sp/>}</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3104" column="16" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3104" bodyend="3107"/>
+        <references refid="group__grp__oc_1ga5a3191b846544a7dced3ea094018f361" compoundref="main_8c" startline="3104" endline="3107">OC_EstActive</references>
+        <references refid="group__grp__oc_1ga7851b235d1d1f7564644d659587b3ba2" compoundref="main_8c" startline="3086" endline="3089">OC_EstSurveillee</references>
+        <referencedby refid="group__grp__etat_1gad7a2801e95c498fa0a2f1982238ae732" compoundref="main_8c" startline="3307" endline="3361">LDO_MettreAJour</referencedby>
+        <referencedby refid="group__grp__oc_1ga5a3191b846544a7dced3ea094018f361" compoundref="main_8c" startline="3104" endline="3107">OC_EstActive</referencedby>
+        <referencedby refid="group__grp__oc_1gafc2057d31d2abd2b3389f0e6ce4cc3a2" compoundref="main_8c" startline="3120" endline="3128">OC_SeuilValide</referencedby>
+        <referencedby refid="group__grp__oc_1gafaa9094a90053ac8bf6eace70669f172" compoundref="main_8c" startline="3283" endline="3294">OC_SurFrontIT</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__oc_1gafc2057d31d2abd2b3389f0e6ce4cc3a2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>static uint8_t OC_SeuilValide</definition>
+        <argsstring>(int idx)</argsstring>
+        <name>OC_SeuilValide</name>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Verifie que le seuil programme est dans la plage specifiee du LM211 (VDAC &gt;= 0,5 V). Une LDO non surveillee est toujours valide. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO (0-17). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>si le seuil est valide, 0 sinon. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">if<sp/>(OC_SeuilValide(findLdoIndex(&quot;2PSp&quot;))<sp/>==<sp/>0U)<sp/>{<sp/>refuser_activation();<sp/>}</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3120" column="16" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3120" bodyend="3128"/>
+        <references refid="group__grp__oc_1ga5a3191b846544a7dced3ea094018f361" compoundref="main_8c" startline="3104" endline="3107">OC_EstActive</references>
+        <references refid="group__grp__oc_1gafc2057d31d2abd2b3389f0e6ce4cc3a2" compoundref="main_8c" startline="3120" endline="3128">OC_SeuilValide</references>
+        <referencedby refid="group__grp__etat_1gad7a2801e95c498fa0a2f1982238ae732" compoundref="main_8c" startline="3307" endline="3361">LDO_MettreAJour</referencedby>
+        <referencedby refid="group__grp__oc_1ga53ac0c1da803505e54c72dbd31e4de73" compoundref="main_8c" startline="3952" endline="3963">OC_Etat</referencedby>
+        <referencedby refid="group__grp__oc_1gafc2057d31d2abd2b3389f0e6ce4cc3a2" compoundref="main_8c" startline="3120" endline="3128">OC_SeuilValide</referencedby>
+        <referencedby refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" compoundref="main_8c" startline="6290" endline="6439">tc_request</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__oc_1ga4c720f3df5385977a33b0d91f63df5f9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>static uint8_t OC_LireDefaut</definition>
+        <argsstring>(int idx)</argsstring>
+        <name>OC_LireDefaut</name>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Lit la broche OC de la LDO et indique si elle signale une surintensite. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO (0-17). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>si surintensite, 0 sinon. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">uint8_t<sp/>defaut<sp/>=<sp/>OC_LireDefaut(findLdoIndex(&quot;2PSp&quot;));</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3171" column="16" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3171" bodyend="3174"/>
+        <references refid="group__grp__oc_1ga4c720f3df5385977a33b0d91f63df5f9" compoundref="main_8c" startline="3171" endline="3174">OC_LireDefaut</references>
+        <referencedby refid="group__grp__config_1ga2ba862323ea386969585492246cd74d6" compoundref="main_8c" startline="6223" endline="6264">LDO_Diagnostic</referencedby>
+        <referencedby refid="group__grp__etat_1gad7a2801e95c498fa0a2f1982238ae732" compoundref="main_8c" startline="3307" endline="3361">LDO_MettreAJour</referencedby>
+        <referencedby refid="group__grp__etat_1ga4d73884db55d5370dfdce4dca8d1eddf" compoundref="main_8c" startline="3228" endline="3254">LDO_RelacherBleeder</referencedby>
+        <referencedby refid="group__grp__oc_1ga53ac0c1da803505e54c72dbd31e4de73" compoundref="main_8c" startline="3952" endline="3963">OC_Etat</referencedby>
+        <referencedby refid="group__grp__oc_1ga4c720f3df5385977a33b0d91f63df5f9" compoundref="main_8c" startline="3171" endline="3174">OC_LireDefaut</referencedby>
+        <referencedby refid="group__grp__oc_1ga61bd3c43a673ea375cabfe6a2de48eb0" compoundref="main_8c" startline="3929" endline="3938">OC_Rearmer</referencedby>
+        <referencedby refid="group__grp__oc_1gafaa9094a90053ac8bf6eace70669f172" compoundref="main_8c" startline="3283" endline="3294">OC_SurFrontIT</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__oc_1gad5ee0d7de4089f81d1b5309a4919b764" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void OC_Verrouiller</definition>
+        <argsstring>(int idx)</argsstring>
+        <name>OC_Verrouiller</name>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Coupe l&apos;EN de la LDO et verrouille le defaut. N&apos;utilise aucune API FreeRTOS : appelable depuis l&apos;interruption EXTI ou depuis la boucle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO (0-17). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">OC_Verrouiller(findLdoIndex(&quot;2PSp&quot;));</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3187" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3187" bodyend="3210"/>
+        <references refid="group__grp__eeprom_1ga0fdcf8780e2127569c1e1a76e9518c5a" compoundref="main_8c" startline="3147" endline="3159">DAC_DemanderSauvegarde</references>
+        <references refid="group__grp__oc_1gad5ee0d7de4089f81d1b5309a4919b764" compoundref="main_8c" startline="3187" endline="3210">OC_Verrouiller</references>
+        <referencedby refid="group__grp__etat_1gad7a2801e95c498fa0a2f1982238ae732" compoundref="main_8c" startline="3307" endline="3361">LDO_MettreAJour</referencedby>
+        <referencedby refid="group__grp__oc_1gafaa9094a90053ac8bf6eace70669f172" compoundref="main_8c" startline="3283" endline="3294">OC_SurFrontIT</referencedby>
+        <referencedby refid="group__grp__oc_1gad5ee0d7de4089f81d1b5309a4919b764" compoundref="main_8c" startline="3187" endline="3210">OC_Verrouiller</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__oc_1gab7b892d9b93ae98c0860c1569fb10702" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>static uint8_t OC_EstArme</definition>
+        <argsstring>(int idx)</argsstring>
+        <name>OC_EstArme</name>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Indique si la surveillance est armee : EN actif depuis au moins ldoConfig[idx].oc.blanking_ms (fin du soft-start et de l&apos;appel de courant). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO (0-17). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>si armee, 0 sinon. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">if<sp/>(OC_EstArme(findLdoIndex(&quot;2PSp&quot;))<sp/>!=<sp/>0U)<sp/>{<sp/>...<sp/>}</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3267" column="16" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3267" bodyend="3271"/>
+        <references refid="group__grp__oc_1gab7b892d9b93ae98c0860c1569fb10702" compoundref="main_8c" startline="3267" endline="3271">OC_EstArme</references>
+        <referencedby refid="group__grp__config_1ga2ba862323ea386969585492246cd74d6" compoundref="main_8c" startline="6223" endline="6264">LDO_Diagnostic</referencedby>
+        <referencedby refid="group__grp__etat_1gad7a2801e95c498fa0a2f1982238ae732" compoundref="main_8c" startline="3307" endline="3361">LDO_MettreAJour</referencedby>
+        <referencedby refid="group__grp__oc_1gab7b892d9b93ae98c0860c1569fb10702" compoundref="main_8c" startline="3267" endline="3271">OC_EstArme</referencedby>
+        <referencedby refid="group__grp__oc_1gafaa9094a90053ac8bf6eace70669f172" compoundref="main_8c" startline="3283" endline="3294">OC_SurFrontIT</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__oc_1gafaa9094a90053ac8bf6eace70669f172" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void OC_SurFrontIT</definition>
+        <argsstring>(int idx)</argsstring>
+        <name>OC_SurFrontIT</name>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Traitement d&apos;un front de la broche OC en interruption. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO dont la broche OC a change. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">OC_SurFrontIT(findLdoIndex(&quot;2PSp&quot;));<sp/><sp/><sp/>//<sp/>depuis<sp/>HAL_GPIO_EXTI_Callback()</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3283" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3283" bodyend="3294"/>
+        <references refid="group__grp__oc_1ga5a3191b846544a7dced3ea094018f361" compoundref="main_8c" startline="3104" endline="3107">OC_EstActive</references>
+        <references refid="group__grp__oc_1gab7b892d9b93ae98c0860c1569fb10702" compoundref="main_8c" startline="3267" endline="3271">OC_EstArme</references>
+        <references refid="group__grp__oc_1ga4c720f3df5385977a33b0d91f63df5f9" compoundref="main_8c" startline="3171" endline="3174">OC_LireDefaut</references>
+        <references refid="group__grp__oc_1gafaa9094a90053ac8bf6eace70669f172" compoundref="main_8c" startline="3283" endline="3294">OC_SurFrontIT</references>
+        <references refid="group__grp__oc_1gad5ee0d7de4089f81d1b5309a4919b764" compoundref="main_8c" startline="3187" endline="3210">OC_Verrouiller</references>
+        <referencedby refid="group__grp__exti_1ga0cd91fd3a9608559c2a87a8ba6cba55f" compoundref="main_8c" startline="6676" endline="6707">HAL_GPIO_EXTI_Callback</referencedby>
+        <referencedby refid="group__grp__oc_1gafaa9094a90053ac8bf6eace70669f172" compoundref="main_8c" startline="3283" endline="3294">OC_SurFrontIT</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__oc_1ga66c4ac6f7a9837733484590dbe3081d2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void OC_SignalerEvenements</definition>
+        <argsstring>(void)</argsstring>
+        <name>OC_SignalerEvenements</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Emet sur USART1 une ligne par defaut nouvellement verrouille. Appelee depuis la boucle de StartLwipTask(), jamais en interruption. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ligne emise : &quot;OC_TRIP:2PSp:NB=1:T_MS=123456:SEUIL=4006&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">OC_SignalerEvenements();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3898" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3898" bodyend="3914"/>
+        <references refid="group__grp__oc_1ga66c4ac6f7a9837733484590dbe3081d2" compoundref="main_8c" startline="3898" endline="3914">OC_SignalerEvenements</references>
+        <references refid="group__grp__comm_1gab9b5dfc109e472981cbbb7867d1b7f92" compoundref="main_8c" startline="1803" endline="1816">UART1_EnvoyerTexte</references>
+        <referencedby refid="group__grp__oc_1ga66c4ac6f7a9837733484590dbe3081d2" compoundref="main_8c" startline="3898" endline="3914">OC_SignalerEvenements</referencedby>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__oc_1ga61bd3c43a673ea375cabfe6a2de48eb0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void OC_Rearmer</definition>
+        <argsstring>(int idx, const char *nom)</argsstring>
+        <name>OC_Rearmer</name>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>nom</declname>
+        </param>
+        <briefdescription>
+<para>Commande &quot;RST_OC_LDO_&lt;nom&gt;&quot; : deverrouille le defaut si la broche OC est revenue au repos. L&apos;EN reste a 0 : l&apos;operateur doit renvoyer SET_EN_LDO_&lt;nom&gt;. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO (0-17). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nom</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nom de la LDO, pour la reponse. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reponse &quot;OC_RST:&lt;nom&gt;:OK&quot; ou &quot;OC_RST:&lt;nom&gt;:REFUS_OC_ACTIF&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;RST_OC_LDO_2PSp&quot;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3929" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3929" bodyend="3938"/>
+        <references refid="group__grp__oc_1ga4c720f3df5385977a33b0d91f63df5f9" compoundref="main_8c" startline="3171" endline="3174">OC_LireDefaut</references>
+        <references refid="group__grp__oc_1ga61bd3c43a673ea375cabfe6a2de48eb0" compoundref="main_8c" startline="3929" endline="3938">OC_Rearmer</references>
+        <referencedby refid="group__grp__oc_1ga61bd3c43a673ea375cabfe6a2de48eb0" compoundref="main_8c" startline="3929" endline="3938">OC_Rearmer</referencedby>
+        <referencedby refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" compoundref="main_8c" startline="6290" endline="6439">tc_request</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__oc_1ga53ac0c1da803505e54c72dbd31e4de73" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void OC_Etat</definition>
+        <argsstring>(int idx, const char *nom)</argsstring>
+        <name>OC_Etat</name>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>nom</declname>
+        </param>
+        <briefdescription>
+<para>Commande &quot;GET_OC_LDO_&lt;nom&gt;&quot; : etat complet de la protection. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO (0-17). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nom</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nom de la LDO, pour la reponse. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reponse &quot;OC_LDO:2PSp:NIV=0:VERROU=1:NB=1:T_MS=123456:SEUIL=4006:SEUIL_VALIDE=1&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;GET_OC_LDO_2PSp&quot;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3952" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3952" bodyend="3963"/>
+        <references refid="group__grp__oc_1ga53ac0c1da803505e54c72dbd31e4de73" compoundref="main_8c" startline="3952" endline="3963">OC_Etat</references>
+        <references refid="group__grp__oc_1ga4c720f3df5385977a33b0d91f63df5f9" compoundref="main_8c" startline="3171" endline="3174">OC_LireDefaut</references>
+        <references refid="group__grp__oc_1gafc2057d31d2abd2b3389f0e6ce4cc3a2" compoundref="main_8c" startline="3120" endline="3128">OC_SeuilValide</references>
+        <referencedby refid="group__grp__oc_1ga53ac0c1da803505e54c72dbd31e4de73" compoundref="main_8c" startline="3952" endline="3963">OC_Etat</referencedby>
+        <referencedby refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" compoundref="main_8c" startline="6290" endline="6439">tc_request</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__oc_1ga9358ff0a14ed464e81374dab1f13777d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void OC_InitialiserSeuilsDefaut</definition>
+        <argsstring>(void)</argsstring>
+        <name>OC_InitialiserSeuilsDefaut</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Programme le seuil de courant par defaut (ldoConfig[i].oc.seuil_defaut, 0,50 A par defaut) sur toutes les LDO surveillees, au demarrage. Sans cela, le seuil vaudrait 0 V (MCP4725_VAL_DEF), hors de la plage d&apos;entree du LM211, et l&apos;activation serait refusee. Doit etre appelee apres LDO_InitialiserTables() et avant tout traitement de commande UDP. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Met a jour CURRENT_LDO[], ldo-&gt;CURRENT et DACx_DEF ; la boucle de StartLwipTask() l&apos;envoie au DAC au tour suivant. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">LDO_InitialiserTables();</highlight></codeline>
+<codeline><highlight class="normal">OC_InitialiserSeuilsDefaut();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="4173" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="4173" bodyend="4185"/>
+        <references refid="group__grp__dac_1ga4469a4eb236eb4a995abab435c43c644" compoundref="main_8c" startline="4011" endline="4022">EcrireValeurDac</references>
+        <references refid="group__grp__oc_1ga7851b235d1d1f7564644d659587b3ba2" compoundref="main_8c" startline="3086" endline="3089">OC_EstSurveillee</references>
+        <references refid="group__grp__oc_1ga9358ff0a14ed464e81374dab1f13777d" compoundref="main_8c" startline="4173" endline="4185">OC_InitialiserSeuilsDefaut</references>
+        <referencedby refid="group__grp__oc_1ga9358ff0a14ed464e81374dab1f13777d" compoundref="main_8c" startline="4173" endline="4185">OC_InitialiserSeuilsDefaut</referencedby>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__oc_1gaa95aeec744d338f67994e9ecbaf895b9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int OC_LdoDuCanalSeuil</definition>
+        <argsstring>(const uint8_t *tableau, uint8_t canal)</argsstring>
+        <name>OC_LdoDuCanalSeuil</name>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>tableau</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>canal</declname>
+        </param>
+        <briefdescription>
+<para>Cherche la LDO surveillee dont le seuil de courant est sur le canal donne d&apos;un tableau DACx_DEF. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tableau</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tableau DACx_DEF (DAC1_DEF ... DAC5_DEF), peut etre NULL. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>canal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Canal (0-7). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>de la LDO (0-17), ou -1 si ce canal n&apos;est pas un seuil OC. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">int<sp/>idx<sp/>=<sp/>OC_LdoDuCanalSeuil(DAC1_DEF,<sp/>5);<sp/><sp/><sp/>//<sp/>-&gt;<sp/>2<sp/>(2PSp)</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="4199" column="12" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="4199" bodyend="4214"/>
+        <references refid="group__grp__oc_1ga7851b235d1d1f7564644d659587b3ba2" compoundref="main_8c" startline="3086" endline="3089">OC_EstSurveillee</references>
+        <references refid="group__grp__oc_1gaa95aeec744d338f67994e9ecbaf895b9" compoundref="main_8c" startline="4199" endline="4214">OC_LdoDuCanalSeuil</references>
+        <references refid="group__grp__dac_1gad09bc7e6abf4db69f2fea3ab311c637f" compoundref="main_8c" startline="3979" endline="3989">ResoudreTableauDac</references>
+        <referencedby refid="group__grp__dac_1ga161b95d8fabb7c81f08c2e0629238b6e" compoundref="main_8c" startline="4458" endline="4508">h_BALAYER_DAC</referencedby>
+        <referencedby refid="group__grp__oc_1gaa95aeec744d338f67994e9ecbaf895b9" compoundref="main_8c" startline="4199" endline="4214">OC_LdoDuCanalSeuil</referencedby>
+        <referencedby refid="group__grp__dac_1gaeda25d5b60439cf57afc75b5c8096a3d" compoundref="main_8c" startline="4235" endline="4291">SetMappingDacLdo</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__oc_1ga3c2340b58426351c26b0ff583df3f970" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>IRQn_Type</type>
+        <definition>static IRQn_Type OC_IrqDepuisBroche</definition>
+        <argsstring>(uint16_t pin)</argsstring>
+        <name>OC_IrqDepuisBroche</name>
+        <param>
+          <type>uint16_t</type>
+          <declname>pin</declname>
+        </param>
+        <briefdescription>
+<para>Ligne EXTI (IRQn) correspondant a une broche GPIO (la ligne EXTI n est partagee par la broche n de TOUS les ports). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Masque de broche HAL (GPIO_PIN_0 ... GPIO_PIN_15), un seul bit. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>IRQn_Type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>de la ligne EXTI correspondante. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">HAL_NVIC_EnableIRQ(OC_IrqDepuisBroche(GPIO_PIN_4));<sp/><sp/><sp/>//<sp/>EXTI4_IRQn</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6474" column="18" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6474" bodyend="6487"/>
+        <references refid="group__grp__oc_1ga3c2340b58426351c26b0ff583df3f970" compoundref="main_8c" startline="6474" endline="6487">OC_IrqDepuisBroche</references>
+        <referencedby refid="group__grp__oc_1ga12ef8bab086612c9ecf3cb2ffed9c776" compoundref="main_8c" startline="6510" endline="6543">MX_OC_EXTI_Init</referencedby>
+        <referencedby refid="group__grp__oc_1ga3c2340b58426351c26b0ff583df3f970" compoundref="main_8c" startline="6474" endline="6487">OC_IrqDepuisBroche</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__oc_1ga12ef8bab086612c9ecf3cb2ffed9c776" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void MX_OC_EXTI_Init</definition>
+        <argsstring>(void)</argsstring>
+        <name>MX_OC_EXTI_Init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Met en interruption la broche OC de chaque LDO declaree avec oc.interruption = 1 dans ldoConfig[], sur le front qui correspond a l&apos;apparition d&apos;une surintensite (montant si niveau_defaut = SET). Refuse (ligne UART &quot;OC_EXTI:&lt;nom&gt;:REFUS_LIGNE_n&quot;) une broche dont la ligne EXTI est deja prise (bouton, ou autre LDO de meme numero de broche sur un autre port) : la LDO reste alors surveillee par la boucle seule. Aucune API FreeRTOS n&apos;est appelee dans l&apos;IT : la priorite 2 peut etre plus haute que configMAX_SYSCALL_INTERRUPT_PRIORITY. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Remplit oc_it_active[]. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">InitialiserConfigDacsI2C1();</highlight></codeline>
+<codeline><highlight class="normal">MX_OC_EXTI_Init();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6510" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6510" bodyend="6543"/>
+        <references refid="struct_oc_config__t_1ab4aae6449b7133c24f0a31a11881bf23" compoundref="main_8c" startline="321">OcConfig_t::interruption</references>
+        <references refid="group__grp__oc_1ga12ef8bab086612c9ecf3cb2ffed9c776" compoundref="main_8c" startline="6510" endline="6543">MX_OC_EXTI_Init</references>
+        <references refid="struct_l_d_o___config__t_1a758e71184ba8cf7c7469b54870bd0dc7" compoundref="main_8c" startline="334">LDO_Config_t::name</references>
+        <references refid="struct_oc_config__t_1a02fdfd44379abeade99ae11bc092a844" compoundref="main_8c" startline="322">OcConfig_t::niveau_defaut</references>
+        <references refid="struct_l_d_o___config__t_1a59768e079b3397e54037a129ef4f9c2d" compoundref="main_8c" startline="348">LDO_Config_t::oc</references>
+        <references refid="group__grp__oc_1ga7851b235d1d1f7564644d659587b3ba2" compoundref="main_8c" startline="3086" endline="3089">OC_EstSurveillee</references>
+        <references refid="group__grp__oc_1ga3c2340b58426351c26b0ff583df3f970" compoundref="main_8c" startline="6474" endline="6487">OC_IrqDepuisBroche</references>
+        <references refid="struct_l_d_o___config__t_1a5ed27972c794409b5b714fe682915bfd" compoundref="main_8c" startline="339">LDO_Config_t::oc_port</references>
+        <references refid="group__grp__comm_1gab9b5dfc109e472981cbbb7867d1b7f92" compoundref="main_8c" startline="1803" endline="1816">UART1_EnvoyerTexte</references>
+        <referencedby refid="group__grp__oc_1ga12ef8bab086612c9ecf3cb2ffed9c776" compoundref="main_8c" startline="6510" endline="6543">MX_OC_EXTI_Init</referencedby>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Surveillance, verrouillage, signalement et réarmement de la protection LM211. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

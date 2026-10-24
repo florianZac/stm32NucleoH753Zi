@@ -1,0 +1,17 @@
+<map id="ldo_config_csv.normaliser_broche" name="ldo_config_csv.normaliser_broche">
+<area shape="rect" id="Node000001" title=" " alt="" coords="657,56,829,99"/>
+<area shape="rect" id="Node000002" href="$namespaceldo__config__csv.html#a9831324bd62fc0edfbb81a47f4e9df4d" title=" " alt="" coords="438,56,609,99"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="639,78,610,80,610,75,645,77"/>
+<area shape="rect" id="Node000003" href="$namespaceldo__config__csv.html#ae13ae04d824d3e4ef44203ace3510c65" title=" " alt="" coords="222,5,390,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="425,52,358,35,358,30,430,51"/>
+<area shape="rect" id="Node000005" href="$namespaceldo__config__csv.html#add5edc00560b683b44f194fa7cb345ea" title=" " alt="" coords="242,56,370,99"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="420,78,370,80,370,75,426,77"/>
+<area shape="rect" id="Node000007" href="$namespaceldo__config__csv.html#a820a443863bc420ed6f8c56689a0969c" title=" " alt="" coords="222,127,390,153"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="435,103,356,129,355,123,430,104"/>
+<area shape="rect" id="Node000004" href="$namespaceldo__config__csv.html#ae5b2fcb4eec4c52b9966d20e84c5093c" title=" " alt="" coords="5,5,174,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="204,20,175,21,173,16,209,18"/>
+<area shape="rect" id="Node000006" href="$namespaceldo__config__csv.html#ae0d2ad7c8459c6ca61e654b4692c4a86" title=" " alt="" coords="25,56,154,99"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="224,78,154,80,154,75,229,76"/>
+<area shape="rect" id="Node000008" href="$namespaceldo__config__csv.html#af19bfc842b7b882af076b03fc4adc9ef" title=" " alt="" coords="18,123,161,165"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="204,142,162,145,162,140,209,142"/>
+</map>

@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="generer__config_8py" kind="file" language="Python">
+    <compoundname>generer_config.py</compoundname>
+    <innernamespace refid="namespacegenerer__config">generer_config</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/configurationLDO/generer_config.py"/>
+  </compounddef>
+</doxygen>

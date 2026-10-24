@@ -1,0 +1,399 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="group__grp__config" kind="group">
+    <compoundname>grp_config</compoundname>
+    <title>Configuration des LDO (CSV) et broches</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__grp__config_1gadc686ab4f6036d732a6f2b1ecb6dbd01" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int findLdoIndex</definition>
+        <argsstring>(const char *suffix)</argsstring>
+        <name>findLdoIndex</name>
+        <param>
+          <type>const char *</type>
+          <declname>suffix</declname>
+        </param>
+        <briefdescription>
+<para>Recherche l&apos;indice (0 a NB_LDO-1) d&apos;une LDO dans le tableau ldoConfig[] a partir de son suffixe de nom. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>suffix</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Chaine de caracteres identifiant la LDO, sans le prefixe de commande (ex : &quot;1PSp&quot;, &quot;3PLn&quot;). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>int</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indice trouve dans ldoConfig[] (0..17), ou -1 si le suffixe ne correspond a aucune LDO connue. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">int<sp/>idx<sp/>=<sp/>findLdoIndex(&quot;2PSn&quot;);<sp/><sp/><sp/>//<sp/>idx<sp/>==<sp/>3</highlight></codeline>
+<codeline><highlight class="normal">int<sp/>bad<sp/>=<sp/>findLdoIndex(&quot;ALL&quot;);<sp/><sp/><sp/><sp/>//<sp/>bad<sp/>==<sp/>-1</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="2727" column="12" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="2727" bodyend="2733"/>
+        <references refid="group__grp__config_1gadc686ab4f6036d732a6f2b1ecb6dbd01" compoundref="main_8c" startline="2727" endline="2733">findLdoIndex</references>
+        <referencedby refid="group__grp__config_1gadc686ab4f6036d732a6f2b1ecb6dbd01" compoundref="main_8c" startline="2727" endline="2733">findLdoIndex</referencedby>
+        <referencedby refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" compoundref="main_8c" startline="6290" endline="6439">tc_request</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__config_1ga8ad9d7191f49b52c41d5a583f774465d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void LDO_InitialiserTables</definition>
+        <argsstring>(void)</argsstring>
+        <name>LDO_InitialiserTables</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Recopie dans les tables RAM modifiables a chaud les valeurs initiales declarees dans ldoConfig[] : mapping DAC tension/courant (mappingDacLdo[]) et voies des multiplexeurs de mesure (muxLdoConfig[], muxLdoConfigCourant[]). A appeler UNE FOIS au demarrage, avant OC_InitialiserSeuilsDefaut() et udpServer_init(). Signale sur USART1 toute ligne incoherente (LDO surveillee sans DAC de seuil, seuil par defaut hors bornes, voie DAC &gt; 7). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">LDO_InitialiserTables();</highlight></codeline>
+<codeline><highlight class="normal">OC_InitialiserSeuilsDefaut();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6025" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6025" bodyend="6058"/>
+        <references refid="struct_l_d_o___config__t_1ab1b433037254fabc41638d891ec6499c" compoundref="main_8c" startline="347">LDO_Config_t::canal_courant</references>
+        <references refid="struct_l_d_o___config__t_1a4a931dcafdf172ee7114cf1c9602bc1d" compoundref="main_8c" startline="345">LDO_Config_t::canal_tension</references>
+        <references refid="struct_l_d_o___config__t_1a363ddabe5e06a850e79f08385c46207a" compoundref="main_8c" startline="346">LDO_Config_t::dac_courant</references>
+        <references refid="struct_l_d_o___config__t_1a436d89c79fab8032e135f8f962bb9d58" compoundref="main_8c" startline="344">LDO_Config_t::dac_tension</references>
+        <references refid="group__grp__config_1ga8ad9d7191f49b52c41d5a583f774465d" compoundref="main_8c" startline="6025" endline="6058">LDO_InitialiserTables</references>
+        <references refid="struct_l_d_o___config__t_1a9602612e2a2bd9e967025a7d357dcf6d" compoundref="main_8c" startline="353">LDO_Config_t::mux_courant</references>
+        <references refid="struct_l_d_o___config__t_1a8bf1c02ea03f58433b9cca6ab5475dd6" compoundref="main_8c" startline="352">LDO_Config_t::mux_tension</references>
+        <references refid="struct_l_d_o___config__t_1a758e71184ba8cf7c7469b54870bd0dc7" compoundref="main_8c" startline="334">LDO_Config_t::name</references>
+        <references refid="struct_l_d_o___config__t_1a59768e079b3397e54037a129ef4f9c2d" compoundref="main_8c" startline="348">LDO_Config_t::oc</references>
+        <references refid="group__grp__oc_1ga7851b235d1d1f7564644d659587b3ba2" compoundref="main_8c" startline="3086" endline="3089">OC_EstSurveillee</references>
+        <references refid="struct_oc_config__t_1ab54cb3ef340e386f02f0d25ddb7a5bdc" compoundref="main_8c" startline="323">OcConfig_t::seuil_defaut</references>
+        <references refid="struct_oc_config__t_1a02d54a5b70b7606da5863162de32fd80" compoundref="main_8c" startline="325">OcConfig_t::seuil_max</references>
+        <references refid="struct_oc_config__t_1a98afa44ff3ce1b9dea487d408539ec0e" compoundref="main_8c" startline="324">OcConfig_t::seuil_min</references>
+        <references refid="struct_oc_config__t_1a56247b577392782299054a6ef58879dd" compoundref="main_8c" startline="320">OcConfig_t::surveille</references>
+        <references refid="group__grp__comm_1gab9b5dfc109e472981cbbb7867d1b7f92" compoundref="main_8c" startline="1803" endline="1816">UART1_EnvoyerTexte</references>
+        <referencedby refid="group__grp__config_1ga8ad9d7191f49b52c41d5a583f774465d" compoundref="main_8c" startline="6025" endline="6058">LDO_InitialiserTables</referencedby>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__config_1gaa5729680e86eeadbd61a302f18bf329f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void LDO_ActiverHorlogePort</definition>
+        <argsstring>(GPIO_TypeDef *port)</argsstring>
+        <name>LDO_ActiverHorlogePort</name>
+        <param>
+          <type>GPIO_TypeDef *</type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+<para>Active l&apos;horloge d&apos;un port GPIO (A a H). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>GPIOA ... GPIOH. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">LDO_ActiverHorlogePort(GPIOE);</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6070" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6070" bodyend="6081"/>
+        <references refid="group__grp__config_1gaa5729680e86eeadbd61a302f18bf329f" compoundref="main_8c" startline="6070" endline="6081">LDO_ActiverHorlogePort</references>
+        <referencedby refid="group__grp__config_1gaa5729680e86eeadbd61a302f18bf329f" compoundref="main_8c" startline="6070" endline="6081">LDO_ActiverHorlogePort</referencedby>
+        <referencedby refid="group__grp__config_1ga3bce4a57356f1afcbef6d05a989f33f5" compoundref="main_8c" startline="6117" endline="6159">LDO_GPIO_Init</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__config_1gae28fc29161c8b412bf38609488b281ef" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>static uint8_t LDO_BrocheBouton</definition>
+        <argsstring>(GPIO_TypeDef *port, uint16_t pin)</argsstring>
+        <name>LDO_BrocheBouton</name>
+        <param>
+          <type>GPIO_TypeDef *</type>
+          <declname>port</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>pin</declname>
+        </param>
+        <briefdescription>
+<para>Indique si une broche appartient a un bouton du firmware (PC13 USER, PD0 reset ADG728). Ces broches ne sont jamais reconfigurees par LDO_GPIO_Init() (generer_config.py le signale en avertissement). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Port GPIO. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Masque de broche HAL. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>si la broche est reservee a un bouton, 0 sinon. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">if<sp/>(LDO_BrocheBouton(GPIOC,<sp/>GPIO_PIN_13)<sp/>!=<sp/>0U)<sp/>{<sp/>...<sp/>}</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6096" column="16" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6096" bodyend="6099" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="112" declcolumn="16"/>
+        <references refid="group__grp__config_1gae28fc29161c8b412bf38609488b281ef" compoundref="main_8c" startline="6096" endline="6099">LDO_BrocheBouton</references>
+        <referencedby refid="group__grp__cmd_1ga5d44c3c48f8606b7286fe670f62997b4" compoundref="main_8c" startline="3625" endline="3640">CmdOnOff_BasculerBld</referencedby>
+        <referencedby refid="group__grp__config_1gae28fc29161c8b412bf38609488b281ef" compoundref="main_8c" startline="6096" endline="6099">LDO_BrocheBouton</referencedby>
+        <referencedby refid="group__grp__config_1ga3bce4a57356f1afcbef6d05a989f33f5" compoundref="main_8c" startline="6117" endline="6159">LDO_GPIO_Init</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__config_1ga3bce4a57356f1afcbef6d05a989f33f5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void LDO_GPIO_Init</definition>
+        <argsstring>(void)</argsstring>
+        <name>LDO_GPIO_Init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Configure les broches de TOUTES les LDO a partir de ldoConfig[] (donc du CSV), independamment du .ioc : EN en sortie a 0, BLD en sortie au niveau inactif, OC et PG en entree (sans tirage : R109 et tirages externes). Les broches OC en interruption sont ensuite reprises par MX_OC_EXTI_Init(). Le niveau de sortie est ecrit AVANT le passage en sortie : aucune impulsion sur EN ni BLD. A appeler juste apres MX_GPIO_Init() (USER CODE BEGIN 2). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">MX_GPIO_Init();</highlight></codeline>
+<codeline><highlight class="normal">LDO_GPIO_Init();</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6117" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6117" bodyend="6159" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="110" declcolumn="13"/>
+        <references refid="struct_l_d_o___config__t_1a86d4802858f22daa6de74f9451176788" compoundref="main_8c" startline="349">LDO_Config_t::bld_niveau_actif</references>
+        <references refid="struct_l_d_o___config__t_1ae7c0856a698600dac5a3bcf57e9181a7" compoundref="main_8c" startline="337">LDO_Config_t::bld_port</references>
+        <references refid="struct_l_d_o___config__t_1ae9dd3d03509308f932bec9ff533476dc" compoundref="main_8c" startline="335">LDO_Config_t::en_port</references>
+        <references refid="group__grp__config_1gaa5729680e86eeadbd61a302f18bf329f" compoundref="main_8c" startline="6070" endline="6081">LDO_ActiverHorlogePort</references>
+        <references refid="group__grp__config_1gae28fc29161c8b412bf38609488b281ef" compoundref="main_8c" startline="6096" endline="6099">LDO_BrocheBouton</references>
+        <references refid="group__grp__config_1ga3bce4a57356f1afcbef6d05a989f33f5" compoundref="main_8c" startline="6117" endline="6159">LDO_GPIO_Init</references>
+        <references refid="struct_l_d_o___config__t_1a5ed27972c794409b5b714fe682915bfd" compoundref="main_8c" startline="339">LDO_Config_t::oc_port</references>
+        <references refid="struct_l_d_o___config__t_1a7730ca2fec0b799905356ab0d30ef0c9" compoundref="main_8c" startline="341">LDO_Config_t::pg_port</references>
+        <referencedby refid="group__grp__config_1ga3bce4a57356f1afcbef6d05a989f33f5" compoundref="main_8c" startline="6117" endline="6159">LDO_GPIO_Init</referencedby>
+        <referencedby refid="group__grp__cubemx_1ga840291bc02cba5474a4cb46a9b9566fe" compoundref="main_8c" startline="1824" endline="1932">main</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__config_1ga8a388f244af9f1ecdae4d35c3126a7ea" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_GET_CONFIG_LDO</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_GET_CONFIG_LDO</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Commande &quot;GET_CONFIG_LDO&quot; : nombre de LDO et empreinte de la configuration compilee. Le controleur la compare a celle du CSV pour signaler une carte non reflashee apres modification. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reponse &quot;CONFIG_LDO:NB=18:CRC=0x3A5E98C0&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;GET_CONFIG_LDO&quot;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6172" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6172" bodyend="6175" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="111" declcolumn="13"/>
+        <references refid="group__grp__config_1ga8a388f244af9f1ecdae4d35c3126a7ea" compoundref="main_8c" startline="6172" endline="6175">h_GET_CONFIG_LDO</references>
+        <referencedby refid="group__grp__config_1ga8a388f244af9f1ecdae4d35c3126a7ea" compoundref="main_8c" startline="6172" endline="6175">h_GET_CONFIG_LDO</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__config_1ga12b4c9909bec1ea781ab3e736da3b356" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char</type>
+        <definition>static char ModeBroche</definition>
+        <argsstring>(GPIO_TypeDef *port, uint16_t pin)</argsstring>
+        <name>ModeBroche</name>
+        <param>
+          <type>GPIO_TypeDef *</type>
+          <declname>port</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>pin</declname>
+        </param>
+        <briefdescription>
+<para>Mode d&apos;une broche GPIO lu dans le registre MODER. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Port GPIO (GPIOA ... GPIOK). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Masque de broche HAL (un seul bit). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>&apos;I&apos;</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>entree, &apos;O&apos; sortie, &apos;F&apos; fonction alternative, &apos;A&apos; analogique. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">char<sp/>m<sp/>=<sp/>ModeBroche(GPIOF,<sp/>GPIO_PIN_1);<sp/><sp/><sp/>//<sp/>&apos;O&apos;<sp/>attendu<sp/>pour<sp/>BLD_LDO2_PSp</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6188" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6188" bodyend="6199"/>
+        <references refid="group__grp__config_1ga12b4c9909bec1ea781ab3e736da3b356" compoundref="main_8c" startline="6188" endline="6199">ModeBroche</references>
+        <referencedby refid="group__grp__config_1ga2ba862323ea386969585492246cd74d6" compoundref="main_8c" startline="6223" endline="6264">LDO_Diagnostic</referencedby>
+        <referencedby refid="group__grp__config_1ga12b4c9909bec1ea781ab3e736da3b356" compoundref="main_8c" startline="6188" endline="6199">ModeBroche</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__config_1ga2ba862323ea386969585492246cd74d6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void LDO_Diagnostic</definition>
+        <argsstring>(int idx, const char *nom)</argsstring>
+        <name>LDO_Diagnostic</name>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>nom</declname>
+        </param>
+        <briefdescription>
+<para>Commande &quot;GET_DIAG_LDO_&lt;nom&gt;&quot; : etat REEL des broches d&apos;une LDO (niveau lu sur la broche, pas seulement la commande logicielle) et de la protection OC. Separe un defaut firmware d&apos;un defaut carte : si BL=1/1O et que le bleeder ne conduit pas, ou si OC reste a 0 avec VU=0 et FR=0 alors que le courant depasse le seuil, le probleme est en aval de la broche (carte), pas dans le code. VU (OC vu actif par la boucle) est remis a 0 a chaque lecture. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO (0-17). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nom</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nom de la LDO, pour la reponse. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reponse (aussi emise sur USART1), par exemple : &quot;DIAG:2PSp:EN=1/1:BL=1/1O:OC=0/0:VU=0:FR=0:IT=1:ARME=1:VER=0:S=1056:1289mV:493mA:PG=1:V=860:DACR=0&quot; EN=commande/broche, BL=commande/broche+mode MODER, OC=defaut/niveau brut, FR=fronts EXTI, S=code seuil, puis VDAC et seuil (hors hysteresis), V=code du DAC de tension en memoire, DACR=reconfigurations de sa puce par SurveillerConfigDacsI2C1(). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;GET_DIAG_LDO_2PSp&quot;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6223" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6223" bodyend="6264"/>
+        <references refid="struct_l_d_o___config__t_1ae7c0856a698600dac5a3bcf57e9181a7" compoundref="main_8c" startline="337">LDO_Config_t::bld_port</references>
+        <references refid="struct_l_d_o___config__t_1ae9dd3d03509308f932bec9ff533476dc" compoundref="main_8c" startline="335">LDO_Config_t::en_port</references>
+        <references refid="group__grp__dac_1gab992619e0a04a6fbb9a6a97c2e284c65" compoundref="main_8c" startline="1175" endline="1189">IndexDacI2C1</references>
+        <references refid="struct_oc_config__t_1a797257c705383220e7d91decf2270a7e" compoundref="main_8c" startline="327">OcConfig_t::k_mv_par_a</references>
+        <references refid="group__grp__config_1ga2ba862323ea386969585492246cd74d6" compoundref="main_8c" startline="6223" endline="6264">LDO_Diagnostic</references>
+        <references refid="group__grp__config_1ga12b4c9909bec1ea781ab3e736da3b356" compoundref="main_8c" startline="6188" endline="6199">ModeBroche</references>
+        <references refid="struct_l_d_o___config__t_1a59768e079b3397e54037a129ef4f9c2d" compoundref="main_8c" startline="348">LDO_Config_t::oc</references>
+        <references refid="group__grp__oc_1gab7b892d9b93ae98c0860c1569fb10702" compoundref="main_8c" startline="3267" endline="3271">OC_EstArme</references>
+        <references refid="group__grp__oc_1ga4c720f3df5385977a33b0d91f63df5f9" compoundref="main_8c" startline="3171" endline="3174">OC_LireDefaut</references>
+        <references refid="struct_l_d_o___config__t_1a5ed27972c794409b5b714fe682915bfd" compoundref="main_8c" startline="339">LDO_Config_t::oc_port</references>
+        <references refid="struct_l_d_o___config__t_1a7730ca2fec0b799905356ab0d30ef0c9" compoundref="main_8c" startline="341">LDO_Config_t::pg_port</references>
+        <references refid="group__grp__comm_1gab9b5dfc109e472981cbbb7867d1b7f92" compoundref="main_8c" startline="1803" endline="1816">UART1_EnvoyerTexte</references>
+        <referencedby refid="group__grp__config_1ga2ba862323ea386969585492246cd74d6" compoundref="main_8c" startline="6223" endline="6264">LDO_Diagnostic</referencedby>
+        <referencedby refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" compoundref="main_8c" startline="6290" endline="6439">tc_request</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Lecture de ldoConfig[] (généré depuis le CSV), configuration des broches, recherche d&apos;une LDO par son nom. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

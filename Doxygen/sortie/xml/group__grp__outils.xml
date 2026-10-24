@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="group__grp__outils" kind="group">
+    <compoundname>grp_outils</compoundname>
+    <title>Outils généraux</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__grp__outils_1ga4264917775e9932f98b48713bf592321" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int map</definition>
+        <argsstring>(uint16_t x, uint16_t in_min, uint16_t in_max, uint16_t out_min, uint16_t out_max)</argsstring>
+        <name>map</name>
+        <param>
+          <type>uint16_t</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>in_min</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>in_max</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>out_min</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>out_max</declname>
+        </param>
+        <briefdescription>
+<para>Met a l&apos;echelle lineaire une valeur d&apos;une plage d&apos;entree vers une plage de sortie (equivalent de la fonction map() d&apos;Arduino). Utilisee pour convertir une lecture ADC brute (0-65535) en pourcentage (0-100). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Valeur a convertir. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>in_min</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Borne basse de la plage d&apos;entree. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>in_max</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Borne haute de la plage d&apos;entree. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>out_min</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Borne basse de la plage de sortie. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>out_max</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Borne haute de la plage de sortie. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>int</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Valeur convertie, ramenee dans la plage [out_min, out_max]. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">int<sp/>pourcentage<sp/>=<sp/>map(32768,<sp/>0,<sp/>65535,<sp/>0,<sp/>100);<sp/><sp/><sp/>//<sp/>~=<sp/>50</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6458" column="5" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6458" bodyend="6461" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="85" declcolumn="5"/>
+        <references refid="group__grp__outils_1ga4264917775e9932f98b48713bf592321" compoundref="main_8c" startline="6458" endline="6461">map</references>
+        <referencedby refid="group__grp__adc_1ga096a71e898411e3976c99187adaddc11" compoundref="main_8c" startline="4332" endline="4341">h_GET_CURRENT_1</referencedby>
+        <referencedby refid="group__grp__adc_1ga861c7e50b324d97f26759930fa7390a2" compoundref="main_8c" startline="4355" endline="4364">h_GET_CURRENT_2</referencedby>
+        <referencedby refid="group__grp__outils_1ga4264917775e9932f98b48713bf592321" compoundref="main_8c" startline="6458" endline="6461">map</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Fonctions utilitaires. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

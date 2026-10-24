@@ -1,0 +1,1899 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="main_8c" kind="file" language="C++">
+    <compoundname>main.c</compoundname>
+    <includes refid="main_8h" local="yes">main.h</includes>
+    <includes local="yes">cmsis_os.h</includes>
+    <includes local="yes">lwip.h</includes>
+    <includes local="no">string.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes local="yes">lwip/udp.h</includes>
+    <includes refid="ldo__config__genere_8h" local="yes">ldo_config_genere.h</includes>
+    <includes local="yes">ldo_config_lignes.inc</includes>
+    <incdepgraph>
+      <node id="10">
+        <label>ldo_config_genere.h</label>
+        <link refid="ldo__config__genere_8h_source"/>
+      </node>
+      <node id="2">
+        <label>main.h</label>
+        <link refid="main_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c</label>
+        <link refid="main_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>cmsis_os.h</label>
+      </node>
+      <node id="11">
+        <label>ldo_config_lignes.inc</label>
+      </node>
+      <node id="5">
+        <label>lwip.h</label>
+      </node>
+      <node id="9">
+        <label>lwip/udp.h</label>
+      </node>
+      <node id="7">
+        <label>stdio.h</label>
+      </node>
+      <node id="8">
+        <label>stdlib.h</label>
+      </node>
+      <node id="3">
+        <label>stm32h7xx_hal.h</label>
+      </node>
+      <node id="6">
+        <label>string.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="struct_mapping_dac_ldo__t" prot="public">MappingDacLdo_t</innerclass>
+    <innerclass refid="struct_dac_puce__t" prot="public">DacPuce_t</innerclass>
+    <innerclass refid="struct_oc_config__t" prot="public">OcConfig_t</innerclass>
+    <innerclass refid="struct_l_d_o___config__t" prot="public">LDO_Config_t</innerclass>
+    <innerclass refid="struct_scan_result__t" prot="public">ScanResult_t</innerclass>
+    <innerclass refid="struct_mux_ldo_config__t" prot="public">MuxLdoConfig_t</innerclass>
+    <innerclass refid="struct_mux_ldo_config_courant__t" prot="public">MuxLdoConfigCourant_t</innerclass>
+    <innerclass refid="struct_command__t" prot="public">Command_t</innerclass>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="main_8c_1a8b35558692a0f1e770391e168331655f" prot="public" static="no">
+        <name>NB_LDO</name>
+        <initializer>LDO_NB</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="262" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="262" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1addf9569bf1222e7d67e48eb5e3121ee9" prot="public" static="no">
+        <name>NB_DAC_PUCES</name>
+        <initializer>(sizeof(tableDac) / sizeof(tableDac[0]))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="313" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="313" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1aad16d67bcfc63c84ce3147fad2107467" prot="public" static="no">
+        <name>BROCHES_LDO</name>
+        <param><defname>s</defname></param>
+        <initializer>EN_LDO##s##_GPIO_Port,  EN_LDO##s##_Pin,  \
+BLD_LDO##s##_GPIO_Port, BLD_LDO##s##_Pin, \
+OC_LDO##s##_GPIO_Port,  OC_LDO##s##_Pin,  \
+PG_LDO##s##_GPIO_Port,  PG_LDO##s##_Pin</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Les 4 broches d&apos;une LDO a partir de son suffixe CubeMX (ex : 2_PSp). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="363" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="363" bodyend="366"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1a99dfb57cf3bbe3e87e309120be4c4219" prot="public" static="no">
+        <name>OC_K_MV_PAR_A</name>
+        <initializer>((uint16_t)(OC_K_V_PAR_A * 1000.0f + 0.5f))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Gain de la chaine de mesure en mV/A (2610 carte corrigee, 10000 sinon). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="369" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="369" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1a43bd5bee2587d25e1f08cb497c760519" prot="public" static="no">
+        <name>OC_LM211</name>
+        <param><defname>it</defname></param>
+        <initializer>{ 1U, (it), OC_NIVEAU_DEFAUT, OC_CODE_SEUIL_DEFAUT, \
+OC_CODE_SEUIL_MIN, OC_CODE_SEUIL_MAX, OC_BLANKING_MS, <ref refid="main_8c_1a99dfb57cf3bbe3e87e309120be4c4219" kindref="member">OC_K_MV_PAR_A</ref> }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>LDO equipee du circuit shunt + OP184 + LM211. it = 1 : broche OC en EXTI. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="372" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="372" bodyend="373"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1a123ef4d7cf17e6fc5a3263af6280cd46" prot="public" static="no">
+        <name>OC_SANS</name>
+        <initializer>{ 0U, 0U, OC_NIVEAU_DEFAUT, 0U, 0U, 4095U, 0U, 0U }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>LDO sans protection : OC affiche seulement, jamais de coupure. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="376" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="376" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1ac0dd7ece0376f26dc4c9f6e25df445fc" prot="public" static="no">
+        <name>BLD_HAUT</name>
+        <initializer>GPIO_PIN_SET</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>bleeder actif sur BLD = 1 (IRF7821 attaque en direct) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="382" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="382" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1a193f9751aee3a39a3f5d185415f075fb" prot="public" static="no">
+        <name>BLD_BAS</name>
+        <initializer>GPIO_PIN_RESET</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>bleeder actif sur BLD = 0 (etage inverseur) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="383" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="383" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1ac65a284ddb5507b9b4b8db18f96cf108" prot="public" static="no">
+        <name>MUX_NC</name>
+        <initializer>0xFFU</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>voie de multiplexeur non cablee </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="384" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="384" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1af04729f8279b12f4ada1b213537159d4" prot="public" static="no">
+        <name>SEUIL_DAC</name>
+        <initializer>0U</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Source du seuil de courant (colonne &quot;seuil&quot;). SEUIL_SOURCE suit le define LIMITATION_PAR_POTENTIOMETRE de main.h ; SEUIL_DAC / SEUIL_POT forcent une LDO. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="388" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="388" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1a56b700db09138877439b503065f03240" prot="public" static="no">
+        <name>SEUIL_POT</name>
+        <initializer>1U</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="389" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="389" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1a138d35d36b3e291e17d2c7b42c1723ea" prot="public" static="no">
+        <name>SEUIL_SOURCE</name>
+        <initializer><ref refid="main_8c_1af04729f8279b12f4ada1b213537159d4" kindref="member">SEUIL_DAC</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="393" column="10" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="393" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1ad6c37c89b2eb47f604659c8cedf12ff5" prot="public" static="no">
+        <name>MEM_RAM</name>
+        <initializer>0U</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Memoire des codes DAC (colonne &quot;memoire&quot;) : MEM_EEPROM = sauvegarde et restauration dans l&apos;EEPROM du MCP47FEB28 ; MEM_RAM = comportement d&apos;origine (0 au demarrage, valeurs en RAM uniquement). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="399" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="399" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1aa9997d933806a6fb207fb55930432a00" prot="public" static="no">
+        <name>MEM_EEPROM</name>
+        <initializer>1U</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="400" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="400" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1a006409c0d704fa59d274cc1b019885d2" prot="public" static="no">
+        <name>UART_HEARTBEAT_MS</name>
+        <initializer>1000U</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="633" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="633" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1ada130d1d107e8d6a4765b1b01b50e0b5" prot="public" static="no">
+        <name>OC_COUPURE_AUTO</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="660" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="660" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1ae4a87d9c4828e8f305cb8cb2ad4ab5b6" prot="public" static="no">
+        <name>BALAYAGE_SUR</name>
+        <param><defname>h</defname></param>
+        <param><defname>a</defname></param>
+        <initializer>((balayage_hi2c == (h)) &amp;&amp; (balayage_adresse == (uint8_t)(a)))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="672" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="672" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1a9acfb59a054e8f69ab1004e7c3658bc3" prot="public" static="no">
+        <name>DAC_VDD_REFERENCE_V</name>
+        <initializer>5.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="820" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="820" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1aa6d44d9b72c1725bcdead603009ed935" prot="public" static="no">
+        <name>NB_DACS_I2C1</name>
+        <initializer>(sizeof(dacs_i2c1_adresses) / sizeof(dacs_i2c1_adresses[0]))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1090" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1090" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1abbe5ae9dcbbc7a517e01e9555c6bf32f" prot="public" static="no">
+        <name>DAC_SURVEILLANCE_MS</name>
+        <initializer>500U</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1155" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1155" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1a56e91039e3a5fc587b5c00cd3581becb" prot="public" static="no">
+        <name>CMD_GET_BLD</name>
+        <initializer>&quot;GET_CMD_ON_OFF_BLD_LDO_&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3379" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3379" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1a7a8091f2684ecc69aa5c99c702819a97" prot="public" static="no">
+        <name>CMD_GET_OC</name>
+        <initializer>&quot;GET_CMD_ON_OFF_OC_LDO_&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3380" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3380" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1ac2e11ad4bf04db87b7030d5c727cb609" prot="public" static="no">
+        <name>CMD_SWITCH_BLD</name>
+        <initializer>&quot;SWITCH_CMD_ON_OFF_BLD_LDO_&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3381" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3381" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1a8ec4b384028535a76957f5a3f44d33a1" prot="public" static="no">
+        <name>CMD_SWITCH_OC</name>
+        <initializer>&quot;SWITCH_CMD_ON_OFF_OC_LDO_&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3382" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3382" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1a40cf1607cf1cee5c1480b456c548da43" prot="public" static="no">
+        <name>CMD_FLASH_ADRESSE</name>
+        <initializer>0x081E0000UL</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3384" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3384" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1a3987177c955ac71c3786fde9161c4f74" prot="public" static="no">
+        <name>CMD_FLASH_TAILLE</name>
+        <initializer>0x00020000UL</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3385" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3385" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1a4d785a2b168f2903230ebe0b1552ec9b" prot="public" static="no">
+        <name>CMD_FLASH_ENREG</name>
+        <initializer>64UL</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3386" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3386" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1acc28580e33c8dbfd250f7f1681e781b8" prot="public" static="no">
+        <name>CMD_FLASH_MOTS</name>
+        <initializer>16U</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3387" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3387" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1a265c48df8bc32baddc496c1b5e8fbd4e" prot="public" static="no">
+        <name>CMD_FLASH_MAGIC</name>
+        <initializer>0x434D4431UL</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3388" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3388" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1a85789b45f8ad8b9e64c604ad125432c3" prot="public" static="no">
+        <name>CMD_FLASH_DELAI_MS</name>
+        <initializer>500U</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3389" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3389" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1ae1ab724485bc183169dda0261ee38135" prot="public" static="no">
+        <name>UART_CMD_TAILLE</name>
+        <initializer>150U</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3668" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3668" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1a3f27cc9a97929edf1955591712d62091" prot="public" static="no">
+        <name>ADG728_ADDR_0</name>
+        <initializer>(0x4C &lt;&lt; 1)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5179" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5179" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1a511528d700deaa1f3c73811fbc95a910" prot="public" static="no">
+        <name>ADG728_ADDR_1</name>
+        <initializer>(0x4D &lt;&lt; 1)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5180" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5180" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1a78113cd3dbe37360352eb9ea2ff8c4db" prot="public" static="no">
+        <name>ADG728_ADDR_2</name>
+        <initializer>(0x4E &lt;&lt; 1)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5181" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5181" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1a335648d63707d2607cb6b9e454d5db2c" prot="public" static="no">
+        <name>ADC_CANAL_TENSION</name>
+        <initializer>ADC_CHANNEL_10</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5191" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5191" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1a936286a9bd4616c7ddc428e1ffe0c797" prot="public" static="no">
+        <name>ADC_CANAL_COURANT</name>
+        <initializer>ADC_CHANNEL_9</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5192" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5192" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1a636b5633e528a0a253e961526337d7c4" prot="public" static="no">
+        <name>MUX_RATIO_PONT</name>
+        <initializer>1.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5196" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5196" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1a9b2ed3a266295f9210a80490556765f0" prot="public" static="no">
+        <name>NB_COMMANDS</name>
+        <initializer>(sizeof(commandTable) / sizeof(commandTable[0]))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5910" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5910" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="main_8c_1a3f9fd8a5de22198aff70c45287530197" prot="public" static="no">
+        <name>EXTI_LIGNES_RESERVEES</name>
+        <initializer>((uint16_t)(GPIO_PIN_0 | GPIO_PIN_13))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="6491" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="6491" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="main_8c_1a75e57bba50363a40a374df0b941bfd58" prot="public" static="no" strong="no">
+        <type></type>
+        <name>CibleDac_t</name>
+        <enumvalue id="main_8c_1a75e57bba50363a40a374df0b941bfd58a6f7db6e31ab4660172e6c43ccfae0c76" prot="public">
+          <name>CIBLE_AUCUNE</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="main_8c_1a75e57bba50363a40a374df0b941bfd58ac7c0df9454e42daa11ffd275f80d1933" prot="public">
+          <name>CIBLE_DAC1</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="main_8c_1a75e57bba50363a40a374df0b941bfd58a65037c0bd5c073de9e47b22512f00afe" prot="public">
+          <name>CIBLE_DAC2</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="main_8c_1a75e57bba50363a40a374df0b941bfd58aa33225739ca7f6901ec6ef3ae07132e6" prot="public">
+          <name>CIBLE_DAC3</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="main_8c_1a75e57bba50363a40a374df0b941bfd58a03577089479afe4864e6211434384cc2" prot="public">
+          <name>CIBLE_DAC4</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="main_8c_1a75e57bba50363a40a374df0b941bfd58a7cc1a0ba8d8a2b56e74186301af6b09a" prot="public">
+          <name>CIBLE_DAC5</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Identifie quel tableau DACx_DEF (donc quelle puce) est vise. CIBLE_AUCUNE = pas de DAC associe (ex : courant des LDO *PLp). Le numero (1-5) est aussi celui de SET_DAC_MAPPING_LDO_&lt;nom&gt;. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="269" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="269" bodyend="276"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="main_8c_1ad88b6ed0baabe6df575f9770c16ec126" prot="public" static="no">
+        <type>struct <ref refid="struct_l_d_o" kindref="compound">LDO</ref></type>
+        <definition>typedef struct LDO LDO_TypeDef</definition>
+        <argsstring></argsstring>
+        <name>LDO_TypeDef</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="40" column="18" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="40" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="main_8c_1a22b804736f5648d52f639b2647d4ed13" prot="public" static="no" mutable="no">
+        <type>ADC_HandleTypeDef</type>
+        <definition>ADC_HandleTypeDef hadc1</definition>
+        <argsstring></argsstring>
+        <name>hadc1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="54" column="19" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1acd9221f1aa19aebfe0b744947f2daf49" prot="public" static="no" mutable="no">
+        <type>ADC_HandleTypeDef</type>
+        <definition>ADC_HandleTypeDef hadc2</definition>
+        <argsstring></argsstring>
+        <name>hadc2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="55" column="19" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a984624bcf28d1b2fb7e4e18349f65d5c" prot="public" static="no" mutable="no">
+        <type>ADC_HandleTypeDef</type>
+        <definition>ADC_HandleTypeDef hadc3</definition>
+        <argsstring></argsstring>
+        <name>hadc3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="56" column="19" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1af7b2c26e44dadaaa798a5c3d82914ba7" prot="public" static="no" mutable="no">
+        <type>I2C_HandleTypeDef</type>
+        <definition>I2C_HandleTypeDef hi2c1</definition>
+        <argsstring></argsstring>
+        <name>hi2c1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="58" column="19" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1ac379bcc152d860f08b1279fd3e232295" prot="public" static="no" mutable="no">
+        <type>I2C_HandleTypeDef</type>
+        <definition>I2C_HandleTypeDef hi2c2</definition>
+        <argsstring></argsstring>
+        <name>hi2c2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="59" column="19" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a2cf715bef37f7e8ef385a30974a5f0d5" prot="public" static="no" mutable="no">
+        <type>UART_HandleTypeDef</type>
+        <definition>UART_HandleTypeDef huart1</definition>
+        <argsstring></argsstring>
+        <name>huart1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="61" column="20" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a8f5dba325bf16f0f5b08de23e1c89ca5" prot="public" static="no" mutable="no">
+        <type>osThreadId</type>
+        <definition>osThreadId lwipTaskHandle</definition>
+        <argsstring></argsstring>
+        <name>lwipTaskHandle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="63" column="12" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1ae98f87215581798ddd95d4dbe4802852" prot="public" static="yes" mutable="no">
+        <type>struct <ref refid="struct_l_d_o" kindref="compound">LDO</ref></type>
+        <definition>struct LDO ldoEtat[LDO_NB]</definition>
+        <argsstring>[LDO_NB]</argsstring>
+        <name>ldoEtat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="142" column="17" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a04fc9a4a7e0af15fa9a1077cf578ec4a" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* last_message</definition>
+        <argsstring></argsstring>
+        <name>last_message</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="146" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a0533b59e275168a0109ab159e56742e7" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char response[150]</definition>
+        <argsstring>[150]</argsstring>
+        <name>response</name>
+        <initializer>= &quot;STM32 connect&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="147" column="6" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a562f5c2b21b2cc7c3d59962f526eb34e" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t delta_dvdd_avdd</definition>
+        <argsstring></argsstring>
+        <name>delta_dvdd_avdd</name>
+        <initializer>= DELTA_INIT_DVDD_AVDD</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="153" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a2ae961f781c2e35d90000cfa198facaa" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t delta_avdd_vref</definition>
+        <argsstring></argsstring>
+        <name>delta_avdd_vref</name>
+        <initializer>= DELTA_INIT_AVDD_VREF</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="154" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="154" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a907f056cabf2d91f0402600207422c02" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t delta_vref_nrst</definition>
+        <argsstring></argsstring>
+        <name>delta_vref_nrst</name>
+        <initializer>= DELTA_INIT_VREF_NRST</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="155" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a1fa4e0855c94687908748bfdccf46d3a" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t delta_nrst_vref</definition>
+        <argsstring></argsstring>
+        <name>delta_nrst_vref</name>
+        <initializer>= DELTA_INIT_NRST_VREF</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="156" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="156" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1ab077dd5678eb482555a017f595d0a280" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t delta_vref_avdd</definition>
+        <argsstring></argsstring>
+        <name>delta_vref_avdd</name>
+        <initializer>= DELTA_INIT_VREF_AVDD</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="157" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="157" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a3677ba7602c344fb9da5b257466774a3" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t delta_avdd_dvdd</definition>
+        <argsstring></argsstring>
+        <name>delta_avdd_dvdd</name>
+        <initializer>= DELTA_INIT_AVDD_DVDD</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="158" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="158" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1acab5be20cdee758749728c3af1848fa3" prot="public" static="no" mutable="no">
+        <type>volatile _Bool</type>
+        <definition>volatile _Bool EN_LDO[LDO_NB]</definition>
+        <argsstring>[LDO_NB]</argsstring>
+        <name>EN_LDO</name>
+        <initializer>= {0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="164" column="15" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="164" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a088bafe349e74388f4652172b2172e0c" prot="public" static="no" mutable="no">
+        <type>volatile _Bool</type>
+        <definition>volatile _Bool BL_LDO[LDO_NB]</definition>
+        <argsstring>[LDO_NB]</argsstring>
+        <name>BL_LDO</name>
+        <initializer>= {0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="167" column="15" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="167" bodyend="167"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a5f337572fecd95278594dda847951124" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t VAL_LDO[LDO_NB]</definition>
+        <argsstring>[LDO_NB]</argsstring>
+        <name>VAL_LDO</name>
+        <initializer>= {0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="168" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="168" bodyend="168"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a08b04a3d6ec33d148ab20549e5c8435e" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t CURRENT_LDO[LDO_NB]</definition>
+        <argsstring>[LDO_NB]</argsstring>
+        <name>CURRENT_LDO</name>
+        <initializer>= {0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="170" column="9" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="170" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a4b7de10d956b28769395b14f70c3c6c9" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t DAC1_DEF[24]</definition>
+        <argsstring>[24]</argsstring>
+        <name>DAC1_DEF</name>
+        <initializer>= {(0x00&lt;&lt;3),0x00, 0x00,     
+                     (0x01&lt;&lt;3),0x00, 0x00,       
+                     (0x02&lt;&lt;3),0x00, 0x00,       
+                     (0x03&lt;&lt;3),0x00, 0x00,       
+                     (0x04&lt;&lt;3),0x00, 0x00,       
+                     (0x05&lt;&lt;3),0x00, 0x00,       
+                     (0x06&lt;&lt;3),0x00, 0x00,       
+                     (0x07&lt;&lt;3),0x00, 0x00}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="180" column="8" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="180" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a0ee6c554305c9eae3b5a78297c53e5c6" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t DAC2_DEF[24]</definition>
+        <argsstring>[24]</argsstring>
+        <name>DAC2_DEF</name>
+        <initializer>= {(0x00&lt;&lt;3),0x00, 0x00,
+                     (0x01&lt;&lt;3),0x00, 0x00,
+                     (0x02&lt;&lt;3),0x00, 0x00,
+                     (0x03&lt;&lt;3),0x00, 0x00,
+                     (0x04&lt;&lt;3),0x00, 0x00,
+                     (0x05&lt;&lt;3),0x00, 0x00,
+                     (0x06&lt;&lt;3),0x00, 0x00,
+                     (0x07&lt;&lt;3),0x00, 0x00}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="199" column="8" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="199" bodyend="206"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a05a31c83c5f811282e6539b8f8769f85" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t DAC3_DEF[24]</definition>
+        <argsstring>[24]</argsstring>
+        <name>DAC3_DEF</name>
+        <initializer>= {(0x00&lt;&lt;3),0x00, 0x00,     
+                     (0x01&lt;&lt;3),0x00, 0x00,       
+                     (0x02&lt;&lt;3),0x00, 0x00,       
+                     (0x03&lt;&lt;3),0x00, 0x00,       
+                     (0x04&lt;&lt;3),0x00, 0x00,       
+                     (0x05&lt;&lt;3),0x00, 0x00,       
+                     (0x06&lt;&lt;3),0x00, 0x00,       
+                     (0x07&lt;&lt;3),0x00, 0x00}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="211" column="8" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="211" bodyend="218"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1acc96ff452eba3a836db3cc2c62d7affc" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t DAC4_DEF[24]</definition>
+        <argsstring>[24]</argsstring>
+        <name>DAC4_DEF</name>
+        <initializer>= {(0x00&lt;&lt;3),0x00, 0x00,
+                     (0x01&lt;&lt;3),0x00, 0x00,
+                     (0x02&lt;&lt;3),0x00, 0x00,
+                     (0x03&lt;&lt;3),0x00, 0x00,
+                     (0x04&lt;&lt;3),0x00, 0x00,
+                     (0x05&lt;&lt;3),0x00, 0x00,
+                     (0x06&lt;&lt;3),0x00, 0x00,
+                     (0x07&lt;&lt;3),0x00, 0x00}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="221" column="8" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="221" bodyend="228"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a7766e461c3eaa4c3cfa456e2b5adc8d6" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t DAC5_DEF[24]</definition>
+        <argsstring>[24]</argsstring>
+        <name>DAC5_DEF</name>
+        <initializer>= {(0x00&lt;&lt;3),0x00, 0x00,
+                     (0x01&lt;&lt;3),0x00, 0x00,
+                     (0x02&lt;&lt;3),0x00, 0x00,
+                     (0x03&lt;&lt;3),0x00, 0x00,
+                     (0x04&lt;&lt;3),0x00, 0x00,
+                     (0x05&lt;&lt;3),0x00, 0x00,
+                     (0x06&lt;&lt;3),0x00, 0x00,
+                     (0x07&lt;&lt;3),0x00, 0x00}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="231" column="8" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="231" bodyend="238"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a6e456da6cd0755df0290e75bfbaf3b1a" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="struct_dac_puce__t" kindref="compound">DacPuce_t</ref></type>
+        <definition>const DacPuce_t tableDac[]</definition>
+        <argsstring>[]</argsstring>
+        <name>tableDac</name>
+        <initializer>                                = {
+    
+    { CIBLE_DAC1, &amp;hi2c1, MCP4725_I2CADDR_DEFAULT, DAC1_DEF },  
+    { CIBLE_DAC2, &amp;hi2c2, MCP4725_I2CADDR_DEFAULT, DAC2_DEF },  
+    { CIBLE_DAC3, &amp;hi2c1, MPC4725_I2CADDR_A0,      DAC3_DEF },  
+    { CIBLE_DAC4, &amp;hi2c2, MPC4725_I2CADDR_A1,      DAC4_DEF },  
+    { CIBLE_DAC5, &amp;hi2c2, MPC4725_I2CADDR_A0,      DAC5_DEF },  
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="305" column="24" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="305" bodyend="312"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1aa434ac3a875c3d6cc593ded116708239" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="struct_l_d_o___config__t" kindref="compound">LDO_Config_t</ref></type>
+        <definition>const LDO_Config_t ldoConfig[NB_LDO]</definition>
+        <argsstring>[NB_LDO]</argsstring>
+        <name>ldoConfig</name>
+        <initializer>                                    = {
+
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="419" column="27" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="419" bodyend="421"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a6d13831d52ddc96129a80011437d621e" prot="public" static="yes" mutable="no">
+        <type>volatile uint8_t</type>
+        <definition>volatile uint8_t oc_verrou[NB_LDO]</definition>
+        <argsstring>[NB_LDO]</argsstring>
+        <name>oc_verrou</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="425" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="425" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a7db1653ac34b66a993b302aa24db8a2c" prot="public" static="yes" mutable="no">
+        <type>volatile uint8_t</type>
+        <definition>volatile uint8_t oc_a_signaler[NB_LDO]</definition>
+        <argsstring>[NB_LDO]</argsstring>
+        <name>oc_a_signaler</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="426" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="426" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a3844c63b55238b08265daa6669e4084f" prot="public" static="yes" mutable="no">
+        <type>volatile uint32_t</type>
+        <definition>volatile uint32_t oc_nb_declenchements[NB_LDO]</definition>
+        <argsstring>[NB_LDO]</argsstring>
+        <name>oc_nb_declenchements</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="427" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="427" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a55cec6b2569b1efba5a3a7fa44614964" prot="public" static="yes" mutable="no">
+        <type>volatile uint32_t</type>
+        <definition>volatile uint32_t oc_tick_declenchement[NB_LDO]</definition>
+        <argsstring>[NB_LDO]</argsstring>
+        <name>oc_tick_declenchement</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="428" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="428" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a100620a6b2c8e8414c31d0d8c6c4e96d" prot="public" static="yes" mutable="no">
+        <type>volatile uint32_t</type>
+        <definition>volatile uint32_t en_tick_activation[NB_LDO]</definition>
+        <argsstring>[NB_LDO]</argsstring>
+        <name>en_tick_activation</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="429" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="429" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a4485bf259c52312b6ab97e3108ddf855" prot="public" static="yes" mutable="no">
+        <type>volatile uint8_t</type>
+        <definition>volatile uint8_t en_actif[NB_LDO]</definition>
+        <argsstring>[NB_LDO]</argsstring>
+        <name>en_actif</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="430" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="430" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1ad9804e1567296fd30ebe0e9d97e9247c" prot="public" static="yes" mutable="no">
+        <type>volatile uint32_t</type>
+        <definition>volatile uint32_t oc_nb_fronts[NB_LDO]</definition>
+        <argsstring>[NB_LDO]</argsstring>
+        <name>oc_nb_fronts</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="433" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="433" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1afc2cb5f4583c1e70bc4b4da25a767436" prot="public" static="yes" mutable="no">
+        <type>volatile uint8_t</type>
+        <definition>volatile uint8_t oc_vu_actif[NB_LDO]</definition>
+        <argsstring>[NB_LDO]</argsstring>
+        <name>oc_vu_actif</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="434" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="434" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1aa7f8444f0d176e845ab6e3dd70013b6e" prot="public" static="yes" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t oc_it_active[NB_LDO]</definition>
+        <argsstring>[NB_LDO]</argsstring>
+        <name>oc_it_active</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="436" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="436" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1ab91ba2025bc116af02237c8cd912d23b" prot="public" static="yes" mutable="no">
+        <type>volatile uint8_t</type>
+        <definition>volatile uint8_t nv_a_sauver[NB_LDO]</definition>
+        <argsstring>[NB_LDO]</argsstring>
+        <name>nv_a_sauver</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>1 = ecriture EEPROM demandee </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="440" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="440" bodyend="-1"/>
+        <referencedby refid="group__grp__eeprom_1ga0fdcf8780e2127569c1e1a76e9518c5a" compoundref="main_8c" startline="3147" endline="3159">DAC_DemanderSauvegarde</referencedby>
+        <referencedby refid="group__grp__eeprom_1ga5f9ce30ec25412cc3efbe118447a5a11" compoundref="main_8c" startline="4755" endline="4804">DAC_TraiterSauvegardes</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a1acf61734b798ac869d4d7fe0ced5d0a" prot="public" static="yes" mutable="no">
+        <type>volatile uint8_t</type>
+        <definition>volatile uint8_t nv_immediat[NB_LDO]</definition>
+        <argsstring>[NB_LDO]</argsstring>
+        <name>nv_immediat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>1 = sans attendre DAC_EEPROM_DELAI_MS </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="441" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="441" bodyend="-1"/>
+        <referencedby refid="group__grp__eeprom_1ga0fdcf8780e2127569c1e1a76e9518c5a" compoundref="main_8c" startline="3147" endline="3159">DAC_DemanderSauvegarde</referencedby>
+        <referencedby refid="group__grp__eeprom_1ga5f9ce30ec25412cc3efbe118447a5a11" compoundref="main_8c" startline="4755" endline="4804">DAC_TraiterSauvegardes</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1aa0fa904d4cb16a94c2afe4e638237ca6" prot="public" static="yes" mutable="no">
+        <type>volatile uint32_t</type>
+        <definition>volatile uint32_t nv_tick_demande[NB_LDO]</definition>
+        <argsstring>[NB_LDO]</argsstring>
+        <name>nv_tick_demande</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>date de la derniere demande (ms) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="442" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="442" bodyend="-1"/>
+        <referencedby refid="group__grp__eeprom_1ga0fdcf8780e2127569c1e1a76e9518c5a" compoundref="main_8c" startline="3147" endline="3159">DAC_DemanderSauvegarde</referencedby>
+        <referencedby refid="group__grp__eeprom_1ga5f9ce30ec25412cc3efbe118447a5a11" compoundref="main_8c" startline="4755" endline="4804">DAC_TraiterSauvegardes</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a84eb6014508b64ca7409c685af6cb3dc" prot="public" static="yes" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t nv_essais[NB_LDO]</definition>
+        <argsstring>[NB_LDO]</argsstring>
+        <name>nv_essais</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>tentatives echouees consecutives </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="443" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="443" bodyend="-1"/>
+        <referencedby refid="group__grp__eeprom_1ga5f9ce30ec25412cc3efbe118447a5a11" compoundref="main_8c" startline="4755" endline="4804">DAC_TraiterSauvegardes</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a32ff7679a6f20470636cf413ff3b1136" prot="public" static="yes" mutable="no">
+        <type>volatile uint8_t</type>
+        <definition>volatile uint8_t cmd_on_off_bld[NB_LDO]</definition>
+        <argsstring>[NB_LDO]</argsstring>
+        <name>cmd_on_off_bld</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="448" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="448" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a3d030cf9e204a40c5c372ab6b3bd1407" prot="public" static="yes" mutable="no">
+        <type>volatile uint8_t</type>
+        <definition>volatile uint8_t cmd_on_off_oc[NB_LDO]</definition>
+        <argsstring>[NB_LDO]</argsstring>
+        <name>cmd_on_off_oc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="449" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="449" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1ae56f0d1a3fa5b74b0471254ab33e72af" prot="public" static="yes" mutable="no">
+        <type>char</type>
+        <definition>char rapport_scan[512]</definition>
+        <argsstring>[512]</argsstring>
+        <name>rapport_scan</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="596" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="596" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1acee44a69531784066ff3df57ce1b9907" prot="public" static="yes" mutable="no">
+        <type>osMutexId</type>
+        <definition>osMutexId i2c1_mutex_id</definition>
+        <argsstring></argsstring>
+        <name>i2c1_mutex_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="613" column="18" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="613" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1aeb9e188f71764e6da66e7af34732b801" prot="public" static="yes" mutable="no">
+        <type>osMutexId</type>
+        <definition>osMutexId i2c2_mutex_id</definition>
+        <argsstring></argsstring>
+        <name>i2c2_mutex_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="614" column="18" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="614" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1ab9b818a13672edc417547dd14c84d470" prot="public" static="yes" mutable="no">
+        <type>osMutexId</type>
+        <definition>osMutexId uart1_mutex_id</definition>
+        <argsstring></argsstring>
+        <name>uart1_mutex_id</name>
+        <initializer>= NULL</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="625" column="18" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="625" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a54525b1d333b49975f00237853ca64c5" prot="public" static="yes" mutable="no">
+        <type>volatile uint8_t</type>
+        <definition>volatile uint8_t i2c2_actif</definition>
+        <argsstring></argsstring>
+        <name>i2c2_actif</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="645" column="25" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="645" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a4ab4e5153d918d9f7a06c5503788e25e" prot="public" static="yes" mutable="no">
+        <type>I2C_HandleTypeDef *volatile</type>
+        <definition>I2C_HandleTypeDef* volatile balayage_hi2c</definition>
+        <argsstring></argsstring>
+        <name>balayage_hi2c</name>
+        <initializer>= NULL</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="670" column="36" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="670" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a492bd2fe016cdce7372099eb25b7e9e8" prot="public" static="yes" mutable="no">
+        <type>volatile uint8_t</type>
+        <definition>volatile uint8_t balayage_adresse</definition>
+        <argsstring></argsstring>
+        <name>balayage_adresse</name>
+        <initializer>= 0U</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="671" column="38" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="671" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a78dd59d8f412cbf969045cfdbbcd93bd" prot="public" static="yes" mutable="no">
+        <type>const uint8_t</type>
+        <definition>const uint8_t dacs_i2c1_adresses[]</definition>
+        <argsstring>[]</argsstring>
+        <name>dacs_i2c1_adresses</name>
+        <initializer>= { (0x60 &lt;&lt; 1), (0x61 &lt;&lt; 1), (0x62 &lt;&lt; 1) }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1089" column="22" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1089" bodyend="1089"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a31dc105ae3df7e6733e83d71a15f7a64" prot="public" static="yes" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t dac_cfg_attendue[NB_DACS_I2C1][3]</definition>
+        <argsstring>[NB_DACS_I2C1][3]</argsstring>
+        <name>dac_cfg_attendue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1160" column="17" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1160" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1ac3d40680c9bb52251d2152d9a776e6fe" prot="public" static="yes" mutable="no">
+        <type>volatile uint32_t</type>
+        <definition>volatile uint32_t dac_nb_reconfig[NB_DACS_I2C1]</definition>
+        <argsstring>[NB_DACS_I2C1]</argsstring>
+        <name>dac_nb_reconfig</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1161" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1161" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a54aa4f51726b75ab28d78661ead24847" prot="public" static="yes" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t tick_derniere_surveillance_dac</definition>
+        <argsstring></argsstring>
+        <name>tick_derniere_surveillance_dac</name>
+        <initializer>= 0U</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1162" column="17" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1162" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a7b61ae72a2b4a91d507b51b2b7288449" prot="public" static="yes" mutable="no">
+        <type>volatile uint8_t</type>
+        <definition>volatile uint8_t bouton_appuye</definition>
+        <argsstring></argsstring>
+        <name>bouton_appuye</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1537" column="25" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1537" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a8f2306fdf5656fc12d9fa18ee3efb27f" prot="public" static="yes" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t dernier_appui_ms</definition>
+        <argsstring></argsstring>
+        <name>dernier_appui_ms</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1538" column="17" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1538" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1ab66b59a62b44ec762158d9d8b78a64c3" prot="public" static="yes" mutable="no">
+        <type>volatile uint8_t</type>
+        <definition>volatile uint8_t mux_reset_appuye</definition>
+        <argsstring></argsstring>
+        <name>mux_reset_appuye</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1546" column="25" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1546" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a1491e3365407062ea14c0c1bbef5916d" prot="public" static="yes" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t dernier_reset_mux_ms</definition>
+        <argsstring></argsstring>
+        <name>dernier_reset_mux_ms</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1547" column="17" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1547" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1aa16a47df2eb26a63e1e15246149b6a9f" prot="public" static="yes" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t canal_mux_tension_actuel</definition>
+        <argsstring></argsstring>
+        <name>canal_mux_tension_actuel</name>
+        <initializer>= 0xFF</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1553" column="16" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1553" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1adc6057b3a6cf664b8784ebe21c4df4c6" prot="public" static="yes" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t canal_mux_courant_actuel</definition>
+        <argsstring></argsstring>
+        <name>canal_mux_courant_actuel</name>
+        <initializer>= 0xFF</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1554" column="16" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1554" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a93bf3ddbae48ff58d2a0476fdb2f3cae" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_scan_result__t" kindref="compound">ScanResult_t</ref></type>
+        <definition>ScanResult_t res_i2c1</definition>
+        <argsstring></argsstring>
+        <name>res_i2c1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1621" column="21" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1621" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a0c891713d5e60ef49c4b5d9b301cd206" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_scan_result__t" kindref="compound">ScanResult_t</ref></type>
+        <definition>ScanResult_t res_i2c2</definition>
+        <argsstring></argsstring>
+        <name>res_i2c2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1622" column="21" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1622" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1aa8e7fa0685cfea9757ebcfb6273fdd94" prot="public" static="yes" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t numero_cycle</definition>
+        <argsstring></argsstring>
+        <name>numero_cycle</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1623" column="17" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1623" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a160cc71db8e1a7003291e5295dec431e" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_mapping_dac_ldo__t" kindref="compound">MappingDacLdo_t</ref></type>
+        <definition>MappingDacLdo_t mappingDacLdo[NB_LDO]</definition>
+        <argsstring>[NB_LDO]</argsstring>
+        <name>mappingDacLdo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3067" column="24" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3067" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1aed956a8024b42ba286e8a8733751c61a" prot="public" static="yes" mutable="no">
+        <type>volatile uint8_t</type>
+        <definition>volatile uint8_t cmd_flash_a_sauver</definition>
+        <argsstring></argsstring>
+        <name>cmd_flash_a_sauver</name>
+        <initializer>= 0U</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3391" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3391" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1af0e2aac00cb079cad4e566ad4a678a83" prot="public" static="yes" mutable="no">
+        <type>volatile uint32_t</type>
+        <definition>volatile uint32_t cmd_flash_tick</definition>
+        <argsstring></argsstring>
+        <name>cmd_flash_tick</name>
+        <initializer>= 0U</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3392" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3392" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1ac8fb80ed64b5e20b016f11608543aed6" prot="public" static="yes" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t cmd_flash_sequence</definition>
+        <argsstring></argsstring>
+        <name>cmd_flash_sequence</name>
+        <initializer>= 0U</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3393" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3393" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a21f71d07f70ceff0eac4aeca1a8aa5f2" prot="public" static="yes" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t cmd_flash_prochain</definition>
+        <argsstring></argsstring>
+        <name>cmd_flash_prochain</name>
+        <initializer>= 0U</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3394" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3394" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a51e344e42968eb1775eb842f9d310774" prot="public" static="yes" mutable="no">
+        <type>osMutexId</type>
+        <definition>osMutexId tc_mutex_id</definition>
+        <argsstring></argsstring>
+        <name>tc_mutex_id</name>
+        <initializer>= NULL</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3670" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3670" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a71632fb31a87e48392e92b2605cea5d4" prot="public" static="yes" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t uart_rx_octet</definition>
+        <argsstring></argsstring>
+        <name>uart_rx_octet</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3672" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3672" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a32f7495574434a4b14dda6299ad70245" prot="public" static="yes" mutable="no">
+        <type>char</type>
+        <definition>char uart_rx_ligne[UART_CMD_TAILLE]</definition>
+        <argsstring>[UART_CMD_TAILLE]</argsstring>
+        <name>uart_rx_ligne</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3673" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3673" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a657f26bd91bed1ee8ed2d42ac0f04307" prot="public" static="yes" mutable="no">
+        <type>volatile uint16_t</type>
+        <definition>volatile uint16_t uart_rx_longueur</definition>
+        <argsstring></argsstring>
+        <name>uart_rx_longueur</name>
+        <initializer>= 0U</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3674" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3674" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a24e424296a468fbd7b1407ad58d5a4fe" prot="public" static="yes" mutable="no">
+        <type>char</type>
+        <definition>char uart_cmd[UART_CMD_TAILLE]</definition>
+        <argsstring>[UART_CMD_TAILLE]</argsstring>
+        <name>uart_cmd</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3675" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3675" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1aef9edaa7d2b870c96762028d3ab7a7f8" prot="public" static="yes" mutable="no">
+        <type>volatile uint8_t</type>
+        <definition>volatile uint8_t uart_cmd_prete</definition>
+        <argsstring></argsstring>
+        <name>uart_cmd_prete</name>
+        <initializer>= 0U</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3676" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3676" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a2ef7dda5b06a77005c7a019fc0234ee9" prot="public" static="yes" mutable="no">
+        <type>volatile uint32_t</type>
+        <definition>volatile uint32_t uart_cmd_perdues</definition>
+        <argsstring></argsstring>
+        <name>uart_cmd_perdues</name>
+        <initializer>= 0U</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="3677" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="3677" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1ada5e70bf03bf97c17ea4f41ad15c92f0" prot="public" static="yes" mutable="no">
+        <type>const uint8_t</type>
+        <definition>const uint8_t adg728_adresses_tension[3]</definition>
+        <argsstring>[3]</argsstring>
+        <name>adg728_adresses_tension</name>
+        <initializer>= { ADG728_ADDR_0, ADG728_ADDR_1, ADG728_ADDR_2 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5183" column="22" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5183" bodyend="5183"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a29c04adb27d531784f3c604c39cddfe4" prot="public" static="yes" mutable="no">
+        <type>const uint8_t</type>
+        <definition>const uint8_t adg728_adresses_courant[2]</definition>
+        <argsstring>[2]</argsstring>
+        <name>adg728_adresses_courant</name>
+        <initializer>= { ADG728_ADDR_0, ADG728_ADDR_1 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5184" column="22" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5184" bodyend="5184"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a50799a0c330a833e0bf7ef1c411f06bb" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_mux_ldo_config__t" kindref="compound">MuxLdoConfig_t</ref></type>
+        <definition>MuxLdoConfig_t muxLdoConfig[NB_LDO]</definition>
+        <argsstring>[NB_LDO]</argsstring>
+        <name>muxLdoConfig</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5327" column="23" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5327" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1a8bf49ea79fd706573aab3299d0723e12" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_mux_ldo_config_courant__t" kindref="compound">MuxLdoConfigCourant_t</ref></type>
+        <definition>MuxLdoConfigCourant_t muxLdoConfigCourant[NB_LDO]</definition>
+        <argsstring>[NB_LDO]</argsstring>
+        <name>muxLdoConfigCourant</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5542" column="30" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5542" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="main_8c_1aae35fdfbc5ca8fbf2861c3caa77346b2" prot="public" static="yes" mutable="no">
+        <type><ref refid="struct_command__t" kindref="compound">Command_t</ref></type>
+        <definition>Command_t commandTable[]</definition>
+        <argsstring>[]</argsstring>
+        <name>commandTable</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5872" column="18" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5872" bodyend="5909"/>
+      </memberdef>
+      <member refid="group__grp__comm_1ga768693a9fdf4a85d1ba355e3c321e075" kind="variable"><name>findCommandHandler</name></member>
+    </sectiondef>
+    <sectiondef kind="func">
+      <member refid="group__grp__cubemx_1ga70af21c671abfcc773614a9a4f63d920" kind="function"><name>SystemClock_Config</name></member>
+      <member refid="group__grp__cubemx_1ga336c5acb34a801b2984e602b97ed7b73" kind="function"><name>PeriphCommonClock_Config</name></member>
+      <member refid="group__grp__cubemx_1ga93ce41942d08d309203e0188cad7e54e" kind="function"><name>MPU_Config</name></member>
+      <member refid="group__grp__cubemx_1gae89fdd15729ad41a66911190fcbab23a" kind="function"><name>MX_GPIO_Init</name></member>
+      <member refid="group__grp__cubemx_1gaaa163e37853e6fc971474824d9f655ca" kind="function"><name>MX_ADC1_Init</name></member>
+      <member refid="group__grp__cubemx_1gae1e1b355e2d7714a267fee7e71891e59" kind="function"><name>MX_ADC3_Init</name></member>
+      <member refid="group__grp__cubemx_1ga4230d11f81d0b16e112f1cc3f40cb42f" kind="function"><name>MX_I2C1_Init</name></member>
+      <member refid="group__grp__cubemx_1gaf71812af4fbb9ebbe0f681165b657433" kind="function"><name>MX_I2C2_Init</name></member>
+      <member refid="group__grp__cubemx_1ga62f4b77e20bccafe98a183771749c20c" kind="function"><name>MX_USART1_UART_Init</name></member>
+      <member refid="group__grp__cubemx_1ga4e987f0fdef6459c1a03ca830bac23f5" kind="function"><name>MX_ADC2_Init</name></member>
+      <member refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" kind="function"><name>StartLwipTask</name></member>
+      <member refid="group__grp__comm_1ga78047c519037c4c6091c71e1801519c7" kind="function"><name>udpServer_init</name></member>
+      <member refid="group__grp__comm_1ga5b44c65aa41e79871a46aeed1bb4751b" kind="function"><name>udp_receive_callback</name></member>
+      <member refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" kind="function"><name>tc_request</name></member>
+      <member refid="group__grp__outils_1ga4264917775e9932f98b48713bf592321" kind="function"><name>map</name></member>
+      <member refid="group__grp__exti_1ga738473a5b43f6c92b80ce1d3d6f77ed9" kind="function"><name>EXTI15_10_IRQHandler</name></member>
+      <member refid="group__grp__exti_1ga17e9789a29a87d2df54f12b94dd1a0b6" kind="function"><name>EXTI0_IRQHandler</name></member>
+      <member refid="group__grp__adc_1ga5620dbaf6425610dff776e64b7f6c3ca" kind="function"><name>GetMesureReelle</name></member>
+      <member refid="group__grp__comm_1gab9b5dfc109e472981cbbb7867d1b7f92" kind="function"><name>UART1_EnvoyerTexte</name></member>
+      <member refid="group__grp__etat_1ga4d73884db55d5370dfdce4dca8d1eddf" kind="function"><name>LDO_RelacherBleeder</name></member>
+      <member refid="group__grp__config_1ga3bce4a57356f1afcbef6d05a989f33f5" kind="function"><name>LDO_GPIO_Init</name></member>
+      <member refid="group__grp__config_1ga8a388f244af9f1ecdae4d35c3126a7ea" kind="function"><name>h_GET_CONFIG_LDO</name></member>
+      <member refid="group__grp__config_1gae28fc29161c8b412bf38609488b281ef" kind="function"><name>LDO_BrocheBouton</name></member>
+      <member refid="group__grp__comm_1ga700668cb98e6ac2d4c9e2a1f80bd365a" kind="function"><name>Commande_Verrouiller</name></member>
+      <member refid="group__grp__comm_1ga8f851878b9fa126696fa20796cb7c274" kind="function"><name>Commande_Deverrouiller</name></member>
+      <member refid="group__grp__i2c_1ga64c71e2587dfe3b42d37bd356dd021a0" kind="function"><name>I2C1_BusRecovery</name></member>
+      <member refid="group__grp__i2c_1ga2f7d3957d1b8de76916916f379898287" kind="function"><name>I2C_BusRecovery</name></member>
+      <member refid="group__grp__i2c_1ga9c1e98ecaf3c304b9045320209882bf7" kind="function"><name>CreerMutexI2C</name></member>
+      <member refid="group__grp__comm_1ga59372978b4f9f6b427161864e8bc4dd6" kind="function"><name>CreerMutexUART</name></member>
+      <member refid="group__grp__i2c_1ga5cb1cd70b1dd76a8aadb2bccb2837d2f" kind="function"><name>ResoudreMutexI2C</name></member>
+      <member refid="group__grp__i2c_1ga779f08189cf1996577c596f37e17f128" kind="function"><name>ScanI2C</name></member>
+      <member refid="group__grp__i2c_1ga66520b068519c774eaeaa10c91bc87e4" kind="function"><name>FormaterRapport</name></member>
+      <member refid="group__grp__dac_1ga4f3b4b4120ebf5fcecc3f9b14f56afae" kind="function"><name>VoltageVersCodeDAC</name></member>
+      <member refid="group__grp__dac_1gab5371264b6f8831689ac30f87a45c4ed" kind="function"><name>ResoudreTableauDacParAdresse</name></member>
+      <member refid="group__grp__dac_1ga924c3b0d97d03d4aba5b24043d36849c" kind="function"><name>MajEtatLdoDepuisDac</name></member>
+      <member refid="group__grp__dac_1gafd7df1ea4aaa529649e87bc99b737e42" kind="function"><name>SynchroniserTableauDac</name></member>
+      <member refid="group__grp__dac_1gaf2d35bfc7d39a06f0e77e0680df9c08d" kind="function"><name>EcrireDACVolatile</name></member>
+      <member refid="group__grp__dac_1gade7258168a59f260de108ec88059f889" kind="function"><name>LireRegistreConfigDAC</name></member>
+      <member refid="group__grp__dac_1ga64f4ecd7d147a039d045da6b64975451" kind="function"><name>EcrireRegistreConfigDAC</name></member>
+      <member refid="group__grp__dac_1gaef2582c078db38424ec959fc1f9f1c5f" kind="function"><name>InitialiserConfigDacsI2C1</name></member>
+      <member refid="group__grp__dac_1gab992619e0a04a6fbb9a6a97c2e284c65" kind="function"><name>IndexDacI2C1</name></member>
+      <member refid="group__grp__dac_1ga657c4f07f159cff86dc8a577e46d0ddb" kind="function"><name>MemoriserConfigDac</name></member>
+      <member refid="group__grp__dac_1gacdf4ad1b5d4a18ab3a5b309318099344" kind="function"><name>SurveillerConfigDacsI2C1</name></member>
+      <member refid="group__grp__dac_1ga3c9eb54cd6a878bce23cc531e877692f" kind="function"><name>EcrireToutesLesSorties</name></member>
+      <member refid="group__grp__dac_1ga3b69ec3e3af5d495bc0a095f6e4343eb" kind="function"><name>BalayerSortieDAC</name></member>
+      <member refid="group__grp__exti_1gaca19a894d35c5407313b2afaca72d390" kind="function"><name>FormaterTempsEcoule</name></member>
+      <member refid="group__grp__i2c_1gad3e3e81fe86eb2d85a4b3a6e84e0b550" kind="function"><name>EstDansListe</name></member>
+      <member refid="group__grp__i2c_1ga78897222189585f100bc3855e98e25cc" kind="function"><name>EnvoyerBonjourATous</name></member>
+      <member refid="group__grp__adc_1ga6ff0e6f3d7fd661242785ab1fe918c8c" kind="function"><name>MX_MuxResetSync_GPIO_Init</name></member>
+      <member refid="group__grp__adc_1ga22145e0da7150e80ea9faf528fa8e7c3" kind="function"><name>TraiterResetMultiplexeur</name></member>
+      <member refid="group__grp__exti_1ga3a919fef613806da58b99557a009f22a" kind="function"><name>ExecuterCaptureComplete</name></member>
+      <member refid="group__grp__comm_1ga5294dbf6a367b9a48010296000e1430a" kind="function"><name>MX_USART1_GPIO_Init</name></member>
+      <member refid="group__grp__comm_1ga59e35c131ee43adc1fad6c4bfdf9fa0a" kind="function"><name>MX_USART1_Init</name></member>
+      <member refid="group__grp__cubemx_1ga840291bc02cba5474a4cb46a9b9566fe" kind="function"><name>main</name></member>
+      <member refid="group__grp__config_1gadc686ab4f6036d732a6f2b1ecb6dbd01" kind="function"><name>findLdoIndex</name></member>
+      <member refid="group__grp__etat_1ga70c1db5780542cb5246d6ed350666c5c" kind="function"><name>buildStatusResponse</name></member>
+      <member refid="group__grp__etat_1ga2198514337355fbc3eed31749b6b70ed" kind="function"><name>h_SET_EN_LDO_ALL</name></member>
+      <member refid="group__grp__etat_1ga0484ceea1d95b83765fa039e1343e8fb" kind="function"><name>h_RST_EN_LDO_ALL</name></member>
+      <member refid="group__grp__etat_1gad253a15902d4faf160fb7108c2996a53" kind="function"><name>h_SET_BL_LDO_ALL</name></member>
+      <member refid="group__grp__etat_1ga9b73881c339d3de0d81a83298d3c74c6" kind="function"><name>h_RST_BL_LDO_ALL</name></member>
+      <member refid="group__grp__etat_1ga2826c6768d6a04792faf92ff00a74d4e" kind="function"><name>h_SET_EN_TAB</name></member>
+      <member refid="group__grp__etat_1ga31a850bfb276c79400e40e6272d933ae" kind="function"><name>h_SET_BL_TAB</name></member>
+      <member refid="group__grp__seq_1ga8024c7bf9dc251e781f90eb02093c068" kind="function"><name>h_SET_DELTA_DVDD_AVDD</name></member>
+      <member refid="group__grp__seq_1ga447238e5b551e58c8b0e7ae98584b5e8" kind="function"><name>h_SET_DELTA_AVDD_VREF</name></member>
+      <member refid="group__grp__seq_1gad6a88754ddfa232341e56f1002eec8c0" kind="function"><name>h_SET_DELTA_VREF_NRST</name></member>
+      <member refid="group__grp__seq_1gad624d55c33c1c9d1fa936ec32c703b45" kind="function"><name>h_SET_DELTA_NRST_VREF</name></member>
+      <member refid="group__grp__seq_1gac6a1155f69e7a25d7bb385ae35b93aae" kind="function"><name>h_SET_DELTA_VREF_AVDD</name></member>
+      <member refid="group__grp__seq_1gad370c2ace608cdb8daf1afd3ca3b202f" kind="function"><name>h_SET_DELTA_AVDD_DVDD</name></member>
+      <member refid="group__grp__seq_1gab8a97c1e4d7e30955e1e037a892379bf" kind="function"><name>h_RST_DELTA_DVDD_AVDD</name></member>
+      <member refid="group__grp__seq_1gaa3fe1ad448a429d3760b5fbef9c41f07" kind="function"><name>h_RST_DELTA_AVDD_VREF</name></member>
+      <member refid="group__grp__seq_1gafa476ad70dfb2f285f7dff1b041e04dd" kind="function"><name>h_RST_DELTA_VREF_NRST</name></member>
+      <member refid="group__grp__seq_1gaaf5aa614e94e4b5e58f55b372a3dc575" kind="function"><name>h_RST_DELTA_NRST_VREF</name></member>
+      <member refid="group__grp__seq_1gaa9d31428d43e4e992c4c104147df4fc4" kind="function"><name>h_RST_DELTA_VREF_AVDD</name></member>
+      <member refid="group__grp__seq_1gab0984c31ea124d09363e7ed26ea7191c" kind="function"><name>h_RST_DELTA_AVDD_DVDD</name></member>
+      <member refid="group__grp__oc_1ga7851b235d1d1f7564644d659587b3ba2" kind="function"><name>OC_EstSurveillee</name></member>
+      <member refid="group__grp__oc_1ga5a3191b846544a7dced3ea094018f361" kind="function"><name>OC_EstActive</name></member>
+      <member refid="group__grp__oc_1gafc2057d31d2abd2b3389f0e6ce4cc3a2" kind="function"><name>OC_SeuilValide</name></member>
+      <member refid="group__grp__eeprom_1ga0fdcf8780e2127569c1e1a76e9518c5a" kind="function"><name>DAC_DemanderSauvegarde</name></member>
+      <member refid="group__grp__oc_1ga4c720f3df5385977a33b0d91f63df5f9" kind="function"><name>OC_LireDefaut</name></member>
+      <member refid="group__grp__oc_1gad5ee0d7de4089f81d1b5309a4919b764" kind="function"><name>OC_Verrouiller</name></member>
+      <member refid="group__grp__oc_1gab7b892d9b93ae98c0860c1569fb10702" kind="function"><name>OC_EstArme</name></member>
+      <member refid="group__grp__oc_1gafaa9094a90053ac8bf6eace70669f172" kind="function"><name>OC_SurFrontIT</name></member>
+      <member refid="group__grp__etat_1gad7a2801e95c498fa0a2f1982238ae732" kind="function"><name>LDO_MettreAJour</name></member>
+      <member refid="group__grp__cmd_1ga3ea657061e2d4ecf828155a9ca3a9dba" kind="function"><name>Crc32Mots</name></member>
+      <member refid="group__grp__cmd_1ga3f4f9ffd19d9dfb5f1fccd414e6bd2f3" kind="function"><name>CmdOnOff_Initialiser</name></member>
+      <member refid="group__grp__cmd_1gacc19a91cbb61d5aa4f80d4a141306050" kind="function"><name>CmdOnOff_EcrireFlash</name></member>
+      <member refid="group__grp__cmd_1ga8a6ad7d0ecff45c40c421cbab46b2526" kind="function"><name>CmdOnOff_TraiterSauvegarde</name></member>
+      <member refid="group__grp__cmd_1ga7d468d2e11f2a18d745896a5865ed077" kind="function"><name>CmdOnOff_BasculerOc</name></member>
+      <member refid="group__grp__cmd_1ga5d44c3c48f8606b7286fe670f62997b4" kind="function"><name>CmdOnOff_BasculerBld</name></member>
+      <member refid="group__grp__cmd_1gafb6457db3c48283dd0fb280775957f7a" kind="function"><name>CmdOnOff_Repondre</name></member>
+      <member refid="group__grp__comm_1ga7e95f093ea99a8f73f132b261bdebc2f" kind="function"><name>CreerMutexCommandes</name></member>
+      <member refid="group__grp__comm_1ga6b6a3cef741ac3270119f7e1890f58eb" kind="function"><name>UART1_DemarrerReceptionCommandes</name></member>
+      <member refid="group__grp__comm_1ga7139cd4baabbbcbab0c1fe6d7d4ae1cc" kind="function"><name>USART1_IRQHandler</name></member>
+      <member refid="group__grp__comm_1gae494a9643f29b87d6d81e5264e60e57b" kind="function"><name>HAL_UART_RxCpltCallback</name></member>
+      <member refid="group__grp__comm_1ga0e0456ea96d55db31de947fb3e954f18" kind="function"><name>HAL_UART_ErrorCallback</name></member>
+      <member refid="group__grp__comm_1gabcc2bb9c188ed5dd0c34bf573bdb04e6" kind="function"><name>UART1_TraiterCommande</name></member>
+      <member refid="group__grp__oc_1ga66c4ac6f7a9837733484590dbe3081d2" kind="function"><name>OC_SignalerEvenements</name></member>
+      <member refid="group__grp__oc_1ga61bd3c43a673ea375cabfe6a2de48eb0" kind="function"><name>OC_Rearmer</name></member>
+      <member refid="group__grp__oc_1ga53ac0c1da803505e54c72dbd31e4de73" kind="function"><name>OC_Etat</name></member>
+      <member refid="group__grp__dac_1gad09bc7e6abf4db69f2fea3ab311c637f" kind="function"><name>ResoudreTableauDac</name></member>
+      <member refid="group__grp__dac_1ga4469a4eb236eb4a995abab435c43c644" kind="function"><name>EcrireValeurDac</name></member>
+      <member refid="group__grp__dac_1gadcbefabbab52750a575b5dac7150534e" kind="function"><name>h_SET_VAL_LDO_GENERIQUE</name></member>
+      <member refid="group__grp__dac_1ga1b7ca6a4fce7e0d525508dd4951a48f0" kind="function"><name>h_SET_CURRENT_LDO_GENERIQUE</name></member>
+      <member refid="group__grp__oc_1ga9358ff0a14ed464e81374dab1f13777d" kind="function"><name>OC_InitialiserSeuilsDefaut</name></member>
+      <member refid="group__grp__oc_1gaa95aeec744d338f67994e9ecbaf895b9" kind="function"><name>OC_LdoDuCanalSeuil</name></member>
+      <member refid="group__grp__dac_1gaeda25d5b60439cf57afc75b5c8096a3d" kind="function"><name>SetMappingDacLdo</name></member>
+      <member refid="group__grp__dac_1gac1d35f9367efff87f176072901b295ac" kind="function"><name>GetMappingDacLdo</name></member>
+      <member refid="group__grp__adc_1ga096a71e898411e3976c99187adaddc11" kind="function"><name>h_GET_CURRENT_1</name></member>
+      <member refid="group__grp__adc_1ga861c7e50b324d97f26759930fa7390a2" kind="function"><name>h_GET_CURRENT_2</name></member>
+      <member refid="group__grp__i2c_1ga45ca114e0fa3b65a4923db15bbc51a0e" kind="function"><name>h_SCAN_I2C1</name></member>
+      <member refid="group__grp__i2c_1gaf5fe51ec000f68a1b5a11cea7a1ffd32" kind="function"><name>h_SCAN_I2C2</name></member>
+      <member refid="group__grp__dac_1ga161b95d8fabb7c81f08c2e0629238b6e" kind="function"><name>h_BALAYER_DAC</name></member>
+      <member refid="group__grp__dac_1ga60bdf8f5f95deb2ebd6667b24e0cef0b" kind="function"><name>h_GET_DAC_CONFIG</name></member>
+      <member refid="group__grp__dac_1gae1030d1ce005f7deac0f86610f9df4af" kind="function"><name>LireRegistreValeurDAC</name></member>
+      <member refid="group__grp__eeprom_1ga411fdeb5f1d7a54dc6d8ecf893d7d0a9" kind="function"><name>DAC_PuceDeCible</name></member>
+      <member refid="group__grp__eeprom_1ga9038fec6d17da09fb1543c560d3e7965" kind="function"><name>DAC_PuceJoignable</name></member>
+      <member refid="group__grp__eeprom_1ga1de03c1c4ce3c3d63b079d5bce9c8e74" kind="function"><name>EcrireDACEeprom</name></member>
+      <member refid="group__grp__eeprom_1ga461f9e8b58bc45203018e3132c71b989" kind="function"><name>DAC_GarderEnEeprom</name></member>
+      <member refid="group__grp__eeprom_1ga5f9ce30ec25412cc3efbe118447a5a11" kind="function"><name>DAC_TraiterSauvegardes</name></member>
+      <member refid="group__grp__eeprom_1gaea23265d4fdedf9ac60d1c4afb886e40" kind="function"><name>DAC_RestaurerMemoire</name></member>
+      <member refid="group__grp__eeprom_1ga538f60d46cf0ac04119fa65a989274be" kind="function"><name>DAC_ConfigurerSeuilsPotentiometre</name></member>
+      <member refid="group__grp__dac_1ga9a556575c443842fc36ade5dc4983b87" kind="function"><name>h_GET_DAC_REG</name></member>
+      <member refid="group__grp__dac_1ga459cb06259e765da581fe6170672b59a" kind="function"><name>h_SET_DAC_VREF</name></member>
+      <member refid="group__grp__dac_1ga0bd0eb566573e23c1258ec14e95e53f0" kind="function"><name>h_SET_DAC_PD</name></member>
+      <member refid="group__grp__dac_1ga3f77fbf6480487ff43ce47d7ed7d89e2" kind="function"><name>h_SET_DAC_GAIN</name></member>
+      <member refid="group__grp__dac_1ga8721dfe3dc61c6a257e56c61a478b703" kind="function"><name>h_SET_I2C2_ACTIF</name></member>
+      <member refid="group__grp__adc_1ga74a9c056e466dd59ca9ea5b9110125f0" kind="function"><name>EcrireADG728</name></member>
+      <member refid="group__grp__adc_1gaf26fbfed012a3cc53e96a8cf7c284e2d" kind="function"><name>SelectionnerCanalMuxTension</name></member>
+      <member refid="group__grp__adc_1ga58dc9f0471184fd3cc5f8030ba048bcd" kind="function"><name>SelectionnerCanalMuxCourant</name></member>
+      <member refid="group__grp__adc_1gabea253a3031b6371c35f5c1b206728c6" kind="function"><name>SetMuxLdo</name></member>
+      <member refid="group__grp__adc_1ga9ab7d7bc3c2e86fe9886ff9a25b5d2d4" kind="function"><name>GetMuxLdo</name></member>
+      <member refid="group__grp__adc_1ga6bcd15aecac42670e775f0796aa0b8ec" kind="function"><name>LireTensionADC</name></member>
+      <member refid="group__grp__adc_1ga4feb141ddc6376d2ada1a4e0f58416e1" kind="function"><name>LireCourantADC</name></member>
+      <member refid="group__grp__adc_1ga291e2e1e27a0a67a3c63820c746abc60" kind="function"><name>GetMesureCourantReelle</name></member>
+      <member refid="group__grp__adc_1ga17dfb24c9ed80c2dca43e9d81d13e130" kind="function"><name>SetMuxCourantLdo</name></member>
+      <member refid="group__grp__adc_1gac835b21b6948669a86732fd2683d8fd6" kind="function"><name>GetMuxCourantLdo</name></member>
+      <member refid="group__grp__adc_1ga2a74a6a59230cb5a091b0e9709d54fe4" kind="function"><name>h_SET_MUX_CANAL_TENSION</name></member>
+      <member refid="group__grp__adc_1ga135b6adb8e9bb52953618d4160a21035" kind="function"><name>h_GET_MUX_CANAL_TENSION</name></member>
+      <member refid="group__grp__adc_1ga70cfdd7f1ddad05ce9fe0f32762d5d9d" kind="function"><name>h_SET_MUX_CANAL_COURANT</name></member>
+      <member refid="group__grp__adc_1ga67624c69d417f4b658d797a9bfcf85c9" kind="function"><name>h_GET_MUX_CANAL_COURANT</name></member>
+      <member refid="group__grp__adc_1gacef2ce765b1a58a67b122129344ed9c3" kind="function"><name>h_GET_ADC_BRUT</name></member>
+      <member refid="group__grp__comm_1ga69203767b05a3021fd164dfbc0b4d6c5" kind="function"><name>h_WHO</name></member>
+      <member refid="group__grp__comm_1ga5e4e310aeaafd17d31d0c9fd0874ad0c" kind="function"><name>compareCommand</name></member>
+      <member refid="group__grp__comm_1ga2f7f33500ff00c489e30866948d48e3c" kind="function"><name>compareCommandForSort</name></member>
+      <member refid="group__grp__comm_1gaa8eed1e7f490101de8fcefc4af23882c" kind="function"><name>sortCommandTable</name></member>
+      <member refid="group__grp__config_1ga8ad9d7191f49b52c41d5a583f774465d" kind="function"><name>LDO_InitialiserTables</name></member>
+      <member refid="group__grp__config_1gaa5729680e86eeadbd61a302f18bf329f" kind="function"><name>LDO_ActiverHorlogePort</name></member>
+      <member refid="group__grp__config_1ga12b4c9909bec1ea781ab3e736da3b356" kind="function"><name>ModeBroche</name></member>
+      <member refid="group__grp__config_1ga2ba862323ea386969585492246cd74d6" kind="function"><name>LDO_Diagnostic</name></member>
+      <member refid="group__grp__oc_1ga3c2340b58426351c26b0ff583df3f970" kind="function"><name>OC_IrqDepuisBroche</name></member>
+      <member refid="group__grp__oc_1ga12ef8bab086612c9ecf3cb2ffed9c776" kind="function"><name>MX_OC_EXTI_Init</name></member>
+      <member refid="group__grp__exti_1ga49cfdd46eb8d0ef3e1987514aa9343dc" kind="function"><name>EXTI1_IRQHandler</name></member>
+      <member refid="group__grp__exti_1gab5a1d9e9c8ef50e0cb9ddb5745a20a14" kind="function"><name>EXTI2_IRQHandler</name></member>
+      <member refid="group__grp__exti_1ga30c045de96d18ec9c67a7b9e4350920f" kind="function"><name>EXTI3_IRQHandler</name></member>
+      <member refid="group__grp__exti_1ga290cb997018c8d85d4b965b4a242842f" kind="function"><name>EXTI4_IRQHandler</name></member>
+      <member refid="group__grp__exti_1ga7b2096b8b2643286dc3a7e5110e5ae85" kind="function"><name>EXTI9_5_IRQHandler</name></member>
+      <member refid="group__grp__exti_1ga0cd91fd3a9608559c2a87a8ba6cba55f" kind="function"><name>HAL_GPIO_EXTI_Callback</name></member>
+      <member refid="group__grp__cubemx_1ga8a3b0ad512a6e6c6157440b68d395eac" kind="function"><name>HAL_TIM_PeriodElapsedCallback</name></member>
+      <member refid="group__grp__cubemx_1ga1730ffe1e560465665eb47d9264826f9" kind="function"><name>Error_Handler</name></member>
+      <member refid="group__grp__cubemx_1ga2532ff72b1a2ff82f65e8c2a5a4dde00" kind="function"><name>assert_failed</name></member>
+    </sectiondef>
+    <briefdescription>
+<para>: Main program body </para>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="attention"><para></para>
+</simplesect>
+Copyright (c) 2025 STMicroelectronics. All rights reserved.</para>
+<para>This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-IS. </para>
+    </detaileddescription>
+    <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,30 @@
+<map id="EcrireRegistreConfigDAC" name="EcrireRegistreConfigDAC">
+<area shape="rect" id="Node000001" title="Ecrit un registre VOLATILE de CONFIGURATION du DAC MCP47FEB28 (adresses memoire 08h/09h/0Ah UNIQUEMEN..." alt="" coords="537,216,709,243"/>
+<area shape="poly" id="edge7_Node000001_Node000001" title=" " alt="" coords="665,201,652,197,623,195,597,197,582,202,579,207,586,216,581,215,573,207,579,197,595,191,623,189,653,192,670,201"/>
+<area shape="rect" id="Node000002" href="$group__grp__eeprom.html#ga538f60d46cf0ac04119fa65a989274be" title="Mode potentiometre (LDO dont la colonne &quot;seuil&quot; vaut SEUIL_POT) : met la voie du DAC de courant en Po..." alt="" coords="255,29,489,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="605,202,559,136,526,100,488,70,465,59,465,54,491,66,530,96,563,132,610,203"/>
+<area shape="rect" id="Node000005" href="$group__grp__dac.html#ga3f77fbf6480487ff43ce47d7ed7d89e2" title="Handler de la commande reseau &quot;SET_DAC_GAIN&quot; &#45; ecrit le registre Gain (0x0A) d&#39;une puce DAC : gain de..." alt="" coords="304,104,441,131"/>
+<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="590,206,545,175,488,145,441,130,441,125,490,140,547,171,596,206"/>
+<area shape="rect" id="Node000006" href="$group__grp__dac.html#ga0bd0eb566573e23c1258ec14e95e53f0" title="Handler de la commande reseau &quot;SET_DAC_PD&quot; &#45; ecrit le registre Power&#45;Down (0x09) d&#39;une puce DAC : eta..." alt="" coords="310,179,434,205"/>
+<area shape="poly" id="edge10_Node000001_Node000006" title=" " alt="" coords="520,215,435,204,434,198,525,214"/>
+<area shape="rect" id="Node000007" href="$group__grp__dac.html#ga459cb06259e765da581fe6170672b59a" title="Handler de la commande reseau &quot;SET_DAC_VREF&quot; &#45; ecrit le registre VREF (0x08) d&#39;une puce DAC : source ..." alt="" coords="302,253,442,280"/>
+<area shape="poly" id="edge12_Node000001_Node000007" title=" " alt="" coords="519,245,443,259,442,254,524,244"/>
+<area shape="rect" id="Node000008" href="$group__grp__dac.html#gaef2582c078db38424ec959fc1f9f1c5f" title="Force la configuration VOLATILE des MCP47FEB28 de I2C1 a l&#39;etat attendu par tout le reste du firmware..." alt="" coords="287,328,457,355"/>
+<area shape="poly" id="edge14_Node000001_Node000008" title=" " alt="" coords="582,249,490,294,408,330,406,325,488,290,577,251"/>
+<area shape="rect" id="Node000009" href="$group__grp__dac.html#gacdf4ad1b5d4a18ab3a5b309318099344" title="Relit VREF/PD/Gain des puces de I2C1 et reecrit la configuration attendue si une puce l&#39;a perdue...." alt="" coords="286,403,458,429"/>
+<area shape="poly" id="edge17_Node000001_Node000009" title=" " alt="" coords="605,254,556,312,525,342,491,369,455,389,418,405,417,399,452,385,488,364,521,338,552,308,600,256"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="408,15,397,10,372,8,349,10,337,15,334,20,340,29,335,29,329,21,333,11,348,5,372,3,398,5,413,14"/>
+<area shape="rect" id="Node000003" href="$group__grp__tache.html#gae9bf934dd2f4a12a5c5975d81afa3063" title="Tache FreeRTOS principale (lwipTask). Initialise LwIP, les verrous (I2C, UART, commandes),..." alt="" coords="103,328,207,355"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="257,67,257,70,230,99,208,133,191,170,179,208,164,278,159,328,154,326,159,277,174,207,186,169,203,131,225,96,253,66,261,63"/>
+<area shape="poly" id="edge6_Node000003_Node000003" title=" " alt="" coords="174,313,168,309,155,307,142,309,136,313,134,319,138,328,132,327,129,319,131,310,140,304,155,301,170,304,180,313"/>
+<area shape="rect" id="Node000004" href="$group__grp__cubemx.html#ga840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,328,55,355"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="85,343,56,344,54,339,89,340"/>
+<area shape="poly" id="edge5_Node000004_Node000004" title=" " alt="" coords="50,314,43,309,30,307,18,309,11,313,9,319,13,327,8,328,4,319,7,310,16,304,30,301,46,304,55,312"/>
+<area shape="poly" id="edge9_Node000005_Node000005" title=" " alt="" coords="408,89,397,85,372,83,349,85,337,89,334,95,340,104,335,103,329,95,333,85,348,79,372,77,398,80,413,88"/>
+<area shape="poly" id="edge11_Node000006_Node000006" title=" " alt="" coords="408,164,397,160,372,157,349,159,337,164,334,169,340,179,335,178,329,170,333,160,348,154,372,152,398,155,413,163"/>
+<area shape="poly" id="edge13_Node000007_Node000007" title=" " alt="" coords="408,238,397,234,372,232,349,234,337,239,334,244,340,253,335,252,329,245,333,235,348,229,372,227,398,229,413,238"/>
+<area shape="poly" id="edge16_Node000008_Node000003" title=" " alt="" coords="269,342,208,344,207,339,274,341"/>
+<area shape="poly" id="edge15_Node000008_Node000008" title=" " alt="" coords="408,313,397,309,372,307,349,309,337,313,334,319,340,328,335,327,329,319,333,309,348,303,372,301,398,304,413,313"/>
+<area shape="poly" id="edge18_Node000009_Node000003" title=" " alt="" coords="314,398,196,358,197,353,319,396"/>
+<area shape="poly" id="edge19_Node000009_Node000009" title=" " alt="" coords="408,387,397,384,372,381,349,383,337,388,334,393,340,403,335,401,329,394,333,384,348,378,372,376,398,379,413,388"/>
+</map>

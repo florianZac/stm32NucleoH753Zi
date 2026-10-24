@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="struct_scan_result__t" kind="struct" language="C++" prot="public">
+    <compoundname>ScanResult_t</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_scan_result__t_1ae1eaefa6a96c98aef42bcbf96b73e8d1" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t ScanResult_t::addr_trouve[16]</definition>
+        <argsstring>[16]</argsstring>
+        <name>addr_trouve</name>
+        <qualifiedname>ScanResult_t::addr_trouve</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="585" column="14" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="585" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_scan_result__t_1a254e841a4251ec1f65b1e19b3ba6018e" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t ScanResult_t::addr_cpt</definition>
+        <argsstring></argsstring>
+        <name>addr_cpt</name>
+        <qualifiedname>ScanResult_t::addr_cpt</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="586" column="14" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="586" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_scan_result__t_1a54669235c988b7f960bca3e997c95f75" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ScanResult_t::count_ok</definition>
+        <argsstring></argsstring>
+        <name>count_ok</name>
+        <qualifiedname>ScanResult_t::count_ok</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="587" column="14" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="587" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_scan_result__t_1a9762a9fd0bc800cb56dc9ff2687f4a36" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ScanResult_t::count_error</definition>
+        <argsstring></argsstring>
+        <name>count_error</name>
+        <qualifiedname>ScanResult_t::count_error</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="588" column="14" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="588" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_scan_result__t_1ad16801d4095006a90b674ad8a67bc8f5" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ScanResult_t::count_busy</definition>
+        <argsstring></argsstring>
+        <name>count_busy</name>
+        <qualifiedname>ScanResult_t::count_busy</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="589" column="14" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="589" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_scan_result__t_1a5a41bf081a4bec1754975f6805d090c9" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ScanResult_t::count_timeout</definition>
+        <argsstring></argsstring>
+        <name>count_timeout</name>
+        <qualifiedname>ScanResult_t::count_timeout</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="590" column="14" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="590" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Resultat d&apos;un scan I2C complet (voir ScanI2C()) : la liste des adresses ayant repondu, et un compteur par type de reponse HAL (OK/NACK/bus occupe/timeout). Une instance separee par bus (ex : res_i2c1, res_i2c2), pour ne jamais melanger les resultats de deux bus differents. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="584" column="1" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="584" bodyend="591"/>
+    <listofallmembers>
+      <member refid="struct_scan_result__t_1a254e841a4251ec1f65b1e19b3ba6018e" prot="public" virt="non-virtual"><scope>ScanResult_t</scope><name>addr_cpt</name></member>
+      <member refid="struct_scan_result__t_1ae1eaefa6a96c98aef42bcbf96b73e8d1" prot="public" virt="non-virtual"><scope>ScanResult_t</scope><name>addr_trouve</name></member>
+      <member refid="struct_scan_result__t_1ad16801d4095006a90b674ad8a67bc8f5" prot="public" virt="non-virtual"><scope>ScanResult_t</scope><name>count_busy</name></member>
+      <member refid="struct_scan_result__t_1a9762a9fd0bc800cb56dc9ff2687f4a36" prot="public" virt="non-virtual"><scope>ScanResult_t</scope><name>count_error</name></member>
+      <member refid="struct_scan_result__t_1a54669235c988b7f960bca3e997c95f75" prot="public" virt="non-virtual"><scope>ScanResult_t</scope><name>count_ok</name></member>
+      <member refid="struct_scan_result__t_1a5a41bf081a4bec1754975f6805d090c9" prot="public" virt="non-virtual"><scope>ScanResult_t</scope><name>count_timeout</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,7 @@
+<map id="ScanI2C" name="ScanI2C">
+<area shape="rect" id="Node000001" title="Scanne toutes les adresses I2C possibles (hors General Call =&gt; 0x00) sur le bus passe en parametre,..." alt="" coords="5,29,78,56"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="15,29,11,21,14,11,24,5,42,3,60,5,71,14,66,14,58,10,41,8,26,10,18,14,16,20,20,28"/>
+<area shape="rect" id="Node000002" href="$group__grp__i2c.html#ga5cb1cd70b1dd76a8aadb2bccb2837d2f" title="Retourne le mutex correspondant au bus d&#39;un handle I2C donne." alt="" coords="126,29,260,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,40,112,42,107,43,78,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="166,28,162,21,165,11,176,5,193,3,211,5,222,15,217,14,209,10,193,8,177,10,169,14,167,20,171,30"/>
+</map>

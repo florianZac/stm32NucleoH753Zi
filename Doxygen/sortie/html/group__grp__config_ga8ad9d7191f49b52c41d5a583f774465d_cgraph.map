@@ -1,0 +1,10 @@
+<map id="LDO_InitialiserTables" name="LDO_InitialiserTables">
+<area shape="rect" id="Node000001" title="Recopie dans les tables RAM modifiables a chaud les valeurs initiales declarees dans ldoConfig[] : ma..." alt="" coords="5,67,151,93"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="44,67,39,58,43,48,56,42,78,40,101,43,115,51,110,52,100,48,78,45,58,47,46,52,44,57,49,66"/>
+<area shape="rect" id="Node000002" href="$group__grp__oc.html#ga7851b235d1d1f7564644d659587b3ba2" title="Indique si la LDO est surveillee : ldoConfig[idx].oc.surveille = 1 ET un DAC de seuil (dac_courant) d..." alt="" coords="212,29,337,56"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="150,64,199,56,194,58,152,69"/>
+<area shape="rect" id="Node000003" href="$group__grp__comm.html#gab9b5dfc109e472981cbbb7867d1b7f92" title="Envoie une chaine de caracteres sur USART1 (PB6/PB7, via un adaptateur USB&#45;UART externe),..." alt="" coords="199,104,350,131"/>
+<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="151,91,188,100,183,101,151,96"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="241,28,235,21,239,11,253,5,274,3,298,5,312,14,306,14,296,10,274,8,254,10,243,15,240,20,246,30"/>
+<area shape="poly" id="edge5_Node000003_Node000003" title=" " alt="" coords="241,103,235,95,239,86,253,79,274,77,298,80,312,89,306,88,296,85,274,83,254,85,243,89,240,95,246,105"/>
+</map>

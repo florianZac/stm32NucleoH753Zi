@@ -1,0 +1,13 @@
+<map id="SynchroniserTableauDac" name="SynchroniserTableauDac">
+<area shape="rect" id="Node000001" title="Repercute une ecriture DAC directe (EcrireDACVolatile(), typiquement depuis BalayerSortieDAC()) dans ..." alt="" coords="5,67,172,93"/>
+<area shape="poly" id="edge7_Node000001_Node000001" title=" " alt="" coords="48,67,41,58,46,48,62,42,89,40,117,43,134,51,128,52,116,48,88,45,63,47,50,52,47,57,53,66"/>
+<area shape="rect" id="Node000002" href="$group__grp__dac.html#ga924c3b0d97d03d4aba5b24043d36849c" title="Repercute une ecriture directe sur un canal DAC (balayage a distance BALAYER_DAC, capture bouton USER..." alt="" coords="251,29,403,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="172,64,238,56,233,58,173,70"/>
+<area shape="rect" id="Node000004" href="$group__grp__dac.html#gab5371264b6f8831689ac30f87a45c4ed" title="Retrouve le tableau DACx_DEF (celui rafraichi en continu par la boucle de StartLwipTask(),..." alt="" coords="220,104,434,131"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="172,90,225,101,220,101,172,96"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="288,28,281,21,286,11,302,5,327,3,354,5,370,15,365,14,353,10,327,8,303,10,290,15,287,20,293,30"/>
+<area shape="rect" id="Node000003" href="$group__grp__dac.html#gad09bc7e6abf4db69f2fea3ab311c637f" title="Retourne le pointeur vers le tableau DACx_DEF correspondant a une cible logique." alt="" coords="482,29,628,56"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="403,40,469,42,464,43,404,45"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="516,28,510,21,515,11,530,5,555,3,583,5,599,15,593,14,581,10,555,8,531,10,518,15,515,20,521,30"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="288,103,281,95,286,85,302,79,327,77,354,80,370,90,365,89,353,85,327,83,303,85,290,89,287,95,293,105"/>
+</map>

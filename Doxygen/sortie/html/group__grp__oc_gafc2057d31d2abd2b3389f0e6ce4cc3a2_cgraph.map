@@ -1,0 +1,10 @@
+<map id="OC_SeuilValide" name="OC_SeuilValide">
+<area shape="rect" id="Node000001" title="Verifie que le seuil programme est dans la plage specifiee du LM211 (VDAC &gt;= 0,5 V)...." alt="" coords="5,29,118,56"/>
+<area shape="poly" id="edge5_Node000001_Node000001" title=" " alt="" coords="34,29,29,21,33,11,44,5,62,3,81,5,92,14,87,14,79,10,61,8,45,10,37,15,35,20,39,29"/>
+<area shape="rect" id="Node000002" href="$group__grp__oc.html#ga5a3191b846544a7dced3ea094018f361" title="Indique si la protection OC est AGISSANTE : LDO surveillee (circuit cable, voir OC_EstSurveillee()) E..." alt="" coords="166,29,271,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,40,153,42,147,43,118,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="191,28,186,21,190,11,201,5,218,3,237,5,249,15,243,14,236,10,218,8,202,10,194,15,192,20,196,30"/>
+<area shape="rect" id="Node000003" href="$group__grp__oc.html#ga7851b235d1d1f7564644d659587b3ba2" title="Indique si la LDO est surveillee : ldoConfig[idx].oc.surveille = 1 ET un DAC de seuil (dac_courant) d..." alt="" coords="319,29,444,56"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="271,40,306,43,301,43,271,45"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="353,28,348,21,352,11,363,5,382,3,401,5,413,15,408,14,400,10,382,8,365,10,356,15,354,20,358,30"/>
+</map>

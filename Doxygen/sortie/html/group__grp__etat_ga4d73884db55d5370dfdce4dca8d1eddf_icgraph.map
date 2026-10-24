@@ -1,0 +1,29 @@
+<map id="LDO_RelacherBleeder" name="LDO_RelacherBleeder">
+<area shape="rect" id="Node000001" title="Desactive le bleeder d&#39;une LDO (RST_BL_LDO_&lt;nom&gt;, RST_BL_LDO_ALL, SET_BL_TAB avec 0)...." alt="" coords="870,104,1021,131"/>
+<area shape="poly" id="edge5_Node000001_Node000001" title=" " alt="" coords="978,88,968,85,946,83,925,85,914,89,911,95,917,105,912,102,906,95,910,86,924,79,946,77,969,80,983,89"/>
+<area shape="rect" id="Node000002" href="$group__grp__etat.html#ga9b73881c339d3de0d81a83298d3c74c6" title="Handler de la commande reseau &quot;RST_BL_LDO_ALL&quot;. Parcourt les 18 LDO et desactive le bleeder (Bl=0) po..." alt="" coords="673,29,822,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="895,98,821,70,790,59,791,54,823,66,900,98"/>
+<area shape="rect" id="Node000003" href="$group__grp__etat.html#ga31a850bfb276c79400e40e6272d933ae" title="Handler de la commande reseau &quot;SET_BL_TAB&quot;. Renseigne en une seule fois l&#39;etat Bleeder des 18 LDO a p..." alt="" coords="689,104,806,131"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="852,118,806,120,806,115,857,117"/>
+<area shape="rect" id="Node000004" href="$group__grp__comm.html#gad6e271fe1796ab0b2a698260f0b78533" title="Analyseur (parser) principal des trames recues par UDP. Extrait le premier token de la trame (avant l..." alt="" coords="706,179,788,205"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="897,136,785,181,784,176,891,137"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="779,14,769,10,747,8,727,10,716,15,713,20,719,30,714,28,708,21,712,11,726,5,747,3,771,5,785,14"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="779,88,769,85,747,83,727,85,716,89,713,95,719,105,714,103,708,95,712,86,726,79,747,77,771,80,785,89"/>
+<area shape="poly" id="edge7_Node000004_Node000004" title=" " alt="" coords="779,163,769,160,747,157,727,159,716,164,713,169,719,179,714,177,708,170,712,160,726,154,747,152,771,155,785,164"/>
+<area shape="rect" id="Node000005" href="$group__grp__comm.html#gabcc2bb9c188ed5dd0c34bf573bdb04e6" title="Execute la commande recue sur l&#39;UART (s&#39;il y en a une) et renvoie la reponse sur l&#39;UART...." alt="" coords="255,141,430,168"/>
+<area shape="poly" id="edge8_Node000004_Node000005" title=" " alt="" coords="688,186,624,183,431,165,431,160,625,177,693,186"/>
+<area shape="rect" id="Node000008" href="$group__grp__comm.html#ga5b44c65aa41e79871a46aeed1bb4751b" title="Callback LwIP invoque automatiquement a chaque paquet UDP recu sur le port du serveur (enregistre par..." alt="" coords="478,216,625,243"/>
+<area shape="poly" id="edge14_Node000004_Node000008" title=" " alt="" coords="693,202,625,218,625,213,688,203"/>
+<area shape="poly" id="edge13_Node000005_Node000005" title=" " alt="" coords="373,126,364,122,343,120,323,122,313,127,310,132,315,142,310,140,305,133,309,123,322,117,343,115,365,117,379,126"/>
+<area shape="rect" id="Node000006" href="$group__grp__tache.html#gae9bf934dd2f4a12a5c5975d81afa3063" title="Tache FreeRTOS principale (lwipTask). Initialise LwIP, les verrous (I2C, UART, commandes),..." alt="" coords="103,179,207,205"/>
+<area shape="poly" id="edge9_Node000005_Node000006" title=" " alt="" coords="255,172,208,184,207,179,260,171"/>
+<area shape="poly" id="edge12_Node000006_Node000006" title=" " alt="" coords="174,163,168,160,155,157,142,159,136,164,134,170,138,179,132,177,129,170,131,161,140,154,155,152,170,155,180,164"/>
+<area shape="rect" id="Node000007" href="$group__grp__cubemx.html#ga840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="5,179,55,205"/>
+<area shape="poly" id="edge10_Node000006_Node000007" title=" " alt="" coords="85,194,55,195,54,189,89,190"/>
+<area shape="poly" id="edge11_Node000007_Node000007" title=" " alt="" coords="49,164,43,160,30,157,18,159,11,164,9,170,13,178,8,179,4,170,7,161,16,154,30,152,46,155,55,163"/>
+<area shape="poly" id="edge15_Node000008_Node000008" title=" " alt="" coords="583,200,573,197,551,195,531,197,520,201,518,207,523,217,518,214,512,207,516,198,530,191,552,189,575,192,589,201"/>
+<area shape="rect" id="Node000009" href="$group__grp__comm.html#ga78047c519037c4c6091c71e1801519c7" title="Initialise le serveur UDP applicatif. Cree un PCB UDP (udp_new), le lie a l&#39;adresse IP et au port def..." alt="" coords="290,216,395,243"/>
+<area shape="poly" id="edge16_Node000008_Node000009" title=" " alt="" coords="460,229,395,232,395,227,466,229"/>
+<area shape="poly" id="edge17_Node000009_Node000006" title=" " alt="" coords="273,216,207,205,207,200,278,216"/>
+<area shape="poly" id="edge18_Node000009_Node000009" title=" " alt="" coords="373,200,364,197,343,195,323,197,313,201,310,207,315,217,310,214,305,207,309,198,322,191,343,189,365,192,378,201"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="CmdOnOff_TraiterSauvegarde" name="CmdOnOff_TraiterSauvegarde">
+<area shape="rect" id="Node000001" title="Ecrit en flash les commandes ON/OFF modifiees, DELAI_MS apres la derniere bascule (plusieurs bascules..." alt="" coords="5,67,202,93"/>
+<area shape="poly" id="edge5_Node000001_Node000001" title=" " alt="" coords="65,66,59,58,64,48,79,42,104,40,130,43,146,51,141,52,129,48,103,45,80,47,67,52,64,57,71,66"/>
+<area shape="rect" id="Node000002" href="$group__grp__cmd.html#gacc19a91cbb61d5aa4f80d4a141306050" title="Ecrit l&#39;etat des commandes ON/OFF dans le prochain emplacement libre du secteur (efface le secteur qu..." alt="" coords="250,29,406,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="187,63,237,57,232,59,188,69"/>
+<area shape="rect" id="Node000004" href="$group__grp__comm.html#gab9b5dfc109e472981cbbb7867d1b7f92" title="Envoie une chaine de caracteres sur USART1 (PB6/PB7, via un adaptateur USB&#45;UART externe),..." alt="" coords="252,104,404,131"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="188,91,239,102,234,102,187,97"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="298,28,294,21,297,11,309,5,328,3,348,5,360,14,355,14,346,10,328,8,310,10,301,15,299,20,304,30"/>
+<area shape="rect" id="Node000003" href="$group__grp__cmd.html#ga3ea657061e2d4ecf828155a9ca3a9dba" title="CRC&#45;32 (polynome 0xEDB88320, comme zlib) d&#39;une suite de mots 32 bits." alt="" coords="454,29,539,56"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="406,40,441,42,436,43,407,45"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="467,28,462,21,466,11,478,5,497,3,517,5,529,14,524,14,515,10,497,8,479,10,470,15,468,20,472,30"/>
+<area shape="poly" id="edge7_Node000004_Node000004" title=" " alt="" coords="299,102,294,95,297,86,309,80,328,77,348,80,360,89,355,88,346,85,328,83,310,85,301,89,299,95,303,105"/>
+</map>

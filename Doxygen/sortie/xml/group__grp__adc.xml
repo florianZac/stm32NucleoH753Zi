@@ -1,0 +1,1053 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="fr">
+  <compounddef id="group__grp__adc" kind="group">
+    <compoundname>grp_adc</compoundname>
+    <title>Mesure ADC et multiplexeurs ADG728</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__grp__adc_1ga6ff0e6f3d7fd661242785ab1fe918c8c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void MX_MuxResetSync_GPIO_Init</definition>
+        <argsstring>(void)</argsstring>
+        <name>MX_MuxResetSync_GPIO_Init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Configure PD0 en entree avec interruption, pour detecter les appuis sur le bouton-poussoir cable sur la broche RESET des ADG728. A appeler depuis MX_GPIO_Init_2, comme pour B1. ATTENTION : polarite (front montant ou descendant) et necessite d&apos;un pull-up/pull-down externe ou interne a verifier selon le cablage reel du bouton et de la broche RESET de l&apos;ADG728 (actif haut ou bas, non confirme cote datasheet au moment de l&apos;ecriture de ce code). Si les deux chaines (tension/courant) ont chacune leur PROPRE ligne RESET physique separee, il faudra dupliquer ce mecanisme sur une deuxieme broche/interruption. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">//<sp/>Fin<sp/>de<sp/>MX_GPIO_Init(),<sp/>zone<sp/>USER<sp/>CODE<sp/>MX_GPIO_Init_2<sp/>:</highlight></codeline>
+<codeline><highlight class="normal">MX_MuxResetSync_GPIO_Init();<sp/><sp/><sp/>//<sp/>PD0<sp/>-&gt;<sp/>EXTI0<sp/>-&gt;<sp/>mux_reset_appuye</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1577" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1577" bodyend="1590"/>
+        <references refid="group__grp__adc_1ga6ff0e6f3d7fd661242785ab1fe918c8c" compoundref="main_8c" startline="1577" endline="1590">MX_MuxResetSync_GPIO_Init</references>
+        <referencedby refid="group__grp__cubemx_1gae89fdd15729ad41a66911190fcbab23a" compoundref="main_8c" startline="2348" endline="2537">MX_GPIO_Init</referencedby>
+        <referencedby refid="group__grp__adc_1ga6ff0e6f3d7fd661242785ab1fe918c8c" compoundref="main_8c" startline="1577" endline="1590">MX_MuxResetSync_GPIO_Init</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__adc_1ga22145e0da7150e80ea9faf528fa8e7c3" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void TraiterResetMultiplexeur</definition>
+        <argsstring>(void)</argsstring>
+        <name>TraiterResetMultiplexeur</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Resynchronise l&apos;etat logiciel des DEUX chaines de multiplexage (tension et courant) avec la realite materielle, apres un appui sur le bouton de RESET des ADG728 : le reset materiel coupe tous les canaux, quel que soit ce que le firmware pensait actif avant l&apos;appui - sans cette resynchronisation, GET_MUX_CANAL/GET_MUX_CANAL_COURANT renverraient un canal qui n&apos;est plus reellement selectionne. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Remet les deux canaux actuels a 0xFF, et journalise l&apos;evenement sur UART. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Appelee<sp/>depuis<sp/>la<sp/>boucle<sp/>de<sp/>StartLwipTask(),<sp/>quand</highlight></codeline>
+<codeline><highlight class="normal">mux_reset_appuye<sp/>est<sp/>a<sp/>1<sp/>(mis<sp/>par<sp/>l&apos;interruption<sp/>PD0)<sp/>:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>if<sp/>(mux_reset_appuye)<sp/>{<sp/>mux_reset_appuye<sp/>=<sp/>0;<sp/>TraiterResetMultiplexeur();<sp/>}</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="1611" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="1611" bodyend="1616"/>
+        <references refid="group__grp__adc_1ga22145e0da7150e80ea9faf528fa8e7c3" compoundref="main_8c" startline="1611" endline="1616">TraiterResetMultiplexeur</references>
+        <references refid="group__grp__comm_1gab9b5dfc109e472981cbbb7867d1b7f92" compoundref="main_8c" startline="1803" endline="1816">UART1_EnvoyerTexte</references>
+        <referencedby refid="group__grp__tache_1gae9bf934dd2f4a12a5c5975d81afa3063" compoundref="main_8c" startline="6730" endline="6833">StartLwipTask</referencedby>
+        <referencedby refid="group__grp__adc_1ga22145e0da7150e80ea9faf528fa8e7c3" compoundref="main_8c" startline="1611" endline="1616">TraiterResetMultiplexeur</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__adc_1ga096a71e898411e3976c99187adaddc11" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_GET_CURRENT_1</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_GET_CURRENT_1</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;GET_CURRENT_1&quot;. Declenche une conversion sur ADC1, la convertit en pourcentage (0-100) via map(), et prepare la reponse texte. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Ecrit le resultat dans la variable globale response, format &quot;Current ADC 1 = &lt;valeur&gt;\n&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;GET_CURRENT_1&quot;<sp/>-&gt;<sp/>reponse<sp/>&quot;Current<sp/>ADC<sp/>1<sp/>=<sp/>42&quot;.</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="4332" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="4332" bodyend="4341"/>
+        <references refid="group__grp__adc_1ga096a71e898411e3976c99187adaddc11" compoundref="main_8c" startline="4332" endline="4341">h_GET_CURRENT_1</references>
+        <references refid="group__grp__outils_1ga4264917775e9932f98b48713bf592321" compoundref="main_8c" startline="6458" endline="6461">map</references>
+        <referencedby refid="group__grp__adc_1ga096a71e898411e3976c99187adaddc11" compoundref="main_8c" startline="4332" endline="4341">h_GET_CURRENT_1</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__adc_1ga861c7e50b324d97f26759930fa7390a2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_GET_CURRENT_2</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_GET_CURRENT_2</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;GET_CURRENT_2&quot;. Declenche une conversion sur ADC3, la convertit en pourcentage (0-100) via map(), et prepare la reponse texte. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Ecrit le resultat dans la variable globale response, format &quot;Current ADC 2 = &lt;valeur&gt;\n&quot;. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;GET_CURRENT_2&quot;<sp/>-&gt;<sp/>reponse<sp/>&quot;Current<sp/>ADC<sp/>2<sp/>=<sp/>17&quot;.</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="4355" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="4355" bodyend="4364"/>
+        <references refid="group__grp__adc_1ga861c7e50b324d97f26759930fa7390a2" compoundref="main_8c" startline="4355" endline="4364">h_GET_CURRENT_2</references>
+        <references refid="group__grp__outils_1ga4264917775e9932f98b48713bf592321" compoundref="main_8c" startline="6458" endline="6461">map</references>
+        <referencedby refid="group__grp__adc_1ga861c7e50b324d97f26759930fa7390a2" compoundref="main_8c" startline="4355" endline="4364">h_GET_CURRENT_2</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__adc_1ga74a9c056e466dd59ca9ea5b9110125f0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>HAL_StatusTypeDef</type>
+        <definition>static HAL_StatusTypeDef EcrireADG728</definition>
+        <argsstring>(I2C_HandleTypeDef *hi2c, uint8_t adresse_hal, uint8_t masque_canaux)</argsstring>
+        <name>EcrireADG728</name>
+        <param>
+          <type>I2C_HandleTypeDef *</type>
+          <declname>hi2c</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>adresse_hal</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>masque_canaux</declname>
+        </param>
+        <briefdescription>
+<para>Ecrit le masque de canaux actifs sur un ADG728 (un octet, un bit par canal - voir datasheet ADG728, &quot;chaque canal pilote
+        par un bit d&apos;un mot de 8 bits&quot;). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hi2c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bus I2C a utiliser (&amp;hi2c1 pour la chaine tension, &amp;hi2c2 pour la chaine courant). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>adresse_hal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Adresse I2C de la puce ciblee, format HAL (ex : ADG728_ADDR_0). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>masque_canaux</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Masque 8 bits, un bit a 1 = canal correspondant actif. 0x00 desactive tous les canaux de cette puce (etat par defaut a la mise sous tension). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>HAL_StatusTypeDef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Resultat de la transmission I2C. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">EcrireADG728(&amp;hi2c1,<sp/>ADG728_ADDR_0,<sp/>0x04);<sp/><sp/>//<sp/>canal<sp/>2<sp/>actif</highlight></codeline>
+<codeline><highlight class="normal">EcrireADG728(&amp;hi2c2,<sp/>ADG728_ADDR_0,<sp/>0x00);<sp/><sp/>//<sp/>tous<sp/>desactives</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5222" column="26" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5222" bodyend="5229"/>
+        <references refid="group__grp__adc_1ga74a9c056e466dd59ca9ea5b9110125f0" compoundref="main_8c" startline="5222" endline="5229">EcrireADG728</references>
+        <references refid="group__grp__i2c_1ga5cb1cd70b1dd76a8aadb2bccb2837d2f" compoundref="main_8c" startline="728" endline="731">ResoudreMutexI2C</references>
+        <referencedby refid="group__grp__adc_1ga74a9c056e466dd59ca9ea5b9110125f0" compoundref="main_8c" startline="5222" endline="5229">EcrireADG728</referencedby>
+        <referencedby refid="group__grp__adc_1ga58dc9f0471184fd3cc5f8030ba048bcd" compoundref="main_8c" startline="5285" endline="5305">SelectionnerCanalMuxCourant</referencedby>
+        <referencedby refid="group__grp__adc_1gaf26fbfed012a3cc53e96a8cf7c284e2d" compoundref="main_8c" startline="5248" endline="5268">SelectionnerCanalMuxTension</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__adc_1gaf26fbfed012a3cc53e96a8cf7c284e2d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void SelectionnerCanalMuxTension</definition>
+        <argsstring>(uint8_t canal)</argsstring>
+        <name>SelectionnerCanalMuxTension</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>canal</declname>
+        </param>
+        <briefdescription>
+<para>Selectionne un canal (0-23) parmi les 3 ADG728 de la chaine TENSION (bus I2C1). Desactive systematiquement les 2 autres puces (masque 0x00) avant d&apos;activer le canal voulu, pour que la broche D commune (vers PC2) ne porte jamais deux sorties a la fois. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>canal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Canal a selectionner, 0-23 (0-7 = puce 0, 8-15 = puce 1, 16-23 = puce 2). Ignore silencieusement si hors plage. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Met a jour canal_mux_tension_actuel et attend un court delai d&apos;etablissement. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">SelectionnerCanalMuxTension(2);<sp/><sp/><sp/><sp/>//<sp/>canal<sp/>2<sp/>de<sp/>la<sp/>puce<sp/>0<sp/>(0x4C)</highlight></codeline>
+<codeline><highlight class="normal">SelectionnerCanalMuxTension(10);<sp/><sp/><sp/>//<sp/>canal<sp/>2<sp/>de<sp/>la<sp/>puce<sp/>1<sp/>(0x4D)</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5248" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5248" bodyend="5268"/>
+        <references refid="group__grp__adc_1ga74a9c056e466dd59ca9ea5b9110125f0" compoundref="main_8c" startline="5222" endline="5229">EcrireADG728</references>
+        <references refid="group__grp__adc_1gaf26fbfed012a3cc53e96a8cf7c284e2d" compoundref="main_8c" startline="5248" endline="5268">SelectionnerCanalMuxTension</references>
+        <referencedby refid="group__grp__adc_1ga5620dbaf6425610dff776e64b7f6c3ca" compoundref="main_8c" startline="5474" endline="5501">GetMesureReelle</referencedby>
+        <referencedby refid="group__grp__adc_1ga2a74a6a59230cb5a091b0e9709d54fe4" compoundref="main_8c" startline="5698" endline="5710">h_SET_MUX_CANAL_TENSION</referencedby>
+        <referencedby refid="group__grp__adc_1gaf26fbfed012a3cc53e96a8cf7c284e2d" compoundref="main_8c" startline="5248" endline="5268">SelectionnerCanalMuxTension</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__adc_1ga58dc9f0471184fd3cc5f8030ba048bcd" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void SelectionnerCanalMuxCourant</definition>
+        <argsstring>(uint8_t canal)</argsstring>
+        <name>SelectionnerCanalMuxCourant</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>canal</declname>
+        </param>
+        <briefdescription>
+<para>Selectionne un canal (0-15) parmi les 2 ADG728 de la chaine COURANT (bus I2C2). Meme principe que SelectionnerCanalMuxTension(), sur l&apos;autre bus/puces/broche ADC (PC3). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>canal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Canal a selectionner, 0-15 (0-7 = puce 0, 8-15 = puce 1). Ignore silencieusement si hors plage. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Met a jour canal_mux_courant_actuel et attend un court delai d&apos;etablissement. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">SelectionnerCanalMuxCourant(9);<sp/><sp/>//<sp/>canal<sp/>1<sp/>de<sp/>la<sp/>puce<sp/>1</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5285" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5285" bodyend="5305"/>
+        <references refid="group__grp__adc_1ga74a9c056e466dd59ca9ea5b9110125f0" compoundref="main_8c" startline="5222" endline="5229">EcrireADG728</references>
+        <references refid="group__grp__adc_1ga58dc9f0471184fd3cc5f8030ba048bcd" compoundref="main_8c" startline="5285" endline="5305">SelectionnerCanalMuxCourant</references>
+        <referencedby refid="group__grp__adc_1ga291e2e1e27a0a67a3c63820c746abc60" compoundref="main_8c" startline="5595" endline="5618">GetMesureCourantReelle</referencedby>
+        <referencedby refid="group__grp__adc_1ga70cfdd7f1ddad05ce9fe0f32762d5d9d" compoundref="main_8c" startline="5755" endline="5767">h_SET_MUX_CANAL_COURANT</referencedby>
+        <referencedby refid="group__grp__adc_1ga58dc9f0471184fd3cc5f8030ba048bcd" compoundref="main_8c" startline="5285" endline="5305">SelectionnerCanalMuxCourant</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__adc_1gabea253a3031b6371c35f5c1b206728c6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void SetMuxLdo</definition>
+        <argsstring>(int idx, const char *nom)</argsstring>
+        <name>SetMuxLdo</name>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>nom</declname>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;SET_MUX_LDO_&lt;nom&gt;:&lt;canal&gt;&quot; - associe une LDO a un canal du multiplexeur (0-31), a chaud, sans recompilation ni reflash. Voir le branchement dans tc_request(), meme motif que SET_VAL_LDO_&lt;nom&gt; : prefixe + findLdoIndex() pour resoudre idx directement. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO (0-17), deja resolu par findLdoIndex() dans tc_request(). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nom</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nom texte de la LDO (ex : &quot;1PSp&quot;), pour la reponse. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Lit last_message (deja positionne apres le premier &apos;:&apos; par tc_request()) au format &quot;&lt;canal&gt;&quot; (entier 0-23). Remplit response avec &quot;MUX_LDO:&lt;nom&gt;:CANAL=&lt;n&gt;\n&quot; si valide, ou &quot;MUX_LDO:&lt;nom&gt;:ERREUR_CANAL\n&quot; sinon. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;SET_MUX_LDO_1PSp:3&quot;</highlight></codeline>
+<codeline><highlight class="normal">Reponse<sp/>type<sp/><sp/><sp/><sp/>:<sp/>&quot;MUX_LDO:1PSp:CANAL=3\n&quot;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5349" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5349" bodyend="5361"/>
+        <references refid="group__grp__adc_1gabea253a3031b6371c35f5c1b206728c6" compoundref="main_8c" startline="5349" endline="5361">SetMuxLdo</references>
+        <referencedby refid="group__grp__adc_1gabea253a3031b6371c35f5c1b206728c6" compoundref="main_8c" startline="5349" endline="5361">SetMuxLdo</referencedby>
+        <referencedby refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" compoundref="main_8c" startline="6290" endline="6439">tc_request</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__adc_1ga9ab7d7bc3c2e86fe9886ff9a25b5d2d4" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void GetMuxLdo</definition>
+        <argsstring>(int idx, const char *nom)</argsstring>
+        <name>GetMuxLdo</name>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>nom</declname>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;GET_MUX_LDO_&lt;nom&gt;&quot; - lit le canal du multiplexeur actuellement associe a une LDO, sans le modifier. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO (0-17), deja resolu par findLdoIndex(). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nom</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nom texte de la LDO, pour la reponse. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Remplit response avec &quot;MUX_LDO:&lt;nom&gt;:CANAL=&lt;n&gt;\n&quot; si un canal est associe, ou &quot;MUX_LDO:&lt;nom&gt;:NON_CABLE\n&quot; sinon. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;GET_MUX_LDO_1PSp&quot;</highlight></codeline>
+<codeline><highlight class="normal">Reponse<sp/>type<sp/><sp/><sp/><sp/>:<sp/>&quot;MUX_LDO:1PSp:CANAL=3\n&quot;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5379" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5379" bodyend="5391"/>
+        <references refid="group__grp__adc_1ga9ab7d7bc3c2e86fe9886ff9a25b5d2d4" compoundref="main_8c" startline="5379" endline="5391">GetMuxLdo</references>
+        <referencedby refid="group__grp__adc_1ga9ab7d7bc3c2e86fe9886ff9a25b5d2d4" compoundref="main_8c" startline="5379" endline="5391">GetMuxLdo</referencedby>
+        <referencedby refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" compoundref="main_8c" startline="6290" endline="6439">tc_request</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__adc_1ga6bcd15aecac42670e775f0796aa0b8ec" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>static float LireTensionADC</definition>
+        <argsstring>(ADC_HandleTypeDef *hadc, uint32_t canal, float ratio_pont)</argsstring>
+        <name>LireTensionADC</name>
+        <param>
+          <type>ADC_HandleTypeDef *</type>
+          <declname>hadc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>canal</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ratio_pont</declname>
+        </param>
+        <briefdescription>
+<para>Lit une conversion ADC sur le canal donne et la convertit en tension REELLE cote LDO (avant le pont diviseur), a partir du ratio R2/(R1+R2) du pont utilise. Resolution 16 bits (ADC_RESOLUTION_16B, deja configuree sur hadc1/hadc3) : plage brute 0-65535 pour 0-VDDA (3.3V typique). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hadc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Handle ADC a utiliser (&amp;hadc1 pour PC0/canal 10, &amp;hadc3 pour PF4/canal 9). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>canal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Canal ADC a lire (ex : ADC_CANAL_TENSION ou ADC_CANAL_COURANT). RECONFIGURE le canal actif de hadc a chaque appel (HAL_ADC_ConfigChannel) : necessaire des qu&apos;un meme ADC (ex : hadc3) doit lire plusieurs canaux differents selon le contexte (ex : canal 1 pour GET_CURRENT_2, canal 9 pour la mesure de courant LDO). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ratio_pont</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>R2 / (R1 + R2) du pont diviseur utilise (0.5f pour le pont partage R1=R2=10k de ce montage). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>float</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tension reelle en volts, cote sortie du LDO (deja divisee par ratio_pont pour &quot;annuler&quot; l&apos;effet du pont). Retourne -1.0f en cas d&apos;echec de conversion (timeout) ou de configuration du canal. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">float<sp/>v<sp/>=<sp/>LireTensionADC(&amp;hadc1,<sp/>ADC_CANAL_TENSION,<sp/>MUX_RATIO_PONT);</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5420" column="14" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5420" bodyend="5450"/>
+        <references refid="group__grp__adc_1ga6bcd15aecac42670e775f0796aa0b8ec" compoundref="main_8c" startline="5420" endline="5450">LireTensionADC</references>
+        <referencedby refid="group__grp__adc_1ga5620dbaf6425610dff776e64b7f6c3ca" compoundref="main_8c" startline="5474" endline="5501">GetMesureReelle</referencedby>
+        <referencedby refid="group__grp__adc_1gacef2ce765b1a58a67b122129344ed9c3" compoundref="main_8c" startline="5818" endline="5840">h_GET_ADC_BRUT</referencedby>
+        <referencedby refid="group__grp__adc_1ga4feb141ddc6376d2ada1a4e0f58416e1" compoundref="main_8c" startline="5561" endline="5571">LireCourantADC</referencedby>
+        <referencedby refid="group__grp__adc_1ga6bcd15aecac42670e775f0796aa0b8ec" compoundref="main_8c" startline="5420" endline="5450">LireTensionADC</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__adc_1ga5620dbaf6425610dff776e64b7f6c3ca" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void GetMesureReelle</definition>
+        <argsstring>(int idx, const char *nom)</argsstring>
+        <name>GetMesureReelle</name>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>nom</declname>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;GET_MESURE_REELLE_&lt;nom&gt;&quot; (voir le branchement dans tc_request(), meme motif que GET_STATUS_LDO_&lt;nom&gt; : prefixe + findLdoIndex() pour resoudre idx directement, sans parser last_message). Selectionne d&apos;abord le canal du multiplexeur associe a la LDO, PUIS lit l&apos;unique ADC partage. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO (0-17, voir muxLdoConfig ci-dessus), deja resolu par findLdoIndex() dans tc_request(). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nom</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nom texte de la LDO (ex : &quot;1PSp&quot;), pour la reponse. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Remplit response avec : &quot;MESURE:&lt;nom&gt;:&lt;tension&gt;V\n&quot; si la lecture reussit, &quot;MESURE:&lt;nom&gt;:NON_CABLE\n&quot; si muxLdoConfig[idx].canal_mux vaut encore 0xFF, &quot;MESURE:&lt;nom&gt;:ERREUR\n&quot; si la conversion ADC echoue. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;GET_MESURE_REELLE_1PSp&quot;</highlight></codeline>
+<codeline><highlight class="normal">Reponse<sp/>type<sp/><sp/><sp/><sp/>:<sp/>&quot;MESURE:1PSp:3.075V\n&quot;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5474" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5474" bodyend="5501" declfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" declline="91" declcolumn="13"/>
+        <references refid="group__grp__adc_1ga5620dbaf6425610dff776e64b7f6c3ca" compoundref="main_8c" startline="5474" endline="5501">GetMesureReelle</references>
+        <references refid="group__grp__adc_1ga6bcd15aecac42670e775f0796aa0b8ec" compoundref="main_8c" startline="5420" endline="5450">LireTensionADC</references>
+        <references refid="group__grp__adc_1gaf26fbfed012a3cc53e96a8cf7c284e2d" compoundref="main_8c" startline="5248" endline="5268">SelectionnerCanalMuxTension</references>
+        <references refid="group__grp__comm_1gab9b5dfc109e472981cbbb7867d1b7f92" compoundref="main_8c" startline="1803" endline="1816">UART1_EnvoyerTexte</references>
+        <referencedby refid="group__grp__exti_1ga3a919fef613806da58b99557a009f22a" compoundref="main_8c" startline="1648" endline="1720">ExecuterCaptureComplete</referencedby>
+        <referencedby refid="group__grp__adc_1ga5620dbaf6425610dff776e64b7f6c3ca" compoundref="main_8c" startline="5474" endline="5501">GetMesureReelle</referencedby>
+        <referencedby refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" compoundref="main_8c" startline="6290" endline="6439">tc_request</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__adc_1ga4feb141ddc6376d2ada1a4e0f58416e1" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>static float LireCourantADC</definition>
+        <argsstring>(ADC_HandleTypeDef *hadc, uint32_t canal, float ratio_pont)</argsstring>
+        <name>LireCourantADC</name>
+        <param>
+          <type>ADC_HandleTypeDef *</type>
+          <declname>hadc</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>canal</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ratio_pont</declname>
+        </param>
+        <briefdescription>
+<para>Lit le canal ADC courant et convertit en courant REEL (mA), a partir du gain de l&apos;AOP differentiel (x100) et du shunt (100 mOhm) : I_reel(A) = Vmesuree(V) / (shunt x gain) = Vmesuree / 10, soit I_reel(mA) = Vmesuree(V) x 100. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hadc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Handle ADC a utiliser (&amp;hadc1). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>canal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Canal ADC deja configure (ADC_CANAL_COURANT, dedie avec la mesure de tension). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ratio_pont</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ratio de pont diviseur eventuel avant ce canal precis (1.0f = aucun, voir le TODO ci-dessus). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>float</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Courant reel en mA, ou -1.0f si la conversion ADC echoue. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">float<sp/>i_mA<sp/>=<sp/>LireCourantADC(&amp;hadc3,<sp/>ADC_CANAL_COURANT,<sp/>1.0f);</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5561" column="14" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5561" bodyend="5571"/>
+        <references refid="group__grp__adc_1ga4feb141ddc6376d2ada1a4e0f58416e1" compoundref="main_8c" startline="5561" endline="5571">LireCourantADC</references>
+        <references refid="group__grp__adc_1ga6bcd15aecac42670e775f0796aa0b8ec" compoundref="main_8c" startline="5420" endline="5450">LireTensionADC</references>
+        <referencedby refid="group__grp__adc_1ga291e2e1e27a0a67a3c63820c746abc60" compoundref="main_8c" startline="5595" endline="5618">GetMesureCourantReelle</referencedby>
+        <referencedby refid="group__grp__adc_1ga4feb141ddc6376d2ada1a4e0f58416e1" compoundref="main_8c" startline="5561" endline="5571">LireCourantADC</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__adc_1ga291e2e1e27a0a67a3c63820c746abc60" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void GetMesureCourantReelle</definition>
+        <argsstring>(int idx, const char *nom)</argsstring>
+        <name>GetMesureCourantReelle</name>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>nom</declname>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;GET_MESURE_COURANT_REELLE_&lt;nom&gt;&quot; (voir le branchement dans tc_request(), meme motif que GET_MESURE_REELLE_&lt;nom&gt; : prefixe + findLdoIndex()). Selectionne le canal du multiplexeur associe a la mesure de COURANT de cette LDO (muxLdoConfigCourant, pas muxLdoConfig), puis lit l&apos;ADC partage. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO (0-17), deja resolu par findLdoIndex(). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nom</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nom texte de la LDO, pour la reponse. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Remplit response avec : &quot;MESURE_I:&lt;nom&gt;:&lt;courant_mA&gt;mA\n&quot; si la lecture reussit, &quot;MESURE_I:&lt;nom&gt;:NON_CABLE\n&quot; si muxLdoConfigCourant[idx] vaut encore 0xFF (LDO PL, ou LDO PS pas encore cablee), &quot;MESURE_I:&lt;nom&gt;:ERREUR\n&quot; si la conversion ADC echoue. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;GET_MESURE_COURANT_REELLE_1PSp&quot;</highlight></codeline>
+<codeline><highlight class="normal">Reponse<sp/>type<sp/><sp/><sp/><sp/>:<sp/>&quot;MESURE_I:1PSp:145.230mA\n&quot;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5595" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5595" bodyend="5618"/>
+        <references refid="group__grp__adc_1ga291e2e1e27a0a67a3c63820c746abc60" compoundref="main_8c" startline="5595" endline="5618">GetMesureCourantReelle</references>
+        <references refid="group__grp__adc_1ga4feb141ddc6376d2ada1a4e0f58416e1" compoundref="main_8c" startline="5561" endline="5571">LireCourantADC</references>
+        <references refid="group__grp__adc_1ga58dc9f0471184fd3cc5f8030ba048bcd" compoundref="main_8c" startline="5285" endline="5305">SelectionnerCanalMuxCourant</references>
+        <references refid="group__grp__comm_1gab9b5dfc109e472981cbbb7867d1b7f92" compoundref="main_8c" startline="1803" endline="1816">UART1_EnvoyerTexte</references>
+        <referencedby refid="group__grp__adc_1ga291e2e1e27a0a67a3c63820c746abc60" compoundref="main_8c" startline="5595" endline="5618">GetMesureCourantReelle</referencedby>
+        <referencedby refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" compoundref="main_8c" startline="6290" endline="6439">tc_request</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__adc_1ga17dfb24c9ed80c2dca43e9d81d13e130" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void SetMuxCourantLdo</definition>
+        <argsstring>(int idx, const char *nom)</argsstring>
+        <name>SetMuxCourantLdo</name>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>nom</declname>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;SET_MUX_COURANT_LDO_&lt;nom&gt;:&lt;canal&gt;&quot;. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><itemizedlist>
+<listitem><para>ECRIT le canal du multiplexeur associe a la mesure de COURANT d&apos;une LDO (table separee de SET_MUX_LDO_, qui gere la tension). A chaud, sans recompilation. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO (0-17), deja resolu par findLdoIndex(). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nom</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nom texte de la LDO, pour la reponse. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Lit last_message (format &quot;&lt;canal&gt;&quot;, 0-15). Remplit response avec &quot;MUX_I_LDO:&lt;nom&gt;:CANAL=&lt;n&gt;\n&quot; si valide, ou &quot;MUX_I_LDO:&lt;nom&gt;:ERREUR_CANAL\n&quot; sinon. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;SET_MUX_COURANT_LDO_1PSp:9&quot;</highlight></codeline>
+<codeline><highlight class="normal">Reponse<sp/>type<sp/><sp/><sp/><sp/>:<sp/>&quot;MUX_I_LDO:1PSp:CANAL=26\n&quot;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5637" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5637" bodyend="5649"/>
+        <references refid="group__grp__adc_1ga17dfb24c9ed80c2dca43e9d81d13e130" compoundref="main_8c" startline="5637" endline="5649">SetMuxCourantLdo</references>
+        <referencedby refid="group__grp__adc_1ga17dfb24c9ed80c2dca43e9d81d13e130" compoundref="main_8c" startline="5637" endline="5649">SetMuxCourantLdo</referencedby>
+        <referencedby refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" compoundref="main_8c" startline="6290" endline="6439">tc_request</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__adc_1gac835b21b6948669a86732fd2683d8fd6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void GetMuxCourantLdo</definition>
+        <argsstring>(int idx, const char *nom)</argsstring>
+        <name>GetMuxCourantLdo</name>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>nom</declname>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;GET_MUX_COURANT_LDO_&lt;nom&gt;&quot; - LIT le canal du multiplexeur associe a la mesure de courant d&apos;une LDO, sans le modifier. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index de la LDO (0-17), deja resolu par findLdoIndex(). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nom</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nom texte de la LDO, pour la reponse. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Remplit response avec &quot;MUX_I_LDO:&lt;nom&gt;:CANAL=&lt;n&gt;\n&quot; si un canal est associe, ou &quot;MUX_I_LDO:&lt;nom&gt;:NON_CABLE\n&quot; sinon. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;GET_MUX_COURANT_LDO_1PSp&quot;</highlight></codeline>
+<codeline><highlight class="normal">Reponse<sp/>type<sp/><sp/><sp/><sp/>:<sp/>&quot;MUX_I_LDO:1PSp:CANAL=26\n&quot;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5667" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5667" bodyend="5679"/>
+        <references refid="group__grp__adc_1gac835b21b6948669a86732fd2683d8fd6" compoundref="main_8c" startline="5667" endline="5679">GetMuxCourantLdo</references>
+        <referencedby refid="group__grp__adc_1gac835b21b6948669a86732fd2683d8fd6" compoundref="main_8c" startline="5667" endline="5679">GetMuxCourantLdo</referencedby>
+        <referencedby refid="group__grp__comm_1gad6e271fe1796ab0b2a698260f0b78533" compoundref="main_8c" startline="6290" endline="6439">tc_request</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__adc_1ga2a74a6a59230cb5a091b0e9709d54fe4" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_SET_MUX_CANAL_TENSION</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_SET_MUX_CANAL_TENSION</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;SET_MUX_CANAL_TENSION:&lt;canal&gt;&quot;. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><itemizedlist>
+<listitem><para>ECRIT l&apos;etat de la chaine de multiplexage TENSION (change le canal actif, bus I2C1, 0-23). <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>parametre C. Lit last_message (deja positionne apres le premier &apos;:&apos; par tc_request()), attendu au format &quot;&lt;canal&gt;&quot; (entier 0-23). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Remplit response avec &quot;MUX:CANAL=&lt;n&gt;\n&quot; si le canal est valide, ou &quot;MUX:ERREUR_CANAL\n&quot; sinon (hors plage 0-23, ou parametre non numerique). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;SET_MUX_CANAL_TENSION:3&quot;</highlight></codeline>
+<codeline><highlight class="normal">Reponse<sp/>type<sp/><sp/><sp/><sp/>:<sp/>&quot;MUX:CANAL=3\n&quot;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5698" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5698" bodyend="5710"/>
+        <references refid="group__grp__adc_1ga2a74a6a59230cb5a091b0e9709d54fe4" compoundref="main_8c" startline="5698" endline="5710">h_SET_MUX_CANAL_TENSION</references>
+        <references refid="group__grp__adc_1gaf26fbfed012a3cc53e96a8cf7c284e2d" compoundref="main_8c" startline="5248" endline="5268">SelectionnerCanalMuxTension</references>
+        <referencedby refid="group__grp__adc_1ga2a74a6a59230cb5a091b0e9709d54fe4" compoundref="main_8c" startline="5698" endline="5710">h_SET_MUX_CANAL_TENSION</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__adc_1ga135b6adb8e9bb52953618d4160a21035" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_GET_MUX_CANAL_TENSION</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_GET_MUX_CANAL_TENSION</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;GET_MUX_CANAL_TENSION&quot; - LIT l&apos;etat actuel de la chaine TENSION (dernier canal selectionne), sans le modifier. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Remplit response avec &quot;MUX:CANAL=&lt;n&gt;\n&quot; si un canal a deja ete selectionne depuis le demarrage, ou &quot;MUX:AUCUN\n&quot; sinon. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;GET_MUX_CANAL_TENSION&quot;</highlight></codeline>
+<codeline><highlight class="normal">Reponse<sp/>type<sp/><sp/><sp/><sp/>:<sp/>&quot;MUX:CANAL=3\n&quot;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5727" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5727" bodyend="5737"/>
+        <references refid="group__grp__adc_1ga135b6adb8e9bb52953618d4160a21035" compoundref="main_8c" startline="5727" endline="5737">h_GET_MUX_CANAL_TENSION</references>
+        <referencedby refid="group__grp__adc_1ga135b6adb8e9bb52953618d4160a21035" compoundref="main_8c" startline="5727" endline="5737">h_GET_MUX_CANAL_TENSION</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__adc_1ga70cfdd7f1ddad05ce9fe0f32762d5d9d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_SET_MUX_CANAL_COURANT</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_SET_MUX_CANAL_COURANT</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;SET_MUX_CANAL_COURANT:&lt;canal&gt;&quot;. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><itemizedlist>
+<listitem><para>ECRIT l&apos;etat de la chaine de multiplexage COURANT (change le canal actif, bus I2C2, 0-15). <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>parametre C. Lit last_message, format &quot;&lt;canal&gt;&quot; (entier 0-15). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Remplit response avec &quot;MUX:CANAL=&lt;n&gt;\n&quot; si le canal est valide, ou &quot;MUX:ERREUR_CANAL\n&quot; sinon (hors plage 0-15, ou parametre non numerique). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;SET_MUX_CANAL_COURANT:5&quot;</highlight></codeline>
+<codeline><highlight class="normal">Reponse<sp/>type<sp/><sp/><sp/><sp/>:<sp/>&quot;MUX:CANAL=5\n&quot;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5755" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5755" bodyend="5767"/>
+        <references refid="group__grp__adc_1ga70cfdd7f1ddad05ce9fe0f32762d5d9d" compoundref="main_8c" startline="5755" endline="5767">h_SET_MUX_CANAL_COURANT</references>
+        <references refid="group__grp__adc_1ga58dc9f0471184fd3cc5f8030ba048bcd" compoundref="main_8c" startline="5285" endline="5305">SelectionnerCanalMuxCourant</references>
+        <referencedby refid="group__grp__adc_1ga70cfdd7f1ddad05ce9fe0f32762d5d9d" compoundref="main_8c" startline="5755" endline="5767">h_SET_MUX_CANAL_COURANT</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__adc_1ga67624c69d417f4b658d797a9bfcf85c9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_GET_MUX_CANAL_COURANT</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_GET_MUX_CANAL_COURANT</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;GET_MUX_CANAL_COURANT&quot; - LIT l&apos;etat actuel de la chaine COURANT (dernier canal selectionne), sans le modifier. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun.</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Remplit response avec &quot;MUX:CANAL=&lt;n&gt;\n&quot; si un canal a deja ete selectionne depuis le demarrage, ou &quot;MUX:AUCUN\n&quot; sinon. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;GET_MUX_CANAL_COURANT&quot;</highlight></codeline>
+<codeline><highlight class="normal">Reponse<sp/>type<sp/><sp/><sp/><sp/>:<sp/>&quot;MUX:CANAL=5\n&quot;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5784" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5784" bodyend="5794"/>
+        <references refid="group__grp__adc_1ga67624c69d417f4b658d797a9bfcf85c9" compoundref="main_8c" startline="5784" endline="5794">h_GET_MUX_CANAL_COURANT</references>
+        <referencedby refid="group__grp__adc_1ga67624c69d417f4b658d797a9bfcf85c9" compoundref="main_8c" startline="5784" endline="5794">h_GET_MUX_CANAL_COURANT</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__grp__adc_1gacef2ce765b1a58a67b122129344ed9c3" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void h_GET_ADC_BRUT</definition>
+        <argsstring>(void)</argsstring>
+        <name>h_GET_ADC_BRUT</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Handler de la commande reseau &quot;GET_ADC_BRUT:&lt;numero_adc&gt;:&lt;canal&gt;&quot;. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><itemizedlist>
+<listitem><para>lit un canal ADC DIRECTEMENT, sans passer par le multiplexeur (SelectionnerCanalMuxTension/Courant). Utile en phase de test sur breadboard, quand le multiplexeur n&apos;est pas encore cable : on branche l&apos;ADC directement sur la sortie a verifier (ex : un VOUT precis de 0xC4). <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>parametre C. Lit last_message (deja positionne apres le premier &apos;:&apos; par tc_request()), format &quot;&lt;numero_adc&gt;:&lt;canal&gt;&quot; : numero_adc = 1 (hadc1) ou 3 (hadc3), canal = numero ADC_CHANNEL_x. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Aucun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(void). Remplit response avec &quot;ADC_BRUT:&lt;tension&gt;V\n&quot; si la lecture reussit, ou &quot;ADC_BRUT:ERREUR_PARAMETRES\n&quot; / &quot;ADC_BRUT:ERREUR\n&quot; sinon. Tension calculee SANS aucun pont diviseur (ratio 1.0f) : c&apos;est la tension reelle au pin ADC, a toi de tenir compte d&apos;un eventuel pont externe manuellement. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Exemple d&apos;utilisation</title><para><programlisting><codeline><highlight class="normal">Trame<sp/>UDP<sp/>recue<sp/>:<sp/>&quot;GET_ADC_BRUT:1:4&quot;</highlight></codeline>
+<codeline><highlight class="normal">-&gt;<sp/>lit<sp/>hadc1,<sp/>ADC_CHANNEL_4,<sp/>repond<sp/>&quot;ADC_BRUT:1.650V\n&quot;</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" line="5818" column="13" bodyfile="C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/main.c" bodystart="5818" bodyend="5840"/>
+        <references refid="group__grp__adc_1gacef2ce765b1a58a67b122129344ed9c3" compoundref="main_8c" startline="5818" endline="5840">h_GET_ADC_BRUT</references>
+        <references refid="group__grp__adc_1ga6bcd15aecac42670e775f0796aa0b8ec" compoundref="main_8c" startline="5420" endline="5450">LireTensionADC</references>
+        <referencedby refid="group__grp__adc_1gacef2ce765b1a58a67b122129344ed9c3" compoundref="main_8c" startline="5818" endline="5840">h_GET_ADC_BRUT</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Sélection des voies de multiplexeur et mesures réelles de tension et de courant. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

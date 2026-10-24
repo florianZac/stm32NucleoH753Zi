@@ -1,0 +1,616 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.18.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lwip_demo_H753 - Controleur de LDO: Référence de la structure LDO_Config_t</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="codefolding.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Lwip_demo_H753 - Controleur de LDO<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">Firmware STM32H753ZI : pilotage de 18 LDO (configuration CSV, DAC MCP47FEB28, protection OC)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.18.0 -->
+<script type="text/javascript">
+let searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', codefold.init);
+</script>
+<script type="application/json" id="doxygen-config">
+{
+  "relPath": "",
+  "generateTreeView": true,
+  "searchEngine": true,
+  "serverBasedSearch": false,
+  "disableIndex": false,
+  "dynamicMenus": true,
+  "fullSidebar": false
+}
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<div id="main-nav-mobile">
+<div class="sm sm-dox"><input id="main-menu-state" type="checkbox"/>
+<label class="main-menu-btn" for="main-menu-state">
+<span class="main-menu-btn-icon"></span> Toggle main menu visibility</label>
+<span id="searchBoxPos1"></span>
+</div>
+</div><!-- main-nav-mobile -->
+<div id="main-nav">
+  <ul class="sm sm-dox" id="main-menu">
+    <li id="searchBoxPos2">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Recherche" accesskey="S"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+    </li>
+  </ul>
+</div><!-- main-nav -->
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',() => { initNavTree('struct_l_d_o___config__t.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Référence de la structure LDO_Config_t</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Description complete d'une LDO : UNE ligne de ldoConfig[].  
+ <a href="#details">Plus de détails...</a></p>
+<div class="dynheader">
+Graphe de collaboration de LDO_Config_t:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="struct_l_d_o___config__t__coll__graph.svg" width="171" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">légende</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Champs de données</h2></td></tr>
+<tr class="memitem:a758e71184ba8cf7c7469b54870bd0dc7" id="r_a758e71184ba8cf7c7469b54870bd0dc7"><td class="memItemLeft">const char *&#160;</td><td class="memItemRight"><a class="el" href="#a758e71184ba8cf7c7469b54870bd0dc7">name</a></td></tr>
+<tr class="memitem:ae9dd3d03509308f932bec9ff533476dc" id="r_ae9dd3d03509308f932bec9ff533476dc"><td class="memItemLeft">GPIO_TypeDef *&#160;</td><td class="memItemRight"><a class="el" href="#ae9dd3d03509308f932bec9ff533476dc">en_port</a></td></tr>
+<tr class="memitem:a0fcfe6cd6e6e7b80b4f5a45cb0b6629a" id="r_a0fcfe6cd6e6e7b80b4f5a45cb0b6629a"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#a0fcfe6cd6e6e7b80b4f5a45cb0b6629a">en_pin</a></td></tr>
+<tr class="memitem:ae7c0856a698600dac5a3bcf57e9181a7" id="r_ae7c0856a698600dac5a3bcf57e9181a7"><td class="memItemLeft">GPIO_TypeDef *&#160;</td><td class="memItemRight"><a class="el" href="#ae7c0856a698600dac5a3bcf57e9181a7">bld_port</a></td></tr>
+<tr class="memitem:a2a81aac43428a27f84ca183d5c2e25f5" id="r_a2a81aac43428a27f84ca183d5c2e25f5"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#a2a81aac43428a27f84ca183d5c2e25f5">bld_pin</a></td></tr>
+<tr class="memitem:a5ed27972c794409b5b714fe682915bfd" id="r_a5ed27972c794409b5b714fe682915bfd"><td class="memItemLeft">GPIO_TypeDef *&#160;</td><td class="memItemRight"><a class="el" href="#a5ed27972c794409b5b714fe682915bfd">oc_port</a></td></tr>
+<tr class="memitem:a4f362942c9d68afa09b311969e0a6308" id="r_a4f362942c9d68afa09b311969e0a6308"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#a4f362942c9d68afa09b311969e0a6308">oc_pin</a></td></tr>
+<tr class="memitem:a7730ca2fec0b799905356ab0d30ef0c9" id="r_a7730ca2fec0b799905356ab0d30ef0c9"><td class="memItemLeft">GPIO_TypeDef *&#160;</td><td class="memItemRight"><a class="el" href="#a7730ca2fec0b799905356ab0d30ef0c9">pg_port</a></td></tr>
+<tr class="memitem:a5ebb072c54d0c8e06e4191c33bb66ca4" id="r_a5ebb072c54d0c8e06e4191c33bb66ca4"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#a5ebb072c54d0c8e06e4191c33bb66ca4">pg_pin</a></td></tr>
+<tr class="memitem:a5bd88c21655b6be5ff18e2851cdddeaf" id="r_a5bd88c21655b6be5ff18e2851cdddeaf"><td class="memItemLeft">LDO_TypeDef *&#160;</td><td class="memItemRight"><a class="el" href="#a5bd88c21655b6be5ff18e2851cdddeaf">ldo</a></td></tr>
+<tr class="memitem:a436d89c79fab8032e135f8f962bb9d58" id="r_a436d89c79fab8032e135f8f962bb9d58"><td class="memItemLeft"><a class="el" href="main_8c.html#a75e57bba50363a40a374df0b941bfd58">CibleDac_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a436d89c79fab8032e135f8f962bb9d58">dac_tension</a></td></tr>
+<tr class="memitem:a4a931dcafdf172ee7114cf1c9602bc1d" id="r_a4a931dcafdf172ee7114cf1c9602bc1d"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a4a931dcafdf172ee7114cf1c9602bc1d">canal_tension</a></td></tr>
+<tr class="memitem:a363ddabe5e06a850e79f08385c46207a" id="r_a363ddabe5e06a850e79f08385c46207a"><td class="memItemLeft"><a class="el" href="main_8c.html#a75e57bba50363a40a374df0b941bfd58">CibleDac_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a363ddabe5e06a850e79f08385c46207a">dac_courant</a></td></tr>
+<tr class="memitem:ab1b433037254fabc41638d891ec6499c" id="r_ab1b433037254fabc41638d891ec6499c"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#ab1b433037254fabc41638d891ec6499c">canal_courant</a></td></tr>
+<tr class="memitem:a59768e079b3397e54037a129ef4f9c2d" id="r_a59768e079b3397e54037a129ef4f9c2d"><td class="memItemLeft"><a class="el" href="struct_oc_config__t.html">OcConfig_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a59768e079b3397e54037a129ef4f9c2d">oc</a></td></tr>
+<tr class="memitem:a86d4802858f22daa6de74f9451176788" id="r_a86d4802858f22daa6de74f9451176788"><td class="memItemLeft">GPIO_PinState&#160;</td><td class="memItemRight"><a class="el" href="#a86d4802858f22daa6de74f9451176788">bld_niveau_actif</a></td></tr>
+<tr class="memitem:a636c9637a723e0c7d5de0c74573e0480" id="r_a636c9637a723e0c7d5de0c74573e0480"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a636c9637a723e0c7d5de0c74573e0480">bld_coupe_en</a></td></tr>
+<tr class="memitem:a6faf3257e5843570bfbd7e6e4ac69875" id="r_a6faf3257e5843570bfbd7e6e4ac69875"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a6faf3257e5843570bfbd7e6e4ac69875">bld_sur_coupure_oc</a></td></tr>
+<tr class="memitem:a8bf1c02ea03f58433b9cca6ab5475dd6" id="r_a8bf1c02ea03f58433b9cca6ab5475dd6"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a8bf1c02ea03f58433b9cca6ab5475dd6">mux_tension</a></td></tr>
+<tr class="memitem:a9602612e2a2bd9e967025a7d357dcf6d" id="r_a9602612e2a2bd9e967025a7d357dcf6d"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a9602612e2a2bd9e967025a7d357dcf6d">mux_courant</a></td></tr>
+<tr class="memitem:a887afe1ed570ca20840e0497730798e8" id="r_a887afe1ed570ca20840e0497730798e8"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a887afe1ed570ca20840e0497730798e8">seuil_par_pot</a></td></tr>
+<tr class="memitem:a4090d7bdf9494c405adff20231e59dd6" id="r_a4090d7bdf9494c405adff20231e59dd6"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a4090d7bdf9494c405adff20231e59dd6">memoire_dac</a></td></tr>
+<tr class="memitem:a7b83694b76200985dda7b928bc6d9d47" id="r_a7b83694b76200985dda7b928bc6d9d47"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a7b83694b76200985dda7b928bc6d9d47">cmd_bld_defaut</a></td></tr>
+<tr class="memitem:a45b6f0c5fd33dda21bf63ec901361c37" id="r_a45b6f0c5fd33dda21bf63ec901361c37"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a45b6f0c5fd33dda21bf63ec901361c37">cmd_oc_defaut</a></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Description complete d'une LDO : UNE ligne de ldoConfig[]. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00333">333</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Documentation des champs</h2>
+<a id="a758e71184ba8cf7c7469b54870bd0dc7" name="a758e71184ba8cf7c7469b54870bd0dc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a758e71184ba8cf7c7469b54870bd0dc7">&#9670;&#160;</a></span>name</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* LDO_Config_t::name</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>nom des commandes (SET_EN_LDO_&lt;name&gt;) </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00334">334</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04902">DAC_ConfigurerSeuilsPotentiometre()</a>, <a class="el" href="main_8c_source.html#l04822">DAC_RestaurerMemoire()</a>, <a class="el" href="main_8c_source.html#l04755">DAC_TraiterSauvegardes()</a>, <a class="el" href="main_8c_source.html#l06025">LDO_InitialiserTables()</a>, et <a class="el" href="main_8c_source.html#l06510">MX_OC_EXTI_Init()</a>.</p>
+
+</div>
+</div>
+<a id="ae9dd3d03509308f932bec9ff533476dc" name="ae9dd3d03509308f932bec9ff533476dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9dd3d03509308f932bec9ff533476dc">&#9670;&#160;</a></span>en_port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GPIO_TypeDef* LDO_Config_t::en_port</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Enable (sortie) </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00335">335</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06223">LDO_Diagnostic()</a>, <a class="el" href="main_8c_source.html#l06117">LDO_GPIO_Init()</a>, et <a class="el" href="main_8c_source.html#l03307">LDO_MettreAJour()</a>.</p>
+
+</div>
+</div>
+<a id="a0fcfe6cd6e6e7b80b4f5a45cb0b6629a" name="a0fcfe6cd6e6e7b80b4f5a45cb0b6629a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fcfe6cd6e6e7b80b4f5a45cb0b6629a">&#9670;&#160;</a></span>en_pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t LDO_Config_t::en_pin</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00336">336</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="ae7c0856a698600dac5a3bcf57e9181a7" name="ae7c0856a698600dac5a3bcf57e9181a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7c0856a698600dac5a3bcf57e9181a7">&#9670;&#160;</a></span>bld_port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GPIO_TypeDef* LDO_Config_t::bld_port</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Bleeder (sortie) </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00337">337</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l03625">CmdOnOff_BasculerBld()</a>, <a class="el" href="main_8c_source.html#l06223">LDO_Diagnostic()</a>, <a class="el" href="main_8c_source.html#l06117">LDO_GPIO_Init()</a>, et <a class="el" href="main_8c_source.html#l03307">LDO_MettreAJour()</a>.</p>
+
+</div>
+</div>
+<a id="a2a81aac43428a27f84ca183d5c2e25f5" name="a2a81aac43428a27f84ca183d5c2e25f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a81aac43428a27f84ca183d5c2e25f5">&#9670;&#160;</a></span>bld_pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t LDO_Config_t::bld_pin</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00338">338</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="a5ed27972c794409b5b714fe682915bfd" name="a5ed27972c794409b5b714fe682915bfd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ed27972c794409b5b714fe682915bfd">&#9670;&#160;</a></span>oc_port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GPIO_TypeDef* LDO_Config_t::oc_port</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Over-Current (entree) </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00339">339</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06223">LDO_Diagnostic()</a>, <a class="el" href="main_8c_source.html#l06117">LDO_GPIO_Init()</a>, et <a class="el" href="main_8c_source.html#l06510">MX_OC_EXTI_Init()</a>.</p>
+
+</div>
+</div>
+<a id="a4f362942c9d68afa09b311969e0a6308" name="a4f362942c9d68afa09b311969e0a6308"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f362942c9d68afa09b311969e0a6308">&#9670;&#160;</a></span>oc_pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t LDO_Config_t::oc_pin</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00340">340</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="a7730ca2fec0b799905356ab0d30ef0c9" name="a7730ca2fec0b799905356ab0d30ef0c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7730ca2fec0b799905356ab0d30ef0c9">&#9670;&#160;</a></span>pg_port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GPIO_TypeDef* LDO_Config_t::pg_port</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Power-Good (entree) </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00341">341</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06223">LDO_Diagnostic()</a>, <a class="el" href="main_8c_source.html#l06117">LDO_GPIO_Init()</a>, et <a class="el" href="main_8c_source.html#l03307">LDO_MettreAJour()</a>.</p>
+
+</div>
+</div>
+<a id="a5ebb072c54d0c8e06e4191c33bb66ca4" name="a5ebb072c54d0c8e06e4191c33bb66ca4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ebb072c54d0c8e06e4191c33bb66ca4">&#9670;&#160;</a></span>pg_pin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t LDO_Config_t::pg_pin</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00342">342</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="a5bd88c21655b6be5ff18e2851cdddeaf" name="a5bd88c21655b6be5ff18e2851cdddeaf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bd88c21655b6be5ff18e2851cdddeaf">&#9670;&#160;</a></span>ldo</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">LDO_TypeDef* LDO_Config_t::ldo</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>etat logiciel (struct LDO) </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00343">343</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04822">DAC_RestaurerMemoire()</a>, et <a class="el" href="main_8c_source.html#l03307">LDO_MettreAJour()</a>.</p>
+
+</div>
+</div>
+<a id="a436d89c79fab8032e135f8f962bb9d58" name="a436d89c79fab8032e135f8f962bb9d58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a436d89c79fab8032e135f8f962bb9d58">&#9670;&#160;</a></span>dac_tension</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="main_8c.html#a75e57bba50363a40a374df0b941bfd58">CibleDac_t</a> LDO_Config_t::dac_tension</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>puce du DAC de tension </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00344">344</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06025">LDO_InitialiserTables()</a>.</p>
+
+</div>
+</div>
+<a id="a4a931dcafdf172ee7114cf1c9602bc1d" name="a4a931dcafdf172ee7114cf1c9602bc1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a931dcafdf172ee7114cf1c9602bc1d">&#9670;&#160;</a></span>canal_tension</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t LDO_Config_t::canal_tension</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>voie 0-7 du DAC de tension </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00345">345</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06025">LDO_InitialiserTables()</a>.</p>
+
+</div>
+</div>
+<a id="a363ddabe5e06a850e79f08385c46207a" name="a363ddabe5e06a850e79f08385c46207a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a363ddabe5e06a850e79f08385c46207a">&#9670;&#160;</a></span>dac_courant</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="main_8c.html#a75e57bba50363a40a374df0b941bfd58">CibleDac_t</a> LDO_Config_t::dac_courant</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>puce du DAC de seuil de courant </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00346">346</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04902">DAC_ConfigurerSeuilsPotentiometre()</a>, <a class="el" href="main_8c_source.html#l04822">DAC_RestaurerMemoire()</a>, <a class="el" href="main_8c_source.html#l04755">DAC_TraiterSauvegardes()</a>, et <a class="el" href="main_8c_source.html#l06025">LDO_InitialiserTables()</a>.</p>
+
+</div>
+</div>
+<a id="ab1b433037254fabc41638d891ec6499c" name="ab1b433037254fabc41638d891ec6499c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1b433037254fabc41638d891ec6499c">&#9670;&#160;</a></span>canal_courant</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t LDO_Config_t::canal_courant</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>voie 0-7 du DAC de seuil de courant </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00347">347</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04902">DAC_ConfigurerSeuilsPotentiometre()</a>, <a class="el" href="main_8c_source.html#l04822">DAC_RestaurerMemoire()</a>, <a class="el" href="main_8c_source.html#l04755">DAC_TraiterSauvegardes()</a>, et <a class="el" href="main_8c_source.html#l06025">LDO_InitialiserTables()</a>.</p>
+
+</div>
+</div>
+<a id="a59768e079b3397e54037a129ef4f9c2d" name="a59768e079b3397e54037a129ef4f9c2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59768e079b3397e54037a129ef4f9c2d">&#9670;&#160;</a></span>oc</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_oc_config__t.html">OcConfig_t</a> LDO_Config_t::oc</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>protection surintensite </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00348">348</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04822">DAC_RestaurerMemoire()</a>, <a class="el" href="main_8c_source.html#l06223">LDO_Diagnostic()</a>, <a class="el" href="main_8c_source.html#l06025">LDO_InitialiserTables()</a>, et <a class="el" href="main_8c_source.html#l06510">MX_OC_EXTI_Init()</a>.</p>
+
+</div>
+</div>
+<a id="a86d4802858f22daa6de74f9451176788" name="a86d4802858f22daa6de74f9451176788"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86d4802858f22daa6de74f9451176788">&#9670;&#160;</a></span>bld_niveau_actif</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GPIO_PinState LDO_Config_t::bld_niveau_actif</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>niveau de BLD qui fait conduire le bleeder </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00349">349</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l03625">CmdOnOff_BasculerBld()</a>, <a class="el" href="main_8c_source.html#l06117">LDO_GPIO_Init()</a>, et <a class="el" href="main_8c_source.html#l03307">LDO_MettreAJour()</a>.</p>
+
+</div>
+</div>
+<a id="a636c9637a723e0c7d5de0c74573e0480" name="a636c9637a723e0c7d5de0c74573e0480"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a636c9637a723e0c7d5de0c74573e0480">&#9670;&#160;</a></span>bld_coupe_en</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t LDO_Config_t::bld_coupe_en</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>1 = bleeder actif -&gt; EN coupe (protection de la sortie) </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00350">350</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l03307">LDO_MettreAJour()</a>.</p>
+
+</div>
+</div>
+<a id="a6faf3257e5843570bfbd7e6e4ac69875" name="a6faf3257e5843570bfbd7e6e4ac69875"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6faf3257e5843570bfbd7e6e4ac69875">&#9670;&#160;</a></span>bld_sur_coupure_oc</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t LDO_Config_t::bld_sur_coupure_oc</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>1 = bleeder force tant que le defaut OC est verrouille </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00351">351</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="a8bf1c02ea03f58433b9cca6ab5475dd6" name="a8bf1c02ea03f58433b9cca6ab5475dd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bf1c02ea03f58433b9cca6ab5475dd6">&#9670;&#160;</a></span>mux_tension</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t LDO_Config_t::mux_tension</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>voie initiale mux mesure tension (MUX_NC) </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00352">352</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06025">LDO_InitialiserTables()</a>.</p>
+
+</div>
+</div>
+<a id="a9602612e2a2bd9e967025a7d357dcf6d" name="a9602612e2a2bd9e967025a7d357dcf6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9602612e2a2bd9e967025a7d357dcf6d">&#9670;&#160;</a></span>mux_courant</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t LDO_Config_t::mux_courant</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>voie initiale mux mesure courant (MUX_NC) </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00353">353</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l06025">LDO_InitialiserTables()</a>.</p>
+
+</div>
+</div>
+<a id="a887afe1ed570ca20840e0497730798e8" name="a887afe1ed570ca20840e0497730798e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a887afe1ed570ca20840e0497730798e8">&#9670;&#160;</a></span>seuil_par_pot</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t LDO_Config_t::seuil_par_pot</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>SEUIL_DAC (0) ou SEUIL_POT (1) : source du seuil OC </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00354">354</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04902">DAC_ConfigurerSeuilsPotentiometre()</a>, <a class="el" href="main_8c_source.html#l04822">DAC_RestaurerMemoire()</a>, et <a class="el" href="main_8c_source.html#l04755">DAC_TraiterSauvegardes()</a>.</p>
+
+</div>
+</div>
+<a id="a4090d7bdf9494c405adff20231e59dd6" name="a4090d7bdf9494c405adff20231e59dd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4090d7bdf9494c405adff20231e59dd6">&#9670;&#160;</a></span>memoire_dac</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t LDO_Config_t::memoire_dac</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>MEM_EEPROM (1) : codes DAC sauvegardes/restaures en EEPROM </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00355">355</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="main_8c_source.html#l04822">DAC_RestaurerMemoire()</a>.</p>
+
+</div>
+</div>
+<a id="a7b83694b76200985dda7b928bc6d9d47" name="a7b83694b76200985dda7b928bc6d9d47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b83694b76200985dda7b928bc6d9d47">&#9670;&#160;</a></span>cmd_bld_defaut</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t LDO_Config_t::cmd_bld_defaut</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>CMD_ON_OFF_BLD du CSV : 1 = bleeder ON au 1er demarrage </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00356">356</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="a45b6f0c5fd33dda21bf63ec901361c37" name="a45b6f0c5fd33dda21bf63ec901361c37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45b6f0c5fd33dda21bf63ec901361c37">&#9670;&#160;</a></span>cmd_oc_defaut</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t LDO_Config_t::cmd_oc_defaut</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>CMD_ON_OFF_OC du CSV : 1 = protection OC ON au 1er demarrage </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="main_8c_source.html#l00357">357</a> du fichier <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<hr/>La documentation de cette structure a été générée à partir du fichier suivant :<ul>
+<li>C:/Users/Admin/Documents/flo/Lwip_demo_H753/Core/Src/<a class="el" href="main_8c_source.html">main.c</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="struct_l_d_o___config__t.html">LDO_Config_t</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
+  </ul>
+</div>
+</body>
+</html>

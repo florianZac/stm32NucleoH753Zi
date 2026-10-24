@@ -1,0 +1,7 @@
+<map id="PeriphCommonClock_Config" name="PeriphCommonClock_Config">
+<area shape="rect" id="Node000001" title="Peripherals Common Clock Configuration." alt="" coords="110,29,300,56"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="232,14,224,10,205,8,188,10,179,15,176,20,181,30,176,28,171,21,175,11,186,5,205,3,225,5,237,14"/>
+<area shape="rect" id="Node000002" href="$group__grp__cubemx.html#ga840291bc02cba5474a4cb46a9b9566fe" title="The application entry point." alt="" coords="13,29,62,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="92,43,62,45,62,40,97,42"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="66,17,58,11,37,8,19,10,10,15,9,21,15,29,10,31,3,22,6,12,18,5,37,3,60,6,71,16"/>
+</map>
