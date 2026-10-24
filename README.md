@@ -1,10 +1,10 @@
 <!--
   Auteur   : Florian Aizac
   Révision : 1.0.0
-  Date     : 22/10/2026
+  Date     : 24/10/2026
 -->
 
-# Firmware Lwip_demo_H753 — pilotage des LDO de la carte d'alimentation
+# Firmware Lwip_demo_H753 - pilotage des LDO de la carte d'alimentation
 
 Firmware STM32H753ZI (Nucleo-H753ZI, STM32CubeIDE, FreeRTOS + LwIP) qui pilote les régulateurs
 LDO de la carte d'alimentation :
@@ -28,30 +28,47 @@ L'interface PC est le projet `Controleur` (Flask, voir son `README.md`).
 | I2C2 | PB10 / PB11 : DAC hérités, **désactivé par défaut** (`SET_I2C2_ACTIF:1` pour l'activer) |
 | Boutons | PC13 (USER B1) : capture de diagnostic ; PD0 : reset des ADG728 |
 
-## Arborescence (fichiers propres au projet)
+## Arborescence du projet
 
 ```
 Lwip_demo_H753/
-|-- Lwip_demo_H753.ioc          <- CubeMX : horloges, Ethernet, I2C, UART, ADC, FreeRTOS (systeme uniquement)
-|-- STM32H753ZITX_FLASH.ld      <- FLASH limitee a 1920 Ko : 128 Ko de fin reserves (commandes ON/OFF)
-|-- .cproject                   <- etape pre-build : python ../configurationLDO/generer_config.py
+|-- .project / .cproject        <- projet actif STM32CubeIDE et configurations Debug / Release
+|-- Lwip_demo_H753.ioc          <- CubeMX : horloges, Ethernet, I2C, UART, ADC et FreeRTOS
+|-- Lwip_demo_H753.launch       <- configuration de lancement / débogage
+|-- STM32H753ZITX_FLASH.ld      <- linker FLASH : 128 Ko réservés aux commandes ON/OFF
+|-- STM32H753ZITX_RAM.ld        <- linker RAM
 |-- configurationLDO/
-|   |-- ldo_config.csv          <- CABLAGE DES LDO : seul fichier a modifier
-|   |-- ldo_config_csv.py       <- lecture / verification / generation (aussi utilise par le Controleur)
-|   |-- generer_config.py       <- lance avant chaque compilation
-|   |-- mettre_a_jour.bat       <- verifier + compiler + flasher en un double-clic
-|   `-- README.txt              <- colonnes du CSV, regles, procedure
-`-- Core/
-    |-- Inc/
-    |   |-- main.h                  <- defines de la carte (protection, EEPROM, potentiometre)
-    |   |-- ldo_config_genere.h     <- GENERE : LDO_NB, LDO_CONFIG_CRC32
-    |   `-- ldo_config_lignes.inc   <- GENERE : lignes de ldoConfig[]
-    `-- Src/
-        `-- main.c                  <- tout le code applicatif
+|   |-- ldo_config.csv          <- câblage et paramètres des LDO
+|   |-- ldo_config_csv.py       <- lecture, validation et génération du CSV
+|   |-- generer_config.py       <- génération avant compilation
+|   |-- mettre_a_jour.bat       <- procédure de compilation et de flash
+|   `-- README.txt              <- colonnes du CSV et règles de configuration
+|-- Core/
+|   |-- Inc/                    <- configuration FreeRTOS, en-têtes et fichiers LDO générés
+|   |-- Src/                    <- application dans main.c, initialisation et interruptions
+|   `-- Startup/                <- démarrage STM32H753
+|-- LWIP/
+|   |-- App/                    <- initialisation et configuration LwIP
+|   `-- Target/                 <- interface Ethernet et options LwIP
+|-- Drivers/
+|   |-- BSP/                    <- composants de carte, dont LAN8742
+|   |-- CMSIS/                  <- en-têtes CMSIS
+|   `-- STM32H7xx_HAL_Driver/   <- pilotes HAL ST
+|-- Middlewares/Third_Party/
+|   |-- FreeRTOS/               <- noyau RTOS
+|   `-- LwIP/                   <- pile réseau
+|-- Doxygen/                    <- sources et outils de documentation de conception
+|-- STM32CubeIDE/               <- fichiers complémentaires du projet CubeIDE
+|-- Debug/                      <- fichiers générés par la configuration Debug
+`-- Release/                    <- fichiers générés par la configuration Release
 ```
 
-Les fichiers `ldo_config_genere.h` et `ldo_config_lignes.inc` ne se modifient pas à la main :
-ils sont réécrits à chaque compilation depuis le CSV.
+Le projet CubeIDE actif est celui défini à la racine par `.project` et `.cproject`.
+Les dossiers `Debug/` et `Release/` contiennent les sorties de compilation. Le code applicatif
+et les gestionnaires de commandes sont principalement regroupés dans `Core/Src/main.c`.
+
+Les fichiers générés `Core/Inc/ldo_config_genere.h` et `Core/Inc/ldo_config_lignes.inc`
+ne se modifient pas à la main : ils sont réécrits à chaque compilation depuis le CSV.
 
 ## Configuration des LDO (CSV)
 
@@ -258,7 +275,7 @@ CMD_ON_OFF_OC:2PSp:1
 
 ## Historique des révisions
 
-### Révision 1.0.0 — 22/10/2026
+### Révision 1.0.0 - 22/10/2026
 - Configuration des LDO dans `configurationLDO/ldo_config.csv`, vérifiée et générée à chaque compilation ; `.ioc` réservé au système, broches LDO configurées par `LDO_GPIO_Init()`.
 - 18 LDO : `1PSp` à `16PSp` + `2PLn`, `3PLn` mises de côté ; `2PSp` (PS2+) inchangée.
 - Protection OC : défaut mémorisé, bleeder = drapeau BL, réarmement par `RST_BL_LDO_`, coupure en interruption sur PE4.
